@@ -1,0 +1,18 @@
+baseURL = "https://guidemetothemoon.github.io/kristhecodingunicorn"
+languageCode = "en"
+DefaultContentLanguage = "en"
+title = "Kristina's Tech Corner"
+theme = "anatole"
+summarylength = 50
+enableEmoji = true
+enableRobotsTXT = true
+# Enable Disqus
+#disqusShortname = ""
+
+# Google Analytics
+#googleAnalytics = "UA-123-45"
+
+# Syntax highlighting
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
