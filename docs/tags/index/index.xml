@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>index on Kris - The Coding Unicorn</title>
-    <link>https://guidemetothemoon.github.io/tags/index/</link>
+    <link>https://guidemetothemoon.github.io/kristhecodingunicorn/tags/index/</link>
     <description>Recent content in index on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://guidemetothemoon.github.io/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://guidemetothemoon.github.io/kristhecodingunicorn/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Blog</title>
-      <link>https://guidemetothemoon.github.io/post/</link>
+      <link>https://guidemetothemoon.github.io/kristhecodingunicorn/post/</link>
       <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://guidemetothemoon.github.io/post/</guid>
+      <guid>https://guidemetothemoon.github.io/kristhecodingunicorn/post/</guid>
       <description></description>
     </item>
     

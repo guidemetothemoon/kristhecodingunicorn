@@ -23,4 +23,4 @@ Anyway, thanks for stopping by! Check out the blog section and stay tuned for th
 
 See you there!
 
-![Photo of myself on a mountain trip](/images/about.jpg)
+![Photo of myself on a mountain trip](../images/about.jpg)

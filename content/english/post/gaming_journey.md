@@ -10,7 +10,7 @@ tags = [
 ]
 +++
 
-![Screenshot from Journey game](/images/gaming_corner/journey_1.jpg)
+![Screenshot from Journey game](../../images/gaming_corner/journey_1.jpg)
 
 I haven\'t been much of a gamer actually but there have been some games that managed to keep my interest and attention for quite some time. The highlight of my gaming activity was in the beginning of 2000s - when I used to come home from school and complete all of my homework - as a reward I would be allowed to spend some hours playing games on the good old Windows XP. Some of the games I played a lot as a kid were GTA: Vice City, Return to Castle Wolfenstein, Tomb Raider series, The Mummy, KAO the Kangaroo, Dungeon Siege...Oh, and of course it was a must to play Quake over LAN when the informatics teacher was out of the classroom.
 
@@ -21,13 +21,13 @@ So, what is my Journey? This is a bunch of very warm and colourful emotions but 
 **That\'s how I remember it....**
 
 ...I have discovered myself in the middle of the unknown, an enormous dessert filled with secrets of the fallen civilization. Why am I here? Where have I been before this very moment? What is my purpose? Will I ever find the answer to these questions and am I supposed to find it? I can see a mountain, stately located behind the horizon of silky golden sands...this mountain was to define the further steps in my Journey.
-![Screenshot from Journey game, a person standing in the desert](/images/gaming_corner/journey_2.jpg)
+![Screenshot from Journey game, a person standing in the desert](../../images/gaming_corner/journey_2.jpg)
 
 While I smoothly drift along the dessert and fly up high to the top of half-destroyed temples in search for concealed messages, I can\'t stop thinking of what surrounds me..What made this place disappear? Will it await for me there, on the top of the mountain? Who were those living here before? Only the flying creatures, helping me to keep up the energy, know the stories that are never to be told..
 
 Suddenly I see a silhouette in the distance - I don\'t know who it is and if it a name. I don\'t know where it comes from and what it\'s story is. I can\'t ask and I can\'t get an answer but we can sound...We can use only sound, together making it a music stream, a never-ending song of peace and equality, flowing in harmony along the clouds above the forgotten civilization. And what\'s more valuable is that it wants to share the sacrament of the Journey with me. And from that moment on I\'m not alone anymore. 
 
-![Screenshot from Journey game, two heroes facing each other](/images/gaming_corner/journey_3.jpg)
+![Screenshot from Journey game, two heroes facing each other](../../images/gaming_corner/journey_3.jpg)
 
 
 When we reached the Mountain, the toughest challenge was still to come - a challenge to test my strength, will-power and intention. And the moment I thought my Journey was about to end, I have found my new self and one more Journey was about to begin.     
@@ -44,7 +44,7 @@ Anyway, way to go, thatgamecompany!
 
 * A man behind the music of Journey - **Austin Wintory**. An American composer that has created so colourful and magical music for both Journey and Flow, that even listening to it separately, outside of the game, will bring a lot of joy and excitement :) Three years of work, strong cooperation with game developers, hours of re-works and, in the end, 100% deserved Grammy nomination for the Best Score Soundtrack for Visual Media - according to Wikipedia, the first video game score to receive a Grammy nomination - all this is a "child" of a bunch of talented people, motivated by bringing some special emotions in people and making the game experience a sacred and unique experience that would last a lifetime. More thumbs up for Mr. Austin Wintory, a group of soloists, the Macedonia Radio Symphonic Orhestra and Lisbeth Scott - a miraculous voice behind the final track of Journey "I was born for this". I\'m looking forward to hearing more of your works, hopefully in Sky, too.
 
-![Art inspired by Journey game](/images/gaming_corner/journey_4.jpg)
+![Art inspired by Journey game](../../images/gaming_corner/journey_4.jpg)
 
 I cincerely hope that if you haven\'t tried this game, you\'ve at least gotten a bit curious about it and will give it a try in the future.
 
