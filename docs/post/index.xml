@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Kris - The Coding Unicorn</title>
+    <link>https://guidemetothemoon.github.io/post/</link>
+    <description>Recent content in Blog on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 02 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://guidemetothemoon.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My journey through Journey</title>
+      <link>https://guidemetothemoon.github.io/post/gaming_journey/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://guidemetothemoon.github.io/post/gaming_journey/</guid>
+      <description>I haven&#39;t been much of a gamer actually but there have been some games that managed to keep my interest and attention for quite some time. The highlight of my gaming activity was in the beginning of 2000s - when I used to come home from school and complete all of my homework - as a reward I would be allowed to spend some hours playing games on the good old Windows XP.</description>
+    </item>
+    
+  </channel>
+</rss>

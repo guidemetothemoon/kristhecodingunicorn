@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aboutkris on Kris - The Coding Unicorn</title>
+    <link>https://guidemetothemoon.github.io/tags/aboutkris/</link>
+    <description>Recent content in aboutkris on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://guidemetothemoon.github.io/tags/aboutkris/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://guidemetothemoon.github.io/about/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://guidemetothemoon.github.io/about/</guid>
+      <description>Hey and welcome to my Tech Corner!
+My name is Kris (obvously) and I have created this blog to share tech and non-tech (sometimes) stuff with the rest of the world :) I live in Norway, love coding and strengthening security wherever possible. Currently I am working as Lead SW Architect and driving several exciting tech journeys that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens&#39; life easier.</description>
+    </item>
+    
+  </channel>
+</rss>
