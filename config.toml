@@ -1,4 +1,5 @@
 baseURL = "https://guidemetothemoon.github.io/kristhecodingunicorn"
+publishDir = "docs"
 languageCode = "en"
 DefaultContentLanguage = "en"
 title = "Kristina's Tech Corner"
