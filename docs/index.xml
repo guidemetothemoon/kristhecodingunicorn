@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kris - The Coding Unicorn</title>
+    <link>https://guidemetothemoon.github.io/kristhecodingunicorn/</link>
+    <description>Recent content on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 02 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://guidemetothemoon.github.io/kristhecodingunicorn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://guidemetothemoon.github.io/kristhecodingunicorn/archives/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://guidemetothemoon.github.io/kristhecodingunicorn/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://guidemetothemoon.github.io/kristhecodingunicorn/contact/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://guidemetothemoon.github.io/kristhecodingunicorn/contact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My journey through Journey</title>
+      <link>https://guidemetothemoon.github.io/kristhecodingunicorn/post/gaming_journey/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://guidemetothemoon.github.io/kristhecodingunicorn/post/gaming_journey/</guid>
+      <description>I haven&#39;t been much of a gamer actually but there have been some games that managed to keep my interest and attention for quite some time. The highlight of my gaming activity was in the beginning of 2000s - when I used to come home from school and complete all of my homework - as a reward I would be allowed to spend some hours playing games on the good old Windows XP.</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://guidemetothemoon.github.io/kristhecodingunicorn/about/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://guidemetothemoon.github.io/kristhecodingunicorn/about/</guid>
+      <description>Hey and welcome to my Tech Corner!
+My name is Kris (obvously) and I have created this blog to share tech and non-tech (sometimes) stuff with the rest of the world :) I live in Norway, love coding and strengthening security wherever possible. Currently I am working as Lead SW Architect and driving several exciting tech journeys that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens&#39; life easier.</description>
+    </item>
+    
+  </channel>
+</rss>
