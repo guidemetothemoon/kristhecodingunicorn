@@ -1,5 +1,4 @@
-baseURL = "https://guidemetothemoon.github.io/kristhecodingunicorn"
-#baseURL = "https://guidemetothemoon.github.io/kristhecodingunicorn/"
+baseURL = "https://kristhecodingunicorn.com"
 publishDir = "docs"
 languageCode = "en"
 DefaultContentLanguage = "en"
