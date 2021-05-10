@@ -1,7 +1,7 @@
 
 title = "Kris - The Coding Unicorn"
-author = "Kristina D."
-#copyright = "2021"
+author = "Kris - The Coding Unicorn"
+copyright = "2021"
 description = "Hey! I'm Kris and I like to code. Welcome to my tech corner!"
 profilePicture = "images/profile.png"
 keywords = ""
@@ -18,7 +18,7 @@ doNotLoadAnimations = false
 # Form Spree Contact Form
 contactFormAction = "https://formspree.io/f/mleaglnw"
 # Google Site Verify
-#googleSiteVerify = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+googleSiteVerify = "OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA"
 singleDateFormat = "2/1/2006"
 indexDateFormat = "2/1/2006"
 listDateFormat = "2/1/2006"
@@ -27,7 +27,6 @@ listDateFormat = "2/1/2006"
 # Read More links for truncated summaries
 # readMore = true
 # postSectionName = "blog"
-
 
 [simpleAnalytics]
 # enable = true
