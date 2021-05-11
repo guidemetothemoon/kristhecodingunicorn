@@ -233,6 +233,6 @@ There are several resources available if you would like to get deeper understand
 
 Well, that\'s it from me on this topic, thanks for checking in! Hopefully it was useful for you and go ahead and create some dotnet templates of your own - that\'s how you really learn ;)
 
-If this article was helpful, please let me know about it! You can reach out to me on Linkedin, GitHub or by using the contact form on this page. All the contact links are on your left hand side :)
+If this article was helpful, please let me know about it! You can reach out to me on Linkedin, GitHub or by using the contact form on this page :)
 
 Till we connect again!
