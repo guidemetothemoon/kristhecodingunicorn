@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html  dir="ltr" lang="en" data-theme="dark"><head>
+    <title> Kris - The Coding Unicorn | How to create new microservices easily with dotnet custom templates </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice">
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA">
+    
+    
+    
+    <link rel="stylesheet"
+        href="/css/style.min.51d7ec6db610dce512b735d5315f963c278042d026aa4ebe05a9355460b49016.css"
+        integrity="sha256-UdfsbbYQ3OUStzXVMV&#43;WPCeAQtAmqk6&#43;Bak1VGC0kBY="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    
+    <link rel="stylesheet"
+        href="/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+        
+        
+        <link rel="stylesheet"
+        href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
+        integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+        crossorigin="anonymous"
+        media="screen" />
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="/post/dotnet_custom_templates/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js"
+                integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="How to create new microservices easily with dotnet custom templates"/>
+<meta name="twitter:description" content="This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice"/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">Kris - The Coding Unicorn</a></h3>
+            <div class="description">
+                <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/contact/" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Kris - The Coding Unicorn  2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/blog/"
+                        
+                   title="">Blog</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/contact/"
+                        
+                   title="">Contact</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>How to create new microservices easily with dotnet custom templates</h3>
+                
+                    <div class="info">
+                        <em class="fas fa-calendar-day"></em>
+                        <span class="date"> 
+                                                8/5/2021
+                                           </span>
+                        <em class="fas fa-stopwatch"></em>
+                        <span class="reading-time">14-minute read</span>
+                    </div>
+                
+            </div>
+
+            <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-a-dotnet-template-though">What is a dotnet template though?</a></li>
+    <li><a href="#how-to-create-a-custom-dotnet-template">How to create a custom dotnet template?</a></li>
+    <li><a href="#how-do-i-transform-a-microservice-template-to-a-dotnet-template">How do I transform a microservice template to a dotnet template?</a></li>
+    <li><a href="#how-do-i-test-the-dotnet-template-and-verify-that-it-performs-as-expected">How do I test the dotnet template and verify that it performs as expected?</a>
+      <ul>
+        <li><a href="#testing-single-template">Testing single template</a></li>
+        <li><a href="#testing-template-collection">Testing template collection</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-do-i-pack-and-make-template-collection-nuget-package-available-for-others">How do I pack and make template collection NuGet package available for others?</a></li>
+    <li><a href="#where-can-i-read-more-about-dotnet-templates">Where can I read more about dotnet templates?</a></li>
+  </ul>
+</nav>
+</div>
+<p>Doing development for microservices is quite different from development for a monolithic application - it will require changes in the mindset, either you want it or not&hellip;But it's not only the mindset that will undergo changes. Let's say that you're working on creating a new component for your application that will provide functionality for sending e-mail notifications to your users. If you're creating this component for a monolithic application, you typically have one place where you'll add backend changes and one place for frontend changes. And then those changes are magically included as part of the build and deployment of the application. Nice and straightforward, huh?</p>
+<p>If you need to create this component as a microservice, there are many more things that must be set up and configured. In case you're working with an enterprise application all the new components must also comply with already established standards in the organization. So, for the e-mail notifications service we will need to:</p>
+<ul>
+<li>create proper folder structure with correct folder hierarchy where you will place the code for your microservice</li>
+<li>create project code with respective test project</li>
+<li>add common configuration for the service</li>
+<li>create Docker folder with Dockerfile and other container-related resources</li>
+<li>create Helm folder with respective Helm charts and deployment configurations</li>
+<li>create build and deployment pipeline for your microservice</li>
+<li>create or add any additional components depending on the requirements</li>
+</ul>
+<p>It seems like a lot of manual work&hellip;wouldn't it be great if you could just run one command and all of this will be created for you so that the only thing you will need to do is to add code for your microservice? Well, that's where dotnet custom templates come in!</p>
+<h2 id="what-is-a-dotnet-template-though">What is a dotnet template though?</h2>
+<p>Dotnet template is a pre-set of all the files, folders and resources needed in order to create, configure and run a specific project. If you would like to create an ASP.NET Core Web API project, you can just run <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new webapi -n My.TestProject </code></pre></div> and basic project will be created for you. .NET SDK provides an extensive collection of various projects that can be generated by running the <strong>dotnet new</strong> command. You can find an overview of the standard templates in Microsoft documentation: <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new">https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new</a></p>
+<p><img src="../../images/dotnet_custom_templates/dotnet_new_webapi.jpg" alt="Screenshot for dotnet new webapi command"></p>
+<p>In most cases just creating basic project is not enough and you still need to perform many additional steps like the ones I listed above for the e-mail notification service. That's when you can take all the files and resources you need and wrap those into re-usable and extendable custom dotnet template, or even a collection of multiple templates.</p>
+<h2 id="how-to-create-a-custom-dotnet-template">How to create a custom dotnet template?</h2>
+<p>You can either create a single template or you can create a template pack which will consist of multiple templates packaged into a single file. I will explain the latter based on how we've done it in one of the projects I've been a part of.</p>
+<p>Let's move on from an e-mail notification service to a more generic use case. Let's imagine that we have several development teams creating different types of microservices and many of these services are either created as ASP.NET Core Web API or React applications. We would like to make life of these developers easier and to minimize amount of manual work they're doing when creating a new microservice - for example, creation of all the necessary folders, setting up build pipeline from scratch, naming struggles, etc. We want to create 3 different templates that will help developers in our team to create new microservices based on established best practices. First template will be used to create an ASP.NET Core Web API application, second template will be used to create a React application and third template will be a more generic one, for the cases where we don't know yet what technology stack will be used for the new microservice - this template will not create any application code but will only set up basic folder structure and include common files like Dockerfile, build pipeline yaml-file and Helm charts. All the templates will be packaged into a single file that will be pushed as a NuGet package to our NuGet feed from where any developer in our team can easily install it and run whatever template they need from our custom collection.</p>
+<p>First, we need to create a directory where the template package will reside - let's call it <strong>&quot;template-collection&quot;</strong>. Inside this directory we will create a folder called <strong>&quot;templates&quot;</strong> where resources for all dotnet custom templates will be placed into. In our case <strong>&quot;templates&quot;</strong> folder will contain 3 folders with respecitve template names: <strong>&quot;microservice-web&quot;</strong>, <strong>&quot;microservice-react&quot;</strong> and <strong>&quot;microservice-base&quot;</strong>. In addition, we will create 2 more files inside <strong>&quot;template-collection&quot;</strong> directory:</p>
+<ul>
+<li><strong>pipeline.yml</strong>: this file will contain build pipeline definition that will package dotnet template collection and push the generated NuGet package to our private NuGet feed (or public feed, depending on your use case).</li>
+<li><strong>Custom.Dotnet.Templates.csproj</strong>: this is a basic C# project file that can be built in order to produce a NuGet package for our template collection. Example of the project file I have used is provided below: first batch of properties is used to provide information  that will be used and displayed as part of the NuGet package. TargetFramework property is needed in order for the MSBuild to run properly when the project is being compiled and packed. It is also possible to provide <strong>&lt;PackageVersion&gt;</strong> property but in our use case we'll be using semantic versioning to centrally and automatically version the NuGet package as part of the build pipeline execution, therefore the property is not defined in this example. Second batch of properties, starting with <strong>&lt;IncludeContentInPack&gt;</strong> will be used to include all the custom templates in the proper folder when NuGet package is created. Lastly, settings defined in the <strong>&lt;ItemGroup&gt;</strong> section will include only what's located in &quot;templates&quot; folder (except for &quot;bin&quot; and &quot;obj&quot; folders since we don't want output from our testing to be a part of standard template package). <strong>&lt;Compile&gt;</strong> setting will prevent compilation of any code located in &quot;templates&quot; directory - the purpose of this project file is not to build any real application code but to generate a collection of project templates. 
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- This is example code for project definition used to create dotnet template collection pack --&gt;</span>
+<span class="p">&lt;</span><span class="nt">Project</span> <span class="na">Sdk</span><span class="o">=</span><span class="s">&#34;Microsoft.NET.Sdk&#34;</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">PropertyGroup</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">PackageType</span><span class="p">&gt;</span>Template<span class="p">&lt;/</span><span class="nt">PackageType</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">PackageId</span><span class="p">&gt;</span>Custom.Dotnet.Templates<span class="p">&lt;/</span><span class="nt">PackageId</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Title</span><span class="p">&gt;</span>Dotnet Custom Templates Collection<span class="p">&lt;/</span><span class="nt">Title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Authors</span><span class="p">&gt;</span>Kris - The Coding Unicorn<span class="p">&lt;/</span><span class="nt">Authors</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Description</span><span class="p">&gt;</span>Collection of common templates to use when creating microservices and related components.<span class="p">&lt;/</span><span class="nt">Description</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">PackageTags</span><span class="p">&gt;</span>dotnet-new;templates<span class="p">&lt;/</span><span class="nt">PackageTags</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">TargetFramework</span><span class="p">&gt;</span>net5.0<span class="p">&lt;/</span><span class="nt">TargetFramework</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">NoDefaultExcludes</span><span class="p">&gt;</span>true<span class="p">&lt;/</span><span class="nt">NoDefaultExcludes</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">IncludeContentInPack</span><span class="p">&gt;</span>true<span class="p">&lt;/</span><span class="nt">IncludeContentInPack</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">IncludeBuildOutput</span><span class="p">&gt;</span>false<span class="p">&lt;/</span><span class="nt">IncludeBuildOutput</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ContentTargetFolders</span><span class="p">&gt;</span>content<span class="p">&lt;/</span><span class="nt">ContentTargetFolders</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">PropertyGroup</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">ItemGroup</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Content</span> <span class="na">Include</span><span class="o">=</span><span class="s">&#34;templates\**\*&#34;</span> <span class="na">Exclude</span><span class="o">=</span><span class="s">&#34;templates\**\bin\**;templates\**\obj\**&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Compile</span> <span class="na">Remove</span><span class="o">=</span><span class="s">&#34;**\*&#34;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ItemGroup</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">Project</span><span class="p">&gt;</span></code></pre></div></li>
+</ul>
+<p>More information about project file settings and properties can be found in Microsoft Documentation: <a href="https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-pack#create-a-template-pack-project">https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-pack#create-a-template-pack-project</a></p>
+<p>Our folder structure will look something like this:</p>
+<p><img src="../../images/dotnet_custom_templates/dotnet_template_pack_tree.jpg" alt="Screenshot for dotnet template pack folder structure"></p>
+<p>Now it's time to add some content to our templates!</p>
+<h2 id="how-do-i-transform-a-microservice-template-to-a-dotnet-template">How do I transform a microservice template to a dotnet template?</h2>
+<p>In order to transform a project template to a dotnet template we will need only two things:</p>
+<ol>
+<li>Files and resources needed to create a specific microservice</li>
+<li><strong>template.json</strong> file that will contain configuration needed in order to deploy the resources when <strong>dotnet new</strong> command is executed.</li>
+</ol>
+<p>Let's take ASP.NET Core Web API template from our collection as an example. We have created a folder in <strong>&quot;template-collection&quot;</strong> directory called <strong>&quot;microservice-web&quot;</strong> - that's where we'll add all the files, folders and application code needed in order to create a common ASP.NET Core Web API microservice. In addition to that we'll create a new folder called <strong>&quot;.template.config&quot;</strong> (mind the syntax, it must be exactly the same!) where we'll place a file called <strong>&quot;template.json&quot;</strong>. That's how dotnet templates are recognized - now that <strong>&quot;.template.config&quot;</strong> folder and <strong>&quot;template.json&quot;</strong> file with (soon) necessary configurations exist at the root of our template, we can simply run <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new microservice-web -n My.WebProject </code></pre></div> and it will deploy everything we need in order to start developing an ASP.NET Core Web API microservice according to established best practices.</p>
+<p><strong>&quot;template.json&quot;</strong> file can include quite extensive configuration depending on the use case so I will not get too much into details of every available configuration that can be added - there are great resources out there where you can read more about it, and I will provide some useful links later in this post. Let's define some configuration for our ASP.NET Core Web API microservice template.</p>
+<p>Our template will include:</p>
+<ul>
+<li>application code with respective unit tests,</li>
+<li>files and folders needed to create Docker container for our application,</li>
+<li>Helm charts for easier configuration and deployment of our application in Kubernetes,</li>
+<li>build pipeline definition written in yaml,</li>
+<li>GitVersion.yml for semantic versioning of our application.</li>
+</ul>
+<p>Template configuration will look something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;$schema&#34;</span><span class="p">:</span> <span class="s2">&#34;http://json.schemastore.org/template&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;Kris - The Coding Unicorn&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;classifications&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&#34;Common&#34;</span><span class="p">,</span> <span class="s2">&#34;Web&#34;</span><span class="p">,</span> <span class="s2">&#34;Microservice&#34;</span> <span class="p">],</span> 
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Base template for Kris - The Coding Unicorn ASP.NET Web microservice&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;identity&#34;</span><span class="p">:</span> <span class="s2">&#34;Microservice.CommonTemplate.CSharp&#34;</span><span class="p">,</span>         
+    <span class="nt">&#34;shortName&#34;</span><span class="p">:</span> <span class="s2">&#34;microservice-web&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;language&#34;</span><span class="p">:</span> <span class="s2">&#34;C#&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;project&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;sourceName&#34;</span><span class="p">:</span> <span class="s2">&#34;common-microservice-web&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;preferNameDirectory&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;symbols&#34;</span><span class="p">:{</span>
+      <span class="nt">&#34;solutionName&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;parameter&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;isRequired&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&#34;FileRename&#34;</span><span class="p">:</span> <span class="s2">&#34;Common.Microservice.Web&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;defaultValue&#34;</span><span class="p">:</span> <span class="s2">&#34;Common.Microservice.Web&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;replaces&#34;</span><span class="p">:</span><span class="s2">&#34;Common.Microservice.Web&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span></code></pre></div>
+<p>As you can see, some of the settings are pretty straightforward but some might need further clarification:</p>
+<ul>
+<li><strong>&quot;classifications&quot;</strong> - represents tags that are displayed for every template when you run the <strong>&quot;dotnet new &ndash;list&quot;</strong> command to get an overview of all available dotnet templates;</li>
+<li><strong>&quot;shortName&quot;</strong> - represents the name of the template that you use when you run the <strong>&quot;dotnet new&quot;</strong> command to install a specific template;</li>
+<li><strong>&quot;sourceName&quot;</strong> - that's the name of your microservice, i.e. your application. In the configuration we'll need to provide a default name for a microservice - this is also the name we will be using as a default placeholder several places in our template resources. For example, this default name will be typically set as Docker container name and application Helm chart name. When developer deploys the template, all the mentioned placeholders in the template resources will be replaced with the value that the developer will provide for <strong>-n</strong> argument.</li>
+<li><strong>&quot;preferNameDirectory&quot;</strong> - when set to &quot;true&quot;, it will create a directory for the template if output directory is not provided. If set to &quot;false&quot; (default value) and output directory is not provided, the template resources would then have been deployed to the current directory.</li>
+<li><strong>&quot;solutionName&quot;</strong> - that's one of the configuration settings provided in <strong>&quot;symbols&quot;</strong> section. In this section you can define any additional arguments that the user will need to provide when deploying a template. It also has a default value that is being used as a placeholder in template resources. In our use case we need only one additional argument which is the solution name - this value will be used as a C# project name and solution name wherever those are created and referenced. Default value will be replaced with the one developer provides for <strong>-s</strong> argument. Argument shortkey is automatically generated and is typically the first letter of the symbol name.</li>
+</ul>
+<p>After all the changes <strong>&quot;microservice-web&quot;</strong> folder structure will look like this:</p>
+<p><img src="../../images/dotnet_custom_templates/dotnet_template_web_tree.jpg" alt="Screenshot for ASP.NET Core Web API dotnet template folder structure"></p>
+<p>Awesomesauce, I think we're all set and ready to test our ASP.NET Core Web API microservice template!</p>
+<h2 id="how-do-i-test-the-dotnet-template-and-verify-that-it-performs-as-expected">How do I test the dotnet template and verify that it performs as expected?</h2>
+<p>So, we've done a great job so far and are ready to test our template collection locally before adding it to our source code. I will explain how we can test a single template and all the templates in the collection.</p>
+<h3 id="testing-single-template">Testing single template</h3>
+<p>Let's test ASP.NET Core Web API microservice template we've created in the previous section. Since it's a custom template it doesn't exist in .NET SDK by default, that's why we'll need to install it first. You will need to run the command from the directory where template folder is located or provide full path to the template folder. We can install the template by executing following command: 
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new -i ./template-collection/templates/microservice-web </code></pre></div></p>
+<p>Now we can run a help command for our newly installed template and see what arguments must be provided as part of the &quot;dotnet new&quot; command:
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new microservice-web -h </code></pre></div></p>
+<p>And the output will be:</p>
+<p><img src="../../images/dotnet_custom_templates/dotnet_new_help.jpg" alt="Screenshot for ASP.NET Core Web API dotnet new help command output"></p>
+<p>As you can see, apart from the name of our application we'll also need to provide the solution name. Let's go ahead and create our ASP.NET Core Web API microservice:
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new microservice-web -s Kris.Awesome.Service -n kris-awesome-service </code></pre></div></p>
+<p>After the command is executed we can verify that the resources have been deployed to the current directory and all the default placeholders have been replaced with the names I've provided in the above command:</p>
+<p><img src="../../images/dotnet_custom_templates/dotnet_new_web_output_tree.jpg" alt="Screenshot for ASP.NET Core Web API dotnet new command result"></p>
+<p>If I want to specify another directory to deploy the microservice resources to, I can do that by providing <strong>-o</strong> argument:
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new microservice-web -s Kris.Awesome.Service -n kris-awesome-service -o &#34;C:/Playground/my-microservice&#34; </code></pre></div></p>
+<h3 id="testing-template-collection">Testing template collection</h3>
+<p>When you have multiple templates, you would like to test them all at once. You can do this manually by packaging the template collection, installing the produced NuGet package locally, and then running <strong>&quot;dotnet new&quot;</strong> for every template in the collection. What I would recommend though is to create a script that will do all of it for you, including deployment of all the templates in the collection so that the only thing you will need to do after running the script is to verify that the output looks correct.</p>
+<p>Here is an example of the PowerShell script we can use for our use case with 3 templates:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">$TemplateCollectionDirectory = &#34;C:/Playground/template-collection&#34;</span><span class="w">
+</span><span class="w"></span><span class="l">$TemplateOutputDirectory = &#34;C:/Playground/template-output&#34;</span><span class="w">
+</span><span class="w"></span><span class="l">Set-Location -Path $TemplateCollectionDirectory</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c">#Package and install template collection NuGet</span><span class="w">
+</span><span class="w"></span><span class="l">dotnet pack</span><span class="w"> </span><span class="c">#Package our template collection (remember our C# project file that defined what template resources must be included in the package?)</span><span class="w">
+</span><span class="w"></span><span class="l">dotnet new -i $TemplateCollectionDirectory/bin/Debug/Custom.Dotnet.Templates.1.0.0.nupkg</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c">#Deploy all the templates in the collection</span><span class="w">
+</span><span class="w"></span><span class="l">dotnet new microservice-web -s Kris.Awesome.Service.Web -n kris-awesome-service-web -o $TemplateOutputDirectory/test-template-web --force</span><span class="w">
+</span><span class="w"></span><span class="l">dotnet new microservice-react -n kris-awesome-service-react -o $TemplateOutputDirectory/test-template-react --force</span><span class="w">
+</span><span class="w"></span><span class="l">dotnet new microservice-base -n kris-awesome-service-base -o $TemplateOutputDirectory/test-template-base --force</span></code></pre></div>
+<p>Then you can navigate to the output directory you've deployed your templates to and verify that the resources are created as expected, and with proper namings.</p>
+<p><img src="../../images/dotnet_custom_templates/template_test_script_output_tree.jpg" alt="Screenshot for template collection test script output tree"></p>
+<p>When you're done with testing you can <strong>uninstall</strong> the template collection by simply running following command:
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"> dotnet new -u Custom.Dotnet.Templates </code></pre></div></p>
+<h2 id="how-do-i-pack-and-make-template-collection-nuget-package-available-for-others">How do I pack and make template collection NuGet package available for others?</h2>
+<p>Now that you've tested your template collection and everything looks good, you can make the templates available for others to try out. You will need to upload the NuGet package that contains your template collection to public or private NuGet feed (depending on what development processes you have in place). I have used Azure Pipelines for this - every time new changes are added to the template collection, a build is triggered that will package the template collection, version the package and push it to the NuGet feed that I've specified.</p>
+<p>Pack and push build tasks will look something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">    </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">      </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Package my dotnet template collection&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pack&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">packagesToPack</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/Custom.Dotnet.Templates.csproj&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">packDirectory</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">versioningScheme</span><span class="p">:</span><span class="w"> </span><span class="l">byEnvVar</span><span class="w"> </span><span class="c">#for semantic versioning</span><span class="w">
+</span><span class="w">        </span><span class="nt">versionEnvVar</span><span class="p">:</span><span class="w"> </span><span class="l">GitVersion.SemVer </span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NuGetCommand@2</span><span class="w">
+</span><span class="w">      </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Push template collection NuGet package to my feed&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">push</span><span class="w">
+</span><span class="w">        </span><span class="nt">packagesToPush</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages/*.nupkg&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">publishVstsFeed</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;YOUR_NUGET_FEED_ID&gt;</span><span class="w">
+</span><span class="w">        </span><span class="nt">allowPackageConflicts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(), ne(variables[&#39;Build.Reason&#39;], &#39;PullRequest&#39;), or(eq(variables[&#39;Build.SourceBranch&#39;], &#39;refs/heads/master&#39;)))</span></code></pre></div>
+<p>After the build has succeeded, your template collection will become available and ready to be used by millions of developers - amazing job! :)</p>
+<h2 id="where-can-i-read-more-about-dotnet-templates">Where can I read more about dotnet templates?</h2>
+<p>There are several resources available if you would like to get deeper understanding of how to create dotnet custom template and how dotnet template engine is functioning. Here are some of the resources I used in order to get better understanding of dotnet templates:</p>
+<ol>
+<li>
+<p>Microsoft documentation for &quot;dotnet new&quot; command: <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new">https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new</a></p>
+</li>
+<li>
+<p>Microsoft documentation on how to create custom templates for dotnet CLI: <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates">https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates</a></p>
+</li>
+<li>
+<p>.NET Blog article about how to create your own templates for dotnet new, written by Visual Studio senior program manager Sayed Hashimi: <a href="https://devblogs.microsoft.com/dotnet/how-to-create-your-own-templates-for-dotnet-new">https://devblogs.microsoft.com/dotnet/how-to-create-your-own-templates-for-dotnet-new</a></p>
+</li>
+<li>
+<p>Official reference documentation for template.json file that is used to define configuration of the dotnet template: <a href="https://github.com/dotnet/templating/wiki/Reference-for-template.json">https://github.com/dotnet/templating/wiki/Reference-for-template.json</a></p>
+</li>
+<li>
+<p>GitHub repository containing source code for dotnet Template Engine: <a href="https://github.com/dotnet/templating">https://github.com/dotnet/templating</a></p>
+</li>
+<li>
+<p>GitHub repository containing samples of dotnet templates for dotnet new command: <a href="https://github.com/dotnet/dotnet-template-samples">https://github.com/dotnet/dotnet-template-samples</a></p>
+</li>
+<li>
+<p>Informative InfoQ article, written by developer advocate at JetBrains Matt Ellis, about how .NET Core Template Engine can be used to create custom templates and projects: <a href="https://www.infoq.com/articles/dotnet-core-template-engine">https://www.infoq.com/articles/dotnet-core-template-engine</a></p>
+</li>
+</ol>
+<p>Well, that's it from me on this topic, thanks for checking in! Hopefully it was useful for you and go ahead and create some dotnet templates of your own - that's how you really learn ;)</p>
+<p>If this article was helpful, please let me know about it! You can reach out to me on Linkedin, GitHub or by using the contact form on this page. All the contact links are on your left hand side :)</p>
+<p>Till we connect again!</p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                
+                <span class="separator"><a class="tag" href="/tags/dotnet/">dotnet</a><a class="tag" href="/tags/microservices/">microservices</a></span>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>
+
+</html>

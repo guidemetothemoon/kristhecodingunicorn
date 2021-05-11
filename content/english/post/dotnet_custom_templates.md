@@ -3,7 +3,7 @@ author = "Kristina D."
 title = "How to create new microservices easily with dotnet custom templates"
 date = "2021-05-08"
 description = "This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice"
-draft = true
+draft = false
 tags = [
     "dotnet",
     "microservices",
