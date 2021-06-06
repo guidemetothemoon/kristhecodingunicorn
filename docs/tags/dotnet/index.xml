@@ -6,7 +6,16 @@
     <description>Recent content in dotnet on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to distribute console applications easily with .NET tools</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_tools/</link>
+      <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
+      <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+    </item>
+    
     <item>
       <title>How to create new microservices easily with dotnet custom templates</title>
       <link>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</link>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html  dir="ltr" lang="en" data-theme="dark"><head>
+    <title> Kris - The Coding Unicorn | How to distribute console applications easily with .NET tools </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner.">
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA">
+    
+    
+    
+    <link rel="stylesheet"
+        href="/css/style.min.51d7ec6db610dce512b735d5315f963c278042d026aa4ebe05a9355460b49016.css"
+        integrity="sha256-UdfsbbYQ3OUStzXVMV&#43;WPCeAQtAmqk6&#43;Bak1VGC0kBY="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    
+    <link rel="stylesheet"
+        href="/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+        
+        
+        <link rel="stylesheet"
+        href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
+        integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+        crossorigin="anonymous"
+        media="screen" />
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="/post/dotnet_tools/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js"
+                integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="How to distribute console applications easily with .NET tools"/>
+<meta name="twitter:description" content="This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner."/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">Kris - The Coding Unicorn</a></h3>
+            <div class="description">
+                <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/contact/" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Kris - The Coding Unicorn  2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/blog/"
+                        
+                   title="">Blog</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/contact/"
+                        
+                   title="">Contact</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>How to distribute console applications easily with .NET tools</h3>
+                
+                    <div class="info">
+                        <em class="fas fa-calendar-day"></em>
+                        <span class="date"> 
+                                                6/6/2021
+                                           </span>
+                        <em class="fas fa-stopwatch"></em>
+                        <span class="reading-time">7-minute read</span>
+                    </div>
+                
+            </div>
+
+            <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-a-net-tool-and-how-do-i-create-one">What is a .NET Tool and how do I create one?</a></li>
+    <li><a href="#how-to-install-use-and-uninstall-a-net-tool">How to install, use and uninstall a .NET Tool?</a></li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands. In my team we have several administrative tools that are being distributed as console apps in addition to the main application. Multiple stakeholders are using these apps in order to easily perform administrative tasks, make changes to application's metadata, interact with the database, integrate customizations into standard application functionality, etc.</p>
+<p>Initially, the tools were distributed as part of the main application's setup which proved to be <strong>not</strong> a very scalable approach:</p>
+<ul>
+<li>tools didn't follow the release cycle of the main application and sometimes were changed more frequently, therefore it was more time-consuming and challenging to distribute the new version of the tools to all the stakeholders;</li>
+<li>in order to get access to the tool you either needed to have access to the application server where the setup package is located or you needed to have access to the internal portal from where the setup package could be downloaded;</li>
+<li>you could also download the tool from the build pipeline but finding the correct pipeline and downloading the stable version of the tool may be frustrating, especially when you don't know where to look.</li>
+</ul>
+<p>In order to make this process more user-friendly we have decided to package all our admin tools as .NET tools and make them available to all the relevant stakeholders in the private NuGet feed. I'll now describe in more detail how this can be done.</p>
+<h2 id="what-is-a-net-tool-and-how-do-i-create-one">What is a .NET Tool and how do I create one?</h2>
+<p>.NET tool is basically a way to package your application as a NuGet package that can be made easily available for relevant audience on the NuGet feed of your choice - be it a global NuGet feed or a private one. What I think is a huge benefit of distributing console apps as .NET tools is that it provides an easy and smooth way to keep your utilities up-to-date and make the latest version easily available at all times for everyone who requires to use it. Installation process will also be much easier - no need to search for a specific build with stable build artifacts, correct setup package, etc..You can install a .NET tool by simply running a single command in the command line, and you're good to go.</p>
+<p><em><strong>It's important to mention that until .NET 5 it was also possible to distribute WinForms and WPF applications as .NET tools but from .NET 5 it is not supported anymore. It might be supported in .NET 6 but there is no guarantee - you can follow this</strong></em>  <a href="https://github.com/dotnet/sdk/issues/16361">GitHub issue</a> for more updates on the topic.</p>
+<p>Let's look at the whole flow from creating a .NET tool to installing/uninstalling it. I have created a console app that will make it easier to perform some administrative tasks for my application like turning on/off feature toggles, adding or modifying settings, etc. Target framework for my app is .NET 5.0.</p>
+<p>In order to convert my app to a .NET tool I will need to add following 3 properties to the .csproj file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">PackAsTool</span><span class="p">&gt;</span>true<span class="p">&lt;/</span><span class="nt">PackAsTool</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ToolCommandName</span><span class="p">&gt;</span>admincli<span class="p">&lt;/</span><span class="nt">ToolCommandName</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">PackageOutputPath</span><span class="p">&gt;</span>./nupkg<span class="p">&lt;/</span><span class="nt">PackageOutputPath</span><span class="p">&gt;</span></code></pre></div>
+<p>And my console app is now a .NET Tool! Well, that was not that hard, was it? :)</p>
+<p>First property defines that current tool will be packaged as a .NET tool. Second property is optional and defines the command you will need to use in order to start the tool after it has been installed. And lastly, third property, which is also optional, defines where the NuGet package will be generated. .NET CLI will be using the NuGet package in order to install the tool.</p>
+<p>Now my admin tool is ready to be uploaded to a NuGet feed so that others can install and start using it - since I'm using Azure Pipelines to continuously build it, I will be adding some new build tasks to pack and push the newly created Admin CLI tool to the private NuGet feed.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;dotnet pack Admin.CLI&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">pack</span><span class="w">
+</span><span class="w">    </span><span class="nt">packagesToPack</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/Admin.CLI.csproj&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">packDirectory</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">versioningScheme</span><span class="p">:</span><span class="w"> </span><span class="l">byEnvVar</span><span class="w"> </span><span class="c"># for centralized versioning of the tool with semantic versioning</span><span class="w">
+</span><span class="w">    </span><span class="nt">versionEnvVar</span><span class="p">:</span><span class="w"> </span><span class="l">GitVersion.NuGetVersion</span><span class="w">
+</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(BuildConfiguration)&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NuGetCommand@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NuGet push Admin.CLI&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;push&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">packagesToPush</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages/*.nupkg&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">nuGetFeedType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;internal&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">publishVstsFeed</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&lt;My-Private-NuGet-Feed-ID&gt;&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">allowPackageConflicts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(),ne(variables[&#39;Build.Reason&#39;], &#39;PullRequest&#39;),and(eq(variables[&#39;Build.SourceBranch&#39;], &#39;refs/heads/master&#39;)))</span><span class="w">
+</span><span class="w">  </span><span class="nt">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div>
+<p>And the tool is now ready for others to use!</p>
+<h2 id="how-to-install-use-and-uninstall-a-net-tool">How to install, use and uninstall a .NET Tool?</h2>
+<p>A .NET tool can be installed as a global or a local tool. When a .NET tool is installed as a global tool, it's binaries will be installed to a default directory of your OS (for example, <strong>%USERPROFILE%\.dotnet\tools</strong> in Windows) and the path to it will be made available as a part of the <strong>PATH</strong> environment variable. You can also provide a custom directory to install the tool to by providing the <strong>&ndash;tool-path</strong> option to <strong>dotnet tool install</strong> command, but in that case you will need to:</p>
+<ul>
+<li>invoke the tool from the directory where it was installed <strong>or</strong></li>
+<li>provide the full path to the tool upon invoke <strong>or</strong></li>
+<li>add the tool path to the PATH environment variable manually.</li>
+</ul>
+<p>When a .NET Tool is installed as a local tool, it can be accessed only from the current directory or it's subdirectories. In this case you will also need to add the tool to the manifest file which is being used by the .NET CLI to track what tools are installed as local tools to a directory. I will not go into much detail about this installation type but you can read more about it here: <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools#install-a-local-tool">Install a local tool</a>.</p>
+<p><strong>Security tip: .NET tool runs in full trust, always validate the source and the author of the tool before installing it!</strong></p>
+<p>Before we install the Admin CLI tool that we created in the previous section, we'll need to ensure that we have a .NET 5.0 runtime installed since that's the framework version that my console app was targeting. Since I have uploaded the tool to the private NuGet feed and not the public one, I will need to be authenticated in order to access any of the packages from that feed - for this I have created a &ldquo;nuget.config&rdquo; file where I have provided a personal access token (PAT) that will be used for accessing the NuGet feed. I will be using this file as an input to <strong>&ndash;configfile</strong> argument in the install command. You can also register any private NuGet feed on your machine by providing credentials interactively with <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source">dotnet nuget add source</a> command.</p>
+<p>Now we can install the Admin CLI .NET tool as a global tool by executing following command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet tool install --global Admin.CLI --configfile &#34;.\nuget.config&#34;</code></pre></div>
+<p>It is always a good idea to test that the tool works as expected before pushing it to the NuGet feed - you can do it locally by generating a NuGet package for your console application and installing it as a .NET tool from a generated .nupkg file (please ensure that you're running install command from the application directory):</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet pack Admin.CLI.csproj
+dotnet tool install --global --add-source ./nupkg Admin.CLI</code></pre></div>
+<p>After the tool is installed, you will get information in the command line output about how you can invoke it. Since I have provided a custom tool command name in the project file definition, I can start the tool by executing <strong>&quot;admincli&quot;</strong> command.</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">You can invoke the tool using the following command: admincli
+Tool &#39;Admin.CLI&#39; (version &#39;1.0.0&#39;) was successfully installed.</code></pre></div>
+<p>And that's it, the tool starts as expected and you're ready to use it!</p>
+<p>If you're dealing with a tool that can be invoked as part of the build pipeline, you can easily install and start it with help of a build task like this:
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    dotnet tool install -g Admin.CLI
+</span><span class="sd">    admincli --generate-install-scripts 
+</span><span class="sd">    exit 0</span><span class="w">    
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install Admin CLI and generate installation scripts&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div></p>
+<p>It's a good practice to regularly update the tools you're using to the latest version. You can easily update .NET tools by executing following command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet tool update -g Admin.CLI</code></pre></div>
+<p>If you want to uninstall the tool, you can do it by executing following command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet tool uninstall -g Admin.CLI</code></pre></div>
+<h2 id="additional-resources">Additional resources</h2>
+<p>You can read more about .NET Tools in Microsoft's official documentation:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools">How to manage .NET tools</a></li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools-how-to-create">Create tools for the .NET CLI</a></li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install">dotnet tool commands</a></li>
+</ul>
+<p>That's it from me this time, thanks for checking in! 
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!</p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                
+                <span class="separator"><a class="tag" href="/tags/dotnet/">dotnet</a><a class="tag" href="/tags/tooling/">tooling</a></span>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</body>
+
+</html>
