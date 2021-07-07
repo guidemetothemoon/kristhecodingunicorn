@@ -191,6 +191,9 @@ With the advent of .NET Core and the need for cross-platform support in many app
 
 You can read more about strong name signing in .NET Core on [GitHub](https://github.com/dotnet/runtime/blob/main/docs/project/strong-name-signing.md).
 
+And in case you\'re wondering if unsigned assemblies will be able to call strong name signed assemblies, the answer is: **\'Yes, they can!\'**. 
+> Unsigned assemblies can load strong-name signed assemblies but **not** the other way around, so even if you decide to remove strong name signing in your application you\'ll still be able to use third-party dependencies that are signing their assemblies with strong name.
+
 In conclusion I would say that as long as your application targets .NET Core or you\'re in process of migrating your application to .NET Core, you should **not** use strong name signing for your assemblies. Unless you need to, of course.
 
 Congratulations on mastering the art of assembly version conflict resolutions! Hopefully, you will not face these issues yourself but if you do, you should now have all the necessary tools to resolve them and become a dev hero! ;-)
