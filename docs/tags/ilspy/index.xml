@@ -13,7 +13,9 @@
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
-      <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
+      
+        <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
+      
     </item>
     
   </channel>

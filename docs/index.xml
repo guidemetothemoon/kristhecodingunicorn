@@ -6,14 +6,27 @@
     <description>Recent content on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to perform static code analysis of .NET Code with Security Code Scan</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</guid>
+      
+        <description>What is static code analysis and why do I need it? How to install and use Security Code Scan tool?  Installation in CI/CD pipeline Local installation How to view and read result report?   Additional resources   What is static code analysis and why do I need it?</description>
+      
+    </item>
+    
     <item>
       <title>Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log</title>
       <link>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
-      <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
+      
+        <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
+      
     </item>
     
     <item>
@@ -22,7 +35,9 @@
       <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
-      <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+      
+        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+      
     </item>
     
     <item>
@@ -31,7 +46,9 @@
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/owasp_depcheck/</guid>
-      <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check   Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
+      
+        <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check   Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
+      
     </item>
     
     <item>
@@ -40,7 +57,9 @@
       <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</guid>
-      <description>What is a dotnet template though? How to create a custom dotnet template? How do I transform a microservice template to a dotnet template? How do I test the dotnet template and verify that it performs as expected?  Testing single template Testing template collection   How do I pack and make template collection NuGet package available for others?</description>
+      
+        <description>What is a dotnet template though? How to create a custom dotnet template? How do I transform a microservice template to a dotnet template? How do I test the dotnet template and verify that it performs as expected?  Testing single template Testing template collection   How do I pack and make template collection NuGet package available for others?</description>
+      
     </item>
     
     <item>
@@ -49,7 +68,9 @@
       <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/archives/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -58,7 +79,9 @@
       <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/contact/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -67,7 +90,9 @@
       <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/gaming_journey/</guid>
-      <description>I haven&#39;t been much of a gamer actually but there have been some games that managed to keep my interest and attention for quite some time. The highlight of my gaming activity was in the beginning of 2000s - when I used to come home from school and complete all of my homework - as a reward I would be allowed to spend some hours playing games on the good old Windows XP.</description>
+      
+        <description>I haven&#39;t been much of a gamer actually but there have been some games that managed to keep my interest and attention for quite some time. The highlight of my gaming activity was in the beginning of 2000s - when I used to come home from school and complete all of my homework - as a reward I would be allowed to spend some hours playing games on the good old Windows XP.</description>
+      
     </item>
     
     <item>
@@ -76,8 +101,10 @@
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/about/</guid>
-      <description>Hey and welcome to my Tech Corner!
+      
+        <description>Hey and welcome to my Tech Corner!
 My name is Kris (obvously) and I have created this blog to share tech and non-tech (sometimes) stuff with the rest of the world :) I live in Norway, love coding and strengthening security wherever possible. Currently I am working as Lead SW Architect and driving several exciting tech projects that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens&#39; life easier.</description>
+      
     </item>
     
   </channel>

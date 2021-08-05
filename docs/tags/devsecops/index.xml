@@ -6,14 +6,27 @@
     <description>Recent content in devsecops on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/devsecops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/devsecops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to perform static code analysis of .NET Code with Security Code Scan</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</guid>
+      
+        <description>What is static code analysis and why do I need it? How to install and use Security Code Scan tool?  Installation in CI/CD pipeline Local installation How to view and read result report?   Additional resources   What is static code analysis and why do I need it?</description>
+      
+    </item>
+    
     <item>
       <title>Security scanning of third-party dependencies with OWASP Dependency Check</title>
       <link>https://kristhecodingunicorn.com/post/owasp_depcheck/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/owasp_depcheck/</guid>
-      <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check   Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
+      
+        <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check   Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
+      
     </item>
     
   </channel>

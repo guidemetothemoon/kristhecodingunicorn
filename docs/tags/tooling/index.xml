@@ -13,7 +13,9 @@
       <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
-      <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+      
+        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+      
     </item>
     
   </channel>

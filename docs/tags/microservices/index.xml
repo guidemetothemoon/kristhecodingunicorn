@@ -13,7 +13,9 @@
       <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</guid>
-      <description>What is a dotnet template though? How to create a custom dotnet template? How do I transform a microservice template to a dotnet template? How do I test the dotnet template and verify that it performs as expected?  Testing single template Testing template collection   How do I pack and make template collection NuGet package available for others?</description>
+      
+        <description>What is a dotnet template though? How to create a custom dotnet template? How do I transform a microservice template to a dotnet template? How do I test the dotnet template and verify that it performs as expected?  Testing single template Testing template collection   How do I pack and make template collection NuGet package available for others?</description>
+      
     </item>
     
   </channel>

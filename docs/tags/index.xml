@@ -6,23 +6,60 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cybersecurity-corner</title>
+      <link>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>devsecops</title>
+      <link>https://kristhecodingunicorn.com/tags/devsecops/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>dotnet</title>
+      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>sast</title>
+      <link>https://kristhecodingunicorn.com/tags/sast/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/sast/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>assembly</title>
       <link>https://kristhecodingunicorn.com/tags/assembly/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/assembly/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dotnet</title>
-      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
-      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
-      <description></description>
+        <description></description>
+      
     </item>
     
     <item>
@@ -31,7 +68,9 @@
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/fusionlog/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -40,7 +79,9 @@
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/ilspy/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -49,25 +90,9 @@
       <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/tooling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cybersecurity-corner</title>
-      <link>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>devsecops</title>
-      <link>https://kristhecodingunicorn.com/tags/devsecops/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+        <description></description>
       
-      <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -76,7 +101,9 @@
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/owasp/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -85,7 +112,9 @@
       <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/microservices/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -94,7 +123,9 @@
       <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/gamingcorner/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -103,7 +134,9 @@
       <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/journey/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -112,7 +145,9 @@
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/aboutkris/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
     <item>
@@ -121,7 +156,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/index/</guid>
-      <description></description>
+      
+        <description></description>
+      
     </item>
     
   </channel>
