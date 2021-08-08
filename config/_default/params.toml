@@ -25,6 +25,9 @@ contactFormAction = "https://formspree.io/f/mleaglnw"
 # Google Site Verify
 googleSiteVerify = "OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA"
 
+# Google Analytics
+gtagId = "G-RJTQCDFS2Q"
+
 singleDateFormat = "2/1/2006"
 indexDateFormat = "2/1/2006"
 listDateFormat = "2/1/2006"
