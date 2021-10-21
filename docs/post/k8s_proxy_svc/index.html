@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+><head>
+  <title>
+    Kris - The Coding Unicorn
+      |
+      Using Kubernetes Service for proxying to external services
+
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta
+    name="description"
+    content="
+      This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services.
+
+
+    "
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/css/main.min.51423ad97099a08f3a20e16d238c13adae76db7dd5e1913789bdc81143ff4cc6.css"
+    integrity="sha256-UUI62XCZoI86IOFtI4wTra52233V4ZE3ib3IEUP/TMY="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+    integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
+      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="/post/k8s_proxy_svc/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.2a2cd9614b7d007dfbb75e8da19e3a0fa872ceab53c6d000c00b7a0c89b85bfc.js"
+    integrity="sha256-KizZYUt9AH37t16NoZ46D6hyzqtTxtAAwAt6DIm4W/w="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js"
+      integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus="
+      crossorigin="anonymous"
+    ></script>
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Using Kubernetes Service for proxying to external services"/>
+<meta name="twitter:description" content="This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services."/>
+
+
+
+  
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Using Kubernetes Service for proxying to external services",
+        "headline": "Using Kubernetes Service for proxying to external services",
+        "alternativeHeadline": "",
+        "description": "
+      This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_proxy_svc\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2021",
+        "dateCreated": "2021-10-21T00:00:00.00Z",
+        "datePublished": "2021-10-21T00:00:00.00Z",
+        "dateModified": "2021-10-21T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_proxy_svc\/",
+        "wordCount" : "2503",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "proxy"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body>
+    <header><div
+  class="page-top 
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </a>
+  <nav>
+    <ul class="nav__list" id="navMenu">
+      <div class="nav__links">
+        
+        
+          
+          <li>
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/blog/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+
+        
+        
+      </div>
+      <li>
+        
+          <a class="theme-switch" title="Switch Theme">
+            <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+          </a>
+
+        
+      </li>
+    </ul>
+  </nav>
+</div>
+</header>
+    <div class="wrapper">
+      <aside><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="logo-title">
+      <div class="title">
+        <img src="/images/profile.png" alt="profile picture" />
+        <h3 title=""><a href="/">Kris - The Coding Unicorn</a></h3>
+        <div class="description">
+          <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!</p>
+        </div>
+      </div>
+    </div>
+    <ul class="social-links">
+      
+        <li>
+          <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="/contact/" rel="me" aria-label="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer--sidebar">
+  <div class="by_farbox">
+    <ul class="footer__list">
+      <li class="footer__item">
+        &copy;
+        
+          2021
+
+        
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.71100d84fab0ad794b8399a66ac810700cc78d703f715dc10af4d7ba7b761362.js"
+    integrity="sha256-cRANhPqwrXlLg5mmasgQcAzHjXA/cV3BCvTXunt2E2I="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</div>
+</aside>
+      <main>
+        <div class="autopagerize_page_element">
+          <div class="content">
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    <div class="post-content">
+      
+      <div class="post-title">
+        <h1>Using Kubernetes Service for proxying to external services</h1>
+        
+          <div class="info">
+            <em class="fas fa-calendar-day"></em>
+            <span class="date"
+              >
+                21/10/2021
+
+
+              </span
+            >
+            <em class="fas fa-stopwatch"></em>
+            <span class="reading-time">12-minute read</span>
+          </div>
+
+        
+      </div><div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-would-proxying-to-external-services-from-kubernetes-cluster-be-relevant">Why would proxying to external services from Kubernetes cluster be relevant?</a></li>
+    <li><a href="#what-is-kubernetes-service-and-what-kinds-of-kubernetes-service-can-be-created">What is Kubernetes Service and what kinds of Kubernetes Service can be created?</a></li>
+    <li><a href="#implementation-description-and-preparation">Implementation description and preparation</a></li>
+    <li><a href="#proxy-to-external-services-with-service-without-selectors">Proxy to external services with Service without Selectors</a></li>
+    <li><a href="#proxy-to-external-services-with-externalname-service">Proxy to external services with ExternalName Service</a></li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>So, recently I've faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those. I would like to share one of the experiments where I tested several Kubernetes Service types to implement proxying of the requests to external services from Kubernetes cluster.</p>
+<h2 id="why-would-proxying-to-external-services-from-kubernetes-cluster-be-relevant">Why would proxying to external services from Kubernetes cluster be relevant?</h2>
+<p>There may be multiple reasons for why you would look into setting up this kind of proxying to external services from Kubernetes cluster. A few use case examples may be:</p>
+<ul>
+<li>You have a hybrid deployment where some services are running in Kubernetes cluster and some services haven't been migrated yet and are running, for example, on-premises.</li>
+<li>You have services that will always reside outside of the cluster due to specific requirements like, for instance, object storage or database.</li>
+<li>You have a service that is located in another data center than the Kubernetes cluster.</li>
+<li>You're performing a bigger restructuring/refactoring in your Kubernetes cluster and would like to avoid downtime and have an easy way to redirect traffic during migration.</li>
+</ul>
+<p>Scenario where this was relevant for me was like this: I have a single-tenant application used by hundreds of customers. Some instances of this application are already hosted in Kubernetes (Azure Kubernetes Service (AKS) in this case) but most of the instances are still hosted on hundreds of Azure VMs which are using only dynamic IPs. A new component that has been added to standard application will be sending requests to an external service's API that is hosted by a third-party. This external API accepts requests coming <strong>only</strong> from static IPs, i.e. you will need to have a single static IP that the third-party will need to whitelist in order for you to call their APIs. This would work fine for the instances hosted in Kubernetes since we're already using Ingress Controller there with a static public IP that the requests will be sent from but, as you may guess, this wouldn&rsquo;t work for most of the instances that are still deployed on Azure VMs with dynamic IPs. For those cases there was a need to find other solutions.</p>
+<blockquote>
+<p>When an AKS cluster is created it'll by default create an external Azure Load Balancer and assign it a public IP which is only valid for the lifespan of the LoadBalancer Service. If you need a static IP you need to explicitly create it and assign to your Kubernetes services. If you're also using a public facing Ingress Controller with static external IP, you will need to ensure that you have properly defined the necessary IP addresses in the Azure Load Balancer. You must also verify that you've defined the correct IP rule order in Azure Load Balancer Frontend IP Configuration section. It's important because the first frontend IP from the list will be used by Azure Load Balancer for the egress traffic from the AKS cluster. Official Microsoft documentation describes this pretty well: <a href="https://docs.microsoft.com/en-us/azure/aks/egress">Egress traffic in AKS</a>.</p>
+</blockquote>
+<p>There are multiple ways to solve the scenario that I've mentioned above:</p>
+<ol>
+<li><strong>Dedicated VM with installed transparent proxy.</strong> You could set up a dedicated VM with a static IP and install a transparent proxy solution that would forward all the requests to the respective external service. Disadvantage of that is that you will need someone to maintain that proxy solution in addition to the dedicated VM which must also be secured and protected from, for instance, DDoS attacks.</li>
+<li><strong>Web traffic load balancer (Azure Application Gateway).</strong> Another possiblity which works pretty well is to set up a web traffic load balancer like Azure Application Gateway that could be created with a static IP as well. I will not go into details on how to do that but I think that this guide describes pretty well how you could use Azure Application Gateway to redirect web traffic: <a href="https://docs.microsoft.com/en-us/azure/application-gateway/tutorial-url-redirect-powershell">Tutorial: Redirect web traffic using Azure PowerShell</a>. The disadvantage of this approach is additional cost - in case of Azure Application Gateway, depending on the size of the gateway the price will vary, and the service is charged per hour. Depending on which location the service is deployed to, the price may vary from 22 to almost 300 dollars a month.</li>
+</ol>
+<blockquote>
+<p>It's important to note that if you're setting up Azure Application Gateway, you can't use Redirection rule for the proxy scenario since it will be a pure URL redirection where no intervention with the HTTP request will happen and the request will still be sent from the original client IP. You will need to set up a backend pool pointing to the external service - then, when request hits Azure Application Gateway, it will set up a new session with the backend, assigning the request a new IP which would be equal to the static IP of the gateway, as well as add the source IP of the request as a &quot;X-Forwarded-For&quot; HTTP request header. More information can be found here: <a href="https://docs.microsoft.com/en-us/azure/application-gateway/how-application-gateway-works#modifications-to-the-request">How an application gateway routes a request</a></p>
+</blockquote>
+<p>Since I already had part of the workload running in Kubernetes and the remaining instances were planned to be migrated to Kubernetes in the near future it was clear that the solution I needed to find was temporary. Once all of the instances are migrated to Kubernetes, this problem will be solved automatically. And the cherry on top is that we will need to account only for one static IP address that needs to be whitelisted - the public IP of Azure Load Balancer configured for my AKS cluster! So, why not use the additional capabilities in the existing Kubernetes platform in order to provide this temporary solution for VM-hosted workloads? That's when Kubernetes Service came into picture.</p>
+<h2 id="what-is-kubernetes-service-and-what-kinds-of-kubernetes-service-can-be-created">What is Kubernetes Service and what kinds of Kubernetes Service can be created?</h2>
+<p>Let's briefly clarify what a Kubernetes Service is and what types of Kubernetes Service exist.
+Kubernetes Service is a an abstraction over a logical set of Pods that your application is running on in Kubernetes. As we know, Pods are temporary and can die at any moment and get replaced with a new set of Pods with new IP addresses, therefore Service is a way to expose your application, as well as define the policy for how application Pods must be accessed. More on this in official Kubernetes documentation: <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>.</p>
+<p>There are multiple kinds of Kubernetes Service you can create:</p>
+<ul>
+<li><strong>ClusterIP (default):</strong> internal Service with assigned internal IP - will only be reachable from inside the Kubernetes cluster.</li>
+<li><strong>NodePort:</strong> Service is exposed at static port on each Node's IP and can be reached from outside the cluster by calling [NodeIP]:[NodePort]. Also creates ClusterIP Service automatically.</li>
+<li><strong>LoadBalancer:</strong> normally used by cloud providers, Service is exposed and reachable from the outside via cloud provider's load balancer. For example, in case of AKS it will be Azure Load Balancer. Also creates ClusterIP and NodePort Services automatically.</li>
+<li><strong>ExternalName:</strong> Service is mapped to a respective CNAME record.</li>
+</ul>
+<p>Kubernetes Service can also be created with selectors and without selectors.</p>
+<ul>
+<li><strong>Service with selectors</strong> is a classic implementation where a set of Pods are abstracted with a Service, and based on the defined selector the Service will now know which Pods it's handling access for. An example of such selector may be application name but you can define whatever selector you want as long as you remember to define the same selector for the Pods as well as for the Service. When a Service with selector is created a respective Endpoint Object is created automatically - it will handle a list of IPs that the Service will redirect traffic to.</li>
+<li><strong>Service without selectors</strong> can be used when you want to expose backend types different from Pods, for instance, an external database, a service in another namespace or an external service in my scenario. When a Service without selector is created, no Endpoint Object is created automatically so you need to create it manually and provide the backend address that the Service must route traffic to. If ExternalName Service is created, no Endpoint Object is needed.</li>
+</ul>
+<p><strong>Headless Service</strong> is a Service without cluster IP - you can use this Service when you want to use a specific service discovery mechanism that is not the one provided by Kubernetes platform. No load balancing or proxying is done for this Service by Kubernetes and no cluster IP is being allocated for the Service. It can be defined with and without selectors as well and that's what defines how DNS is configured for the headless Service.</p>
+<p>Now that we've covered the basics, let's get back to the scenario I've described above and see how we can implement proxying to external services with help of Kubernetes Service without selectors and ExternalName Service.</p>
+<h2 id="implementation-description-and-preparation">Implementation description and preparation</h2>
+<p>I will be using AKS as my Kubernetes cluster. As an external service I'll be using a small app I've created that will check the request it receives and return information about the IP that the request is being sent from, as well as the source IPs the request forwarding is happening for (if there are any). For illustration purposes I've deployed the app to IIS on an Azure VM but it's a cross-platform .NET 5 app that can be easily deployed in other ways as well. This application can also be used to test web traffic load balancer like Azure Application Gateway that I've briefly mentioned above.</p>
+<p>If you would like to use it for testing, you can find the code on my GitHub: <a href="https://github.com/guidemetothemoon/IPValidator">IPValidator</a>.</p>
+<p>Since I'm using a Kubernetes cluster provided by a cloud provider (Azure in this case) I will also create an Ingress to provide access from the outside and route traffic to my Service(s) and an Ingress Controller (NGINX) so that Ingress can work as expected.</p>
+<h2 id="proxy-to-external-services-with-service-without-selectors">Proxy to external services with Service without Selectors</h2>
+<p>Now we're ready to create and deploy our Service for proxying. There are two Service types we can achieve it with: a default ClusterIP Service without selectors and ExternalName Service that I will demonstrate in the section below.</p>
+<p>Let's start with creating a default ClusterIP Service without selectors first:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#service.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-service</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span></code></pre></div>
+<p>As you can see we're not providing any selectors and since we're using default Service type (ClusterIP), we don't need to specify the type either. We only need to specify the Service name and port. I'm using Kubernetes deployment templates but Helm templates can be used here as well if you would like a more generic deployment of these resources.
+Now, if you remember from the previous section, since we're creating a Service without selectors, no Endpoint is being created for us so we need to create an Endpoint manually and provide IP address of the external service we want to proxy requests to. I will use an IP address of IPValidator app running on an Azure VM (IP address is inactive now and was used only for demonstration purposes :) ):</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#endpoint.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Endpoints</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-endpoint  </span><span class="w">
+</span><span class="w"></span><span class="nt">subsets</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="nt">addresses</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="m">10.240.0.129</span><span class="w"> </span><span class="c"># IP address of your external service that you would like to proxy requests to</span><span class="w">
+</span><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span></code></pre></div>
+<p>Now, let's create an Ingress to enable traffic routing to our Service. I'm using NGINX Ingress therefore it's specified in the annotations but you can definitely use any other Ingress here as well. I'm also not demonstrating TLS configuration here but you can enable that as well.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#ingress.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/rewrite-target</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-ingress  </span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">test-proxy-service.dev.com</span><span class="w">
+</span><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">backend</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-service</span><span class="w"> </span><span class="c"># Here you specify the name of the Service traffic must be routed to</span><span class="w">
+</span><span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">ImplementationSpecific</span></code></pre></div>
+<p>And it's done! If we now go to <a href="http://test-proxy-service.dev.com">http://test-proxy-service.dev.com</a>, it&rsquo;ll now proxy the request further to my external service's IP which is 10.240.0.129. IPValidator provides us a response saying that initially the client request came from the Node IP where we've deployed our &quot;proxy-service&quot; Service but it was then sent further from the Kubernetes cluster via Azure Load Balancer with a configured static IP of our choice - that's the IP that can be whitelisted by a third-party so that we can access their APIs!</p>
+<p><img src="../../images/k8s_proxy/proxy_example.jpg" alt="Example of response from IPValidator"></p>
+<p>Now, let's see how the same can be achieved with ExternalName Service!</p>
+<h2 id="proxy-to-external-services-with-externalname-service">Proxy to external services with ExternalName Service</h2>
+<p>If you remember from the earlier section, for ExternalName Service we don't need to bother about creating an Endpoint, we just need to specify correct Service type and provide the FQDN of the external service we want to proxy the requests to. So our Service definition will look something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#service.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-service-externalname</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ExternalName</span><span class="w">
+</span><span class="w">  </span><span class="nt">externalName</span><span class="p">:</span><span class="w"> </span><span class="l">ipvalidator-test.dev.com</span><span class="w"> </span><span class="c"># Provide the FQDN of the external service you want to proxy requests to</span></code></pre></div>
+<p>Now, we can create an Ingress - it's pretty much the same as the one we created for default Service without selectors but now we're pointing to the ExternalName Service instead:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#ingress.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/rewrite-target</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/upstream-vhost</span><span class="p">:</span><span class="w"> </span><span class="l">ipvalidator-test.dev.com</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-ingress  </span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">test-proxy-service-externalname.dev.com</span><span class="w">
+</span><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">backend</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">proxy-service-externalname</span><span class="w"> </span><span class="c"># Here you specify the name of the ExternalName Service traffic must be routed to</span><span class="w">
+</span><span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">ImplementationSpecific</span></code></pre></div>
+<p>And we're all set! If we now go to <a href="http://test-proxy-service-externalname.dev.com">http://test-proxy-service-externalname.dev.com</a>, our request will be redirected to <a href="http://ipvalidator-test.dev.com">http://ipvalidator-test.dev.com</a> .
+In this case the egress traffic from AKS cluster uses respective Azure Load Balancer public static IP, in my case, the same one as in the previous example (external static IP of NGINX Ingress Controller) so that's still the same IP we can let the third-party whitelist in order for us to access their APIs.</p>
+<blockquote>
+<p><strong>Important note:</strong> ExternalName Service is supported only by NGINX  Plus Ingress Controller, not the free version. You can read more about it here: <a href="https://www.nginx.com/blog/announcing-nginx-ingress-controller-for-kubernetes-release-1-5-0/#ExternalName">Support for ExternalName Services</a></p>
+</blockquote>
+<blockquote>
+<p>There are some known challenges with ExternalName Service type, also when it comes to common protocols like HTTP and HTTPS. Challenges are related to the Host header discrepancies when it comes to the hostname ExternalName Service references and the actual hostname used by clients inside the cluster. You can read more about the challenges here: <a href="https://kubernetes.io/docs/concepts/services-networking/service/#externalname">Type ExternalName</a>. In order to not preserve the hostname that was initially set in the request you can add &quot;ingress.kubernetes.io/preserve-host: &ldquo;false&rdquo;&quot; (valid for Ingress Controller like, f.ex., Traefik) or &quot;nginx.ingress.kubernetes.io/upstream-vhost: [your_external_host]&quot; (NGINX) annotation to your Ingress definition.</p>
+</blockquote>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Some material that may be relevant to check out for more in-depth understanding of different networking concepts in Kubernetes:</p>
+<ul>
+<li>Explanation of what Ingress Controller is and how it's used in Kubernetes: <a href="https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/">Ingress Controllers</a></li>
+<li>Explanation of what Ingress is and how it's used in Kubernetes: <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a></li>
+<li>Explanation of Service without selectors: <a href="https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors">Services without selectors</a></li>
+<li>Explanation of Headless Service: <a href="https://kubernetes.io/docs/concepts/services-networking/service/#headless-services">Headless Services</a></li>
+<li>Explanation of different Service types: <a href="https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types">Service Types</a></li>
+<li>Explanation of how to create an Ingress Controller with static public IP in Azure Kubernetes Service (AKS): <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip">Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)</a></li>
+</ul>
+<p>That's it from me this time, thanks for checking in! 
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again</p>
+</div>
+    <div class="post-footer">
+      <div class="info">
+        
+
+        
+          <span class="separator"><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/proxy/">proxy</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+    
+  </div>
+
+
+          </div>
+        </div>
+      </main>
+    </div><footer class="footer footer--base">
+  <div class="by_farbox">
+    <ul class="footer__list">
+      <li class="footer__item">
+        &copy;
+        
+          2021
+
+        
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.71100d84fab0ad794b8399a66ac810700cc78d703f715dc10af4d7ba7b761362.js"
+    integrity="sha256-cRANhPqwrXlLg5mmasgQcAzHjXA/cV3BCvTXunt2E2I="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</body>
+</html>
