@@ -168,7 +168,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_proxy_svc\/",
-        "wordCount" : "2503",
+        "wordCount" : "2554",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -504,7 +504,10 @@ Now, if you remember from the previous section, since we're creating a Service w
 </span><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
 </span><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
 </span><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">ImplementationSpecific</span></code></pre></div>
-<p>And it's done! If we now go to <a href="http://test-proxy-service.dev.com">http://test-proxy-service.dev.com</a>, it&rsquo;ll now proxy the request further to my external service's IP which is 10.240.0.129. IPValidator provides us a response saying that initially the client request came from the Node IP where we've deployed our &quot;proxy-service&quot; Service but it was then sent further from the Kubernetes cluster via Azure Load Balancer with a configured static IP of our choice - that's the IP that can be whitelisted by a third-party so that we can access their APIs!</p>
+<p>And it's done!</p>
+<p>The flow would look something like this:</p>
+<p><img src="../../images/k8s_proxy/clusterip_svc_workflow.jpg" alt="Example of request flow with ClusterIP Service without selectors"></p>
+<p>If we now go to <a href="http://test-proxy-service.dev.com">http://test-proxy-service.dev.com</a>, it&rsquo;ll now proxy the request further to my external service's IP which is 10.240.0.129. IPValidator provides us a response saying that initially the client request came from the Node IP where we've deployed our &quot;proxy-service&quot; Service but it was then sent further from the Kubernetes cluster via Azure Load Balancer with a configured static IP of our choice - that's the IP that can be whitelisted by a third-party so that we can access their APIs!</p>
 <p><img src="../../images/k8s_proxy/proxy_example.jpg" alt="Example of response from IPValidator"></p>
 <p>Now, let's see how the same can be achieved with ExternalName Service!</p>
 <h2 id="proxy-to-external-services-with-externalname-service">Proxy to external services with ExternalName Service</h2>
@@ -541,10 +544,13 @@ Now, if you remember from the previous section, since we're creating a Service w
 </span><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
 </span><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
 </span><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">ImplementationSpecific</span></code></pre></div>
-<p>And we're all set! If we now go to <a href="http://test-proxy-service-externalname.dev.com">http://test-proxy-service-externalname.dev.com</a>, our request will be redirected to <a href="http://ipvalidator-test.dev.com">http://ipvalidator-test.dev.com</a> .
+<p>And we're all set!</p>
+<p>The flow would look something like this:</p>
+<p><img src="../../images/k8s_proxy/externalname_svc_workflow.jpg" alt="Example of request flow with ExternalName Service without selectors"></p>
+<p>If we now go to <a href="http://test-proxy-service-externalname.dev.com">http://test-proxy-service-externalname.dev.com</a>, our request will be redirected to <a href="http://ipvalidator-test.dev.com">http://ipvalidator-test.dev.com</a> .
 In this case the egress traffic from AKS cluster uses respective Azure Load Balancer public static IP, in my case, the same one as in the previous example (external static IP of NGINX Ingress Controller) so that's still the same IP we can let the third-party whitelist in order for us to access their APIs.</p>
 <blockquote>
-<p><strong>Important note:</strong> ExternalName Service is supported only by NGINX  Plus Ingress Controller, not the free version. You can read more about it here: <a href="https://www.nginx.com/blog/announcing-nginx-ingress-controller-for-kubernetes-release-1-5-0/#ExternalName">Support for ExternalName Services</a></p>
+<p><strong>Important note:</strong> I was able to test the flow with Minikube after installing NGINX Ingress Controller addon but I haven't succeeded with testing the same in AKS with NGINX Ingress Controller. A reason for this seems to be that ExternalName Service is supported only by NGINX  Plus Ingress Controller, not the free version. You can read more about it here: <a href="https://www.nginx.com/blog/announcing-nginx-ingress-controller-for-kubernetes-release-1-5-0/#ExternalName">Support for ExternalName Services</a></p>
 </blockquote>
 <blockquote>
 <p>There are some known challenges with ExternalName Service type, also when it comes to common protocols like HTTP and HTTPS. Challenges are related to the Host header discrepancies when it comes to the hostname ExternalName Service references and the actual hostname used by clients inside the cluster. You can read more about the challenges here: <a href="https://kubernetes.io/docs/concepts/services-networking/service/#externalname">Type ExternalName</a>. In order to not preserve the hostname that was initially set in the request you can add &quot;ingress.kubernetes.io/preserve-host: &ldquo;false&rdquo;&quot; (valid for Ingress Controller like, f.ex., Traefik) or &quot;nginx.ingress.kubernetes.io/upstream-vhost: [your_external_host]&quot; (NGINX) annotation to your Ingress definition.</p>
