@@ -168,7 +168,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_proxy_svc\/",
-        "wordCount" : "2554",
+        "wordCount" : "2622",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -396,7 +396,7 @@ if (!doNotTrack) {
               </span
             >
             <em class="fas fa-stopwatch"></em>
-            <span class="reading-time">12-minute read</span>
+            <span class="reading-time">13-minute read</span>
           </div>
 
         
@@ -550,7 +550,7 @@ Now, if you remember from the previous section, since we're creating a Service w
 <p>If we now go to <a href="http://test-proxy-service-externalname.dev.com">http://test-proxy-service-externalname.dev.com</a>, our request will be redirected to <a href="http://ipvalidator-test.dev.com">http://ipvalidator-test.dev.com</a> .
 In this case the egress traffic from AKS cluster uses respective Azure Load Balancer public static IP, in my case, the same one as in the previous example (external static IP of NGINX Ingress Controller) so that's still the same IP we can let the third-party whitelist in order for us to access their APIs.</p>
 <blockquote>
-<p><strong>Important note:</strong> I was able to test the flow with Minikube after installing NGINX Ingress Controller addon but I haven't succeeded with testing the same in AKS with NGINX Ingress Controller. A reason for this seems to be that ExternalName Service is supported only by NGINX  Plus Ingress Controller, not the free version. You can read more about it here: <a href="https://www.nginx.com/blog/announcing-nginx-ingress-controller-for-kubernetes-release-1-5-0/#ExternalName">Support for ExternalName Services</a></p>
+<p><strong>Important note:</strong> <strong>If you want to use ExternalName Service in AKS, you will need to set up NGINX Plus Ingress Controller</strong>, it's not officially supported in Basic version. You can read more about it here: <a href="https://www.nginx.com/blog/announcing-nginx-ingress-controller-for-kubernetes-release-1-5-0/#ExternalName">Support for ExternalName Services</a>. It may work in some cases, also in other Kubernetes clusters using basic NGINX Ingress - I was, for instance, able to test proxying with ExternalName Service in Minikube after installing NGINX Ingress Controller addon. The reason for that it's not stable in basic NGINX Ingress and if you even make it work once, there are many more issues that may come up afterwards so it's definitely not a way to go for production workload - you can find more detailed information in following GitHub issue: <a href="https://github.com/nginxinc/kubernetes-ingress/issues/837?fbclid=IwAR3T_dhPlsouVMsFTnYlj78WPeh0R280TSFKlcdnjmKqPcM9L5sOhwVmdcU">Ingress with a backend service type ExternalName</a></p>
 </blockquote>
 <blockquote>
 <p>There are some known challenges with ExternalName Service type, also when it comes to common protocols like HTTP and HTTPS. Challenges are related to the Host header discrepancies when it comes to the hostname ExternalName Service references and the actual hostname used by clients inside the cluster. You can read more about the challenges here: <a href="https://kubernetes.io/docs/concepts/services-networking/service/#externalname">Type ExternalName</a>. In order to not preserve the hostname that was initially set in the request you can add &quot;ingress.kubernetes.io/preserve-host: &ldquo;false&rdquo;&quot; (valid for Ingress Controller like, f.ex., Traefik) or &quot;nginx.ingress.kubernetes.io/upstream-vhost: [your_external_host]&quot; (NGINX) annotation to your Ingress definition.</p>
