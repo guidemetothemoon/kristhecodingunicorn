@@ -6,22 +6,11 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>public</title>
-      <link>https://kristhecodingunicorn.com/tags/public/</link>
-      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/public/</guid>
-      
-        <description></description>
-      
-    </item>
-    
+    <lastBuildDate>Fri, 14 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
-      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
       
@@ -32,7 +21,7 @@
     <item>
       <title>helm</title>
       <link>https://kristhecodingunicorn.com/tags/helm/</link>
-      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/helm/</guid>
       
@@ -41,9 +30,20 @@
     </item>
     
     <item>
+      <title>ingress-controller</title>
+      <link>https://kristhecodingunicorn.com/tags/ingress-controller/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/ingress-controller/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
       <title>k8s</title>
       <link>https://kristhecodingunicorn.com/tags/k8s/</link>
-      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
       
@@ -54,9 +54,31 @@
     <item>
       <title>kubernetes</title>
       <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
-      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://kristhecodingunicorn.com/tags/nginx/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/nginx/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>public</title>
+      <link>https://kristhecodingunicorn.com/tags/public/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/public/</guid>
       
         <description></description>
       

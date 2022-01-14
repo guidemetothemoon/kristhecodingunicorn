@@ -6,7 +6,18 @@
     <description>Recent content in k8s on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to upgrade NGINX Ingress Controller with zero downtime in production</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
+      
+        <description>Introduction to the needs for upgrading Ingress Controller Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime  Preparations Create temporary Ingress Controller Re-route traffic to temporary Ingress Controller Upgrade original Ingress Controller and re-route traffic from temporary IC Final test and cleanup   Additional resources   Introduction to the needs for upgrading Ingress Controller In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in stable repo and fully embrace the new Helm chart located in ingress-nginx repository.</description>
+      
+    </item>
+    
     <item>
       <title>How to include new Kubernetes resource into existing Helm release</title>
       <link>https://kristhecodingunicorn.com/post/k8s_object_helm/</link>

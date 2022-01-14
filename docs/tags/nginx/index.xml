@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>helm on Kris - The Coding Unicorn</title>
-    <link>https://kristhecodingunicorn.com/tags/helm/</link>
-    <description>Recent content in helm on Kris - The Coding Unicorn</description>
+    <title>nginx on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/tags/nginx/</link>
+    <description>Recent content in nginx on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to upgrade NGINX Ingress Controller with zero downtime in production</title>
       <link>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</link>
@@ -15,17 +15,6 @@
       <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
       
         <description>Introduction to the needs for upgrading Ingress Controller Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime  Preparations Create temporary Ingress Controller Re-route traffic to temporary Ingress Controller Upgrade original Ingress Controller and re-route traffic from temporary IC Final test and cleanup   Additional resources   Introduction to the needs for upgrading Ingress Controller In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in stable repo and fully embrace the new Helm chart located in ingress-nginx repository.</description>
-      
-    </item>
-    
-    <item>
-      <title>How to include new Kubernetes resource into existing Helm release</title>
-      <link>https://kristhecodingunicorn.com/post/k8s_object_helm/</link>
-      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/post/k8s_object_helm/</guid>
-      
-        <description>What is Helm? How to let existing Helm release &amp;ldquo;adopt&amp;rdquo; a new Kubernetes resource and why it&#39;s important? Additional resources   Helm is extremely useful and efficient when it comes to distributing, installing and upgrading applications hosted in Kubernetes. But sometimes you may have a need to patch an existing release and there is a quick way to do that which I would like to share with you today.</description>
       
     </item>
     

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+><head>
+  <title>
+    Kris - The Coding Unicorn
+      |
+      How to upgrade NGINX Ingress Controller with zero downtime in production
+
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta
+    name="description"
+    content="
+      This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.
+
+
+    "
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/css/main.min.51423ad97099a08f3a20e16d238c13adae76db7dd5e1913789bdc81143ff4cc6.css"
+    integrity="sha256-UUI62XCZoI86IOFtI4wTra52233V4ZE3ib3IEUP/TMY="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+    integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
+      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="/post/k8s_ic_upgrade/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.2a2cd9614b7d007dfbb75e8da19e3a0fa872ceab53c6d000c00b7a0c89b85bfc.js"
+    integrity="sha256-KizZYUt9AH37t16NoZ46D6hyzqtTxtAAwAt6DIm4W/w="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js"
+      integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus="
+      crossorigin="anonymous"
+    ></script>
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="How to upgrade NGINX Ingress Controller with zero downtime in production"/>
+<meta name="twitter:description" content="This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production."/>
+
+
+
+  
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "How to upgrade NGINX Ingress Controller with zero downtime in production",
+        "headline": "How to upgrade NGINX Ingress Controller with zero downtime in production",
+        "alternativeHeadline": "",
+        "description": "
+      This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_ic_upgrade\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-01-14T00:00:00.00Z",
+        "datePublished": "2022-01-14T00:00:00.00Z",
+        "dateModified": "2022-01-14T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_ic_upgrade\/",
+        "wordCount" : "3137",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "helm"
+
+    
+      
+        ,
+
+      
+      "nginx"
+
+    
+      
+        ,
+
+      
+      "ingress-controller"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body>
+    <header><div
+  class="page-top 
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </a>
+  <nav>
+    <ul class="nav__list" id="navMenu">
+      <div class="nav__links">
+        
+        
+          
+          <li>
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/blog/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+
+        
+        
+      </div>
+      <li>
+        
+          <a class="theme-switch" title="Switch Theme">
+            <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+          </a>
+
+        
+      </li>
+    </ul>
+  </nav>
+</div>
+</header>
+    <div class="wrapper">
+      <aside><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="logo-title">
+      <div class="title">
+        <img src="/images/profile.png" alt="profile picture" />
+        <h3 title=""><a href="/">Kris - The Coding Unicorn</a></h3>
+        <div class="description">
+          <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!</p>
+        </div>
+      </div>
+    </div>
+    <ul class="social-links">
+      
+        <li>
+          <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="/contact/" rel="me" aria-label="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer--sidebar">
+  <div class="by_farbox">
+    <ul class="footer__list">
+      <li class="footer__item">
+        &copy;
+        
+          2022 - Powered by Hugo
+
+        
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.71100d84fab0ad794b8399a66ac810700cc78d703f715dc10af4d7ba7b761362.js"
+    integrity="sha256-cRANhPqwrXlLg5mmasgQcAzHjXA/cV3BCvTXunt2E2I="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</div>
+</aside>
+      <main>
+        <div class="autopagerize_page_element">
+          <div class="content">
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    <div class="post-content">
+      
+      <div class="post-title">
+        <h1>How to upgrade NGINX Ingress Controller with zero downtime in production</h1>
+        
+          <div class="info">
+            <em class="fas fa-calendar-day"></em>
+            <span class="date"
+              >
+                14/1/2022
+
+
+              </span
+            >
+            <em class="fas fa-stopwatch"></em>
+            <span class="reading-time">15-minute read</span>
+          </div>
+
+        
+      </div><div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-the-needs-for-upgrading-ingress-controller">Introduction to the needs for upgrading Ingress Controller</a></li>
+    <li><a href="#walkthrough-of-the-process-for-upgrading-nginx-ingress-controller-with-zero-downtime">Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime</a>
+      <ul>
+        <li><a href="#preparations">Preparations</a></li>
+        <li><a href="#create-temporary-ingress-controller">Create temporary Ingress Controller</a></li>
+        <li><a href="#re-route-traffic-to-temporary-ingress-controller">Re-route traffic to temporary Ingress Controller</a></li>
+        <li><a href="#upgrade-original-ingress-controller-and-re-route-traffic-from-temporary-ic">Upgrade original Ingress Controller and re-route traffic from temporary IC</a></li>
+        <li><a href="#final-test-and-cleanup">Final test and cleanup</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<h2 id="introduction-to-the-needs-for-upgrading-ingress-controller">Introduction to the needs for upgrading Ingress Controller</h2>
+<p>In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in <code>stable</code> repo and fully embrace the new Helm chart located in <code>ingress-nginx</code> repository. The reason for that is related to higher maintenance costs for the Helm repositories' maintainers which has become significantly more challenging with release of Helm 3. Therefore EOL timeline has been officially announced by CNCF and Helm back in 2020. You can read the official announcement as well as the reasoning behind deprecation of Helm repositories here: <a href="https://www.cncf.io/blog/2020/10/07/important-reminder-for-all-helm-users-stable-incubator-repos-are-deprecated-and-all-images-are-changing-location/">Important Helm Repo Changes &amp; v2 End of Support in November</a> .</p>
+<p>There may, of course, be other reasons for why you would need to perform maintenance of the Ingress Controller and take it offline: for instance, you may want to spin up a totally different Ingress Controller or a different version of the Ingress Controller that is currently in use. And I love avoiding downtime when performing maintenance work and I guess that many of the readers of this blog post can relate to that ;)</p>
+<p>Well, there is quite a neat and straightforward way to do that! To simplify the whole process for myself I've created a PowerShell script that I've re-used many times (since I had to perform the same work on multiple Kubernetes clusters, both in dev and production). And it saved me quite some time and manual work. You can find the complete version of the script in my GitHub repository: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/Upgrade-Nginx-IC.ps1">guidemetothemoon - Upgrade NGINX Ingress Controller</a></p>
+<p>If you would like to learn more about debugging in Kubernetes, I've also created a small cheatsheet that I've been actively using and referencing when helping out Kubernetes beginners <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/help-material/kubernetes/k8s-debugging-quicknotes.md">guidemetothemoon - Kubernetes debugging quicknotes</a> :)</p>
+<h2 id="walkthrough-of-the-process-for-upgrading-nginx-ingress-controller-with-zero-downtime">Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime</h2>
+<p>I will now go through the script in more detail so that you can understand how zero downtime process actually works. In my scenario I will be using NGINX Ingress Controller, Azure Kubernetes Service and Azure DNS but this may be customized based on your infrastructure setup and your needs.
+From now on I will also be using Ingress Controller and IC terms interchangeably but both actually mean the same thing :)</p>
+<h3 id="preparations">Preparations</h3>
+<p>Firstly, we'll need to do some preparations that will make it easier for us to do the work later:</p>
+<ul>
+<li>Set alias for kubectl command so that we don't need to refer the full command every single time</li>
+<li>Log into Azure and set active subscription to the one where your DNS Zones are created</li>
+<li>Set current Kubernetes context to the cluster where you will be performing the upgrade - mine is called TestKubeCluster</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 0 - Set alias for kubectl to not type the whole command every single time ;)</span>
+Set-Alias -Name k -Value kubectl
+
+<span class="c1">#Log in to Azure and set proper subscription active in order to be able to update DNS records (not applicable if you&#39;re using another DNS provider</span>
+az login
+az account <span class="nb">set</span> --subscription mySubscription <span class="c1"># Set active subscription to the one where your DNS zones are defined</span>
+k config use-context TestKubeCluster</code></pre></div>
+<h3 id="create-temporary-ingress-controller">Create temporary Ingress Controller</h3>
+<p>Next step is to create a temporary Ingress Controller and I recommend to use the same configuration and resource definition as the existing Ingress Controller in production uses. Why? Well, it has been running in production for a while and you know that it works, therefore it's a safe choice to avoid any potential issues with temporary Ingress Controller while you're performing maintenance and upgrading the initial IC.</p>
+<p>Temporary Ingress Controller will naturally reside in a temporary namespace which we will create beforehand. Once we've created a temporary namespace we can add Helm repositories where we can download both the Helm Chart for the original IC, as well as the repo where the Chart for the new IC resides.</p>
+<p>Once that's done, we move to step 2 and deploy temporary Ingress Controller using the same configuration as the active IC uses. Once temporary IC is created we'll need to make a note of the External IP that both the original and temporary Ingress Controller use - we will need that during re-routing of the traffic.</p>
+<p>Finally, once the temporary Ingress Controller is deployed and is up and running, we move on to step 3 and set up monitoring for both the original and the temporary IC - this will become very relevant once we need to re-route the traffic from the original Ingress Controller to the temporary one. We don't want any application becoming unavailable, right? ;) Re-routing traffic will mean updating DNS records and that type of update will take some time. Therefore monitoring traffic for both Ingress Controllers will help us identify when all the traffic is fully drained from the original IC and is actively hitting temporary IC instead.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1 - Prepare namespace and Helm charts before creating temp Ingress Controller</span>
+
+k create ns ingress-temp
+
+<span class="c1"># Add old and new Helm charts to ensure that the repo is up-to-date:</span>
+helm repo add nginx-stable https://helm.nginx.com/stable
+helm repo add stable https://charts.helm.sh/stable
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+<span class="c1"># 2 - Create temp Ingress Controller based on the same Helm chart as the existing Ingress Controller that will be upgraded</span>
+helm upgrade nginx-ingress-temp stable/nginx-ingress --install --namespace ingress-temp --set controller.config.proxy-buffer-size<span class="o">=</span><span class="s2">&#34;32k&#34;</span> --set controller.config.large-client-header-buffers<span class="o">=</span><span class="s2">&#34;4 32k&#34;</span> --set controller.replicaCount<span class="o">=</span><span class="m">2</span> --set controller.nodeSelector.<span class="s2">&#34;beta\.kubernetes\.io/os&#34;</span><span class="o">=</span>linux --set defaultBackend.nodeSelector.<span class="s2">&#34;beta\.kubernetes\.io/os&#34;</span><span class="o">=</span>linux --set controller.metrics.service.annotations.<span class="s2">&#34;prometheus\.io/port&#34;</span><span class="o">=</span><span class="s2">&#34;10254&#34;</span> --set controller.metrics.service.annotations.<span class="s2">&#34;prometheus\.io/scrape&#34;</span><span class="o">=</span><span class="s2">&#34;true&#34;</span> --set controller.metrics.enabled<span class="o">=</span><span class="nb">true</span> --version<span class="o">=</span>1.41.2 
+
+<span class="nv">$original_ingress_ip</span> <span class="o">=</span> <span class="s2">&#34;10.10.10.10&#34;</span> <span class="c1"># replace with the External IP of existing Ingress Controller</span>
+
+<span class="c1"># Get external IP of the newly created Ingress Controller (service of type LoadBalancer in ingress-temp namespace)</span>
+<span class="nv">$temp_ingress_ip</span> <span class="o">=</span> k get svc -n ingress-temp --output <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type contains &#39;</span>LoadBalancer<span class="s1">&#39;)].status.loadBalancer.ingress[0].ip}&#39;</span> <span class="c1"># get External IP of LoadBalancer service</span>
+
+<span class="c1"># 3 - Monitor traffic in both Ingress Controllers to identify when the traffic is only routed to the temporary IC so that the original IC can be taken offline</span>
+kubectl logs -l <span class="nv">component</span><span class="o">=</span>controller -n ingress-basic -f <span class="c1"># Monitor traffic in original IC</span>
+kubectl logs -l <span class="nv">component</span><span class="o">=</span>controller -n ingress-temp -f <span class="c1"># Monitor traffic in temporary IC</span></code></pre></div>
+<h3 id="re-route-traffic-to-temporary-ingress-controller">Re-route traffic to temporary Ingress Controller</h3>
+<p>All right, now that we have the temporary Ingress Controller in place, we&rsquo;re ready to re-route all the traffic from original IC to the temporary one.
+Here I would recommend doing some additional tests before updating DNS records in order to ensure that the temporary Ingress Controller is working as expected. For AKS following tutorial and test application from Microsoft came in really handy: <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-basic">Create an ingress controller in Azure Kubernetes Service (AKS)</a>. What I did is that I deployed the demo application as described in the tutorial and created a DNS record for this app which points to the External IP of the temporary Ingress Controller which we made a note of earlier. Now we can navigate to the DNS name we've created (or to External IP of temporary IC) and we should be able to see the same application UI as shown in the tutorial.</p>
+<p>Very nice! Now we've confirmed that the temporary IC works as expected - we're ready for the next step.
+First, we need to get all the DNS records from the DNS zone used by applications running in current Kubernetes cluster. Then we'll need to retrieve only those DNS records pointing to the External IP of the original Ingress Controller - that's the ones we will need to update to point to the temporary IC instead. Once all the relevant DNS records have been retrieved we can start removing External IP of original Ingress Controller and add External IP of temporary IC - for that parallel execution in PowerShell came in very handy for me. Parallel execution (available from PowerShell 7.0, ref. <a href="https://devblogs.microsoft.com/powershell/powershell-foreach-object-parallel-feature/">PowerShell ForEach-Object Parallel Feature</a>) will spin up several threads that will update DNS records in parallel - when you have tens or hundreds of DNS records, this could save quite some time. Important note here which is also mentioned in the script itself - I wouldn&rsquo;t recommend using more than 10-15 threads at a time since it may result in resource exhaustion of your system. Of course, if you have a really fancy quantum computer or something similar, you can try using a higher amount of threads as well ;)</p>
+<p><strong>Please note:</strong> for even further automation, the code that is used to retrieve, filter and update DNS records can be moved out to a separate function to avoid duplication. Since this blog post is aimed for educating purposes, I&rsquo;ve consciously duplicated the same steps at a later step as well instead of creating a separate function.</p>
+<p>Once all DNS records are updated, let's ensure that we haven't missed out on any relevant DNS records. We repeat the same steps we did a few moments ago:</p>
+<ul>
+<li>Retrieve all the DNS records from the DNS zone used by applications running in current Kubernetes cluster</li>
+<li>Filter out only those DNS records pointing to the External IP of the original Ingress Controller</li>
+<li>If no records are returned, we did well and successfully re-routed traffic from the original Ingress Controller to the temporary IC! Of course, if you're using multiple DNS zones, you need to ensure that relevant DNS records in those DNS zones are updated as well.</li>
+</ul>
+<p>Lastly, we wait. Update of DNS records takes time, sometimes up to an hour or two, depending on the amount of DNS records that were updated. We can periodically check if all DNS records were updated with help of <code>Resolve-DnsName</code> function.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 4 - Update DNS records to route traffic to temp Ingress Controller</span>
+<span class="nv">$dns_recs</span> <span class="o">=</span> az network dns record-set a list -g myresourcegroup -z mydnszone.com
+
+<span class="c1"># Check in the DNS zone how many records are there that are connected to the original IC&#39;s IP</span>
+<span class="nv">$cluster_dns_recs</span> <span class="o">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="nv">$original_ingress_ip</span><span class="o">}</span>
+<span class="nv">$cluster_dns_recs</span>.count
+
+<span class="nv">$cluster_dns_recs</span> <span class="p">|</span> ForEach-Object -Parallel <span class="o">{</span>
+	Write-Output <span class="s2">&#34;Updating </span><span class="nv">$_</span><span class="s2">.name IP </span><span class="nv">$_</span><span class="s2">.arecords.ipv4Address with updated Ingress Controller External IP </span><span class="nv">$temp_ingress_ip</span><span class="s2">&#34;</span>
+	az network dns record-set a add-record --resource-group myresourcegroup --zone-name mydnszone.com --record-set-name <span class="nv">$_</span>.name --ipv4-address  <span class="nv">$temp_ingress_ip</span>
+        az network dns record-set a remove-record --resource-group myresourcegroup --zone-name mydnszone.com --record-set-name <span class="nv">$_</span>.name --ipv4-address <span class="nv">$original_ingress_ip</span>
+<span class="o">}</span> -ThrottleLimit <span class="m">2</span> <span class="c1"># here you can customize parallel threads count based on how many records you have but I wouldn&#39;t recommend to use more that 15 depending on how resourceful your system is</span>
+
+<span class="c1"># Once you&#39;ve updated DNS records you will need to load them again</span>
+<span class="nv">$dns_recs</span> <span class="o">=</span> az network dns record-set a list -g myresourcegroup -z mydnszone.com
+
+<span class="c1"># Verify that there are no more DNS records that are connected to the original IC&#39;s IP</span>
+<span class="nv">$cluster_dns_recs</span> <span class="o">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="nv">$original_ingress_ip</span><span class="o">}</span>
+<span class="nv">$cluster_dns_recs</span>.count <span class="c1"># Should be 0 by now</span>
+
+<span class="c1"># Now wait for all traffic to be drained from original IC and moved to the temp IC</span>
+<span class="c1"># You can check DNS resolution in the meantime to confirm that all DNS records are updated</span>
+
+<span class="c1"># For few exisitng DNS records - check what those are resolved to</span>
+foreach<span class="o">(</span><span class="nv">$dnsrec</span> in <span class="nv">$cluster_dns_recs</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nv">$res</span> <span class="o">=</span> Resolve-DnsName -Name <span class="nv">$dnsrec</span>.fqdn
+	Write-Output <span class="nv">$res</span>
+<span class="o">}</span>
+<span class="c1"># For large amount of DNS records - Faster check if all the DNS records have been properly updated</span>
+<span class="nv">$dns_resolv_Res</span> <span class="o">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="nv">$original_ingress_ip</span> -and <span class="o">(</span>Resolve-DnsName -Name <span class="nv">$_</span>.fqdn<span class="o">)</span>.IPAddress -ne <span class="nv">$temp_ingress_ip</span><span class="o">}</span></code></pre></div>
+<h3 id="upgrade-original-ingress-controller-and-re-route-traffic-from-temporary-ic">Upgrade original Ingress Controller and re-route traffic from temporary IC</h3>
+<p>Okay, we've waited and monitored enough! We've now confirmed that all DNS records were updated and all traffic was drained from original Ingress Controller and is now hitting temporary IC. This means that we're ready to upgrade or perform maintenance on the original Ingress Controller. And by upgrade, which we're performing in this scenario, I mean uninstalling the running deployment of original IC and installing a new and shiny NGINX Ingress Controller from the new and shiny <code>ingress-nginx</code> repository.</p>
+<p>With help of <code>helm uninstall</code> and <code>helm upgrade</code> we've now deployed a new version of NGINX Ingress Controller that we want to use in production. Since we've uninstalled the original IC we've also lost the live traffic monitoring that we've set up for it earlier so we need to set up the traffic monitoring for the newly created Ingress Controller as well - we'll be re-routing traffic once again.</p>
+<p>After logging is enabled, we will need to drain traffic from the temporary Ingress Controller and re-route it to the newly created IC. In order to do that we can follow the same steps we did in the previous section:</p>
+<ul>
+<li>(Optional) Create test application pointing to the new Ingress Controller to test that it functions as expected and is ready to accept traffic</li>
+<li>Make a note of External IP of the newly created Ingress Controller</li>
+<li>Update all the relevant DNS records in the respective DNS zones - now, we'll need to remove External IP of the temporary Ingress Controller and add External IP of the newly created IC</li>
+<li>Monitor and wait for the DNS records to be updated and traffic to be drained from temporary IC and re-routed to the newly created IC</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 5 - Once DNS records were updated and all traffic has been re-routed to temp IC, uninstall original Ingress Controller with Helm and install new Ingress Controller with Helm</span>
+<span class="c1"># In this case new Ingress Controller is configured to use Public IP of Azure Load Balancer and not create a new IP</span>
+helm uninstall nginx-ingress -n ingress-basic
+helm upgrade nginx-ingress ingress-nginx/ingress-nginx --install --create-namespace --namespace ingress-basic --set controller.config.proxy-buffer-size<span class="o">=</span><span class="s2">&#34;32k&#34;</span> --set controller.config.large-client-header-buffers<span class="o">=</span><span class="s2">&#34;4 32k&#34;</span> --set controller.replicaCount<span class="o">=</span><span class="m">2</span> --set controller.nodeSelector.<span class="s2">&#34;kubernetes\.io/os&#34;</span><span class="o">=</span>linux --set defaultBackend.nodeSelector.<span class="s2">&#34;kubernetes\.io/os&#34;</span><span class="o">=</span>linux --set-string controller.metrics.service.annotations.<span class="s2">&#34;prometheus\.io/port&#34;</span><span class="o">=</span><span class="s2">&#34;10254&#34;</span> --set-string controller.metrics.service.annotations.<span class="s2">&#34;prometheus\.io/scrape&#34;</span><span class="o">=</span><span class="s2">&#34;true&#34;</span> --set controller.metrics.enabled<span class="o">=</span><span class="nb">true</span> --set controller.service.loadBalancerIP<span class="o">=</span><span class="s2">&#34;00.00.00.000&#34;</span> <span class="c1">#remove loadBalancerIP if Ingress Controller will not use Azure Load Balancer&#39;s Public IP</span>
+
+<span class="c1"># 6 - Monitor the newly created Ingress Controller since the initial one was removed in previous step - be aware that the Kubernetes label for in new NGINX Ingress Controller template has changed!</span>
+kubectl logs -l app.kubernetes.io/component<span class="o">=</span>controller -n ingress-basic -f <span class="c1"># New IC</span>
+kubectl logs -l <span class="nv">component</span><span class="o">=</span>controller -n ingress-temp -f <span class="c1"># Temporary IC, should still be actively monitoring as per actions in step 3</span>
+
+<span class="c1"># 7 - Redirect traffic back to newly created Ingress Controller and monitor traffic routing together with DNS resolution</span>
+<span class="c1"># Repeat step 4, just like below:</span>
+
+<span class="nv">$new_ingress_ip</span> <span class="o">=</span> <span class="s2">&#34;00.00.00.000&#34;</span> <span class="c1"># Public IP of newly created Ingress Controller</span>
+
+<span class="c1">#Update DNS records to route traffic to temp Ingress Controller</span>
+<span class="nv">$dns_recs</span> <span class="o">=</span> az network dns record-set a list -g myresourcegroup -z mydnszone.com
+
+<span class="c1"># Check in the DNS zone how many records are there that are connected to the temp IC&#39;s IP</span>
+<span class="nv">$cluster_dns_recs</span> <span class="o">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="nv">$temp_ingress_ip</span><span class="o">}</span>
+<span class="nv">$cluster_dns_recs</span>.count
+
+<span class="nv">$cluster_dns_recs</span> <span class="p">|</span> ForEach-Object -Parallel <span class="o">{</span>
+	Write-Output <span class="s2">&#34;Updating </span><span class="nv">$_</span><span class="s2">.name IP </span><span class="nv">$_</span><span class="s2">.arecords.ipv4Address with updated Ingress Controller External IP </span><span class="nv">$new_ingress_ip</span><span class="s2">&#34;</span>
+	az network dns record-set a add-record --resource-group myresourcegroup --zone-name mydnszone.com --record-set-name <span class="nv">$_</span>.name --ipv4-address  <span class="nv">$new_ingress_ip</span>
+        az network dns record-set a remove-record --resource-group myresourcegroup --zone-name mydnszone.com --record-set-name <span class="nv">$_</span>.name --ipv4-address <span class="nv">$temp_ingress_ip</span>
+<span class="o">}</span> -ThrottleLimit <span class="m">2</span> <span class="c1"># here you can customize parallel threads count based on how many records you have but I wouldn&#39;t recommend to use more that 15 depending on how resourceful your system is</span>
+
+<span class="c1"># Once you&#39;ve updated DNS records you will need to load them again</span>
+<span class="nv">$dns_recs</span> <span class="o">=</span> az network dns record-set a list -g myresourcegroup -z mydnszone.com
+
+<span class="c1"># Verify that there are no more DNS records that are connected to the temp IC&#39;s IP</span>
+<span class="nv">$cluster_dns_recs</span> <span class="o">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="nv">$temp_ingress_ip</span><span class="o">}</span>
+<span class="nv">$cluster_dns_recs</span>.count <span class="c1"># Should be 0 by now</span>
+
+<span class="c1"># Now wait for all traffic to be drained from temp IC and moved to the new IC</span>
+<span class="c1"># You can check DNS resolution in the meantime to confirm that all DNS records are updated</span>
+
+<span class="c1"># For few exisitng DNS records - check what those are resolved to</span>
+foreach<span class="o">(</span><span class="nv">$dnsrec</span> in <span class="nv">$cluster_dns_recs</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nv">$res</span> <span class="o">=</span> Resolve-DnsName -Name <span class="nv">$dnsrec</span>.fqdn
+	Write-Output <span class="nv">$res</span>
+<span class="o">}</span>
+
+<span class="c1"># For large amount of DNS records - Faster check if all the DNS records have been properly updated</span>
+<span class="nv">$dns_resolv_Res</span> <span class="o">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="nv">$temp_ingress_ip</span> -and <span class="o">(</span>Resolve-DnsName -Name <span class="nv">$_</span>.fqdn<span class="o">)</span>.IPAddress -ne <span class="nv">$new_ingress_ip</span><span class="o">}</span></code></pre></div>
+<h3 id="final-test-and-cleanup">Final test and cleanup</h3>
+<p>Aaaaaallright! We're almost there and it was worth the wait! Hopefully now you have all applications on the current Kubernetes cluster running nicely and being unaware of this amazing maintenance work we've just performed in production :) But <strong>remember: though it's very tempting to do this directly on a production cluster, one does not simply test in production!</strong> I do encourage you to test this approach out in development first to get your hands dirty and ensure that no deviations in configuration or infrastructure set up cause errors during this type of maintenance.</p>
+<p>Last but not least: we must clean up after ourselves and remove all the temporary resource we've created along the way:</p>
+<ul>
+<li>Remove test application that was used for testing newly created Ingress Controllers and respective DNS records that were created to reach this test application</li>
+<li>Remove temporary Ingress Controller with <code>helm uninstall</code></li>
+<li>Remove temporary namespace where temp IC was residing</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 8 - Remove temp resources once traffic is drained from temporary IC and newly created IC is fully in use and successfully running in respective Kubernetes cluster</span>
+helm uninstall nginx-ingress-temp -n ingress-temp
+k delete ns ingress-temp
+
+<span class="c1"># Final step, after all clusters are upgraded - remove DNS record for any test applications you might have created like the one from this Microsoft tutorial: https://docs.microsoft.com/en-us/azure/aks/ingress-basic</span></code></pre></div>
+<p><strong>Lastly, take yourself a cup of tasty coffee or tea, sit down in a comfortable chair and enjoy all the traffic hitting the new and shiny Ingress Controller you've created - you deserved it! ;)</strong></p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>A few resources that were really useful for me while doing this work which I hope may help you on your way as well:</p>
+<ul>
+<li>Microsoft tutorial on creation and testing of NGINX Ingress Controller in AKS (which I also used for testing new instances of ICs): <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-basic">Create an ingress controller in Azure Kubernetes Service (AKS)</a></li>
+<li>Recommendations for upgrading ingress-nginx installation: <a href="https://kubernetes.github.io/ingress-nginx/deploy/upgrade/">Upgrading</a></li>
+<li>New GitHub repository for NGINX Ingress Controller and it's Helm Chart: <a href="https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/README.md">ingress-nginx</a></li>
+<li>Finally, I'm continuously filling up my GitHub account with useful material, scripts and (soon) applications that cover different areas of product development and architecture - you're very much welcome to join me there! <a href="https://github.com/guidemetothemoon/div-dev-resources">guidemetothemoon/div-dev-resources</a>  ^_^</li>
+</ul>
+<p>That's it from me this time, thanks for checking in! 
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again</p>
+</div>
+    <div class="post-footer">
+      <div class="info">
+        
+
+        
+          <span class="separator"><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/helm/">helm</a><a class="tag" href="/tags/nginx/">nginx</a><a class="tag" href="/tags/ingress-controller/">ingress-controller</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+    
+  </div>
+
+
+          </div>
+        </div>
+      </main>
+    </div><footer class="footer footer--base">
+  <div class="by_farbox">
+    <ul class="footer__list">
+      <li class="footer__item">
+        &copy;
+        
+          2022 - Powered by Hugo
+
+        
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.71100d84fab0ad794b8399a66ac810700cc78d703f715dc10af4d7ba7b761362.js"
+    integrity="sha256-cRANhPqwrXlLg5mmasgQcAzHjXA/cV3BCvTXunt2E2I="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</body>
+</html>
