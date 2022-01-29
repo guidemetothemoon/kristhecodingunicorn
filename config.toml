@@ -6,7 +6,7 @@ title = "Kristina's Tech Corner"
 theme = "anatole"
 summarylength = 50
 enableEmoji = true
-enableRobotsTXT = true
+enableRobotsTXT = false
 # Enable Disqus
 #disqusShortname = ""
 
