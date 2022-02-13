@@ -23,7 +23,7 @@ Let\'s see the execution time differences for both - I will use ```Measure-Comma
 
 {{< highlight bash >}}
 # Approach 1
-PS C:\Playground> Measure-Command {$dns_list = az network dns record-set a list -g test-rg -z dev.testzone.com; $dns_recs = $dns_list | convertfrom-json -Depth 4 | where {$_.arecords.ipv4Address -eq "192.0.2.146"}}
+PS C:\Playground> Measure-Command {$dns_list = az network dns record-set a list -g test-rg -z dev.testzone.com; $dns_recs = $dns_list | ConvertFrom-Json -Depth 4 | Where-Object {$_.arecords.ipv4Address -eq "192.0.2.146"}}
 
 Days              : 0
 Hours             : 0
