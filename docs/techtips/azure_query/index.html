@@ -8,7 +8,7 @@
     
       Kris - The Coding Unicorn
         |
-        gamingcorner
+        Power of --query in Azure CLI
 
 
       
@@ -22,7 +22,7 @@
   <meta
     name="description"
     content="
-      Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!
+      Let&#39;s take a look at how helpful query parameter can be in Azure CLI.
 
 
     "
@@ -71,12 +71,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/gamingcorner/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/azure_query/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/gamingcorner/index.xml" title="Kris - The Coding Unicorn" />
-
-
   
   
   
@@ -106,8 +103,8 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="gamingcorner"/>
-<meta name="twitter:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!"/>
+<meta name="twitter:title" content="Power of --query in Azure CLI"/>
+<meta name="twitter:description" content="Let&#39;s take a look at how helpful query parameter can be in Azure CLI."/>
 
 
 
@@ -116,6 +113,94 @@
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "Power of --query in Azure CLI",
+        "headline": "Power of --query in Azure CLI",
+        "alternativeHeadline": "",
+        "description": "
+      Let\u0027s take a look at how helpful query parameter can be in Azure CLI.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/azure_query\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-02-13T00:00:00.00Z",
+        "datePublished": "2022-02-13T00:00:00.00Z",
+        "dateModified": "2022-02-13T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/azure_query\/",
+        "wordCount" : "477",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "azure-cli"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body>
@@ -318,37 +403,79 @@ if (!doNotTrack) {
         <div class="autopagerize_page_element">
           <div class="content">
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
-    <ul class="list-with-title">
+    <div class="post-content">
       
-        <div class="listing-title">2021</div>
+      <div class="post-title">
+        <h1>Power of --query in Azure CLI</h1>
         
-          <ul class="listing">
-            <div class="listing-item">
-              <div class="listing-post">
-                <a href="/post/gaming_journey/" title="My journey through Journey">My journey through Journey</a>
-                <div class="post-time">
-                  <span class="date"
-                    >
-                      2/5/2021
+      </div><p>Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering!
+Let's use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.ex. <code>192.0.2.146</code>.</p>
+<p>So, in order to retrieve all DNS records in respective DNS zone pointing to <code>192.0.2.146</code> with Azure CLI I could either:</p>
+<ol>
+<li>Retrieve all records registered in respective DNS zone and save them to a variable from which I can filter out only those records pointing to my IP.</li>
+<li>Use <code>--query</code> parameter to retrieve only the DNS records pointing to my IP instead of retrieving all of the records at once.</li>
+</ol>
+<p>Let's see the execution time differences for both - I will use <code>Measure-Command</code> to measure the time it take to execute each of the approaches. The DNS zone I will be testing against has <strong>64 713</strong> records and I will be replacing real values with dummy ones in the test below since it's real name and IP are being used in production :)</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Approach 1</span>
+PS C:<span class="se">\P</span>layground&gt; Measure-Command <span class="o">{</span><span class="nv">$dns_list</span> <span class="o">=</span> az network dns record-set a list -g test-rg -z dev.testzone.com<span class="p">;</span> <span class="nv">$dns_recs</span> <span class="o">=</span> <span class="nv">$dns_list</span> <span class="p">|</span> convertfrom-json -Depth <span class="m">4</span> <span class="p">|</span> where <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="s2">&#34;192.0.2.146&#34;</span><span class="o">}}</span>
 
+Days              : <span class="m">0</span>
+Hours             : <span class="m">0</span>
+Minutes           : <span class="m">0</span>
+Seconds           : <span class="m">8</span>
+Milliseconds      : <span class="m">896</span>
+Ticks             : <span class="m">88962891</span>
+TotalDays         : 0.000102966309027778
+TotalHours        : 0.00247119141666667
+TotalMinutes      : 0.148271485
+TotalSeconds      : 8.8962891
+TotalMilliseconds : 8896.2891
 
-                    </span
-                  >
-                </div>
-              </div>
-            </div>
-          </ul>
+PS C:<span class="se">\P</span>layground&gt; <span class="nv">$dns_recs</span>.Count
+<span class="m">16</span>
 
+<span class="c1"># Approach 2</span>
+PS C:<span class="se">\P</span>layground&gt; Measure-Command <span class="o">{</span><span class="nv">$dns_recs_to_update</span> <span class="o">=</span> az network dns record-set a list -g test-rg -z dev.testzone.com --query <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;192.0.2.146&#39;)]&#34;</span> <span class="p">|</span> ConvertFrom-Json<span class="o">}</span>
+
+Days              : <span class="m">0</span>
+Hours             : <span class="m">0</span>
+Minutes           : <span class="m">0</span>
+Seconds           : <span class="m">5</span>
+Milliseconds      : <span class="m">736</span>
+Ticks             : <span class="m">57361877</span>
+TotalDays         : 6.63910613425926E-05
+TotalHours        : 0.00159338547222222
+TotalMinutes      : 0.0956031283333333
+TotalSeconds      : 5.7361877
+TotalMilliseconds : 5736.1877
+
+PS C:<span class="se">\P</span>layground&gt; <span class="nv">$dns_recs_to_update</span>.Count
+<span class="m">16</span></code></pre></div>
+<p>As you can see, approach #2 is faster and the difference might not seem so significant here (3-4 seconds) but when you're creating a more advanced automation script where you might need to retrieve and refresh DNS records multiple times or when you need to perform maintenance on other types of Azure resources that have even more data to retrieve, the difference can get pretty significant. By utilizing the full potential of Azure CLI you can make your scripts more performant and optimized minimizing the footprint at the same time ;)</p>
+<p><code>--query</code> syntax is based on a query language for JSON called JMESPath and you can familiarize yourself with it here: <a href="https://jmespath.org/">JMESPath</a>.</p>
+<p>Check also this tutorial in Microsoft docs on how to write JMESPath-based queries as part of your Azure CLI command: <a href="https://docs.microsoft.com/en-us/cli/azure/query-azure-cli">How to query Azure CLI command output using a JMESPath query</a>.</p>
+<p>Thanks for reading and till next tech tip ;)</p>
+</div>
+    <div class="post-footer">
+      <div class="info">
         
 
+        
+          <span class="separator"><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/azure-cli/">azure-cli</a></span>
 
-      
-    </ul>
+
+
+
+        
+      </div>
+    </div>
+
+    
   </div>
 
 

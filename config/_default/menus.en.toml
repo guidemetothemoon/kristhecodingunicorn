@@ -11,19 +11,25 @@
   url = "/blog/"
 
   [[main]]
-  name = "Public Talks and Publications"
+  name = "Tech Tips"
   weight = 300
+  identifier = "techtips"
+  url = "/techtips/"
+
+  [[main]]
+  name = "Public Talks and Publications"
+  weight = 400
   identifier = "public"
   url = "/public/"
 
   [[main]]
   name = "About"
-  weight = 400
+  weight = 500
   identifier = "about"
   url = "/about/"
 
   [[main]]
   name = "Contact"
-  weight = 500
+  weight = 600
   identifier = "contact"
   url = "/contact/"

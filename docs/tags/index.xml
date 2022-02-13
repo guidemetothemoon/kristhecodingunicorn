@@ -6,7 +6,40 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure-cli</title>
+      <link>https://kristhecodingunicorn.com/tags/azure-cli/</link>
+      <pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure-cli/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>techtips</title>
+      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
+      <pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>

@@ -95,6 +95,11 @@
     ></script>
 
   
+
+  
+
+
+  
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
@@ -171,7 +176,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_ic_upgrade\/",
-        "wordCount" : "3291",
+        "wordCount" : "3282",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -256,6 +261,18 @@
               
               title=""
               >Blog</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
             >
           </li>
 
@@ -505,7 +522,7 @@ Here I would recommend doing some additional tests before updating DNS records i
 <p>Very nice! Now we've confirmed that the temporary IC works as expected - we're ready for the next step.
 First, we need to get all the DNS records from the DNS zone used by applications running in current Kubernetes cluster that point to the External IP of the original Ingress Controller - that's the ones we will need to update to point to the temporary IC instead. For this we can use quite powerful <code>--query</code> parameter to not retrieve all the DNS records but only those we actually need to update - you can read more about <code>--query</code> syntax here: <a href="https://docs.microsoft.com/en-us/cli/azure/query-azure-cli">How to query Azure CLI command output using a JMESPath query</a>.</p>
 <blockquote>
-<p><strong>Tip:</strong> Many Azure resources support <code>--query-examples</code> parameter which will return you examples on how you can filter the results that a specific command returns. So if I would like to see examples on how to filter result of DNS records list I would run following command <code>az network dns record-set a list -g myresourcegroup -z mydnszone.com --query-examples</code> .</p>
+<p><strong>Tip:</strong> Some Azure resources support <code>--query-examples</code> parameter which will return you examples on how you can filter the results that a specific command returns - check out Microsoft documentation related to Azure CLI commands related to the Azure resource you're working with and see if those provide query examples!</p>
 </blockquote>
 <p>Once all the relevant DNS records have been retrieved we can start removing External IP of original Ingress Controller and add External IP of temporary IC - for that parallel execution in PowerShell came in very handy for me. Parallel execution (available from PowerShell 7.0, ref. <a href="https://devblogs.microsoft.com/powershell/powershell-foreach-object-parallel-feature/">PowerShell ForEach-Object Parallel Feature</a>) will spin up several threads that will update DNS records in parallel - when you have tens or hundreds of DNS records, this could save quite some time. Important note here which is also mentioned in the script itself - I wouldn&rsquo;t recommend using more than 10-15 threads at a time since it may result in resource exhaustion of your system. Of course, if you have a really fancy quantum computer or something similar, you can try using a higher amount of threads as well ;)</p>
 <p><strong>Please note:</strong> for even further automation, the code that is used to retrieve, filter and update DNS records can be moved out to a separate function to avoid duplication. Since this blog post is aimed for educating purposes, I&rsquo;ve consciously duplicated the same steps at a later step as well instead of creating a separate function. See a fully automated version of the script for this: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ingress/Upgrade-Nginx-IC-Auto.ps1">guidemetothemoon - Upgrade NGINX Ingress Controller - Automatic</a></p>

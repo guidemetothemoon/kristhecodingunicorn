@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech Tips on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/techtips/</link>
+    <description>Recent content in Tech Tips on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 13 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Power of --query in Azure CLI</title>
+      <link>https://kristhecodingunicorn.com/techtips/azure_query/</link>
+      <pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/azure_query/</guid>
+      
+        <description>Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering! Let&#39;s use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
