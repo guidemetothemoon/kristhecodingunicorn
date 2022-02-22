@@ -11,9 +11,9 @@ tags = [
 ]
 +++
 
-{{< table_of_contents >}}
-
 ![Article banner for cleanup of secrets in repos with BFG Repo-Cleaner](../../images/secrets_cleanup/secrets_cleanup_banner.png)
+
+{{< table_of_contents >}}
 
 ## Why should you care about secrets management?
 There are very few applications out there that don\'t require a secret, an API key or a password of some kind. Secrets and sensitive values are a natural part of a software developer\'s life and are tightly incorporated into software development process. With the vast and diverse amount of cybersecurity threats in the modern world proper secrets management hasn\'t been as crucial and important as it is now.
@@ -22,7 +22,9 @@ Why? Well, if we don\'t care about where and how we store sensitive data related
 
 Sometimes mistakes happen. A developer might forget to remove a client secret before committing the changes. At the same time PR reviewer might have been multi-tasking and has overseen that a secret was part of the pull request and approved it. Or it was a faster and easier way to deploy a new microservice by hard-coding the API key that will be used in production - it\'s so much more time-consuming to create it as a secret and store it somewhere else, in a secure storage...we\'ll fix it once the service is 100% production-ready! And then we forget....And that\'s how easy it is to expose bits of your application that should\'ve never been exposed.
 
-Fortunately there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in \"Additional resources\" section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.
+If you don\'t trust me, just search for variations of \"password\" or \"apikey\" in GitHub or Google it - you\'ll catch my drift, this type of mistakes happen pretty often, unfortunately.
+
+Fortunately, there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in \"Additional resources\" section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.
 
 ## I\'ve committed a secret - now what? o.O
 
@@ -46,11 +48,13 @@ In order to demonstrate how this tool can be used, I\'ve created a minimal versi
 After I\'ve executed BFG Repo-Cleaner, these secrets were cleaned up and marked as ```***REMOVED***``` in repo history:
 ![Screenshot of obfuscated secrets in repo history after execution of BFG Repo-Cleaner](../../images/secrets_cleanup/bfg_cleanup_res.png)
 
+You can do the same operations with ```git filter-branch``` but it\'s more complicated and more error-prone. BFG Repo-Cleaner significantly decreases the complexity of clean-up operations and is known for being much more performant than  ```git filter-branch``` command. For instance, I\'ve tested this on a repo with more than 15 000 files and it took around 4-5 seconds to execute, which I think is a very good result.
+
 So, how can this be done?
 
 ### Step-by-step walkthrough
 
-First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Once you\'ve done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.
+First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Or you can run it in a container with Jave pre-installed ;-) Once you\'ve done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.
 
 First, we\'ll need to clone a fresh copy of our repo with ```git clone --mirror``` command:
 
@@ -183,7 +187,7 @@ Let\'s check some of the commits and what those have been changed to - let\'s ta
 {{< highlight bash >}}
 PS C:\Playground\test-cleanup\demo-projects.git> git show 08b6925
 commit 08b69254b55f93d02babae751b9573575dc39327
-Author: Kristina D. <guidemetothemoon@gmail.com>
+Author: Kristina D. <g********@gmail.com>
 Date:   Sun Feb 20 13:29:43 2022 +0100
 
     Adding build pipeline definition with secrets
@@ -230,7 +234,7 @@ As you can see, the secrets are there, as expected, since this commit represents
 {{< highlight bash >}}
 PS C:\Playground\test-cleanup\demo-projects.git> git show 11b0554
 commit 11b05548da5d1900066d13d048da6ce98e249426
-Author: Kristina D. <guidemetothemoon@gmail.com>
+Author: Kristina D. <g********@gmail.com>
 Date:   Sun Feb 20 13:29:43 2022 +0100
 
     Adding build pipeline definition with secrets

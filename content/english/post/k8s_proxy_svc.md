@@ -12,6 +12,8 @@ tags = [
 ]
 +++
 
+![Article banner for using Kubernetes Service as proxy](../../images/k8s_proxy/k8s_proxy_banner.png)
+
 {{< table_of_contents >}}
 
 So, recently I\'ve faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those. I would like to share one of the experiments where I tested several Kubernetes Service types to implement proxying of the requests to external services from Kubernetes cluster.

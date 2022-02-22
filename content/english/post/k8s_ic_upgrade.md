@@ -14,8 +14,9 @@ tags = [
 ]
 +++
 
-{{< table_of_contents >}}
+![Article banner for Ingress Controller upgrade](../../images/k8s_ic_upgrade/k8s_ic_upgrade_banner.png)
 
+{{< table_of_contents >}}
 ## Introduction to the needs for upgrading Ingress Controller
 
 In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in ```stable``` repo and fully embrace the new Helm chart located in ```ingress-nginx``` repository. The reason for that is related to higher maintenance costs for the Helm repositories\' maintainers which has become significantly more challenging with release of Helm 3. Therefore EOL timeline has been officially announced by CNCF and Helm back in 2020. You can read the official announcement as well as the reasoning behind deprecation of Helm repositories here: [Important Helm Repo Changes & v2 End of Support in November](https://www.cncf.io/blog/2020/10/07/important-reminder-for-all-helm-users-stable-incubator-repos-are-deprecated-and-all-images-are-changing-location/) .

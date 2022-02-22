@@ -12,6 +12,8 @@ tags = [
 ]
 +++
 
+![Article banner for adding Kubernetes resource to Helm release](../../images/k8s_object_helm/k8s_object_helm_banner.png)
+
 {{< table_of_contents >}}
 
 Helm is extremely useful and efficient when it comes to distributing, installing and upgrading applications hosted in Kubernetes. But sometimes you may have a need to patch an existing release and there is a quick way to do that which I would like to share with you today. 

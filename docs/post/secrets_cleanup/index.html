@@ -176,7 +176,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/secrets_cleanup\/",
-        "wordCount" : "2689",
+        "wordCount" : "2799",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -423,11 +423,12 @@ if (!doNotTrack) {
               </span
             >
             <em class="fas fa-stopwatch"></em>
-            <span class="reading-time">13-minute read</span>
+            <span class="reading-time">14-minute read</span>
           </div>
 
         
-      </div><div class="toc">
+      </div><p><img src="../../images/secrets_cleanup/secrets_cleanup_banner.png" alt="Article banner for cleanup of secrets in repos with BFG Repo-Cleaner"></p>
+<div class="toc">
   <nav id="TableOfContents">
   <ul>
     <li><a href="#why-should-you-care-about-secrets-management">Why should you care about secrets management?</a></li>
@@ -442,12 +443,12 @@ if (!doNotTrack) {
   </ul>
 </nav>
 </div>
-<p><img src="../../images/secrets_cleanup/secrets_cleanup_banner.png" alt="Article banner for cleanup of secrets in repos with BFG Repo-Cleaner"></p>
 <h2 id="why-should-you-care-about-secrets-management">Why should you care about secrets management?</h2>
 <p>There are very few applications out there that don't require a secret, an API key or a password of some kind. Secrets and sensitive values are a natural part of a software developer's life and are tightly incorporated into software development process. With the vast and diverse amount of cybersecurity threats in the modern world proper secrets management hasn't been as crucial and important as it is now.</p>
 <p>Why? Well, if we don't care about where and how we store sensitive data related to our application, and just let it be publicly available in plaintext then we basically tell all the malicious actors out there: &quot;<em>Hey, please get all the user data out of our application and please use it to damage our users and interconnected applications! Thank you!</em>&quot;. Not that far-fetched in my humble opinion. If attackers get hold of crucial secrets, their evil job becomes so much easier from that point on: privilege escalation, execution of malicious programs and scripts, stealing user data to sell it on dark web, injection of malicious code to damage as many systems and users as possible, etc. Improper or lacking secrets management can open an ocean of malicious possibilities to those who are up to no good. Therefore, proper secrets management policies must be in place in every organization and proper routines to follow these policies must be enforced as part of the software development lifecycle.</p>
 <p>Sometimes mistakes happen. A developer might forget to remove a client secret before committing the changes. At the same time PR reviewer might have been multi-tasking and has overseen that a secret was part of the pull request and approved it. Or it was a faster and easier way to deploy a new microservice by hard-coding the API key that will be used in production - it's so much more time-consuming to create it as a secret and store it somewhere else, in a secure storage&hellip;we'll fix it once the service is 100% production-ready! And then we forget&hellip;.And that's how easy it is to expose bits of your application that should've never been exposed.</p>
-<p>Fortunately there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in &quot;Additional resources&quot; section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.</p>
+<p>If you don't trust me, just search for variations of &quot;password&quot; or &quot;apikey&quot; in GitHub or Google it - you'll catch my drift, this type of mistakes happen pretty often, unfortunately.</p>
+<p>Fortunately, there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in &quot;Additional resources&quot; section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.</p>
 <h2 id="ive-committed-a-secret---now-what-oo">I've committed a secret - now what? o.O</h2>
 <p>Now let's fix it! Your first thought might be &quot;<em>Well, I can just create a new pull request and remove the secret! Once the PR is merged, the secret is gone from the source code, right? RIGHT?!</em>&quot;. Well, not exactly. Though the secret will be gone from the latest version of your source code in master branch, it will still be available in commit history of your repo. If any developers cloned the repo before the secret was removed, they may still have it locally as well, even after you remove it from the source code.</p>
 <p>Therefore, if such a mistake has happened and a secret has been committed to the source code <strong>you must always consider following approach first:</strong></p>
@@ -462,9 +463,10 @@ if (!doNotTrack) {
 <img src="../../images/secrets_cleanup/bfg_commit_history.png" alt="Screenshot of commit history stating that secrets were committed"></p>
 <p>After I've executed BFG Repo-Cleaner, these secrets were cleaned up and marked as <code>***REMOVED***</code> in repo history:
 <img src="../../images/secrets_cleanup/bfg_cleanup_res.png" alt="Screenshot of obfuscated secrets in repo history after execution of BFG Repo-Cleaner"></p>
+<p>You can do the same operations with <code>git filter-branch</code> but it's more complicated and more error-prone. BFG Repo-Cleaner significantly decreases the complexity of clean-up operations and is known for being much more performant than  <code>git filter-branch</code> command. For instance, I've tested this on a repo with more than 15 000 files and it took around 4-5 seconds to execute, which I think is a very good result.</p>
 <p>So, how can this be done?</p>
 <h3 id="step-by-step-walkthrough">Step-by-step walkthrough</h3>
-<p>First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Once you've done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.</p>
+<p>First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Or you can run it in a container with Jave pre-installed ;-) Once you've done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.</p>
 <p>First, we'll need to clone a fresh copy of our repo with <code>git clone --mirror</code> command:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\P</span>layground<span class="se">\t</span>est-cleanup&gt; git clone --mirror https://github.com/guidemetothemoon/demo-projects.git
 Cloning into bare repository <span class="s1">&#39;demo-projects.git&#39;</span>...
@@ -570,7 +572,7 @@ BFG run is complete! When ready, run: git reflog expire --expire<span class="o">
 <p>Let's check some of the commits and what those have been changed to - let's take the first commit id from the list, navigate to the Git repo folder and check how the initial commit looks like with <code>git show</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\P</span>layground<span class="se">\t</span>est-cleanup<span class="se">\d</span>emo-projects.git&gt; git show 08b6925
 commit 08b69254b55f93d02babae751b9573575dc39327
-Author: Kristina D. &lt;guidemetothemoon@gmail.com&gt;
+Author: Kristina D. &lt;g********@gmail.com&gt;
 Date:   Sun Feb <span class="m">20</span> 13:29:43 <span class="m">2022</span> +0100
 
     Adding build pipeline definition with secrets
@@ -613,7 +615,7 @@ index 0000000..578e8c2
 <p>As you can see, the secrets are there, as expected, since this commit represents the state before the changes have been applied by the tool. From the txt-file above we can see that this commit id was mapped to the commit with id <code>11b05548da5d1900066d13d048da6ce98e249426</code> - let's check how the changes in that commit look like:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\P</span>layground<span class="se">\t</span>est-cleanup<span class="se">\d</span>emo-projects.git&gt; git show 11b0554
 commit 11b05548da5d1900066d13d048da6ce98e249426
-Author: Kristina D. &lt;guidemetothemoon@gmail.com&gt;
+Author: Kristina D. &lt;g********@gmail.com&gt;
 Date:   Sun Feb <span class="m">20</span> 13:29:43 <span class="m">2022</span> +0100
 
     Adding build pipeline definition with secrets
