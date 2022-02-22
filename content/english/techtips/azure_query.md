@@ -11,6 +11,8 @@ tags = [
 ]
 +++
 
+![Article banner for power of query in Azure CLI](../../images/tech_tips/techtip_1.png)
+
 Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering!
 Let\'s use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.ex. ```192.0.2.146```. 
 
