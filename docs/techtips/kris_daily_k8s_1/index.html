@@ -8,7 +8,7 @@
     
       Kris - The Coding Unicorn
         |
-        kubernetes
+        Kris&#39;s Quick Cup of K8s #1
 
 
       
@@ -22,7 +22,7 @@
   <meta
     name="description"
     content="
-      Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!
+      4 helpful commands that can make your life easier when working with Kubernetes and AKS
 
 
     "
@@ -71,12 +71,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/kubernetes/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/kubernetes/index.xml" title="Kris - The Coding Unicorn" />
-
-
   
   
   
@@ -106,8 +103,8 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="kubernetes"/>
-<meta name="twitter:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!"/>
+<meta name="twitter:title" content="Kris&#39;s Quick Cup of K8s #1"/>
+<meta name="twitter:description" content="4 helpful commands that can make your life easier when working with Kubernetes and AKS"/>
 
 
 
@@ -116,6 +113,108 @@
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "Kris\u0027s Quick Cup of K8s #1",
+        "headline": "Kris\u0027s Quick Cup of K8s #1",
+        "alternativeHeadline": "",
+        "description": "
+      4 helpful commands that can make your life easier when working with Kubernetes and AKS
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/kris_daily_k8s_1\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-03-04T00:00:00.00Z",
+        "datePublished": "2022-03-04T00:00:00.00Z",
+        "dateModified": "2022-03-04T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/kris_daily_k8s_1\/",
+        "wordCount" : "518",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "gitops"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body>
@@ -318,96 +417,52 @@ if (!doNotTrack) {
         <div class="autopagerize_page_element">
           <div class="content">
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
-    <ul class="list-with-title">
+    <div class="post-content">
       
-        <div class="listing-title">2022</div>
+      <div class="post-title">
+        <h1>Kris&#39;s Quick Cup of K8s #1</h1>
         
-          <ul class="listing">
-            <div class="listing-item">
-              <div class="listing-post">
-                <a href="/techtips/kris_daily_k8s_1/" title="Kris&#39;s Quick Cup of K8s #1">Kris&#39;s Quick Cup of K8s #1</a>
-                <div class="post-time">
-                  <span class="date"
-                    >
-                      4/3/2022
-
-
-                    </span
-                  >
-                </div>
-              </div>
-            </div>
-          </ul>
-
-        
-          <ul class="listing">
-            <div class="listing-item">
-              <div class="listing-post">
-                <a href="/post/k8s_ic_upgrade/" title="How to upgrade NGINX Ingress Controller with zero downtime in production">How to upgrade NGINX Ingress Controller with zero downtime in production</a>
-                <div class="post-time">
-                  <span class="date"
-                    >
-                      14/1/2022
-
-
-                    </span
-                  >
-                </div>
-              </div>
-            </div>
-          </ul>
-
+      </div><p><img src="../../images/tech_tips/techtip_2.png" alt="Article banner for Kris&rsquo;s quick cup of K8s"></p>
+<p>Starting a totally new Tech Tips subsection feels great - especially when it's going to be purely dedicated to Kubernetes utilizing Azure Kubernetes Service (AKS) for demo purposes! :-)</p>
+<p>In this first edition I would like to demonstrate 4 helpful commands that can make your life easier when working with Kubernetes. AKS will be my Kubernetes distribution of choice.</p>
+<h3 id="1---live-streaming-of-pod-logs">#1 - Live streaming of Pod logs</h3>
+<p>Sometimes it can be really useful to monitor application's logs, for instance when there are errors happening during application's start-up or while it's up and running. If you use <code>kubectl logs &lt;pod_name&gt; -n &lt;namespace&gt;</code> you will only get what's been logged until the execution of command. In order to stream logs and follow them in real-time you will need to use -f flag (&quot;f&quot; for &quot;follow&quot;) with kubectl logs command, i.e. <code>kubectl logs &lt;pod_name&gt; -n &lt;namespace&gt; -f</code>.</p>
+<p>In the screenshot below you can see the result of the command above. To abort log streaming click Ctrl+C.</p>
+<p><img src="../../images/tech_tips/k8s_log_f.png" alt="Screenshot of Kubernetes log streaming command"></p>
+<h3 id="2---get-non-existent-namespace-without-erros">#2 - Get non-existent Namespace without erros</h3>
+<p>Normally if you attempt to get a Namespace that doesn't exist, an error will be returned saying that namespace wasn't found. So if you're writing an automation script where you want to create a Namespace if it doesn't exist, you will need to think about how to handle an error that's being returned back from kubectl command. Fortunatelly there's a flag that can suppress this error and instead return nothing if a Namespace doesn't exist - <code>kubectl get ns &lt;namespace&gt; --ignore-not-found=true</code>.</p>
+<p>That's the difference you can see in the example below:
+<img src="../../images/tech_tips/k8s_get_ns.png" alt="Screenshot of Kubernetes get namespace command"></p>
+<h3 id="3---get-all-resources-in-a-namespace">#3 - Get all resources in a Namespace</h3>
+<p>If you want to check all resources that have been created in a Namespace, <code>kubectl get all -n &lt;namespace&gt;</code> command can come in pretty handy. <strong>Please note</strong> that custom resources associated with the respective Namespace will <strong>not</strong> be displayed as part of this command.</p>
+<p>In the example below I've deployed a test application in my AKS cluster and am retrieving all standard resources that were created in application's Namespace - &quot;aks-helloworld&quot; :</p>
+<p><img src="../../images/tech_tips/k8s_get_all.png" alt="Screenshot of Kubernetes get all command"></p>
+<h3 id="4---retrieve-and-clean-up-evicted-pods">#4 - Retrieve and clean up Evicted Pods</h3>
+<p>Sometimes you may have a lot of Pods in the cluster with a specific status that may need clean-up. You could have deleted one and one Pod but why do that when with 2 PowerShell commands you can clean up all Pods at once? For instance, let's use Pods with status &quot;Evicted&quot; as an example. I will use first command to retrieve all Pods in &quot;testapp&quot; Namespace where reason is set to &quot;Evicted&quot; and save the result to a variable called &quot;evictedPods&quot;. Then with command #2 I will delete each of the retrieved Evicted Pods. The same approach can be used for any other status, you will just need to confirm with Pod metadata that you're filtering Pods based on the correct property because in some cases different properties may be used to set Pod's state.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">$evictedPods</span> <span class="o">=</span> <span class="o">((</span>kubectl get pods -n testapp -o json <span class="p">|</span> ConvertFrom-Json<span class="o">)</span>.items <span class="p">|</span> Where-Object <span class="o">{</span><span class="nv">$_</span>.status.reason -eq <span class="s2">&#34;Evicted&#34;</span><span class="o">})</span>
+foreach<span class="o">(</span><span class="nv">$pod</span> in <span class="nv">$evictedPods</span><span class="o">)</span> <span class="o">{</span>kubectl delete pods <span class="k">$(</span><span class="nv">$pod</span>.metadata.name<span class="k">)</span> -n testapp<span class="o">}</span></code></pre></div>
+<p>Thanks for reading and till next tech tip ;)</p>
+</div>
+    <div class="post-footer">
+      <div class="info">
         
 
-
-      
-        <div class="listing-title">2021</div>
         
-          <ul class="listing">
-            <div class="listing-item">
-              <div class="listing-post">
-                <a href="/post/k8s_proxy_svc/" title="Using Kubernetes Service for proxying to external services">Using Kubernetes Service for proxying to external services</a>
-                <div class="post-time">
-                  <span class="date"
-                    >
-                      21/10/2021
+          <span class="separator"><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/gitops/">gitops</a></span>
 
 
-                    </span
-                  >
-                </div>
-              </div>
-            </div>
-          </ul>
+
 
         
-          <ul class="listing">
-            <div class="listing-item">
-              <div class="listing-post">
-                <a href="/post/k8s_object_helm/" title="How to include new Kubernetes resource into existing Helm release">How to include new Kubernetes resource into existing Helm release</a>
-                <div class="post-time">
-                  <span class="date"
-                    >
-                      21/10/2021
+      </div>
+    </div>
 
-
-                    </span
-                  >
-                </div>
-              </div>
-            </div>
-          </ul>
-
-        
-
-
-      
-    </ul>
+    
   </div>
 
 

@@ -3,10 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kristhecodingunicorn.com/</loc>
-    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
-    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/gitops/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/kubernetes/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
+    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
@@ -20,23 +41,11 @@
     <loc>https://kristhecodingunicorn.com/tags/devsecops/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/</loc>
-    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kristhecodingunicorn.com/tags/azure-cli/</loc>
     <lastmod>2022-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/azure_query/</loc>
     <lastmod>2022-02-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/techtips/</loc>
-    <lastmod>2022-02-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
-    <lastmod>2022-02-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
-    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/helm/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
@@ -48,9 +57,6 @@
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/k8s/</loc>
-    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/kubernetes/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/nginx/</loc>
