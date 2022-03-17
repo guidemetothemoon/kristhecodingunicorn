@@ -6,7 +6,62 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 04 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>azure-devops</title>
+      <link>https://kristhecodingunicorn.com/tags/azure-devops/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure-devops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>dotnet</title>
+      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ndepend</title>
+      <link>https://kristhecodingunicorn.com/tags/ndepend/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/ndepend/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>tooling</title>
+      <link>https://kristhecodingunicorn.com/tags/tooling/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/tooling/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>visual-studio</title>
+      <link>https://kristhecodingunicorn.com/tags/visual-studio/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/visual-studio/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
@@ -162,17 +217,6 @@
     </item>
     
     <item>
-      <title>dotnet</title>
-      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
-      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>sast</title>
       <link>https://kristhecodingunicorn.com/tags/sast/</link>
       <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
@@ -211,17 +255,6 @@
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/ilspy/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>tooling</title>
-      <link>https://kristhecodingunicorn.com/tags/tooling/</link>
-      <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/tooling/</guid>
       
         <description></description>
       
