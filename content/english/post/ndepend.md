@@ -22,7 +22,7 @@ When developing software it\'s important to focus on fullfilling customer requir
 
 NDepend has a long history dating back to 2004 and it has gained quite a lot of popularity in the .NET community through the years. I\'ve heard about NDepend many times before and from time to time stumbled upon reviews from other developers, but now the time has come to test it out myself and see what the tool is capable of.
 
-**So what is NDepend?** It\'s a static code analysis tool for .NET applications. The tool is quite extensive and has a lot of use cases starting from arhitecture-related functionality like building project and class dependency diagrams to incorporating build quality policies as part of CI/CD pipelines in Azure DevOps and other CI servers. Documentation is pretty detailed and extensive which makes it pretty easy to get started and get your hands dirty with the tool.
+**So what is NDepend?** It\'s a static code analysis tool for .NET applications. The tool is quite extensive and has a lot of use cases starting from architecture-related functionality like building project and class dependency diagrams to incorporating build quality policies as part of CI/CD pipelines in Azure DevOps and other CI servers. Documentation is pretty detailed and extensive which makes it pretty easy to get started and get your hands dirty with the tool.
 
 Since there are so many use cases and so many possibilities NDepend has to offer I will not be going through all of them, but I will focus on one specific use cases which I was experimenting with: incorporating code quality analysis and enforcing code quality policies with NDepend through Azure DevOps and Visual Studio extensions.
 
