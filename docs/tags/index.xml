@@ -8,17 +8,6 @@
     <language>en</language>
     <lastBuildDate>Thu, 17 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>azure</title>
-      <link>https://kristhecodingunicorn.com/tags/azure/</link>
-      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>azure-devops</title>
       <link>https://kristhecodingunicorn.com/tags/azure-devops/</link>
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
@@ -79,6 +68,17 @@
       <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
       
         <description></description>
       

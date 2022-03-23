@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -36,8 +36,8 @@
     
     <link
       rel="stylesheet"
-      href="/scss/main.min.82736afd9549d956847808ef4610f7ed040fe328c379b9d7f31ffb5945a2af0a.css"
-      integrity="sha256-gnNq/ZVJ2VaEeAjvRhD37QQP4yjDebnX8x/7WUWirwo="
+      href="/scss/main.min.797778be30288660989fc283c7405e789b43cfd39b9f31892aea9fa0a4059946.css"
+      integrity="sha256-eXd4vjAohmCYn8KDx0BeeJtDz9ObnzGJKuqfoKQFmUY="
       crossorigin="anonymous"
       type="text/css"
     />
@@ -47,8 +47,8 @@
   
   <link
     rel="stylesheet"
-    href="/css/markupHighlight.min.793b323d7f2d9fbfd0b93f4d593fb5ad77b918716ed33eddea403fa87f770403.css"
-    integrity="sha256-eTsyPX8tn7/QuT9NWT&#43;1rXe5GHFu0z7d6kA/qH93BAM="
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
     crossorigin="anonymous"
     type="text/css"
   />
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.5c846cefa5ed21cceee981c70901aaf21b17b4e0b05bd777af840780918abea9.js"
-    integrity="sha256-XIRs76XtIczu6YHHCQGq8hsXtOCwW9d3r4QHgJGKvqk="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -112,8 +112,8 @@
     
     <script
       type="text/javascript"
-      src="/js/anatole-theme-switcher.min.245da778410d349aba672975fe9ff04e24e608155cc9102b5c1c70554c1539c0.js"
-      integrity="sha256-JF2neEENNJq6Zyl1/p/wTiTmCBVcyRArXBxwVUwVOcA="
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
       crossorigin="anonymous"
     ></script>
 
@@ -135,10 +135,10 @@
   <meta property="og:title" content="How to perform static code analysis of .NET Code with Security Code Scan" />
 <meta property="og:description" content="This blog post explains how to perform static code analysis of .NET code locally and as part of CI/CD with Security Code Scan tool." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/post/dotnet_sast_scs/" />
-<meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
-<meta property="article:published_time" content="2021-08-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-08-05T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/dotnet_sast_scs/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-05T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-08-05T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
 
 
 
@@ -207,7 +207,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/dotnet_sast_scs\/",
-        "wordCount" : "2456",
+        "wordCount" : "2463",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -319,8 +319,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.7d3bf3472b73d9ba107b3de37d0df8fa736593a3c6638c95eaed42006bfc0193.js"
-    integrity="sha256-fTvzRytz2boQez3jfQ34&#43;nNlk6PGY4yV6u1CAGv8AZM="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script>
 <script type="application/javascript">
@@ -529,16 +529,16 @@ if (!doNotTrack) {
 <h3 id="installation-in-cicd-pipeline">Installation in CI/CD pipeline</h3>
 <p>Since it's a .NET tool it's just a matter of few commands to get it installed and executed. Here I've created a separate PowerShell script that will install the tool, get all solution files in the repository and run a code analysis on all the discovered solutions, finally producing a scan results report. This way, any time a new solution is added to the repo, it will be automatically included into the SAST step of the build pipeline.</p>
 <p>Build tasks in your yaml-file can look like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="k">task</span><span class="p">:</span><span class="w"> </span>PowerShell@<span class="m">2</span><span class="w">
-</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run Security Code Scan&#39;</span><span class="w">
-</span><span class="w">  </span>inputs<span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">filePath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;util-scripts\Invoke-StaticCodeScan.ps1&#39;</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PowerShell@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run Security Code Scan&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">filePath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;util-scripts\Invoke-StaticCodeScan.ps1&#39;</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span>- <span class="k">task</span><span class="p">:</span><span class="w"> </span>PublishBuildArtifacts@<span class="m">1</span><span class="w">
-</span><span class="w">  </span><span class="k">displayName: &#39;Publish Artifact</span><span class="p">:</span><span class="w"> </span>Security<span class="w"> </span>Code<span class="w"> </span>Scan<span class="s1">&#39;
-</span><span class="s1">  inputs:
-</span><span class="s1">    pathToPublish: &#39;</span>sast-results.sarif<span class="s1">&#39;
-</span><span class="s1">    artifactName: &#39;</span>CodeAnalysisLogs&#39;</code></pre></div>
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishBuildArtifacts@1</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName: &#39;Publish Artifact</span><span class="p">:</span><span class="w"> </span><span class="l">Security Code Scan&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">pathToPublish</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;sast-results.sarif&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">artifactName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;CodeAnalysisLogs&#39;</span></code></pre></div>
 <p>You can take a look at the PowerShell script below. Here, I'm excluding the test projects from scanning since those will not be rolled out to production. I would also like to publish CWE id-s so that I can get more information about the discovered vulnerabilities from Common Weakness Enumeration lists, for example the one from <a href="https://cwe.mitre.org/data/index.html">MITRE</a>. Lastly, I would like to dynamically generate a scan result report for all the scanned source code that I will then publish as a build artifact (ref. PublishBuildArtifacts@1 build task above). You can also provide other arguments to the tool in order to customize it's execution, I'll mention more about it in the Local Installation section below.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Write-Output <span class="s2">&#34;Installing Security Code Scan...&#34;</span>
 dotnet tool install --global security-scan --version 5.1.1
@@ -550,14 +550,14 @@ foreach<span class="o">(</span><span class="nv">$sln</span> in <span class="nv">
     security-scan <span class="nv">$sln</span>.FullName --excl-proj<span class="o">=</span>**/*Test*/** --cwe --export<span class="o">=</span>sast-results.sarif
 <span class="o">}</span></code></pre></div>
 <p>If you don't want to create a separate PowerShell script for this, you can simply install and execute CSC as part of the inline PowerShell build task:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="k">script</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    dotnet tool install --global security-scan --version 5.1.1</span><span class="w">
-</span><span class="w">    </span>security-scan<span class="w"> </span>MySolutionFolder/My.Solution.sln<span class="w"> </span>--excl-proj=<span class="cp">**/*Test*/**</span><span class="w"> </span>--cwe<span class="w"> </span>--export=sast-results.sarif<span class="w">
-</span><span class="w">  </span><span class="k">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install and run SCS&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    dotnet tool install --global security-scan --version 5.1.1
+</span><span class="sd">    security-scan MySolutionFolder/My.Solution.sln --excl-proj=**/*Test*/** --cwe --export=sast-results.sarif</span><span class="w">    
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install and run SCS&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div>
 <h3 id="local-installation">Local installation</h3>
 <p>You can also install and run Security Code Scan as a .NET tool locally. In the example below, I installed the tool and executed it with the same arguments as the ones used in the build pipeline example above.</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">dotnet<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>--global<span class="w"> </span>security-scan<span class="w"> </span>--version<span class="w"> </span><span class="m">5.1.1</span><span class="w"> </span>--interactive</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">dotnet tool install --global security-scan --version 5.1.1 --interactive</span></code></pre></div>
 <p><img src="../../images/dotnet_sast_scs/scs_install_1.jpg" alt="Secure Code Scan .NET tool installation output"></p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> security-scan .<span class="se">\M</span>y.Solution.sln --excl-proj<span class="o">=</span>**/*Test*/** --cwe --export<span class="o">=</span>sast-report.sarif
 
@@ -700,8 +700,8 @@ If this article was helpful, I'd love to hear about it! You can reach out to me 
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.7d3bf3472b73d9ba107b3de37d0df8fa736593a3c6638c95eaed42006bfc0193.js"
-    integrity="sha256-fTvzRytz2boQez3jfQ34&#43;nNlk6PGY4yV6u1CAGv8AZM="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script>
 <script type="application/javascript">
