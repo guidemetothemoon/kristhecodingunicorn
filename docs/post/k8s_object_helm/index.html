@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -36,8 +36,8 @@
     
     <link
       rel="stylesheet"
-      href="/scss/main.min.797778be30288660989fc283c7405e789b43cfd39b9f31892aea9fa0a4059946.css"
-      integrity="sha256-eXd4vjAohmCYn8KDx0BeeJtDz9ObnzGJKuqfoKQFmUY="
+      href="/scss/main.min.82736afd9549d956847808ef4610f7ed040fe328c379b9d7f31ffb5945a2af0a.css"
+      integrity="sha256-gnNq/ZVJ2VaEeAjvRhD37QQP4yjDebnX8x/7WUWirwo="
       crossorigin="anonymous"
       type="text/css"
     />
@@ -47,8 +47,8 @@
   
   <link
     rel="stylesheet"
-    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
-    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    href="/css/markupHighlight.min.793b323d7f2d9fbfd0b93f4d593fb5ad77b918716ed33eddea403fa87f770403.css"
+    integrity="sha256-eTsyPX8tn7/QuT9NWT&#43;1rXe5GHFu0z7d6kA/qH93BAM="
     crossorigin="anonymous"
     type="text/css"
   />
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    src="/js/anatole-header.min.5c846cefa5ed21cceee981c70901aaf21b17b4e0b05bd777af840780918abea9.js"
+    integrity="sha256-XIRs76XtIczu6YHHCQGq8hsXtOCwW9d3r4QHgJGKvqk="
     crossorigin="anonymous"
   ></script>
 
@@ -112,8 +112,8 @@
     
     <script
       type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      src="/js/anatole-theme-switcher.min.245da778410d349aba672975fe9ff04e24e608155cc9102b5c1c70554c1539c0.js"
+      integrity="sha256-JF2neEENNJq6Zyl1/p/wTiTmCBVcyRArXBxwVUwVOcA="
       crossorigin="anonymous"
     ></script>
 
@@ -135,10 +135,10 @@
   <meta property="og:title" content="How to include new Kubernetes resource into existing Helm release" />
 <meta property="og:description" content="This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_object_helm/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-10-21T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-10-21T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
-
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_object_helm/" />
+<meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+<meta property="article:published_time" content="2021-10-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-10-21T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
@@ -207,7 +207,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_object_helm\/",
-        "wordCount" : "1689",
+        "wordCount" : "1691",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -319,8 +319,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.7d3bf3472b73d9ba107b3de37d0df8fa736593a3c6638c95eaed42006bfc0193.js"
+    integrity="sha256-fTvzRytz2boQez3jfQ34&#43;nNlk6PGY4yV6u1CAGv8AZM="
     crossorigin="anonymous"
   ></script>
 <script type="application/javascript">
@@ -528,22 +528,22 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 <li><strong>app.kubernetes.io/managed-by: Helm</strong> -&gt; this label lets Helm know that you would like to include current Kubernetes Object into Helm release you're patching</li>
 </ul>
 <p>I'll continue illustrating the concept with PDB example. So, knowing about the annotations and labels I need to add to the PDB definition, I've created following definition file - here I'm using placeholders because I would like to show you how patching can be automated for multiple deployments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># pdb.yaml</span><span class="w">
-</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">policy/v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodDisruptionBudget</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]-pdb</span><span class="w">
-</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
-</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]</span><span class="w">
-</span><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="l">%</span><span class="w"> </span><span class="c"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span><span class="w">
-</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="l">deployment_labels]</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># pdb.yaml</span><span class="w">
+</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>policy/v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>PodDisruptionBudget<span class="w">
+</span><span class="w"></span>metadata<span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>deployment_name<span class="p">]</span>-pdb<span class="w">
+</span><span class="w">  </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>deployment_namespace<span class="p">]</span><span class="w">
+</span><span class="w">  </span>annotations<span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>deployment_name<span class="p">]</span><span class="w">
+</span><span class="w">    </span><span class="k">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>deployment_namespace<span class="p">]</span><span class="w">
+</span><span class="w">  </span>labels<span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span>Helm<span class="w">
+</span><span class="w"></span>spec<span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="m">50</span>%<span class="w"> </span><span class="c"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span><span class="w">
+</span><span class="w">  </span>selector<span class="p">:</span><span class="w">
+</span><span class="w">    </span>matchLabels<span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="p">[</span>deployment_labels<span class="p">]</span></code></pre></div>
 <p>And we're all set! Now our PDB is ready to be patched to the existing application deployment running in production as well as managed by Helm going forward! But what if we have tens, hundreds or even thousands of application deployments that we need to patch this to? Do we need to create this Object manually for every single deployment?? Not to worry, we can automate it!</p>
 <p>I've created following script that will get all the deployments I would like to patch based on the filter I provide and replace the placeholders in the pdb.yaml file we've created above with values related to every individual deployment we're patching. Then it will create a new version of the file (which is also useful in case we want to check the content before creating the new resource) for every deployment and finally apply it in order to create the resource we want - in this case, a PodDisruptionBudget.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Add-PDB.ps1</span>
@@ -633,8 +633,8 @@ If this article was helpful, I'd love to hear about it! You can reach out to me 
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.7d3bf3472b73d9ba107b3de37d0df8fa736593a3c6638c95eaed42006bfc0193.js"
+    integrity="sha256-fTvzRytz2boQez3jfQ34&#43;nNlk6PGY4yV6u1CAGv8AZM="
     crossorigin="anonymous"
   ></script>
 <script type="application/javascript">

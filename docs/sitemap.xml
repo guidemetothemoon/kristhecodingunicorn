@@ -1,156 +1,258 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
-    <loc>https://kristhecodingunicorn.com/</loc>
+    <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/azure-devops/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/dotnet/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/ndepend/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/ndepend/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/tooling/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/visual-studio/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/gitops/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/kubernetes/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/techtips/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/secrets_cleanup/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/devsecops/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/azure-cli/</loc>
     <lastmod>2022-02-13T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/techtips/azure_query/</loc>
     <lastmod>2022-02-13T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/helm/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/ingress-controller/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/k8s/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/nginx/</loc>
     <lastmod>2022-01-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
+    <loc>https://kristhecodingunicorn.com/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/public/</loc>
     <lastmod>2021-10-30T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/public/</loc>
     <lastmod>2021-10-30T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/k8s_object_helm/</loc>
     <lastmod>2021-10-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/proxy/</loc>
     <lastmod>2021-10-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</loc>
     <lastmod>2021-10-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</loc>
     <lastmod>2021-08-05T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/sast/</loc>
     <lastmod>2021-08-05T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/assembly/</loc>
     <lastmod>2021-07-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</loc>
     <lastmod>2021-07-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/fusionlog/</loc>
     <lastmod>2021-07-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/ilspy/</loc>
     <lastmod>2021-07-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/dotnet_tools/</loc>
     <lastmod>2021-06-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/owasp/</loc>
     <lastmod>2021-05-18T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/owasp_depcheck/</loc>
     <lastmod>2021-05-18T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</loc>
     <lastmod>2021-05-11T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/microservices/</loc>
     <lastmod>2021-05-11T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/archives/</loc>
     <lastmod>2021-05-02T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/contact/</loc>
     <lastmod>2021-05-02T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/gamingcorner/</loc>
     <lastmod>2021-05-02T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/journey/</loc>
     <lastmod>2021-05-02T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/post/gaming_journey/</loc>
     <lastmod>2021-05-02T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/about/</loc>
     <lastmod>2021-05-01T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/aboutkris/</loc>
     <lastmod>2021-05-01T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/categories/</loc>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://kristhecodingunicorn.com/tags/index/</loc>
   </url>
+  
 </urlset>
