@@ -9,7 +9,7 @@
     
       Kris - The Coding Unicorn
         |
-        sast
+        Automate .NET target framework update with PowerShell
 
 
       
@@ -24,7 +24,7 @@
   <meta
     name="description"
     content="
-      Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!
+      Let&#39;s take a look at how we can automate update of .NET target framework across projects with PowerShell.
 
 
     "
@@ -94,12 +94,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/sast/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/update_dotnet_fw/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/sast/index.xml" title="Kris - The Coding Unicorn" />
-
-
   
   
   
@@ -129,22 +126,112 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="sast"/>
-<meta name="twitter:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!"/>
+<meta name="twitter:title" content="Automate .NET target framework update with PowerShell"/>
+<meta name="twitter:description" content="Let&#39;s take a look at how we can automate update of .NET target framework across projects with PowerShell."/>
 
 
 
   
-  <meta property="og:title" content="sast" />
-<meta property="og:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/tags/sast/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+  <meta property="og:title" content="Automate .NET target framework update with PowerShell" />
+<meta property="og:description" content="Let&#39;s take a look at how we can automate update of .NET target framework across projects with PowerShell." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/update_dotnet_fw/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-03-28T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-03-28T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "Automate .NET target framework update with PowerShell",
+        "headline": "Automate .NET target framework update with PowerShell",
+        "alternativeHeadline": "",
+        "description": "
+      Let\u0027s take a look at how we can automate update of .NET target framework across projects with PowerShell.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/update_dotnet_fw\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-03-28T00:00:00.00Z",
+        "datePublished": "2022-03-28T00:00:00.00Z",
+        "dateModified": "2022-03-28T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/update_dotnet_fw\/",
+        "wordCount" : "494",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "dotnet"
+
+    
+      
+        ,
+
+      
+      "powershell"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body
@@ -362,29 +449,59 @@ if (!doNotTrack) {
 </div>
 </header>
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
     
-      <div class="archive__heading">2021</div>
+    <div class="post__content">
+      <h1>Automate .NET Target Framework Update With PowerShell</h1>
+      <p><img src="../../images/tech_tips/techtip_3.png" alt="Article banner for automating update of .NET target framework"></p>
+<p>With all the active development in the .NET world many of us have faced a situation where we need to update .NET target framework more frequently in order to be able to keep up, but at the same time to be able to utilize all the goodies .NET has to offer.
+It's not a big deal when you have 1, 2, 10 projects but when you have 300+ projects that need to be updated? Then it can become a pretty boring and time-consuming process. 
+And what's boring must always be automated, right? ;-)</p>
+<p>That's what I thought of as well when I had to port 300+ projects from .NET 5 to .NET 6 - and that's when I decided to automate this task! I have created a PowerShell script which can let you add and/or remove .NET target framework across all of the projects in the specific location except for the ones you decide to exclude.</p>
+<p>Script is available on my GitHub: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/dotnet/Update-DotnetFramework.ps1">guidemetothemoon - Update-DotnetFramework</a></p>
+<p><strong>Script usage highlights</strong></p>
+<ul>
+<li>The script will only update projects defined in the new project format. Projects using the legacy project format will not be taken into consideration and information about those projects will be logged by the script.</li>
+<li>The script will search both for .csproj and .vbproj files but you can always exclude specific projects from update.</li>
+<li>I used the script to update 300+ projects and it took around 10 seconds to complete so you should be able to complete the update quite quickly even in a large code base.</li>
+<li>Both <code>FrameworksToAdd</code> and <code>FrameworksToRemove</code> parameters support multiple values as long as those are comma-separated.</li>
+<li><code>ProjectsToExclude</code> also supports comma-separated multiple values and wildcards!</li>
+<li>Location where the script is triggered from will be used as default to search for the projects to update unless  <code>ProjectLocation</code> is provided.</li>
+<li>Use <code>BuildProjects</code> switch if you want to build your projects once the update is complete. If private NuGet feed is in use, the script will attempt to authenticate you interactively but you can also modify the script to use a NuGet config file instead.</li>
+</ul>
+<p><strong>How to run a script:</strong></p>
+<p>A few examples are provided in the top of the script itself but I'll demonstrate a few here as well:</p>
+<ol>
+<li>Add <code>net6.0</code> target framework and remove <code>net5.0</code> from all <code>csproj</code> and <code>vbproj</code> projects in <code>repo1</code> directory:</li>
+</ol>
+<p><code>Update-DotnetFramework.ps1 -FrameworksToAdd net6.0 -FrameworksToRemove net5.0 -ProjectLocation ./repo1</code></p>
+<ol start="2">
+<li>Only add  <code>net6.0-windows</code> target framework to <code>csproj</code> projects, exclude <code>vbproj</code> and all test projects in default script location:</li>
+</ol>
+<p><code>Update-DotnetFramework.ps1 -FrameworksToAdd net6.0-windows -ProjectsToExclude *Test*,*.vbproj</code></p>
+<ol start="3">
+<li>Only remove <code>net6.0-windows</code> and <code>net5.0</code> target framework from all projects in <code>repo2</code> directory and build all projects once complete:</li>
+</ol>
+<p><code>Update-DotnetFramework.ps1 -FrameworksToRemove net6.0-windows,net5.0 -ProjectLocation ./repo2 -BuildProjects</code></p>
+<p>Hope that this script will also help you spare some time and reduce manual work in the same way as it helps me every single time :)</p>
+<p>To get an overview of all valid .NET frameworks, check out Microsoft documentation: <a href="https://docs.microsoft.com/en-us/dotnet/standard/frameworks">Target frameworks in SDK-style projects</a>.</p>
+<p>Thanks for reading and till next tech tip ;)</p>
+</div>
+    <div class="post__footer">
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/dotnet_sast_scs/" title="How to perform static code analysis of .NET Code with Security Code Scan">How to perform static code analysis of .NET Code with Security Code Scan</a>
-            <div class="archive__list-date">
-              
-                5/8/2021
-
-
-              
-            </div>
-          </li>
-        </ul>
 
       
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/dotnet/">dotnet</a><a class="tag" href="/tags/powershell/">powershell</a></span>
 
+
+
+
+      
+    </div>
 
     
   </div>
