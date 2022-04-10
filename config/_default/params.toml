@@ -8,6 +8,7 @@ keywords = ""
 favicon = "favicons/"
 displayMode = "dark"
 readMore = true
+enableEmoji = true
 
 # example ["css/custom.css"]
 customCss = ["css/syntax.css"]
@@ -58,6 +59,16 @@ url = "https://www.linkedin.com/in/krisde"
 icon = "fab fa-github"
 title = "GitHub"
 url = "https://github.com/guidemetothemoon"
+
+[[socialIcons]]
+icon = "fab fa-twitter"
+title = "Twitter"
+url = "https://twitter.com/kristhecodingu1"
+
+[[socialIcons]]
+icon = "fas fa-bullhorn"
+title = "Sessionize"
+url = "https://sessionize.com/kristina-devochko"
 
 [[socialIcons]]
 icon = "fab fa-instagram"
