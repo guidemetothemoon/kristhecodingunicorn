@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/ndepend/</guid>
       
-        <description>What is NDepend? Improving and enforcing source code quality with NDepend Azure DevOps extension  Adding NDepend Build Task NDepend build output and Azure DevOps Dashboard Adding code coverage to NDepend analysis Adding code coverage from external location to NDepend analysis Trends section in NDepend Dashboard in Azure DevOps Enabling NDepend quality gate checks in build pipeline   Quality gate and rule management with NDepend VS Extension  Running initial NDepend analysis in Visual Studio Modifying default quality gate Deactivate, Suppress and Resolve quality gate issues Adding custom rule and connecting it to existing quality gate   Additional resources   What is NDepend?</description>
+        <description>What is NDepend? Improving and enforcing source code quality with NDepend Azure DevOps extension  Adding NDepend Build Task NDepend build output and Azure DevOps Dashboard Adding code coverage to NDepend analysis Adding code coverage from external location to NDepend analysis Trends section in NDepend Dashboard in Azure DevOps Enabling NDepend quality gate checks in build pipeline   Quality gate and rule management with NDepend VS Extension  Running initial NDepend analysis in Visual Studio Modifying default quality gate Deactivate, Suppress and Resolve quality gate issues Adding custom rule and connecting it to existing quality gate   Additional resources    What is NDepend?</description>
       
     </item>
     
@@ -25,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
       
-        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources    There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
       
     </item>
     

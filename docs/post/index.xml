@@ -6,7 +6,18 @@
     <description>Recent content in Blog on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 1</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</guid>
+      
+        <description>What is an Azure DevOps Environment?  Introduction Benefits of using ADO Environments (IMHO)   Resource Grouping Tips  One Environment representing all development/staging/production clusters One Environment representing one development/staging/production cluster One Environment representing one application deployed in development/staging/production cluster   Next Steps    In the first part of this blog series I would like to talk about Azure DevOps Environments, benefits of using it for deployment of applications to AKS or any other Kubernetes distribution (or even a VM), and provide a few tips and tricks for how ADO environments and resources can be created.</description>
+      
+    </item>
+    
     <item>
       <title>Improving .NET code quality with NDepend in Visual Studio and Azure DevOps</title>
       <link>https://kristhecodingunicorn.com/post/ndepend/</link>
@@ -14,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/ndepend/</guid>
       
-        <description>What is NDepend? Improving and enforcing source code quality with NDepend Azure DevOps extension  Adding NDepend Build Task NDepend build output and Azure DevOps Dashboard Adding code coverage to NDepend analysis Adding code coverage from external location to NDepend analysis Trends section in NDepend Dashboard in Azure DevOps Enabling NDepend quality gate checks in build pipeline   Quality gate and rule management with NDepend VS Extension  Running initial NDepend analysis in Visual Studio Modifying default quality gate Deactivate, Suppress and Resolve quality gate issues Adding custom rule and connecting it to existing quality gate   Additional resources   What is NDepend?</description>
+        <description>What is NDepend? Improving and enforcing source code quality with NDepend Azure DevOps extension  Adding NDepend Build Task NDepend build output and Azure DevOps Dashboard Adding code coverage to NDepend analysis Adding code coverage from external location to NDepend analysis Trends section in NDepend Dashboard in Azure DevOps Enabling NDepend quality gate checks in build pipeline   Quality gate and rule management with NDepend VS Extension  Running initial NDepend analysis in Visual Studio Modifying default quality gate Deactivate, Suppress and Resolve quality gate issues Adding custom rule and connecting it to existing quality gate   Additional resources    What is NDepend?</description>
       
     </item>
     
@@ -25,7 +36,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/secrets_cleanup/</guid>
       
-        <description>Why should you care about secrets management? I&#39;ve committed a secret - now what? o.O Cleaning up secrets in Azure DevOps and GitHub repos (or any other Git repo) with BFG Repo-Cleaner  Step-by-step walkthrough Final note on permissions in Azure DevOps repos   Additional resources   Why should you care about secrets management?</description>
+        <description>Why should you care about secrets management? I&#39;ve committed a secret - now what? o.O Cleaning up secrets in Azure DevOps and GitHub repos (or any other Git repo) with BFG Repo-Cleaner  Step-by-step walkthrough Final note on permissions in Azure DevOps repos   Additional resources    Why should you care about secrets management?</description>
       
     </item>
     
@@ -36,7 +47,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
       
-        <description>Introduction to the needs for upgrading Ingress Controller Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime  Preparations Create temporary Ingress Controller Re-route traffic to temporary Ingress Controller Upgrade original Ingress Controller and re-route traffic from temporary IC Final test and cleanup   Additional resources   Introduction to the needs for upgrading Ingress Controller In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in stable repo and fully embrace the new Helm chart located in ingress-nginx repository.</description>
+        <description>Introduction to the needs for upgrading Ingress Controller Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime  Preparations Create temporary Ingress Controller Re-route traffic to temporary Ingress Controller Upgrade original Ingress Controller and re-route traffic from temporary IC Final test and cleanup   Additional resources    Introduction to the needs for upgrading Ingress Controller In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in stable repo and fully embrace the new Helm chart located in ingress-nginx repository.</description>
       
     </item>
     
@@ -47,7 +58,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_object_helm/</guid>
       
-        <description>What is Helm? How to let existing Helm release &amp;ldquo;adopt&amp;rdquo; a new Kubernetes resource and why it&#39;s important? Additional resources   Helm is extremely useful and efficient when it comes to distributing, installing and upgrading applications hosted in Kubernetes. But sometimes you may have a need to patch an existing release and there is a quick way to do that which I would like to share with you today.</description>
+        <description>What is Helm? How to let existing Helm release &amp;ldquo;adopt&amp;rdquo; a new Kubernetes resource and why it&#39;s important? Additional resources    Helm is extremely useful and efficient when it comes to distributing, installing and upgrading applications hosted in Kubernetes. But sometimes you may have a need to patch an existing release and there is a quick way to do that which I would like to share with you today.</description>
       
     </item>
     
@@ -58,7 +69,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</guid>
       
-        <description>Why would proxying to external services from Kubernetes cluster be relevant? What is Kubernetes Service and what kinds of Kubernetes Service can be created? Implementation description and preparation Proxy to external services with Service without Selectors Proxy to external services with ExternalName Service Additional resources   So, recently I&#39;ve faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those.</description>
+        <description>Why would proxying to external services from Kubernetes cluster be relevant? What is Kubernetes Service and what kinds of Kubernetes Service can be created? Implementation description and preparation Proxy to external services with Service without Selectors Proxy to external services with ExternalName Service Additional resources    So, recently I&#39;ve faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those.</description>
       
     </item>
     
@@ -69,7 +80,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</guid>
       
-        <description>What is static code analysis and why do I need it? How to install and use Security Code Scan tool?  Installation in CI/CD pipeline Local installation How to view and read result report?   Additional resources   What is static code analysis and why do I need it?</description>
+        <description>What is static code analysis and why do I need it? How to install and use Security Code Scan tool?  Installation in CI/CD pipeline Local installation How to view and read result report?   Additional resources    What is static code analysis and why do I need it?</description>
       
     </item>
     
@@ -80,7 +91,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
       
-        <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
+        <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies    If you&#39;re a .</description>
       
     </item>
     
@@ -91,7 +102,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
       
-        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
+        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources    There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
       
     </item>
     
@@ -102,7 +113,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/owasp_depcheck/</guid>
       
-        <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check   Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
+        <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check    Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
       
     </item>
     

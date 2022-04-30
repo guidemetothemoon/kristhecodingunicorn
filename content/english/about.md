@@ -24,4 +24,4 @@ Anyway, thanks for stopping by! Check out the blog and tech tips section and sta
 
 See you there! 🤗
 
-![Photo of myself on a mountain trip](../images/about_new.jpg)
+![Photo of myself on a mountain trip](../images/about.jpg)
