@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</guid>
       
-        <description>#1 - Live streaming of Pod logs #2 - Get non-existent Namespace without erros #3 - Get all resources in a Namespace #4 - Retrieve and clean up Evicted Pods    Starting a totally new Tech Tips subsection feels great - especially when it&#39;s going to be purely dedicated to Kubernetes utilizing Azure Kubernetes Service (AKS) for demo purposes!</description>
+        <description>4 helpful commands that can make your life easier when working with Kubernetes and AKS</description>
       
     </item>
     

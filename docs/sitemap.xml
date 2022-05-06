@@ -3,15 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kristhecodingunicorn.com/</loc>
-    <lastmod>2022-04-30T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure-devops/</loc>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/pr_templates/</loc>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/</loc>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/</loc>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
+    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
     <lastmod>2022-04-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
-    <lastmod>2022-04-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/azure-devops/</loc>
     <lastmod>2022-04-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/</loc>
@@ -26,9 +41,6 @@
     <loc>https://kristhecodingunicorn.com/tags/kubernetes/</loc>
     <lastmod>2022-04-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/</loc>
-    <lastmod>2022-04-30T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/update_dotnet_fw/</loc>
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
   </url><url>
@@ -36,12 +48,6 @@
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/powershell/</loc>
-    <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/techtips/</loc>
-    <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
     <lastmod>2022-03-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/ndepend/</loc>
