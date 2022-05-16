@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/update_dotnet_fw/</guid>
       
-        <description>Let&#39;s take a look at how we can automate update of .NET target framework across projects with PowerShell.</description>
+        <description>With all the active development in the .NET world many of us have faced a situation where we need to update .NET target framework more frequently in order to be able to keep up, but at the same time to be able to utilize all the goodies .NET has to offer.</description>
       
     </item>
     
@@ -25,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/ndepend/</guid>
       
-        <description>This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool.</description>
+        <description>What is NDepend? Improving and enforcing source code quality with NDepend Azure DevOps extension  Adding NDepend Build Task NDepend build output and Azure DevOps Dashboard Adding code coverage to NDepend analysis Adding code coverage from external location to NDepend analysis Trends section in NDepend Dashboard in Azure DevOps Enabling NDepend quality gate checks in build pipeline   Quality gate and rule management with NDepend VS Extension  Running initial NDepend analysis in Visual Studio Modifying default quality gate Deactivate, Suppress and Resolve quality gate issues Adding custom rule and connecting it to existing quality gate   Additional resources   What is NDepend?</description>
       
     </item>
     
@@ -36,7 +36,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</guid>
       
-        <description>This blog post explains how to perform static code analysis of .NET code locally and as part of CI/CD with Security Code Scan tool.</description>
+        <description>What is static code analysis and why do I need it? How to install and use Security Code Scan tool?  Installation in CI/CD pipeline Local installation How to view and read result report?   Additional resources   What is static code analysis and why do I need it?</description>
       
     </item>
     
@@ -47,7 +47,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
       
-        <description>This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog.</description>
+        <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
       
     </item>
     
@@ -58,7 +58,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
       
-        <description>This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner.</description>
+        <description>What is a .NET Tool and how do I create one? How to install, use and uninstall a .NET Tool? Additional resources   There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands.</description>
       
     </item>
     
@@ -69,7 +69,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</guid>
       
-        <description>This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice</description>
+        <description>What is a dotnet template though? How to create a custom dotnet template? How do I transform a microservice template to a dotnet template? How do I test the dotnet template and verify that it performs as expected?  Testing single template Testing template collection   How do I pack and make template collection NuGet package available for others?</description>
       
     </item>
     

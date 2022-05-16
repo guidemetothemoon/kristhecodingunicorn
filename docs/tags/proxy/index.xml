@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</guid>
       
-        <description>This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services.</description>
+        <description>Why would proxying to external services from Kubernetes cluster be relevant? What is Kubernetes Service and what kinds of Kubernetes Service can be created? Implementation description and preparation Proxy to external services with Service without Selectors Proxy to external services with ExternalName Service Additional resources   So, recently I&#39;ve faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those.</description>
       
     </item>
     

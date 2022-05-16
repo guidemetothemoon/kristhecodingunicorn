@@ -6,7 +6,18 @@
     <description>Recent content in aks on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/aks/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/aks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kris&#39;s Quick Cup of (A)K8s #2</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</link>
+      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</guid>
+      
+        <description>#1 - Run CronJob instantly #2 - Configure Rolling Update for Deployment #3 - Check what add-ons are available in AKS with Azure CLI   It&#39;s time for a new edition of Kris&#39;s Quick cup of Kubernetes where I&#39;m utilizing Azure Kubernetes Service (AKS) for demo purposes!😺 In second edition of this tech tip series I would like to share a few tips related to CronJobs, Rolling Updates and AKS add-ons that can make your life easier when working with Kubernetes and specifically Azure Kubernetes Service.</description>
+      
+    </item>
+    
     <item>
       <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 1</title>
       <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</link>
@@ -14,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</guid>
       
-        <description>First part of this blog post series describes what Azure DevOps Environments are and provides some tips and tricks for using it deployment of applications to Kubernetes.</description>
+        <description>What is an Azure DevOps Environment?  Introduction Benefits of using ADO Environments (IMHO)   Resource Grouping Tips  One Environment representing all development/staging/production clusters One Environment representing one development/staging/production cluster One Environment representing one application deployed in development/staging/production cluster   Next Steps   In the first part of this blog series I would like to talk about Azure DevOps Environments, benefits of using it for deployment of applications to AKS or any other Kubernetes distribution (or even a VM), and provide a few tips and tricks for how ADO environments and resources can be created.</description>
       
     </item>
     
@@ -25,7 +36,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</guid>
       
-        <description>4 helpful commands that can make your life easier when working with Kubernetes and AKS</description>
+        <description>#1 - Live streaming of Pod logs #2 - Get non-existent Namespace without erros #3 - Get all resources in a Namespace #4 - Retrieve and clean up Evicted Pods   Starting a totally new Tech Tips subsection feels great - especially when it&#39;s going to be purely dedicated to Kubernetes utilizing Azure Kubernetes Service (AKS) for demo purposes!</description>
       
     </item>
     
@@ -36,7 +47,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
       
-        <description>This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.</description>
+        <description>Introduction to the needs for upgrading Ingress Controller Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime  Preparations Create temporary Ingress Controller Re-route traffic to temporary Ingress Controller Upgrade original Ingress Controller and re-route traffic from temporary IC Final test and cleanup   Additional resources   Introduction to the needs for upgrading Ingress Controller In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in stable repo and fully embrace the new Helm chart located in ingress-nginx repository.</description>
       
     </item>
     
@@ -47,7 +58,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_object_helm/</guid>
       
-        <description>This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example.</description>
+        <description>What is Helm? How to let existing Helm release &amp;ldquo;adopt&amp;rdquo; a new Kubernetes resource and why it&#39;s important? Additional resources   Helm is extremely useful and efficient when it comes to distributing, installing and upgrading applications hosted in Kubernetes. But sometimes you may have a need to patch an existing release and there is a quick way to do that which I would like to share with you today.</description>
       
     </item>
     
@@ -58,7 +69,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</guid>
       
-        <description>This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services.</description>
+        <description>Why would proxying to external services from Kubernetes cluster be relevant? What is Kubernetes Service and what kinds of Kubernetes Service can be created? Implementation description and preparation Proxy to external services with Service without Selectors Proxy to external services with ExternalName Service Additional resources   So, recently I&#39;ve faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those.</description>
       
     </item>
     

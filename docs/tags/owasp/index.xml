@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/owasp_depcheck/</guid>
       
-        <description>This blog post explains why it&#39;s important to scan third-party dependencies for known security vulnerabilities and how this can be done with OWASP Dependency Check tool</description>
+        <description>Why should you care about security of third-party dependencies What is OWASP Dependency Check (ODC) Adding OWASP Dependency Check to build pipeline How to analyze and fix build errors triggered by OWASP Dependency Check   Why should you care about security of third-party dependencies No matter how small the application you&#39;re developing is, at some point you&#39;ll end up using code that has been developed by someone else, i.</description>
       
     </item>
     

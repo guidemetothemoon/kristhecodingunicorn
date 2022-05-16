@@ -6,7 +6,18 @@
     <description>Recent content in Tech Tips on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 06 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kris&#39;s Quick Cup of (A)K8s #2</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</link>
+      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</guid>
+      
+        <description>#1 - Run CronJob instantly #2 - Configure Rolling Update for Deployment #3 - Check what add-ons are available in AKS with Azure CLI   It&#39;s time for a new edition of Kris&#39;s Quick cup of Kubernetes where I&#39;m utilizing Azure Kubernetes Service (AKS) for demo purposes!😺 In second edition of this tech tip series I would like to share a few tips related to CronJobs, Rolling Updates and AKS add-ons that can make your life easier when working with Kubernetes and specifically Azure Kubernetes Service.</description>
+      
+    </item>
+    
     <item>
       <title>Improving Pull Request flow with PR templates and PR Completion Stats in Azure DevOps</title>
       <link>https://kristhecodingunicorn.com/techtips/pr_templates/</link>
@@ -14,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/pr_templates/</guid>
       
-        <description>Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps.</description>
+        <description>PR templates PR Completion Stats extension   Code reviews and pull requests are a totally normal practice these days if you&#39;re working together with other developers. Even if you&#39;re working solo you probably don&#39;t want to commit to main branch directly if you have CI/CD in place. That&#39;s when adding changes through pull requests and code reviews come into picture.</description>
       
     </item>
     
@@ -25,7 +36,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/update_dotnet_fw/</guid>
       
-        <description>Let&#39;s take a look at how we can automate update of .NET target framework across projects with PowerShell.</description>
+        <description>With all the active development in the .NET world many of us have faced a situation where we need to update .NET target framework more frequently in order to be able to keep up, but at the same time to be able to utilize all the goodies .NET has to offer.</description>
       
     </item>
     
@@ -36,7 +47,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</guid>
       
-        <description>4 helpful commands that can make your life easier when working with Kubernetes and AKS</description>
+        <description>#1 - Live streaming of Pod logs #2 - Get non-existent Namespace without erros #3 - Get all resources in a Namespace #4 - Retrieve and clean up Evicted Pods   Starting a totally new Tech Tips subsection feels great - especially when it&#39;s going to be purely dedicated to Kubernetes utilizing Azure Kubernetes Service (AKS) for demo purposes!</description>
       
     </item>
     
@@ -47,7 +58,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/azure_query/</guid>
       
-        <description>Let&#39;s take a look at how helpful query parameter can be in Azure CLI.</description>
+        <description>Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering! Let&#39;s use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.</description>
       
     </item>
     

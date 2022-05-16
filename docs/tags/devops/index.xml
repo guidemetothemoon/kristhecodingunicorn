@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/pr_templates/</guid>
       
-        <description>Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps.</description>
+        <description>PR templates PR Completion Stats extension   Code reviews and pull requests are a totally normal practice these days if you&#39;re working together with other developers. Even if you&#39;re working solo you probably don&#39;t want to commit to main branch directly if you have CI/CD in place. That&#39;s when adding changes through pull requests and code reviews come into picture.</description>
       
     </item>
     

@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</guid>
       
-        <description>This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice</description>
+        <description>What is a dotnet template though? How to create a custom dotnet template? How do I transform a microservice template to a dotnet template? How do I test the dotnet template and verify that it performs as expected?  Testing single template Testing template collection   How do I pack and make template collection NuGet package available for others?</description>
       
     </item>
     
