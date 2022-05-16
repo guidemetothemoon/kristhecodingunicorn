@@ -1,6 +1,6 @@
 +++
 author = "Kristina D."
-title = "Kris's Quick Cup of (A)K8s #2"
+title = "Kris's Quick Cup of (A)K8S #2"
 date = "2022-05-16"
 description = "A few tricks that can make your life easier when working with Kubernetes and AKS"
 draft = false
