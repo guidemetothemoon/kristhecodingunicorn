@@ -57,8 +57,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
-      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
       crossorigin="anonymous"
       media="screen"
     />
@@ -589,7 +589,8 @@ if (!doNotTrack) {
 </blockquote>
 <p>Our build pipeline is ready to deploy the new microservice to AKS! Before we do that, let's take a look at how to connect your build with a Kubernetes resource in an Azure DevOps Environment.</p>
 <p>Here's the build definition for our new microservice:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">trigger:
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
+trigger:
   branches:
     include:
     - master
@@ -632,8 +633,9 @@ stages:
               inputs:
                 action: <span class="s1">&#39;deploy&#39;</span>
                 namespace: <span class="s1">&#39;aks-helloworld&#39;</span>
-                manifests: <span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/hw-ingress.yaml&#39;</span></code></pre></div>
-<p>All you need in order to be able to deploy with ADO Environments from an Azure Pipeline is to define a deployment stage with a deployment job where you provide a property called <code>environment</code> that tells the build pipeline exactly which Azure DevOps Environment and which resource to target. In our case this will be the Environment and Kubernetes resource that we created earlier in this post. And that's it - easy-peasy, right?😺</p>
+                manifests: <span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/hw-ingress.yaml&#39;</span>
+
+</code></pre></div><p>All you need in order to be able to deploy with ADO Environments from an Azure Pipeline is to define a deployment stage with a deployment job where you provide a property called <code>environment</code> that tells the build pipeline exactly which Azure DevOps Environment and which resource to target. In our case this will be the Environment and Kubernetes resource that we created earlier in this post. And that's it - easy-peasy, right?😺</p>
 <p>You can deploy to multiple environments by extending the multi-staged pipeline presented above with even more stages. In reality you will also need a build stage, a security validation stage and maybe even a deployment stage for Pre-Production and Production environments. That's when you can utilize a multi-staged pipeline to it's full potential.</p>
 <p>It's deployment time! Since we haven't explicitly added a newly created build pipeline in the <strong>&quot;Pipeline permissions&quot;</strong> list which we looked at earlier, once the build is triggered it will ask you to provide it 2 types of permissions:</p>
 <ol>

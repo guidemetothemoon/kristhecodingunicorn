@@ -42,7 +42,7 @@ Once the license is applied in Azure DevOps you can start experimenting with NDe
 
 Build task to set up analysis with NDepend is pretty easy and straightforward to set up - here I\'ve configured the basic build task for a repo with 2 projects in it, with default configuration. **Please note** that this task can only run on a Windows build agent at the moment. The task is added after the unit test execution task for a more representative analysis:
 
-{{< highlight yaml >}}
+``` bash
 #azure-pipelines.yaml
 - task: NDependTask@1
   displayName: 'NDepend Scan'
@@ -55,7 +55,7 @@ Build task to set up analysis with NDepend is pretty easy and straightforward to
     BuildGates: false
     PullRequest2: false
     iscoverage: false
-{{< /highlight >}}
+```
 
 If you want to generate multiple views with different configurations, you can add multiple build tasks with different viewname property (which is also called Perspective in official NDepend documentation), but you always operate with the build task of one type - ```NDependTask@1```. Here we\'re excluding test projects from the analysis and are not enforcing any quality gates just yet. Also, we haven\'t enabled code coverage as of now, and shortly we\'ll see why it can be useful to enable it. But first let\'s see what the output of the build will be once this task is added. I liked that the task executes quite fast - it took no more than 4-5 minutes for a repo with 200+ projects and from my experience, quite few tools can handle such amount of projects this fast. This makes it an advantage since it doesn\'t increase the build time significantly and can still run as part of the pull request build for instance, to enforce additional quality gates for the code check-ins.
 
@@ -79,7 +79,7 @@ Now, code coverage statistics is showing 0% and in order to get a more realistic
 
 We can enable code coverage in NDepend build task by enabling ```iscoverage``` property and providing path to the code coverage results in ```coverage``` property, as demonstrated in the build pipeline definition below:
 
-{{< highlight yaml >}}
+``` bash
 #azure-pipelines.yaml
 - task: DotNetCoreCLI@2
   displayName: 'Run all tests'
@@ -109,7 +109,7 @@ We can enable code coverage in NDepend build task by enabling ```iscoverage``` p
     PullRequest2: false
     iscoverage: true
     coverage: '$(Build.SourcesDirectory)/**/CodeCoverage'
-{{< /highlight >}}
+```
 
 Now, that we\'ve enabled code coverage analysis as well, let\'s take a look how the results have changed since the first run:
 
@@ -121,7 +121,7 @@ As you can see, enabling code coverage had a significant effect! Quality rating 
 
 In some cases you may be running code coverage outside of the main build pipeline and can\'t therefore connect it to NDepend directly, because the report files are located externally, on a totally different build agent. This is the case for one of my repos where there are 200+ projects - running code coverage as part of the pull request or main build pipeline isn\'t realistic - it will add more than 1 hour to the main build execution time. Therefore code coverage is running in a dedicated build pipeline but I can still add it to analysis with NDepend and enforce policies with following adjustment:
 
-{{< highlight yaml >}}
+``` bash
 #azure-pipelines.yaml
 
 - task: PublishCodeCoverageResults@1
@@ -154,7 +154,7 @@ In some cases you may be running code coverage outside of the main build pipelin
     PullRequest2: false
     iscoverage: true
     coverage: '$(Build.SourcesDirectory)/cc-results/CodeCoverage'
-{{< /highlight >}}
+```
 
 First, we add publishing of code coverage report files in Opencover format as an additional build artifact, since that\'s the format supported by NDepend. Then, we download the reports from the latest succeeded build for code coverage and enable analysis for the same in NDepend build task. In that way we can connect code coverage data located externally to NDepend analysis - and it doesn\'t increase the main build duration time more than with a few seconds! :)
 
@@ -178,7 +178,7 @@ You can customize this section with your own Trends, you can find more informati
 
 Lastly, I would like to enforce NDepend quality gates so that the build fails if at least one quality gate is violated. In addition I will add a new custom rule that is not included in the default collection provided by NDepend. But first let\'s enable quality gate build policy by setting ```BuildGates``` property to ```true``` so that our NDepend build task looks like this:
 
-{{< highlight yaml >}}
+``` bash
 #azure-pipelines.yaml
 
 - task: NDependTask@1
@@ -193,7 +193,7 @@ Lastly, I would like to enforce NDepend quality gates so that the build fails if
     PullRequest2: false
     iscoverage: true
     coverage: '$(Build.SourcesDirectory)/**/CodeCoverage'
-{{< /highlight >}}
+```
 
 Once this is done we can execute a new build. You can see that the build now fails because at least one quality gate failed:
 
@@ -405,7 +405,7 @@ public class Logger
 
 Last thing before we check in our changes and start testing is to update NDepend build task and let NDepend know that we have added custom configuration that it needs to be aware of. Remember that auto-generated ndproj file that is created for us once we start modifying default NDepend configuration? That\'s the one we need to provide the path for in a new property called ```ndproj```:
 
-{{< highlight yaml >}}
+``` bash
 #azure-pipelines.yaml
 
 - task: NDependTask@1
@@ -421,7 +421,7 @@ Last thing before we check in our changes and start testing is to update NDepend
     PullRequest2: false
     iscoverage: true
     coverage: '$(Build.SourcesDirectory)/**/CodeCoverage'
-{{< /highlight >}}
+```
 
 Let\'s check in all our changes and trigger a new build - if we\'ve done everything correctly, all 3 violations that were initially identified should now be resolved, but the build should still fail because we have code that violates our new custom rule - and therefore \"Critical rules violated\" quality gate.
 

@@ -61,7 +61,7 @@ You will also need to add following label to the Object definition:
 
 I\'ll continue illustrating the concept with PDB example. So, knowing about the annotations and labels I need to add to the PDB definition, I\'ve created following definition file - here I\'m using placeholders because I would like to show you how patching can be automated for multiple deployments:
 
-{{< highlight yaml >}}
+{{< highlight bash >}}
 # pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
@@ -130,7 +130,7 @@ kubectl drain --delete-emptydir-data --force --ignore-daemonsets <your_node_name
 
 After executing the command above you should be able to see messages in the console output saying that a Pod can't be deleted due to potential violation of PodDisruptionBudget Policy. Once a new Pod is scheduled and ready on another node, this alert will disappear and the Pod on the to-be-drained-node will be evicted. You can read more about node draining procedure here: [Safely drain a Node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\> Set-Alias -Name k -Value kubectl
 PS C:\> k drain --delete-emptydir-data --force --ignore-daemonsets aks-nodepool1-14745837-vmss000001
 node/aks-nodepool1-14745837-vmss000001 cordoned

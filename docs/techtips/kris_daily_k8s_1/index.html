@@ -57,8 +57,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
-      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
       crossorigin="anonymous"
       media="screen"
     />
@@ -519,9 +519,10 @@ if (!doNotTrack) {
 <p><img src="../../images/tech_tips/k8s_get_all.png" alt="Screenshot of Kubernetes get all command"></p>
 <h2 id="4---retrieve-and-clean-up-evicted-pods">#4 - Retrieve and clean up Evicted Pods</h2>
 <p>Sometimes you may have a lot of Pods in the cluster with a specific status that may need clean-up. You could have deleted one and one Pod but why do that when with 2 PowerShell commands you can clean up all Pods at once? For instance, let's use Pods with status &quot;Evicted&quot; as an example. I will use first command to retrieve all Pods in &quot;testapp&quot; Namespace where reason is set to &quot;Evicted&quot; and save the result to a variable called &quot;evictedPods&quot;. Then with command #2 I will delete each of the retrieved Evicted Pods. The same approach can be used for any other status, you will just need to confirm with Pod metadata that you're filtering Pods based on the correct property because in some cases different properties may be used to set Pod's state.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">$evictedPods</span> <span class="o">=</span> <span class="o">((</span>kubectl get pods -n testapp -o json <span class="p">|</span> ConvertFrom-Json<span class="o">)</span>.items <span class="p">|</span> Where-Object <span class="o">{</span><span class="nv">$_</span>.status.reason -eq <span class="s2">&#34;Evicted&#34;</span><span class="o">})</span>
-foreach<span class="o">(</span><span class="nv">$pod</span> in <span class="nv">$evictedPods</span><span class="o">)</span> <span class="o">{</span>kubectl delete pods <span class="k">$(</span><span class="nv">$pod</span>.metadata.name<span class="k">)</span> -n testapp<span class="o">}</span></code></pre></div>
-<p>Thanks for reading and till next tech tip ;)</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">$evictedPods = ((kubectl get pods -n testapp -o json | ConvertFrom-Json).items | Where-Object {$_.status.reason -eq &#34;Evicted&#34;})
+
+foreach($pod in $evictedPods) {kubectl delete pods $($pod.metadata.name) -n testapp}
+</code></pre></div><p>Thanks for reading and till next tech tip ;)</p>
 </div>
     <div class="post__footer">
       

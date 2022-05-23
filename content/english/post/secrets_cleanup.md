@@ -58,7 +58,7 @@ First of all, you need to ensure that you have Java Runtime Environment (JRE) in
 
 First, we\'ll need to clone a fresh copy of our repo with ```git clone --mirror``` command:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\Playground\test-cleanup> git clone --mirror https://github.com/guidemetothemoon/demo-projects.git
 Cloning into bare repository 'demo-projects.git'...
 remote: Enumerating objects: 12, done.
@@ -90,7 +90,7 @@ Once you have taken the backup we can start with the clean up. First we\'ll need
 
 Please note that the values are separated with a new line. File can be saved wherever it\'s easily accessible - I will save it to the same folder where I cloned my Git repo database to. Now we have everything we need in order to do the clean up. We can do that by executing ```java -jar bfg.jar --replace-text "C:\Playground\test-cleanup\secrets.txt" demo-projects.git``` command:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\Playground\test-cleanup> java -jar bfg.jar --replace-text "C:\Playground\test-cleanup\secrets.txt" demo-projects.git
 
 Using repo : C:\Playground\test-cleanup\demo-projects.git
@@ -184,7 +184,7 @@ BFG Repo-Cleaner also generates a report that can make it easier for you to exam
 
 Let\'s check some of the commits and what those have been changed to - let\'s take the first commit id from the list, navigate to the Git repo folder and check how the initial commit looks like with ```git show```:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\Playground\test-cleanup\demo-projects.git> git show 08b6925
 commit 08b69254b55f93d02babae751b9573575dc39327
 Author: Kristina D. <g********@gmail.com>
@@ -231,7 +231,7 @@ index 0000000..578e8c2
 
 As you can see, the secrets are there, as expected, since this commit represents the state before the changes have been applied by the tool. From the txt-file above we can see that this commit id was mapped to the commit with id ```11b05548da5d1900066d13d048da6ce98e249426``` - let\'s check how the changes in that commit look like:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\Playground\test-cleanup\demo-projects.git> git show 11b0554
 commit 11b05548da5d1900066d13d048da6ce98e249426
 Author: Kristina D. <g********@gmail.com>
@@ -278,7 +278,7 @@ index 0000000..43f73ac
 
 Check that out! Just as I said, client id and client secret got cleaned up - very nice! Once we have done the verification of changes, we can push them to the remote repository by running ```git reflog expire --expire=now --all && git gc --prune=now --aggressive``` and ```git push``` commands:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\Playground\test-cleanup\demo-projects.git> git reflog expire --expire=now --all && git gc --prune=now --aggressive
 Enumerating objects: 12, done.
 Counting objects: 100% (12/12), done.
@@ -305,7 +305,7 @@ Now let\'s check one of the existing commits where the secrets were exposed and 
 
 The secrets are not there, awesome! If we attempt to check the initial commit that had secrets in plaintext, we can see that it\'s not available anymore and was deleted for good:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 PS C:\Playground\test-cleanup\demo-projects.git> git show 08b6925
 fatal: ambiguous argument '08b6925': unknown revision or path not in the working tree.
 Use '--' to separate paths from revisions, like this:

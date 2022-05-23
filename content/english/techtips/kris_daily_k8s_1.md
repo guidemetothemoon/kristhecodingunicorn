@@ -45,9 +45,10 @@ In the example below I\'ve deployed a test application in my AKS cluster and am 
 ## #4 - Retrieve and clean up Evicted Pods
 Sometimes you may have a lot of Pods in the cluster with a specific status that may need clean-up. You could have deleted one and one Pod but why do that when with 2 PowerShell commands you can clean up all Pods at once? For instance, let\'s use Pods with status \"Evicted\" as an example. I will use first command to retrieve all Pods in \"testapp\" Namespace where reason is set to \"Evicted\" and save the result to a variable called \"evictedPods\". Then with command #2 I will delete each of the retrieved Evicted Pods. The same approach can be used for any other status, you will just need to confirm with Pod metadata that you\'re filtering Pods based on the correct property because in some cases different properties may be used to set Pod\'s state.
 
-{{< highlight bash >}}
+``` xml
 $evictedPods = ((kubectl get pods -n testapp -o json | ConvertFrom-Json).items | Where-Object {$_.status.reason -eq "Evicted"})
+
 foreach($pod in $evictedPods) {kubectl delete pods $($pod.metadata.name) -n testapp}
-{{< /highlight >}}
+```
 
 Thanks for reading and till next tech tip ;)

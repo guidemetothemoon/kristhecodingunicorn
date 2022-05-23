@@ -57,8 +57,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
-      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
       crossorigin="anonymous"
       media="screen"
     />
@@ -207,7 +207,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/dotnet_sast_scs\/",
-        "wordCount" : "2463",
+        "wordCount" : "2484",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -550,16 +550,16 @@ if (!doNotTrack) {
 <h3 id="installation-in-cicd-pipeline">Installation in CI/CD pipeline</h3>
 <p>Since it's a .NET tool it's just a matter of few commands to get it installed and executed. Here I've created a separate PowerShell script that will install the tool, get all solution files in the repository and run a code analysis on all the discovered solutions, finally producing a scan results report. This way, any time a new solution is added to the repo, it will be automatically included into the SAST step of the build pipeline.</p>
 <p>Build tasks in your yaml-file can look like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PowerShell@2</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run Security Code Scan&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">filePath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;util-scripts\Invoke-StaticCodeScan.ps1&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishBuildArtifacts@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName: &#39;Publish Artifact</span><span class="p">:</span><span class="w"> </span><span class="l">Security Code Scan&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">pathToPublish</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;sast-results.sarif&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">artifactName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;CodeAnalysisLogs&#39;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">- task: PowerShell@2
+  displayName: <span class="s1">&#39;Run Security Code Scan&#39;</span>
+  inputs:
+    filePath: <span class="s1">&#39;util-scripts\Invoke-StaticCodeScan.ps1&#39;</span>
+
+- task: PublishBuildArtifacts@1
+  displayName: <span class="s1">&#39;Publish Artifact: Security Code Scan&#39;</span>
+  inputs:
+    pathToPublish: <span class="s1">&#39;sast-results.sarif&#39;</span>
+    artifactName: <span class="s1">&#39;CodeAnalysisLogs&#39;</span></code></pre></div>
 <p>You can take a look at the PowerShell script below. Here, I'm excluding the test projects from scanning since those will not be rolled out to production. I would also like to publish CWE id-s so that I can get more information about the discovered vulnerabilities from Common Weakness Enumeration lists, for example the one from <a href="https://cwe.mitre.org/data/index.html">MITRE</a>. Lastly, I would like to dynamically generate a scan result report for all the scanned source code that I will then publish as a build artifact (ref. PublishBuildArtifacts@1 build task above). You can also provide other arguments to the tool in order to customize it's execution, I'll mention more about it in the Local Installation section below.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Write-Output <span class="s2">&#34;Installing Security Code Scan...&#34;</span>
 dotnet tool install --global security-scan --version 5.1.1
@@ -571,16 +571,16 @@ foreach<span class="o">(</span><span class="nv">$sln</span> in <span class="nv">
     security-scan <span class="nv">$sln</span>.FullName --excl-proj<span class="o">=</span>**/*Test*/** --cwe --export<span class="o">=</span>sast-results.sarif
 <span class="o">}</span></code></pre></div>
 <p>If you don't want to create a separate PowerShell script for this, you can simply install and execute CSC as part of the inline PowerShell build task:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span><span class="sd">    dotnet tool install --global security-scan --version 5.1.1
-</span><span class="sd">    security-scan MySolutionFolder/My.Solution.sln --excl-proj=**/*Test*/** --cwe --export=sast-results.sarif</span><span class="w">    
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install and run SCS&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">- script: <span class="p">|</span>
+    dotnet tool install --global security-scan --version 5.1.1
+    security-scan MySolutionFolder/My.Solution.sln --excl-proj<span class="o">=</span>**/*Test*/** --cwe --export<span class="o">=</span>sast-results.sarif
+  displayName: <span class="s1">&#39;Install and run SCS&#39;</span>
+  continueOnError: false</code></pre></div>
 <h3 id="local-installation">Local installation</h3>
 <p>You can also install and run Security Code Scan as a .NET tool locally. In the example below, I installed the tool and executed it with the same arguments as the ones used in the build pipeline example above.</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">dotnet tool install --global security-scan --version 5.1.1 --interactive</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">dotnet tool install --global security-scan --version 5.1.1 --interactive</code></pre></div>
 <p><img src="../../images/dotnet_sast_scs/scs_install_1.jpg" alt="Secure Code Scan .NET tool installation output"></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> security-scan .<span class="se">\M</span>y.Solution.sln --excl-proj<span class="o">=</span>**/*Test*/** --cwe --export<span class="o">=</span>sast-report.sarif
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">PS C:\&gt; security-scan .\My.Solution.sln --excl-proj=**/*Test*/** --cwe --export=sast-report.sarif
 
 ╔═╗┌─┐┌─┐┬ ┬┬─┐┬┌┬┐┬ ┬  ╔═╗┌─┐┌┬┐┌─┐  ╔═╗┌─┐┌─┐┌┐┌
 ╚═╗├┤ │  │ │├┬┘│ │ └┬┘  ║  │ │ ││├┤   ╚═╗│  ├─┤│││
@@ -589,16 +589,16 @@ foreach<span class="o">(</span><span class="nv">$sln</span> in <span class="nv">
 .NET tool by Jaroslav Lobačevski v5.1.1.0
 
 
-Loading solution <span class="s1">&#39;.\My.Solution.sln&#39;</span>
-Resolve         0:00.0554626    My.Solution.csproj <span class="o">(</span>net5.0<span class="o">)</span>
-Resolve         0:00.7575499    My.Solution.Tests.csproj <span class="o">(</span>net5.0<span class="o">)</span>
-Finished loading solution <span class="s1">&#39;.\My.Solution.sln&#39;</span>
-Skipped: C:<span class="se">\M</span>y.Solution.Tests.csproj excluded from analysis
-Found: C:<span class="se">\M</span>ySolutionFolder<span class="se">\W</span>eb.config<span class="o">(</span>6,1<span class="o">)</span>: warning SCS0023: CWE-554: View state is not encrypted.
+Loading solution &#39;.\My.Solution.sln&#39;
+Resolve         0:00.0554626    My.Solution.csproj (net5.0)
+Resolve         0:00.7575499    My.Solution.Tests.csproj (net5.0)
+Finished loading solution &#39;.\My.Solution.sln&#39;
+Skipped: C:\My.Solution.Tests.csproj excluded from analysis
+Found: C:\MySolutionFolder\Web.config(6,1): warning SCS0023: CWE-554: View state is not encrypted.
 Completed in 00:00:09
-<span class="m">1</span> warnings</code></pre></div>
+1 warnings</code></pre></div>
 <p>As I also mentioned earlier, there are several other arguments you can provide to the tool in order to tweak the scanning even more. You can find all the available arguments by running following command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> security-scan -h
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">PS C:\&gt; security-scan -h
 
 ╔═╗┌─┐┌─┐┬ ┬┬─┐┬┌┬┐┬ ┬  ╔═╗┌─┐┌┬┐┌─┐  ╔═╗┌─┐┌─┐┌┐┌
 ╚═╗├┤ │  │ │├┬┘│ │ └┬┘  ║  │ │ ││├┤   ╚═╗│  ├─┤│││
@@ -610,25 +610,25 @@ Completed in 00:00:09
 
 Usage:
 
-  -w, --excl-warn<span class="o">=</span>VALUE      <span class="o">(</span>Optional<span class="o">)</span> semicolon delimited list of warnings to
+  -w, --excl-warn=VALUE      (Optional) semicolon delimited list of warnings to
                                exclude
-      --incl-warn<span class="o">=</span>VALUE      <span class="o">(</span>Optional<span class="o">)</span> semicolon delimited list of warnings to
+      --incl-warn=VALUE      (Optional) semicolon delimited list of warnings to
                                include
-  -p, --excl-proj<span class="o">=</span>VALUE      <span class="o">(</span>Optional<span class="o">)</span> semicolon delimited list of glob
+  -p, --excl-proj=VALUE      (Optional) semicolon delimited list of glob
                                project patterns to exclude
-      --incl-proj<span class="o">=</span>VALUE      <span class="o">(</span>Optional<span class="o">)</span> semicolon delimited list of glob
+      --incl-proj=VALUE      (Optional) semicolon delimited list of glob
                                project patterns to include
-  -x, --export<span class="o">=</span>VALUE         <span class="o">(</span>Optional<span class="o">)</span> SARIF file path
-  -c, --config<span class="o">=</span>VALUE         <span class="o">(</span>Optional<span class="o">)</span> path to additional configuration file
-      --cwe                  <span class="o">(</span>Optional<span class="o">)</span> show CWE IDs
-  -t, --threads<span class="o">=</span>VALUE        <span class="o">(</span>Optional<span class="o">)</span> run analysis in parallel <span class="o">(</span>experimental<span class="o">)</span>
-  -n, --no-banner            <span class="o">(</span>Optional<span class="o">)</span> don<span class="err">&#39;</span>t show the banner
-  -v, --verbose              <span class="o">(</span>Optional<span class="o">)</span> more diagnostic messages
-  -h, -?, --help             show this message and <span class="nb">exit</span>
+  -x, --export=VALUE         (Optional) SARIF file path
+  -c, --config=VALUE         (Optional) path to additional configuration file
+      --cwe                  (Optional) show CWE IDs
+  -t, --threads=VALUE        (Optional) run analysis in parallel (experimental)
+  -n, --no-banner            (Optional) don&#39;t show the banner
+  -v, --verbose              (Optional) more diagnostic messages
+  -h, -?, --help             show this message and exit
 
 Example:
 
-  security-scan my.sln --excl-proj<span class="o">=</span>**/*Test*/** --export<span class="o">=</span>out.sarif --excl-warn<span class="o">=</span>SCS1234<span class="p">;</span>SCS2345 --config<span class="o">=</span>setting.yml</code></pre></div>
+  security-scan my.sln --excl-proj=**/*Test*/** --export=out.sarif --excl-warn=SCS1234;SCS2345 --config=setting.yml</code></pre></div>
 <p>There are some limitations in the Security Code Scan tool that I've discovered while implementing it in my application that might be relevant for you to be aware of:</p>
 <ul>
 <li>If you're using dual-targeting in your projects (f.ex., targeting both .NET Framework 4.8 and .NET 5.0) then there is no way to choose a single framework to execute code analysis for. Scanning will happen for each framework defined in the project.</li>
@@ -640,34 +640,34 @@ Example:
 <p>SARIF is The Static Analysis Results Interchange Format and this has been a de facto standard in the industry used to provide output from SAST tools. You can read the specification as well as get more information about available SARIF tools and viewers on the official website: <a href="https://sarifweb.azurewebsites.net/">SARIF</a>.</p>
 </blockquote>
 <p>SARIF is based on JSON so you can easily download the report and view it locally in Notepad or IDE of your choice. Let's open the &quot;sast-report.sarif&quot; file I've configured during execution of SCS in the Local Installation section: in &quot;results&quot; section I can see all potential security vulnerabilities that have been discovered by the tool:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">      <span class="s2">&#34;results&#34;</span><span class="err">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-          <span class="nt">&#34;ruleId&#34;</span><span class="p">:</span> <span class="s2">&#34;SCS0023&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;ruleIndex&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;warning&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;message&#34;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&#34;text&#34;</span><span class="p">:</span> <span class="s2">&#34;View state is not encrypted.&#34;</span>
-          <span class="p">},</span>
-          <span class="nt">&#34;locations&#34;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-              <span class="nt">&#34;physicalLocation&#34;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="nt">&#34;artifactLocation&#34;</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="nt">&#34;uri&#34;</span><span class="p">:</span> <span class="s2">&#34;file:///C:/MySolutionFolder/Web.config&#34;</span>
-                <span class="p">},</span>
-                <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="nt">&#34;startLine&#34;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-                  <span class="nt">&#34;startColumn&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                  <span class="nt">&#34;endLine&#34;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-                  <span class="nt">&#34;endColumn&#34;</span><span class="p">:</span> <span class="mi">1</span>
-                <span class="p">}</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-          <span class="p">],</span>
-          <span class="nt">&#34;properties&#34;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&#34;warningLevel&#34;</span><span class="p">:</span> <span class="mi">1</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">]</span><span class="err">,</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">      <span class="s2">&#34;results&#34;</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">&#34;ruleId&#34;</span>: <span class="s2">&#34;SCS0023&#34;</span>,
+          <span class="s2">&#34;ruleIndex&#34;</span>: 0,
+          <span class="s2">&#34;level&#34;</span>: <span class="s2">&#34;warning&#34;</span>,
+          <span class="s2">&#34;message&#34;</span>: <span class="o">{</span>
+            <span class="s2">&#34;text&#34;</span>: <span class="s2">&#34;View state is not encrypted.&#34;</span>
+          <span class="o">}</span>,
+          <span class="s2">&#34;locations&#34;</span>: <span class="o">[</span>
+            <span class="o">{</span>
+              <span class="s2">&#34;physicalLocation&#34;</span>: <span class="o">{</span>
+                <span class="s2">&#34;artifactLocation&#34;</span>: <span class="o">{</span>
+                  <span class="s2">&#34;uri&#34;</span>: <span class="s2">&#34;file:///C:/MySolutionFolder/Web.config&#34;</span>
+                <span class="o">}</span>,
+                <span class="s2">&#34;region&#34;</span>: <span class="o">{</span>
+                  <span class="s2">&#34;startLine&#34;</span>: 6,
+                  <span class="s2">&#34;startColumn&#34;</span>: 1,
+                  <span class="s2">&#34;endLine&#34;</span>: 6,
+                  <span class="s2">&#34;endColumn&#34;</span>: <span class="m">1</span>
+                <span class="o">}</span>
+              <span class="o">}</span>
+            <span class="o">}</span>
+          <span class="o">]</span>,
+          <span class="s2">&#34;properties&#34;</span>: <span class="o">{</span>
+            <span class="s2">&#34;warningLevel&#34;</span>: <span class="m">1</span>
+          <span class="o">}</span>
+        <span class="o">}</span>
+      <span class="o">]</span>,</code></pre></div>
 <p>Here, we can see the rule ID, warning message, where the warning was discovered and what the warning level is. In the bottom of the file, in &quot;tool&quot; section we can also find some information about the tool itself, like it's name, version, etc.</p>
 <p>You can also upload your report to SARIF validator - this can be especially relevant if you would like to customize the tool and add your own rules: <a href="https://sarifweb.azurewebsites.net/Validation">SARIF Validator</a>.</p>
 <p>Lastly, I would like to show you a pretty neat Azure DevOps extension that can let you visualize your report in a separate tab of your build results page in Azure DevOps. Extension is called <strong>&quot;SARIF SAST Scans Tab&quot;</strong> and it has been developed by Microsoft DevLabs - you can download it to your Azure DevOps server from Marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=sariftools.scans&amp;ssr=false#overview">SARIF SAST Scans Tab</a>. Once it's downloaded you need to verify that your build pipeline is publishing a SARIF report as a build artifact with a specific name: <strong>&quot;CodeAnalysisLogs&quot;</strong>. Also, as of now, the extension works properly only if you're publishing a scan report artifact with <strong>&quot;PublishBuildArtifacts@1&quot;</strong> task and <strong>not &quot;PublishPipelineArtifact@1&quot;</strong> so please, ensure that you're using a proper build task for this.</p>

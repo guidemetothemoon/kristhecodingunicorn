@@ -103,7 +103,7 @@ Our build pipeline is ready to deploy the new microservice to AKS! Before we do 
 
 Here\'s the build definition for our new microservice:
 
-{{< highlight bash >}}
+``` bash
 
 trigger:
   branches:
@@ -150,7 +150,7 @@ stages:
                 namespace: 'aks-helloworld'
                 manifests: '$(Build.SourcesDirectory)/deploy/kubernetes-templates/hw-ingress.yaml'
 
-{{< /highlight >}}
+```
 
 All you need in order to be able to deploy with ADO Environments from an Azure Pipeline is to define a deployment stage with a deployment job where you provide a property called ```environment``` that tells the build pipeline exactly which Azure DevOps Environment and which resource to target. In our case this will be the Environment and Kubernetes resource that we created earlier in this post. And that\'s it - easy-peasy, right?😺
 

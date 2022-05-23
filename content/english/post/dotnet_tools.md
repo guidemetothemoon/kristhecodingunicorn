@@ -34,7 +34,7 @@ Let\'s look at the whole flow from creating a .NET tool to installing/uninstalli
 
 In order to convert my app to a .NET tool I will need to add following 3 properties to the .csproj file:
 
-{{< highlight html >}}
+{{< highlight bash >}}
 <PackAsTool>true</PackAsTool>
 <ToolCommandName>admincli</ToolCommandName>
 <PackageOutputPath>./nupkg</PackageOutputPath>
@@ -46,7 +46,7 @@ First property defines that current tool will be packaged as a .NET tool. Second
 
 Now my admin tool is ready to be uploaded to a NuGet feed so that others can install and start using it - since I\'m using Azure Pipelines to continuously build it, I will be adding some new build tasks to pack and push the newly created Admin CLI tool to the private NuGet feed.
 
-{{< highlight yaml >}}
+{{< highlight bash >}}
 - task: DotNetCoreCLI@2
   displayName: 'dotnet pack Admin.CLI'
   inputs:
@@ -103,7 +103,7 @@ Tool 'Admin.CLI' (version '1.0.0') was successfully installed.{{< /highlight >}}
 And that\'s it, the tool starts as expected and you\'re ready to use it!
 
 If you\'re dealing with a tool that can be invoked as part of the build pipeline, you can easily install and start it with help of a build task like this:
-{{< highlight yaml >}}
+{{< highlight bash >}}
 - script: |
     dotnet tool install -g Admin.CLI
     admincli --generate-install-scripts 

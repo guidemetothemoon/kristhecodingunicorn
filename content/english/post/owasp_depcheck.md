@@ -61,7 +61,7 @@ Security scanning may take time, especially when you have quite big application 
 
 Here\'s an example of how such security job can look like:
 
-{{< highlight yaml >}}
+{{< highlight bash >}}
 - job: myrepo_security_job
   steps:
   - task: DotNetCoreCLI@2
@@ -128,7 +128,7 @@ If you need to suppress the vulnerability, you will need to create a suppression
 
 Here is an example of a suppression definition for a vulnerability related to MS Office 2013 that can be fixed by installing a security patch provided by Microsoft:
 
-{{< highlight xml >}}
+{{< highlight bash >}}
     <!--Vulnerability is related to Office 2013 and a security fix must be deployed for customers 
         using Office 2013: https://docs.microsoft.com/en-us/security-updates/securitybulletins/2015/ms15-059#affected-software-->
     <suppress>

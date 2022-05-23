@@ -57,8 +57,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
-      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
       crossorigin="anonymous"
       media="screen"
     />
@@ -207,7 +207,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/dotnet_tools\/",
-        "wordCount" : "1425",
+        "wordCount" : "1467",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -512,32 +512,32 @@ if (!doNotTrack) {
 <p><em><strong>It's important to mention that until .NET 5 it was also possible to distribute WinForms and WPF applications as .NET tools but from .NET 5 it is not supported anymore. It might be supported in .NET 6 but there is no guarantee - you can follow this</strong></em>  <a href="https://github.com/dotnet/sdk/issues/16361">GitHub issue</a> for more updates on the topic.</p>
 <p>Let's look at the whole flow from creating a .NET tool to installing/uninstalling it. I have created a console app that will make it easier to perform some administrative tasks for my application like turning on/off feature toggles, adding or modifying settings, etc. Target framework for my app is .NET 5.0.</p>
 <p>In order to convert my app to a .NET tool I will need to add following 3 properties to the .csproj file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">PackAsTool</span><span class="p">&gt;</span>true<span class="p">&lt;/</span><span class="nt">PackAsTool</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">ToolCommandName</span><span class="p">&gt;</span>admincli<span class="p">&lt;/</span><span class="nt">ToolCommandName</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">PackageOutputPath</span><span class="p">&gt;</span>./nupkg<span class="p">&lt;/</span><span class="nt">PackageOutputPath</span><span class="p">&gt;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">&lt;PackAsTool&gt;true&lt;/PackAsTool&gt;
+&lt;ToolCommandName&gt;admincli&lt;/ToolCommandName&gt;
+&lt;PackageOutputPath&gt;./nupkg&lt;/PackageOutputPath&gt;</code></pre></div>
 <p>And my console app is now a .NET Tool! Well, that was not that hard, was it? :)</p>
 <p>First property defines that current tool will be packaged as a .NET tool. Second property is optional and defines the command you will need to use in order to start the tool after it has been installed. And lastly, third property, which is also optional, defines where the NuGet package will be generated. .NET CLI will be using the NuGet package in order to install the tool.</p>
 <p>Now my admin tool is ready to be uploaded to a NuGet feed so that others can install and start using it - since I'm using Azure Pipelines to continuously build it, I will be adding some new build tasks to pack and push the newly created Admin CLI tool to the private NuGet feed.</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;dotnet pack Admin.CLI&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">pack</span><span class="w">
-</span><span class="w">    </span><span class="nt">packagesToPack</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/Admin.CLI.csproj&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">packDirectory</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">versioningScheme</span><span class="p">:</span><span class="w"> </span><span class="l">byEnvVar</span><span class="w"> </span><span class="c"># for centralized versioning of the tool with semantic versioning</span><span class="w">
-</span><span class="w">    </span><span class="nt">versionEnvVar</span><span class="p">:</span><span class="w"> </span><span class="l">GitVersion.NuGetVersion</span><span class="w">
-</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(BuildConfiguration)&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NuGetCommand@2</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NuGet push Admin.CLI&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;push&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">packagesToPush</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages/*.nupkg&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">nuGetFeedType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;internal&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">publishVstsFeed</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&lt;My-Private-NuGet-Feed-ID&gt;&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">allowPackageConflicts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(),ne(variables[&#39;Build.Reason&#39;], &#39;PullRequest&#39;),and(eq(variables[&#39;Build.SourceBranch&#39;], &#39;refs/heads/master&#39;)))</span><span class="w">
-</span><span class="w">  </span><span class="nt">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">- task: DotNetCoreCLI@2
+  displayName: <span class="s1">&#39;dotnet pack Admin.CLI&#39;</span>
+  inputs:
+    command: pack
+    packagesToPack: <span class="s1">&#39;**/Admin.CLI.csproj&#39;</span>
+    packDirectory: <span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages&#39;</span>
+    versioningScheme: byEnvVar <span class="c1"># for centralized versioning of the tool with semantic versioning</span>
+    versionEnvVar: GitVersion.NuGetVersion
+    arguments: <span class="s1">&#39;--configuration $(BuildConfiguration)&#39;</span>
+
+- task: NuGetCommand@2
+  displayName: <span class="s1">&#39;NuGet push Admin.CLI&#39;</span>
+  inputs:
+    command: <span class="s1">&#39;push&#39;</span>
+    packagesToPush: <span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages/*.nupkg&#39;</span>
+    nuGetFeedType: <span class="s1">&#39;internal&#39;</span>
+    publishVstsFeed: <span class="s1">&#39;&lt;My-Private-NuGet-Feed-ID&gt;&#39;</span>
+    allowPackageConflicts: <span class="nb">false</span>
+  condition: and<span class="o">(</span>succeeded<span class="o">()</span>,ne<span class="o">(</span>variables<span class="o">[</span><span class="s1">&#39;Build.Reason&#39;</span><span class="o">]</span>, <span class="s1">&#39;PullRequest&#39;</span><span class="o">)</span>,and<span class="o">(</span>eq<span class="o">(</span>variables<span class="o">[</span><span class="s1">&#39;Build.SourceBranch&#39;</span><span class="o">]</span>, <span class="s1">&#39;refs/heads/master&#39;</span><span class="o">)))</span>
+  continueOnError: false</code></pre></div>
 <p>And the tool is now ready for others to use!</p>
 <h2 id="how-to-install-use-and-uninstall-a-net-tool">How to install, use and uninstall a .NET Tool?</h2>
 <p>A .NET tool can be installed as a global or a local tool. When a .NET tool is installed as a global tool, it's binaries will be installed to a default directory of your OS (for example, <strong>%USERPROFILE%\.dotnet\tools</strong> in Windows) and the path to it will be made available as a part of the <strong>PATH</strong> environment variable. You can also provide a custom directory to install the tool to by providing the <strong>&ndash;tool-path</strong> option to <strong>dotnet tool install</strong> command, but in that case you will need to:</p>
@@ -559,12 +559,12 @@ dotnet tool install --global --add-source ./nupkg Admin.CLI</code></pre></div>
 Tool &#39;Admin.CLI&#39; (version &#39;1.0.0&#39;) was successfully installed.</code></pre></div>
 <p>And that's it, the tool starts as expected and you're ready to use it!</p>
 <p>If you're dealing with a tool that can be invoked as part of the build pipeline, you can easily install and start it with help of a build task like this:
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span><span class="sd">    dotnet tool install -g Admin.CLI
-</span><span class="sd">    admincli --generate-install-scripts 
-</span><span class="sd">    exit 0</span><span class="w">    
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install Admin CLI and generate installation scripts&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">continueOnError</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></div></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">- script: <span class="p">|</span>
+    dotnet tool install -g Admin.CLI
+    admincli --generate-install-scripts 
+    <span class="nb">exit</span> <span class="m">0</span>
+  displayName: <span class="s1">&#39;Install Admin CLI and generate installation scripts&#39;</span>
+  continueOnError: false</code></pre></div></p>
 <p>It's a good practice to regularly update the tools you're using to the latest version. You can easily update .NET tools by executing following command:</p>
 <div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet tool update -g Admin.CLI</code></pre></div>
 <p>If you want to uninstall the tool, you can do it by executing following command:</p>

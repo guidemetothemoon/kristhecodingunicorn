@@ -57,8 +57,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.d05334109c8eb1900492b0c2bd920b2e852c106609256ef7af7f61b59a76e817.css"
-      integrity="sha256-0FM0EJyOsZAEkrDCvZILLoUsEGYJJW73r39htZp26Bc="
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
       crossorigin="anonymous"
       media="screen"
     />
@@ -207,7 +207,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_object_helm\/",
-        "wordCount" : "1689",
+        "wordCount" : "1713",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -499,7 +499,7 @@ if (!doNotTrack) {
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">8-minute read</span>
+            <span class="post__meta-text">9-minute read</span>
           </li>
         </ul>
 
@@ -549,22 +549,22 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 <li><strong>app.kubernetes.io/managed-by: Helm</strong> -&gt; this label lets Helm know that you would like to include current Kubernetes Object into Helm release you're patching</li>
 </ul>
 <p>I'll continue illustrating the concept with PDB example. So, knowing about the annotations and labels I need to add to the PDB definition, I've created following definition file - here I'm using placeholders because I would like to show you how patching can be automated for multiple deployments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># pdb.yaml</span><span class="w">
-</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">policy/v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodDisruptionBudget</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]-pdb</span><span class="w">
-</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
-</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]</span><span class="w">
-</span><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w">
-</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="l">%</span><span class="w"> </span><span class="c"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span><span class="w">
-</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="l">deployment_labels]</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># pdb.yaml</span>
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: <span class="o">[</span>deployment_name<span class="o">]</span>-pdb
+  namespace: <span class="o">[</span>deployment_namespace<span class="o">]</span>
+  annotations:
+    meta.helm.sh/release-name: <span class="o">[</span>deployment_name<span class="o">]</span>
+    meta.helm.sh/release-namespace: <span class="o">[</span>deployment_namespace<span class="o">]</span>
+  labels:
+    app.kubernetes.io/managed-by: Helm
+spec:
+  minAvailable: 50% <span class="c1"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span>
+  selector:
+    matchLabels:
+<span class="o">[</span>deployment_labels<span class="o">]</span></code></pre></div>
 <p>And we're all set! Now our PDB is ready to be patched to the existing application deployment running in production as well as managed by Helm going forward! But what if we have tens, hundreds or even thousands of application deployments that we need to patch this to? Do we need to create this Object manually for every single deployment?? Not to worry, we can automate it!</p>
 <p>I've created following script that will get all the deployments I would like to patch based on the filter I provide and replace the placeholders in the pdb.yaml file we've created above with values related to every individual deployment we're patching. Then it will create a new version of the file (which is also useful in case we want to check the content before creating the new resource) for every deployment and finally apply it in order to create the resource we want - in this case, a PodDisruptionBudget.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Add-PDB.ps1</span>
@@ -603,12 +603,12 @@ foreach<span class="o">(</span><span class="nv">$deploy</span> in <span class="n
 <p>If you would like to see PDB in action, you can simulate a disruption by draining one of the nodes that your application's Pod is running on with following kubectl command:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">kubectl drain --delete-emptydir-data --force --ignore-daemonsets &lt;your_node_name&gt;</code></pre></div>
 <p>After executing the command above you should be able to see messages in the console output saying that a Pod can&rsquo;t be deleted due to potential violation of PodDisruptionBudget Policy. Once a new Pod is scheduled and ready on another node, this alert will disappear and the Pod on the to-be-drained-node will be evicted. You can read more about node draining procedure here: <a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">Safely drain a Node</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> Set-Alias -Name k -Value kubectl
-PS C:<span class="se">\&gt;</span> k drain --delete-emptydir-data --force --ignore-daemonsets aks-nodepool1-14745837-vmss000001
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">PS C:\&gt; Set-Alias -Name k -Value kubectl
+PS C:\&gt; k drain --delete-emptydir-data --force --ignore-daemonsets aks-nodepool1-14745837-vmss000001
 node/aks-nodepool1-14745837-vmss000001 cordoned
 evicting pod mytestapp/app-1
 evicting pod mytestapp/app-2
-error when evicting pods/<span class="s2">&#34;app-2&#34;</span> -n <span class="s2">&#34;mytestapp&#34;</span> <span class="o">(</span>will retry after 5s<span class="o">)</span>: Cannot evict pod as it would violate the pod<span class="err">&#39;</span>s disruption budget.
+error when evicting pods/&#34;app-2&#34; -n &#34;mytestapp&#34; (will retry after 5s): Cannot evict pod as it would violate the pod&#39;s disruption budget.
 pod/app-2 evicted
 node/aks-nodepool1-14745837-vmss000001 evicted</code></pre></div>
 <h2 id="additional-resources">Additional resources</h2>
