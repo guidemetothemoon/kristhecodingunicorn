@@ -535,7 +535,7 @@ if (!doNotTrack) {
 <p>Let's imagine that you're a developer who has created a new microservice. All of your source code is now in an Azure DevOps repository, including build pipeline defintion (though you haven't created an actual build pipeline yet). Now you need to deploy  your application to AKS. So, how can you do that directly from Azure DevOps?</p>
 <p>Let me walk you through it😼</p>
 <blockquote>
-<p><strong>A quick FYI:</strong> you may see that throughout this blog post I'm using <code>k</code> as part of commands that interact with a Kubernetes cluster - this is basically an alias for <code>kubectl</code> which is the full name of the Kubernetes command-line tool😺</p>
+<p><em><strong>A quick FYI: you may see that throughout this blog post I'm using <code>k</code> as part of commands that interact with a Kubernetes cluster - this is basically an alias for <code>kubectl</code> which is the full name of the Kubernetes command-line tool</strong></em>😺</p>
 </blockquote>
 <h3 id="create-azure-devops-environment-and-kubernetes-resource">Create Azure DevOps Environment and Kubernetes resource</h3>
 <p>First things first: let's create an Azure DevOps Environment which will represent a location we want to deploy the application to, i.e. an AKS cluster. We can do that by going to <strong>&quot;Pipelines -&gt; Environments&quot;</strong> in Azure DevOps:</p>
@@ -585,7 +585,7 @@ if (!doNotTrack) {
 <h3 id="create-build-pipeline-with-deployment-stage">Create build pipeline with deployment stage</h3>
 <p>Last step before we can deploy the application is to create the actual build pipeline that will perform the deployment itself. As I mentioned earlier, all of the source code including build pipeline YAML definition is already stored in a repository in Azure DevOps. So, let's connect it to an actual pipeline. In Azure DevOps, go to <strong>&quot;Pipelines&quot;</strong> and click <strong>&quot;New pipeine&quot;</strong> in the right-hand corner. From there choose the repository type - in our case it is <strong>&quot;Azure Repos Git&quot;</strong>. Finally, choose the repository where the source code and build definition are stored. The build definition will then be populated automatically.</p>
 <blockquote>
-<p><strong>Please note:</strong> if you have a repository with multiple build definition YAML files, you will need to provide exact path to the YAML file that the build should use by choosing <strong>&quot;Existing Azure Pipelines YAML file&quot;</strong> in the <strong>&quot;Configure your pipeline&quot;</strong> section.</p>
+<p><em><strong>Please note: if you have a repository with multiple build definition YAML files, you will need to provide exact path to the YAML file that the build should use by choosing &quot;Existing Azure Pipelines YAML file&quot; in the &quot;Configure your pipeline&quot; section.</strong></em></p>
 </blockquote>
 <p>Our build pipeline is ready to deploy the new microservice to AKS! Before we do that, let's take a look at how to connect your build with a Kubernetes resource in an Azure DevOps Environment.</p>
 <p>Here's the build definition for our new microservice:</p>
@@ -687,7 +687,7 @@ stages:
 <h2 id="automate-migration-of-kubernetes-resources-between-azure-devops-environments">Automate migration of Kubernetes resources between Azure DevOps Environments</h2>
 <p>In some cases you may need to migrate resources between Azure DevOps Environments and it will typically require a lot of clicks and typing in the UI. I've decided to automate that and created a PowerShell script that can perform the migration automatically for you. This script supports migration of Kubernetes resources that are using Azure Kubernetes Service provider. You can find the script in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/ado-environments">guidemetothemoon/Move-AKS-Environments</a></p>
 <blockquote>
-<p>Prior to running the script, please ensure that you have created an Azure DevOps Personal Access Token (PAT) with read/write permissions that will allow the script to create Azure DevOps Environments, Kubernetes resources and Kubernetes service connections.</p>
+<p><em><strong>Prior to running the script, please ensure that you have created an Azure DevOps Personal Access Token (PAT) with read/write permissions that will allow the script to create Azure DevOps Environments, Kubernetes resources and Kubernetes service connections.</strong></em></p>
 </blockquote>
 <p>The script covers two cases:</p>
 <ol>
