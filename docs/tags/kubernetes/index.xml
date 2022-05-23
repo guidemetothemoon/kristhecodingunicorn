@@ -6,7 +6,18 @@
     <description>Recent content in kubernetes on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 2</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</link>
+      <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</guid>
+      
+        <description>Deploy application to AKS with ADO Environments  Create Azure DevOps Environment and Kubernetes resource Update Access Control and Deployment Policies Create build pipeline with deployment stage Deploy and look around Workloads   Automate migration of Kubernetes resources between Azure DevOps Environments Additional resources   Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments!</description>
+      
+    </item>
+    
     <item>
       <title>Kris&#39;s Quick Cup of (A)K8S #2</title>
       <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</link>
