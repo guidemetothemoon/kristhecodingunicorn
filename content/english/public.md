@@ -10,6 +10,12 @@ tags = [
 +++
 
 ---
+## 01.June 2022 - Tech evening at Novanet - "Migration journey from VM-hosted SaaS solution to containers and Azure Kubernetes Service - experiences and considerations"
+In this session I talked about migration from VM-hosted SaaS solution to containers and Azure Kubernetes Service, how we did it in one of my projects and what considerations are important to take when planning such a migration journey. Although it’s an exciting journey, starting to use Kubernetes isn’t just a walk in the park, even if it’s a PaaS resource - the learning curve is high and demanding so it’s good to know what you should pay extra attention to and plan for.🚀
+
+[Novanet Tech Evening - From VM to Azure Kubernetes Service and Azure Container Apps](https://www.linkedin.com/posts/novanet-as_azure-kubernetes-bicep-activity-6939949494742466561-otUj?utm_source=linkedin_share&utm_medium=member_desktop_web)
+
+---
 
 ## 30.September 2021 - Semi-live video session - "Cloud Stories from Norway, Episode 9: Frequent releases with Azure Kubernetes Service (AKS)"
 “Cloud stories from Norway” is a 40-minutes long videoshow where Microsoft Norway together with invited guests features Azure cloud best practices, patterns, tips & tricks used in production in the products and services of well-known Norwegian companies. Check out this episode to learn about

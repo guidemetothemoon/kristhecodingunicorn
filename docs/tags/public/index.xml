@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/public/</guid>
       
-        <description>30.September 2021 - Semi-live video session - &amp;ldquo;Cloud Stories from Norway, Episode 9: Frequent releases with Azure Kubernetes Service (AKS)&amp;rdquo; “Cloud stories from Norway” is a 40-minutes long videoshow where Microsoft Norway together with invited guests features Azure cloud best practices, patterns, tips &amp;amp; tricks used in production in the products and services of well-known Norwegian companies.</description>
+        <description>01.June 2022 - Tech evening at Novanet - &amp;ldquo;Migration journey from VM-hosted SaaS solution to containers and Azure Kubernetes Service - experiences and considerations&amp;rdquo; In this session I talked about migration from VM-hosted SaaS solution to containers and Azure Kubernetes Service, how we did it in one of my projects and what considerations are important to take when planning such a migration journey.</description>
       
     </item>
     

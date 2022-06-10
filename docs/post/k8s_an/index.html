@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  class="html"
+><head>
+  <title>
+    
+      Kris - The Coding Unicorn
+        |
+        Accelerated Networking for AKS nodes
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="
+      In this blog post we&#39;ll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux.
+
+
+    "
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.6ca8a4683c6fa4366612b86c7a7e389042acc394db90117db6cfeba266c67d9e.css"
+      integrity="sha256-bKikaDxvpDZmErhsen44kEKsw5TbkBF9ts/rombGfZ4="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_an/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Accelerated Networking for AKS nodes"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux."/>
+
+
+
+  
+  <meta property="og:title" content="Accelerated Networking for AKS nodes" />
+<meta property="og:description" content="In this blog post we&#39;ll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_an/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-10T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-06-10T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Accelerated Networking for AKS nodes",
+        "headline": "Accelerated Networking for AKS nodes",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we\u0027ll look into what accelerated networking is and how you can enable\/disable and test it in AKS nodes, both Windows and Linux.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_an\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-06-10T00:00:00.00Z",
+        "datePublished": "2022-06-10T00:00:00.00Z",
+        "dateModified": "2022-06-10T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_an\/",
+        "wordCount" : "2761",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--dark"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.jpg"
+        alt="profile picture"
+      />
+      <h1 class="sidebar__introduction-title">
+        <a href="/">Kris - The Coding Unicorn</a>
+      </h1>
+      <div class="sidebar__introduction-description">
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Content Hero | Open-Sourcerer | Volunteer at NNUG Oslo, OWASP | <br /> Cat mom and Potterhead</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://twitter.com/kristhecodingu1" rel="me" aria-label="Twitter" title="Twitter">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://sessionize.com/kristina-devochko" rel="me" aria-label="Sessionize" title="Sessionize">
+            <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="/contact/" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml" rel="me" aria-label="rss" title="rss">
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.azureheroes.community/user/15391" rel="me" aria-label="Azure Heroes" title="Azure Heroes">
+            <i class="fas fa-certificate fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Blog</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/techtips/"
+            
+            title=""
+            >Tech Tips</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/public/"
+            
+            title=""
+            >Public Talks and Publications</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/about/"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/contact/"
+            
+            title=""
+            >Contact</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Accelerated Networking for AKS Nodes</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                10/6/2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">13-minute read</span>
+          </li>
+        </ul>
+
+      <p><img src="../../images/k8s_an/aks_an_banner.png" alt="Article banner for Accelerated Networking for AKS nodes"></p>
+<div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-accelerated-networking-and-why-use-it-in-aks">What is Accelerated Networking and why use it in AKS?</a></li>
+    <li><a href="#network-performance-test-with-and-without-accelerated-networking-in-aks">Network performance test with and without Accelerated Networking in AKS</a>
+      <ul>
+        <li><a href="#linux-nodes">Linux nodes</a></li>
+        <li><a href="#windows-nodes">Windows nodes</a></li>
+      </ul>
+    </li>
+    <li><a href="#enable-accelerated-networking-for-aks-nodes">Enable Accelerated Networking for AKS nodes</a></li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>In this blog post I would like to talk about Accelerated Networking, how it can improve internal communication inside an AKS cluster and how you can enable that for Linux and Windows AKS nodes.</p>
+<p>But first, let's get the basics straight.</p>
+<h2 id="what-is-accelerated-networking-and-why-use-it-in-aks">What is Accelerated Networking and why use it in AKS?</h2>
+<p>Accelerated Networking (AN) is something that has been around in Azure for a few years now - I think I have read about it for the first time around 2018. Until recently this functionality has been mainly mentioned in terms of classic Azure VMs or Virtual Machine Scale Sets (VMSS). It's not that long ago that the possibility for Accelerated Networking got introduced in Azure Kubernetes Service though, especially if we're talking about Windows nodes. When I tested this back in February 2022, support for AN in Windows nodes in AKS was still in private preview but fortunately, a few months later this has been included as part of standard AKS offering. Now, when you create an AKS cluster or a new node pool, be it Linux or Windows, Accelerated Networking will be enabled automatically for you. And this is a reason for celebration, my friend - you'll understand why when I show you the numbers!😼</p>
+<p>But what is this Accelerated Networking that I'm talking about? Basically, it provides a way to significantly improve networking performance between VMs that have it enabled. Network traffic bypasses the Hyper-V Virtual Switch and lands directly at the VM's Network Interface Card (NIC), from where it's forwarded further to the VM itself. This reduces the overhead and the amount of control points that the network packets must travel through - this gives an opportunity to process many more packets during the same time span. In addition, since network policies will now be offloaded to hardware, it reduces the amount of software interruptions and the pressure on the CPU utilization of the host that the VM is running on. All of it can be observed when we lokk at the network performance tests later in this blog post.</p>
+<p>Accelerated Networking is supported for most of the Azure VM families and types but there may be a few exceptions - I would recommend to always check if the VM SKU that your AKS nodes are targeting officially supports AN. You can check it here: <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/sizes">Sizes for virtual machines in Azure</a></p>
+<p>For example, if I'm using <code>Standard_DS13_v2</code> I can go to &quot;Memory optimized&quot; section in the link above and verify that Accelerated Networking is supported for this VM type:</p>
+<p><img src="../../images/k8s_an/an_supported_vms.png" alt="Example of VM type that supports Accelerated Networking"></p>
+<p>You can also add support for AN in a custom image as long as it's using the required drivers - you can read more on how to do that here: <a href="https://docs.microsoft.com/en-us/azure/virtual-network/accelerated-networking-overview#custom-images">Custom images</a></p>
+<p>I could have created my own diagram that illustrates Accelerated Networking but why do that when the one provided by Microsoft visualizes the concept in a straightforward and understandable way?😸</p>
+<p>So, here it goes:</p>
+<p><img src="../../images/k8s_an/an_diagram.png" alt="Illustration of Accelerated Networking"></p>
+<p>More information about benefits of Accelerated Networking and what it is can be found in official Microsoft documentation: <a href="https://docs.microsoft.com/en-us/azure/virtual-network/accelerated-networking-overview">What is Accelerated Networking?</a></p>
+<blockquote>
+<p><em><strong>Important note:</strong></em> <strong>Accelerated Networking will provide most significant impact on network performance inside a virtual network but it will have minimal effect on the cross-network communication, external communication or when communicating with on-premises resources. In AKS this feature will provide significant improvement to communication between nodes inside the cluster since those are typically deployed in a single virtual network.</strong></p>
+</blockquote>
+<p>Now, let's see the actual numbers and if network latency actually changes significantly when Accelerated Networking is enabled.</p>
+<h2 id="network-performance-test-with-and-without-accelerated-networking-in-aks">Network performance test with and without Accelerated Networking in AKS</h2>
+<p>In order to see the actual effect of enabled Accelerated Networking in AKS nodes, I've executed a set of network performance tests with and without AN, both on Linux and Windows nodes, - and the numbers are in! <strong>Spoiler alert:</strong> the difference is very much visible!😼</p>
+<p>For measuring network latency I've used the tools recommended by Microsoft: <code>SockPerf</code> for Linux nodes and <code>latte.exe</code> for Windows nodes. You can find more information about the tools here: <a href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-test-latency">Test VM network latency</a></p>
+<h3 id="linux-nodes">Linux nodes</h3>
+<p><em><strong>Preparations</strong></em></p>
+<p>First, choose 2 Linux nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with SockPerf. Also, make a note of IP for the node that will act as server. Following commands can help you retrieve that information:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Get all nodes in AKS cluster and note NAME of 2 Linux nodes in addition to INTERNAL-IP for the node that will act as server</span>
+kubectl get nodes -o wide
+</code></pre></div><p>Now we need to log into both of the nodes simultaneously - we can do that by starting a prviliged debug container on the node which will give us an opportunity to create an interactive shell session with the Linux node. This guide provides more information on how to do that: <a href="https://docs.microsoft.com/en-us/azure/aks/node-access#create-an-interactive-shell-connection-to-a-linux-node">Create an interactive shell connection to a Linux node</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start interactive shell inside Linux node in AKS</span>
+kubectl debug node/<span class="o">[</span>NODE_NAME<span class="o">]</span> -it --image<span class="o">=</span>mcr.microsoft.com/dotnet/runtime-deps:6.0
+</code></pre></div><p>Finally, install and configure SockPerf on both nodes - I recommend to check a few links in Additional resources section for more information on how to use SockPerf:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. Install SockPerf - on SERVER and CLIENT node</span>
+apt-get update
+apt-get install sockperf
+
+<span class="c1"># 2. Start SockPerf on SERVER node - we&#39;ll use a default port which is 11111</span>
+sockperf sr -i <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>
+</code></pre></div><p>SockPerf supports multiple types of tests from the client. Today we'll execute following tests:</p>
+<ul>
+<li>ping-pong - run sockperf client for latency test in ping pong mode;</li>
+<li>throughput - run sockperf client for one way throughput test;</li>
+<li>under-load - run sockperf client for latency under load test;</li>
+</ul>
+<p><em><strong>Results of Ping-Pong test</strong></em></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Ping-Pong mode - run for 60 seconds with 64 byte messages</span>
+sockperf pp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">64</span> -t <span class="m">60</span> --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_pp_time_noan.png" alt="SockPerf Ping-Pong test without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_pp_time_an.png" alt="SockPerf Ping-Pong test with AN"></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Ping-Pong mode - run for 60 seconds with larger messages (10 000 bytes)</span>
+sockperf pp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">10000</span> -t <span class="m">60</span> --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_pp_msgsize_noan.png" alt="SockPerf Ping-Pong test with larger messages without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_pp_msgsize_an.png" alt="SockPerf Ping-Pong test with larger messages with AN"></p>
+<p><em><strong>Results of Throughput test</strong></em></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Throughput mode - run for 60 seconds with 64 byte messages and maximum number of messages-per-second</span>
+sockperf tp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">64</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_tp_time_noan.png" alt="SockPerf Throughput test without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_tp_time_an.png" alt="SockPerf Throughput test with AN"></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Throughput mode - run for 60 seconds with larger messages (1472 bytes) and maximum number of messages-per-second</span>
+sockperf tp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">1472</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_tp_msgsize_noan.png" alt="SockPerf Throughput test with larger messages without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_tp_msgsize_an.png" alt="SockPerf Throughput test with larger messages with AN"></p>
+<p><em><strong>Results of Under-Load test</strong></em></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Under-Load mode - run for 60 seconds with 1472 byte messages and maximum number of messages-per-second</span>
+sockperf ul -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">1472</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_ul_time_noan.png" alt="SockPerf Under-Load test without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_ul_time_an.png" alt="SockPerf Under-Load test with AN"></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Under-Load mode - run for 60 seconds with larger messages (10 000 bytes) and maximum number of messages-per-second</span>
+sockperf ul -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">10000</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_ul_msgsize_noan.png" alt="SockPerf Under-Load test with larger messages without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/sockperf_ul_msgsize_an.png" alt="SockPerf Under-Load test with larger messages with AN"></p>
+<p>In all of these tests we can clearly see that enabling Accelerated Networking results in a significant improvement: higher message throughput and much lower latency - in some cases this is more than a 50% reduction in latency which is pretty amazing!🙀</p>
+<p>Now, let's see if the trend is the same for Windows nodes.</p>
+<h3 id="windows-nodes">Windows nodes</h3>
+<p><em><strong>Preparations</strong></em></p>
+<p>Just as we did for Linux, first you need to choose 2 Windows nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with latte. Also, make a note of IP for the node that will act as server.</p>
+<p>Following commands can help you retrieve that information:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Get all nodes in AKS cluster and note NAME of 2 Windows nodes in addition to INTERNAL-IP for the node that will act as server</span>
+kubectl get nodes -o wide
+</code></pre></div><p>Now we need to log into both of the nodes simultaneously - for Windows nodes it's a bit harder than for Linux nodes since you need to set up a jumpserver. This is out of scope for this blog post but the guides below provide more information on how you can set up SSH or RDP connection to Windows nodes in AKS:</p>
+<p><a href="https://docs.microsoft.com/en-us/azure/aks/node-access#create-the-ssh-connection-to-a-windows-node">Create the SSH connection to a Windows node</a></p>
+<p><a href="https://docs.microsoft.com/en-us/azure/aks/rdp">Connect to Windows Server nodes using remote desktop protocol (RDP) connections</a></p>
+<p>Once you've logged into the Windows nodes, you need to install and configure latte on both nodes - I recommend to check a few links in Additional resources section for more information on how to use latte.exe:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (PowerShell) Install latte - on SERVER and CLIENT node</span>
+mkdir <span class="s2">&#34;C:\tools&#34;</span>
+Invoke-WebRequest -OutFile <span class="s2">&#34;C:\tools\latte.exe&#34;</span> -Uri <span class="s2">&#34;https://github.com/microsoft/latte/releases/download/v0/latte.exe&#34;</span>
+
+</code></pre></div><p>latte behaves a bit differently than SockPerf. You need to provide exactly the same command on server and on client with the only difference where you need to add <code>-c</code> parameter to a client command which will signal latte that this specific call is coming from a client machine. You need to ensure that you run command on server and on client node for every execution because latte exits after every completed execution.</p>
+<p><em><strong>Test with 64 message size and duration of 60 seconds</strong></em></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
+latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">64</span>
+
+<span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
+latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">64</span>
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/latte_time_noan.png" alt="Latte test without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/latte_time_an.png" alt="Latte test with AN"></p>
+<p><em><strong>Test with larger message size (10 000 bytes) and duration of 60 seconds</strong></em></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
+latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">10000</span>
+
+<span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
+latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">10000</span>
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/latte_msgsize_noan.png" alt="Latte test with larger messages without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/latte_msgsize_an.png" alt="Latte test with larger messages with AN"></p>
+<p><em><strong>Test with larger message size (10 000 bytes) and iterations</strong></em></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
+latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -i <span class="m">65100</span> -m <span class="m">10000</span>
+
+<span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
+latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -i <span class="m">65100</span> -m <span class="m">10000</span>
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
+<img src="../../images/k8s_an/latte_iterations_noan.png" alt="Latte test with larger messages and iterations without AN"></p>
+<p><strong>With Accelerated Networking</strong>
+<img src="../../images/k8s_an/latte_iterations_an.png" alt="Latte test with larger messages and iterations with AN"></p>
+<p>And in the case of Windows nodes the results are pretty impressive as well! Latency and CPU load are 70-80% lower when Accelerated Networking is enabled. When it comes to interruptions you can see that interruption per iteration is much lower when AN is enabled as well which correlates with the benefits mentioned in the section above. 🦾</p>
+<p><img src="../../images/k8s_an/happy_cat.gif" alt="GIF of a happy cat"></p>
+<p>I mean, that's quite cool, don't you think?😻 Especially when it's so easy now to get it out of the box in AKS - let's see how we can do that!</p>
+<h2 id="enable-accelerated-networking-for-aks-nodes">Enable Accelerated Networking for AKS nodes</h2>
+<p>Fortunately for all us, from now on (spring/summer 2022) if you create a new AKS cluster or a new Linux/Windows node pool, Accelerated Networking is enabled by default for you. You can verify that with:</p>
+<p><strong>Azure Portal:</strong> go to a resource group where AKS node pools are provisioned (normally it&rsquo;s different from the one where AKS resource itself is provisioned). If you're using a default resource group naming, it will have a format like this <code>MC_[AKS_RESOURCE_GROUP_NAME]_[AKS_CLUSTER_NAME]_[AKS_CLUSTER_LOCATION]</code>. Example: <code>MC_akstest-rg_akstest_northeurope</code>. In the chosen resource group locate node pools (VMSS resources) and navigate to those. In Networking section you can see a property called &quot;Accelerated networking&quot; and if it's enabled/disabled:</p>
+<p><img src="../../images/k8s_an/aks_vmss_an.png" alt="Location of Accelerated networking property in AKS node pool in Azure portal"></p>
+<p><strong>Azure CLI</strong>: you need to make a note of your AKS cluster name and resource group where it's deployed - once it's done, we can run below commands to check if Accelerated Networking is enabled for node pools in the chosen AKS cluster:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. Get the name of the resource group where AKS node pools are deployed</span>
+az aks show --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> --name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --query nodeResourceGroup
+
+<span class="c1"># 2. Get the names of the AKS cluster node pools that we need to check AN property for</span>
+az aks nodepool list  --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --query <span class="s2">&#34;[].{Name:name}&#34;</span>
+
+<span class="c1"># 3. For each node pool, check if Accelerated Networking is enabled on a VMSS level </span>
+<span class="c1">#    Please remember that node pool name consists of &#34;aks&#34; which is appended automatically by Azure and the node pool name itself, f.ex. &#34;akswinpol&#34;, &#34;akslinpol&#34;</span>
+<span class="c1">#    Resource group here is the one that was retrieved in step 1</span>
+az vmss show --name <span class="o">[</span>AKS_NODE_POOL_NAME<span class="o">]</span> --resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --query <span class="s2">&#34;virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking&#34;</span>
+
+</code></pre></div><p>In case you have older node pools which were deployed before Accelerated Networking was supported in AKS, you might want to consider to enable that to start receiving the benefits of improved network performance.</p>
+<p><img src="../../images/k8s_an/cat_servants.gif" alt="GIF of a cat with his servants"></p>
+<p>In order to do that you will need to create a new node pool and migrate all the workloads from the initial node pool. If you're using an IaC tool for provisioning your AKS clusters, you can also handle it in the deployment template but I've seen cases where such a change may cause a full re-creation of a cluster and it will require some downtime and you might not want that. So another approach can be to simply create a new node pool where AN will be enabled by default (as long as it's a supported VM SKU which the most of them are😺).</p>
+<p>Alternative approach is similar to what a node image upgrade does, just that you will do it for the whole node pool:</p>
+<p>1.Retrieve configuration details of the node pool that is currently active - we want to create a new node pool that is the same as the existing node pool with only difference, which is enabled Accelerated Networking.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. Retrieve configuration details of the node pool that is currently active</span>
+az aks nodepool show --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP<span class="o">]</span> --name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+</code></pre></div><p>2.There are quite a few properties you can see in the output - a few to make a note of are <code>count</code>, <code>currentOrchestratorVersion</code>, <code>enableAutoScaling</code>, <code>maxCount</code>, <code>minCount</code>, <code>maxPods</code>, <code>nodeTaints</code>, <code>vmSize</code>. Now we can create a new node pool based on the existing node pool's configuration - please note that the name of the node pool must be different from the initial node pool (and renaming of the node pool is unfortunately not supported in AKS).</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 2. Create a new node pool based on existing node pool&#39;s configuration</span>
+az aks nodepool add --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --name <span class="o">[</span>NEW_NODE_POOL_NAME<span class="o">]</span> --resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --kubernetes-version <span class="o">[</span>CURRENT_ORCHESTRATOR_VERSION<span class="o">]</span> --os-type <span class="o">[</span>NODE_POOL_OS<span class="o">]</span> --node-count <span class="o">[</span>NODE_COUNT<span class="o">]</span> --enable-cluster-autoscaler --min-count <span class="o">[</span>MIN_COUNT<span class="o">]</span> --max-count <span class="o">[</span>MAX_COUNT<span class="o">]</span> --max-pods <span class="o">[</span>MAX_PODS<span class="o">]</span> --node-vm-size <span class="o">[</span>VM_SIZE<span class="o">]</span> --node-taints <span class="o">[</span>NODE_TAINTS<span class="o">]</span>
+</code></pre></div><p>3.Move workloads to the new node pool and delete the old node pool - it's a good idea to verify that all of your workloads have PodDisruptionBudget configured to avoid application downtime😉</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Cordon existing node pool to forbid scheduling workloads to it (use kubectl edit node [NODE_NAME] to see selector value for agentpool)</span>
+kubectl cordon -l <span class="nv">agentpool</span><span class="o">=</span>winpol
+
+<span class="c1"># Drain cordoned node pool to move all workloads to a newly created node pool: </span>
+kubectl drain -l <span class="nv">agentpool</span><span class="o">=</span>winpol --force --delete-local-data --ignore-daemonsets --grace-period<span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># Once workload migration is successful, delete old node pool: </span>
+az aks nodepool delete --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> --name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+</code></pre></div><p>If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion.</p>
+<p>And we're finished! Now the migrated workloads can start benefiting from networking goodies offered by AN feature in AKS.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Some good resources on Accelerated Networking and tools used for network performance testing:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/cli/azure/aks/nodepool?view=azure-cli-latest#az-aks-nodepool-add">Add a node pool to AKS cluster</a></li>
+<li><a href="https://github.com/microsoft/latte/">latte - GitHub</a></li>
+<li><a href="https://docs.nvidia.com/networking/pages/viewpage.action?pageId=19800142">Sockperf – UDP/TCP Latency and Throughput Benchmarking Tool</a></li>
+<li><a href="https://manualzz.com/doc/o/c8eht/user-manual---mellanox-technologies-using-sockperf-with-vma">Using sockperf with VMA</a></li>
+<li><a href="https://manpages.debian.org/bullseye/sockperf/sockperf.1.en.html">SockPerf - Manpage</a></li>
+</ul>
+<p>That's it from me this time, thanks for checking in!</p>
+<p>If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/azure/">azure</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</body>
+</html>

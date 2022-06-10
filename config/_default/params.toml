@@ -2,7 +2,7 @@
 title = "Kris - The Coding Unicorn"
 author = "Kris - The Coding Unicorn"
 copyright = "2022 - Powered by Hugo"
-description = "Hey! I'm Kris and I like to code. Welcome to my tech corner!"
+description = "Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 \n Content Hero | Open-Sourcerer | Volunteer at NNUG Oslo, OWASP | \n Cat mom and Potterhead"
 profilePicture = "images/profile.jpg"
 keywords = ""
 favicon = "favicons/"
@@ -84,3 +84,8 @@ url = "/contact/"
 icon = "fas fa-rss"
 title = "rss"
 url = "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+
+[[socialIcons]]
+icon = "fas fa-certificate"
+title = "Azure Heroes"
+url = "https://www.azureheroes.community/user/15391"

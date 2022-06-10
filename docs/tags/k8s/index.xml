@@ -6,7 +6,18 @@
     <description>Recent content in k8s on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 23 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Accelerated Networking for AKS nodes</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_an/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_an/</guid>
+      
+        <description>What is Accelerated Networking and why use it in AKS? Network performance test with and without Accelerated Networking in AKS  Linux nodes Windows nodes   Enable Accelerated Networking for AKS nodes Additional resources   In this blog post I would like to talk about Accelerated Networking, how it can improve internal communication inside an AKS cluster and how you can enable that for Linux and Windows AKS nodes.</description>
+      
+    </item>
+    
     <item>
       <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 2</title>
       <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</link>
