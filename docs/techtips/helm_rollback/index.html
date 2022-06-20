@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  class="html"
+><head>
+  <title>
+    
+      Kris - The Coding Unicorn
+        |
+        Handling failed Helm upgrade due to another operation in progress
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="
+      How to handle failed helm upgrade with helm rollback
+
+
+    "
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.6ca8a4683c6fa4366612b86c7a7e389042acc394db90117db6cfeba266c67d9e.css"
+      integrity="sha256-bKikaDxvpDZmErhsen44kEKsw5TbkBF9ts/rombGfZ4="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/helm_rollback/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Handling failed Helm upgrade due to another operation in progress"/>
+<meta name="twitter:description" content="How to handle failed helm upgrade with helm rollback"/>
+
+
+
+  
+  <meta property="og:title" content="Handling failed Helm upgrade due to another operation in progress" />
+<meta property="og:description" content="How to handle failed helm upgrade with helm rollback" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/helm_rollback/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-06-20T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-06-20T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "Handling failed Helm upgrade due to another operation in progress",
+        "headline": "Handling failed Helm upgrade due to another operation in progress",
+        "alternativeHeadline": "",
+        "description": "
+      How to handle failed helm upgrade with helm rollback
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/helm_rollback\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-06-20T00:00:00.00Z",
+        "datePublished": "2022-06-20T00:00:00.00Z",
+        "dateModified": "2022-06-20T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/helm_rollback\/",
+        "wordCount" : "723",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "helm"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--dark"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.jpg"
+        alt="profile picture"
+      />
+      <h1 class="sidebar__introduction-title">
+        <a href="/">Kris - The Coding Unicorn</a>
+      </h1>
+      <div class="sidebar__introduction-description">
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Content Hero | Open-Sourcerer | Volunteer at NNUG Oslo, OWASP | <br /> Cat mom and Potterhead</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://twitter.com/kristhecodingu1" rel="me" aria-label="Twitter" title="Twitter">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://sessionize.com/kristina-devochko" rel="me" aria-label="Sessionize" title="Sessionize">
+            <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="/contact/" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml" rel="me" aria-label="rss" title="rss">
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.azureheroes.community/user/15391" rel="me" aria-label="Azure Heroes" title="Azure Heroes">
+            <i class="fas fa-certificate fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Blog</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/techtips/"
+            
+            title=""
+            >Tech Tips</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/public/"
+            
+            title=""
+            >Public Talks and Publications</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/about/"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/contact/"
+            
+            title=""
+            >Contact</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Handling Failed Helm Upgrade Due to Another Operation in Progress</h1>
+      <p><img src="../../images/tech_tips/techtip_6.png" alt="Article banner for handling failed Helm upgrade tech tip"></p>
+<div class="toc">
+  <nav id="TableOfContents"></nav>
+</div>
+<p>Sometimes things may go wrong, also during ugprade of the application that is deployed to a Kubernetes cluster with Helm. When something goes wrong, you fix it and re-try a deployment with the new fix included. But then deployment operation fails with following error message:</p>
+<p><code>Error: UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress</code></p>
+<p><strong>So, what does it mean and how can you fix it?</strong></p>
+<p>This happens typically when Helm attempts to roll out a new revision of an application and then something goes wrong in the process, like a bug in an application itself or an issue inside the Kubernetes cluster which causes the new deployment to never get completed. This faulty deployment becomes dangling, therefore preventing all the future deployments to be rolled out. You can easily check the latest deployment status by retrieving the history of application deployments with <code>helm history</code>. It will look something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> helm <span class="nb">history</span> test-app -n test-app
+REVISION        UPDATED                         STATUS          CHART                                                  APP VERSION                      DESCRIPTION
+<span class="m">7</span>               Fri Apr <span class="m">22</span> 06:44:47 <span class="m">2022</span>        superseded      test-app-0.1.232-move-ps.17                            0.1.232-move-ps.17               Upgrade <span class="nb">complete</span>
+<span class="m">8</span>               Fri Apr <span class="m">22</span> 07:26:30 <span class="m">2022</span>        superseded      test-app-0.1.232-move-ps.18                            0.1.232-move-ps.18               Upgrade <span class="nb">complete</span>
+<span class="m">9</span>               Fri Apr <span class="m">22</span> 08:49:51 <span class="m">2022</span>        superseded      test-app-0.1.232-PullRequest45039.23                   0.1.232-PullRequest45039.23      Upgrade <span class="nb">complete</span>
+<span class="m">10</span>              Mon Apr <span class="m">25</span> 10:46:23 <span class="m">2022</span>        superseded      test-app-0.1.232-add-ma.3                              0.1.232-add-ma.3                 Upgrade <span class="nb">complete</span>
+<span class="m">11</span>              Mon Apr <span class="m">25</span> 11:15:52 <span class="m">2022</span>        superseded      test-app-0.1.232-add-ma.5                              0.1.232-add-ma.5                 Upgrade <span class="nb">complete</span>
+<span class="m">12</span>              Mon Apr <span class="m">25</span> 12:06:04 <span class="m">2022</span>        superseded      test-app-0.1.232-PullRequest45039.24                   0.1.232-PullRequest45039.24      Upgrade <span class="nb">complete</span>
+<span class="m">13</span>              Mon Apr <span class="m">25</span> 13:39:56 <span class="m">2022</span>        superseded      test-app-0.1.232                                       0.1.232                          Upgrade <span class="nb">complete</span>
+<span class="m">14</span>              Mon Apr <span class="m">25</span> 14:29:40 <span class="m">2022</span>        superseded      test-app-0.1.233-PullRequest45146.2                    0.1.233-PullRequest45146.2       Upgrade <span class="nb">complete</span>
+<span class="m">15</span>              Mon Apr <span class="m">25</span> 14:49:18 <span class="m">2022</span>        deployed        test-app-0.1.233                                       0.1.233                          Upgrade <span class="nb">complete</span>
+<span class="m">16</span>              Tue Jun <span class="m">14</span> 12:28:20 <span class="m">2022</span>        pending-upgrade test-app-0.1.244-PullRequest47437.3                    0.1.244-PullRequest47437.3       Preparing upgrade
+</code></pre></div><p>As you can see in the last entry there, a deployment with revision 16 has had status <code>pending-upgrade</code> since June, 14th which is almost a week long at the time of writing of this blog post. No application can take such a long time to deploy (I hope)!😸 So let's fix it!</p>
+<blockquote>
+<p>Please note that even with the dangling deployment like this Helm upgrade operation performs a rolling update which means that the previous version of your applicaiton will still be running until the rollout of the new version is confirmed to be healthy and available. You can easily check that by running <code>kubectl get pods -n [app_namespace]</code> command.</p>
+</blockquote>
+<p>In order to fix this error all you need to do is to perform a rollback with <code>helm rollback [release_name] [revision_number] -n [app_namespace]</code> so that the latest stable version of the deployment will become the active one and the dangling deployment will be canceled. In the example above deployment with revision 15 is the one that is known to be stable and was successfully rolled out before so we can perform a rollback like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> helm rollback test-app <span class="m">15</span> -n test-app
+Rollback was a success! Happy Helming!
+</code></pre></div><p>If we get history of Helm deployments once again, we can see that the dangling release got rolled back under revision 17 to the latest stable release which now gets next active revision number 18 (you can see that the app version for revision 15 and 18 is the same which is expected):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\&gt;</span> helm <span class="nb">history</span> matrikkel-adapter -n matrikkel-adapter
+REVISION        UPDATED                         STATUS          CHART                                                   APP VERSION                     DESCRIPTION
+<span class="m">9</span>               Fri Apr <span class="m">22</span> 08:49:51 <span class="m">2022</span>        superseded      test-app-0.1.232-PullRequest45039.23                    0.1.232-PullRequest45039.23     Upgrade <span class="nb">complete</span>
+<span class="m">10</span>              Mon Apr <span class="m">25</span> 10:46:23 <span class="m">2022</span>        superseded      test-app-0.1.232-add-ma.3                               0.1.232-add-ma.3                Upgrade <span class="nb">complete</span>
+<span class="m">11</span>              Mon Apr <span class="m">25</span> 11:15:52 <span class="m">2022</span>        superseded      test-app-0.1.232-add-ma.5                               0.1.232-add-ma.5                Upgrade <span class="nb">complete</span>
+<span class="m">12</span>              Mon Apr <span class="m">25</span> 12:06:04 <span class="m">2022</span>        superseded      test-app-0.1.232-PullRequest45039.24                    0.1.232-PullRequest45039.24     Upgrade <span class="nb">complete</span>
+<span class="m">13</span>              Mon Apr <span class="m">25</span> 13:39:56 <span class="m">2022</span>        superseded      test-app-0.1.232                                        0.1.232                         Upgrade <span class="nb">complete</span>
+<span class="m">14</span>              Mon Apr <span class="m">25</span> 14:29:40 <span class="m">2022</span>        superseded      test-app-0.1.233-PullRequest45146.2                     0.1.233-PullRequest45146.2      Upgrade <span class="nb">complete</span>
+<span class="m">15</span>              Mon Apr <span class="m">25</span> 14:49:18 <span class="m">2022</span>        superseded      test-app-0.1.233                                        0.1.233                         Upgrade <span class="nb">complete</span>
+<span class="m">16</span>              Tue Jun <span class="m">14</span> 12:28:20 <span class="m">2022</span>        pending-upgrade test-app-0.1.244-PullRequest47437.3                     0.1.244-PullRequest47437.3      Preparing upgrade
+<span class="m">17</span>              Mon Jun <span class="m">20</span> 10:28:05 <span class="m">2022</span>        superseded      test-app-0.1.233                                        0.1.233                         Rollback to <span class="m">15</span>
+<span class="m">18</span>              Mon Jun <span class="m">20</span> 08:29:52 <span class="m">2022</span>        deployed        test-app-0.1.244-PullRequest47437.29                    0.1.244-PullRequest47437.29     Upgrade <span class="nb">complete</span>
+</code></pre></div><p>If we now re-try deployment of a new version of the application, the <code>upgrade failed</code> error will not appear anymore and the new deployment should succeed. 
+<code>helm rollback</code> is a useful command which you can also use to roll back to the latest stable release in case you discover issues during testing of your application. You can read more about it here: <a href="https://helm.sh/docs/helm/helm_rollback/">Helm Rollback</a></p>
+<p>Thanks for reading and till next tech tip 😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/helm/">helm</a><a class="tag" href="/tags/devops/">devops</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</body>
+</html>
