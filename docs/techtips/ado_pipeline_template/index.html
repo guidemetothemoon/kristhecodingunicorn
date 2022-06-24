@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  class="html"
+><head>
+  <title>
+    
+      Kris - The Coding Unicorn
+        |
+        Creating reusable build tasks in Azure DevOps pipelines with templates
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="
+      In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates.
+
+
+    "
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.6ca8a4683c6fa4366612b86c7a7e389042acc394db90117db6cfeba266c67d9e.css"
+      integrity="sha256-bKikaDxvpDZmErhsen44kEKsw5TbkBF9ts/rombGfZ4="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/ado_pipeline_template/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Creating reusable build tasks in Azure DevOps pipelines with templates"/>
+<meta name="twitter:description" content="In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates."/>
+
+
+
+  
+  <meta property="og:title" content="Creating reusable build tasks in Azure DevOps pipelines with templates" />
+<meta property="og:description" content="In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/ado_pipeline_template/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-06-24T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-06-24T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "Creating reusable build tasks in Azure DevOps pipelines with templates",
+        "headline": "Creating reusable build tasks in Azure DevOps pipelines with templates",
+        "alternativeHeadline": "",
+        "description": "
+      In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/ado_pipeline_template\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-06-24T00:00:00.00Z",
+        "datePublished": "2022-06-24T00:00:00.00Z",
+        "dateModified": "2022-06-24T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/ado_pipeline_template\/",
+        "wordCount" : "925",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "azure-devops"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--dark"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.jpg"
+        alt="profile picture"
+      />
+      <h1 class="sidebar__introduction-title">
+        <a href="/">Kris - The Coding Unicorn</a>
+      </h1>
+      <div class="sidebar__introduction-description">
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Content Hero | Open-Sourcerer | Volunteer at NNUG Oslo, OWASP | <br /> Cat mom and Potterhead</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.linkedin.com/in/krisde" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/guidemetothemoon" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://twitter.com/kristhecodingu1" rel="me" aria-label="Twitter" title="Twitter">
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://sessionize.com/kristina-devochko" rel="me" aria-label="Sessionize" title="Sessionize">
+            <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.instagram.com/guidemetothemoon" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="/contact/" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml" rel="me" aria-label="rss" title="rss">
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="https://www.azureheroes.community/user/15391" rel="me" aria-label="Azure Heroes" title="Azure Heroes">
+            <i class="fas fa-certificate fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Blog</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/techtips/"
+            
+            title=""
+            >Tech Tips</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/public/"
+            
+            title=""
+            >Public Talks and Publications</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/about/"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/contact/"
+            
+            title=""
+            >Contact</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Creating Reusable Build Tasks in Azure DevOps Pipelines With Templates</h1>
+      <p><img src="../../images/tech_tips/techtip_7.png" alt="Article banner for creating reusable build tasks in Azure DevOps pipelines"></p>
+<div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#use-case-for-pipeline-templates">Use case for pipeline templates</a></li>
+    <li><a href="#example-1-re-use-template-in-multiple-build-pipelines">Example 1: re-use template in multiple build pipelines</a></li>
+    <li><a href="#example-2-re-use-parameterized-template-in-multiple-build-stages">Example 2: re-use parameterized template in multiple build stages</a></li>
+  </ul>
+</nav>
+</div>
+<h2 id="use-case-for-pipeline-templates">Use case for pipeline templates</h2>
+<p>In the world of complex enterprise applications and distributed systems you may have a need to perform many more actions and validations as part of a build pipeline than before:</p>
+<ul>
+<li>build an application,</li>
+<li>execute multiple types of tests like unit tests and API tests,</li>
+<li>perform security validations like SCA, SAST, container image scanning and scanning of third-party dependencies,</li>
+<li>perform application packaging and deployment,
+etc.</li>
+</ul>
+<p>That's when it's worth considering to implement a multi-staged pipeline where you can run several jobs in parallel and control application flow with stages. Each stage may then have it's own set of checks and validations. You may even have multiple applications which have similar build tasks as part of the build pipeline - for instance, if you have multiple .NET Web API applications, it's very likely that build pipelines for those will be similar to some extent.</p>
+<p><strong>So, instead of duplicating build tasks in every build stage or in every build pipeline, can you optimize this somehow?</strong> Yes, you can! By introducing re-usability with build templates. 😺</p>
+<p>A template in this case is a collection of tasks that can be re-used across build pipelines and build stages. With parameters and build conditions you can dynamically adjust configuration for the template depending on the stage or pipeline where the template is being integrated.</p>
+<p>So, let's take a look at some examples!😼</p>
+<h2 id="example-1-re-use-template-in-multiple-build-pipelines">Example 1: re-use template in multiple build pipelines</h2>
+<p>Let's say you have a collection of build tasks that you need to add to several build pipelines in your project. For example, build tasks that download some build artifacts, install some tools and run some common scripts. What you can do then is to make these tasks reusable by creating a YAML template and storing it in a common repo that can be referenced from all the respective pipelines. Here's an example of such a template YAML that is stored in a repo called <code>common-templates</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># prep-env-template.yaml
+
+- task: UseDotNet@2
+  inputs:
+    packageType: &#39;sdk&#39;
+    version: &#39;6.x&#39;
+
+- task: DownloadPipelineArtifact@2
+  displayName: &#39;Download Build Artifacts - File Viewer&#39;
+  inputs:
+    buildType: &#39;specific&#39;
+    project: &#39;3c8d4d22-f3d0-11ec-b939-0242ac120002&#39;
+    definition: &#39;007&#39;
+    buildVersionToDownload: &#39;latestFromBranch&#39;
+    branchName: &#39;refs/heads/master&#39;
+    artifactName: &#39;my-artifact&#39;
+    targetPath: &#39;$(Build.SourcesDirectory)/temp/my-artifact&#39;
+
+- task: PowerShell@2
+  displayName: &#39;Update service data&#39;
+  inputs:
+    filePath: &#39;build-scripts/Update-Service.ps1&#39;
+    
+</code></pre></div><p>As you can see, this template installs latest version of .NET 6 SDK on the build agent, downloads artifact from another repo's build and executes a PowerShell script to update some data for the service. Now, in every build pipeline where we want to execute these tasks we can check out the <code>common-templates</code> repo and integrate template with a <code>template</code> build task, like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># azure-pipeline.yaml
+
+... 
+
+- job: prepare_environment
+  timeoutInMinutes: 60
+  pool:
+    vmImage : &#39;ubuntu-latest&#39;
+
+  steps:
+  - checkout: common-templates # integrate another repo into current pipeline
+  - template: prep-env-template.yaml # load and execute build tasks from provided template
+
+...
+
+</code></pre></div><p>And you're all set! 🤟</p>
+<h2 id="example-2-re-use-parameterized-template-in-multiple-build-stages">Example 2: re-use parameterized template in multiple build stages</h2>
+<p>In this example we have a multi-staged build pipeline for an application where one stage builds the app, executes tests, packages and publishes the application while another stage performs security validations. Both stages need to build an app while only build stage needs to run the tests and publish an app - that's when we can dynamically adjust which template tasks should be executed for which stage based on parameterization and task conditions. So in this case we store our template YAML in the same repo as the application, in a <code>pipeline-templates</code> folder:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># build-app-template.yaml
+
+parameters:  
+  build: true
+  test: true
+  publish: false
+
+steps:
+
+- task: DotNetCoreCLI@2
+  displayName: &#39;Build solution&#39;
+  inputs:
+    command: &#39;build&#39;
+    projects: &#39;source/My.TestApp.sln&#39;
+    configuration: &#39;$(buildConfiguration)&#39; # here we refer a variable defined in main build pipeline definition
+    arguments: &#39;-f net6.0&#39;
+  condition: and(succeeded(),eq(&#39;${{ parameters.build }}&#39;, true))
+
+- task: DotNetCoreCLI@2
+  displayName: &#39;Execute unit tests&#39;
+  inputs:
+    command: &#39;test&#39;
+    arguments: &#39;--no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./CodeCoverage/my-testapp/&#39;
+    publishTestResults: true
+    projects: &#39;source/My.TestApp.sln&#39;
+  condition: and(succeeded(),eq(&#39;${{ parameters.test }}&#39;, true))
+
+- task: DotNetCoreCLI@2
+  displayName: &#39;Publish application&#39;
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: &#39;--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/pub-output&#39;
+    projects: &#39;source/My.TestApp/My.TestApp.csproj&#39;
+    zipAfterPublish: false
+  condition: and(succeeded(),eq(&#39;${{ parameters.publish }}&#39;, true))
+
+</code></pre></div><p>As you can see, in the top of the template we have <code>parameters</code> section where we define which parameters that can be sent to the template and what the default values for those parameters should be. With <code>condition</code> property on every build task we can refer to respective parameters and activate the task based on the provided value of the parameter.</p>
+<p>Now, in every stage of our main build pipeline we can dynamically adjust how the template should be executed, also by using <code>parameters</code> property:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># azure-pipeline.yaml
+
+...
+stages:
+- stage: Build
+  jobs:
+  - job: BuildApplication
+    pool:
+      vmImage: &#39;ubuntu-latest&#39;
+    steps:
+    
+    ...
+    
+    - template:  pipeline-templates/build-app-template.yaml
+      parameters:
+        build: true
+        publish: true
+        test: true
+    
+    ...
+
+- stage: Security
+  jobs:
+  - job: SecurityChecks
+    pool:
+      vmImage: &#39;ubuntu-latest&#39;
+    steps:
+    
+    ...
+    
+    - template:  pipeline-templates/build-app-template.yaml
+      parameters:
+        build: true
+        publish: false # no need to publish app in this stage -you can also skip providing this parameter - then default value will be used which is also &#39;false&#39;
+        test: false # no need to run tests in this stage
+    
+    ...
+
+</code></pre></div><p>And we're good to go!😸</p>
+<p>Build templates can really help you make your pipeline code more reusable and keep the build pipeline definition cleaner and smaller since you don't need to duplicate the same build tasks every single time, which is always nice. 💖</p>
+<p>You can learn more about templates here: <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops">Template types &amp; usage</a></p>
+<p>Thanks for reading and till next tech tip! 😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/azure-devops/">azure-devops</a><a class="tag" href="/tags/devops/">devops</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-RJTQCDFS2Q', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</body>
+</html>

@@ -3,24 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kristhecodingunicorn.com/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure-devops/</loc>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/ado_pipeline_template/</loc>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/</loc>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/</loc>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/helm_rollback/</loc>
     <lastmod>2022-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/helm/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/techtips/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
     <lastmod>2022-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/k8s_an/</loc>
@@ -40,9 +46,6 @@
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/kubernetes/</loc>
     <lastmod>2022-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/azure-devops/</loc>
-    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</loc>
     <lastmod>2022-05-23T00:00:00+00:00</lastmod>

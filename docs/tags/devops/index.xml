@@ -6,7 +6,18 @@
     <description>Recent content in devops on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating reusable build tasks in Azure DevOps pipelines with templates</title>
+      <link>https://kristhecodingunicorn.com/techtips/ado_pipeline_template/</link>
+      <pubDate>Fri, 24 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/ado_pipeline_template/</guid>
+      
+        <description>Use case for pipeline templates Example 1: re-use template in multiple build pipelines Example 2: re-use parameterized template in multiple build stages   Use case for pipeline templates In the world of complex enterprise applications and distributed systems you may have a need to perform many more actions and validations as part of a build pipeline than before:</description>
+      
+    </item>
+    
     <item>
       <title>Handling failed Helm upgrade due to another operation in progress</title>
       <link>https://kristhecodingunicorn.com/techtips/helm_rollback/</link>
