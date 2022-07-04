@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/ado_pipeline_template/</guid>
       
-        <description>Use case for pipeline templates Example 1: re-use template in multiple build pipelines Example 2: re-use parameterized template in multiple build stages   Use case for pipeline templates In the world of complex enterprise applications and distributed systems you may have a need to perform many more actions and validations as part of a build pipeline than before:</description>
+        <description>In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates.</description>
       
     </item>
     
@@ -25,8 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/helm_rollback/</guid>
       
-        <description>Sometimes things may go wrong, also during ugprade of the application that is deployed to a Kubernetes cluster with Helm. When something goes wrong, you fix it and re-try a deployment with the new fix included. But then deployment operation fails with following error message:
-Error: UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress</description>
+        <description>How to handle failed helm upgrade with helm rollback</description>
       
     </item>
     
@@ -37,7 +36,7 @@ Error: UPGRADE FAILED: another operation (install/upgrade/rollback) is in progre
       
       <guid>https://kristhecodingunicorn.com/techtips/pr_templates/</guid>
       
-        <description>PR templates PR Completion Stats extension   Code reviews and pull requests are a totally normal practice these days if you&#39;re working together with other developers. Even if you&#39;re working solo you probably don&#39;t want to commit to main branch directly if you have CI/CD in place. That&#39;s when adding changes through pull requests and code reviews come into picture.</description>
+        <description>Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps.</description>
       
     </item>
     

@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/ado_pipeline_template/</guid>
       
-        <description>Use case for pipeline templates Example 1: re-use template in multiple build pipelines Example 2: re-use parameterized template in multiple build stages   Use case for pipeline templates In the world of complex enterprise applications and distributed systems you may have a need to perform many more actions and validations as part of a build pipeline than before:</description>
+        <description>In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates.</description>
       
     </item>
     
@@ -25,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</guid>
       
-        <description>Deploy application to AKS with ADO Environments  Create Azure DevOps Environment and Kubernetes resource Update Access Control and Deployment Policies Create build pipeline with deployment stage Deploy and look around Workloads   Automate migration of Kubernetes resources between Azure DevOps Environments Additional resources   Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments!</description>
+        <description>Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments.</description>
       
     </item>
     
@@ -36,7 +36,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/pr_templates/</guid>
       
-        <description>PR templates PR Completion Stats extension   Code reviews and pull requests are a totally normal practice these days if you&#39;re working together with other developers. Even if you&#39;re working solo you probably don&#39;t want to commit to main branch directly if you have CI/CD in place. That&#39;s when adding changes through pull requests and code reviews come into picture.</description>
+        <description>Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps.</description>
       
     </item>
     
@@ -47,7 +47,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</guid>
       
-        <description>What is an Azure DevOps Environment?  Introduction Benefits of using ADO Environments (IMHO)   Resource Grouping Tips  One Environment representing all development/staging/production clusters One Environment representing one development/staging/production cluster One Environment representing one application deployed in development/staging/production cluster   Next Steps   In the first part of this blog series I would like to talk about Azure DevOps Environments, benefits of using it for deployment of applications to AKS or any other Kubernetes distribution (or even a VM), and provide a few tips and tricks for how ADO environments and resources can be created.</description>
+        <description>First part of this blog post series describes what Azure DevOps Environments are and provides some tips and tricks for using it deployment of applications to Kubernetes.</description>
       
     </item>
     
@@ -58,7 +58,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/ndepend/</guid>
       
-        <description>What is NDepend? Improving and enforcing source code quality with NDepend Azure DevOps extension  Adding NDepend Build Task NDepend build output and Azure DevOps Dashboard Adding code coverage to NDepend analysis Adding code coverage from external location to NDepend analysis Trends section in NDepend Dashboard in Azure DevOps Enabling NDepend quality gate checks in build pipeline   Quality gate and rule management with NDepend VS Extension  Running initial NDepend analysis in Visual Studio Modifying default quality gate Deactivate, Suppress and Resolve quality gate issues Adding custom rule and connecting it to existing quality gate   Additional resources   What is NDepend?</description>
+        <description>This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool.</description>
       
     </item>
     

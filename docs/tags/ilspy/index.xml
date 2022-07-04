@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
       
-        <description>Why is dll hell created in the first place? Tools that helped me survive The Hell of DLL  Fusion Log ILSpy dotnet list package &amp;ndash;include-transitive   How to resolve assembly version conflicts To sign or not to sign - the future of strong-named assemblies   If you&#39;re a .</description>
+        <description>This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog.</description>
       
     </item>
     

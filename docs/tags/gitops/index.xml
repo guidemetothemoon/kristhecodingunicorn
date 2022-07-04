@@ -14,7 +14,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</guid>
       
-        <description>#1 - Run CronJob instantly #2 - Configure Rolling Update for Deployment #3 - Check what add-ons are available in AKS with Azure CLI   It&#39;s time for a new edition of Kris&#39;s Quick cup of Kubernetes where I&#39;m utilizing Azure Kubernetes Service (AKS) for demo purposes!😺 In second edition of this tech tip series I would like to share a few tips related to CronJobs, Rolling Updates and AKS add-ons that can make your life easier when working with Kubernetes and specifically Azure Kubernetes Service.</description>
+        <description>A few tricks that can make your life easier when working with Kubernetes and AKS</description>
       
     </item>
     
@@ -25,7 +25,7 @@
       
       <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</guid>
       
-        <description>#1 - Live streaming of Pod logs #2 - Get non-existent Namespace without erros #3 - Get all resources in a Namespace #4 - Retrieve and clean up Evicted Pods   Starting a totally new Tech Tips subsection feels great - especially when it&#39;s going to be purely dedicated to Kubernetes utilizing Azure Kubernetes Service (AKS) for demo purposes!</description>
+        <description>4 helpful commands that can make your life easier when working with Kubernetes and AKS</description>
       
     </item>
     
