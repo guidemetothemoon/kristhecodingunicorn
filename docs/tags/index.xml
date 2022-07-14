@@ -6,7 +6,73 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aks</title>
+      <link>https://kristhecodingunicorn.com/tags/aks/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>auth</title>
+      <link>https://kristhecodingunicorn.com/tags/auth/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/auth/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ingress-controller</title>
+      <link>https://kristhecodingunicorn.com/tags/ingress-controller/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/ingress-controller/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>https://kristhecodingunicorn.com/tags/k8s/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://kristhecodingunicorn.com/tags/nginx/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/nginx/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>azure-devops</title>
       <link>https://kristhecodingunicorn.com/tags/azure-devops/</link>
@@ -52,44 +118,11 @@
     </item>
     
     <item>
-      <title>aks</title>
-      <link>https://kristhecodingunicorn.com/tags/aks/</link>
-      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>azure</title>
       <link>https://kristhecodingunicorn.com/tags/azure/</link>
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>k8s</title>
-      <link>https://kristhecodingunicorn.com/tags/k8s/</link>
-      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>kubernetes</title>
-      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
-      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
       
         <description></description>
       
@@ -189,28 +222,6 @@
       <pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/azure-cli/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>ingress-controller</title>
-      <link>https://kristhecodingunicorn.com/tags/ingress-controller/</link>
-      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/ingress-controller/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>nginx</title>
-      <link>https://kristhecodingunicorn.com/tags/nginx/</link>
-      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/nginx/</guid>
       
         <description></description>
       

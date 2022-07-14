@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  class="html"
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy
+
+
+      
+
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.3f19c50a3ed6f0bb5b2b8595a88dbec7e0c5a7ac5ab3492f7baf72c31f2231b4.css"
+      integrity="sha256-PxnFCj7W8LtbK4WVqI2&#43;x&#43;DFp6xas0kve69ywx8iMbQ="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
+      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.b1c4e6a10bdbab01f33fff9d78816ee68cf9a9a731f07668afd546a79924cb80.css"
+    integrity="sha256-scTmoQvbqwHzP/&#43;deIFu5oz5qacx8HZor9VGp5kky4A="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.423dee17c62f55fa733a4ee13e00d523dfce88cc4f4ab4549a24ba36bd9de681.css"
+    integrity="sha256-Qj3uF8YvVfpzOk7hPgDVI9/OiMxPSrRUmiS6Nr2d5oE="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.b7d54133b27e5b4de15245b8e143de3e8ed2d674c706137274cedc9953f31917.css"
+    integrity="sha256-t9VBM7J&#43;W03hUkW44UPePo7S1nTHBhNydM7cmVPzGRc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_nginx_oauth/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
+      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy"/>
+<meta name="twitter:description" content="This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy."/>
+
+
+
+  
+  <meta property="og:title" content="Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy" />
+<meta property="og:description" content="This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_nginx_oauth/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-14T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-07-14T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy",
+        "headline": "Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy",
+        "alternativeHeadline": "",
+        "description": "
+      This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-07-14T00:00:00.00Z",
+        "datePublished": "2022-07-14T00:00:00.00Z",
+        "dateModified": "2022-07-14T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
+        "wordCount" : "2508",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "nginx"
+
+    
+      
+        ,
+
+      
+      "ingress-controller"
+
+    
+      
+        ,
+
+      
+      "auth"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--dark"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.jpg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | <br /> Cat Mom 🐈🐈🐈 and Potterhead</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.linkedin.com/in/krisde"
+            target="_blank"
+            rel="noopener"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://github.com/guidemetothemoon"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://twitter.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+            title="Twitter"
+          >
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://sessionize.com/kristina-devochko"
+            target="_blank"
+            rel="noopener"
+            aria-label="Sessionize"
+            title="Sessionize"
+          >
+            <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.instagram.com/guidemetothemoon"
+            target="_blank"
+            rel="noopener"
+            aria-label="instagram"
+            title="instagram"
+          >
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="/contact/"
+            target="_blank"
+            rel="noopener"
+            aria-label="e-mail"
+            title="e-mail"
+          >
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener"
+            aria-label="rss"
+            title="rss"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.azureheroes.community/user/15391"
+            target="_blank"
+            rel="noopener"
+            aria-label="Azure Heroes"
+            title="Azure Heroes"
+          >
+            <i class="fas fa-certificate fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-RJTQCDFS2Q', { 'anonymize_ip': false });
+}
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+
+        
+
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                14/7/2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">12-minute read</span>
+          </li>
+        </ul>
+
+      <p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_proxy_banner.png" alt="Article banner for enabling OAuth 2.0 in AKS"></p>
+<div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-and-use-cases">Introduction and use cases</a></li>
+    <li><a href="#setting-up-authentication-with-oauth-20">Setting up authentication with OAuth 2.0</a>
+      <ul>
+        <li><a href="#create-oauth2-proxy-application-in-azure-ad">Create OAuth2 Proxy application in Azure AD</a></li>
+        <li><a href="#configure-nginx-ingress-controller">Configure NGINX Ingress Controller</a></li>
+        <li><a href="#configure-and-deploy-oauth2-proxy">Configure and deploy OAuth2 Proxy</a></li>
+      </ul>
+    </li>
+    <li><a href="#all-in-one-deployment-package">All-in-one deployment package</a></li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<h2 id="introduction-and-use-cases">Introduction and use cases</h2>
+<p>Today I would like to show how you can set up authentication with OAuth 2.0 for applications that are running in Azure Kubernetes Service with help of NGINX Ingress Controller and OAuth2 Proxy.</p>
+<p>There may be multiple reasons for why you would want to implement authentication with OAuth 2.0 this way. For example, you may not want to implement authentication logic in the application itself or, like it was in my case, you want to limit access to a third-party application that you're running in your cluster in case authentication is not natively supported by the application itself (or requires an Enterprise license for the same😃). I was recently working on implementing an open source version of kubecost for cost management in our AKS clusters and the thing is that the open source version of kubecost doesn't natively support authentication. You can enable support for SSO with SAML 2.0 by acquiring an Enterprise version of kubecost which was not applicable in my scenario. Nevertheless, I still wanted to expose kubecost instances so that other teams and business stakeholders can easily access those and check whatever data they need. At the same time I still wanted to limit access and protect the application so I had to look for an alternative solution. And that's where NGINX Ingress Controller and OAuth2 Proxy come into play!😺</p>
+<p>With just a few configuration changes in NGINX Ingress Controller and a lightweight proxy application it's possible to easily configure OAuth 2.0 authentication with Azure AD as an identity provider. So let's take a look at how we can do that!🌟</p>
+<h2 id="setting-up-authentication-with-oauth-20">Setting up authentication with OAuth 2.0</h2>
+<p>I will be using kubecost as an example application in this walkthrough. It's now deployed in an AKS cluster and is exposed without any authentication (yet!) on this example URL: <code>https://kubecost-kris.unicorndomain.com</code>. Now, let's protect it by setting up an OAuth2 Proxy.</p>
+<p>In order to do that we will need to perform following steps:</p>
+<p>🐾 Create an application in Azure AD which will represent OAuth2 Proxy application that we're going to implement later;</p>
+<p>🐾 Update NGINX Ingress configuration for kubecost to enable support for external authentication;</p>
+<p>🐾 Configure and deploy OAuth2 Proxy application which will act as a reverse proxy and provide authentication to kubecost with Azure AD;</p>
+<p>In addition you will need to have a TLS certificate provisioned both for your application and the OAuth2 Proxy. In my example use case, I'm using cert-manager which is the most popular certificate management application for Kubernetes. Setting up cert-manager is outside of scope for this blog post but it's expected that you have a certificate management application available in order to be able to provision respective TLS certificates. If you want to learn more about cert-manager, you can check this link: <a href="https://cert-manager.io/docs/">cert-manager</a></p>
+<p>Let's get to it!🚀</p>
+<h3 id="create-oauth2-proxy-application-in-azure-ad">Create OAuth2 Proxy application in Azure AD</h3>
+<p>In order to create an OAuth2 Proxy application we need to go to <code>App registrations</code> section in Azure AD and choose <code>New registration</code>. Then provide following properties:</p>
+<p>🐾 <strong>Name</strong> of the Azure AD application. Since I'm setting it up for kubecost, I'll call it <code>kubecost-oauth2-proxy</code>.</p>
+<p>🐾 <strong>Azure AD single-tenant or multi-tenant account types</strong>. In my case there's only one directory being used, therefore I will choose <code>Accounts in this organizational directory only</code>.</p>
+<p>🐾 <strong>Redirect URI</strong> which will represent an application URL that will be receiving an authorization code on behalf of the application. Since we're using an OAuth2 Proxy, a redirect URI in our case is a public URL of your application plus <code>oauth2/callback</code>, i.e. <code>https://kubecost-kris.unicorndomain.com/oauth2/callback</code></p>
+<p>Once all properties are provided, click <code>Register</code> - the application will then be created for you in Azure AD.</p>
+<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_ad_config.png" alt="Screenshot for setting up OAuth2 Proxy application in Azure AD"></p>
+<p>Next, we'll need to create a client secret which will allow OAuth2 Proxy to perform authentication on behalf of our application. In Azure AD, navigate to recently created application. In <code>Certificates &amp; secrets</code> section choose <code>New client secret</code>. Then provide following properties:</p>
+<p>🐾 <strong>Description</strong> that explains what the secret will be used for. In my case it's <code>kubecost-oauth2-proxy-secret</code>.</p>
+<p>🐾 <strong>Expiration lifecycle of the secret</strong>. For better security, choose at least the recommended lifecycle which at the moment of writing this blog post is 6 months. If you can automate secret renewal, do choose as short lifecycle as possible.</p>
+<p>Once all properties are provided, click <code>Add</code>. Once the client secret is created, <strong>do ensure to copy it and save for a later step since the secret will be shown to you only once, right upon creation</strong>.</p>
+<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_ad_client_secret_config.png" alt="Screenshot for setting up application client secret in Azure AD"></p>
+<p>Finally, go to the <code>Overview</code> section of the recently created application in Azure AD and make a note of <code>Application (client) ID</code> and <code>Directory (tenant) ID</code> which we'll need later.</p>
+<p>Now we're done with setting everything up in Azure AD - let's prepare our application's Ingress next!😺</p>
+<h3 id="configure-nginx-ingress-controller">Configure NGINX Ingress Controller</h3>
+<p>In order to be able to expose our application publicly, we need to create an Ingress. Since my kubecost application is already exposed, I have an Ingress resource already which looks something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubecost-cost-analyzer
+  namespace: kubecost
+  annotations:
+    nginx.ingress.kubernetes.io/affinity: <span class="s2">&#34;cookie&#34;</span>
+    nginx.ingress.kubernetes.io/session-cookie-name: <span class="s2">&#34;route&#34;</span>
+    nginx.ingress.kubernetes.io/session-cookie-hash: <span class="s2">&#34;sha1&#34;</span>
+    nginx.ingress.kubernetes.io/session-cookie-expires: <span class="s2">&#34;172800&#34;</span>
+    nginx.ingress.kubernetes.io/session-cookie-max-age: <span class="s2">&#34;172800&#34;</span>
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: <span class="s2">&#34;2000m&#34;</span>
+    nginx.ingress.kubernetes.io/proxy-buffer-size: <span class="s2">&#34;32k&#34;</span>
+    nginx.ingress.kubernetes.io/ssl-redirect: <span class="s2">&#34;true&#34;</span>
+    meta.helm.sh/release-name: kubecost
+    meta.helm.sh/release-namespace: kubecost
+  labels:
+    app: cost-analyzer
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cost-analyzer
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - kubecost-kris.unicorndomain.com
+    secretName: kubecost-cost-analyzer-tls-cert
+  rules:
+  - host: kubecost-kris.unicorndomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kubecost-cost-analyzer
+            port:
+              number: <span class="m">9090</span>
+</code></pre></div><p>Since I've deployed kubecost with Helm and current Ingress belongs to the same release, I've added additional annotations which will let Helm include and manage this Ingress resource as part of the kubecost release. You can read more about adding Kubernetes resources to existing Helm releases here: <a href="https://kristhecodingunicorn.com/post/k8s_object_helm/">How to Include New Kubernetes Resource Into Existing Helm Release</a></p>
+<p>Now, the only thing we will need to do to configure support for OAuth 2.0 authentication is to add following annotations to the Ingress object:</p>
+<p>🐾 <strong>auth-url</strong>: Annotation that represents URL to the authentication service where requests must be sent.</p>
+<p><code>nginx.ingress.kubernetes.io/auth-url: &quot;https://[application-hostname]/oauth2/auth&quot;</code></p>
+<p>🐾 <strong>auth-signin</strong>: Annotation that represents URL to the location of the error page:</p>
+<p><code>nginx.ingress.kubernetes.io/auth-signin: &quot;https://[application-hostname]/oauth2/start?rd=https://[application-hostname]/oauth2/callback&quot;</code></p>
+<p>So, in my example the final kubecost application Ingress definition will look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubecost-cost-analyzer
+  namespace: kubecost
+  annotations:
+    <span class="c1"># OMITTED - ALL ANNOTATIONS AS ABOVE</span>
+    nginx.ingress.kubernetes.io/auth-url: <span class="s2">&#34;https://kubecost-kris.unicorndomain.com/oauth2/auth&#34;</span>
+    nginx.ingress.kubernetes.io/auth-signin: <span class="s2">&#34;https://kubecost-kris.unicorndomain.com/oauth2/start?rd=https://kubecost-kris.unicorndomain.com/oauth2/callback&#34;</span>
+
+  labels:
+    <span class="c1"># OMITTED - SAME AS ABOVE</span>
+spec:
+  <span class="c1"># OMITTED - SAME AS ABOVE</span>
+</code></pre></div><p>Configuration of NGINX Ingress is done - finally we're ready to deploy OAuth2 Proxy!🤩</p>
+<h3 id="configure-and-deploy-oauth2-proxy">Configure and deploy OAuth2 Proxy</h3>
+<p>Last thing we'll need to do is to install a proxy application which will authenticate the requests coming into our main application, which in my example case is kubecost. There are many good open source alternatives for such a proxy out there but I can recommend the one called OAuth2 Proxy - it's well maintained and has a big community support. It's also recommended by NGINX. You can find more information in OAuth2 Proxy GitHub and documentation by checking out the links in <a href="https://kristhecodingunicorn.com//post/k8s_nginx_oauth/#additional-resources">Additional resources</a> section below.😉</p>
+<p>OAuth2 Proxy doesn't have a Helm chart so we'll create a Kubernetes YAML template and include it as part of the kubecost Helm release by adding a few annotations to the OAuth2 Proxy Ingress definition.</p>
+<p>But before we do that, we need to make a few preparations first. OAuth2 Proxy requires some information from us in order to work properly:</p>
+<p>🐾 Tenant ID, Client ID and Client Secret of an Azure AD application that we've created earlier;</p>
+<p>🐾 Cookie secret for session information storage;</p>
+<p>Since we've made a note of tenant id, client id and client secret what we need to do now is to generate a cookie secret. Cookie storage is the default storage type used by OAuth2 Proxy to store information about a session in a client-side cookie, therefore setting a cookie secret is mandatory. You can also use Redis as an alternative session storage but it's outside of scope of this blog post. You can read more about OAuth2 Proxy session storage options here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage">Session Storage</a></p>
+<h4 id="cookie-secret"><strong>Cookie Secret</strong></h4>
+<p>It's an important and good practice to always generate a strong secret, using cryptographically secure random number generator and never re-use the same secret across applications! Since cookie secret can be used for sensitive information like storing user session data, in the wrong hands this information can cause a lot of damage and even let attacker get control of the server hosting an application. There are several ways to generate a cookie secret, for example with OpenSSL: <code>openssl rand -hex 32</code>. Once you've generated a secret value, make a note of it, we're going to use it in a second.</p>
+<h4 id="create-oauth2-proxy-secrets-in-aks-cluster"><strong>Create OAuth2 Proxy secrets in AKS cluster</strong></h4>
+<p>The last thing we need to do before we can deploy OAuth2 Proxy is to save Client ID, Client Secret and Cookie Secret as Kubernetes Secrets. Of course we could've just written them in plaintext in the Deployment YAML but we're conscious about security, right?😼 We want to keep secrets secret, therefore we'll deploy sensitive values as Kubernetes Secrets.</p>
+<blockquote>
+<p>As an alternative to Kubernetes Secrets in AKS you can save secrets with help of The Azure Key Vault Provider for Secrets Store CSI Driver. Walkthrough of how to do that will be provided in the subsequent blog posts. In current blog post we'll be utilizing Kubernetes Secrets. If you would like to learn more about The Azure Key Vault Provider for Secrets Store CSI Driver, you can check official Microsoft documentation: <a href="https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver">Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster</a></p>
+</blockquote>
+<p>In AKS cluster where OAuth2 Proxy will be installed, in the namespace where your application is running (in my case it's <code>kubecost</code>), run following commands with <code>kubectl</code> in order to create secrets for the respective values:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">kubectl create secret generic client-id --from-literal<span class="o">=</span><span class="nv">oauth2_proxy_client_id</span><span class="o">=[</span>client-id-value<span class="o">]</span> -n <span class="o">[</span>application-namespace<span class="o">]</span>
+kubectl create secret generic client-secret --from-literal<span class="o">=</span><span class="nv">oauth2_proxy_client_secret</span><span class="o">=[</span>client-secret-value<span class="o">]</span> -n <span class="o">[</span>application-namespace<span class="o">]</span>
+kubectl create secret generic cookie-secret --from-literal<span class="o">=</span><span class="nv">oauth2_proxy_cookie_secret</span><span class="o">=[</span>cookie-secret-value<span class="o">]</span> -n <span class="o">[</span>application-namespace<span class="o">]</span>
+</code></pre></div><p>You can also create Kubernetes Secrets from file by using <code>--from-file</code> instead of <code>--from-literal</code> where you provide the values directly in the command line - you can find more about it here: <a href="https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#create-a-secret">Managing Secrets using kubectl</a></p>
+<p>Finally we're ready to deploy OAuth2 Proxy!🥳 Below you can find an example of a Deployment YAML that will deploy OAuth2 Proxy as part of the existing Helm release for kubecost application.</p>
+<blockquote>
+<p>Wherever you can see <code>kubecost</code> mentioned in the example template below, you can replace it with the name of your specific application.</p>
+</blockquote>
+<p>A few things to be aware of:</p>
+<ul>
+<li>
+<p>I wouldn't recommend to use the latest container image of any third-party application since it may introduce breaking changes and cause inconsistent application behaviour. Always choose a <strong>stable</strong> release version and have a good upgrade routine in place to ensure that you're keeping third-party applications up-to-date.</p>
+</li>
+<li>
+<p>Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template below. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider which I'm using below. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
+</li>
+<li>
+<p>In the <code>template.spec.containers.env</code> section of the Deployment, we're integrating Kubernetes Secrets for the sensitive values which we created earlier as the environment variables for OAuth2 Proxy. Names of the environment variables should stay as provided in the example since that's what OAuth2 Proxy expects: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#environment-variables">OAuth2 Proxy - Environment variables</a></p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#oauth2-proxy.yaml</span>
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kubecost <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+    meta.helm.sh/release-namespace: kubecost <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+  labels:
+    application: kubecost-oauth2-proxy
+    app.kubernetes.io/managed-by: Helm <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+  name: kubecost-oauth2-proxy-deployment
+  namespace: kubecost
+spec:
+  replicas: <span class="m">1</span>
+  selector:
+    matchLabels:
+      application: kubecost-oauth2-proxy
+  template:
+    metadata:
+      labels:
+        application: kubecost-oauth2-proxy
+    spec:
+      containers:
+      - args:
+        - --provider<span class="o">=</span>oidc
+        - --azure-tenant<span class="o">=[</span>oauth2-proxy-azure-ad-tenant-id<span class="o">]</span> <span class="c1"># Azure AD OAuth2 Proxy application Tenant ID</span>
+        - --pass-access-token<span class="o">=</span><span class="nb">true</span>
+        - --cookie-name<span class="o">=</span>_proxycookie <span class="c1"># this can be any name of your choice which you would like OAuth2 Proxy to use for the session cookie</span>
+        - --email-domain<span class="o">=</span>*
+        - --upstream<span class="o">=</span>file:///dev/null
+        - --http-address<span class="o">=</span>0.0.0.0:4180
+        - --oidc-issuer-url<span class="o">=</span>https://login.microsoftonline.com/<span class="o">[</span>oauth2-proxy-azure-ad-tenant-id<span class="o">]</span>/v2.0
+        name: kubecost-oauth2-proxy
+        image: quay.io/oauth2-proxy/oauth2-proxy:v7.3.0
+        imagePullPolicy: Always
+        env:
+        - name: OAUTH2_PROXY_CLIENT_ID <span class="c1"># keep this name - it\&#39;s required to be defined like this by OAuth2 Proxy</span>
+          valueFrom:
+            secretKeyRef:
+              name: client-id
+              key: oauth2_proxy_client_id
+        - name: OAUTH2_PROXY_CLIENT_SECRET <span class="c1"># keep this name - it\&#39;s required to be defined like this by OAuth2 Proxy</span>
+          valueFrom:
+            secretKeyRef:
+              name: client-secret
+              key: oauth2_proxy_client_secret
+        - name: OAUTH2_PROXY_COOKIE_SECRET <span class="c1"># keep this name - it\&#39;s required to be defined like this by OAuth2 Proxy</span>
+          valueFrom:
+            secretKeyRef:
+              name: cookie-secret
+              key: oauth2_proxy_cookie_secret
+        ports:
+        - containerPort: <span class="m">4180</span>
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kubecost <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+    meta.helm.sh/release-namespace: kubecost <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+  labels:
+    application: kubecost-oauth2-proxy
+    app.kubernetes.io/managed-by: Helm <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+  name: kubecost-oauth2-proxy-svc
+  namespace: kubecost
+spec:
+  ports:
+  - name: http
+    port: <span class="m">4180</span>
+    protocol: TCP
+    targetPort: <span class="m">4180</span>
+  selector:
+    application: kubecost-oauth2-proxy
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: <span class="s2">&#34;true&#34;</span>
+    cert-manager.io/cluster-issuer: <span class="o">[</span>cert-manager-cluster-issuer-name<span class="o">]</span>
+    nginx.ingress.kubernetes.io/proxy-body-size: <span class="s2">&#34;2000m&#34;</span>
+    nginx.ingress.kubernetes.io/proxy-buffer-size: <span class="s2">&#34;32k&#34;</span>
+    meta.helm.sh/release-name: kubecost <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+    meta.helm.sh/release-namespace: kubecost <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+  labels:
+    app.kubernetes.io/managed-by: Helm <span class="c1"># can be removed if your application isn\&#39;t deployed through Helm</span>
+  name: kubecost-oauth2-proxy-ingress
+  namespace: kubecost
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - <span class="o">[</span>application-hostname<span class="o">]</span>
+      secretName: kubecost-oauth2-proxy-ingress-tls-secret
+  rules:
+    - host: <span class="o">[</span>application-hostname<span class="o">]</span>
+      http:
+        paths:
+          - path: /oauth2
+            pathType: Prefix
+            backend:
+              service:
+                name: kubecost-oauth2-proxy-svc
+                port:
+                  number: <span class="m">4180</span>
+</code></pre></div><p>Once you've verified that configuration and the template look correct you can deploy OAuth2 Proxy in AKS cluster where your application is running with following kubectl command: <code>kubectl apply -f ./my-path-to-template/oauth2-proxy.yaml</code></p>
+<p>And it's done! Now, when you access the application, you will first be redirected to the Microsoft authentication.</p>
+<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png" alt="Screenshot of Microsoft login screen once OAuth2 Proxy is enabled"></p>
+<h2 id="all-in-one-deployment-package">All-in-one deployment package</h2>
+<p>You can find all the Kubernetes YAML deployment templates as well as a PowerShell script that includes all the necessary commands to create an Azure AD application and installs OAuth2 Proxy in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/oauth2-proxy">guidemetothemoon:oauth2-proxy</a></p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>A few resources I've found useful on this topic:</p>
+<ul>
+<li>Documentation of OAuth2 Proxy open source project: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/">OAuth2 Proxy Docs</a></li>
+<li>OAuth2 Proxy GitHub: <a href="https://github.com/oauth2-proxy/oauth2-proxy">OAuth2 Proxy</a></li>
+<li>More on SSO with SAML 2.0 support in kubecost: <a href="https://guide.kubecost.com/hc/en-us/articles/4407595985047-User-Management-SSO-SAML">User Management - SSO/SAML/RBAC</a></li>
+<li>Support for different authentication types in NGINX Ingress Controller including OAuth: <a href="https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/">External OAUTH Authentication</a></li>
+</ul>
+<p>That's it from me this time, thanks for checking in!</p>
+<p>If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/nginx/">nginx</a><a class="tag" href="/tags/ingress-controller/">ingress-controller</a><a class="tag" href="/tags/auth/">auth</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-RJTQCDFS2Q', { 'anonymize_ip': false });
+}
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-RJTQCDFS2Q');
+</script>
+</body>
+</html>
