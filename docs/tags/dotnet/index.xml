@@ -6,7 +6,18 @@
     <description>Recent content in dotnet on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title> Detect and avoid this certificate validation trap in .NET!</title>
+      <link>https://kristhecodingunicorn.com/techtips/dotnet_https_validation/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/dotnet_https_validation/</guid>
+      
+        <description>In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code.</description>
+      
+    </item>
+    
     <item>
       <title>Automate .NET target framework update with PowerShell</title>
       <link>https://kristhecodingunicorn.com/techtips/update_dotnet_fw/</link>
