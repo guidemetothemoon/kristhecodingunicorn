@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kristhecodingunicorn.com/</loc>
-    <lastmod>2022-07-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure-ad/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure-cli/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/azure_ad_login_subscription/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
     <lastmod>2022-07-14T00:00:00+00:00</lastmod>
@@ -38,15 +59,6 @@
     <loc>https://kristhecodingunicorn.com/post/k8s_nginx_oauth/</loc>
     <lastmod>2022-07-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/</loc>
-    <lastmod>2022-07-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/techtips/</loc>
-    <lastmod>2022-07-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
-    <lastmod>2022-07-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/ado_pipeline_template/</loc>
     <lastmod>2022-06-24T00:00:00+00:00</lastmod>
   </url><url>
@@ -57,9 +69,6 @@
     <lastmod>2022-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/k8s_an/</loc>
-    <lastmod>2022-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
     <lastmod>2022-06-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</loc>
@@ -109,9 +118,6 @@
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/devsecops/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/azure-cli/</loc>
-    <lastmod>2022-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/azure_query/</loc>
     <lastmod>2022-02-13T00:00:00+00:00</lastmod>

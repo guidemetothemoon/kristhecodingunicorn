@@ -6,7 +6,18 @@
     <description>Recent content on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Log in to Azure AD without active subscription from Azure CLI</title>
+      <link>https://kristhecodingunicorn.com/techtips/azure_ad_login_subscription/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/azure_ad_login_subscription/</guid>
+      
+        <description>In this post we take a look at how you can log in to an Azure AD without active subscription from Azure CLI.</description>
+      
+    </item>
+    
     <item>
       <title>Re-using Azure DevOps Environment efficiently across multiple pipelines</title>
       <link>https://kristhecodingunicorn.com/techtips/ado_env_as_var/</link>

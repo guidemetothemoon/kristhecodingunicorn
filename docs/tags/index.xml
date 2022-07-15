@@ -6,7 +6,51 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure-ad</title>
+      <link>https://kristhecodingunicorn.com/tags/azure-ad/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure-ad/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure-cli</title>
+      <link>https://kristhecodingunicorn.com/tags/azure-cli/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure-cli/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>techtips</title>
+      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
@@ -96,33 +140,11 @@
     </item>
     
     <item>
-      <title>techtips</title>
-      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
-      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>helm</title>
       <link>https://kristhecodingunicorn.com/tags/helm/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/helm/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>azure</title>
-      <link>https://kristhecodingunicorn.com/tags/azure/</link>
-      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
       
         <description></description>
       
@@ -211,17 +233,6 @@
       <pubDate>Tue, 22 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>azure-cli</title>
-      <link>https://kristhecodingunicorn.com/tags/azure-cli/</link>
-      <pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/azure-cli/</guid>
       
         <description></description>
       
