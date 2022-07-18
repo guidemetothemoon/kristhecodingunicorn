@@ -8,7 +8,7 @@
   <title>
     Kris - The Coding Unicorn
         |
-        dotnet
+         Detect and avoid this certificate validation trap in .NET!
 
 
       
@@ -23,9 +23,7 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead"
+    content="In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -92,12 +90,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/dotnet/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/dotnet_https_validation/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/dotnet/index.xml" title="Kris - The Coding Unicorn" />
-
-
   
   
   
@@ -127,26 +122,112 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="dotnet"/>
-<meta name="twitter:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead"/>
+<meta name="twitter:title" content=" Detect and avoid this certificate validation trap in .NET!"/>
+<meta name="twitter:description" content="In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code."/>
 
 
 
   
-  <meta property="og:title" content="dotnet" />
-<meta property="og:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/tags/dotnet/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+  <meta property="og:title" content=" Detect and avoid this certificate validation trap in .NET!" />
+<meta property="og:description" content="In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/dotnet_https_validation/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-07-18T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-07-18T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": " Detect and avoid this certificate validation trap in .NET!",
+        "headline": " Detect and avoid this certificate validation trap in .NET!",
+        "alternativeHeadline": "",
+        "description": "
+      In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/dotnet_https_validation\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-07-18T00:00:00.00Z",
+        "datePublished": "2022-07-18T00:00:00.00Z",
+        "dateModified": "2022-07-18T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/dotnet_https_validation\/",
+        "wordCount" : "399",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "dotnet"
+
+    
+      
+        ,
+
+      
+      "cybersecurity-corner"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body
@@ -467,118 +548,41 @@ if (!doNotTrack) {
 </div>
 </header>
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
     
-      <div class="archive__heading">2022</div>
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/dotnet_https_validation/" title=" Detect and avoid this certificate validation trap in .NET!"> Detect and avoid this certificate validation trap in .NET!</a>
-            <div class="archive__list-date">
-              
-                18/7/2022
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/update_dotnet_fw/" title="Automate .NET target framework update with PowerShell">Automate .NET target framework update with PowerShell</a>
-            <div class="archive__list-date">
-              
-                28/3/2022
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/ndepend/" title="Improving .NET code quality with NDepend in Visual Studio and Azure DevOps">Improving .NET code quality with NDepend in Visual Studio and Azure DevOps</a>
-            <div class="archive__list-date">
-              
-                17/3/2022
-
-
-              
-            </div>
-          </li>
-        </ul>
-
+    <div class="post__content">
+      <h1> Detect and Avoid This Certificate Validation Trap in .NET!</h1>
+      <p><img src="../../images/tech_tips/techtip_10.png" alt="Article banner for certificate validation in dotnet"></p>
+<div class="toc">
+  <nav id="TableOfContents"></nav>
+</div>
+<p>There is one scary property in .NET which, if misused or forgotten, can make your security champions tremble at night&hellip;🙀🙀🙀 As scary as it sounds, the risk of forgetting or misusing the property is pretty serious and I've seen it multiple times sneaking into the source code as part of the pull request. And I keep seeing it still. Therefore this tech tip gets to see the world.☀️</p>
+<p>The property I'm talking about is <code>ServicePointManager.ServerCertificateValidationCallback</code> that is part of a <code>System.Net</code> library. This property can be used for custom certificate validation in case you're using a non-trusted certificate authority. One of the scenarios when you can end up using this property is when you're developing and testing new functionality and you're using a self-signed TLS certificate on the server instead of production-level certificates. If this property is not set and you're using a non-trusted certificate, you may get errors like: <code>The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.</code></p>
+<p>The danger of it is though that once you're done with testing you may forget to clean it up in the source code, and it silently paves it's way out to production&hellip; What it results into is that <strong>all TLS certificates will be accepted and all HTTPS traffic will be allowed, even the malicious one!</strong> This can be extremely destructive from the security perspective and can open up for the man-in-the-middle vulnerability for instance.🔥</p>
+<p>So, whenever you see a variation of this piece of code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) =&gt; true;
+</code></pre></div><p><strong>Stall the change immediately</strong> and take your time to ensure that you or the one who has added this piece of code know what you're doing and understand the consequences of enabling this property!⛔️</p>
+<p>A good thing is that if you're using a Static Application Security Testing (SAST) tool like NDepend, you will get alerted in case anyone attempts enabling this property as part of the PR since a validation like this is typically a part of the security rules collection of the SAST tool.</p>
+<p>If you would like to learn more about <code>ServerCertificateValidationCallback</code> property, you can check this link: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.servicepointmanager.servercertificatevalidationcallback?view=net-6.0">ServicePointManager.ServerCertificateValidationCallback Property</a></p>
+<p>And here you can check one of the Microsoft quality rules which also is about cautious usage of <code>ServerCertificateValidationCallback</code> property: <a href="https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5359">CA5359: Do not disable certificate validation</a></p>
+<p>Stay secure, stay safe!</p>
+<p>Thanks for reading and till next tech tip! 😻</p>
+</div>
+    <div class="post__footer">
       
 
-
-    
-      <div class="archive__heading">2021</div>
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/dotnet_sast_scs/" title="How to perform static code analysis of .NET Code with Security Code Scan">How to perform static code analysis of .NET Code with Security Code Scan</a>
-            <div class="archive__list-date">
-              
-                5/8/2021
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/dotnet/">dotnet</a><a class="tag" href="/tags/cybersecurity-corner/">cybersecurity-corner</a></span>
 
 
-              
-            </div>
-          </li>
-        </ul>
+
 
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/assembly_version_conflicts/" title="Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log">Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log</a>
-            <div class="archive__list-date">
-              
-                6/7/2021
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/dotnet_tools/" title="How to distribute console applications easily with .NET tools">How to distribute console applications easily with .NET tools</a>
-            <div class="archive__list-date">
-              
-                6/6/2021
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/dotnet_custom_templates/" title="How to create new microservices easily with dotnet custom templates">How to create new microservices easily with dotnet custom templates</a>
-            <div class="archive__list-date">
-              
-                11/5/2021
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-
+    </div>
 
     
   </div>
