@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_ado_envs-2\/",
-        "wordCount" : "3244",
+        "wordCount" : "3288",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -607,6 +607,7 @@ if (!doNotTrack) {
 </nav>
 </div>
 <p>Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments! In Part 1 we looked into what Azure DevOps Environments are, what benefits they provide and how I would recommend to create ADO environments and resources based on my own experience. If you haven't read Part 1, you can check it out here: <a href="https://kristhecodingunicorn.com/post/k8s_ado_envs-1/">Continuous Delivery to AKS With Azure DevOps Environments - Part 1</a>.</p>
+<p>If you would like to know a simple but really useful way to re-use the same Azure DevOps Environment in multiple deployment stages across multiple pipelines, you can check out one of my tech tips here: <a href="https://kristhecodingunicorn.com/techtips/ado_env_as_var/">Re-Using Azure DevOps Environment Efficiently Across Multiple Pipelines</a></p>
 <p>In Part 2 we'll get more hands-on and deploy a test application to AKS with Azure DevOps Environments. In addition we'll take a look at how we can migrate Kubernetes resources between Azure DevOps Environments with a sprinkle of automation. Now, let's dig in!😼</p>
 <h2 id="deploy-application-to-aks-with-ado-environments">Deploy application to AKS with ADO Environments</h2>
 <p>For this scenario I have used a small AKS HelloWorld application that is provided by Microsoft in following tutorial: <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli">Create an ingress controller in Azure Kubernetes Service (AKS)</a>. I have slightly modified it and created a build definition for Azure Pipelines that will deploy the application to AKS with help of Azure DevOps Environments. All the resources can be found in my GitHub repo: <a href="https://github.com/guidemetothemoon/demo-projects/tree/main/ado-environments">guidemetothemoon/demo-projects </a>.</p>

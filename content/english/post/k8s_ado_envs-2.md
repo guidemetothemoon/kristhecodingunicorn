@@ -19,6 +19,8 @@ tags = [
 
 Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments! In Part 1 we looked into what Azure DevOps Environments are, what benefits they provide and how I would recommend to create ADO environments and resources based on my own experience. If you haven\'t read Part 1, you can check it out here: [Continuous Delivery to AKS With Azure DevOps Environments - Part 1](https://kristhecodingunicorn.com/post/k8s_ado_envs-1/).
 
+If you would like to know a simple but really useful way to re-use the same Azure DevOps Environment in multiple deployment stages across multiple pipelines, you can check out one of my tech tips here: [Re-Using Azure DevOps Environment Efficiently Across Multiple Pipelines](https://kristhecodingunicorn.com/techtips/ado_env_as_var/)
+
 In Part 2 we\'ll get more hands-on and deploy a test application to AKS with Azure DevOps Environments. In addition we\'ll take a look at how we can migrate Kubernetes resources between Azure DevOps Environments with a sprinkle of automation. Now, let\'s dig in!😼
 
 ## Deploy application to AKS with ADO Environments
