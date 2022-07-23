@@ -8,7 +8,7 @@
   <title>
     Kris - The Coding Unicorn
         |
-        index
+        How to override ASP.NET Core application runtime version
 
 
       
@@ -23,9 +23,7 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead"
+    content="In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -100,12 +98,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/index/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/dotnet_runtime_framework/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/index/index.xml" title="Kris - The Coding Unicorn" />
-
-
   
   
   
@@ -135,26 +130,105 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="index"/>
-<meta name="twitter:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead"/>
+<meta name="twitter:title" content="How to override ASP.NET Core application runtime version"/>
+<meta name="twitter:description" content="In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with."/>
 
 
 
   
-  <meta property="og:title" content="index" />
-<meta property="og:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/tags/index/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+  <meta property="og:title" content="How to override ASP.NET Core application runtime version" />
+<meta property="og:description" content="In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/dotnet_runtime_framework/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-07-23T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-07-23T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "How to override ASP.NET Core application runtime version",
+        "headline": "How to override ASP.NET Core application runtime version",
+        "alternativeHeadline": "",
+        "description": "
+      In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/dotnet_runtime_framework\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-07-23T00:00:00.00Z",
+        "datePublished": "2022-07-23T00:00:00.00Z",
+        "dateModified": "2022-07-23T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/dotnet_runtime_framework\/",
+        "wordCount" : "670",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "dotnet"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body
@@ -475,51 +549,62 @@ if (!doNotTrack) {
 </div>
 </header>
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
     
-      <div class="archive__heading">2022</div>
+    <div class="post__content">
+      <h1>How to Override ASP.NET Core Application Runtime Version</h1>
+      <p><img src="../../images/tech_tips/techtip_11.png" alt="Article banner for overriding runtime framework in dotnet"></p>
+<div class="toc">
+  <nav id="TableOfContents"></nav>
+</div>
+<p>With release of .NET and .NET Core one significant change you may have noticed is the new version support lifecycle. .NET Framework LTS (long-time support) versions are normally supported for 5+ years by Microsoft but support lifecycle for .NET and .NET Core LTS versions has decreased to 3 years. The main reasons for the shorter support lifecycle are the overall faster technology evolvement, but also more active framework development which requires frequent releases both from the functional and security perspective.</p>
+<p>Upgrading framework version that the application is built on top of can be a challenging, time-consuming process, especially for large and complex enterprise applications. If you have hundreds of on-premises customers that are using your application in their own infrastructure this process becomes even harder.😵 In order to upgrade the application's framework you will typically need to update the version property, re-compile the app and publish a new release. In addition you will need to test the new version properly in order to ensure that porting your app to new framework version hasn't introduced any breaking changes. If it has, some amount of refactoring will be required in order to fix the errors that the new framework version is causing.</p>
+<p>Doing this every three years may be hard and even unrealistic in some scenarios but still, you don't want to run with unsupported framework installed on your server, right?🙄 So, is there any temporary workaround that may buy you some time so that you can port your application to a newer framework version and at the same time only have a supported framework installed on the server where your application is hosted? Yes, there may be a way and I'll tell you all about it in a moment!😺</p>
+<p>There is a configuration property that can let you override the runtime framework version that an ASP.NET Core application is using though the application is compiled with a different version of the framework. In order to do that you will need to locate a <code>[application-name].runtimeconfig.json</code> file that is published as part of the ASP.NET Core application. This file provides configuration properties that define .NET application's behaviour at run time. In <code>[application-name].runtimeconfig.json</code> file update <code>runtimeOptions.framework.version</code> property to the runtime framework version that you want your application to use. For example, if I have an ASP.NET Core 5.0 application and I want it to use ASP.NET Core 6.0 version, my JSON file will look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">{</span>
+  <span class="s2">&#34;runtimeOptions&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;tfm&#34;</span>: <span class="s2">&#34;net5.0&#34;</span>,
+    <span class="s2">&#34;framework&#34;</span>: <span class="o">{</span>
+      <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;Microsoft.AspNetCore.App&#34;</span>,
+      <span class="s2">&#34;version&#34;</span>:  <span class="s2">&#34;6.0.0&#34;</span>, <span class="c1"># &lt;- update this property to override runtime framework version!</span>
+      <span class="s2">&#34;rollForward&#34;</span>:  <span class="s2">&#34;major&#34;</span>
+    <span class="o">}</span>,
+    <span class="s2">&#34;configProperties&#34;</span>: <span class="o">{</span>
+      <span class="s2">&#34;System.GC.Server&#34;</span>: true,
+      <span class="s2">&#34;System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization&#34;</span>: <span class="nb">false</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>Now, my ASP.NET Core application that was compiled with .NET 5.0 will use .NET 6.0 as a runtime framework which will let me uninstall .NET 5.0 and only install .NET 6.0 on the server where the application is running.</p>
+<p>If you want to do it programmatically, you can call this PowerShell function and provide a path to the <code>[application-name].runtimeconfig.json</code> file as an argument to the function:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> Edit-RuntimeConfig<span class="o">(</span><span class="nv">$jsonFilePath</span><span class="o">)</span>
+<span class="o">{</span>
+    <span class="nv">$appRuntimeConfigJson</span> <span class="o">=</span> Get-Content <span class="nv">$jsonFilePath</span> -Encoding UTF8 <span class="p">|</span> ConvertFrom-Json
+    <span class="nv">$appRuntimeConfigJson</span>.runtimeOptions.framework.version <span class="o">=</span> <span class="s2">&#34;6.0.0&#34;</span> <span class="c1"># this property can be updated with any other runtime framework version you may want to use</span>
+    <span class="nv">$appRuntimeConfigJson</span>.runtimeOptions.framework <span class="p">|</span> Add-Member -Name <span class="s2">&#34;rollForward&#34;</span> -Value <span class="s2">&#34;major&#34;</span> -MemberType NoteProperty -Force
+    <span class="nv">$appRuntimeConfigJson</span> <span class="p">|</span> ConvertTo-Json <span class="p">|</span> Out-File <span class="nv">$jsonFilePath</span> -Encoding UTF8
+<span class="o">}</span>
+</code></pre></div><blockquote>
+<p>It's important to note that this change should be considered as a <strong>temporary</strong> workaround and the recommended approach is to lift your application to the newest supported ASP.NET version. It's also recommended to test that the application works as expected after this configuration change has been implemented, and before rolling out the change to production environment. This is important in order to ensure that there are no breaking changes in the new framework version that are affecting your application's functionality.</p>
+</blockquote>
+<p>You can also read more about .NET Runtime configuration settings here: <a href="https://docs.microsoft.com/en-us/dotnet/core/runtime-config/">.NET Runtime configuration settings</a> and about .NET and .NET Core support lifecycle here: <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">.NET and .NET Core Support Policy</a>.</p>
+<p>Thanks for reading and till next tech tip! 😻</p>
+</div>
+    <div class="post__footer">
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/" title="Tech Tips">Tech Tips</a>
-            <div class="archive__list-date">
-              
-                
-                  23/7/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
 
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/" title="Blog">Blog</a>
-            <div class="archive__list-date">
-              
-                
-                  14/7/2022
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/dotnet/">dotnet</a></span>
 
 
-                
 
-
-              
-            </div>
-          </li>
-        </ul>
 
       
-
+    </div>
 
     
   </div>
