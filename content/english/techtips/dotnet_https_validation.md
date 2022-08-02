@@ -34,7 +34,7 @@ A good thing is that if you\'re using a Static Application Security Testing (SAS
 **An important note on alternative implementation in .NET Core and .NET:** though ```ServicePointManager.ServerCertificateValidationCallback``` is supported both in .NET Framework, in .NET Core and .NET I would recommend to consider an alternative implementation. In .NET a new ```HttpClientHandler``` property - ```HttpClientHandler.DangerousAcceptAnyServerCertificateValidator``` - makes deactivation of certificate validation for development purposes more secure and scoped to development environment only. For instance, in ```Startup.cs``` of your ASP.NET Core Web application you can enable it for development purposes like this:
 
 ``` csharp
-if ( env.IsDevelopment()    )
+if ( env.IsDevelopment() )
 {
     httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 }
