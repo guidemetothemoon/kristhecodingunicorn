@@ -211,7 +211,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/dotnet_https_validation\/",
-        "wordCount" : "399",
+        "wordCount" : "494",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -575,6 +575,12 @@ if (!doNotTrack) {
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) =&gt; true;
 </code></pre></div><p><strong>Stall the change immediately</strong> and take your time to ensure that you or the one who has added this piece of code know what you're doing and understand the consequences of enabling this property!⛔️</p>
 <p>A good thing is that if you're using a Static Application Security Testing (SAST) tool like NDepend, you will get alerted in case anyone attempts enabling this property as part of the PR since a validation like this is typically a part of the security rules collection of the SAST tool.</p>
+<p><strong>An important note on alternative implementation in .NET Core and .NET:</strong> though <code>ServicePointManager.ServerCertificateValidationCallback</code> is supported both in .NET Framework, in .NET Core and .NET I would recommend to consider an alternative implementation. In .NET a new <code>HttpClientHandler</code> property - <code>HttpClientHandler.DangerousAcceptAnyServerCertificateValidator</code> - makes deactivation of certificate validation for development purposes more secure and scoped to development environment only. For instance, in <code>Startup.cs</code> of your ASP.NET Core Web application you can enable it for development purposes like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">if</span> <span class="p">(</span> <span class="n">env</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">()</span>    <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">httpClientHandler</span><span class="p">.</span><span class="n">ServerCertificateCustomValidationCallback</span> <span class="p">=</span> <span class="n">HttpClientHandler</span><span class="p">.</span><span class="n">DangerousAcceptAnyServerCertificateValidator</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>You can read more about this property here: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclienthandler.dangerousacceptanyservercertificatevalidator?view=net-6.0">HttpClientHandler.DangerousAcceptAnyServerCertificateValidator Property</a></p>
 <p>If you would like to learn more about <code>ServerCertificateValidationCallback</code> property, you can check this link: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.servicepointmanager.servercertificatevalidationcallback?view=net-6.0">ServicePointManager.ServerCertificateValidationCallback Property</a></p>
 <p>And here you can check one of the Microsoft quality rules which also is about cautious usage of <code>ServerCertificateValidationCallback</code> property: <a href="https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5359">CA5359: Do not disable certificate validation</a></p>
 <p>Stay secure, stay safe!</p>
