@@ -8,7 +8,7 @@
   <title>
     Kris - The Coding Unicorn
         |
-        azure
+        Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management
 
 
       
@@ -23,9 +23,7 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead"
+    content="In this tech tip we look at how we can locate a ClusterRole and/or Role and identify which accounts it is assigned to."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -100,12 +98,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/azure/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/azure/index.xml" title="Kris - The Coding Unicorn" />
-
-
   
   
   
@@ -135,26 +130,126 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="azure"/>
-<meta name="twitter:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead"/>
+<meta name="twitter:title" content="Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management"/>
+<meta name="twitter:description" content="In this tech tip we look at how we can locate a ClusterRole and/or Role and identify which accounts it is assigned to."/>
 
 
 
   
-  <meta property="og:title" content="azure" />
-<meta property="og:description" content="Hey! I&#39;m Kris and I like to code. Welcome to my tech corner!🤗 
- Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | 
- Cat Mom 🐈🐈🐈 and Potterhead" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/tags/azure/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+  <meta property="og:title" content="Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management" />
+<meta property="og:description" content="In this tech tip we look at how we can locate a ClusterRole and/or Role and identify which accounts it is assigned to." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-08-14T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-08-14T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "Kris\u0027s Quick Cup of (A)K8S #3 - (Cluster)Role management",
+        "headline": "Kris\u0027s Quick Cup of (A)K8S #3 - (Cluster)Role management",
+        "alternativeHeadline": "",
+        "description": "
+      In this tech tip we look at how we can locate a ClusterRole and\/or Role and identify which accounts it is assigned to.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/kris_daily_k8s_3\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-08-14T00:00:00.00Z",
+        "datePublished": "2022-08-14T00:00:00.00Z",
+        "dateModified": "2022-08-14T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/kris_daily_k8s_3\/",
+        "wordCount" : "523",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "gitops"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body
@@ -475,195 +570,51 @@ if (!doNotTrack) {
 </div>
 </header>
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
     
-      <div class="archive__heading">2022</div>
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/k8s_pluto/" title="Monitoring Kubernetes API deprecations with Pluto">Monitoring Kubernetes API deprecations with Pluto</a>
-            <div class="archive__list-date">
-              
-                
-                  14/8/2022
+    <div class="post__content">
+      <h1>Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role Management</h1>
+      <p><img src="../../images/tech_tips/techtip_12.png" alt="Article banner for Kris&rsquo;s quick cup of K8s"></p>
+<p>One day I was going through Azure Policies for Kubernetes and suddenly saw an alert related to the following policy for one of the AKS clusters: <code>Kubernetes clusters should not grant CAP_SYS_ADMIN security capabilities</code>. What this basically means is that you shouldn't have any accounts in your cluster that have been assigned a ClusterRole or Role with <code>CAP_SYS_ADMIN</code> capabilities. <code>CAP_SYS_ADMIN</code> is a capability that is available in Linux. It provides a very privileged level of permissions that allows an account that has this capability to perform a range of system administration operations which can potentially be harmful and damaging for the whole system. You can read more about this capability here: <a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities(7) — Linux manual page</a>.</p>
+<p><img src="../../images/tech_tips/k8s_policy_capsysadmin.png" alt="Screenshot of Azure Policy for usage of CAP_SYS_ADMIN capability in Kubernetes clusters"></p>
+<p>An example of a ClusterRole with such capabilities is <code>system:aggregate-to-edit</code>. Obviously we want to follow the principle of least privilege which means that we want to ensure that there are no accounts that have a high level of permissions in our clusters, unless it's absolutely necessary. Therefore it's investigation time!🧐</p>
+<p>It´s important to mention that <strong>you should perform this check both for Roles which set permissions in a particular namespace and ClusterRoles which can set cluster-wide permissions because it can be both!</strong> Though we can get information about which ClusterRole or Role violates this policy from the Azure Portal, we don't necessarily get enough information about which accounts it was assigned to. So the question is: if I were to investigate further if there are any accounts that have been assigned a highly privileged ClusterRole or Role in my Kubernetes cluster, is there a way I can easily check that? The answer is: <strong>Oh Yes</strong>!😻</p>
+<p>Now, in order to demonstrate you how to do that I'll be using an AKS cluster but the same commands will work for any other Kubernetes distribution. As mentioned above, we'll be checking both for ClusterRole and Role resources to be completely safe.</p>
+<p>In order to retrieve information about usage of a specific ClusterRole or Role we can use below command - we'll also be using a customized output to display all the relevant data like ServiceAcocunt, Namespace,  creation timestamp etc. In this case, we'll search for <code>system:aggregate-to-edit</code> ClusterRole and Role but you can replace it with any other role definition name that you need to check.</p>
+<p><strong>PowerShell:</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">
+kubectl get rolebindings,clusterrolebindings -A `
+-o custom-columns=&#39;ServiceAccountName:subjects[?(@.kind==\&#34;ServiceAccount\&#34;)].name,ClusterRoleName:metadata.name,ClusterRoleNamespace:metadata.namespace,ObjectKind:kind,CreatedAt:metadata.creationTimestamp&#39; `
+| Where-Object {$_  -match &#39;[ \t]system:aggregate-to-edit[ \t]&#39;}
 
+</code></pre></div><p><strong>Bash:</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">
+kubectl get rolebindings,clusterrolebindings -A \
+-o custom-columns=&#39;ServiceAccountName:subjects[?(@.kind==&#34;ServiceAccount&#34;)].name,ClusterRoleName:metadata.name,ClusterRoleNamespace:metadata.namespace,ObjectKind:kind,CreatedAt:metadata.creationTimestamp&#39; \ 
+| grep &#39;[[:blank:]]system:aggregate-to-edit[[:blank:]]&#39;
 
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/kris_daily_k8s_3/" title="Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management">Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management</a>
-            <div class="archive__list-date">
-              
-                
-                  14/8/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/azure_ad_login_subscription/" title="Log in to Azure AD without active subscription from Azure CLI">Log in to Azure AD without active subscription from Azure CLI</a>
-            <div class="archive__list-date">
-              
-                
-                  15/7/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/k8s_an/" title="Accelerated Networking for AKS nodes">Accelerated Networking for AKS nodes</a>
-            <div class="archive__list-date">
-              
-                
-                  10/6/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/k8s_ado_envs-2/" title="Continuous Delivery to AKS with Azure DevOps Environments - Part 2">Continuous Delivery to AKS with Azure DevOps Environments - Part 2</a>
-            <div class="archive__list-date">
-              
-                
-                  23/5/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/kris_daily_k8s_2/" title="Kris&#39;s Quick Cup of (A)K8S #2">Kris&#39;s Quick Cup of (A)K8S #2</a>
-            <div class="archive__list-date">
-              
-                
-                  16/5/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/k8s_ado_envs-1/" title="Continuous Delivery to AKS with Azure DevOps Environments - Part 1">Continuous Delivery to AKS with Azure DevOps Environments - Part 1</a>
-            <div class="archive__list-date">
-              
-                
-                  30/4/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/kris_daily_k8s_1/" title="Kris&#39;s Quick Cup of K8s #1">Kris&#39;s Quick Cup of K8s #1</a>
-            <div class="archive__list-date">
-              
-                
-                  4/3/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/secrets_cleanup/" title="Cleaning up secrets in Azure DevOps and GitHub repositories with BFG Repo-Cleaner">Cleaning up secrets in Azure DevOps and GitHub repositories with BFG Repo-Cleaner</a>
-            <div class="archive__list-date">
-              
-                
-                  22/2/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/techtips/azure_query/" title="Power of --query in Azure CLI">Power of --query in Azure CLI</a>
-            <div class="archive__list-date">
-              
-                
-                  13/2/2022
-
-
-                
-
-
-              
-            </div>
-          </li>
-        </ul>
-
+</code></pre></div><p>Here, we're also using regex to filter out entries that may start with or match the name we're searching for. In case there are any accounts that have been assigned the ClusterRole or Role we've been checking for, the output of the command will look something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Output format: [ServiceAccountName] [ClusterRoleName] [ClusterRoleNamespace] [ObjectKind] [CreatedAt]</span>
+  testapp-admin         system:aggregate-to-edit    &lt;none&gt;                  ClusterRoleBinding                  2022-06-09T14:56:16Z
+  testapp-admin         system:aggregate-to-edit    testapp                 RoleBinding                         2022-06-09T14:56:16Z
+</code></pre></div><p>Based on this information you can investigate further if the application that uses detected ServiceAccount really needs so many permissions or if this ClusterRole or Role really needs to be used by any workloads in the cluster.</p>
+<p>That's it for now - Thanks for reading and till next tech tip 😼</p>
+</div>
+    <div class="post__footer">
       
 
+      
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/gitops/">gitops</a></span>
+
+
+
+
+      
+    </div>
 
     
   </div>

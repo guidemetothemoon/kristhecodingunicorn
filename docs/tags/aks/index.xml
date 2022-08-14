@@ -8,6 +8,17 @@
     <language>en</language>
     <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/aks/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/</guid>
+      
+        <description>In this tech tip we look at how we can locate a ClusterRole and/or Role and identify which accounts it is assigned to.</description>
+      
+    </item>
+    
+    <item>
       <title>Monitoring Kubernetes API deprecations with Pluto</title>
       <link>https://kristhecodingunicorn.com/post/k8s_pluto/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>

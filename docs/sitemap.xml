@@ -17,7 +17,13 @@
     <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/gitops/</loc>
+    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://kristhecodingunicorn.com/tags/k8s/</loc>
+    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/kubernetes/</loc>
@@ -29,16 +35,16 @@
     <loc>https://kristhecodingunicorn.com/tags/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://kristhecodingunicorn.com/techtips/</loc>
+    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
+    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://kristhecodingunicorn.com/tags/dotnet/</loc>
     <lastmod>2022-07-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/dotnet_runtime_framework/</loc>
-    <lastmod>2022-07-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/techtips/</loc>
-    <lastmod>2022-07-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/techtips/</loc>
     <lastmod>2022-07-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/dotnet_https_validation/</loc>
@@ -88,9 +94,6 @@
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</loc>
     <lastmod>2022-05-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/gitops/</loc>
-    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>

@@ -41,6 +41,17 @@
     </item>
     
     <item>
+      <title>gitops</title>
+      <link>https://kristhecodingunicorn.com/tags/gitops/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/gitops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
       <title>k8s</title>
       <link>https://kristhecodingunicorn.com/tags/k8s/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
@@ -63,22 +74,22 @@
     </item>
     
     <item>
-      <title>dotnet</title>
-      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
-      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
+      <title>techtips</title>
+      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
+      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
       
         <description></description>
       
     </item>
     
     <item>
-      <title>techtips</title>
-      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
+      <title>dotnet</title>
+      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
+      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
       
         <description></description>
       
@@ -167,17 +178,6 @@
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/helm/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>gitops</title>
-      <link>https://kristhecodingunicorn.com/tags/gitops/</link>
-      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/gitops/</guid>
       
         <description></description>
       
