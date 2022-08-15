@@ -29,28 +29,31 @@ In order to retrieve information about usage of a specific ClusterRole or Role w
 
 **PowerShell:**
 
-```
+```powershell
 
 kubectl get rolebindings,clusterrolebindings -A `
--o custom-columns='ServiceAccountName:subjects[?(@.kind==\"ServiceAccount\")].name,ClusterRoleName:metadata.name,ClusterRoleNamespace:metadata.namespace,ObjectKind:kind,CreatedAt:metadata.creationTimestamp' `
-| Where-Object {$_  -match '[ \t]system:aggregate-to-edit[ \t]'}
+-o custom-columns='ServiceAccountName:subjects[?(@.kind==\"ServiceAccount\")].name, ClusterRoleName:metadata.name, `
+ClusterRoleNamespace:metadata.namespace, ObjectKind:kind, CreatedAt:metadata.creationTimestamp' `
+| Where-Object {$_ -match '[ \t]system:aggregate-to-edit[ \t]'}
 
 ```
 
 **Bash:**
 
-```
+```bash
 
 kubectl get rolebindings,clusterrolebindings -A \
--o custom-columns='ServiceAccountName:subjects[?(@.kind=="ServiceAccount")].name,ClusterRoleName:metadata.name,ClusterRoleNamespace:metadata.namespace,ObjectKind:kind,CreatedAt:metadata.creationTimestamp' \ 
+-o custom-columns='ServiceAccountName:subjects[?(@.kind=="ServiceAccount")].name, ClusterRoleName:metadata.name, \
+ClusterRoleNamespace:metadata.namespace, ObjectKind:kind, CreatedAt:metadata.creationTimestamp' \ 
 | grep '[[:blank:]]system:aggregate-to-edit[[:blank:]]'
 
 ```
 
 Here, we\'re also using regex to filter out entries that may start with or match the name we\'re searching for. In case there are any accounts that have been assigned the ClusterRole or Role we\'ve been checking for, the output of the command will look something like this:
 
-``` bash
-# Output format: [ServiceAccountName] [ClusterRoleName] [ClusterRoleNamespace] [ObjectKind] [CreatedAt]
+**Output format: [ServiceAccountName] [ClusterRoleName] [ClusterRoleNamespace] [ObjectKind] [CreatedAt]**
+
+```
   testapp-admin         system:aggregate-to-edit    <none>                  ClusterRoleBinding                  2022-06-09T14:56:16Z
   testapp-admin         system:aggregate-to-edit    testapp                 RoleBinding                         2022-06-09T14:56:16Z
 ```

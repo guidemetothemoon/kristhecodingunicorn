@@ -46,7 +46,7 @@ What\'s a Rolling Update? Well, it\'s a very nice way to upgrade an application 
 
 It can be configured by including ```strategy``` section in the Deployment ```spec``` section like it\'s shown below:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 
 apiVersion: apps/v1
 kind: Deployment

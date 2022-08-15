@@ -43,7 +43,7 @@ First, we need to create a directory where the template package will reside - le
 - **pipeline.yml**: this file will contain build pipeline definition that will package dotnet template collection and push the generated NuGet package to our private NuGet feed (or public feed, depending on your use case).
 - **Custom.Dotnet.Templates.csproj**: this is a basic C# project file that can be built in order to produce a NuGet package for our template collection. Example of the project file I have used is provided below: first batch of properties is used to provide information  that will be used and displayed as part of the NuGet package. TargetFramework property is needed in order for the MSBuild to run properly when the project is being compiled and packed. It is also possible to provide **\<PackageVersion\>** property but in our use case we\'ll be using semantic versioning to centrally and automatically version the NuGet package as part of the build pipeline execution, therefore the property is not defined in this example. Second batch of properties, starting with **\<IncludeContentInPack\>** will be used to include all the custom templates in the proper folder when NuGet package is created. Lastly, settings defined in the **\<ItemGroup\>** section will include only what\'s located in \"templates\" folder (except for \"bin\" and \"obj\" folders since we don\'t want output from our testing to be a part of standard template package). **\<Compile\>** setting will prevent compilation of any code located in \"templates\" directory - the purpose of this project file is not to build any real application code but to generate a collection of project templates. 
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 <!-- This is example code for project definition used to create dotnet template collection pack -->
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -96,7 +96,7 @@ Our template will include:
 
 Template configuration will look something like this:
 
-{{< highlight bash >}}
+{{< highlight json >}}
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Kris - The Coding Unicorn",
@@ -166,7 +166,7 @@ When you have multiple templates, you would like to test them all at once. You c
 
 Here is an example of the PowerShell script we can use for our use case with 3 templates:
 
-{{< highlight yaml >}}
+{{< highlight powershell >}}
 $TemplateCollectionDirectory = "C:/Playground/template-collection"
 $TemplateOutputDirectory = "C:/Playground/template-output"
 Set-Location -Path $TemplateCollectionDirectory
@@ -194,7 +194,7 @@ Now that you\'ve tested your template collection and everything looks good, you 
 
 Pack and push build tasks will look something like this:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
     - task: DotNetCoreCLI@2
       displayName: 'Package my dotnet template collection'
       inputs:

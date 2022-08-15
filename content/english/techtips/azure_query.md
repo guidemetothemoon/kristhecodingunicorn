@@ -23,7 +23,18 @@ So, in order to retrieve all DNS records in respective DNS zone pointing to ```1
 
 Let\'s see the execution time differences for both - I will use ```Measure-Command``` to measure the time it take to execute each of the approaches. The DNS zone I will be testing against has **64 713** records and I will be replacing real values with dummy ones in the test below since it\'s real name and IP are being used in production :)
 
-{{< highlight bash >}}
+```powershell
+#Command for approach 1:
+Measure-Command { $dns_list = az network dns record-set a list -g test-rg -z dev.testzone.com; $dns_recs = $dns_list ` 
+| ConvertFrom-Json -Depth 4 | Where-Object {$_.arecords.ipv4Address -eq "192.0.2.146"} }
+
+#Command for approach 2:
+Measure-Command { $dns_recs_to_update = az network dns record-set a list -g test-rg -z dev.testzone.com ` 
+--query "[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[], '192.0.2.146')]" ` 
+| ConvertFrom-Json }
+```
+
+```
 # Approach 1
 PS C:\Playground> Measure-Command {$dns_list = az network dns record-set a list -g test-rg -z dev.testzone.com; $dns_recs = $dns_list | ConvertFrom-Json -Depth 4 | Where-Object {$_.arecords.ipv4Address -eq "192.0.2.146"}}
 
@@ -60,7 +71,7 @@ TotalMilliseconds : 5736.1877
 PS C:\Playground> $dns_recs_to_update.Count
 16
 
-{{< /highlight >}}
+```
 
 As you can see, approach #2 is faster and the difference might not seem so significant here (3-4 seconds) but when you\'re creating a more advanced automation script where you might need to retrieve and refresh DNS records multiple times or when you need to perform maintenance on other types of Azure resources that have even more data to retrieve, the difference can get pretty significant. By utilizing the full potential of Azure CLI you can make your scripts more performant and optimized minimizing the footprint at the same time ;)
 

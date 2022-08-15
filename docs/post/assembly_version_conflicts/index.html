@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/assembly_version_conflicts\/",
-        "wordCount" : "2953",
+        "wordCount" : "2970",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -549,15 +539,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -671,38 +652,38 @@ As I mentioned earlier, your projects may be using central package versioning an
 Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51&#39; or one of its dependencies. The located assembly&#39;s manifest definition 
 does not match the assembly reference. (Exception from HRESULT: 0x80131040)</code></pre></div>
 <p>In order to find out what packages are referencing this dependency, let's execute following command and inspect dependencies included in the applicaiton's source code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet list MyTestSolution.sln package --include-transitive -framework net5.0</code></pre></div>
+<p><code>dotnet list MyTestSolution.sln package --include-transitive -framework net5.0</code></p>
 <p>If you have many dependencies it's better to write the output to a separate file which you can easily analyze:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">dotnet list MyTestSolution.sln package --include-transitive -framework net5.0 &gt; mytestsln-dependencies.txt</code></pre></div>
+<p><code>dotnet list MyTestSolution.sln package --include-transitive -framework net5.0 &gt; mytestsln-dependencies.txt</code></p>
 <p>After analyzing the output we could identify following two projects dependent upon different versions of System.Security.Cryptography.Xml:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">Project &#39;TestProject-A&#39; has the following package references</span><span class="w">
-</span><span class="w">   </span><span class="nt">[net5.0]</span><span class="p">:</span><span class="w"> 
-</span><span class="w">   </span><span class="l">Top-level Package                                Requested   Resolved</span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; SoapCore                                       1.0.0       1.0.0   </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Configuration.ConfigurationManager      4.7.0       4.7.0   </span><span class="w">
-</span><span class="w">
-</span><span class="w">   </span><span class="l">Transitive Package                                                                   Resolved    </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Cryptography.ProtectedData                                         4.7.0    </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Cryptography.X509Certificates                                      4.3.0    </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Cryptography.Xml                                                   4.5.0  </span><span class="w">
-</span><span class="w">
-</span><span class="w">   </span><span class="c"># The rest of the dependencies is omitted...</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="l">Project &#39;TestProject-B&#39; has the following package references</span><span class="w">
-</span><span class="w">   </span><span class="nt">[net5.0]</span><span class="p">:</span><span class="w"> 
-</span><span class="w">   </span><span class="l">Top-level Package                                Requested   Resolved</span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; Newtonsoft.Json                                11.0.2      11.0.2  </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; External.Client.Core                           7.0.3       7.0.3   </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; External.Client.Portal                         7.0.3       7.0.3   </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Data.DataSetExtensions                  4.5.0       4.5.0   </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Permissions                    5.0.0       5.0.0   </span><span class="w">
-</span><span class="w">
-</span><span class="w">   </span><span class="l">Transitive Package                                                                   Resolved    </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Cryptography.ProtectedData                                         4.7.0    </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Cryptography.X509Certificates                                      4.3.0    </span><span class="w">
-</span><span class="w">   </span><span class="l">&gt; System.Security.Cryptography.Xml                                                   4.7.0  </span><span class="w">
-</span><span class="w">   
-</span><span class="w">   </span><span class="c"># The rest of the dependencies is omitted...</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-txt" data-lang="txt">Project &#39;TestProject-A&#39; has the following package references
+   [net5.0]: 
+   Top-level Package                                Requested   Resolved
+   &gt; SoapCore                                       1.0.0       1.0.0   
+   &gt; System.Configuration.ConfigurationManager      4.7.0       4.7.0   
+
+   Transitive Package                                                                   Resolved    
+   &gt; System.Security.Cryptography.ProtectedData                                         4.7.0    
+   &gt; System.Security.Cryptography.X509Certificates                                      4.3.0    
+   &gt; System.Security.Cryptography.Xml                                                   4.5.0  
+
+   # The rest of the dependencies is omitted...
+
+Project &#39;TestProject-B&#39; has the following package references
+   [net5.0]: 
+   Top-level Package                                Requested   Resolved
+   &gt; Newtonsoft.Json                                11.0.2      11.0.2  
+   &gt; External.Client.Core                           7.0.3       7.0.3   
+   &gt; External.Client.Portal                         7.0.3       7.0.3   
+   &gt; System.Data.DataSetExtensions                  4.5.0       4.5.0   
+   &gt; System.Security.Permissions                    5.0.0       5.0.0   
+
+   Transitive Package                                                                   Resolved    
+   &gt; System.Security.Cryptography.ProtectedData                                         4.7.0    
+   &gt; System.Security.Cryptography.X509Certificates                                      4.3.0    
+   &gt; System.Security.Cryptography.Xml                                                   4.7.0  
+   
+   # The rest of the dependencies is omitted...</code></pre></div>
 <p>As we can see, both TestProject-A and TestProject-B have System.Security.Cryptography.Xml as a transitive dependency, but projects are dependent upon different versions of the dependency. With help of .NET CLI we have been able to identify which projects are using different version of the same assembly - now we can analyze both projects and decide how this version conflict can be resolved in the best possible way.</p>
 <p>I will briefly mention some of the options for resolving situations like this in the section below.</p>
 <h2 id="how-to-resolve-assembly-version-conflicts">How to resolve assembly version conflicts</h2>
@@ -715,22 +696,22 @@ does not match the assembly reference. (Exception from HRESULT: 0x80131040)</cod
 <p>Sometimes you need to use specific versions for some dependencies and can't enforce point #1 - an alternative solution would then be to <strong>add an assembly binding redirect to the application's configuration file</strong> (for example, App.config). This will redirect all components of your application that attempt to load an older version of a specific assembly to use another, typically newer, version of the same assembly. An example of such binding redirect:</p>
 </li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">&lt;dependentAssembly&gt;</span><span class="w">
-</span><span class="w">   </span><span class="l">&lt;assemblyIdentity name=&#34;System.Net.Http.Formatting&#34; publicKeyToken=&#34;31bf3856ad364e35&#34; culture=&#34;neutral&#34; /&gt;</span><span class="w">
-</span><span class="w">   </span><span class="l">&lt;bindingRedirect oldVersion=&#34;0.0.0.0-5.2.7.0&#34; newVersion=&#34;5.2.7.0&#34; /&gt;</span><span class="w">
-</span><span class="w"></span><span class="l">&lt;/dependentAssembly&gt;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependentAssembly&gt;</span>
+   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;bindingRedirect</span> <span class="na">oldVersion=</span><span class="s">&#34;0.0.0.0-5.2.7.0&#34;</span> <span class="na">newVersion=</span><span class="s">&#34;5.2.7.0&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/dependentAssembly&gt;</span></code></pre></div>
 <p>Here, all versions up to 5.2.7.0 of System.Net.Http.Formatting assembly will be redirected to use version 5.2.7.0. You can read more about redirecting assembly versions here: <a href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/redirect-assembly-versions">Redirecting assembly versions</a>.</p>
 <ol start="3">
 <li>There are situations where you may need to use the same assembly but with different identities, and you are not using Global Assembly Cache. I've experienced a scenario where we had two third-party dependencies in our application that were using different versions of the same package that was strong-name signed. In the newer version of the package authors have changed public/private key pair that was used for signing the assembly with strong name, which caused a totally different assembly identity than what the application expected. We had to keep both versions of this package due to the direct application dependencies - and that's when <strong>assembly redirect based on codebase</strong> came in handy. What differs it from point #2 is that, instead of defining a binding redirect, you create a separate folder in your appbase where you will store one of the versions of the conflicting assembly. In this way you will tell the application where to look for a specific version of the assembly. An example of such assembly codebase redirect:</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">&lt;dependentAssembly&gt;</span><span class="w">
-</span><span class="w">   </span><span class="l">&lt;assemblyIdentity name=&#34;System.Net.Http.Formatting&#34; publicKeyToken=&#34;31bf3856ad364e35&#34; culture=&#34;neutral&#34; /&gt;</span><span class="w">
-</span><span class="w">   </span><span class="l">&lt;codeBase version=&#34;5.6.0.0&#34; href=&#34;bin/System.Net.Http.Formatting_5.6.0.0/System.Net.Http.Formatting.dll&#34;/&gt;</span><span class="w">
-</span><span class="w"></span><span class="l">&lt;/dependentAssembly&gt;</span><span class="w">
-</span><span class="w"></span><span class="l">&lt;dependentAssembly&gt;</span><span class="w">
-</span><span class="w">   </span><span class="l">&lt;assemblyIdentity name=&#34;System.Net.Http.Formatting&#34; publicKeyToken=&#34;1234567891011121&#34; culture=&#34;neutral&#34; /&gt;</span><span class="w">
-</span><span class="w">   </span><span class="l">&lt;codeBase version=&#34;5.7.0.0&#34; href=&#34;bin/System.Net.Http.Formatting_5.7.0.0/System.Net.Http.Formatting.dll&#34;/&gt;</span><span class="w">
-</span><span class="w"></span><span class="l">&lt;/dependentAssembly&gt;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependentAssembly&gt;</span>
+   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;codeBase</span> <span class="na">version=</span><span class="s">&#34;5.6.0.0&#34;</span> <span class="na">href=</span><span class="s">&#34;bin/System.Net.Http.Formatting_5.6.0.0/System.Net.Http.Formatting.dll&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/dependentAssembly&gt;</span>
+<span class="nt">&lt;dependentAssembly&gt;</span>
+   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;1234567891011121&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;codeBase</span> <span class="na">version=</span><span class="s">&#34;5.7.0.0&#34;</span> <span class="na">href=</span><span class="s">&#34;bin/System.Net.Http.Formatting_5.7.0.0/System.Net.Http.Formatting.dll&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/dependentAssembly&gt;</span></code></pre></div>
 <p>Take a look at official documentation for more information: <a href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/specify-assembly-location">Specifying and assembly's location</a>.</p>
 <ol start="4">
 <li>When it comes to storing multiple versions of the same assembly, you can use Global Assembly Cache (GAC) but that's not my preferred solution, that's why I will not directly recommend it - unless it's an absolute requirement for your application. Wherever it's possible to run the application without the dependency on GAC, I would suggest doing so. The reason for this being that GAC makes it harder to maintain application's assemblies and dependencies. Installing and uninstalling a specific assembly also gets more complicated, compared to assemblies that are only located in the appbase folder. It is also strongly tied to Windows OS, and if you decide to migrate your application to .NET Core and make your product cross-platform, you will anyway need to handle deployment of your assemblies outside of GAC.</li>

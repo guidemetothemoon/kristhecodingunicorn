@@ -36,7 +36,7 @@ So, let\'s take a look at some examples!😼
 
 Let\'s say you have a collection of build tasks that you need to add to several build pipelines in your project. For example, build tasks that download some build artifacts, install some tools and run some common scripts. What you can do then is to make these tasks reusable by creating a YAML template and storing it in a common repo that can be referenced from all the respective pipelines. Here\'s an example of such a template YAML that is stored in a repo called ```common-templates```:
 
-```
+```yaml
 # prep-env-template.yaml
 
 - task: UseDotNet@2
@@ -64,7 +64,7 @@ Let\'s say you have a collection of build tasks that you need to add to several 
 
 As you can see, this template installs latest version of .NET 6 SDK on the build agent, downloads artifact from another repo\'s build and executes a PowerShell script to update some data for the service. Now, in every build pipeline where we want to execute these tasks we can check out the ```common-templates``` repo and integrate template with a ```template``` build task, like this:
 
-```
+```yaml
 # azure-pipeline.yaml
 
 ... 
@@ -88,7 +88,7 @@ And you\'re all set! 🤟
 
 In this example we have a multi-staged build pipeline for an application where one stage builds the app, executes tests, packages and publishes the application while another stage performs security validations. Both stages need to build an app while only build stage needs to run the tests and publish an app - that\'s when we can dynamically adjust which template tasks should be executed for which stage based on parameterization and task conditions. So in this case we store our template YAML in the same repo as the application, in a ```pipeline-templates``` folder:
 
-``` 
+```yaml
 # build-app-template.yaml
 
 parameters:  
@@ -131,7 +131,7 @@ As you can see, in the top of the template we have ```parameters``` section wher
 
 Now, in every stage of our main build pipeline we can dynamically adjust how the template should be executed, also by using ```parameters``` property:
 
-```
+```yaml
 # azure-pipeline.yaml
 
 ...

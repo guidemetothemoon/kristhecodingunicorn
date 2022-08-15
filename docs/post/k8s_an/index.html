@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_an\/",
-        "wordCount" : "2761",
+        "wordCount" : "2764",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -549,15 +539,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -701,9 +682,9 @@ kubectl get nodes -o wide
 <p><a href="https://docs.microsoft.com/en-us/azure/aks/node-access#create-the-ssh-connection-to-a-windows-node">Create the SSH connection to a Windows node</a></p>
 <p><a href="https://docs.microsoft.com/en-us/azure/aks/rdp">Connect to Windows Server nodes using remote desktop protocol (RDP) connections</a></p>
 <p>Once you've logged into the Windows nodes, you need to install and configure latte on both nodes - I recommend to check a few links in Additional resources section for more information on how to use latte.exe:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (PowerShell) Install latte - on SERVER and CLIENT node</span>
-mkdir <span class="s2">&#34;C:\tools&#34;</span>
-Invoke-WebRequest -OutFile <span class="s2">&#34;C:\tools\latte.exe&#34;</span> -Uri <span class="s2">&#34;https://github.com/microsoft/latte/releases/download/v0/latte.exe&#34;</span>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># 1. (PowerShell) Install latte - on SERVER and CLIENT node</span>
+<span class="n">mkdir</span> <span class="s2">&#34;C:\tools&#34;</span>
+<span class="nb">Invoke-WebRequest</span> <span class="n">-OutFile</span> <span class="s2">&#34;C:\tools\latte.exe&#34;</span> <span class="n">-Uri</span> <span class="s2">&#34;https://github.com/microsoft/latte/releases/download/v0/latte.exe&#34;</span>
 
 </code></pre></div><p>latte behaves a bit differently than SockPerf. You need to provide exactly the same command on server and on client with the only difference where you need to add <code>-c</code> parameter to a client command which will signal latte that this specific call is coming from a client machine. You need to ensure that you run command on server and on client node for every execution because latte exits after every completed execution.</p>
 <p><em><strong>Test with 64 message size and duration of 60 seconds</strong></em></p>
@@ -744,36 +725,53 @@ latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</sp
 <p><strong>Azure Portal:</strong> go to a resource group where AKS node pools are provisioned (normally it&rsquo;s different from the one where AKS resource itself is provisioned). If you're using a default resource group naming, it will have a format like this <code>MC_[AKS_RESOURCE_GROUP_NAME]_[AKS_CLUSTER_NAME]_[AKS_CLUSTER_LOCATION]</code>. Example: <code>MC_akstest-rg_akstest_northeurope</code>. In the chosen resource group locate node pools (VMSS resources) and navigate to those. In Networking section you can see a property called &quot;Accelerated networking&quot; and if it's enabled/disabled:</p>
 <p><img src="../../images/k8s_an/aks_vmss_an.png" alt="Location of Accelerated networking property in AKS node pool in Azure portal"></p>
 <p><strong>Azure CLI</strong>: you need to make a note of your AKS cluster name and resource group where it's deployed - once it's done, we can run below commands to check if Accelerated Networking is enabled for node pools in the chosen AKS cluster:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. Get the name of the resource group where AKS node pools are deployed</span>
-az aks show --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> --name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --query nodeResourceGroup
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># 1. Get the name of the resource group where AKS node pools are deployed</span>
 
-<span class="c1"># 2. Get the names of the AKS cluster node pools that we need to check AN property for</span>
-az aks nodepool list  --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --query <span class="s2">&#34;[].{Name:name}&#34;</span>
+<span class="n">az</span> <span class="n">aks</span> <span class="n">show</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[AKS_CLUSTER_RESOURCE_GROUP_NAME]</span> <span class="p">-</span><span class="n">-name</span> <span class="no">[AKS_CLUSTER_NAME]</span> <span class="p">-</span><span class="n">-query</span> <span class="n">nodeResourceGroup</span>
 
-<span class="c1"># 3. For each node pool, check if Accelerated Networking is enabled on a VMSS level </span>
-<span class="c1">#    Please remember that node pool name consists of &#34;aks&#34; which is appended automatically by Azure and the node pool name itself, f.ex. &#34;akswinpol&#34;, &#34;akslinpol&#34;</span>
-<span class="c1">#    Resource group here is the one that was retrieved in step 1</span>
-az vmss show --name <span class="o">[</span>AKS_NODE_POOL_NAME<span class="o">]</span> --resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --query <span class="s2">&#34;virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking&#34;</span>
+<span class="c"># 2. Get the names of the AKS cluster node pools that we need to check AN property for</span>
+
+<span class="n">az</span> <span class="n">aks</span> <span class="n">nodepool</span> <span class="n">list</span>  <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[AKS_CLUSTER_RESOURCE_GROUP_NAME]</span> <span class="p">-</span><span class="n">-cluster-name</span> <span class="no">[AKS_CLUSTER_NAME]</span> <span class="p">`</span>
+<span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name}&#34;</span>
+
+<span class="c"># 3. For each node pool, check if Accelerated Networking is enabled on a VMSS level </span>
+<span class="c">#    Please remember that node pool name consists of &#34;aks&#34; which is appended automatically by Azure and the node pool name itself, </span>
+<span class="c">#    f.ex. &#34;akswinpol&#34;, &#34;akslinpol&#34;</span>
+<span class="c">#    Resource group here is the one that was retrieved in step 1</span>
+
+<span class="n">az</span> <span class="n">vmss</span> <span class="n">show</span> <span class="p">-</span><span class="n">-name</span> <span class="no">[AKS_NODE_POOL_NAME]</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[NODE_POOL_RESOURCE_GROUP_NAME]</span> <span class="p">`</span> 
+<span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking&#34;</span>
 
 </code></pre></div><p>In case you have older node pools which were deployed before Accelerated Networking was supported in AKS, you might want to consider to enable that to start receiving the benefits of improved network performance.</p>
 <p><img src="../../images/k8s_an/cat_servants.gif" alt="GIF of a cat with his servants"></p>
 <p>In order to do that you will need to create a new node pool and migrate all the workloads from the initial node pool. If you're using an IaC tool for provisioning your AKS clusters, you can also handle it in the deployment template but I've seen cases where such a change may cause a full re-creation of a cluster and it will require some downtime and you might not want that. So another approach can be to simply create a new node pool where AN will be enabled by default (as long as it's a supported VM SKU which the most of them are😺).</p>
 <p>Alternative approach is similar to what a node image upgrade does, just that you will do it for the whole node pool:</p>
 <p>1.Retrieve configuration details of the node pool that is currently active - we want to create a new node pool that is the same as the existing node pool with only difference, which is enabled Accelerated Networking.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. Retrieve configuration details of the node pool that is currently active</span>
-az aks nodepool show --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP<span class="o">]</span> --name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
+<span class="c1"># 1. Retrieve configuration details of the node pool that is currently active</span>
+az aks nodepool show --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP<span class="o">]</span> 
+--name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+
 </code></pre></div><p>2.There are quite a few properties you can see in the output - a few to make a note of are <code>count</code>, <code>currentOrchestratorVersion</code>, <code>enableAutoScaling</code>, <code>maxCount</code>, <code>minCount</code>, <code>maxPods</code>, <code>nodeTaints</code>, <code>vmSize</code>. Now we can create a new node pool based on the existing node pool's configuration - please note that the name of the node pool must be different from the initial node pool (and renaming of the node pool is unfortunately not supported in AKS).</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 2. Create a new node pool based on existing node pool&#39;s configuration</span>
-az aks nodepool add --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --name <span class="o">[</span>NEW_NODE_POOL_NAME<span class="o">]</span> --resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --kubernetes-version <span class="o">[</span>CURRENT_ORCHESTRATOR_VERSION<span class="o">]</span> --os-type <span class="o">[</span>NODE_POOL_OS<span class="o">]</span> --node-count <span class="o">[</span>NODE_COUNT<span class="o">]</span> --enable-cluster-autoscaler --min-count <span class="o">[</span>MIN_COUNT<span class="o">]</span> --max-count <span class="o">[</span>MAX_COUNT<span class="o">]</span> --max-pods <span class="o">[</span>MAX_PODS<span class="o">]</span> --node-vm-size <span class="o">[</span>VM_SIZE<span class="o">]</span> --node-taints <span class="o">[</span>NODE_TAINTS<span class="o">]</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
+<span class="c1"># 2. Create a new node pool based on existing node pool&#39;s configuration</span>
+az aks nodepool add --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --name <span class="o">[</span>NEW_NODE_POOL_NAME<span class="o">]</span> 
+--resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --kubernetes-version <span class="o">[</span>CURRENT_ORCHESTRATOR_VERSION<span class="o">]</span> 
+--os-type <span class="o">[</span>NODE_POOL_OS<span class="o">]</span> --node-count <span class="o">[</span>NODE_COUNT<span class="o">]</span> --enable-cluster-autoscaler 
+--min-count <span class="o">[</span>MIN_COUNT<span class="o">]</span> --max-count <span class="o">[</span>MAX_COUNT<span class="o">]</span> --max-pods <span class="o">[</span>MAX_PODS<span class="o">]</span> --node-vm-size <span class="o">[</span>VM_SIZE<span class="o">]</span> --node-taints <span class="o">[</span>NODE_TAINTS<span class="o">]</span>
+
 </code></pre></div><p>3.Move workloads to the new node pool and delete the old node pool - it's a good idea to verify that all of your workloads have PodDisruptionBudget configured to avoid application downtime😉</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Cordon existing node pool to forbid scheduling workloads to it (use kubectl edit node [NODE_NAME] to see selector value for agentpool)</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
+<span class="c1"># Cordon existing node pool to forbid scheduling workloads to it (use kubectl edit node [NODE_NAME] to see selector value for agentpool)</span>
 kubectl cordon -l <span class="nv">agentpool</span><span class="o">=</span>winpol
 
 <span class="c1"># Drain cordoned node pool to move all workloads to a newly created node pool: </span>
 kubectl drain -l <span class="nv">agentpool</span><span class="o">=</span>winpol --force --delete-local-data --ignore-daemonsets --grace-period<span class="o">=</span><span class="m">10</span>
 
 <span class="c1"># Once workload migration is successful, delete old node pool: </span>
-az aks nodepool delete --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> --name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+az aks nodepool delete --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> 
+--name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+
 </code></pre></div><p>If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion.</p>
 <p>And we're finished! Now the migrated workloads can start benefiting from networking goodies offered by AN feature in AKS.</p>
 <h2 id="additional-resources">Additional resources</h2>

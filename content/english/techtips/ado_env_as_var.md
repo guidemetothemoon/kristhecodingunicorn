@@ -33,7 +33,7 @@ Then in case you need to change a target Azure DevOps Environment, you would nee
 
 In the pipelines you can then import your variable group at the **root** of the pipeline (it\'s important to import it at the root of the pipeline defintion so that the values can be populated during compile time) and you can refer the respective environment as if you would refer any other build variable:
 
-``` bash
+``` yaml
 trigger:
   branches:
     include:

@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/owasp_depcheck\/",
-        "wordCount" : "2591",
+        "wordCount" : "2534",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -542,15 +532,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -582,7 +563,7 @@ if (!doNotTrack) {
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">13-minute read</span>
+            <span class="post__meta-text">12-minute read</span>
           </li>
         </ul>
 
@@ -624,35 +605,35 @@ if (!doNotTrack) {
 <p>Next step is to add a build task to your pipeline in order to continuously perform security scanning. OWASP Dependency Check supports several file type analyzers, you can find an overview here: <a href="https://jeremylong.github.io/DependencyCheck/analyzers/index.html">File Type Analyzers</a>. You can, for example, use <a href="https://jeremylong.github.io/DependencyCheck/analyzers/nuspec-analyzer.html">Nuspec</a> analyzer that will parse NuGet package specification file, or <a href="https://jeremylong.github.io/DependencyCheck/analyzers/nugetconf-analyzer.html">Nugetconf</a> analyzer that will parse NuGet packages.config file. In my case we're using centralized management of NuGet package versions so we can't use any one of the mentioned file type analyzers. Therefore, we've decided to use <a href="https://jeremylong.github.io/DependencyCheck/analyzers/assembly-analyzer.html">Assembly</a> analyzer to perform security scanning of all .NET .dll and .exe files in our applicaiton.</p>
 <p>Security scanning may take time, especially when you have quite big application with hundreds of assemblies, therefore I would recommend to create a separate job in your build pipeline that will execute security-related tasks in parallell with the rest of the build tasks. Another benefit is that, as you add more security controls to the build pipeline, you can group them under the same build job, and have a central place where all security controls are defined. It will then be much easier for you and other developers or even security auditors to get an overview of all security checks implemented as part of the application's secure development lifecycle.</p>
 <p>Here's an example of how such security job can look like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">- job: myrepo_security_job
-  steps:
-  - task: DotNetCoreCLI@2
-    displayName: <span class="s1">&#39;Build myrepo solution&#39;</span> <span class="c1"># In order to scan assemblies and executables I need to build my application code first</span>
-    inputs:
-      command: <span class="s1">&#39;build&#39;</span>
-      projects: <span class="s1">&#39;**/*.sln&#39;</span>
-      arguments: <span class="s1">&#39;--configuration $(BuildConfiguration)&#39;</span> <span class="c1"># $(BuildConfiguration) = &#39;Release&#39;</span>
-
-  - task: dependency-check-build-task@5
-    displayName: <span class="s1">&#39;OWASP Dependency Check scan of third-party dependencies&#39;</span> <span class="c1"># This task will perform security scan of third-party dependencies</span>
-    inputs:
-      projectName: <span class="s1">&#39;myrepo&#39;</span>
-      scanPath: <span class="s1">&#39;$(Build.SourcesDirectory)/**/bin/$(BuildConfiguration)/net5.0/*.dll&#39;</span>
-      failOnCVSS: <span class="m">8</span> <span class="c1"># Fail the build if vulnerabilities with CVSS score higher than 8 are discovered</span>
-      format: <span class="s1">&#39;HTML, JUNIT&#39;</span> <span class="c1"># Format of scan result report</span>
-      suppressionPath: <span class="s1">&#39;$(Build.SourcesDirectory)/suppression-file.xml&#39;</span> <span class="c1"># File where all the suppressed vulnerabilities are defined</span>
-      enableExperimental: <span class="nb">true</span> <span class="c1"># Enable experimental file type analyzers</span>
-      additionalArguments: <span class="s1">&#39;--scan $(Build.SourcesDirectory)/**/bin/$(BuildConfiguration)/net5.0-windows/*.dll&#39;</span> <span class="c1"># Additional folder to scan</span>
-      dependencyCheckVersion: <span class="s1">&#39;6.1.6&#39;</span>
-
-  - task: PublishTestResults@2
-    displayName: <span class="s1">&#39;Publish OWASP Dependency Check security scan results&#39;</span>
-    inputs:
-      testResultsFormat: <span class="s1">&#39;JUnit&#39;</span>
-      testResultsFiles: <span class="s1">&#39;dependency-check/*junit.xml&#39;</span>
-      searchFolder: <span class="s1">&#39;$(Common.TestResultsDirectory)&#39;</span>
-      testRunTitle: <span class="s1">&#39;Dependency Check&#39;</span>
-      buildConfiguration: <span class="s1">&#39;$(BuildConfiguration)&#39;</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">myrepo_security_job</span><span class="w">
+</span><span class="w">  </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">    </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Build myrepo solution&#39;</span><span class="w"> </span><span class="c"># In order to scan assemblies and executables I need to build my application code first</span><span class="w">
+</span><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;build&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*.sln&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(BuildConfiguration)&#39;</span><span class="w"> </span><span class="c"># $(BuildConfiguration) = &#39;Release&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">dependency-check-build-task@5</span><span class="w">
+</span><span class="w">    </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;OWASP Dependency Check scan of third-party dependencies&#39;</span><span class="w"> </span><span class="c"># This task will perform security scan of third-party dependencies</span><span class="w">
+</span><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">projectName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;myrepo&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">scanPath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/bin/$(BuildConfiguration)/net5.0/*.dll&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">failOnCVSS</span><span class="p">:</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="c"># Fail the build if vulnerabilities with CVSS score higher than 8 are discovered</span><span class="w">
+</span><span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;HTML, JUNIT&#39;</span><span class="w"> </span><span class="c"># Format of scan result report</span><span class="w">
+</span><span class="w">      </span><span class="nt">suppressionPath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/suppression-file.xml&#39;</span><span class="w"> </span><span class="c"># File where all the suppressed vulnerabilities are defined</span><span class="w">
+</span><span class="w">      </span><span class="nt">enableExperimental</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># Enable experimental file type analyzers</span><span class="w">
+</span><span class="w">      </span><span class="nt">additionalArguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--scan $(Build.SourcesDirectory)/**/bin/$(BuildConfiguration)/net5.0-windows/*.dll&#39;</span><span class="w"> </span><span class="c"># Additional folder to scan</span><span class="w">
+</span><span class="w">      </span><span class="nt">dependencyCheckVersion</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;6.1.6&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishTestResults@2</span><span class="w">
+</span><span class="w">    </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Publish OWASP Dependency Check security scan results&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">testResultsFormat</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;JUnit&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">testResultsFiles</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;dependency-check/*junit.xml&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">searchFolder</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Common.TestResultsDirectory)&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">testRunTitle</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Dependency Check&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">buildConfiguration</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(BuildConfiguration)&#39;</span></code></pre></div>
 <p>Now every time the build is triggered, a security job will perform security scanning of all .dll and .exe files that have been generated for my application. In case any known vulnerability with CVSS score higher than 8 is discovered and the discovered vulnerability hasn't been suppressed, the build will fail which means that I will need to fix the error and handle the discovered vulnerability before the code can be merged to master.</p>
 <p>One of the build tasks publishes scan results for each build so we can check in more detail what vulnerabilities have been discovered during scanning, what the CVSS scores are for each vulnerability, where each vulnerability was registered, etc. In the example above I have defined 2 formats for the report:</p>
 <ol>
@@ -687,16 +668,16 @@ if (!doNotTrack) {
 <p><strong>How can I suppress the vulnerability?</strong></p>
 <p>If you need to suppress the vulnerability, you will need to create a suppression file (or update one if it already exists in the repository). You can place the file in the root of your source code repository but it can also be placed in a different location - as you saw earlier, location for the suppression file must be provided in the build task for OWASP Dependency Check (suppressionPath). Add a new &lt;suppress&gt; -node to the bottom of the suppression XML with a comment describing why this vulnerability is being suppressed. If you have several assemblies that are linked to the same vulnerability with the same CVE, you can include those in the same suppression node, as shown in the example below. Some vulnerabilities may have been published with multiple CVE-s and in that case you will need to suppress the vulnerability for every CVE it was registered with. If you have projects that have separate binary output folders, you will need to add a separate suppression node for every binary output folder where this assembly exists. You can find more information about suppressing vulnerabilities here: <a href="https://jeremylong.github.io/DependencyCheck/general/suppression.html">Suppressing False Positives</a>.</p>
 <p>Here is an example of a suppression definition for a vulnerability related to MS Office 2013 that can be fixed by installing a security patch provided by Microsoft:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">    &lt;!--Vulnerability is related to Office <span class="m">2013</span> and a security fix must be deployed <span class="k">for</span> customers 
-        using Office 2013: https://docs.microsoft.com/en-us/security-updates/securitybulletins/2015/ms15-059#affected-software--&gt;
-    &lt;suppress&gt;
-       &lt;notes&gt;&lt;!<span class="o">[</span>CDATA<span class="o">[</span>
-       file name: Microsoft.Office.Client.Education.dll
-       file name: Microsoft.Office.Client.TranslationServices.dll
-       <span class="o">]]</span>&gt;&lt;/notes&gt;
-       &lt;filePath <span class="nv">regex</span><span class="o">=</span><span class="s2">&#34;true&#34;</span>&gt;.*<span class="se">\b</span>MY_ASSEMBLY_FOLDER.*<span class="se">\b</span>Microsoft.Office.Client.*<span class="se">\b</span>.dll&lt;/filePath&gt;
-       &lt;cve&gt;CVE-2015-1770&lt;/cve&gt;
-    &lt;/suppress&gt;</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="c">&lt;!--Vulnerability is related to Office 2013 and a security fix must be deployed for customers 
+</span><span class="c">        using Office 2013: https://docs.microsoft.com/en-us/security-updates/securitybulletins/2015/ms15-059#affected-software--&gt;</span>
+    <span class="nt">&lt;suppress&gt;</span>
+       <span class="nt">&lt;notes&gt;</span><span class="cp">&lt;![CDATA[
+</span><span class="cp">       file name: Microsoft.Office.Client.Education.dll
+</span><span class="cp">       file name: Microsoft.Office.Client.TranslationServices.dll
+</span><span class="cp">       ]]&gt;</span><span class="nt">&lt;/notes&gt;</span>
+       <span class="nt">&lt;filePath</span> <span class="na">regex=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>.*\bMY_ASSEMBLY_FOLDER.*\bMicrosoft.Office.Client.*\b.dll<span class="nt">&lt;/filePath&gt;</span>
+       <span class="nt">&lt;cve&gt;</span>CVE-2015-1770<span class="nt">&lt;/cve&gt;</span>
+    <span class="nt">&lt;/suppress&gt;</span></code></pre></div>
 <p>First of all, we've added a comment about why the vulnerability is being suppressed so that other developers in the team will not question it. Then we've listed all the assemblies this vulnerability was discovered for - we want to suppress the vulnerability only for the assemblies it has been discovered for. If we add new assemblies in the future, we would still like to know if those assemblies are affected by the same vulnerability instead of letting it go undetected - that's how we can get a bigger picture and clearer understanding of what the security state is for all of the external dependencies we're using in the application. Next we've defined the location of assemblies and/or executables the vulnerability was discovered for - when multiple files are affected, regular expressions can be used to provide the file path. Lastly we've provided a Common Vulnerability and Exposure id that the vulnerability was published for - in case it was published for multiple CVE-s, we'll need to create additional suppression nodes for the remaining CVE-s.</p>
 <p>And that's it - after the suppression file is added to the application's source code repository, we can re-trigger the build and it will no longer fail due to this vulnerability.</p>
 <p>That's it from me this time, thanks for checking in! If you would like to know more about OWASP Dependency Check, you can find official documentation for the tool here: <a href="https://jeremylong.github.io/DependencyCheck">https://jeremylong.github.io/DependencyCheck</a></p>

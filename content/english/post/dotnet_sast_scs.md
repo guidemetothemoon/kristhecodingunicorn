@@ -55,7 +55,7 @@ Since it\'s a .NET tool it\'s just a matter of few commands to get it installed 
 
 Build tasks in your yaml-file can look like this:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 - task: PowerShell@2
   displayName: 'Run Security Code Scan'
   inputs:
@@ -70,7 +70,7 @@ Build tasks in your yaml-file can look like this:
 
 You can take a look at the PowerShell script below. Here, I\'m excluding the test projects from scanning since those will not be rolled out to production. I would also like to publish CWE id-s so that I can get more information about the discovered vulnerabilities from Common Weakness Enumeration lists, for example the one from [MITRE](https://cwe.mitre.org/data/index.html). Lastly, I would like to dynamically generate a scan result report for all the scanned source code that I will then publish as a build artifact (ref. PublishBuildArtifacts@1 build task above). You can also provide other arguments to the tool in order to customize it\'s execution, I\'ll mention more about it in the Local Installation section below.
 
-{{< highlight bash >}}
+{{< highlight powershell >}}
 Write-Output "Installing Security Code Scan..."
 dotnet tool install --global security-scan --version 5.1.1
 $solutionsToScan = Get-ChildItem -Path $PSScriptRoot/../ -Recurse -ErrorAction SilentlyContinue -Filter *.sln  | Select-Object fullname
@@ -84,7 +84,7 @@ foreach($sln in $solutionsToScan)
 
 If you don\'t want to create a separate PowerShell script for this, you can simply install and execute CSC as part of the inline PowerShell build task:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 - script: |
     dotnet tool install --global security-scan --version 5.1.1
     security-scan MySolutionFolder/My.Solution.sln --excl-proj=**/*Test*/** --cwe --export=sast-results.sarif
@@ -96,13 +96,11 @@ If you don\'t want to create a separate PowerShell script for this, you can simp
 
 You can also install and run Security Code Scan as a .NET tool locally. In the example below, I installed the tool and executed it with the same arguments as the ones used in the build pipeline example above.
 
-{{< highlight bash >}}
-dotnet tool install --global security-scan --version 5.1.1 --interactive
-{{< /highlight >}}
+```dotnet tool install --global security-scan --version 5.1.1 --interactive```
 
 ![Secure Code Scan .NET tool installation output](../../images/dotnet_sast_scs/scs_install_1.jpg)
 
-{{< highlight xml >}}
+{{< highlight txt >}}
 PS C:\> security-scan .\My.Solution.sln --excl-proj=**/*Test*/** --cwe --export=sast-report.sarif
 
 ╔═╗┌─┐┌─┐┬ ┬┬─┐┬┌┬┐┬ ┬  ╔═╗┌─┐┌┬┐┌─┐  ╔═╗┌─┐┌─┐┌┐┌
@@ -169,7 +167,7 @@ You can export scan results into a separate report by providing **--export=<REPO
 
 SARIF is based on JSON so you can easily download the report and view it locally in Notepad or IDE of your choice. Let\'s open the \"sast-report.sarif\" file I\'ve configured during execution of SCS in the Local Installation section: in \"results\" section I can see all potential security vulnerabilities that have been discovered by the tool:
 
-{{< highlight bash >}}
+{{< highlight json >}}
       "results": [
         {
           "ruleId": "SCS0023",

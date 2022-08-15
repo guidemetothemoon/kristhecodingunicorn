@@ -109,15 +109,15 @@ does not match the assembly reference. (Exception from HRESULT: 0x80131040){{< /
 
 In order to find out what packages are referencing this dependency, let\'s execute following command and inspect dependencies included in the applicaiton\'s source code:
 
-{{< highlight html >}}dotnet list MyTestSolution.sln package --include-transitive -framework net5.0{{< /highlight >}}
+```dotnet list MyTestSolution.sln package --include-transitive -framework net5.0```
 
 If you have many dependencies it\'s better to write the output to a separate file which you can easily analyze:
 
-{{< highlight html >}}dotnet list MyTestSolution.sln package --include-transitive -framework net5.0 > mytestsln-dependencies.txt{{< /highlight >}}
+```dotnet list MyTestSolution.sln package --include-transitive -framework net5.0 > mytestsln-dependencies.txt```
 
 After analyzing the output we could identify following two projects dependent upon different versions of System.Security.Cryptography.Xml:
 
-{{< highlight yaml >}}
+{{< highlight txt >}}
 Project 'TestProject-A' has the following package references
    [net5.0]: 
    Top-level Package                                Requested   Resolved
@@ -159,7 +159,7 @@ There are several ways assembly version conflicts can be resolved:
 
 2. Sometimes you need to use specific versions for some dependencies and can\'t enforce point #1 - an alternative solution would then be to **add an assembly binding redirect to the application\'s configuration file** (for example, App.config). This will redirect all components of your application that attempt to load an older version of a specific assembly to use another, typically newer, version of the same assembly. An example of such binding redirect:
 
-{{< highlight yaml >}}
+{{< highlight xml >}}
 <dependentAssembly>
    <assemblyIdentity name="System.Net.Http.Formatting" publicKeyToken="31bf3856ad364e35" culture="neutral" />
    <bindingRedirect oldVersion="0.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
@@ -170,7 +170,7 @@ Here, all versions up to 5.2.7.0 of System.Net.Http.Formatting assembly will be 
 
 3. There are situations where you may need to use the same assembly but with different identities, and you are not using Global Assembly Cache. I\'ve experienced a scenario where we had two third-party dependencies in our application that were using different versions of the same package that was strong-name signed. In the newer version of the package authors have changed public/private key pair that was used for signing the assembly with strong name, which caused a totally different assembly identity than what the application expected. We had to keep both versions of this package due to the direct application dependencies - and that\'s when **assembly redirect based on codebase** came in handy. What differs it from point #2 is that, instead of defining a binding redirect, you create a separate folder in your appbase where you will store one of the versions of the conflicting assembly. In this way you will tell the application where to look for a specific version of the assembly. An example of such assembly codebase redirect:
 
-{{< highlight yaml >}}
+{{< highlight xml >}}
 <dependentAssembly>
    <assemblyIdentity name="System.Net.Http.Formatting" publicKeyToken="31bf3856ad364e35" culture="neutral" />
    <codeBase version="5.6.0.0" href="bin/System.Net.Http.Formatting_5.6.0.0/System.Net.Http.Formatting.dll"/>
@@ -194,6 +194,7 @@ With the advent of .NET Core and the need for cross-platform support in many app
 You can read more about strong name signing in .NET Core on [GitHub](https://github.com/dotnet/runtime/blob/main/docs/project/strong-name-signing.md).
 
 And in case you\'re wondering if unsigned assemblies will be able to call strong name signed assemblies, the answer is: **\'Yes, they can!\'**. 
+
 > Unsigned assemblies can load strong-name signed assemblies but **not** the other way around, so even if you decide to remove strong name signing in your application you\'ll still be able to use third-party dependencies that are signing their assemblies with strong name.
 
 In conclusion I would say that as long as your application targets .NET Core or you\'re in process of migrating your application to .NET Core, you should **not** use strong name signing for your assemblies. Unless you need to, of course.

@@ -74,7 +74,7 @@ Now we\'re done with setting everything up in Azure AD - let\'s prepare our appl
 
 In order to be able to expose our application publicly, we need to create an Ingress. Since my kubecost application is already exposed, I have an Ingress resource already which looks something like this:
 
-``` bash
+``` yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -130,7 +130,7 @@ Now, the only thing we will need to do to configure support for OAuth 2.0 authen
 
 So, in my example the final kubecost application Ingress definition will look like this:
 
-``` bash 
+``` yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -175,9 +175,15 @@ The last thing we need to do before we can deploy OAuth2 Proxy is to save Client
 In AKS cluster where OAuth2 Proxy will be installed, in the namespace where your application is running (in my case it\'s ```kubecost```), run following commands with ```kubectl``` in order to create secrets for the respective values:
 
 ``` bash
+
 kubectl create secret generic client-id --from-literal=oauth2_proxy_client_id=[client-id-value] -n [application-namespace]
-kubectl create secret generic client-secret --from-literal=oauth2_proxy_client_secret=[client-secret-value] -n [application-namespace]
-kubectl create secret generic cookie-secret --from-literal=oauth2_proxy_cookie_secret=[cookie-secret-value] -n [application-namespace]
+
+kubectl create secret generic client-secret --from-literal=oauth2_proxy_client_secret=[client-secret-value] 
+-n [application-namespace]
+
+kubectl create secret generic cookie-secret --from-literal=oauth2_proxy_cookie_secret=[cookie-secret-value] 
+-n [application-namespace]
+
 ```	
 You can also create Kubernetes Secrets from file by using ```--from-file``` instead of ```--from-literal``` where you provide the values directly in the command line - you can find more about it here: [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#create-a-secret)
 
@@ -193,7 +199,7 @@ A few things to be aware of:
 
 - In the ```template.spec.containers.env``` section of the Deployment, we\'re integrating Kubernetes Secrets for the sensitive values which we created earlier as the environment variables for OAuth2 Proxy. Names of the environment variables should stay as provided in the example since that\'s what OAuth2 Proxy expects: [OAuth2 Proxy - Environment variables](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#environment-variables)
 
-``` bash
+``` yaml
 #oauth2-proxy.yaml
 
 apiVersion: apps/v1

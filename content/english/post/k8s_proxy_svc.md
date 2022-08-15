@@ -71,7 +71,7 @@ Now we\'re ready to create and deploy our Service for proxying. There are two Se
 
 Let\'s start with creating a default ClusterIP Service without selectors first:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 #service.yaml
 
 apiVersion: v1
@@ -88,7 +88,7 @@ spec:
 As you can see we\'re not providing any selectors and since we\'re using default Service type (ClusterIP), we don\'t need to specify the type either. We only need to specify the Service name and port. I\'m using Kubernetes deployment templates but Helm templates can be used here as well if you would like a more generic deployment of these resources.
 Now, if you remember from the previous section, since we\'re creating a Service without selectors, no Endpoint is being created for us so we need to create an Endpoint manually and provide IP address of the external service we want to proxy requests to. I will use an IP address of IPValidator app running on an Azure VM (IP address is inactive now and was used only for demonstration purposes :) ):
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 #endpoint.yaml
 
 apiVersion: v1
@@ -104,7 +104,7 @@ subsets:
 
 Now, let\'s create an Ingress to enable traffic routing to our Service. I\'m using NGINX Ingress therefore it\'s specified in the annotations but you can definitely use any other Ingress here as well. I\'m also not demonstrating TLS configuration here but you can enable that as well.
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 #ingress.yaml
 
 apiVersion: networking.k8s.io/v1
@@ -145,7 +145,7 @@ Now, let\'s see how the same can be achieved with ExternalName Service!
 
 If you remember from the earlier section, for ExternalName Service we don\'t need to bother about creating an Endpoint, we just need to specify correct Service type and provide the FQDN of the external service we want to proxy the requests to. So our Service definition will look something like this:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 #service.yaml
 
 apiVersion: v1
@@ -159,7 +159,7 @@ spec:
 
 Now, we can create an Ingress - it\'s pretty much the same as the one we created for default Service without selectors but now we\'re pointing to the ExternalName Service instead:
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 #ingress.yaml
 
 apiVersion: networking.k8s.io/v1

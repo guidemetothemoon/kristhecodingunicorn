@@ -79,7 +79,7 @@ Pluto doesn\'t have an Azure DevOps extension that you could use directly in Azu
 
 Let\'s take a look at the pipeline first. You will need to check out those Azure DevOps repositories where you want Pluto to scan for deprecated and removed Kubernetes API versions. Then you will need to install Pluto on a build agent and call a script that runs all the necessary Pluto commands. An example of pipeline definition is provided below - replace ```project_name``` with Azure DevOps project name and ```repository_name``` with Azure DevOps repository name that you want to scan:
 
-```
+```yaml
 # api-deprecations-pipeline.yml
 trigger:
 - master
@@ -124,7 +124,7 @@ As you can see in the last build task, we\'re calling a script that will execute
 
 I\'ve created a Bash script that can be used as a template that you can customize to your needs. As an argument it requires a path to the working directory where the repos are located - in our case it\'s default working directory in Azure DevOps. What the script does is that for every checked out repository it will first detect and scan non-Helm resources like Kubernetes YAML templates with help of ```pluto detect-files``` command. Then it will attempt to locate Helm charts and if any Helm charts exist, the script will render each Helm chart based on the standard ```values.yaml``` file and use ```pluto detect``` command to scan it further for deprecated and removed API versions.
 
-```
+```bash {linenos=inline}
 # scan-api-deprecations.sh
 
 reposToScan=("[repository_name") # in case of multiple repos, separate them with whitespace, f.ex. ("repo1" "repo2" "repo3")
@@ -150,12 +150,6 @@ for repo in "${reposToScan[@]}"; do
         helmChartBaseDir="$(dirname "${helmChartDir}")"
 
         helmValuesFile=$(find "$helmChartBaseDir" -type f -iname "values.yaml")
-
-        # If you're using custom Helm values files, you can comment above line and have more granular filtering of values file with the commented code block below        
-        #helmValuesFile=$(find "$helmChartBaseDir" -type f -regextype posix-extended -iregex '.*values-prod.yaml|.*deploy-values.yaml')
-        #if [ -z "$helmValuesFile" ]; then 
-        #    helmValuesFile=$(find "$helmChartBaseDir" -type f -iname "values.yaml")
-        #fi
         
         printf "\nLocated Helm values file:$helmValuesFile -> checking...\n"
         helm template "$helmChartBaseDir" -f "$helmValuesFile" | ./pluto detect - -o markdown --ignore-deprecations --ignore-removals 
@@ -165,9 +159,9 @@ done
       
 echo "Pluto executed scanning successfully!"
 ```
-If you\'re using custom Helm values file you can replace ```helmValuesFile=$(find "$helmChartBaseDir" -type f -iname "values.yaml")``` line of the script with the code block below and customize regex expression according to the file names you\'re using in your projects. In my example, it\'s ```values-prod.yaml``` or ```deploy-values.yaml```.
+If you\'re using custom Helm values file you can replace line 25 -> ```helmValuesFile=$(find "$helmChartBaseDir" -type f -iname "values.yaml")``` of the script above with the code block below and customize regex expression according to the file names you\'re using in your projects. In my example, it\'s ```values-prod.yaml``` or ```deploy-values.yaml```.
 
-```
+```bash
 helmValuesFile=$(find "$helmChartBaseDir" -type f -regextype posix-extended -iregex '.*values-prod.yaml|.*deploy-values.yaml')
 if [ -z "$helmValuesFile" ]; then 
    helmValuesFile=$(find "$helmChartBaseDir" -type f -iname "values.yaml")
@@ -176,7 +170,7 @@ fi
 
 The output in the build pipeline will look something like this:
 
-```bash
+```txt
 *********** my-repo-name ************
 
 YAML TEMPLATES:
@@ -204,7 +198,7 @@ The script above is configured to succeed even though deprecated or removed API 
 
 If you want to run Pluto as part of your GitHub workflow, there is a separate GitHub action that you can use to download Pluto. For executing Pluto there is no separate GitHub action but you can use Pluto commands directly:
 
-```
+```yaml
 - uses: actions/checkout@v2
 
 - name: Install Pluto

@@ -9,6 +9,9 @@ favicon = "favicons/"
 displayMode = "dark"
 readMore = true
 enableEmoji = true
+disableThemeSwitcher = true
+pygmentsCodeFences = true
+pygmentsUseClasses = true
 
 # example ["css/custom.css"]
 customCss = ["css/syntax.css"]

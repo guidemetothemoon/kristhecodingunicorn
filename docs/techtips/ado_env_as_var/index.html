@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/ado_env_as_var\/",
-        "wordCount" : "484",
+        "wordCount" : "459",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -542,15 +532,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -577,31 +558,31 @@ if (!doNotTrack) {
 <p>Then in case you need to change a target Azure DevOps Environment, you would need to update it in one place instead of a hundred places which results in higher re-usability, less duplicated code and faster upgrades. So you can do that by going to <code>Pipelines -&gt; Library</code> section in Azure DevOps and choose <code>+ Variable group</code> to create a new variable group (you can also use existing one if you want). Then you will need to provide a variable group name, description and create variables with values representing your target Azure DevOps Environments, like it's shown in the screenshot below:</p>
 <p><img src="../../images/tech_tips/ado_env_vargroup.png" alt="Screenshot of variable group for Azure DevOps target environments"></p>
 <p>In the pipelines you can then import your variable group at the <strong>root</strong> of the pipeline (it's important to import it at the root of the pipeline defintion so that the values can be populated during compile time) and you can refer the respective environment as if you would refer any other build variable:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">trigger:
-  branches:
-    include:
-    - master
-
-variables:
-  - group: <span class="s1">&#39;ado-envs&#39;</span> <span class="c1"># &lt;- importing a variable group at the root of the pipeline definition</span>
-
-<span class="c1"># REST OF THE CODE IS OMITTED</span>
-
-stages:
-  - stage: Build
-
-  <span class="c1"># REST OF THE CODE IS OMITTED</span>
-
-  - stage: Deploy_Dev
-    jobs:
-    - deployment: Deploy_Dev_AKS
-      pool:
-        vmImage: <span class="s1">&#39;ubuntu-latest&#39;</span>
-      environment: <span class="k">$(</span>ADOEnvDev<span class="k">)</span>.my-testapp <span class="c1"># &lt;- referencing ADO Environment as regular variable</span>
-      strategy:
-
-      <span class="c1"># REST OF THE CODE IS OMITTED</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">trigger</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">master</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ado-envs&#39;</span><span class="w"> </span><span class="c"># &lt;- importing a variable group at the root of the pipeline definition</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Build</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev</span><span class="w">
+</span><span class="w">    </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">deployment</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev_AKS</span><span class="w">
+</span><span class="w">      </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l">$(ADOEnvDev).my-testapp</span><span class="w"> </span><span class="c"># &lt;- referencing ADO Environment as regular variable</span><span class="w">
+</span><span class="w">      </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w">      </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></code></pre></div><blockquote>
 <p>Since we must import variable group at the root of the pipeline, please note that if you're importing multiple variable groups with equal variable names like this, they might overwrite each other during build execution so please ensure that there are no variable name conflicts across variable groups when importing this way.</p>
 </blockquote>
 <p>You can do the same with the target resource as well where we could create a <code>$(testAppResourceDev)</code> variable in the same variable group and replace <code>my-testapp</code> with <code>$(testAppResourceDev)</code>.</p>

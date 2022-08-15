@@ -34,7 +34,7 @@ Let\'s look at the whole flow from creating a .NET tool to installing/uninstalli
 
 In order to convert my app to a .NET tool I will need to add following 3 properties to the .csproj file:
 
-{{< highlight bash >}}
+{{< highlight xml >}}
 <PackAsTool>true</PackAsTool>
 <ToolCommandName>admincli</ToolCommandName>
 <PackageOutputPath>./nupkg</PackageOutputPath>
@@ -46,7 +46,7 @@ First property defines that current tool will be packaged as a .NET tool. Second
 
 Now my admin tool is ready to be uploaded to a NuGet feed so that others can install and start using it - since I\'m using Azure Pipelines to continuously build it, I will be adding some new build tasks to pack and push the newly created Admin CLI tool to the private NuGet feed.
 
-{{< highlight bash >}}
+{{< highlight yaml >}}
 - task: DotNetCoreCLI@2
   displayName: 'dotnet pack Admin.CLI'
   inputs:
@@ -86,24 +86,29 @@ Before we install the Admin CLI tool that we created in the previous section, we
 
 Now we can install the Admin CLI .NET tool as a global tool by executing following command:
 
-{{< highlight html >}}dotnet tool install --global Admin.CLI --configfile ".\nuget.config"{{< /highlight >}}
+```dotnet tool install --global Admin.CLI --configfile ".\nuget.config"```
 
 It is always a good idea to test that the tool works as expected before pushing it to the NuGet feed - you can do it locally by generating a NuGet package for your console application and installing it as a .NET tool from a generated .nupkg file (please ensure that you\'re running install command from the application directory):
 
-{{< highlight html >}}
+```
 dotnet pack Admin.CLI.csproj
 dotnet tool install --global --add-source ./nupkg Admin.CLI
-{{< /highlight >}}
+```
 
 After the tool is installed, you will get information in the command line output about how you can invoke it. Since I have provided a custom tool command name in the project file definition, I can start the tool by executing **\"admincli\"** command.
 
-{{< highlight html >}}You can invoke the tool using the following command: admincli
-Tool 'Admin.CLI' (version '1.0.0') was successfully installed.{{< /highlight >}}
+{{< highlight txt >}}
+
+You can invoke the tool using the following command: admincli
+Tool 'Admin.CLI' (version '1.0.0') was successfully installed.
+
+{{< /highlight >}}
 
 And that\'s it, the tool starts as expected and you\'re ready to use it!
 
 If you\'re dealing with a tool that can be invoked as part of the build pipeline, you can easily install and start it with help of a build task like this:
-{{< highlight bash >}}
+
+{{< highlight yaml >}}
 - script: |
     dotnet tool install -g Admin.CLI
     admincli --generate-install-scripts 
@@ -114,11 +119,11 @@ If you\'re dealing with a tool that can be invoked as part of the build pipeline
 
 It\'s a good practice to regularly update the tools you\'re using to the latest version. You can easily update .NET tools by executing following command:
 
-{{< highlight html >}}dotnet tool update -g Admin.CLI{{< /highlight >}}
+```dotnet tool update -g Admin.CLI```
 
 If you want to uninstall the tool, you can do it by executing following command:
 
-{{< highlight html >}}dotnet tool uninstall -g Admin.CLI{{< /highlight >}}
+```dotnet tool uninstall -g Admin.CLI```
 
 ## Additional resources
 

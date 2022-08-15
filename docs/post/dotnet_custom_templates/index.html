@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/dotnet_custom_templates\/",
-        "wordCount" : "2789",
+        "wordCount" : "2770",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -535,15 +525,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -621,30 +602,30 @@ if (!doNotTrack) {
 <li><strong>pipeline.yml</strong>: this file will contain build pipeline definition that will package dotnet template collection and push the generated NuGet package to our private NuGet feed (or public feed, depending on your use case).</li>
 <li><strong>Custom.Dotnet.Templates.csproj</strong>: this is a basic C# project file that can be built in order to produce a NuGet package for our template collection. Example of the project file I have used is provided below: first batch of properties is used to provide information  that will be used and displayed as part of the NuGet package. TargetFramework property is needed in order for the MSBuild to run properly when the project is being compiled and packed. It is also possible to provide <strong>&lt;PackageVersion&gt;</strong> property but in our use case we'll be using semantic versioning to centrally and automatically version the NuGet package as part of the build pipeline execution, therefore the property is not defined in this example. Second batch of properties, starting with <strong>&lt;IncludeContentInPack&gt;</strong> will be used to include all the custom templates in the proper folder when NuGet package is created. Lastly, settings defined in the <strong>&lt;ItemGroup&gt;</strong> section will include only what's located in &quot;templates&quot; folder (except for &quot;bin&quot; and &quot;obj&quot; folders since we don't want output from our testing to be a part of standard template package). <strong>&lt;Compile&gt;</strong> setting will prevent compilation of any code located in &quot;templates&quot; directory - the purpose of this project file is not to build any real application code but to generate a collection of project templates.</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">&lt;!-- This is example code <span class="k">for</span> project definition used to create dotnet template collection pack --&gt;
-&lt;Project <span class="nv">Sdk</span><span class="o">=</span><span class="s2">&#34;Microsoft.NET.Sdk&#34;</span>&gt;
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- This is example code for project definition used to create dotnet template collection pack --&gt;</span>
+<span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&#34;Microsoft.NET.Sdk&#34;</span><span class="nt">&gt;</span>
 
-  &lt;PropertyGroup&gt;
-    &lt;PackageType&gt;Template&lt;/PackageType&gt;
-    &lt;PackageId&gt;Custom.Dotnet.Templates&lt;/PackageId&gt;
-    &lt;Title&gt;Dotnet Custom Templates Collection&lt;/Title&gt;
-    &lt;Authors&gt;Kris - The Coding Unicorn&lt;/Authors&gt;
-    &lt;Description&gt;Collection of common templates to use when creating microservices and related components.&lt;/Description&gt;
-    &lt;PackageTags&gt;dotnet-new<span class="p">;</span>templates&lt;/PackageTags&gt;
-    &lt;TargetFramework&gt;net5.0&lt;/TargetFramework&gt;
-    &lt;NoDefaultExcludes&gt;true&lt;/NoDefaultExcludes&gt;
+  <span class="nt">&lt;PropertyGroup&gt;</span>
+    <span class="nt">&lt;PackageType&gt;</span>Template<span class="nt">&lt;/PackageType&gt;</span>
+    <span class="nt">&lt;PackageId&gt;</span>Custom.Dotnet.Templates<span class="nt">&lt;/PackageId&gt;</span>
+    <span class="nt">&lt;Title&gt;</span>Dotnet Custom Templates Collection<span class="nt">&lt;/Title&gt;</span>
+    <span class="nt">&lt;Authors&gt;</span>Kris - The Coding Unicorn<span class="nt">&lt;/Authors&gt;</span>
+    <span class="nt">&lt;Description&gt;</span>Collection of common templates to use when creating microservices and related components.<span class="nt">&lt;/Description&gt;</span>
+    <span class="nt">&lt;PackageTags&gt;</span>dotnet-new;templates<span class="nt">&lt;/PackageTags&gt;</span>
+    <span class="nt">&lt;TargetFramework&gt;</span>net5.0<span class="nt">&lt;/TargetFramework&gt;</span>
+    <span class="nt">&lt;NoDefaultExcludes&gt;</span>true<span class="nt">&lt;/NoDefaultExcludes&gt;</span>
 
-    &lt;IncludeContentInPack&gt;true&lt;/IncludeContentInPack&gt;
-    &lt;IncludeBuildOutput&gt;false&lt;/IncludeBuildOutput&gt;
-    &lt;ContentTargetFolders&gt;content&lt;/ContentTargetFolders&gt;
-  &lt;/PropertyGroup&gt;
+    <span class="nt">&lt;IncludeContentInPack&gt;</span>true<span class="nt">&lt;/IncludeContentInPack&gt;</span>
+    <span class="nt">&lt;IncludeBuildOutput&gt;</span>false<span class="nt">&lt;/IncludeBuildOutput&gt;</span>
+    <span class="nt">&lt;ContentTargetFolders&gt;</span>content<span class="nt">&lt;/ContentTargetFolders&gt;</span>
+  <span class="nt">&lt;/PropertyGroup&gt;</span>
 
-  &lt;ItemGroup&gt;
-    &lt;Content <span class="nv">Include</span><span class="o">=</span><span class="s2">&#34;templates\**\*&#34;</span> <span class="nv">Exclude</span><span class="o">=</span><span class="s2">&#34;templates\**\bin\**;templates\**\obj\**&#34;</span> /&gt;
-    &lt;Compile <span class="nv">Remove</span><span class="o">=</span><span class="s2">&#34;**\*&#34;</span> /&gt;
-  &lt;/ItemGroup&gt;
+  <span class="nt">&lt;ItemGroup&gt;</span>
+    <span class="nt">&lt;Content</span> <span class="na">Include=</span><span class="s">&#34;templates\**\*&#34;</span> <span class="na">Exclude=</span><span class="s">&#34;templates\**\bin\**;templates\**\obj\**&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Compile</span> <span class="na">Remove=</span><span class="s">&#34;**\*&#34;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/ItemGroup&gt;</span>
 
-&lt;/Project&gt;</code></pre></div>
+<span class="nt">&lt;/Project&gt;</span></code></pre></div>
 <p>More information about project file settings and properties can be found in Microsoft Documentation: <a href="https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-pack#create-a-template-pack-project">https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-template-pack#create-a-template-pack-project</a></p>
 <p>Our folder structure will look something like this:</p>
 <p><img src="../../images/dotnet_custom_templates/dotnet_template_pack_tree.jpg" alt="Screenshot for dotnet template pack folder structure"></p>
@@ -666,29 +647,29 @@ if (!doNotTrack) {
 <li>GitVersion.yml for semantic versioning of our application.</li>
 </ul>
 <p>Template configuration will look something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">{</span>
-    <span class="s2">&#34;</span><span class="nv">$schema</span><span class="s2">&#34;</span>: <span class="s2">&#34;http://json.schemastore.org/template&#34;</span>,
-    <span class="s2">&#34;author&#34;</span>: <span class="s2">&#34;Kris - The Coding Unicorn&#34;</span>,
-    <span class="s2">&#34;classifications&#34;</span>: <span class="o">[</span> <span class="s2">&#34;Common&#34;</span>, <span class="s2">&#34;Web&#34;</span>, <span class="s2">&#34;Microservice&#34;</span> <span class="o">]</span>, 
-    <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;Base template for Kris - The Coding Unicorn ASP.NET Web microservice&#34;</span>,
-    <span class="s2">&#34;identity&#34;</span>: <span class="s2">&#34;Microservice.CommonTemplate.CSharp&#34;</span>,         
-    <span class="s2">&#34;shortName&#34;</span>: <span class="s2">&#34;microservice-web&#34;</span>,
-    <span class="s2">&#34;tags&#34;</span>: <span class="o">{</span>
-      <span class="s2">&#34;language&#34;</span>: <span class="s2">&#34;C#&#34;</span>,
-      <span class="s2">&#34;type&#34;</span>: <span class="s2">&#34;project&#34;</span>
-    <span class="o">}</span>,
-    <span class="s2">&#34;sourceName&#34;</span>: <span class="s2">&#34;common-microservice-web&#34;</span>,
-    <span class="s2">&#34;preferNameDirectory&#34;</span>: true,
-    <span class="s2">&#34;symbols&#34;</span>:<span class="o">{</span>
-      <span class="s2">&#34;solutionName&#34;</span>: <span class="o">{</span>
-        <span class="s2">&#34;type&#34;</span>: <span class="s2">&#34;parameter&#34;</span>,
-        <span class="s2">&#34;isRequired&#34;</span>: true,
-        <span class="s2">&#34;FileRename&#34;</span>: <span class="s2">&#34;Common.Microservice.Web&#34;</span>,
-        <span class="s2">&#34;defaultValue&#34;</span>: <span class="s2">&#34;Common.Microservice.Web&#34;</span>,
-        <span class="s2">&#34;replaces&#34;</span>:<span class="s2">&#34;Common.Microservice.Web&#34;</span>
-      <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">}</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;$schema&#34;</span><span class="p">:</span> <span class="s2">&#34;http://json.schemastore.org/template&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;Kris - The Coding Unicorn&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;classifications&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&#34;Common&#34;</span><span class="p">,</span> <span class="s2">&#34;Web&#34;</span><span class="p">,</span> <span class="s2">&#34;Microservice&#34;</span> <span class="p">],</span> 
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Base template for Kris - The Coding Unicorn ASP.NET Web microservice&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;identity&#34;</span><span class="p">:</span> <span class="s2">&#34;Microservice.CommonTemplate.CSharp&#34;</span><span class="p">,</span>         
+    <span class="nt">&#34;shortName&#34;</span><span class="p">:</span> <span class="s2">&#34;microservice-web&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;language&#34;</span><span class="p">:</span> <span class="s2">&#34;C#&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;project&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;sourceName&#34;</span><span class="p">:</span> <span class="s2">&#34;common-microservice-web&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;preferNameDirectory&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;symbols&#34;</span><span class="p">:{</span>
+      <span class="nt">&#34;solutionName&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;parameter&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;isRequired&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&#34;FileRename&#34;</span><span class="p">:</span> <span class="s2">&#34;Common.Microservice.Web&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;defaultValue&#34;</span><span class="p">:</span> <span class="s2">&#34;Common.Microservice.Web&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;replaces&#34;</span><span class="p">:</span><span class="s2">&#34;Common.Microservice.Web&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span></code></pre></div>
 <p>As you can see, some of the settings are pretty straightforward but some might need further clarification:</p>
 <ul>
 <li><strong>&quot;classifications&quot;</strong> - represents tags that are displayed for every template when you run the <strong>&quot;dotnet new &ndash;list&quot;</strong> command to get an overview of all available dotnet templates;</li>
@@ -718,18 +699,18 @@ if (!doNotTrack) {
 <h3 id="testing-template-collection">Testing template collection</h3>
 <p>When you have multiple templates, you would like to test them all at once. You can do this manually by packaging the template collection, installing the produced NuGet package locally, and then running <strong>&quot;dotnet new&quot;</strong> for every template in the collection. What I would recommend though is to create a script that will do all of it for you, including deployment of all the templates in the collection so that the only thing you will need to do after running the script is to verify that the output looks correct.</p>
 <p>Here is an example of the PowerShell script we can use for our use case with 3 templates:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">$TemplateCollectionDirectory = &#34;C:/Playground/template-collection&#34;</span><span class="w">
-</span><span class="w"></span><span class="l">$TemplateOutputDirectory = &#34;C:/Playground/template-output&#34;</span><span class="w">
-</span><span class="w"></span><span class="l">Set-Location -Path $TemplateCollectionDirectory</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c">#Package and install template collection NuGet</span><span class="w">
-</span><span class="w"></span><span class="l">dotnet pack</span><span class="w"> </span><span class="c">#Package our template collection (remember our C# project file that defined what template resources must be included in the package?)</span><span class="w">
-</span><span class="w"></span><span class="l">dotnet new -i $TemplateCollectionDirectory/bin/Debug/Custom.Dotnet.Templates.1.0.0.nupkg</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c">#Deploy all the templates in the collection</span><span class="w">
-</span><span class="w"></span><span class="l">dotnet new microservice-web -s Kris.Awesome.Service.Web -n kris-awesome-service-web -o $TemplateOutputDirectory/test-template-web --force</span><span class="w">
-</span><span class="w"></span><span class="l">dotnet new microservice-react -n kris-awesome-service-react -o $TemplateOutputDirectory/test-template-react --force</span><span class="w">
-</span><span class="w"></span><span class="l">dotnet new microservice-base -n kris-awesome-service-base -o $TemplateOutputDirectory/test-template-base --force</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$TemplateCollectionDirectory</span> <span class="p">=</span> <span class="s2">&#34;C:/Playground/template-collection&#34;</span>
+<span class="nv">$TemplateOutputDirectory</span> <span class="p">=</span> <span class="s2">&#34;C:/Playground/template-output&#34;</span>
+<span class="nb">Set-Location</span> <span class="n">-Path</span> <span class="nv">$TemplateCollectionDirectory</span>
+
+<span class="c">#Package and install template collection NuGet</span>
+<span class="n">dotnet</span> <span class="n">pack</span> <span class="c">#Package our template collection (remember our C# project file that defined what template resources must be included in the package?)</span>
+<span class="n">dotnet</span> <span class="n">new</span> <span class="n">-i</span> <span class="nv">$TemplateCollectionDirectory</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">Debug</span><span class="p">/</span><span class="n">Custom</span><span class="p">.</span><span class="n">Dotnet</span><span class="p">.</span><span class="n">Templates</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">nupkg</span>
+
+<span class="c">#Deploy all the templates in the collection</span>
+<span class="n">dotnet</span> <span class="n">new</span> <span class="n">microservice-web</span> <span class="n">-s</span> <span class="n">Kris</span><span class="p">.</span><span class="n">Awesome</span><span class="p">.</span><span class="n">Service</span><span class="p">.</span><span class="n">Web</span> <span class="n">-n</span> <span class="n">kris-awesome-service-web</span> <span class="n">-o</span> <span class="nv">$TemplateOutputDirectory</span><span class="p">/</span><span class="nb">test-template</span><span class="n">-web</span> <span class="p">-</span><span class="n">-force</span>
+<span class="n">dotnet</span> <span class="n">new</span> <span class="n">microservice-react</span> <span class="n">-n</span> <span class="n">kris-awesome-service-react</span> <span class="n">-o</span> <span class="nv">$TemplateOutputDirectory</span><span class="p">/</span><span class="nb">test-template</span><span class="n">-react</span> <span class="p">-</span><span class="n">-force</span>
+<span class="n">dotnet</span> <span class="n">new</span> <span class="n">microservice-base</span> <span class="n">-n</span> <span class="n">kris-awesome-service-base</span> <span class="n">-o</span> <span class="nv">$TemplateOutputDirectory</span><span class="p">/</span><span class="nb">test-template</span><span class="n">-base</span> <span class="p">-</span><span class="n">-force</span></code></pre></div>
 <p>Then you can navigate to the output directory you've deployed your templates to and verify that the resources are created as expected, and with proper namings.</p>
 <p><img src="../../images/dotnet_custom_templates/template_test_script_output_tree.jpg" alt="Screenshot for template collection test script output tree"></p>
 <p>When you're done with testing you can <strong>uninstall</strong> the template collection by simply running following command:
@@ -737,23 +718,23 @@ if (!doNotTrack) {
 <h2 id="how-do-i-pack-and-make-template-collection-nuget-package-available-for-others">How do I pack and make template collection NuGet package available for others?</h2>
 <p>Now that you've tested your template collection and everything looks good, you can make the templates available for others to try out. You will need to upload the NuGet package that contains your template collection to public or private NuGet feed (depending on what development processes you have in place). I have used Azure Pipelines for this - every time new changes are added to the template collection, a build is triggered that will package the template collection, version the package and push it to the NuGet feed that I've specified.</p>
 <p>Pack and push build tasks will look something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">    - task: DotNetCoreCLI@2
-      displayName: <span class="s1">&#39;Package my dotnet template collection&#39;</span>
-      inputs:
-        command: <span class="s1">&#39;pack&#39;</span>
-        packagesToPack: <span class="s1">&#39;**/Custom.Dotnet.Templates.csproj&#39;</span>
-        packDirectory: <span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages&#39;</span>
-        versioningScheme: byEnvVar <span class="c1">#for semantic versioning</span>
-        versionEnvVar: GitVersion.SemVer 
-
-    - task: NuGetCommand@2
-      displayName: <span class="s1">&#39;Push template collection NuGet package to my feed&#39;</span>
-      inputs:
-        command: push
-        packagesToPush: <span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages/*.nupkg&#39;</span>
-        publishVstsFeed: &lt;YOUR_NUGET_FEED_ID&gt;
-        allowPackageConflicts: <span class="nb">false</span>
-      condition: and<span class="o">(</span>succeeded<span class="o">()</span>, ne<span class="o">(</span>variables<span class="o">[</span><span class="s1">&#39;Build.Reason&#39;</span><span class="o">]</span>, <span class="s1">&#39;PullRequest&#39;</span><span class="o">)</span>, or<span class="o">(</span>eq<span class="o">(</span>variables<span class="o">[</span><span class="s1">&#39;Build.SourceBranch&#39;</span><span class="o">]</span>, <span class="s1">&#39;refs/heads/master&#39;</span><span class="o">)))</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">    </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">      </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Package my dotnet template collection&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pack&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">packagesToPack</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/Custom.Dotnet.Templates.csproj&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">packDirectory</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">versioningScheme</span><span class="p">:</span><span class="w"> </span><span class="l">byEnvVar</span><span class="w"> </span><span class="c">#for semantic versioning</span><span class="w">
+</span><span class="w">        </span><span class="nt">versionEnvVar</span><span class="p">:</span><span class="w"> </span><span class="l">GitVersion.SemVer </span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NuGetCommand@2</span><span class="w">
+</span><span class="w">      </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Push template collection NuGet package to my feed&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">push</span><span class="w">
+</span><span class="w">        </span><span class="nt">packagesToPush</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)/nuget-packages/*.nupkg&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">publishVstsFeed</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;YOUR_NUGET_FEED_ID&gt;</span><span class="w">
+</span><span class="w">        </span><span class="nt">allowPackageConflicts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(), ne(variables[&#39;Build.Reason&#39;], &#39;PullRequest&#39;), or(eq(variables[&#39;Build.SourceBranch&#39;], &#39;refs/heads/master&#39;)))</span></code></pre></div>
 <p>After the build has succeeded, your template collection will become available and ready to be used by millions of developers - amazing job! :)</p>
 <h2 id="where-can-i-read-more-about-dotnet-templates">Where can I read more about dotnet templates?</h2>
 <p>There are several resources available if you would like to get deeper understanding of how to create dotnet custom template and how dotnet template engine is functioning. Here are some of the resources I used in order to get better understanding of dotnet templates:</p>

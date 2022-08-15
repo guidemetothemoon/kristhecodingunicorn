@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_ado_envs-2\/",
-        "wordCount" : "3288",
+        "wordCount" : "3229",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -556,15 +546,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -680,53 +661,53 @@ if (!doNotTrack) {
 </blockquote>
 <p>Our build pipeline is ready to deploy the new microservice to AKS! Before we do that, let's take a look at how to connect your build with a Kubernetes resource in an Azure DevOps Environment.</p>
 <p>Here's the build definition for our new microservice:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
-trigger:
-  branches:
-    include:
-    - master
-  paths:
-    include:
-    - deploy/kubernetes-templates
-
-stages:
-
-  <span class="c1">###############</span>
-  <span class="c1"># DEPLOYMENT #</span>
-  <span class="c1">###############  </span>
-  - stage: Deploy_Dev
-    jobs:
-    - deployment: Deploy_Dev_AKS
-      pool:
-        vmImage: <span class="s1">&#39;ubuntu-latest&#39;</span>
-      environment: aks-113366-dev.aks-helloworld <span class="c1"># &lt;- Here you define deployment target for the application in following format: [environment-name].[resource-name]</span>
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - checkout: self
-            - task: KubernetesManifest@0
-              displayName: <span class="s1">&#39;Install AKS HelloWorld Deployment 1&#39;</span>
-              inputs:
-                action: <span class="s1">&#39;deploy&#39;</span>
-                namespace: <span class="s1">&#39;aks-helloworld&#39;</span>
-                manifests: <span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/aks-hw-1.yaml&#39;</span>
-
-            - task: KubernetesManifest@0
-              displayName: <span class="s1">&#39;Install AKS HelloWorld Deployment 2&#39;</span>
-              inputs:
-                action: <span class="s1">&#39;deploy&#39;</span>
-                namespace: <span class="s1">&#39;aks-helloworld&#39;</span>
-                manifests: <span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/aks-hw-2.yaml&#39;</span>
-
-            - task: KubernetesManifest@0
-              displayName: <span class="s1">&#39;Install AKS HelloWorld Ingress&#39;</span>
-              inputs:
-                action: <span class="s1">&#39;deploy&#39;</span>
-                namespace: <span class="s1">&#39;aks-helloworld&#39;</span>
-                manifests: <span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/hw-ingress.yaml&#39;</span>
-
-</code></pre></div><p>All you need in order to be able to deploy with ADO Environments from an Azure Pipeline is to define a deployment stage with a deployment job where you provide a property called <code>environment</code> that tells the build pipeline exactly which Azure DevOps Environment and which resource to target. In our case this will be the Environment and Kubernetes resource that we created earlier in this post. And that's it - easy-peasy, right?😺</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">
+</span><span class="w"></span><span class="nt">trigger</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">master</span><span class="w">
+</span><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">deploy/kubernetes-templates</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c">###############</span><span class="w">
+</span><span class="w">  </span><span class="c"># DEPLOYMENT #</span><span class="w">
+</span><span class="w">  </span><span class="c">###############  </span><span class="w">
+</span><span class="w">  </span>- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev</span><span class="w">
+</span><span class="w">    </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">deployment</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev_AKS</span><span class="w">
+</span><span class="w">      </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span><span class="w">      </span><span class="nt">environment: aks-113366-dev.aks-helloworld # &lt;- Here you define deployment target for the application in following format</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">environment-name].[resource-name]</span><span class="w">
+</span><span class="w">      </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">runOnce</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">checkout</span><span class="p">:</span><span class="w"> </span><span class="l">self</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">KubernetesManifest@0</span><span class="w">
+</span><span class="w">              </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install AKS HelloWorld Deployment 1&#39;</span><span class="w">
+</span><span class="w">              </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;deploy&#39;</span><span class="w">
+</span><span class="w">                </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;aks-helloworld&#39;</span><span class="w">
+</span><span class="w">                </span><span class="nt">manifests</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/aks-hw-1.yaml&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">KubernetesManifest@0</span><span class="w">
+</span><span class="w">              </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install AKS HelloWorld Deployment 2&#39;</span><span class="w">
+</span><span class="w">              </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;deploy&#39;</span><span class="w">
+</span><span class="w">                </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;aks-helloworld&#39;</span><span class="w">
+</span><span class="w">                </span><span class="nt">manifests</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/aks-hw-2.yaml&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">KubernetesManifest@0</span><span class="w">
+</span><span class="w">              </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install AKS HelloWorld Ingress&#39;</span><span class="w">
+</span><span class="w">              </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;deploy&#39;</span><span class="w">
+</span><span class="w">                </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;aks-helloworld&#39;</span><span class="w">
+</span><span class="w">                </span><span class="nt">manifests</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/hw-ingress.yaml&#39;</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><p>All you need in order to be able to deploy with ADO Environments from an Azure Pipeline is to define a deployment stage with a deployment job where you provide a property called <code>environment</code> that tells the build pipeline exactly which Azure DevOps Environment and which resource to target. In our case this will be the Environment and Kubernetes resource that we created earlier in this post. And that's it - easy-peasy, right?😺</p>
 <p>You can deploy to multiple environments by extending the multi-staged pipeline presented above with even more stages. In reality you will also need a build stage, a security validation stage and maybe even a deployment stage for Pre-Production and Production environments. That's when you can utilize a multi-staged pipeline to it's full potential.</p>
 <p>It's deployment time! Since we haven't explicitly added a newly created build pipeline in the <strong>&quot;Pipeline permissions&quot;</strong> list which we looked at earlier, once the build is triggered it will ask you to provide it 2 types of permissions:</p>
 <ol>

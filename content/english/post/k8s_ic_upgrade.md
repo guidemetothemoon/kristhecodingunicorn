@@ -42,7 +42,7 @@ Firstly, we\'ll need to do some preparations that will make it easier for us to 
 - Log into Azure and set active subscription to the one where your DNS Zones are created
 - Set current Kubernetes context to the cluster where you will be performing the upgrade - mine is called TestKubeCluster
 
-{{< highlight bash >}}
+{{< highlight powershell >}}
 # 0 - Set alias for kubectl to not type the whole command every single time ;)
 Set-Alias -Name k -Value kubectl
 
@@ -62,7 +62,7 @@ Once that\'s done, we move to step 2 and deploy temporary Ingress Controller usi
 
 Finally, once the temporary Ingress Controller is deployed and is up and running, we move on to step 3 and set up monitoring for both the original and the temporary IC - this will become very relevant once we need to re-route the traffic from the original Ingress Controller to the temporary one. We don\'t want any application becoming unavailable, right? ;) Re-routing traffic will mean updating DNS records and that type of update will take some time. Therefore monitoring traffic for both Ingress Controllers will help us identify when all the traffic is fully drained from the original IC and is actively hitting temporary IC instead.
 
-{{< highlight bash >}}
+{{< highlight powershell >}}
 # 1 - Prepare namespace and Helm charts before creating temp Ingress Controller
 
 k create ns ingress-temp
@@ -107,7 +107,7 @@ Once all DNS records are updated, let\'s ensure that we haven\'t missed out on a
 
 Lastly, we wait. Update of DNS records takes time, sometimes up to an hour or two, depending on the amount of DNS records that were updated. We can periodically check if all DNS records were updated with help of ```Resolve-DnsName``` function.
 
-{{< highlight bash >}}
+{{< highlight powershell >}}
 # 4 - Update DNS records to route traffic to temp Ingress Controller
 # Check in the DNS zone how many records are there that are connected to the original IC's IP
 $cluster_dns_recs = az network dns record-set a list -g myresourcegroup -z mydnszone.com --query "[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],'$original_ingress_ip')]" | ConvertFrom-Json
@@ -150,7 +150,7 @@ After logging is enabled, we will need to drain traffic from the temporary Ingre
 - Update all the relevant DNS records in the respective DNS zones - now, we\'ll need to remove External IP of the temporary Ingress Controller and add External IP of the newly created IC
 - Monitor and wait for the DNS records to be updated and traffic to be drained from temporary IC and re-routed to the newly created IC
 
-{{< highlight bash >}}
+{{< highlight powershell >}}
 # 5 - Once DNS records were updated and all traffic has been re-routed to temp IC, uninstall original Ingress Controller with Helm and install new Ingress Controller with Helm
 # In this case new Ingress Controller is configured to use Public IP of Azure Load Balancer and not create a new IP
 helm uninstall nginx-ingress -n ingress-basic
@@ -204,7 +204,7 @@ Last but not least: we must clean up after ourselves and remove all the temporar
 - Remove temporary Ingress Controller with ```helm uninstall```
 - Remove temporary namespace where temp IC was residing
 
-{{< highlight bash >}}
+{{< highlight powershell >}}
 # 8 - Remove temp resources once traffic is drained from temporary IC and newly created IC is fully in use and successfully running in respective Kubernetes cluster
 helm uninstall nginx-ingress-temp -n ingress-temp
 k delete ns ingress-temp

@@ -185,7 +185,7 @@ Now we need to log into both of the nodes simultaneously - for Windows nodes it\
 
 Once you\'ve logged into the Windows nodes, you need to install and configure latte on both nodes - I recommend to check a few links in Additional resources section for more information on how to use latte.exe:
 
-``` bash
+``` powershell
 # 1. (PowerShell) Install latte - on SERVER and CLIENT node
 mkdir "C:\tools"
 Invoke-WebRequest -OutFile "C:\tools\latte.exe" -Uri "https://github.com/microsoft/latte/releases/download/v0/latte.exe"
@@ -258,17 +258,23 @@ Fortunately for all us, from now on (spring/summer 2022) if you create a new AKS
 
 **Azure CLI**: you need to make a note of your AKS cluster name and resource group where it\'s deployed - once it\'s done, we can run below commands to check if Accelerated Networking is enabled for node pools in the chosen AKS cluster: 
 
-``` bash
+``` powershell
 # 1. Get the name of the resource group where AKS node pools are deployed
+
 az aks show --resource-group [AKS_CLUSTER_RESOURCE_GROUP_NAME] --name [AKS_CLUSTER_NAME] --query nodeResourceGroup
 
 # 2. Get the names of the AKS cluster node pools that we need to check AN property for
-az aks nodepool list  --resource-group [AKS_CLUSTER_RESOURCE_GROUP_NAME] --cluster-name [AKS_CLUSTER_NAME] --query "[].{Name:name}"
+
+az aks nodepool list  --resource-group [AKS_CLUSTER_RESOURCE_GROUP_NAME] --cluster-name [AKS_CLUSTER_NAME] `
+--query "[].{Name:name}"
 
 # 3. For each node pool, check if Accelerated Networking is enabled on a VMSS level 
-#    Please remember that node pool name consists of "aks" which is appended automatically by Azure and the node pool name itself, f.ex. "akswinpol", "akslinpol"
+#    Please remember that node pool name consists of "aks" which is appended automatically by Azure and the node pool name itself, 
+#    f.ex. "akswinpol", "akslinpol"
 #    Resource group here is the one that was retrieved in step 1
-az vmss show --name [AKS_NODE_POOL_NAME] --resource-group [NODE_POOL_RESOURCE_GROUP_NAME] --query "virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking"
+
+az vmss show --name [AKS_NODE_POOL_NAME] --resource-group [NODE_POOL_RESOURCE_GROUP_NAME] ` 
+--query "virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking"
 
 ```
 
@@ -283,20 +289,29 @@ Alternative approach is similar to what a node image upgrade does, just that you
 1.Retrieve configuration details of the node pool that is currently active - we want to create a new node pool that is the same as the existing node pool with only difference, which is enabled Accelerated Networking.
 
 ``` bash
+
 # 1. Retrieve configuration details of the node pool that is currently active
-az aks nodepool show --cluster-name [AKS_CLUSTER_NAME] --resource-group [AKS_CLUSTER_RESOURCE_GROUP] --name [INITIAL_NODE_POOL_NAME]
+az aks nodepool show --cluster-name [AKS_CLUSTER_NAME] --resource-group [AKS_CLUSTER_RESOURCE_GROUP] 
+--name [INITIAL_NODE_POOL_NAME]
+
 ```
 
 2.There are quite a few properties you can see in the output - a few to make a note of are ```count```, ```currentOrchestratorVersion```, ```enableAutoScaling```, ```maxCount```, ```minCount```, ```maxPods```, ```nodeTaints```, ```vmSize```. Now we can create a new node pool based on the existing node pool\'s configuration - please note that the name of the node pool must be different from the initial node pool (and renaming of the node pool is unfortunately not supported in AKS).
 
 ``` bash
+
 # 2. Create a new node pool based on existing node pool's configuration
-az aks nodepool add --cluster-name [AKS_CLUSTER_NAME] --name [NEW_NODE_POOL_NAME] --resource-group [NODE_POOL_RESOURCE_GROUP_NAME] --kubernetes-version [CURRENT_ORCHESTRATOR_VERSION] --os-type [NODE_POOL_OS] --node-count [NODE_COUNT] --enable-cluster-autoscaler --min-count [MIN_COUNT] --max-count [MAX_COUNT] --max-pods [MAX_PODS] --node-vm-size [VM_SIZE] --node-taints [NODE_TAINTS]
+az aks nodepool add --cluster-name [AKS_CLUSTER_NAME] --name [NEW_NODE_POOL_NAME] 
+--resource-group [NODE_POOL_RESOURCE_GROUP_NAME] --kubernetes-version [CURRENT_ORCHESTRATOR_VERSION] 
+--os-type [NODE_POOL_OS] --node-count [NODE_COUNT] --enable-cluster-autoscaler 
+--min-count [MIN_COUNT] --max-count [MAX_COUNT] --max-pods [MAX_PODS] --node-vm-size [VM_SIZE] --node-taints [NODE_TAINTS]
+
 ```
 
 3.Move workloads to the new node pool and delete the old node pool - it\'s a good idea to verify that all of your workloads have PodDisruptionBudget configured to avoid application downtime😉
 
 ``` bash
+
 # Cordon existing node pool to forbid scheduling workloads to it (use kubectl edit node [NODE_NAME] to see selector value for agentpool)
 kubectl cordon -l agentpool=winpol
 
@@ -304,7 +319,9 @@ kubectl cordon -l agentpool=winpol
 kubectl drain -l agentpool=winpol --force --delete-local-data --ignore-daemonsets --grace-period=10
 
 # Once workload migration is successful, delete old node pool: 
-az aks nodepool delete --cluster-name [AKS_CLUSTER_NAME] --resource-group [AKS_CLUSTER_RESOURCE_GROUP_NAME] --name [INITIAL_NODE_POOL_NAME]
+az aks nodepool delete --cluster-name [AKS_CLUSTER_NAME] --resource-group [AKS_CLUSTER_RESOURCE_GROUP_NAME] 
+--name [INITIAL_NODE_POOL_NAME]
+
 ```
 
 If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion. 

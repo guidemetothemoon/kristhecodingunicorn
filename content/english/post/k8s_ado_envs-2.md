@@ -105,7 +105,7 @@ Our build pipeline is ready to deploy the new microservice to AKS! Before we do 
 
 Here\'s the build definition for our new microservice:
 
-``` bash
+``` yaml
 
 trigger:
   branches:

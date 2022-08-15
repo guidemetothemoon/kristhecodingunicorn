@@ -23,7 +23,7 @@ Sometimes things may go wrong, also during ugprade of the application that is de
 
 This happens typically when Helm attempts to roll out a new revision of an application and then something goes wrong in the process, like a bug in an application itself or an issue inside the Kubernetes cluster which causes the new deployment to never get completed. This faulty deployment becomes dangling, therefore preventing all the future deployments to be rolled out. You can easily check the latest deployment status by retrieving the history of application deployments with ```helm history```. It will look something like this:
 
-``` bash
+```
 PS C:\> helm history test-app -n test-app
 REVISION        UPDATED                         STATUS          CHART                                                  APP VERSION                      DESCRIPTION
 7               Fri Apr 22 06:44:47 2022        superseded      test-app-0.1.232-move-ps.17                            0.1.232-move-ps.17               Upgrade complete
@@ -44,14 +44,14 @@ As you can see in the last entry there, a deployment with revision 16 has had st
 
 In order to fix this error all you need to do is to perform a rollback with ```helm rollback [release_name] [revision_number] -n [app_namespace]``` so that the latest stable version of the deployment will become the active one and the dangling deployment will be canceled. In the example above deployment with revision 15 is the one that is known to be stable and was successfully rolled out before so we can perform a rollback like this:
 
-``` bash
+```
 PS C:\> helm rollback test-app 15 -n test-app
 Rollback was a success! Happy Helming!
 ```
 
 If we get history of Helm deployments once again, we can see that the dangling release got rolled back under revision 17 to the latest stable release which now gets next active revision number 18 (you can see that the app version for revision 15 and 18 is the same which is expected):
 
-``` bash
+```
 PS C:\> helm history matrikkel-adapter -n matrikkel-adapter
 REVISION        UPDATED                         STATUS          CHART                                                   APP VERSION                     DESCRIPTION
 9               Fri Apr 22 08:49:51 2022        superseded      test-app-0.1.232-PullRequest45039.23                    0.1.232-PullRequest45039.23     Upgrade complete

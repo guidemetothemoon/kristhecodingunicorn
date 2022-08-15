@@ -42,7 +42,7 @@ Once the license is applied in Azure DevOps you can start experimenting with NDe
 
 Build task to set up analysis with NDepend is pretty easy and straightforward to set up - here I\'ve configured the basic build task for a repo with 2 projects in it, with default configuration. **Please note** that this task can only run on a Windows build agent at the moment. The task is added after the unit test execution task for a more representative analysis:
 
-``` bash
+``` yaml
 #azure-pipelines.yaml
 - task: NDependTask@1
   displayName: 'NDepend Scan'
@@ -79,7 +79,7 @@ Now, code coverage statistics is showing 0% and in order to get a more realistic
 
 We can enable code coverage in NDepend build task by enabling ```iscoverage``` property and providing path to the code coverage results in ```coverage``` property, as demonstrated in the build pipeline definition below:
 
-``` bash
+``` yaml
 #azure-pipelines.yaml
 - task: DotNetCoreCLI@2
   displayName: 'Run all tests'
@@ -121,7 +121,7 @@ As you can see, enabling code coverage had a significant effect! Quality rating 
 
 In some cases you may be running code coverage outside of the main build pipeline and can\'t therefore connect it to NDepend directly, because the report files are located externally, on a totally different build agent. This is the case for one of my repos where there are 200+ projects - running code coverage as part of the pull request or main build pipeline isn\'t realistic - it will add more than 1 hour to the main build execution time. Therefore code coverage is running in a dedicated build pipeline but I can still add it to analysis with NDepend and enforce policies with following adjustment:
 
-``` bash
+``` yaml
 #azure-pipelines.yaml
 
 - task: PublishCodeCoverageResults@1
@@ -178,7 +178,7 @@ You can customize this section with your own Trends, you can find more informati
 
 Lastly, I would like to enforce NDepend quality gates so that the build fails if at least one quality gate is violated. In addition I will add a new custom rule that is not included in the default collection provided by NDepend. But first let\'s enable quality gate build policy by setting ```BuildGates``` property to ```true``` so that our NDepend build task looks like this:
 
-``` bash
+``` yaml
 #azure-pipelines.yaml
 
 - task: NDependTask@1
@@ -212,7 +212,7 @@ Firstly, you will need to install NDepend Visual Studio Extension - you can read
 Once NDepend extension is installed we need to build our solution so that extension is able to locate the project assemblies for analysis. 
 Before we do that, we must add one important adjustment. Since we\'re going to suppress specific issues, we must add ```CODE_ANALYSIS``` compilation symbol so that suppression attributes are included into project compilation. I have only one project in my example so I\'ll add following property to the project file:
 
-{{< highlight csharp >}}
+{{< highlight xml >}}
 
 // MyProj.Web.csproj
 
@@ -405,7 +405,7 @@ public class Logger
 
 Last thing before we check in our changes and start testing is to update NDepend build task and let NDepend know that we have added custom configuration that it needs to be aware of. Remember that auto-generated ndproj file that is created for us once we start modifying default NDepend configuration? That\'s the one we need to provide the path for in a new property called ```ndproj```:
 
-``` bash
+``` yaml
 #azure-pipelines.yaml
 
 - task: NDependTask@1

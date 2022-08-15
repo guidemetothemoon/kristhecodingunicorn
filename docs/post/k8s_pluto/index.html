@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_pluto\/",
-        "wordCount" : "2307",
+        "wordCount" : "2228",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -556,15 +546,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -655,124 +636,118 @@ kubecost/kubecost-cost-analyzer-psp   kubecost    PodSecurityPolicy   policy/v1b
 <h3 id="cicd---azure-devops">CI/CD -&gt; Azure DevOps</h3>
 <p>Pluto doesn't have an Azure DevOps extension that you could use directly in Azure Pipelines so you will need to use a script that downloads Pluto and executes the commands you want. I have created an example of a build pipeline definition and a script that you could use to achieve this.</p>
 <p>Let's take a look at the pipeline first. You will need to check out those Azure DevOps repositories where you want Pluto to scan for deprecated and removed Kubernetes API versions. Then you will need to install Pluto on a build agent and call a script that runs all the necessary Pluto commands. An example of pipeline definition is provided below - replace <code>project_name</code> with Azure DevOps project name and <code>repository_name</code> with Azure DevOps repository name that you want to scan:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># api-deprecations-pipeline.yml
-trigger:
-- master
-
-pool:
-  vmImage: ubuntu-latest
-
-resources:
-  repositories: #check out those repositories that you want to scan with Pluto
-  - repository: [repository_name]
-    type: git
-    name: [project_name/repository_name]
-    ref: master  
-
-steps:
-- checkout: self
-  submodules: true
-  persistCredentials: true
-
-- checkout: &#39;[repository_name]&#39;
-  submodules: true
-  persistCredentials: true
-
-- task: CmdLine@2
-  displayName: &#39;Install Pluto&#39; # update Pluto version if needed in wget and tar command
-  inputs:
-    script: |
-      sudo apt-get update
-      echo Downloading Pluto...
-      wget github.com/FairwindsOps/pluto/releases/download/v5.10.1/pluto_5.10.1_linux_amd64.tar.gz
-      tar xzvf pluto_5.10.1_linux_amd64.tar.gz
-      echo Pluto downloaded successfully!
-
-- task: Bash@3
-  displayName: &#39;Run Kubernetes API deprecations validation with Pluto&#39;
-  inputs:
-    filePath: &#39;$(System.DefaultWorkingDirectory)/validate-kube-api-deprecations.sh&#39;
-    arguments: &#39;$(System.DefaultWorkingDirectory)&#39; # This argument lets the script know the location for checked out repos
-</code></pre></div><p>As you can see in the last build task, we're calling a script that will execute the scan with Pluto. Let's check it out.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># api-deprecations-pipeline.yml</span><span class="w">
+</span><span class="w"></span><span class="nt">trigger</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="l">master</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">repositories</span><span class="p">:</span><span class="w"> </span><span class="c">#check out those repositories that you want to scan with Pluto</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">repository_name]</span><span class="w">
+</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">git</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">project_name/repository_name]</span><span class="w">
+</span><span class="w">    </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l">master  </span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="nt">checkout</span><span class="p">:</span><span class="w"> </span><span class="l">self</span><span class="w">
+</span><span class="w">  </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">persistCredentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">checkout</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;[repository_name]&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">persistCredentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">CmdLine@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install Pluto&#39;</span><span class="w"> </span><span class="c"># update Pluto version if needed in wget and tar command</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">      sudo apt-get update
+</span><span class="sd">      echo Downloading Pluto...
+</span><span class="sd">      wget github.com/FairwindsOps/pluto/releases/download/v5.10.1/pluto_5.10.1_linux_amd64.tar.gz
+</span><span class="sd">      tar xzvf pluto_5.10.1_linux_amd64.tar.gz
+</span><span class="sd">      echo Pluto downloaded successfully!</span><span class="w">      
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">Bash@3</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run Kubernetes API deprecations validation with Pluto&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">filePath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(System.DefaultWorkingDirectory)/validate-kube-api-deprecations.sh&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(System.DefaultWorkingDirectory)&#39;</span><span class="w"> </span><span class="c"># This argument lets the script know the location for checked out repos</span><span class="w">
+</span></code></pre></div><p>As you can see in the last build task, we're calling a script that will execute the scan with Pluto. Let's check it out.</p>
 <p>I've created a Bash script that can be used as a template that you can customize to your needs. As an argument it requires a path to the working directory where the repos are located - in our case it's default working directory in Azure DevOps. What the script does is that for every checked out repository it will first detect and scan non-Helm resources like Kubernetes YAML templates with help of <code>pluto detect-files</code> command. Then it will attempt to locate Helm charts and if any Helm charts exist, the script will render each Helm chart based on the standard <code>values.yaml</code> file and use <code>pluto detect</code> command to scan it further for deprecated and removed API versions.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># scan-api-deprecations.sh
-
-reposToScan=(&#34;[repository_name&#34;) # in case of multiple repos, separate them with whitespace, f.ex. (&#34;repo1&#34; &#34;repo2&#34; &#34;repo3&#34;)
-      
-for repo in &#34;${reposToScan[@]}&#34;; do
-    repoDir=&#34;$1/$repo&#34;
-
-    printf &#34;\n*********** $repo ************\n&#34;
-    printf &#34;\nYAML TEMPLATES:\n&#34;
-    ./pluto detect-files -d &#34;$repoDir&#34; -o markdown --ignore-deprecations --ignore-removals # 2 last parameters can be removed if you want script to fail in case deprecations/removals have been detected
-
-    IFS=$&#39;\n&#39;
-    helmChartsDir=($(find &#34;$repoDir&#34; -type f -iname &#34;Chart.yaml&#34;))
-    printf &#34;\nHELM TEMPLATES:\n&#34;
-
-    if [ -z &#34;$helmChartsDir&#34; ]; then
-        echo &#34;No Helm templates found!&#34;
-        continue
-    fi
-
-    for helmChartDir in &#34;${helmChartsDir[@]}&#34;; do
-        printf &#34;\nLocated Helm Chart:$helmChartDir\n&#34;
-        helmChartBaseDir=&#34;$(dirname &#34;${helmChartDir}&#34;)&#34;
-
-        helmValuesFile=$(find &#34;$helmChartBaseDir&#34; -type f -iname &#34;values.yaml&#34;)
-
-        # If you&#39;re using custom Helm values files, you can comment above line and have more granular filtering of values file with the commented code block below        
-        #helmValuesFile=$(find &#34;$helmChartBaseDir&#34; -type f -regextype posix-extended -iregex &#39;.*values-prod.yaml|.*deploy-values.yaml&#39;)
-        #if [ -z &#34;$helmValuesFile&#34; ]; then 
-        #    helmValuesFile=$(find &#34;$helmChartBaseDir&#34; -type f -iname &#34;values.yaml&#34;)
-        #fi
-        
-        printf &#34;\nLocated Helm values file:$helmValuesFile -&gt; checking...\n&#34;
-        helm template &#34;$helmChartBaseDir&#34; -f &#34;$helmValuesFile&#34; | ./pluto detect - -o markdown --ignore-deprecations --ignore-removals 
-    done
-    printf &#34;\n*******************************\n&#34;
-done
-      
-echo &#34;Pluto executed scanning successfully!&#34;
-</code></pre></div><p>If you're using custom Helm values file you can replace <code>helmValuesFile=$(find &quot;$helmChartBaseDir&quot; -type f -iname &quot;values.yaml&quot;)</code> line of the script with the code block below and customize regex expression according to the file names you're using in your projects. In my example, it's <code>values-prod.yaml</code> or <code>deploy-values.yaml</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">helmValuesFile=$(find &#34;$helmChartBaseDir&#34; -type f -regextype posix-extended -iregex &#39;.*values-prod.yaml|.*deploy-values.yaml&#39;)
-if [ -z &#34;$helmValuesFile&#34; ]; then 
-   helmValuesFile=$(find &#34;$helmChartBaseDir&#34; -type f -iname &#34;values.yaml&#34;)
-fi
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span><span class="c1"># scan-api-deprecations.sh</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="nv">reposToScan</span><span class="o">=(</span><span class="s2">&#34;[repository_name&#34;</span><span class="o">)</span> <span class="c1"># in case of multiple repos, separate them with whitespace, f.ex. (&#34;repo1&#34; &#34;repo2&#34; &#34;repo3&#34;)</span>
+<span class="ln"> 4</span>      
+<span class="ln"> 5</span><span class="k">for</span> repo in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">reposToScan</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+<span class="ln"> 6</span>    <span class="nv">repoDir</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">/</span><span class="nv">$repo</span><span class="s2">&#34;</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>    <span class="nb">printf</span> <span class="s2">&#34;\n*********** </span><span class="nv">$repo</span><span class="s2"> ************\n&#34;</span>
+<span class="ln"> 9</span>    <span class="nb">printf</span> <span class="s2">&#34;\nYAML TEMPLATES:\n&#34;</span>
+<span class="ln">10</span>    ./pluto detect-files -d <span class="s2">&#34;</span><span class="nv">$repoDir</span><span class="s2">&#34;</span> -o markdown --ignore-deprecations --ignore-removals <span class="c1"># 2 last parameters can be removed if you want script to fail in case deprecations/removals have been detected</span>
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n&#39;</span>
+<span class="ln">13</span>    <span class="nv">helmChartsDir</span><span class="o">=(</span><span class="k">$(</span>find <span class="s2">&#34;</span><span class="nv">$repoDir</span><span class="s2">&#34;</span> -type f -iname <span class="s2">&#34;Chart.yaml&#34;</span><span class="k">)</span><span class="o">)</span>
+<span class="ln">14</span>    <span class="nb">printf</span> <span class="s2">&#34;\nHELM TEMPLATES:\n&#34;</span>
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$helmChartsDir</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="ln">17</span>        <span class="nb">echo</span> <span class="s2">&#34;No Helm templates found!&#34;</span>
+<span class="ln">18</span>        <span class="k">continue</span>
+<span class="ln">19</span>    <span class="k">fi</span>
+<span class="ln">20</span>
+<span class="ln">21</span>    <span class="k">for</span> helmChartDir in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">helmChartsDir</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+<span class="ln">22</span>        <span class="nb">printf</span> <span class="s2">&#34;\nLocated Helm Chart:</span><span class="nv">$helmChartDir</span><span class="s2">\n&#34;</span>
+<span class="ln">23</span>        <span class="nv">helmChartBaseDir</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>dirname <span class="s2">&#34;</span><span class="si">${</span><span class="nv">helmChartDir</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span>
+<span class="ln">24</span>
+<span class="ln">25</span>        <span class="nv">helmValuesFile</span><span class="o">=</span><span class="k">$(</span>find <span class="s2">&#34;</span><span class="nv">$helmChartBaseDir</span><span class="s2">&#34;</span> -type f -iname <span class="s2">&#34;values.yaml&#34;</span><span class="k">)</span>
+<span class="ln">26</span>        
+<span class="ln">27</span>        <span class="nb">printf</span> <span class="s2">&#34;\nLocated Helm values file:</span><span class="nv">$helmValuesFile</span><span class="s2"> -&gt; checking...\n&#34;</span>
+<span class="ln">28</span>        helm template <span class="s2">&#34;</span><span class="nv">$helmChartBaseDir</span><span class="s2">&#34;</span> -f <span class="s2">&#34;</span><span class="nv">$helmValuesFile</span><span class="s2">&#34;</span> <span class="p">|</span> ./pluto detect - -o markdown --ignore-deprecations --ignore-removals 
+<span class="ln">29</span>    <span class="k">done</span>
+<span class="ln">30</span>    <span class="nb">printf</span> <span class="s2">&#34;\n*******************************\n&#34;</span>
+<span class="ln">31</span><span class="k">done</span>
+<span class="ln">32</span>      
+<span class="ln">33</span><span class="nb">echo</span> <span class="s2">&#34;Pluto executed scanning successfully!&#34;</span>
+</code></pre></div><p>If you're using custom Helm values file you can replace line 25 -&gt; <code>helmValuesFile=$(find &quot;$helmChartBaseDir&quot; -type f -iname &quot;values.yaml&quot;)</code> of the script above with the code block below and customize regex expression according to the file names you're using in your projects. In my example, it's <code>values-prod.yaml</code> or <code>deploy-values.yaml</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">helmValuesFile</span><span class="o">=</span><span class="k">$(</span>find <span class="s2">&#34;</span><span class="nv">$helmChartBaseDir</span><span class="s2">&#34;</span> -type f -regextype posix-extended -iregex <span class="s1">&#39;.*values-prod.yaml|.*deploy-values.yaml&#39;</span><span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$helmValuesFile</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> 
+   <span class="nv">helmValuesFile</span><span class="o">=</span><span class="k">$(</span>find <span class="s2">&#34;</span><span class="nv">$helmChartBaseDir</span><span class="s2">&#34;</span> -type f -iname <span class="s2">&#34;values.yaml&#34;</span><span class="k">)</span>
+<span class="k">fi</span>
 </code></pre></div><p>The output in the build pipeline will look something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">*********** my-repo-name ************
+<div class="highlight"><pre class="chroma"><code class="language-txt" data-lang="txt">*********** my-repo-name ************
 
 YAML TEMPLATES:
-<span class="p">|</span>            NAME            <span class="p">|</span>     NAMESPACE     <span class="p">|</span>     KIND      <span class="p">|</span>         VERSION          <span class="p">|</span>    REPLACEMENT     <span class="p">|</span> DEPRECATED <span class="p">|</span> DEPRECATED IN <span class="p">|</span> REMOVED <span class="p">|</span> REMOVED IN <span class="p">|</span>
-<span class="p">|</span>----------------------------<span class="p">|</span>-------------------<span class="p">|</span>---------------<span class="p">|</span>--------------------------<span class="p">|</span>--------------------<span class="p">|</span>------------<span class="p">|</span>---------------<span class="p">|</span>---------<span class="p">|</span>------------<span class="p">|</span>
-<span class="p">|</span> letsencrypt-http01-prod    <span class="p">|</span> &lt;UNKNOWN&gt;         <span class="p">|</span> ClusterIssuer <span class="p">|</span> cert-manager.io/v1alpha2 <span class="p">|</span> cert-manager.io/v1 <span class="p">|</span> <span class="nb">true</span>       <span class="p">|</span> v1.4.0        <span class="p">|</span> <span class="nb">false</span>   <span class="p">|</span> v1.6.0     <span class="p">|</span>
-<span class="p">|</span> letsencrypt-http01-staging <span class="p">|</span> &lt;UNKNOWN&gt;         <span class="p">|</span> ClusterIssuer <span class="p">|</span> cert-manager.io/v1alpha2 <span class="p">|</span> cert-manager.io/v1 <span class="p">|</span> <span class="nb">true</span>       <span class="p">|</span> v1.4.0        <span class="p">|</span> <span class="nb">false</span>   <span class="p">|</span> v1.6.0     <span class="p">|</span>
-<span class="p">|</span> testservicea-tls-cert      <span class="p">|</span> testservicea      <span class="p">|</span> Certificate   <span class="p">|</span> cert-manager.io/v1alpha2 <span class="p">|</span> cert-manager.io/v1 <span class="p">|</span> <span class="nb">true</span>       <span class="p">|</span> v1.4.0        <span class="p">|</span> <span class="nb">false</span>   <span class="p">|</span> v1.6.0     <span class="p">|</span>
-<span class="p">|</span> testserviceb-tls-cert      <span class="p">|</span> testserviceb      <span class="p">|</span> Certificate   <span class="p">|</span> cert-manager.io/v1alpha2 <span class="p">|</span> cert-manager.io/v1 <span class="p">|</span> <span class="nb">true</span>       <span class="p">|</span> v1.4.0        <span class="p">|</span> <span class="nb">false</span>   <span class="p">|</span> v1.6.0     <span class="p">|</span>
+|            NAME            |     NAMESPACE     |     KIND      |         VERSION          |    REPLACEMENT     | DEPRECATED | DEPRECATED IN | REMOVED | REMOVED IN |
+|----------------------------|-------------------|---------------|--------------------------|--------------------|------------|---------------|---------|------------|
+| letsencrypt-http01-prod    | &lt;UNKNOWN&gt;         | ClusterIssuer | cert-manager.io/v1alpha2 | cert-manager.io/v1 | true       | v1.4.0        | false   | v1.6.0     |
+| letsencrypt-http01-staging | &lt;UNKNOWN&gt;         | ClusterIssuer | cert-manager.io/v1alpha2 | cert-manager.io/v1 | true       | v1.4.0        | false   | v1.6.0     |
+| testservicea-tls-cert      | testservicea      | Certificate   | cert-manager.io/v1alpha2 | cert-manager.io/v1 | true       | v1.4.0        | false   | v1.6.0     |
+| testserviceb-tls-cert      | testserviceb      | Certificate   | cert-manager.io/v1alpha2 | cert-manager.io/v1 | true       | v1.4.0        | false   | v1.6.0     |
 
 HELM TEMPLATES:
 
 Located Helm Chart:/home/vsts/work/1/s/my-repo-name/test-service-a/helm/test-service-a/Chart.yaml
 
 Located Helm values file:/home/vsts/work/1/s/my-repo-name/test-service-a/helm/test-service-a/Chart.yaml/deploy-values-prod.yaml -&gt; checking...
-<span class="p">|</span>                       NAME                       <span class="p">|</span> NAMESPACE <span class="p">|</span>          KIND           <span class="p">|</span>       VERSION       <span class="p">|</span>  REPLACEMENT   <span class="p">|</span> DEPRECATED <span class="p">|</span> DEPRECATED IN <span class="p">|</span> REMOVED <span class="p">|</span> REMOVED IN <span class="p">|</span>
-<span class="p">|</span>--------------------------------------------------<span class="p">|</span>-----------<span class="p">|</span>-------------------------<span class="p">|</span>---------------------<span class="p">|</span>----------------<span class="p">|</span>------------<span class="p">|</span>---------------<span class="p">|</span>---------<span class="p">|</span>------------<span class="p">|</span>
-<span class="p">|</span> test-service-a-pdb                               <span class="p">|</span> &lt;UNKNOWN&gt; <span class="p">|</span> PodDisruptionBudget     <span class="p">|</span> policy/v1beta1      <span class="p">|</span> policy/v1      <span class="p">|</span> <span class="nb">true</span>       <span class="p">|</span> v1.21.0       <span class="p">|</span> <span class="nb">false</span>   <span class="p">|</span> v1.25.0    <span class="p">|</span>
-<span class="p">|</span> test-service-a-hpa                               <span class="p">|</span> &lt;UNKNOWN&gt; <span class="p">|</span> HorizontalPodAutoscaler <span class="p">|</span> autoscaling/v2beta1 <span class="p">|</span> autoscaling/v2 <span class="p">|</span> <span class="nb">true</span>       <span class="p">|</span> v1.22.0       <span class="p">|</span> <span class="nb">false</span>   <span class="p">|</span> v1.25.0    <span class="p">|</span>
+|                       NAME                       | NAMESPACE |          KIND           |       VERSION       |  REPLACEMENT   | DEPRECATED | DEPRECATED IN | REMOVED | REMOVED IN |
+|--------------------------------------------------|-----------|-------------------------|---------------------|----------------|------------|---------------|---------|------------|
+| test-service-a-pdb                               | &lt;UNKNOWN&gt; | PodDisruptionBudget     | policy/v1beta1      | policy/v1      | true       | v1.21.0       | false   | v1.25.0    |
+| test-service-a-hpa                               | &lt;UNKNOWN&gt; | HorizontalPodAutoscaler | autoscaling/v2beta1 | autoscaling/v2 | true       | v1.22.0       | false   | v1.25.0    |
 </code></pre></div><p>The script above is configured to succeed even though deprecated or removed API versions have been detected. If you want the build to fail you can update the script and remove <code>--ignore-deprecations</code> and <code>--ignore-removals</code> parameters. For more information on Pluto error codes, check here: <a href="https://pluto.docs.fairwinds.com/advanced/#ci-pipelines">Pluto - CI Pipelines</a>.</p>
 <h3 id="cicd---github-actions">CI/CD -&gt; GitHub Actions</h3>
 <p>If you want to run Pluto as part of your GitHub workflow, there is a separate GitHub action that you can use to download Pluto. For executing Pluto there is no separate GitHub action but you can use Pluto commands directly:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">- uses: actions/checkout@v2
-
-- name: Install Pluto
-  uses: FairwindsOps/pluto/github-action@master
-
-- name: Run Kubernetes API deprecations validation with Pluto
-  run: |
-    pluto detect-files -d &#34;[nonhelm_templates_dirpath]&#34; -o markdown --ignore-deprecations --ignore-removals
-    helm template &#34;[helm_chart_dirpath]&#34; -f &#34;[helm_chart_dirpath]/values.yaml&#34; | pluto detect - -o markdown --ignore-deprecations --ignore-removals
-
-</code></pre></div><p>You can find a working example of running Pluto as part of GitHub workflow in my repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/.github/workflows/kubernetes-pluto-gha.yml">guidemetothemoon - kubernetes-pluto-gha.yml</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Install Pluto</span><span class="w">
+</span><span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">FairwindsOps/pluto/github-action@master</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Run Kubernetes API deprecations validation with Pluto</span><span class="w">
+</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    pluto detect-files -d &#34;[nonhelm_templates_dirpath]&#34; -o markdown --ignore-deprecations --ignore-removals
+</span><span class="sd">    helm template &#34;[helm_chart_dirpath]&#34; -f &#34;[helm_chart_dirpath]/values.yaml&#34; | pluto detect - -o markdown --ignore-deprecations --ignore-removals</span><span class="w">    
+</span><span class="w">
+</span></code></pre></div><p>You can find a working example of running Pluto as part of GitHub workflow in my repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/.github/workflows/kubernetes-pluto-gha.yml">guidemetothemoon - kubernetes-pluto-gha.yml</a>.</p>
 <h3 id="local-files">Local files</h3>
 <p>Finally, if you want to scan resources locally, outside of CI/CD pipeline, you can trigger the same script that we used with Azure Pipelines in the section above, and provide a folder to scan as an input to the script, like this:
 <code>./scan-api-deprecations.sh '[repo_dirpath_to_scan]'</code></p>

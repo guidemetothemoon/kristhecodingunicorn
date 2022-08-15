@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/azure_query\/",
-        "wordCount" : "477",
+        "wordCount" : "537",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -542,15 +532,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -573,42 +554,51 @@ Let's use DNS records retrieval as an example: I need to update DNS records poin
 <li>Use <code>--query</code> parameter to retrieve only the DNS records pointing to my IP instead of retrieving all of the records at once.</li>
 </ol>
 <p>Let's see the execution time differences for both - I will use <code>Measure-Command</code> to measure the time it take to execute each of the approaches. The DNS zone I will be testing against has <strong>64 713</strong> records and I will be replacing real values with dummy ones in the test below since it's real name and IP are being used in production :)</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Approach 1</span>
-PS C:<span class="se">\P</span>layground&gt; Measure-Command <span class="o">{</span><span class="nv">$dns_list</span> <span class="o">=</span> az network dns record-set a list -g test-rg -z dev.testzone.com<span class="p">;</span> <span class="nv">$dns_recs</span> <span class="o">=</span> <span class="nv">$dns_list</span> <span class="p">|</span> ConvertFrom-Json -Depth <span class="m">4</span> <span class="p">|</span> Where-Object <span class="o">{</span><span class="nv">$_</span>.arecords.ipv4Address -eq <span class="s2">&#34;192.0.2.146&#34;</span><span class="o">}}</span>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c">#Command for approach 1:</span>
+<span class="nb">Measure-Command</span> <span class="p">{</span> <span class="nv">$dns_list</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="n">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="nb">test-rg</span> <span class="n">-z</span> <span class="n">dev</span><span class="p">.</span><span class="n">testzone</span><span class="p">.</span><span class="n">com</span><span class="p">;</span> <span class="nv">$dns_recs</span> <span class="p">=</span> <span class="nv">$dns_list</span> <span class="p">`</span> 
+<span class="p">|</span> <span class="nb">ConvertFrom-Json</span> <span class="n">-Depth</span> <span class="n">4</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">arecords</span><span class="p">.</span><span class="n">ipv4Address</span> <span class="o">-eq</span> <span class="s2">&#34;192.0.2.146&#34;</span><span class="p">}</span> <span class="p">}</span>
 
-Days              : <span class="m">0</span>
-Hours             : <span class="m">0</span>
-Minutes           : <span class="m">0</span>
-Seconds           : <span class="m">8</span>
-Milliseconds      : <span class="m">896</span>
-Ticks             : <span class="m">88962891</span>
+<span class="c">#Command for approach 2:</span>
+<span class="nb">Measure-Command</span> <span class="p">{</span> <span class="nv">$dns_recs_to_update</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="n">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="nb">test-rg</span> <span class="n">-z</span> <span class="n">dev</span><span class="p">.</span><span class="n">testzone</span><span class="p">.</span><span class="n">com</span> <span class="p">`</span> 
+<span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[], &#39;192.0.2.146&#39;)]&#34;</span> <span class="p">`</span> 
+<span class="p">|</span> <span class="nb">ConvertFrom-Json</span> <span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># Approach 1
+PS C:\Playground&gt; Measure-Command {$dns_list = az network dns record-set a list -g test-rg -z dev.testzone.com; $dns_recs = $dns_list | ConvertFrom-Json -Depth 4 | Where-Object {$_.arecords.ipv4Address -eq &#34;192.0.2.146&#34;}}
+
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 8
+Milliseconds      : 896
+Ticks             : 88962891
 TotalDays         : 0.000102966309027778
 TotalHours        : 0.00247119141666667
 TotalMinutes      : 0.148271485
 TotalSeconds      : 8.8962891
 TotalMilliseconds : 8896.2891
 
-PS C:<span class="se">\P</span>layground&gt; <span class="nv">$dns_recs</span>.Count
-<span class="m">16</span>
+PS C:\Playground&gt; $dns_recs.Count
+16
 
-<span class="c1"># Approach 2</span>
-PS C:<span class="se">\P</span>layground&gt; Measure-Command <span class="o">{</span><span class="nv">$dns_recs_to_update</span> <span class="o">=</span> az network dns record-set a list -g test-rg -z dev.testzone.com --query <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;192.0.2.146&#39;)]&#34;</span> <span class="p">|</span> ConvertFrom-Json<span class="o">}</span>
+# Approach 2
+PS C:\Playground&gt; Measure-Command {$dns_recs_to_update = az network dns record-set a list -g test-rg -z dev.testzone.com --query &#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;192.0.2.146&#39;)]&#34; | ConvertFrom-Json}
 
-Days              : <span class="m">0</span>
-Hours             : <span class="m">0</span>
-Minutes           : <span class="m">0</span>
-Seconds           : <span class="m">5</span>
-Milliseconds      : <span class="m">736</span>
-Ticks             : <span class="m">57361877</span>
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 5
+Milliseconds      : 736
+Ticks             : 57361877
 TotalDays         : 6.63910613425926E-05
 TotalHours        : 0.00159338547222222
 TotalMinutes      : 0.0956031283333333
 TotalSeconds      : 5.7361877
 TotalMilliseconds : 5736.1877
 
-PS C:<span class="se">\P</span>layground&gt; <span class="nv">$dns_recs_to_update</span>.Count
-<span class="m">16</span></code></pre></div>
-<p>As you can see, approach #2 is faster and the difference might not seem so significant here (3-4 seconds) but when you're creating a more advanced automation script where you might need to retrieve and refresh DNS records multiple times or when you need to perform maintenance on other types of Azure resources that have even more data to retrieve, the difference can get pretty significant. By utilizing the full potential of Azure CLI you can make your scripts more performant and optimized minimizing the footprint at the same time ;)</p>
+PS C:\Playground&gt; $dns_recs_to_update.Count
+16
+
+</code></pre></div><p>As you can see, approach #2 is faster and the difference might not seem so significant here (3-4 seconds) but when you're creating a more advanced automation script where you might need to retrieve and refresh DNS records multiple times or when you need to perform maintenance on other types of Azure resources that have even more data to retrieve, the difference can get pretty significant. By utilizing the full potential of Azure CLI you can make your scripts more performant and optimized minimizing the footprint at the same time ;)</p>
 <p><code>--query</code> syntax is based on a query language for JSON called JMESPath and you can familiarize yourself with it here: <a href="https://jmespath.org/">JMESPath</a>.</p>
 <p>Check also this tutorial in Microsoft docs on how to write JMESPath-based queries as part of your Azure CLI command: <a href="https://docs.microsoft.com/en-us/cli/azure/query-azure-cli">How to query Azure CLI command output using a JMESPath query</a>.</p>
 <p>Thanks for reading and till next tech tip ;)</p>

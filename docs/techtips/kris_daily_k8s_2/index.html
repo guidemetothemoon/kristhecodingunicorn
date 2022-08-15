@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/kris_daily_k8s_2\/",
-        "wordCount" : "564",
+        "wordCount" : "529",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -556,15 +546,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -607,31 +588,31 @@ kubectl log <span class="o">[</span>job_pod_name<span class="o">]</span> -n <spa
 <h2 id="2---configure-rolling-update-for-deployment">#2 - Configure Rolling Update for Deployment</h2>
 <p>What's a Rolling Update? Well, it's a very nice way to upgrade an application in Kubernetes where currently active app version is not taken offline until the new version is up and running successfully. Quite good explanation is provided in official Kubernetes documentation: <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">Performing a Rolling Update</a>. If you're using Kubernetes YAML templates for deployment of workloads, you need to be aware of a useful configuration that enables Rolling Update for the Deployment so that the next time an application is upgraded, it will be done with zero downtime!😻</p>
 <p>It can be configured by including <code>strategy</code> section in the Deployment <code>spec</code> section like it's shown below:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: my-testapp
-  name: testapp
-  namespace: testapp
-spec:
-  progressDeadlineSeconds: <span class="m">1200</span>
-  replicas: <span class="m">1</span>
-  selector:
-    matchLabels:
-      app: my-testapp
-  strategy: <span class="c1"># -&gt; This is the section that enable Rolling Update for the Deployment! </span>
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: <span class="m">0</span> <span class="c1"># This property specifies how many instances of the application can be taken offline during upgrade</span>
-  template:
-    metadata:
-      labels:
-        app: my-testapp
-    spec:
-      containers:
-
-<span class="c1"># Rest of the code is omitted</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-testapp</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">testapp</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">testapp</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">progressDeadlineSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">1200</span><span class="w">
+</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-testapp</span><span class="w">
+</span><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="c"># -&gt; This is the section that enable Rolling Update for the Deployment! </span><span class="w">
+</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
+</span><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="c"># This property specifies how many instances of the application can be taken offline during upgrade</span><span class="w">
+</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-testapp</span><span class="w">
+</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Rest of the code is omitted</span></code></pre></div>
 <h2 id="3---check-what-add-ons-are-available-in-aks-with-azure-cli">#3 - Check what add-ons are available in AKS with Azure CLI</h2>
 <p>There are several add-ons that you can install in AKS cluster to get additional functionality but how do you know what add-ons actually exist and what they're meant to do? You can easily find it out by running following command with Azure CLI:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">az aks addon list-available</code></pre></div>

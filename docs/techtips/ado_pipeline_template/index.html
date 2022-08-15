@@ -53,8 +53,8 @@
     
     <link
       rel="stylesheet"
-      href="/css/syntax.min.b01c29536b8fe49ce49a39a928f2fa602c8c5420dd65164e89ebeb0be5f03496.css"
-      integrity="sha256-sBwpU2uP5JzkmjmpKPL6YCyMVCDdZRZOievrC&#43;XwNJY="
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
       crossorigin="anonymous"
       media="screen"
     />
@@ -110,16 +110,6 @@
     integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
-
-  
-    
-    
-    <script
-      type="text/javascript"
-      src="/js/anatole-theme-switcher.min.5557c8ff5617a01067ac258fd70b9b992506e379317b0da51e5e0f6e018b408a.js"
-      integrity="sha256-VVfI/1YXoBBnrCWP1wubmSUG43kxew2lHl4PbgGLQIo="
-      crossorigin="anonymous"
-    ></script>
 
   
 
@@ -211,7 +201,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/ado_pipeline_template\/",
-        "wordCount" : "925",
+        "wordCount" : "772",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -542,15 +532,6 @@ if (!doNotTrack) {
     <ul class="nav__list nav__list--end">
       
       
-        <li class="nav__list-item">
-          <div class="themeswitch">
-            <a title="Switch Theme">
-              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-
-      
     </ul>
   </nav>
 </div>
@@ -589,126 +570,126 @@ etc.</li>
 <p>So, let's take a look at some examples!😼</p>
 <h2 id="example-1-re-use-template-in-multiple-build-pipelines">Example 1: re-use template in multiple build pipelines</h2>
 <p>Let's say you have a collection of build tasks that you need to add to several build pipelines in your project. For example, build tasks that download some build artifacts, install some tools and run some common scripts. What you can do then is to make these tasks reusable by creating a YAML template and storing it in a common repo that can be referenced from all the respective pipelines. Here's an example of such a template YAML that is stored in a repo called <code>common-templates</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># prep-env-template.yaml
-
-- task: UseDotNet@2
-  inputs:
-    packageType: &#39;sdk&#39;
-    version: &#39;6.x&#39;
-
-- task: DownloadPipelineArtifact@2
-  displayName: &#39;Download Build Artifacts - File Viewer&#39;
-  inputs:
-    buildType: &#39;specific&#39;
-    project: &#39;3c8d4d22-f3d0-11ec-b939-0242ac120002&#39;
-    definition: &#39;007&#39;
-    buildVersionToDownload: &#39;latestFromBranch&#39;
-    branchName: &#39;refs/heads/master&#39;
-    artifactName: &#39;my-artifact&#39;
-    targetPath: &#39;$(Build.SourcesDirectory)/temp/my-artifact&#39;
-
-- task: PowerShell@2
-  displayName: &#39;Update service data&#39;
-  inputs:
-    filePath: &#39;build-scripts/Update-Service.ps1&#39;
-    
-</code></pre></div><p>As you can see, this template installs latest version of .NET 6 SDK on the build agent, downloads artifact from another repo's build and executes a PowerShell script to update some data for the service. Now, in every build pipeline where we want to execute these tasks we can check out the <code>common-templates</code> repo and integrate template with a <code>template</code> build task, like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># azure-pipeline.yaml
-
-... 
-
-- job: prepare_environment
-  timeoutInMinutes: 60
-  pool:
-    vmImage : &#39;ubuntu-latest&#39;
-
-  steps:
-  - checkout: common-templates # integrate another repo into current pipeline
-  - template: prep-env-template.yaml # load and execute build tasks from provided template
-
-...
-
-</code></pre></div><p>And you're all set! 🤟</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># prep-env-template.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">UseDotNet@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">packageType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;sdk&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;6.x&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DownloadPipelineArtifact@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Download Build Artifacts - File Viewer&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">buildType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;specific&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3c8d4d22-f3d0-11ec-b939-0242ac120002&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">definition</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;007&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">buildVersionToDownload</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;latestFromBranch&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">branchName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;refs/heads/master&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">artifactName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;my-artifact&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">targetPath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/temp/my-artifact&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PowerShell@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Update service data&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">filePath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;build-scripts/Update-Service.ps1&#39;</span><span class="w">
+</span><span class="w">    
+</span></code></pre></div><p>As you can see, this template installs latest version of .NET 6 SDK on the build agent, downloads artifact from another repo's build and executes a PowerShell script to update some data for the service. Now, in every build pipeline where we want to execute these tasks we can check out the <code>common-templates</code> repo and integrate template with a <code>template</code> build task, like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># azure-pipeline.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w"> 
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">prepare_environment</span><span class="w">
+</span><span class="w">  </span><span class="nt">timeoutInMinutes</span><span class="p">:</span><span class="w"> </span><span class="m">60</span><span class="w">
+</span><span class="w">  </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">vmImage </span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">checkout</span><span class="p">:</span><span class="w"> </span><span class="l">common-templates</span><span class="w"> </span><span class="c"># integrate another repo into current pipeline</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l">prep-env-template.yaml</span><span class="w"> </span><span class="c"># load and execute build tasks from provided template</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><p>And you're all set! 🤟</p>
 <h2 id="example-2-re-use-parameterized-template-in-multiple-build-stages">Example 2: re-use parameterized template in multiple build stages</h2>
 <p>In this example we have a multi-staged build pipeline for an application where one stage builds the app, executes tests, packages and publishes the application while another stage performs security validations. Both stages need to build an app while only build stage needs to run the tests and publish an app - that's when we can dynamically adjust which template tasks should be executed for which stage based on parameterization and task conditions. So in this case we store our template YAML in the same repo as the application, in a <code>pipeline-templates</code> folder:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># build-app-template.yaml
-
-parameters:  
-  build: true
-  test: true
-  publish: false
-
-steps:
-
-- task: DotNetCoreCLI@2
-  displayName: &#39;Build solution&#39;
-  inputs:
-    command: &#39;build&#39;
-    projects: &#39;source/My.TestApp.sln&#39;
-    configuration: &#39;$(buildConfiguration)&#39; # here we refer a variable defined in main build pipeline definition
-    arguments: &#39;-f net6.0&#39;
-  condition: and(succeeded(),eq(&#39;${{ parameters.build }}&#39;, true))
-
-- task: DotNetCoreCLI@2
-  displayName: &#39;Execute unit tests&#39;
-  inputs:
-    command: &#39;test&#39;
-    arguments: &#39;--no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./CodeCoverage/my-testapp/&#39;
-    publishTestResults: true
-    projects: &#39;source/My.TestApp.sln&#39;
-  condition: and(succeeded(),eq(&#39;${{ parameters.test }}&#39;, true))
-
-- task: DotNetCoreCLI@2
-  displayName: &#39;Publish application&#39;
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: &#39;--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/pub-output&#39;
-    projects: &#39;source/My.TestApp/My.TestApp.csproj&#39;
-    zipAfterPublish: false
-  condition: and(succeeded(),eq(&#39;${{ parameters.publish }}&#39;, true))
-
-</code></pre></div><p>As you can see, in the top of the template we have <code>parameters</code> section where we define which parameters that can be sent to the template and what the default values for those parameters should be. With <code>condition</code> property on every build task we can refer to respective parameters and activate the task based on the provided value of the parameter.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># build-app-template.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">parameters</span><span class="p">:</span><span class="w">  
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">publish</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Build solution&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;build&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;source/My.TestApp.sln&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(buildConfiguration)&#39;</span><span class="w"> </span><span class="c"># here we refer a variable defined in main build pipeline definition</span><span class="w">
+</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;-f net6.0&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(),eq(&#39;${{ parameters.build }}&#39;, true))</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Execute unit tests&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./CodeCoverage/my-testapp/&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">publishTestResults</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;source/My.TestApp.sln&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(),eq(&#39;${{ parameters.test }}&#39;, true))</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Publish application&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">publish</span><span class="w">
+</span><span class="w">    </span><span class="nt">publishWebProjects</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/pub-output&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;source/My.TestApp/My.TestApp.csproj&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">zipAfterPublish</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l">and(succeeded(),eq(&#39;${{ parameters.publish }}&#39;, true))</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><p>As you can see, in the top of the template we have <code>parameters</code> section where we define which parameters that can be sent to the template and what the default values for those parameters should be. With <code>condition</code> property on every build task we can refer to respective parameters and activate the task based on the provided value of the parameter.</p>
 <p>Now, in every stage of our main build pipeline we can dynamically adjust how the template should be executed, also by using <code>parameters</code> property:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># azure-pipeline.yaml
-
-...
-stages:
-- stage: Build
-  jobs:
-  - job: BuildApplication
-    pool:
-      vmImage: &#39;ubuntu-latest&#39;
-    steps:
-    
-    ...
-    
-    - template:  pipeline-templates/build-app-template.yaml
-      parameters:
-        build: true
-        publish: true
-        test: true
-    
-    ...
-
-- stage: Security
-  jobs:
-  - job: SecurityChecks
-    pool:
-      vmImage: &#39;ubuntu-latest&#39;
-    steps:
-    
-    ...
-    
-    - template:  pipeline-templates/build-app-template.yaml
-      parameters:
-        build: true
-        publish: false # no need to publish app in this stage -you can also skip providing this parameter - then default value will be used which is also &#39;false&#39;
-        test: false # no need to run tests in this stage
-    
-    ...
-
-</code></pre></div><p>And we're good to go!😸</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># azure-pipeline.yaml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w">
+</span><span class="w"></span><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Build</span><span class="w">
+</span><span class="w">  </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">BuildApplication</span><span class="w">
+</span><span class="w">    </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="l">...</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span>- <span class="nt">template</span><span class="p">:</span><span class="w">  </span><span class="l">pipeline-templates/build-app-template.yaml</span><span class="w">
+</span><span class="w">      </span><span class="nt">parameters</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span><span class="nt">publish</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="l">...</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Security</span><span class="w">
+</span><span class="w">  </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">SecurityChecks</span><span class="w">
+</span><span class="w">    </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="l">...</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span>- <span class="nt">template</span><span class="p">:</span><span class="w">  </span><span class="l">pipeline-templates/build-app-template.yaml</span><span class="w">
+</span><span class="w">      </span><span class="nt">parameters</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span><span class="nt">publish</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># no need to publish app in this stage -you can also skip providing this parameter - then default value will be used which is also &#39;false&#39;</span><span class="w">
+</span><span class="w">        </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c"># no need to run tests in this stage</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="l">...</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><p>And we're good to go!😸</p>
 <p>Build templates can really help you make your pipeline code more reusable and keep the build pipeline definition cleaner and smaller since you don't need to duplicate the same build tasks every single time, which is always nice. 💖</p>
 <p>You can learn more about templates here: <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops">Template types &amp; usage</a></p>
 <p>Thanks for reading and till next tech tip! 😻</p>
