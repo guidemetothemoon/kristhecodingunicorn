@@ -20,7 +20,7 @@ customCss = ["css/syntax.css"]
 customJs = [] 
 
 mainSections = ["post"]
-images = ["images/site-feature-image.png"]
+images = ["images/blog_banner.png"]
 doNotLoadAnimations = false
 
 # Form Spree Contact Form
