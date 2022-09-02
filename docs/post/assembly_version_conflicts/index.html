@@ -6,8 +6,7 @@
   class="html"
 ><head>
   <title>
-    
-      Kris - The Coding Unicorn
+    Kris - The Coding Unicorn
         |
         Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log
 
@@ -16,18 +15,15 @@
 
 
     
+
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.101.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="
-      This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog.
-
-
-    "
+    content="This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -36,8 +32,8 @@
     
     <link
       rel="stylesheet"
-      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
-      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
+      href="/scss/main.min.3f19c50a3ed6f0bb5b2b8595a88dbec7e0c5a7ac5ab3492f7baf72c31f2231b4.css"
+      integrity="sha256-PxnFCj7W8LtbK4WVqI2&#43;x&#43;DFp6xas0kve69ywx8iMbQ="
       crossorigin="anonymous"
       type="text/css"
     />
@@ -67,24 +63,32 @@
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/fontawesome.min.b1c4e6a10bdbab01f33fff9d78816ee68cf9a9a731f07668afd546a79924cb80.css"
-    integrity="sha256-scTmoQvbqwHzP/&#43;deIFu5oz5qacx8HZor9VGp5kky4A="
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/solid.min.423dee17c62f55fa733a4ee13e00d523dfce88cc4f4ab4549a24ba36bd9de681.css"
-    integrity="sha256-Qj3uF8YvVfpzOk7hPgDVI9/OiMxPSrRUmiS6Nr2d5oE="
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/brands.min.b7d54133b27e5b4de15245b8e143de3e8ed2d674c706137274cedc9953f31917.css"
-    integrity="sha256-t9VBM7J&#43;W03hUkW44UPePo7S1nTHBhNydM7cmVPzGRc="
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
     crossorigin="anonymous"
     type="text/css"
   />
@@ -102,8 +106,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -114,7 +118,7 @@
 
   
   <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/blog_banner_preview2.jpg"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
 <meta name="twitter:title" content="Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log"/>
 <meta name="twitter:description" content="This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog."/>
@@ -125,9 +129,9 @@
   <meta property="og:title" content="Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log" />
 <meta property="og:description" content="This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/post/assembly_version_conflicts/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/blog_banner_preview2.jpg"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-06T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-07-06T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/assembly_version_conflicts/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-06T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-07-06T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
@@ -189,7 +193,7 @@
         "image": 
       [
         
-        "https://kristhecodingunicorn.com/images/blog_banner_preview2.jpg"
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
 
 
       
@@ -263,7 +267,7 @@
 
       
       <div class="sidebar__introduction-description">
-        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | <br /> Cat Mom 🐈🐈🐈 and Potterhead</p>
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Azure Hero and Microsoft Azure MVP⛅️ | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | <br /> Cat Mom 🐈🐈🐈 and Potterhead</p>
       </div>
     </div>
     <ul class="sidebar__list">
@@ -367,7 +371,20 @@
             aria-label="Azure Heroes"
             title="Azure Heroes"
           >
-            <i class="fas fa-certificate fa-2x" aria-hidden="true"></i>
+            <i class="fas fa-mask fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko"
+            target="_blank"
+            rel="noopener"
+            aria-label="Microsoft MVP"
+            title="Microsoft MVP"
+          >
+            <i class="fas fa-cloud fa-2x" aria-hidden="true"></i>
           </a>
         </li>
 
@@ -388,8 +405,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.602bd2014468bd348112e2aa24f595c530d257a4ed6c335d7baaa6ac9a7ca6fb.js"
-    integrity="sha256-YCvSAURovTSBEuKqJPWVxTDSV6TtbDNde6qmrJp8pvs="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
@@ -433,7 +450,6 @@ if (!doNotTrack) {
   </a>
   <nav class="nav">
     <ul class="nav__list" id="navMenu">
-      
       
       
         
@@ -555,7 +571,11 @@ if (!doNotTrack) {
             <em class="fas fa-calendar-day post__meta-icon"></em>
             <span class="post__meta-text"
               >
-                6/7/2021
+                
+                  6/7/2021
+
+
+                
 
 
               
@@ -605,13 +625,13 @@ if (!doNotTrack) {
 <p>Now, let's take a look at what tools may help debugging these issues and identifying the root cause.</p>
 <h2 id="tools-that-helped-me-survive-the-hell-of-dll">Tools that helped me survive The Hell of DLL</h2>
 <h3 id="fusion-log">Fusion Log</h3>
-<p>Aka Assembly Binding Log Viewer, aka Fuslogvw.exe - extremely useful tool that has made my developer life easier many times. It logs details of all the assembly binds generated by the application. With help of Fusion Log you can explore all the assembly bindings that have been successfully or unsuccessfully loaded by the application.
+<p>Aka Assembly Binding Log Viewer, aka Fuslogvw.exe - extremely useful tool that has made my developer life easier many times. It logs details of all the assembly binds generated by the application. With help of Fusion Log you can explore all the assembly bindings that have been successfully or unsuccessfully loaded by the application. 
 Fusion Log is automatically installed together with Visual Studio but when you experience assembly load failures in production environment and you don't want to install Visual Studio on production servers, you can get the tool up and running by copying <strong>FUSLOGVW.exe</strong> and <strong>flogvwrc.dll</strong> from one of the Microsoft SDKs locations (for example, &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools&quot;).</p>
 <p>You can read more about Fusion Log, where to download it and how it can be configured in Microsoft documentation: <a href="https://docs.microsoft.com/en-us/dotnet/framework/tools/fuslogvw-exe-assembly-binding-log-viewer">Fuslogvw.exe (Assembly Binding Log Viewer)</a>.</p>
 <p>Let's now see Fusion Log in action. I have an application that is targeting both .NET Framework 4.8 and .NET 5. As of now, .NET Framework 4.8 is deployed to production since migration to .NET 5 is not fully completed. Something went wrong in one of the projects and the target for .NET Framework 4.8 was removed. Because of this only the .NET 5 version of the assembly was compiled, which was then included in the application setup package for .NET Framework 4.8. This will, of course, cause a runtime error since applicatoin is not expecting to use .NET 5 assemblies just yet. Now, let's borrow the neuralizer from Men in Black and see how we can identify the root cause when we don't know what actually was the reason for the error.</p>
 <p>Initially, logs show us following error message indicating failure during application start-up:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">error : System.IO.FileNotFoundException: Could not load file or assembly &#39;System.Runtime, Version=5.0.0.0, Culture=neutral, 
-</span></span><span class="line"><span class="cl">PublicKeyToken=b03f5f7f11d50a3a&#39; or one of its dependencies. The system cannot find the file specified. </span></span></code></pre></div></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">error : System.IO.FileNotFoundException: Could not load file or assembly &#39;System.Runtime, Version=5.0.0.0, Culture=neutral, 
+PublicKeyToken=b03f5f7f11d50a3a&#39; or one of its dependencies. The system cannot find the file specified. </code></pre></div></p>
 <p>Let's start Fusion Log and get it ready for logging assembly bindings. I've configured a custom log path and logging of all bindings, both successful ones and those that failed. Normal assembly binding requests are being logged by default (marked &quot;Default&quot; in Log categories) but it's also possible to log assembly binds for native images that were created using the Ngen.exe (Native Image Generator) - for that, you need to change Log category to &quot;Native Images&quot;. You can read more about Native Image Generator here: <a href="https://docs.microsoft.com/en-us/dotnet/framework/tools/ngen-exe-native-image-generator">Ngen.exe</a>.</p>
 <p><img src="../../images/assembly_conflicts/fuslog_config.jpg" alt="Fusion Log screenshot of configuration"></p>
 <p>Allright, we're ready to attempt to start our application again in order to get asssembly bindings logged. Once start-up of the application has been triggered, we can see that a lot of bindings are being logged:</p>
@@ -641,42 +661,42 @@ As I mentioned earlier, your projects may be using central package versioning an
 <p><strong>Important note: you need to build the solution or project that you want to inspect prior to running this command!</strong></p>
 <p>More information about <strong>dotnet list package</strong> command can be found in Microsoft's official documentation: <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-list-package">dotnet list package</a>.</p>
 <p>As an example, let's say we get following assembly load error:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">System.IO.FileLoadException: Could not load file or assembly &#39;System.Security.Cryptography.Xml, Version=4.0.3.0, 
-</span></span><span class="line"><span class="cl">Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51&#39; or one of its dependencies. The located assembly&#39;s manifest definition 
-</span></span><span class="line"><span class="cl">does not match the assembly reference. (Exception from HRESULT: 0x80131040)</span></span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">System.IO.FileLoadException: Could not load file or assembly &#39;System.Security.Cryptography.Xml, Version=4.0.3.0, 
+Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51&#39; or one of its dependencies. The located assembly&#39;s manifest definition 
+does not match the assembly reference. (Exception from HRESULT: 0x80131040)</code></pre></div>
 <p>In order to find out what packages are referencing this dependency, let's execute following command and inspect dependencies included in the applicaiton's source code:</p>
 <p><code>dotnet list MyTestSolution.sln package --include-transitive -framework net5.0</code></p>
 <p>If you have many dependencies it's better to write the output to a separate file which you can easily analyze:</p>
 <p><code>dotnet list MyTestSolution.sln package --include-transitive -framework net5.0 &gt; mytestsln-dependencies.txt</code></p>
 <p>After analyzing the output we could identify following two projects dependent upon different versions of System.Security.Cryptography.Xml:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Project &#39;TestProject-A&#39; has the following package references
-</span></span><span class="line"><span class="cl">   [net5.0]: 
-</span></span><span class="line"><span class="cl">   Top-level Package                                Requested   Resolved
-</span></span><span class="line"><span class="cl">   &gt; SoapCore                                       1.0.0       1.0.0   
-</span></span><span class="line"><span class="cl">   &gt; System.Configuration.ConfigurationManager      4.7.0       4.7.0   
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   Transitive Package                                                                   Resolved    
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Cryptography.ProtectedData                                         4.7.0    
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Cryptography.X509Certificates                                      4.3.0    
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Cryptography.Xml                                                   4.5.0  
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   # The rest of the dependencies is omitted...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Project &#39;TestProject-B&#39; has the following package references
-</span></span><span class="line"><span class="cl">   [net5.0]: 
-</span></span><span class="line"><span class="cl">   Top-level Package                                Requested   Resolved
-</span></span><span class="line"><span class="cl">   &gt; Newtonsoft.Json                                11.0.2      11.0.2  
-</span></span><span class="line"><span class="cl">   &gt; External.Client.Core                           7.0.3       7.0.3   
-</span></span><span class="line"><span class="cl">   &gt; External.Client.Portal                         7.0.3       7.0.3   
-</span></span><span class="line"><span class="cl">   &gt; System.Data.DataSetExtensions                  4.5.0       4.5.0   
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Permissions                    5.0.0       5.0.0   
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   Transitive Package                                                                   Resolved    
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Cryptography.ProtectedData                                         4.7.0    
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Cryptography.X509Certificates                                      4.3.0    
-</span></span><span class="line"><span class="cl">   &gt; System.Security.Cryptography.Xml                                                   4.7.0  
-</span></span><span class="line"><span class="cl">   
-</span></span><span class="line"><span class="cl">   # The rest of the dependencies is omitted...</span></span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-txt" data-lang="txt">Project &#39;TestProject-A&#39; has the following package references
+   [net5.0]: 
+   Top-level Package                                Requested   Resolved
+   &gt; SoapCore                                       1.0.0       1.0.0   
+   &gt; System.Configuration.ConfigurationManager      4.7.0       4.7.0   
+
+   Transitive Package                                                                   Resolved    
+   &gt; System.Security.Cryptography.ProtectedData                                         4.7.0    
+   &gt; System.Security.Cryptography.X509Certificates                                      4.3.0    
+   &gt; System.Security.Cryptography.Xml                                                   4.5.0  
+
+   # The rest of the dependencies is omitted...
+
+Project &#39;TestProject-B&#39; has the following package references
+   [net5.0]: 
+   Top-level Package                                Requested   Resolved
+   &gt; Newtonsoft.Json                                11.0.2      11.0.2  
+   &gt; External.Client.Core                           7.0.3       7.0.3   
+   &gt; External.Client.Portal                         7.0.3       7.0.3   
+   &gt; System.Data.DataSetExtensions                  4.5.0       4.5.0   
+   &gt; System.Security.Permissions                    5.0.0       5.0.0   
+
+   Transitive Package                                                                   Resolved    
+   &gt; System.Security.Cryptography.ProtectedData                                         4.7.0    
+   &gt; System.Security.Cryptography.X509Certificates                                      4.3.0    
+   &gt; System.Security.Cryptography.Xml                                                   4.7.0  
+   
+   # The rest of the dependencies is omitted...</code></pre></div>
 <p>As we can see, both TestProject-A and TestProject-B have System.Security.Cryptography.Xml as a transitive dependency, but projects are dependent upon different versions of the dependency. With help of .NET CLI we have been able to identify which projects are using different version of the same assembly - now we can analyze both projects and decide how this version conflict can be resolved in the best possible way.</p>
 <p>I will briefly mention some of the options for resolving situations like this in the section below.</p>
 <h2 id="how-to-resolve-assembly-version-conflicts">How to resolve assembly version conflicts</h2>
@@ -689,22 +709,22 @@ As I mentioned earlier, your projects may be using central package versioning an
 <p>Sometimes you need to use specific versions for some dependencies and can't enforce point #1 - an alternative solution would then be to <strong>add an assembly binding redirect to the application's configuration file</strong> (for example, App.config). This will redirect all components of your application that attempt to load an older version of a specific assembly to use another, typically newer, version of the same assembly. An example of such binding redirect:</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependentAssembly&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="nt">&lt;bindingRedirect</span> <span class="na">oldVersion=</span><span class="s">&#34;0.0.0.0-5.2.7.0&#34;</span> <span class="na">newVersion=</span><span class="s">&#34;5.2.7.0&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependentAssembly&gt;</span></span></span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependentAssembly&gt;</span>
+   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;bindingRedirect</span> <span class="na">oldVersion=</span><span class="s">&#34;0.0.0.0-5.2.7.0&#34;</span> <span class="na">newVersion=</span><span class="s">&#34;5.2.7.0&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/dependentAssembly&gt;</span></code></pre></div>
 <p>Here, all versions up to 5.2.7.0 of System.Net.Http.Formatting assembly will be redirected to use version 5.2.7.0. You can read more about redirecting assembly versions here: <a href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/redirect-assembly-versions">Redirecting assembly versions</a>.</p>
 <ol start="3">
 <li>There are situations where you may need to use the same assembly but with different identities, and you are not using Global Assembly Cache. I've experienced a scenario where we had two third-party dependencies in our application that were using different versions of the same package that was strong-name signed. In the newer version of the package authors have changed public/private key pair that was used for signing the assembly with strong name, which caused a totally different assembly identity than what the application expected. We had to keep both versions of this package due to the direct application dependencies - and that's when <strong>assembly redirect based on codebase</strong> came in handy. What differs it from point #2 is that, instead of defining a binding redirect, you create a separate folder in your appbase where you will store one of the versions of the conflicting assembly. In this way you will tell the application where to look for a specific version of the assembly. An example of such assembly codebase redirect:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependentAssembly&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="nt">&lt;codeBase</span> <span class="na">version=</span><span class="s">&#34;5.6.0.0&#34;</span> <span class="na">href=</span><span class="s">&#34;bin/System.Net.Http.Formatting_5.6.0.0/System.Net.Http.Formatting.dll&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependentAssembly&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;dependentAssembly&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;1234567891011121&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="nt">&lt;codeBase</span> <span class="na">version=</span><span class="s">&#34;5.7.0.0&#34;</span> <span class="na">href=</span><span class="s">&#34;bin/System.Net.Http.Formatting_5.7.0.0/System.Net.Http.Formatting.dll&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependentAssembly&gt;</span></span></span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependentAssembly&gt;</span>
+   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;31bf3856ad364e35&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;codeBase</span> <span class="na">version=</span><span class="s">&#34;5.6.0.0&#34;</span> <span class="na">href=</span><span class="s">&#34;bin/System.Net.Http.Formatting_5.6.0.0/System.Net.Http.Formatting.dll&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/dependentAssembly&gt;</span>
+<span class="nt">&lt;dependentAssembly&gt;</span>
+   <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&#34;System.Net.Http.Formatting&#34;</span> <span class="na">publicKeyToken=</span><span class="s">&#34;1234567891011121&#34;</span> <span class="na">culture=</span><span class="s">&#34;neutral&#34;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;codeBase</span> <span class="na">version=</span><span class="s">&#34;5.7.0.0&#34;</span> <span class="na">href=</span><span class="s">&#34;bin/System.Net.Http.Formatting_5.7.0.0/System.Net.Http.Formatting.dll&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/dependentAssembly&gt;</span></code></pre></div>
 <p>Take a look at official documentation for more information: <a href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/specify-assembly-location">Specifying and assembly's location</a>.</p>
 <ol start="4">
 <li>When it comes to storing multiple versions of the same assembly, you can use Global Assembly Cache (GAC) but that's not my preferred solution, that's why I will not directly recommend it - unless it's an absolute requirement for your application. Wherever it's possible to run the application without the dependency on GAC, I would suggest doing so. The reason for this being that GAC makes it harder to maintain application's assemblies and dependencies. Installing and uninstalling a specific assembly also gets more complicated, compared to assemblies that are only located in the appbase folder. It is also strongly tied to Windows OS, and if you decide to migrate your application to .NET Core and make your product cross-platform, you will anyway need to handle deployment of your assemblies outside of GAC.</li>
@@ -720,7 +740,7 @@ As I mentioned earlier, your projects may be using central package versioning an
 <p>In conclusion I would say that as long as your application targets .NET Core or you're in process of migrating your application to .NET Core, you should <strong>not</strong> use strong name signing for your assemblies. Unless you need to, of course.</p>
 <p>Congratulations on mastering the art of assembly version conflict resolutions! Hopefully, you will not face these issues yourself but if you do, you should now have all the necessary tools to resolve them and become a dev hero! ;-)</p>
 <p><img src="../../images/assembly_conflicts/dll_master.jpg" alt="Dll master meme"></p>
-<p>That's it from me this time, thanks for checking in!
+<p>That's it from me this time, thanks for checking in! 
 If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
 <p>Stay secure, stay safe.</p>
 <p>Till we connect again!</p>
@@ -757,8 +777,8 @@ If this article was helpful, I'd love to hear about it! You can reach out to me 
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.602bd2014468bd348112e2aa24f595c530d257a4ed6c335d7baaa6ac9a7ca6fb.js"
-    integrity="sha256-YCvSAURovTSBEuKqJPWVxTDSV6TtbDNde6qmrJp8pvs="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>

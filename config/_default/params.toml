@@ -2,7 +2,7 @@
 title = "Kris - The Coding Unicorn"
 author = "Kris - The Coding Unicorn"
 copyright = "2022 - Powered by Hugo"
-description = "Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 \n Azure Content Hero🦡 | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | \n Cat Mom 🐈🐈🐈 and Potterhead"
+description = "Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 \n Azure Hero and Microsoft Azure MVP⛅️ | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | \n Cat Mom 🐈🐈🐈 and Potterhead"
 profilePicture = "images/profile.jpg"
 keywords = ""
 favicon = "favicons/"
@@ -20,7 +20,7 @@ customCss = ["css/syntax.css"]
 customJs = [] 
 
 mainSections = ["post"]
-images = ["images/blog_banner_preview2.jpg"]
+images = ["images/site-feature-image.png"]
 doNotLoadAnimations = false
 
 # Form Spree Contact Form
@@ -89,6 +89,11 @@ title = "rss"
 url = "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
 
 [[socialIcons]]
-icon = "fas fa-certificate"
+icon = "fas fa-mask"
 title = "Azure Heroes"
 url = "https://www.azureheroes.community/user/15391"
+
+[[socialIcons]]
+icon = "fas fa-cloud"
+title = "Microsoft MVP"
+url = "https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko"
