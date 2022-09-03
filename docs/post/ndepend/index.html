@@ -6,7 +6,8 @@
   class="html"
 ><head>
   <title>
-    Kris - The Coding Unicorn
+    
+      Kris - The Coding Unicorn
         |
         Improving .NET code quality with NDepend in Visual Studio and Azure DevOps
 
@@ -15,15 +16,18 @@
 
 
     
-
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.82.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.102.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool."
+    content="
+      This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool.
+
+
+    "
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -32,8 +36,8 @@
     
     <link
       rel="stylesheet"
-      href="/scss/main.min.3f19c50a3ed6f0bb5b2b8595a88dbec7e0c5a7ac5ab3492f7baf72c31f2231b4.css"
-      integrity="sha256-PxnFCj7W8LtbK4WVqI2&#43;x&#43;DFp6xas0kve69ywx8iMbQ="
+      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
+      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
       crossorigin="anonymous"
       type="text/css"
     />
@@ -63,32 +67,24 @@
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
-    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    href="/fontawesome/css/fontawesome.min.b1c4e6a10bdbab01f33fff9d78816ee68cf9a9a731f07668afd546a79924cb80.css"
+    integrity="sha256-scTmoQvbqwHzP/&#43;deIFu5oz5qacx8HZor9VGp5kky4A="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
-    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    href="/fontawesome/css/solid.min.423dee17c62f55fa733a4ee13e00d523dfce88cc4f4ab4549a24ba36bd9de681.css"
+    integrity="sha256-Qj3uF8YvVfpzOk7hPgDVI9/OiMxPSrRUmiS6Nr2d5oE="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
-    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
-    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    href="/fontawesome/css/brands.min.b7d54133b27e5b4de15245b8e143de3e8ed2d674c706137274cedc9953f31917.css"
+    integrity="sha256-t9VBM7J&#43;W03hUkW44UPePo7S1nTHBhNydM7cmVPzGRc="
     crossorigin="anonymous"
     type="text/css"
   />
@@ -106,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
     crossorigin="anonymous"
   ></script>
 
@@ -130,8 +126,8 @@
 <meta property="og:description" content="This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kristhecodingunicorn.com/post/ndepend/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-03-17T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-03-17T00:00:00&#43;00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+<meta property="article:published_time" content="2022-03-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-17T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
@@ -201,7 +197,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/ndepend\/",
-        "wordCount" : "4611",
+        "wordCount" : "4789",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -412,8 +408,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>
@@ -457,6 +453,7 @@ if (!doNotTrack) {
   </a>
   <nav class="nav">
     <ul class="nav__list" id="navMenu">
+      
       
       
         
@@ -578,11 +575,7 @@ if (!doNotTrack) {
             <em class="fas fa-calendar-day post__meta-icon"></em>
             <span class="post__meta-text"
               >
-                
-                  17/3/2022
-
-
-                
+                17/3/2022
 
 
               
@@ -590,7 +583,7 @@ if (!doNotTrack) {
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">22-minute read</span>
+            <span class="post__meta-text">23-minute read</span>
           </li>
         </ul>
 
@@ -636,19 +629,19 @@ if (!doNotTrack) {
 <p>Once the license is applied in Azure DevOps you can start experimenting with NDepend. So let's get straight to it!</p>
 <h3 id="adding-ndepend-build-task">Adding NDepend Build Task</h3>
 <p>Build task to set up analysis with NDepend is pretty easy and straightforward to set up - here I've configured the basic build task for a repo with 2 projects in it, with default configuration. <strong>Please note</strong> that this task can only run on a Windows build agent at the moment. The task is added after the unit test execution task for a more representative analysis:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#azure-pipelines.yaml</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDepend Scan&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w"> </span><span class="c"># NDepend needs access to the token to be able to compare builds</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-web</span><span class="w">
-</span><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w"> 
-</span><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span></code></pre></div><p>If you want to generate multiple views with different configurations, you can add multiple build tasks with different viewname property (which is also called Perspective in official NDepend documentation), but you always operate with the build task of one type - <code>NDependTask@1</code>. Here we're excluding test projects from the analysis and are not enforcing any quality gates just yet. Also, we haven't enabled code coverage as of now, and shortly we'll see why it can be useful to enable it. But first let's see what the output of the build will be once this task is added. I liked that the task executes quite fast - it took no more than 4-5 minutes for a repo with 200+ projects and from my experience, quite few tools can handle such amount of projects this fast. This makes it an advantage since it doesn't increase the build time significantly and can still run as part of the pull request build for instance, to enforce additional quality gates for the code check-ins.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#azure-pipelines.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDepend Scan&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w"> </span><span class="c"># NDepend needs access to the token to be able to compare builds</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span></code></pre></div><p>If you want to generate multiple views with different configurations, you can add multiple build tasks with different viewname property (which is also called Perspective in official NDepend documentation), but you always operate with the build task of one type - <code>NDependTask@1</code>. Here we're excluding test projects from the analysis and are not enforcing any quality gates just yet. Also, we haven't enabled code coverage as of now, and shortly we'll see why it can be useful to enable it. But first let's see what the output of the build will be once this task is added. I liked that the task executes quite fast - it took no more than 4-5 minutes for a repo with 200+ projects and from my experience, quite few tools can handle such amount of projects this fast. This makes it an advantage since it doesn't increase the build time significantly and can still run as part of the pull request build for instance, to enforce additional quality gates for the code check-ins.</p>
 <h3 id="ndepend-build-output-and-azure-devops-dashboard">NDepend build output and Azure DevOps Dashboard</h3>
 <p>Once the build has executed we can see in the Artifacts section that quite a few files with analysis results were published by NDepend - these files can be used to investigate the results locally, or they can be used as examples/blueprint for defining your own custom rules, trends, quality gates, etc.</p>
 <p><img src="../../images/ndepend/ndepend_artifacts.png" alt="Screenshot of NDepend artifacts"></p>
@@ -659,73 +652,73 @@ if (!doNotTrack) {
 <h3 id="adding-code-coverage-to-ndepend-analysis">Adding code coverage to NDepend analysis</h3>
 <p>Now, code coverage statistics is showing 0% and in order to get a more realistic analysis we need to enable code coverage. Fortunately, I've already enabled code coverage build task for the current repository, where I'm utilizing Coverlet coverage framework. Let's let NDepend know where it can retrieve code coverage results for it's analysis. <strong>Please note</strong> that you need to configure code coverage to provide a report in OpenCover format - that's the Coverlet output format that is supported by NDepend as of now. In the example below I've configured multiple report formats since I'm using code coverage results for multiple purposes. You can find more information about usage of code coverage in NDepend, as well as what code coverage frameworks are supported by the tool here: <a href="https://www.ndepend.com/docs/code-coverage">Importing Code Coverage Results in the NDepend Code Model</a>.</p>
 <p>We can enable code coverage in NDepend build task by enabling <code>iscoverage</code> property and providing path to the code coverage results in <code>coverage</code> property, as demonstrated in the build pipeline definition below:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#azure-pipelines.yaml</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run all tests&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
-</span><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*Test*/*.csproj&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(BuildConfiguration)&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/p:CollectCoverage=true &#34;/p:CoverletOutputFormat=\&#34;cobertura,opencover\&#34;&#34; /p:CoverletOutput=./CodeCoverage/&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">publishTestResults</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishCodeCoverageResults@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Publish Code Coverage Results&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">codeCoverageTool</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Cobertura&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">summaryFileLocation</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage/coverage.net5.0.cobertura.xml&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">failIfCoverageEmpty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDepend Scan&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w"> </span><span class="c"># NDepend needs access to the token to be able to compare builds</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-web</span><span class="w">
-</span><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w"> 
-</span><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage&#39;</span><span class="w">
-</span></code></pre></div><p>Now, that we've enabled code coverage analysis as well, let's take a look how the results have changed since the first run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#azure-pipelines.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run all tests&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*Test*/*.csproj&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(BuildConfiguration)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/p:CollectCoverage=true &#34;/p:CoverletOutputFormat=\&#34;cobertura,opencover\&#34;&#34; /p:CoverletOutput=./CodeCoverage/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">publishTestResults</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishCodeCoverageResults@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Publish Code Coverage Results&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">codeCoverageTool</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Cobertura&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">summaryFileLocation</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage/coverage.net5.0.cobertura.xml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">failIfCoverageEmpty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDepend Scan&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w"> </span><span class="c"># NDepend needs access to the token to be able to compare builds</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Now, that we've enabled code coverage analysis as well, let's take a look how the results have changed since the first run:</p>
 <p><img src="../../images/ndepend/ndepend_second_run.png" alt="Screenshot of NDepend build run 2, with enabled code coverage"></p>
 <p>As you can see, enabling code coverage had a significant effect! Quality rating went down to level C with technical debt increase of almost 7%, compared to the previous build execution. You can also see multiple changes in Quality Gates, Rules and Issues sections. It means that we have quite some work to do when it comes to improving the code quality of our source code ;)</p>
 <h3 id="adding-code-coverage-from-external-location-to-ndepend-analysis">Adding code coverage from external location to NDepend analysis</h3>
 <p>In some cases you may be running code coverage outside of the main build pipeline and can't therefore connect it to NDepend directly, because the report files are located externally, on a totally different build agent. This is the case for one of my repos where there are 200+ projects - running code coverage as part of the pull request or main build pipeline isn't realistic - it will add more than 1 hour to the main build execution time. Therefore code coverage is running in a dedicated build pipeline but I can still add it to analysis with NDepend and enforce policies with following adjustment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#azure-pipelines.yaml</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishCodeCoverageResults@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Publish Code Coverage Results:Test BL Build&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">codeCoverageTool</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Cobertura&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">summaryFileLocation</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage/Cobertura.xml&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">additionalCodeCoverageFiles</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/CodeCoverage/coverage.net5.0.opencover.xml&#39;</span><span class="w"> </span><span class="c"># add this to publish reports in Opencover format as an additional build artifact</span><span class="w">
-</span><span class="w">    </span><span class="nt">failIfCoverageEmpty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DownloadBuildArtifacts@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">buildType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;specific&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;875e9197-a240-437c-92ef-e6fcf8e0a336&#39;</span><span class="w"> </span><span class="c"># update this value with your Azure DevOps project ID</span><span class="w">
-</span><span class="w">    </span><span class="nt">pipeline</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;1111&#39;</span><span class="w"> </span><span class="c"># update this value with your code coverage pipeline ID</span><span class="w">
-</span><span class="w">    </span><span class="nt">buildVersionToDownload</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;latest&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">downloadType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;specific&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">itemPattern</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*opencover.xml&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">downloadPath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/cc-results/CodeCoverage&#39;</span><span class="w">
-</span><span class="w">          
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDependTask&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-bl</span><span class="w">
-</span><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/cc-results/CodeCoverage&#39;</span><span class="w">
-</span></code></pre></div><p>First, we add publishing of code coverage report files in Opencover format as an additional build artifact, since that's the format supported by NDepend. Then, we download the reports from the latest succeeded build for code coverage and enable analysis for the same in NDepend build task. In that way we can connect code coverage data located externally to NDepend analysis - and it doesn't increase the main build duration time more than with a few seconds! :)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#azure-pipelines.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishCodeCoverageResults@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Publish Code Coverage Results:Test BL Build&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">codeCoverageTool</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Cobertura&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">summaryFileLocation</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage/Cobertura.xml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">additionalCodeCoverageFiles</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/CodeCoverage/coverage.net5.0.opencover.xml&#39;</span><span class="w"> </span><span class="c"># add this to publish reports in Opencover format as an additional build artifact</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">failIfCoverageEmpty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DownloadBuildArtifacts@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">buildType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;specific&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;875e9197-a240-437c-92ef-e6fcf8e0a336&#39;</span><span class="w"> </span><span class="c"># update this value with your Azure DevOps project ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pipeline</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;1111&#39;</span><span class="w"> </span><span class="c"># update this value with your code coverage pipeline ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">buildVersionToDownload</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;latest&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">downloadType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;specific&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">itemPattern</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*opencover.xml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">downloadPath</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/cc-results/CodeCoverage&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDependTask&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-bl</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/cc-results/CodeCoverage&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>First, we add publishing of code coverage report files in Opencover format as an additional build artifact, since that's the format supported by NDepend. Then, we download the reports from the latest succeeded build for code coverage and enable analysis for the same in NDepend build task. In that way we can connect code coverage data located externally to NDepend analysis - and it doesn't increase the main build duration time more than with a few seconds! :)</p>
 <h3 id="trends-section-in-ndepend-dashboard-in-azure-devops">Trends section in NDepend Dashboard in Azure DevOps</h3>
 <p>There is a lot of information in NDepend dashboard that you can use for further analysis of your source code. I will not go through all of it since it's well described in the official documentation but I love visualization, therefore I would like to mention the Trends section of NDepend dashboard. In Trends section you can find a lot of useful diagrams which will demonstrate latest changes compared to the established baseline:</p>
 <ul>
@@ -741,35 +734,35 @@ if (!doNotTrack) {
 <p>You can customize this section with your own Trends, you can find more information on how to do it here: <a href="https://www.ndepend.com/docs/monitor-code-trend">Monitor Code Trend</a>.</p>
 <h3 id="enabling-ndepend-quality-gate-checks-in-build-pipeline">Enabling NDepend quality gate checks in build pipeline</h3>
 <p>Lastly, I would like to enforce NDepend quality gates so that the build fails if at least one quality gate is violated. In addition I will add a new custom rule that is not included in the default collection provided by NDepend. But first let's enable quality gate build policy by setting <code>BuildGates</code> property to <code>true</code> so that our NDepend build task looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#azure-pipelines.yaml</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDependTask&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-bl</span><span class="w">
-</span><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># &lt;- Set this property to true to enable build quality gates!</span><span class="w">
-</span><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage&#39;</span><span class="w">
-</span></code></pre></div><p>Once this is done we can execute a new build. You can see that the build now fails because at least one quality gate failed:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#azure-pipelines.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDependTask&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-bl</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># &lt;- Set this property to true to enable build quality gates!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Once this is done we can execute a new build. You can see that the build now fails because at least one quality gate failed:</p>
 <p><img src="../../images/ndepend/ndepend_buildgate_error.png" alt="Screenshot of NDepend Build Gate Policy error"></p>
 <p>Actually there are 3 quality gates that failed&hellip;well, let's fix that! First of all, I would like to update code coverage quality gate to fail <strong>only</strong> when fail threshold goes beyond 50% and not 70% - we need time to build up high code coverage, therefore we can't enforce such a high coverage percentage just yet. Also, I would like to deactivate one quality gate and resolve the other - in some cases you may find out that some quality gates or rules are not applicable for your use case and it's OK to deactivate/suppress validation of those. Finally, I would like to add my own, custom rule and connect it to one of the default quality gates.</p>
 <p>In the next section I will show you how you can do all of that in Visual Studio with NDepend Extension.</p>
 <h2 id="quality-gate-and-rule-management-with-ndepend-vs-extension">Quality gate and rule management with NDepend VS Extension</h2>
 <p>Firstly, you will need to install NDepend Visual Studio Extension - you can read here how: <a href="https://www.ndepend.com/docs/getting-started-with-ndepend#Part1">Installing the NDepend extension for Visual Studio 2022, 2019, 2017, 2015, 2013, 2012 or 2010</a>.</p>
 <h3 id="running-initial-ndepend-analysis-in-visual-studio">Running initial NDepend analysis in Visual Studio</h3>
-<p>Once NDepend extension is installed we need to build our solution so that extension is able to locate the project assemblies for analysis. 
+<p>Once NDepend extension is installed we need to build our solution so that extension is able to locate the project assemblies for analysis.
 Before we do that, we must add one important adjustment. Since we're going to suppress specific issues, we must add <code>CODE_ANALYSIS</code> compilation symbol so that suppression attributes are included into project compilation. I have only one project in my example so I'll add following property to the project file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">// MyProj.Web.csproj
-
-<span class="nt">&lt;PropertyGroup&gt;</span>
-  <span class="nt">&lt;DefineConstants&gt;</span>CODE_ANALYSIS<span class="nt">&lt;/DefineConstants&gt;</span>
-  // REMAINING CODE IS OMITTED ...
-<span class="nt">&lt;/PropertyGroup&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">// MyProj.Web.csproj
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PropertyGroup&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DefineConstants&gt;</span>CODE_ANALYSIS<span class="nt">&lt;/DefineConstants&gt;</span>
+</span></span><span class="line"><span class="cl">  // REMAINING CODE IS OMITTED ...
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/PropertyGroup&gt;</span></span></span></code></pre></div>
 <p>Now we're ready and can build the solution. Once our solution is built, we can analyze it's assemblies by following this guide: <a href="https://www.ndepend.com/docs/getting-started-with-ndepend#Part2">Analyzing a Visual Studio solution</a>. Once analysis is complete, we get a pop-up window showing that analysis is now complete and presenting us with further options on what we can do - let's choose &quot;View NDepend Dashboard&quot;. <strong>Please note</strong> that during analysis an .ndproj file was generated for us - this file will come in handy when we are going to modify the default configuration of NDepend analysis.</p>
 <p><img src="../../images/ndepend/ndepend_vs_options.png" alt="Screenshot of NDepend VS Extension analysis complete pop-up"></p>
 <p>Here, we get redirected to a dashboard tab where we can see much of the same information we saw in the Azure DevOps dashboard, just that now we can operate on it locally, directly in our IDE this time.</p>
@@ -781,12 +774,11 @@ Before we do that, we must add one important adjustment. Since we're going to su
 <p><img src="../../images/ndepend/ndepend_vs_coverage_qg.png" alt="Screenshot of NDepend VS Extension Edit Coverage Quality Gate section"></p>
 <p>Next we can see the source code of quality gate definition. It's using CQLinq (Code Query LINQ) syntax which is used by NDepend to query .NET code through LINQ queries. You can learn more about CQLinq syntax here: <a href="https://www.ndepend.com/docs/cqlinq-syntax">CQLinq Syntax</a>.
 Now, let's update faliure condition and change it from 70% to 50% and save the definition by clicking on &quot;Save&quot; icon in the top left of the &quot;Queries and Rules Edit&quot; section.</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="c1">// QueryEdit Percentage Coverage
-</span><span class="c1">// &lt;QualityGate Name=&#34;Percentage Coverage&#34; Unit=&#34;%&#34; /&gt;
-</span><span class="c1"></span><span class="n">failif</span> <span class="k">value</span> <span class="p">&lt;</span> <span class="m">50</span><span class="p">%</span> <span class="c1">// &lt;- update this value
-</span><span class="c1"></span><span class="n">warnif</span> <span class="k">value</span> <span class="p">&lt;</span> <span class="m">80</span><span class="p">%</span>
-<span class="n">codeBase</span><span class="p">.</span><span class="n">PercentageCoverage</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// QueryEdit Percentage Coverage</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &lt;QualityGate Name=&#34;Percentage Coverage&#34; Unit=&#34;%&#34; /&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">failif</span> <span class="k">value</span> <span class="p">&lt;</span> <span class="m">50</span><span class="p">%</span> <span class="c1">// &lt;- update this value</span>
+</span></span><span class="line"><span class="cl"><span class="n">warnif</span> <span class="k">value</span> <span class="p">&lt;</span> <span class="m">80</span><span class="p">%</span>
+</span></span><span class="line"><span class="cl"><span class="n">codeBase</span><span class="p">.</span><span class="n">PercentageCoverage</span></span></span></code></pre></div>
 <p>Now, let's take care of the remaining default quality gates that have been violated.</p>
 <h3 id="deactivate-suppress-and-resolve-quality-gate-issues">Deactivate, Suppress and Resolve quality gate issues</h3>
 <p>Let's go back to &quot;Quality Gates&quot; section and click on &quot;Fail&quot; count.</p>
@@ -806,22 +798,19 @@ Now, let's update faliure condition and change it from 70% to 50% and save the d
 <p>Let's double-click on the first rule - &quot;Avoid namespaces mutually dependent&quot;  - now we can see where exactly the issue was identified. In the example below, the issue was identified in <code>CreateHealthDataSource</code> method in <code>Startup.cs</code> file. We can assume that it's not applicable for our use case and suppress it - we can do that by right-clicking on the method name and choosing &quot;Suppress Issue&quot;:</p>
 <p><img src="../../images/ndepend/ndepend_vs_suppress_rule.png" alt="Screenshot of NDepend VS Extension quality gate suppressed rules"></p>
 <p>In the pop-up window we can see how the suppression attribute must be defined and where it should be placed. First choose &quot;Copy SuppressMessage tag to Clipboard&quot; and then &quot;Open Source File Declaration&quot;. We'll be redirected to the exact place where we need to add the suppression attribute - the only thing we'll need to modify is &quot;Justification&quot; for why we're suppressing the issue. It can look something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="na">[SuppressMessage(&#34;NDepend&#34;, &#34;ND1400:AvoidNamespacesMutuallyDependent&#34;, Justification = &#34;Not Applicable validation&#34;)]</span>
-<span class="k">private</span> <span class="n">HealthDataSourceBase</span> <span class="n">CreateHealthDataSource</span><span class="p">(</span><span class="n">IConfiguration</span> <span class="n">config</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">Logger</span> <span class="n">logger</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Logger</span><span class="p">();</span>
-
-  <span class="c1">// Rest of the method implementation in ommitted...
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[SuppressMessage(&#34;NDepend&#34;, &#34;ND1400:AvoidNamespacesMutuallyDependent&#34;, Justification = &#34;Not Applicable validation&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="n">HealthDataSourceBase</span> <span class="n">CreateHealthDataSource</span><span class="p">(</span><span class="n">IConfiguration</span> <span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Logger</span> <span class="n">logger</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Logger</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Rest of the method implementation in ommitted...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <p>Now, let's resolve the second rule violation - &quot;Avoid non-readonly static fields&quot;. If we double-click on it, we get an overview and exact location of the fields that must be fixed. In my project there are two fields that were discovered that are defined like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">static</span> <span class="n">MemoryCache</span> <span class="n">_resultsCache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="s">&#34;HealthCache&#34;</span><span class="p">);</span>
-<span class="k">static</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SemaphoreSlim</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">MemoryCache</span> <span class="n">_resultsCache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="s">&#34;HealthCache&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SemaphoreSlim</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span></span></span></code></pre></div>
 <p>To fix the issue, I just need to add a readonly declaration like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">static</span> <span class="k">readonly</span> <span class="n">MemoryCache</span> <span class="n">_resultsCache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="s">&#34;HealthCache&#34;</span><span class="p">);</span>
-<span class="k">static</span> <span class="k">readonly</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SemaphoreSlim</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">readonly</span> <span class="n">MemoryCache</span> <span class="n">_resultsCache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="s">&#34;HealthCache&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">readonly</span> <span class="n">SemaphoreSlim</span> <span class="n">_semaphore</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SemaphoreSlim</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span></span></span></code></pre></div>
 <p>Normally a detailed description with information about why this is an issue, how it can be fixed or suppressed is provided if you hover over the rule in the &quot;Queries and Rules Edit&quot; tab:</p>
 <p><img src="../../images/ndepend/ndepend_howto_fix_tooltip.png" alt="Screenshot of NDepend rule tooltip"></p>
 <p>Now we can re-build our solution and re-run the analysis. Once it's done, no critical quality gates are failing anymore - great work! ^_^</p>
@@ -836,28 +825,27 @@ Now, let's update faliure condition and change it from 70% to 50% and save the d
 <p>What I liked when working with CQLinq is IntelliSense - it is very good. For each option detailed information is provided directly in the IDE so that you don't need to refer the documentation every signle time. It makes the development of custom configuration easier and more agile.</p>
 </blockquote>
 <p>Complete rule implementation looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="c1">// &lt;Name&gt;Use Uri.EscapeDataString(String) instead of Uri.EscapeUriString()&lt;/Name&gt;
-</span><span class="c1"></span><span class="n">warnif</span> <span class="n">count</span> <span class="p">&gt;</span> <span class="m">0</span> 
-
-<span class="k">let</span> <span class="n">uriEscapeMethods</span> <span class="p">=</span> <span class="n">Types</span><span class="p">.</span><span class="n">WithFullName</span><span class="p">(</span><span class="s">&#34;System.Uri&#34;</span><span class="p">).</span><span class="n">ChildMethods</span><span class="p">().</span><span class="n">WithSimpleNameIn</span><span class="p">(</span><span class="s">&#34;EscapeUriString&#34;</span><span class="p">).</span><span class="n">ToHashSetEx</span><span class="p">()</span>
-
-<span class="k">from</span> <span class="n">m</span> <span class="k">in</span> <span class="n">Application</span><span class="p">.</span><span class="n">Methods</span><span class="p">.</span><span class="n">UsingAny</span><span class="p">(</span><span class="n">uriEscapeMethods</span><span class="p">)</span>
-<span class="k">let</span> <span class="n">mustntUse</span> <span class="p">=</span> <span class="n">m</span><span class="p">.</span><span class="n">MethodsCalled</span><span class="p">.</span><span class="n">Intersect</span><span class="p">(</span><span class="n">uriEscapeMethods</span><span class="p">)</span>
-<span class="k">select</span> <span class="k">new</span> <span class="p">{</span> 
-   <span class="n">m</span><span class="p">,</span> 
-   <span class="n">mustntUse</span><span class="p">,</span>
-   <span class="n">Debt</span> <span class="p">=</span> <span class="m">30.</span><span class="n">ToMinutes</span><span class="p">().</span><span class="n">ToDebt</span><span class="p">(),</span>
-   <span class="n">Severity</span> <span class="p">=</span> <span class="n">Severity</span><span class="p">.</span><span class="n">Critical</span>
-<span class="p">}</span>
-
-<span class="c1">//&lt;Description&gt; 
-</span><span class="c1">// Uri.EscapeUriString() does not escape all the necessary characters and must not be used for escaping URL parameters 
-</span><span class="c1">//&lt;/Description&gt;
-</span><span class="c1"></span>
-<span class="c1">//&lt;HowToFix&gt;
-</span><span class="c1">// Use System.Uri.EscapeDataString(String) instead to properly escape URL parameters.
-</span><span class="c1">//&lt;/HowToFix&gt;
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// &lt;Name&gt;Use Uri.EscapeDataString(String) instead of Uri.EscapeUriString()&lt;/Name&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">warnif</span> <span class="n">count</span> <span class="p">&gt;</span> <span class="m">0</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">uriEscapeMethods</span> <span class="p">=</span> <span class="n">Types</span><span class="p">.</span><span class="n">WithFullName</span><span class="p">(</span><span class="s">&#34;System.Uri&#34;</span><span class="p">).</span><span class="n">ChildMethods</span><span class="p">().</span><span class="n">WithSimpleNameIn</span><span class="p">(</span><span class="s">&#34;EscapeUriString&#34;</span><span class="p">).</span><span class="n">ToHashSetEx</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">from</span> <span class="n">m</span> <span class="k">in</span> <span class="n">Application</span><span class="p">.</span><span class="n">Methods</span><span class="p">.</span><span class="n">UsingAny</span><span class="p">(</span><span class="n">uriEscapeMethods</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">mustntUse</span> <span class="p">=</span> <span class="n">m</span><span class="p">.</span><span class="n">MethodsCalled</span><span class="p">.</span><span class="n">Intersect</span><span class="p">(</span><span class="n">uriEscapeMethods</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">select</span> <span class="k">new</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">m</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">mustntUse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Debt</span> <span class="p">=</span> <span class="m">30.</span><span class="n">ToMinutes</span><span class="p">().</span><span class="n">ToDebt</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Severity</span> <span class="p">=</span> <span class="n">Severity</span><span class="p">.</span><span class="n">Critical</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//&lt;Description&gt; </span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Uri.EscapeUriString() does not escape all the necessary characters and must not be used for escaping URL parameters </span>
+</span></span><span class="line"><span class="cl"><span class="c1">//&lt;/Description&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//&lt;HowToFix&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Use System.Uri.EscapeDataString(String) instead to properly escape URL parameters.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//&lt;/HowToFix&gt;</span></span></span></code></pre></div>
 <p>What's going on here? First of all, I've added a descriptive name for the new rule as well as detailed description and information on how to fix the issue in the bottom of the rule implementation. What the rule basically does is:</p>
 <ol>
 <li>Raise a warning if at least one object satisfying the query conditions was found.</li>
@@ -881,38 +869,37 @@ Now, let's update faliure condition and change it from 70% to 50% and save the d
 <li>added our own &quot;Kris Custom Quality Rules&quot; rule group with a new custom rule - &quot;Use Uri.EscapeDataString(String) instead of Uri.EscapeUriString(String)&quot;, and connected it to default &quot;Critical rules violated&quot; quality gate</li>
 </ul>
 <p>So productive and efficient we've been so far! Now let's create some code that will violate our custom rule. Below I have a file in my test project where I'm using <code>EscapeUriString</code> method in the constructor of <code>Logger</code> class. This should trigger the rule violation and cause the build to fail.</p>
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="c1">//Logger.cs
-</span><span class="c1"></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span>
-<span class="p">{</span>
-  <span class="n">Guid</span> <span class="n">_correlationId</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
-  <span class="kt">int</span> <span class="n">_indent</span><span class="p">;</span>
-  <span class="kt">string</span> <span class="n">_escapedUri</span><span class="p">;</span>
-  <span class="kt">string</span> <span class="n">_uri</span> <span class="p">=</span> <span class="s">&#34;https://blabla.com&#34;</span><span class="p">;</span>
-
-  <span class="k">public</span> <span class="n">Logger</span><span class="p">()</span>
-  <span class="p">{</span>
-    <span class="n">Indent</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
-    <span class="n">_escapedUri</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">EscapeUriString</span><span class="p">(</span><span class="n">_uri</span><span class="p">);</span> <span class="c1">// &lt;- we don&#39;t want this method to be called!
-</span><span class="c1"></span>  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">//Logger.cs</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Logger</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Guid</span> <span class="n">_correlationId</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">_indent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="n">_escapedUri</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="n">_uri</span> <span class="p">=</span> <span class="s">&#34;https://blabla.com&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">Logger</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Indent</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_escapedUri</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">EscapeUriString</span><span class="p">(</span><span class="n">_uri</span><span class="p">);</span> <span class="c1">// &lt;- we don&#39;t want this method to be called!</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <p>Last thing before we check in our changes and start testing is to update NDepend build task and let NDepend know that we have added custom configuration that it needs to be aware of. Remember that auto-generated ndproj file that is created for us once we start modifying default NDepend configuration? That's the one we need to provide the path for in a new property called <code>ndproj</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#azure-pipelines.yaml</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
-</span><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDependTask&#39;</span><span class="w">
-</span><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w">
-</span><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-bl</span><span class="w">
-</span><span class="w">    </span><span class="nt">ndproj</span><span class="p">:</span><span class="w"> </span><span class="l">Source/MyProj.Web/MyProj.Web.ndproj</span><span class="w"> </span><span class="c"># &lt;- provide path to custom NDepend config here</span><span class="w">
-</span><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w">
-</span><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage&#39;</span><span class="w">
-</span></code></pre></div><p>Let's check in all our changes and trigger a new build - if we've done everything correctly, all 3 violations that were initially identified should now be resolved, but the build should still fail because we have code that violates our new custom rule - and therefore &quot;Critical rules violated&quot; quality gate.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#azure-pipelines.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">NDependTask@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NDependTask&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">SYSTEM_ACCESSTOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">$(System.AccessToken)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">viewname</span><span class="p">:</span><span class="w"> </span><span class="l">test-bl</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ndproj</span><span class="p">:</span><span class="w"> </span><span class="l">Source/MyProj.Web/MyProj.Web.ndproj</span><span class="w"> </span><span class="c"># &lt;- provide path to custom NDepend config here</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">excluded</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.*Test*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Assemblies</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">BuildGates</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">PullRequest2</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">iscoverage</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">coverage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/**/CodeCoverage&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Let's check in all our changes and trigger a new build - if we've done everything correctly, all 3 violations that were initially identified should now be resolved, but the build should still fail because we have code that violates our new custom rule - and therefore &quot;Critical rules violated&quot; quality gate.</p>
 <blockquote>
 <p><strong>Quick tip:</strong> before checking in the changes, do verify that you're checking in only what's needed. When you run analysis with NDepend locally, it will produce artifacts in a separate folder called &quot;NDependOut&quot; - you don't need to check that in to your source code, these files are meant for your reference and further analysis.</p>
 </blockquote>
@@ -936,7 +923,7 @@ Now, let's update faliure condition and change it from 70% to 50% and save the d
 </li>
 </ul>
 <p>At the time of publishing this post a new version of NDepend just got released - <a href="https://www.ndepend.com/whatsnew">What&rsquo;s new in NDepend v2022.1</a>. One of the new features I liked in this release is ILSpy Plugin which lets you decompile and analyze assemblies directly in Visual Studio with NDepend Extension. If you haven't heard of or used ILSpy before, check out my post to get to know it: <a href="https://kristhecodingunicorn.com/post/assembly_version_conflicts/">Could not load file or assembly&hellip;Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log</a></p>
-<p>That's it from me this time, thanks for checking in! 
+<p>That's it from me this time, thanks for checking in!
 If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
 <p>Stay secure, stay safe.</p>
 <p>Till we connect again!</p>
@@ -973,8 +960,8 @@ If this article was helpful, I'd love to hear about it! You can reach out to me 
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJTQCDFS2Q"></script>

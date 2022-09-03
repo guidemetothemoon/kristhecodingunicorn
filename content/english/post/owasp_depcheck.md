@@ -59,10 +59,14 @@ Next step is to add a build task to your pipeline in order to continuously perfo
 
 Security scanning may take time, especially when you have quite big application with hundreds of assemblies, therefore I would recommend to create a separate job in your build pipeline that will execute security-related tasks in parallell with the rest of the build tasks. Another benefit is that, as you add more security controls to the build pipeline, you can group them under the same build job, and have a central place where all security controls are defined. It will then be much easier for you and other developers or even security auditors to get an overview of all security checks implemented as part of the application\'s secure development lifecycle.
 
+> Please note that initially OWASP Dependency Check Azure DevOps extension supported only Windows build agents but since 2020 support for running on Linux build agents has been introduced. In order to start running ODC Azure DevOps extension on Linux build agents, you need to ensure that your Azure Pipelines Job is using Linux build agent (see vmImage property in code snippet below) and that you\'re using latest version of the task - ```dependency-check-build-task@6```. If you\'re using ```dependency-check-build-task@5```, you will need to update it to version 6 since version 5 only supports running on Windows.
+
 Here\'s an example of how such security job can look like:
 
 {{< highlight yaml >}}
 - job: myrepo_security_job
+  pool:
+    vmImage: 'ubuntu-latest'
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'Build myrepo solution' # In order to scan assemblies and executables I need to build my application code first
@@ -71,7 +75,7 @@ Here\'s an example of how such security job can look like:
       projects: '**/*.sln'
       arguments: '--configuration $(BuildConfiguration)' # $(BuildConfiguration) = 'Release'
 
-  - task: dependency-check-build-task@5
+  - task: dependency-check-build-task@6
     displayName: 'OWASP Dependency Check scan of third-party dependencies' # This task will perform security scan of third-party dependencies
     inputs:
       projectName: 'myrepo'
@@ -81,7 +85,7 @@ Here\'s an example of how such security job can look like:
       suppressionPath: '$(Build.SourcesDirectory)/suppression-file.xml' # File where all the suppressed vulnerabilities are defined
       enableExperimental: true # Enable experimental file type analyzers
       additionalArguments: '--scan $(Build.SourcesDirectory)/**/bin/$(BuildConfiguration)/net5.0-windows/*.dll' # Additional folder to scan
-      dependencyCheckVersion: '6.1.6'
+      dependencyCheckVersion: '7.1.2'
 
   - task: PublishTestResults@2
     displayName: 'Publish OWASP Dependency Check security scan results'
