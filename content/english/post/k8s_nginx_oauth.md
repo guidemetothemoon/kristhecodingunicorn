@@ -195,8 +195,6 @@ A few things to be aware of:
 
 - I wouldn\'t recommend to use the latest container image of any third-party application since it may introduce breaking changes and cause inconsistent application behaviour. Always choose a **stable** release version and have a good upgrade routine in place to ensure that you\'re keeping third-party applications up-to-date.
 
-- Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use ```--provider=azure``` in the ```template.spec.containers.args``` section of the Deployment resource in the template below. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider which I\'m using below. You can check this GitHub Issue for more details on this: [v7.3.0 breaks azure provider](https://github.com/oauth2-proxy/oauth2-proxy/issues/1666)
-
 - In the ```template.spec.containers.env``` section of the Deployment, we\'re integrating Kubernetes Secrets for the sensitive values which we created earlier as the environment variables for OAuth2 Proxy. Names of the environment variables should stay as provided in the example since that\'s what OAuth2 Proxy expects: [OAuth2 Proxy - Environment variables](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#environment-variables)
 
 ``` yaml
@@ -321,6 +319,30 @@ Once you\'ve verified that configuration and the template look correct you can d
 And it\'s done! Now, when you access the application, you will first be redirected to the Microsoft authentication.
 
 ![Screenshot of Microsoft login screen once OAuth2 Proxy is enabled](../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png)
+
+
+## Known Issues: OAuth2 Proxy
+
+If you will be using OAuth2 Proxy that I have used in this blog post there are a few known issues you should know about and how those issues can be mitigated.
+
+1. **Version 3.7.0 - Issue with Azure provider.** Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use ```--provider=azure``` in the ```template.spec.containers.args``` section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: ```- --provider=oidc```. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: [v7.3.0 breaks azure provider](https://github.com/oauth2-proxy/oauth2-proxy/issues/1666)
+
+2. **Version 3.7.0, Azure B2C - ```Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email```.** If you have configured everything correctly and according to what\'s described in this blog post but are still getting this error, a workaround will be to add ```- --user-id-claim=oid``` to the ```args``` section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: [How can I debug oauth2_proxy when connecting to Azure B2C?](https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c). 
+
+Your updated args section will look something like this:
+
+``` yaml
+#oauth2-proxy.yaml
+
+# Rest of the configuration is omitted - Other properties are unchanged
+spec:
+  containers:
+  - args:
+    - --provider=oidc
+    - --user-id-claim=oid # <- This is the new property
+    # Rest of the configuration is omitted - Other properties are unchanged
+
+```
 
 ## All-in-one deployment package
 
