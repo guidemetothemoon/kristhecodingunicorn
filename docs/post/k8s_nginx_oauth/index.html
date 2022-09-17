@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.102.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.103.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -197,7 +197,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
-        "wordCount" : "2508",
+        "wordCount" : "2726",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -590,7 +590,7 @@ if (!doNotTrack) {
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">12-minute read</span>
+            <span class="post__meta-text">13-minute read</span>
           </li>
         </ul>
 
@@ -606,6 +606,7 @@ if (!doNotTrack) {
         <li><a href="#configure-and-deploy-oauth2-proxy">Configure and deploy OAuth2 Proxy</a></li>
       </ul>
     </li>
+    <li><a href="#known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</a></li>
     <li><a href="#all-in-one-deployment-package">All-in-one deployment package</a></li>
     <li><a href="#additional-resources">Additional resources</a></li>
   </ul>
@@ -734,9 +735,6 @@ if (!doNotTrack) {
 <p>I wouldn't recommend to use the latest container image of any third-party application since it may introduce breaking changes and cause inconsistent application behaviour. Always choose a <strong>stable</strong> release version and have a good upgrade routine in place to ensure that you're keeping third-party applications up-to-date.</p>
 </li>
 <li>
-<p>Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template below. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider which I'm using below. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
-</li>
-<li>
 <p>In the <code>template.spec.containers.env</code> section of the Deployment, we're integrating Kubernetes Secrets for the sensitive values which we created earlier as the environment variables for OAuth2 Proxy. Names of the environment variables should stay as provided in the example since that's what OAuth2 Proxy expects: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#environment-variables">OAuth2 Proxy - Environment variables</a></p>
 </li>
 </ul>
@@ -857,7 +855,27 @@ if (!doNotTrack) {
 </span></span></span></code></pre></div><p>Once you've verified that configuration and the template look correct you can deploy OAuth2 Proxy in AKS cluster where your application is running with following kubectl command: <code>kubectl apply -f ./my-path-to-template/oauth2-proxy.yaml</code></p>
 <p>And it's done! Now, when you access the application, you will first be redirected to the Microsoft authentication.</p>
 <p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png" alt="Screenshot of Microsoft login screen once OAuth2 Proxy is enabled"></p>
-<h2 id="all-in-one-deployment-package">All-in-one deployment package</h2>
+<h2 id="known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</h2>
+<p>If you will be using OAuth2 Proxy that I have used in this blog post there are a few known issues you should know about and how those issues can be mitigated.</p>
+<ol>
+<li>
+<p><strong>Version 3.7.0 - Issue with Azure provider.</strong> Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: <code>- --provider=oidc</code>. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
+</li>
+<li>
+<p><strong>Version 3.7.0, Azure B2C - <code>Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email</code>.</strong> If you have configured everything correctly and according to what's described in this blog post but are still getting this error, a workaround will be to add <code>- --user-id-claim=oid</code> to the <code>args</code> section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: <a href="https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c">How can I debug oauth2_proxy when connecting to Azure B2C?</a>.</p>
+</li>
+</ol>
+<p>Your updated args section will look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#oauth2-proxy.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Rest of the configuration is omitted - Other properties are unchanged</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">provider=oidc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">user-id-claim=oid</span><span class="w"> </span><span class="c"># &lt;- This is the new property</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Rest of the configuration is omitted - Other properties are unchanged</span><span class="w">
+</span></span></span></code></pre></div><h2 id="all-in-one-deployment-package">All-in-one deployment package</h2>
 <p>You can find all the Kubernetes YAML deployment templates as well as a PowerShell script that includes all the necessary commands to create an Azure AD application and installs OAuth2 Proxy in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/oauth2-proxy">guidemetothemoon:oauth2-proxy</a></p>
 <h2 id="additional-resources">Additional resources</h2>
 <p>A few resources I've found useful on this topic:</p>
