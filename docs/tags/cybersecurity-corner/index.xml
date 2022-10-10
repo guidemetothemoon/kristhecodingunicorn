@@ -6,7 +6,18 @@
     <description>Recent content in cybersecurity-corner on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/cybersecurity-corner/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/cybersecurity-corner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs</title>
+      <link>https://kristhecodingunicorn.com/post/ado-auditing-1/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/ado-auditing-1/</guid>
+      
+        <description>First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs.</description>
+      
+    </item>
+    
     <item>
       <title> Detect and avoid this certificate validation trap in .NET!</title>
       <link>https://kristhecodingunicorn.com/techtips/dotnet_https_validation/</link>

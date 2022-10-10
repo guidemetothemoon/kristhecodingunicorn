@@ -6,24 +6,57 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 26 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>aks</title>
-      <link>https://kristhecodingunicorn.com/tags/aks/</link>
-      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
       
         <description></description>
       
     </item>
     
     <item>
-      <title>azure</title>
-      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <title>azure-devops</title>
+      <link>https://kristhecodingunicorn.com/tags/azure-devops/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure-devops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>cybersecurity-corner</title>
+      <link>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>devsecops</title>
+      <link>https://kristhecodingunicorn.com/tags/devsecops/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>aks</title>
+      <link>https://kristhecodingunicorn.com/tags/aks/</link>
       <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
+      <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
       
         <description></description>
       
@@ -96,17 +129,6 @@
     </item>
     
     <item>
-      <title>cybersecurity-corner</title>
-      <link>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</link>
-      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>azure-ad</title>
       <link>https://kristhecodingunicorn.com/tags/azure-ad/</link>
       <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
@@ -134,17 +156,6 @@
       <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/auth/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>azure-devops</title>
-      <link>https://kristhecodingunicorn.com/tags/azure-devops/</link>
-      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/azure-devops/</guid>
       
         <description></description>
       
@@ -222,17 +233,6 @@
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/visual-studio/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>devsecops</title>
-      <link>https://kristhecodingunicorn.com/tags/devsecops/</link>
-      <pubDate>Tue, 22 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
       
         <description></description>
       
