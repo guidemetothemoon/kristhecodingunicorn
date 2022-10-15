@@ -6,7 +6,18 @@
     <description>Recent content on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 10 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Validating quality of Helm Charts with helm lint</title>
+      <link>https://kristhecodingunicorn.com/techtips/helm_lint/</link>
+      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/helm_lint/</guid>
+      
+        <description>In this tech tip we take a look at how we can use helm lint to validate Helm Charts for errors and best practices prior to deployment to Kubernetes</description>
+      
+    </item>
+    
     <item>
       <title>Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs</title>
       <link>https://kristhecodingunicorn.com/post/ado-auditing-1/</link>
