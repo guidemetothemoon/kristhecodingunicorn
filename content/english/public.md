@@ -9,6 +9,16 @@ tags = [
 ]
 +++
 
+📺 3rd May, 2023: [Stockholm Tech Show - Managed Kubernetes Service: Day Zero Survival Pack](https://stockholmtechshow.se/konferens-2023/)
+
+📺 8th February, 2023: [Swetugg 2023 - Standardizing microservice-to-AKS workflow with dotnet custom templates and Azure DevOps](https://swetugg.se/sthlm-2023/speakers/kristina-devochko#standardizing-microservice-to-aks-workflow-with-dotnet-custom-templates-and-azure-devops)
+
+📺 21st December, 2022: [Festive Tech Calendar - Can we prevent the Grinch from stealing Christmas with chaos engineering?](https://festivetechcalendar.com/#sz-tab-44916)
+
+📺 6th December, 2022: [Microsoft Security User Group - DevSecOps for AKS highlighting different security controls throughout the value chain](https://www.meetup.com/microsoft-security-user-group/events/289597419)
+
+📺 24th November, 2022: [Pozitive Technologies 2022 conference - Managed Kubernetes Service: Day Zero Survival Pack](https://pozitive.tech/en)
+
 📺 25th October, 2022: [StreamingClouds - Deploying microservices to AKS using Azure DevOps with Kristina Devochko](https://youtu.be/kwCcnojRXdM)
 
 📝 21st September, 2022: [Computerworld Norway - Portrait Article - "Sjefsarkitekten med et hjerte av gull"](https://www.cw.no/portrettet/sjefsarkitekten-med-et-hjerte-av-gull/2107676)
