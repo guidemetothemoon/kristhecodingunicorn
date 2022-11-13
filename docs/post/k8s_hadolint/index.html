@@ -197,7 +197,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_hadolint\/",
-        "wordCount" : "1655",
+        "wordCount" : "1713",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -555,7 +555,7 @@
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">8-minute read</span>
+            <span class="post__meta-text">9-minute read</span>
           </li>
         </ul>
 
@@ -649,6 +649,9 @@
 </span></code></pre></div><p>You can also save Hadolint output to a separate file to consume it for display or upload at a later point by providing <code>output-file: &lt;file_path&gt;</code> and <code>format: &lt;output_format&gt;</code> parameters to <code>with</code> section of the GitHub Action. You can also integrate PR comments based on the execution results - you can read more about it on the Hadolint Action page on GitHub marketplace: <a href="https://github.com/marketplace/actions/hadolint-action">Hadolint Action</a></p>
 <h3 id="local-development-vscode-extension">Local development (VSCode Extension)</h3>
 <p>It is a good idea to integrate some tools as part of the local development routines in order to detect potential issues and quality improvements early in the development lifecycle. Fortunately Hadolint can be installed as a VSCode extension. You can search for it directly in the Extensions tab of Visual Studio Code or check out it&rsquo;s page on VSCode marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=exiasr.hadolint">hadolint</a>.</p>
+<blockquote>
+<p>If you&rsquo;re getting an error message after installation that says that hadolint executable can&rsquo;t be found it may be that you have saved it to an unusual folder. You can verify and update that by going to <code>Extension Settings</code> of Hadolint extension in VSCode and updating <code>Hadolint: Hadolint Path</code> field either in User or Workspace tab, or both.</p>
+</blockquote>
 <p>Once it&rsquo;s installed and you open a Dockerfile in VSCode you will get information about detected issues in the <strong>&ldquo;Problems&rdquo;</strong> tab of your VSCode workspace.
 Let&rsquo;s take a look at a simple example.</p>
 <p>Here I have a simple Dockerfile:</p>

@@ -127,6 +127,8 @@ You can also save Hadolint output to a separate file to consume it for display o
 
 It is a good idea to integrate some tools as part of the local development routines in order to detect potential issues and quality improvements early in the development lifecycle. Fortunately Hadolint can be installed as a VSCode extension. You can search for it directly in the Extensions tab of Visual Studio Code or check out it's page on VSCode marketplace: [hadolint](https://marketplace.visualstudio.com/items?itemName=exiasr.hadolint).
 
+> If you're getting an error message after installation that says that hadolint executable can't be found it may be that you have saved it to an unusual folder. You can verify and update that by going to ```Extension Settings``` of Hadolint extension in VSCode and updating ```Hadolint: Hadolint Path``` field either in User or Workspace tab, or both. 
+
 Once it's installed and you open a Dockerfile in VSCode you will get information about detected issues in the **"Problems"** tab of your VSCode workspace.
 Let's take a look at a simple example. 
 
