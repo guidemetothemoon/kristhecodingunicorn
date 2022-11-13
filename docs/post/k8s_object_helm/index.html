@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.104.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -197,7 +197,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_object_helm\/",
-        "wordCount" : "1713",
+        "wordCount" : "1689",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -401,8 +401,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -555,7 +555,7 @@
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">9-minute read</span>
+            <span class="post__meta-text">8-minute read</span>
           </li>
         </ul>
 
@@ -589,11 +589,11 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 <li>If you decide at some point to delete this specific Helm deployment, it will not clean up the resources you have created with <code>kubectl patch</code> or <code>kubectl apply</code> which means that you will need to know what resources you have patched manually during lifetime of the deployment and clean those up yourself.</li>
 <li>If you have made changes to the Object definition in the source code and then at some point upgrade the patched deployment where the same Object was patched with <code>kubectl patch</code> or <code>kubectl apply</code>, you may risk getting an error like this:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">  Error: rendered manifests contain a resource that already exists. 
-</span></span><span class="line"><span class="cl">  Unable to continue with install: PodDisruptionBudget &#34;mytestapp-pdb&#34; in namespace &#34;mytestapp&#34; exists and cannot be imported into the current release: invalid ownership metadata; 
-</span></span><span class="line"><span class="cl">  label validation error: missing key &#34;app.kubernetes.io/managed-by&#34;: must be set to &#34;Helm&#34;; 
-</span></span><span class="line"><span class="cl">  annotation validation error: missing key &#34;meta.helm.sh/release-name&#34;: must be set to &#34;mytestapp-10&#34;; 
-</span></span><span class="line"><span class="cl">  annotation validation error: missing key &#34;meta.helm.sh/release-namespace&#34;: must be set to &#34;mytestapp&#34;</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">  Error: rendered manifests contain a resource that already exists. 
+  Unable to continue with install: PodDisruptionBudget &#34;mytestapp-pdb&#34; in namespace &#34;mytestapp&#34; exists and cannot be imported into the current release: invalid ownership metadata; 
+  label validation error: missing key &#34;app.kubernetes.io/managed-by&#34;: must be set to &#34;Helm&#34;; 
+  annotation validation error: missing key &#34;meta.helm.sh/release-name&#34;: must be set to &#34;mytestapp-10&#34;; 
+  annotation validation error: missing key &#34;meta.helm.sh/release-namespace&#34;: must be set to &#34;mytestapp&#34;</code></pre></div>
 <p>The error above is pretty much self-explanatory and can be fixed by either deleting the existing resource and re-trying upgrade, or re-patching the existing resource with proper annotations and labels so that it can be registered and managed by Helm - for guidance on how to do that, see more below ;-)</p>
 <p>In Helm 3 it's quite easy to include a new Kubernetes Object into the Helm release - you can do that by adding following annotations to the Object definition:</p>
 <ul>
@@ -605,68 +605,68 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 <li><code>app.kubernetes.io/managed-by: Helm</code> -&gt; this label lets Helm know that you would like to include current Kubernetes Object into Helm release you're patching</li>
 </ul>
 <p>I'll continue illustrating the concept with PDB example. So, knowing about the annotations and labels I need to add to the PDB definition, I've created following definition file - here I'm using placeholders because I would like to show you how patching can be automated for multiple deployments:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># pdb.yaml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">policy/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodDisruptionBudget</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]-pdb</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="l">%</span><span class="w"> </span><span class="c"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">deployment_labels]</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># pdb.yaml</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">policy/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodDisruptionBudget</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]-pdb</span><span class="w">
+</span><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
+</span><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_name]</span><span class="w">
+</span><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">deployment_namespace]</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="l">%</span><span class="w"> </span><span class="c"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="l">deployment_labels]</span></code></pre></div>
 <p>And we're all set! Now our PDB is ready to be patched to the existing application deployment running in production as well as managed by Helm going forward! But what if we have tens, hundreds or even thousands of application deployments that we need to patch this to? Do we need to create this Object manually for every single deployment?? Not to worry, we can automate it!</p>
 <p>I've created following script that will get all the deployments I would like to patch based on the filter I provide and replace the placeholders in the pdb.yaml file we've created above with values related to every individual deployment we're patching. Then it will create a new version of the file (which is also useful in case we want to check the content before creating the new resource) for every deployment and finally apply it in order to create the resource we want - in this case, a PodDisruptionBudget.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Add-PDB.ps1</span>
-</span></span><span class="line"><span class="cl"><span class="c"># OBS! Ensure that you&#39;re connected to the correct Kubernetes cluster BEFORE executing the script</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># This filter can be adjusted to filter only the deployments you want to apply PodDisruptionBudget to. Current filter is for the deployments of mytestapp only</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$deployments</span><span class="p">=((</span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">deployments</span><span class="p">.</span><span class="n">apps</span> <span class="n">-A</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span><span class="p">).</span><span class="n">items</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">name</span> <span class="o">-match</span> <span class="s1">&#39;mytestapp&#39;</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$deploy</span> <span class="k">in</span> <span class="nv">$deployments</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">  <span class="c"># 1. For each deployment, get raw content of yaml file and deployment values to update the yaml with</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$pdb_yaml</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="nv">$PSScriptRoot</span><span class="p">/</span><span class="n">pdb</span><span class="p">.</span><span class="n">yaml</span> <span class="n">-Raw</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$deploy_name</span> <span class="p">=</span> <span class="nv">$deploy</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">name</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$deploy_ns</span> <span class="p">=</span> <span class="nv">$deploy</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">namespace</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nv">$labels</span> <span class="p">=</span> <span class="nv">$deploy</span><span class="p">.</span><span class="n">spec</span><span class="p">.</span><span class="n">selector</span><span class="p">.</span><span class="n">matchLabels</span> 
-</span></span><span class="line"><span class="cl">  <span class="nv">$label_props</span> <span class="p">=</span> <span class="nv">$labels</span> <span class="p">|</span> <span class="nb">get-member</span> <span class="n">-MemberType</span> <span class="n">NoteProperty</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nv">$formatted_labels</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># 2. There may be multiple selectorLabels so we need to ensure that those are formatted according to the YAML formatting laws</span>
-</span></span><span class="line"><span class="cl">  <span class="k">foreach</span><span class="p">(</span><span class="nv">$labelName</span> <span class="k">in</span> <span class="nv">$label_props</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c"># Due to YAML strictness on formatting we&#39;ll use this hack to format multiple selector labels in the allowed way</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$formatted_labels</span> <span class="p">+=</span> <span class="s2">&#34;      </span><span class="p">$(</span><span class="nv">$labelName</span><span class="p">)</span><span class="s2">: </span><span class="p">$(</span><span class="nv">$labels</span><span class="p">.</span><span class="nv">$labelName</span><span class="p">)</span><span class="se">`n</span><span class="s2">&#34;</span>    
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># 3. Replace placeholders in YAML-file with mytestapp deployment values</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$pdb_yaml</span> <span class="p">=</span> <span class="nv">$pdb_yaml</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s1">&#39;[deployment_name]&#39;</span><span class="p">,</span><span class="nv">$deploy_name</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">&#39;[deployment_namespace]&#39;</span><span class="p">,</span><span class="nv">$deploy_ns</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">&#39;[deployment_labels]&#39;</span><span class="p">,</span><span class="nv">$formatted_labels</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$pdb_yaml</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&#34;$PSScriptRoot/pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml&#34;</span> <span class="n">-Encoding</span> <span class="n">utf8</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># 4. Apply updated YAML-file to add PodDisruptionBudget for current deployment</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="s2">&#34;Applying PDB deployment pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml for deployment $deploy_name&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="s2">&#34;$PSScriptRoot/pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># Add-PDB.ps1</span>
+<span class="c"># OBS! Ensure that you&#39;re connected to the correct Kubernetes cluster BEFORE executing the script</span>
+
+<span class="c"># This filter can be adjusted to filter only the deployments you want to apply PodDisruptionBudget to. Current filter is for the deployments of mytestapp only</span>
+<span class="nv">$deployments</span><span class="p">=((</span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">deployments</span><span class="p">.</span><span class="n">apps</span> <span class="n">-A</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span><span class="p">).</span><span class="n">items</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">name</span> <span class="o">-match</span> <span class="s1">&#39;mytestapp&#39;</span><span class="p">};</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="nv">$deploy</span> <span class="k">in</span> <span class="nv">$deployments</span><span class="p">){</span>
+  <span class="c"># 1. For each deployment, get raw content of yaml file and deployment values to update the yaml with</span>
+  <span class="nv">$pdb_yaml</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="nv">$PSScriptRoot</span><span class="p">/</span><span class="n">pdb</span><span class="p">.</span><span class="n">yaml</span> <span class="n">-Raw</span>
+  <span class="nv">$deploy_name</span> <span class="p">=</span> <span class="nv">$deploy</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">name</span>
+  <span class="nv">$deploy_ns</span> <span class="p">=</span> <span class="nv">$deploy</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">namespace</span>
+
+  <span class="nv">$labels</span> <span class="p">=</span> <span class="nv">$deploy</span><span class="p">.</span><span class="n">spec</span><span class="p">.</span><span class="n">selector</span><span class="p">.</span><span class="n">matchLabels</span> 
+  <span class="nv">$label_props</span> <span class="p">=</span> <span class="nv">$labels</span> <span class="p">|</span> <span class="nb">get-member</span> <span class="n">-MemberType</span> <span class="n">NoteProperty</span>
+
+  <span class="nv">$formatted_labels</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+
+  <span class="c"># 2. There may be multiple selectorLabels so we need to ensure that those are formatted according to the YAML formatting laws</span>
+  <span class="k">foreach</span><span class="p">(</span><span class="nv">$labelName</span> <span class="k">in</span> <span class="nv">$label_props</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c"># Due to YAML strictness on formatting we&#39;ll use this hack to format multiple selector labels in the allowed way</span>
+    <span class="nv">$formatted_labels</span> <span class="p">+=</span> <span class="s2">&#34;      </span><span class="p">$(</span><span class="nv">$labelName</span><span class="p">)</span><span class="s2">: </span><span class="p">$(</span><span class="nv">$labels</span><span class="p">.</span><span class="nv">$labelName</span><span class="p">)</span><span class="se">`n</span><span class="s2">&#34;</span>    
+  <span class="p">}</span>
+
+  <span class="c"># 3. Replace placeholders in YAML-file with mytestapp deployment values</span>
+  <span class="nv">$pdb_yaml</span> <span class="p">=</span> <span class="nv">$pdb_yaml</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s1">&#39;[deployment_name]&#39;</span><span class="p">,</span><span class="nv">$deploy_name</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">&#39;[deployment_namespace]&#39;</span><span class="p">,</span><span class="nv">$deploy_ns</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">&#39;[deployment_labels]&#39;</span><span class="p">,</span><span class="nv">$formatted_labels</span><span class="p">)</span>
+  <span class="nv">$pdb_yaml</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&#34;$PSScriptRoot/pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml&#34;</span> <span class="n">-Encoding</span> <span class="n">utf8</span>
+
+  <span class="c"># 4. Apply updated YAML-file to add PodDisruptionBudget for current deployment</span>
+  <span class="nb">Write-Output</span> <span class="s2">&#34;Applying PDB deployment pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml for deployment $deploy_name&#34;</span>
+  <span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="s2">&#34;$PSScriptRoot/pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml&#34;</span>
+<span class="p">}</span></code></pre></div>
 <p>Now, if I execute this script on my Kubernetes cluster, it'll create PDB for every deployment of <strong>mytestapp</strong> which I've used as a filter in the first line of the script above. And PDB will be included into every Helm release that <strong>mytestapp</strong> deployments have been created with so if I decide to delete one of the deployments with <strong>helm uninstall</strong>, the respective PDB will be removed as well, thanks to the annotations and labels we've provided in the PDB definition file.</p>
 <p>If you would like to see PDB in action, you can simulate a disruption by draining one of the nodes that your application's Pod is running on with following kubectl command:</p>
 <p><code>kubectl drain --delete-emptydir-data --force --ignore-daemonsets &lt;your_node_name&gt;</code></p>
 <p>After executing the command above you should be able to see messages in the console output saying that a Pod can&rsquo;t be deleted due to potential violation of PodDisruptionBudget Policy. Once a new Pod is scheduled and ready on another node, this alert will disappear and the Pod on the to-be-drained-node will be evicted. You can read more about node draining procedure here: <a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">Safely drain a Node</a></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\&gt; Set-Alias -Name k -Value kubectl
-</span></span><span class="line"><span class="cl">PS C:\&gt; k drain --delete-emptydir-data --force --ignore-daemonsets aks-nodepool1-14745837-vmss000001
-</span></span><span class="line"><span class="cl">node/aks-nodepool1-14745837-vmss000001 cordoned
-</span></span><span class="line"><span class="cl">evicting pod mytestapp/app-1
-</span></span><span class="line"><span class="cl">evicting pod mytestapp/app-2
-</span></span><span class="line"><span class="cl">error when evicting pods/&#34;app-2&#34; -n &#34;mytestapp&#34; (will retry after 5s): Cannot evict pod as it would violate the pod&#39;s disruption budget.
-</span></span><span class="line"><span class="cl">pod/app-2 evicted
-</span></span><span class="line"><span class="cl">node/aks-nodepool1-14745837-vmss000001 evicted</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\&gt; Set-Alias -Name k -Value kubectl
+PS C:\&gt; k drain --delete-emptydir-data --force --ignore-daemonsets aks-nodepool1-14745837-vmss000001
+node/aks-nodepool1-14745837-vmss000001 cordoned
+evicting pod mytestapp/app-1
+evicting pod mytestapp/app-2
+error when evicting pods/&#34;app-2&#34; -n &#34;mytestapp&#34; (will retry after 5s): Cannot evict pod as it would violate the pod&#39;s disruption budget.
+pod/app-2 evicted
+node/aks-nodepool1-14745837-vmss000001 evicted</code></pre></div>
 <h2 id="additional-resources">Additional resources</h2>
 <p>Some information I find useful and relevant when working with Kubernetes deployments and Helm:</p>
 <ul>
@@ -710,8 +710,8 @@ If this article was helpful, I'd love to hear about it! You can reach out to me 
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></body>
 </html>

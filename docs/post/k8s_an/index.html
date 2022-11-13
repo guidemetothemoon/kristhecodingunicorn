@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.104.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -401,8 +401,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -598,60 +598,60 @@
 <h3 id="linux-nodes">Linux nodes</h3>
 <p><em><strong>Preparations</strong></em></p>
 <p>First, choose 2 Linux nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with SockPerf. Also, make a note of IP for the node that will act as server. Following commands can help you retrieve that information:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Get all nodes in AKS cluster and note NAME of 2 Linux nodes in addition to INTERNAL-IP for the node that will act as server</span>
-</span></span><span class="line"><span class="cl">kubectl get nodes -o wide
-</span></span></code></pre></div><p>Now we need to log into both of the nodes simultaneously - we can do that by starting a prviliged debug container on the node which will give us an opportunity to create an interactive shell session with the Linux node. This guide provides more information on how to do that: <a href="https://docs.microsoft.com/en-us/azure/aks/node-access#create-an-interactive-shell-connection-to-a-linux-node">Create an interactive shell connection to a Linux node</a></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start interactive shell inside Linux node in AKS</span>
-</span></span><span class="line"><span class="cl">kubectl debug node/<span class="o">[</span>NODE_NAME<span class="o">]</span> -it --image<span class="o">=</span>mcr.microsoft.com/dotnet/runtime-deps:6.0
-</span></span></code></pre></div><p>Finally, install and configure SockPerf on both nodes - I recommend to check a few links in Additional resources section for more information on how to use SockPerf:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. Install SockPerf - on SERVER and CLIENT node</span>
-</span></span><span class="line"><span class="cl">apt-get update
-</span></span><span class="line"><span class="cl">apt-get install sockperf
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. Start SockPerf on SERVER node - we&#39;ll use a default port which is 11111</span>
-</span></span><span class="line"><span class="cl">sockperf sr -i <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>
-</span></span></code></pre></div><p>SockPerf supports multiple types of tests from the client. Today we'll execute following tests:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Get all nodes in AKS cluster and note NAME of 2 Linux nodes in addition to INTERNAL-IP for the node that will act as server</span>
+kubectl get nodes -o wide
+</code></pre></div><p>Now we need to log into both of the nodes simultaneously - we can do that by starting a prviliged debug container on the node which will give us an opportunity to create an interactive shell session with the Linux node. This guide provides more information on how to do that: <a href="https://docs.microsoft.com/en-us/azure/aks/node-access#create-an-interactive-shell-connection-to-a-linux-node">Create an interactive shell connection to a Linux node</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start interactive shell inside Linux node in AKS</span>
+kubectl debug node/<span class="o">[</span>NODE_NAME<span class="o">]</span> -it --image<span class="o">=</span>mcr.microsoft.com/dotnet/runtime-deps:6.0
+</code></pre></div><p>Finally, install and configure SockPerf on both nodes - I recommend to check a few links in Additional resources section for more information on how to use SockPerf:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. Install SockPerf - on SERVER and CLIENT node</span>
+apt-get update
+apt-get install sockperf
+
+<span class="c1"># 2. Start SockPerf on SERVER node - we&#39;ll use a default port which is 11111</span>
+sockperf sr -i <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>
+</code></pre></div><p>SockPerf supports multiple types of tests from the client. Today we'll execute following tests:</p>
 <ul>
 <li>ping-pong - run sockperf client for latency test in ping pong mode;</li>
 <li>throughput - run sockperf client for one way throughput test;</li>
 <li>under-load - run sockperf client for latency under load test;</li>
 </ul>
 <p><em><strong>Results of Ping-Pong test</strong></em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start SockPerf on CLIENT in Ping-Pong mode - run for 60 seconds with 64 byte messages</span>
-</span></span><span class="line"><span class="cl">sockperf pp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">64</span> -t <span class="m">60</span> --tcp
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Ping-Pong mode - run for 60 seconds with 64 byte messages</span>
+sockperf pp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">64</span> -t <span class="m">60</span> --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_pp_time_noan.png" alt="SockPerf Ping-Pong test without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_pp_time_an.png" alt="SockPerf Ping-Pong test with AN"></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start SockPerf on CLIENT in Ping-Pong mode - run for 60 seconds with larger messages (10 000 bytes)</span>
-</span></span><span class="line"><span class="cl">sockperf pp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">10000</span> -t <span class="m">60</span> --tcp
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Ping-Pong mode - run for 60 seconds with larger messages (10 000 bytes)</span>
+sockperf pp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">10000</span> -t <span class="m">60</span> --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_pp_msgsize_noan.png" alt="SockPerf Ping-Pong test with larger messages without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_pp_msgsize_an.png" alt="SockPerf Ping-Pong test with larger messages with AN"></p>
 <p><em><strong>Results of Throughput test</strong></em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start SockPerf on CLIENT in Throughput mode - run for 60 seconds with 64 byte messages and maximum number of messages-per-second</span>
-</span></span><span class="line"><span class="cl">sockperf tp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">64</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Throughput mode - run for 60 seconds with 64 byte messages and maximum number of messages-per-second</span>
+sockperf tp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">64</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_tp_time_noan.png" alt="SockPerf Throughput test without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_tp_time_an.png" alt="SockPerf Throughput test with AN"></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start SockPerf on CLIENT in Throughput mode - run for 60 seconds with larger messages (1472 bytes) and maximum number of messages-per-second</span>
-</span></span><span class="line"><span class="cl">sockperf tp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">1472</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Throughput mode - run for 60 seconds with larger messages (1472 bytes) and maximum number of messages-per-second</span>
+sockperf tp -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">1472</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_tp_msgsize_noan.png" alt="SockPerf Throughput test with larger messages without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_tp_msgsize_an.png" alt="SockPerf Throughput test with larger messages with AN"></p>
 <p><em><strong>Results of Under-Load test</strong></em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start SockPerf on CLIENT in Under-Load mode - run for 60 seconds with 1472 byte messages and maximum number of messages-per-second</span>
-</span></span><span class="line"><span class="cl">sockperf ul -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">1472</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Under-Load mode - run for 60 seconds with 1472 byte messages and maximum number of messages-per-second</span>
+sockperf ul -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">1472</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_ul_time_noan.png" alt="SockPerf Under-Load test without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_ul_time_an.png" alt="SockPerf Under-Load test with AN"></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Start SockPerf on CLIENT in Under-Load mode - run for 60 seconds with larger messages (10 000 bytes) and maximum number of messages-per-second</span>
-</span></span><span class="line"><span class="cl">sockperf ul -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">10000</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Start SockPerf on CLIENT in Under-Load mode - run for 60 seconds with larger messages (10 000 bytes) and maximum number of messages-per-second</span>
+sockperf ul -i <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span> -m <span class="m">10000</span> -t <span class="m">60</span> --mps<span class="o">=</span>max --tcp
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_ul_msgsize_noan.png" alt="SockPerf Under-Load test with larger messages without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/sockperf_ul_msgsize_an.png" alt="SockPerf Under-Load test with larger messages with AN"></p>
@@ -661,43 +661,44 @@
 <p><em><strong>Preparations</strong></em></p>
 <p>Just as we did for Linux, first you need to choose 2 Windows nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with latte. Also, make a note of IP for the node that will act as server.</p>
 <p>Following commands can help you retrieve that information:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Get all nodes in AKS cluster and note NAME of 2 Windows nodes in addition to INTERNAL-IP for the node that will act as server</span>
-</span></span><span class="line"><span class="cl">kubectl get nodes -o wide
-</span></span></code></pre></div><p>Now we need to log into both of the nodes simultaneously - for Windows nodes it's a bit harder than for Linux nodes since you need to set up a jumpserver. This is out of scope for this blog post but the guides below provide more information on how you can set up SSH or RDP connection to Windows nodes in AKS:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Get all nodes in AKS cluster and note NAME of 2 Windows nodes in addition to INTERNAL-IP for the node that will act as server</span>
+kubectl get nodes -o wide
+</code></pre></div><p>Now we need to log into both of the nodes simultaneously - for Windows nodes it's a bit harder than for Linux nodes since you need to set up a jumpserver. This is out of scope for this blog post but the guides below provide more information on how you can set up SSH or RDP connection to Windows nodes in AKS:</p>
 <p><a href="https://docs.microsoft.com/en-us/azure/aks/node-access#create-the-ssh-connection-to-a-windows-node">Create the SSH connection to a Windows node</a></p>
 <p><a href="https://docs.microsoft.com/en-us/azure/aks/rdp">Connect to Windows Server nodes using remote desktop protocol (RDP) connections</a></p>
 <p>Once you've logged into the Windows nodes, you need to install and configure latte on both nodes - I recommend to check a few links in Additional resources section for more information on how to use latte.exe:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. (PowerShell) Install latte - on SERVER and CLIENT node</span>
-</span></span><span class="line"><span class="cl"><span class="n">mkdir</span> <span class="s2">&#34;C:\tools&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Invoke-WebRequest</span> <span class="n">-OutFile</span> <span class="s2">&#34;C:\tools\latte.exe&#34;</span> <span class="n">-Uri</span> <span class="s2">&#34;https://github.com/microsoft/latte/releases/download/v0/latte.exe&#34;</span>
-</span></span></code></pre></div><p>latte behaves a bit differently than SockPerf. You need to provide exactly the same command on server and on client with the only difference where you need to add <code>-c</code> parameter to a client command which will signal latte that this specific call is coming from a client machine. You need to ensure that you run command on server and on client node for every execution because latte exits after every completed execution.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># 1. (PowerShell) Install latte - on SERVER and CLIENT node</span>
+<span class="n">mkdir</span> <span class="s2">&#34;C:\tools&#34;</span>
+<span class="nb">Invoke-WebRequest</span> <span class="n">-OutFile</span> <span class="s2">&#34;C:\tools\latte.exe&#34;</span> <span class="n">-Uri</span> <span class="s2">&#34;https://github.com/microsoft/latte/releases/download/v0/latte.exe&#34;</span>
+
+</code></pre></div><p>latte behaves a bit differently than SockPerf. You need to provide exactly the same command on server and on client with the only difference where you need to add <code>-c</code> parameter to a client command which will signal latte that this specific call is coming from a client machine. You need to ensure that you run command on server and on client node for every execution because latte exits after every completed execution.</p>
 <p><em><strong>Test with 64 message size and duration of 60 seconds</strong></em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
-</span></span><span class="line"><span class="cl">latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">64</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
-</span></span><span class="line"><span class="cl">latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">64</span>
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
+latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">64</span>
+
+<span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
+latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">64</span>
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/latte_time_noan.png" alt="Latte test without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/latte_time_an.png" alt="Latte test with AN"></p>
 <p><em><strong>Test with larger message size (10 000 bytes) and duration of 60 seconds</strong></em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
-</span></span><span class="line"><span class="cl">latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">10000</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
-</span></span><span class="line"><span class="cl">latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">10000</span>
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
+latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">10000</span>
+
+<span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
+latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -t <span class="m">60</span> -m <span class="m">10000</span>
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/latte_msgsize_noan.png" alt="Latte test with larger messages without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/latte_msgsize_an.png" alt="Latte test with larger messages with AN"></p>
 <p><em><strong>Test with larger message size (10 000 bytes) and iterations</strong></em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
-</span></span><span class="line"><span class="cl">latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -i <span class="m">65100</span> -m <span class="m">10000</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
-</span></span><span class="line"><span class="cl">latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -i <span class="m">65100</span> -m <span class="m">10000</span>
-</span></span></code></pre></div><p><strong>Without Accelerated Networking</strong>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1. (CMD) Start latte on SERVER node - ensure that you&#39;re running the command from where latte.exe is located</span>
+latte -a <span class="o">[</span>NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -i <span class="m">65100</span> -m <span class="m">10000</span>
+
+<span class="c1"># 2. (CMD) Start latte on CLIENT with the same configuration but with additional -c parameter to identify that it\&#39;s a client</span>
+latte -c -a <span class="o">[</span>SERVER_NODE_INTERNAL_IP<span class="o">]</span>:<span class="o">[</span>PORT<span class="o">]</span> -i <span class="m">65100</span> -m <span class="m">10000</span>
+</code></pre></div><p><strong>Without Accelerated Networking</strong>
 <img src="../../images/k8s_an/latte_iterations_noan.png" alt="Latte test with larger messages and iterations without AN"></p>
 <p><strong>With Accelerated Networking</strong>
 <img src="../../images/k8s_an/latte_iterations_an.png" alt="Latte test with larger messages and iterations with AN"></p>
@@ -709,50 +710,54 @@
 <p><strong>Azure Portal:</strong> go to a resource group where AKS node pools are provisioned (normally it&rsquo;s different from the one where AKS resource itself is provisioned). If you're using a default resource group naming, it will have a format like this <code>MC_[AKS_RESOURCE_GROUP_NAME]_[AKS_CLUSTER_NAME]_[AKS_CLUSTER_LOCATION]</code>. Example: <code>MC_akstest-rg_akstest_northeurope</code>. In the chosen resource group locate node pools (VMSS resources) and navigate to those. In Networking section you can see a property called &quot;Accelerated networking&quot; and if it's enabled/disabled:</p>
 <p><img src="../../images/k8s_an/aks_vmss_an.png" alt="Location of Accelerated networking property in AKS node pool in Azure portal"></p>
 <p><strong>Azure CLI</strong>: you need to make a note of your AKS cluster name and resource group where it's deployed - once it's done, we can run below commands to check if Accelerated Networking is enabled for node pools in the chosen AKS cluster:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1. Get the name of the resource group where AKS node pools are deployed</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">az</span> <span class="n">aks</span> <span class="n">show</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[AKS_CLUSTER_RESOURCE_GROUP_NAME]</span> <span class="p">-</span><span class="n">-name</span> <span class="no">[AKS_CLUSTER_NAME]</span> <span class="p">-</span><span class="n">-query</span> <span class="n">nodeResourceGroup</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 2. Get the names of the AKS cluster node pools that we need to check AN property for</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">az</span> <span class="n">aks</span> <span class="n">nodepool</span> <span class="n">list</span>  <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[AKS_CLUSTER_RESOURCE_GROUP_NAME]</span> <span class="p">-</span><span class="n">-cluster-name</span> <span class="no">[AKS_CLUSTER_NAME]</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"><span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name}&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 3. For each node pool, check if Accelerated Networking is enabled on a VMSS level </span>
-</span></span><span class="line"><span class="cl"><span class="c">#    Please remember that node pool name consists of &#34;aks&#34; which is appended automatically by Azure and the node pool name itself, </span>
-</span></span><span class="line"><span class="cl"><span class="c">#    f.ex. &#34;akswinpol&#34;, &#34;akslinpol&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#    Resource group here is the one that was retrieved in step 1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">az</span> <span class="n">vmss</span> <span class="n">show</span> <span class="p">-</span><span class="n">-name</span> <span class="no">[AKS_NODE_POOL_NAME]</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[NODE_POOL_RESOURCE_GROUP_NAME]</span> <span class="p">`</span> 
-</span></span><span class="line"><span class="cl"><span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking&#34;</span>
-</span></span></code></pre></div><p>In case you have older node pools which were deployed before Accelerated Networking was supported in AKS, you might want to consider to enable that to start receiving the benefits of improved network performance.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># 1. Get the name of the resource group where AKS node pools are deployed</span>
+
+<span class="n">az</span> <span class="n">aks</span> <span class="n">show</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[AKS_CLUSTER_RESOURCE_GROUP_NAME]</span> <span class="p">-</span><span class="n">-name</span> <span class="no">[AKS_CLUSTER_NAME]</span> <span class="p">-</span><span class="n">-query</span> <span class="n">nodeResourceGroup</span>
+
+<span class="c"># 2. Get the names of the AKS cluster node pools that we need to check AN property for</span>
+
+<span class="n">az</span> <span class="n">aks</span> <span class="n">nodepool</span> <span class="n">list</span>  <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[AKS_CLUSTER_RESOURCE_GROUP_NAME]</span> <span class="p">-</span><span class="n">-cluster-name</span> <span class="no">[AKS_CLUSTER_NAME]</span> <span class="p">`</span>
+<span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name}&#34;</span>
+
+<span class="c"># 3. For each node pool, check if Accelerated Networking is enabled on a VMSS level </span>
+<span class="c">#    Please remember that node pool name consists of &#34;aks&#34; which is appended automatically by Azure and the node pool name itself, </span>
+<span class="c">#    f.ex. &#34;akswinpol&#34;, &#34;akslinpol&#34;</span>
+<span class="c">#    Resource group here is the one that was retrieved in step 1</span>
+
+<span class="n">az</span> <span class="n">vmss</span> <span class="n">show</span> <span class="p">-</span><span class="n">-name</span> <span class="no">[AKS_NODE_POOL_NAME]</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="no">[NODE_POOL_RESOURCE_GROUP_NAME]</span> <span class="p">`</span> 
+<span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;virtualMachineProfile.networkProfile.networkInterfaceConfigurations[].enableAcceleratedNetworking&#34;</span>
+
+</code></pre></div><p>In case you have older node pools which were deployed before Accelerated Networking was supported in AKS, you might want to consider to enable that to start receiving the benefits of improved network performance.</p>
 <p><img src="../../images/k8s_an/cat_servants.gif" alt="GIF of a cat with his servants"></p>
 <p>In order to do that you will need to create a new node pool and migrate all the workloads from the initial node pool. If you're using an IaC tool for provisioning your AKS clusters, you can also handle it in the deployment template but I've seen cases where such a change may cause a full re-creation of a cluster and it will require some downtime and you might not want that. So another approach can be to simply create a new node pool where AN will be enabled by default (as long as it's a supported VM SKU which the most of them are😺).</p>
 <p>Alternative approach is similar to what a node image upgrade does, just that you will do it for the whole node pool:</p>
 <p>1.Retrieve configuration details of the node pool that is currently active - we want to create a new node pool that is the same as the existing node pool with only difference, which is enabled Accelerated Networking.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 1. Retrieve configuration details of the node pool that is currently active</span>
-</span></span><span class="line"><span class="cl">az aks nodepool show --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP<span class="o">]</span> 
-</span></span><span class="line"><span class="cl">--name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
-</span></span></code></pre></div><p>2.There are quite a few properties you can see in the output - a few to make a note of are <code>count</code>, <code>currentOrchestratorVersion</code>, <code>enableAutoScaling</code>, <code>maxCount</code>, <code>minCount</code>, <code>maxPods</code>, <code>nodeTaints</code>, <code>vmSize</code>. Now we can create a new node pool based on the existing node pool's configuration - please note that the name of the node pool must be different from the initial node pool (and renaming of the node pool is unfortunately not supported in AKS).</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. Create a new node pool based on existing node pool&#39;s configuration</span>
-</span></span><span class="line"><span class="cl">az aks nodepool add --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --name <span class="o">[</span>NEW_NODE_POOL_NAME<span class="o">]</span> 
-</span></span><span class="line"><span class="cl">--resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --kubernetes-version <span class="o">[</span>CURRENT_ORCHESTRATOR_VERSION<span class="o">]</span> 
-</span></span><span class="line"><span class="cl">--os-type <span class="o">[</span>NODE_POOL_OS<span class="o">]</span> --node-count <span class="o">[</span>NODE_COUNT<span class="o">]</span> --enable-cluster-autoscaler 
-</span></span><span class="line"><span class="cl">--min-count <span class="o">[</span>MIN_COUNT<span class="o">]</span> --max-count <span class="o">[</span>MAX_COUNT<span class="o">]</span> --max-pods <span class="o">[</span>MAX_PODS<span class="o">]</span> --node-vm-size <span class="o">[</span>VM_SIZE<span class="o">]</span> --node-taints <span class="o">[</span>NODE_TAINTS<span class="o">]</span>
-</span></span></code></pre></div><p>3.Move workloads to the new node pool and delete the old node pool - it's a good idea to verify that all of your workloads have PodDisruptionBudget configured to avoid application downtime😉</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Cordon existing node pool to forbid scheduling workloads to it (use kubectl edit node [NODE_NAME] to see selector value for agentpool)</span>
-</span></span><span class="line"><span class="cl">kubectl cordon -l <span class="nv">agentpool</span><span class="o">=</span>winpol
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Drain cordoned node pool to move all workloads to a newly created node pool: </span>
-</span></span><span class="line"><span class="cl">kubectl drain -l <span class="nv">agentpool</span><span class="o">=</span>winpol --force --delete-local-data --ignore-daemonsets --grace-period<span class="o">=</span><span class="m">10</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Once workload migration is successful, delete old node pool: </span>
-</span></span><span class="line"><span class="cl">az aks nodepool delete --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> 
-</span></span><span class="line"><span class="cl">--name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
-</span></span></code></pre></div><p>If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">
+<span class="c1"># 1. Retrieve configuration details of the node pool that is currently active</span>
+az aks nodepool show --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP<span class="o">]</span> 
+--name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+
+</code></pre></div><p>2.There are quite a few properties you can see in the output - a few to make a note of are <code>count</code>, <code>currentOrchestratorVersion</code>, <code>enableAutoScaling</code>, <code>maxCount</code>, <code>minCount</code>, <code>maxPods</code>, <code>nodeTaints</code>, <code>vmSize</code>. Now we can create a new node pool based on the existing node pool's configuration - please note that the name of the node pool must be different from the initial node pool (and renaming of the node pool is unfortunately not supported in AKS).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">
+<span class="c1"># 2. Create a new node pool based on existing node pool&#39;s configuration</span>
+az aks nodepool add --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --name <span class="o">[</span>NEW_NODE_POOL_NAME<span class="o">]</span> 
+--resource-group <span class="o">[</span>NODE_POOL_RESOURCE_GROUP_NAME<span class="o">]</span> --kubernetes-version <span class="o">[</span>CURRENT_ORCHESTRATOR_VERSION<span class="o">]</span> 
+--os-type <span class="o">[</span>NODE_POOL_OS<span class="o">]</span> --node-count <span class="o">[</span>NODE_COUNT<span class="o">]</span> --enable-cluster-autoscaler 
+--min-count <span class="o">[</span>MIN_COUNT<span class="o">]</span> --max-count <span class="o">[</span>MAX_COUNT<span class="o">]</span> --max-pods <span class="o">[</span>MAX_PODS<span class="o">]</span> --node-vm-size <span class="o">[</span>VM_SIZE<span class="o">]</span> --node-taints <span class="o">[</span>NODE_TAINTS<span class="o">]</span>
+
+</code></pre></div><p>3.Move workloads to the new node pool and delete the old node pool - it's a good idea to verify that all of your workloads have PodDisruptionBudget configured to avoid application downtime😉</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">
+<span class="c1"># Cordon existing node pool to forbid scheduling workloads to it (use kubectl edit node [NODE_NAME] to see selector value for agentpool)</span>
+kubectl cordon -l <span class="nv">agentpool</span><span class="o">=</span>winpol
+
+<span class="c1"># Drain cordoned node pool to move all workloads to a newly created node pool: </span>
+kubectl drain -l <span class="nv">agentpool</span><span class="o">=</span>winpol --force --delete-local-data --ignore-daemonsets --grace-period<span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># Once workload migration is successful, delete old node pool: </span>
+az aks nodepool delete --cluster-name <span class="o">[</span>AKS_CLUSTER_NAME<span class="o">]</span> --resource-group <span class="o">[</span>AKS_CLUSTER_RESOURCE_GROUP_NAME<span class="o">]</span> 
+--name <span class="o">[</span>INITIAL_NODE_POOL_NAME<span class="o">]</span>
+
+</code></pre></div><p>If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion.</p>
 <p>And we're finished! Now the migrated workloads can start benefiting from networking goodies offered by AN feature in AKS.</p>
 <h2 id="additional-resources">Additional resources</h2>
 <p>Some good resources on Accelerated Networking and tools used for network performance testing:</p>
@@ -800,8 +805,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></body>
 </html>

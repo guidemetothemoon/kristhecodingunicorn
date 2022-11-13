@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.104.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -401,8 +401,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -548,9 +548,9 @@
 <p>In some cases you may have an Azure AD tenant that doesn't have an active subscription connected to it but you would nevertheless want to log in to it from a command line for instance, with Azure CLI. You may want to perform actions like creating an Azure AD Application for example. In this case you need to be cautious about the login command you're running so that you don't waste a lot of time on debugging an error you could have avoided in the first place (like someone did 😁)!</p>
 <p>If you attempt to log in to an Azure AD tenant like this:  <code>az login --tenant [your_azure_ad_tenant_id]</code> and you don't have an active subscription it will look like a login was successful: you will be redirected back from the Azure login window to the command line, but you may see an error message in the output stating: <code>No subscriptions found for testuser@mytest.onmicrosoft.com.</code> (which is kind of expected).</p>
 <p>If you then ignore this error message and attempt to create an Azure AD Application in this tenant, you will get following behaviour:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">PS</span><span class="w"> </span><span class="n">C</span><span class="o">:</span><span class="err">\</span><span class="n">Playground</span><span class="o">&gt;</span><span class="w"> </span><span class="n">az</span><span class="w"> </span><span class="n">ad</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="o">--</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="n">testapplication</span><span class="w"> </span><span class="o">--</span><span class="n">sign</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">audience</span><span class="w"> </span><span class="n">AzureADMyOrg</span><span class="w"> </span><span class="o">--</span><span class="n">web</span><span class="o">-</span><span class="n">redirect</span><span class="o">-</span><span class="n">uris</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="c1">//testapplication.com/callback
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ERROR</span><span class="o">:</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="kd">permission</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">needed</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">register</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">application</span><span class="p">.</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">configure</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">refer</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal&#39;. Original error: Insufficient privileges to complete the operation.
-</span></span></span></code></pre></div><p>The error message doesn't necessarily tell you that you're still not properly logged in, and it may result in a lot of confusion when you know that your user or service principal has more than enough permissions to perform this operation.🙄</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">PS C:\Playground&gt; az ad app create --display-name testapplication --sign-in-audience AzureADMyOrg --web-redirect-uris https://testapplication.com/callback
+ERROR: Directory permission is needed for the current user to register the application. For how to configure, please refer &#39;https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal&#39;. Original error: Insufficient privileges to complete the operation.
+</code></pre></div><p>The error message doesn't necessarily tell you that you're still not properly logged in, and it may result in a lot of confusion when you know that your user or service principal has more than enough permissions to perform this operation.🙄</p>
 <p>The clue here is to use <code>--allow-no-subscriptions</code> property which will allow you accessing tenants without active subscription from Azure CLI. So your login command will then look like this:</p>
 <p><code>az login --tenant [your_azure_ad_tenant_id] --allow-no-subscriptions</code></p>
 <p>Once the command has been executed you will be able to successfully create an application or perform other actions towards the respective Azure AD tenant with Azure CLI.😺</p>
@@ -589,8 +589,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></body>
 </html>

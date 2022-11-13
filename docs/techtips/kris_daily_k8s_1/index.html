@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.104.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -408,8 +408,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -548,7 +548,7 @@
     
     <div class="post__content">
       <h1>Kris&#39;s Quick Cup of K8s #1</h1>
-      <p><img src="../../images/tech_tips/techtip_2.png" alt="Article banner for Kris&amp;rsquo;s quick cup of K8s"></p>
+      <p><img src="../../images/tech_tips/techtip_2.png" alt="Article banner for Kris&rsquo;s quick cup of K8s"></p>
 <div class="toc">
   <nav id="TableOfContents">
   <ul>
@@ -575,10 +575,10 @@
 <p><img src="../../images/tech_tips/k8s_get_all.png" alt="Screenshot of Kubernetes get all command"></p>
 <h2 id="4---retrieve-and-clean-up-evicted-pods">#4 - Retrieve and clean up Evicted Pods</h2>
 <p>Sometimes you may have a lot of Pods in the cluster with a specific status that may need clean-up. You could have deleted one and one Pod but why do that when with 2 PowerShell commands you can clean up all Pods at once? For instance, let's use Pods with status &quot;Evicted&quot; as an example. I will use first command to retrieve all Pods in &quot;testapp&quot; Namespace where reason is set to &quot;Evicted&quot; and save the result to a variable called &quot;evictedPods&quot;. Then with command #2 I will delete each of the retrieved Evicted Pods. The same approach can be used for any other status, you will just need to confirm with Pod metadata that you're filtering Pods based on the correct property because in some cases different properties may be used to set Pod's state.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$evictedPods</span> <span class="p">=</span> <span class="p">((</span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="n">-n</span> <span class="n">testapp</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span><span class="p">).</span><span class="n">items</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">status</span><span class="p">.</span><span class="n">reason</span> <span class="o">-eq</span> <span class="s2">&#34;Evicted&#34;</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$pod</span> <span class="k">in</span> <span class="nv">$evictedPods</span><span class="p">)</span> <span class="p">{</span><span class="n">kubectl</span> <span class="n">delete</span> <span class="n">pods</span> <span class="p">$(</span><span class="nv">$pod</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="n">-n</span> <span class="n">testapp</span><span class="p">}</span>
-</span></span></code></pre></div><p>Thanks for reading and till next tech tip ;)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$evictedPods</span> <span class="p">=</span> <span class="p">((</span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="n">-n</span> <span class="n">testapp</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span><span class="p">).</span><span class="n">items</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">status</span><span class="p">.</span><span class="n">reason</span> <span class="o">-eq</span> <span class="s2">&#34;Evicted&#34;</span><span class="p">})</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="nv">$pod</span> <span class="k">in</span> <span class="nv">$evictedPods</span><span class="p">)</span> <span class="p">{</span><span class="n">kubectl</span> <span class="n">delete</span> <span class="n">pods</span> <span class="p">$(</span><span class="nv">$pod</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="n">-n</span> <span class="n">testapp</span><span class="p">}</span>
+</code></pre></div><p>Thanks for reading and till next tech tip ;)</p>
 </div>
     <div class="post__footer">
       
@@ -612,8 +612,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></body>
 </html>

@@ -6,7 +6,18 @@
     <description>Recent content in kubernetes on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Applying Dockerfile best practices with Hadolint</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_hadolint/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_hadolint/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can ensure that Dockerfiles we create are following best practices with Hadolint tool.</description>
+      
+    </item>
+    
     <item>
       <title>Validating quality of Helm Charts with helm lint</title>
       <link>https://kristhecodingunicorn.com/techtips/helm_lint/</link>

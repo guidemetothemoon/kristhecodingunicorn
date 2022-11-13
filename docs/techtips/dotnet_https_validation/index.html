@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.104.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -394,8 +394,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -542,15 +542,15 @@
 <p>The property I'm talking about is <code>ServicePointManager.ServerCertificateValidationCallback</code> that is part of a <code>System.Net</code> library. This property can be used for custom certificate validation in case you're using a non-trusted certificate authority. One of the scenarios when you can end up using this property is when you're developing and testing new functionality and you're using a self-signed TLS certificate on the server instead of production-level certificates. If this property is not set and you're using a non-trusted certificate, you may get errors like: <code>The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.</code></p>
 <p>The danger of it is though that once you're done with testing you may forget to clean it up in the source code, and it silently paves it's way out to production&hellip; What it results into is that <strong>all TLS certificates will be accepted and all HTTPS traffic will be allowed, even the malicious one!</strong> This can be extremely destructive from the security perspective and can open up for the man-in-the-middle vulnerability for instance.🔥</p>
 <p>So, whenever you see a variation of this piece of code:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) =&gt; true;
-</span></span></code></pre></div><p><strong>Stall the change immediately</strong> and take your time to ensure that you or the one who has added this piece of code know what you're doing and understand the consequences of enabling this property!⛔️</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) =&gt; true;
+</code></pre></div><p><strong>Stall the change immediately</strong> and take your time to ensure that you or the one who has added this piece of code know what you're doing and understand the consequences of enabling this property!⛔️</p>
 <p>A good thing is that if you're using a Static Application Security Testing (SAST) tool like NDepend, you will get alerted in case anyone attempts enabling this property as part of the PR since a validation like this is typically a part of the security rules collection of the SAST tool.</p>
 <p><strong>An important note on alternative implementation in .NET Core and .NET:</strong> though <code>ServicePointManager.ServerCertificateValidationCallback</code> is supported both in .NET Framework, in .NET Core and .NET I would recommend to consider an alternative implementation. In .NET a new <code>HttpClientHandler</code> property - <code>HttpClientHandler.DangerousAcceptAnyServerCertificateValidator</code> - makes deactivation of certificate validation for development purposes more secure and scoped to development environment only. For instance, in <code>Startup.cs</code> of your ASP.NET Core Web application you can enable it for development purposes like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span> <span class="n">env</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">()</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">httpClientHandler</span><span class="p">.</span><span class="n">ServerCertificateCustomValidationCallback</span> <span class="p">=</span> <span class="n">HttpClientHandler</span><span class="p">.</span><span class="n">DangerousAcceptAnyServerCertificateValidator</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>You can read more about this property here: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclienthandler.dangerousacceptanyservercertificatevalidator?view=net-6.0">HttpClientHandler.DangerousAcceptAnyServerCertificateValidator Property</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">if</span> <span class="p">(</span> <span class="n">env</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">()</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">httpClientHandler</span><span class="p">.</span><span class="n">ServerCertificateCustomValidationCallback</span> <span class="p">=</span> <span class="n">HttpClientHandler</span><span class="p">.</span><span class="n">DangerousAcceptAnyServerCertificateValidator</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>You can read more about this property here: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclienthandler.dangerousacceptanyservercertificatevalidator?view=net-6.0">HttpClientHandler.DangerousAcceptAnyServerCertificateValidator Property</a></p>
 <p>If you would like to learn more about <code>ServerCertificateValidationCallback</code> property, you can check this link: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.servicepointmanager.servercertificatevalidationcallback?view=net-6.0">ServicePointManager.ServerCertificateValidationCallback Property</a></p>
 <p>And here you can check one of the Microsoft quality rules which also is about cautious usage of <code>ServerCertificateValidationCallback</code> property: <a href="https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5359">CA5359: Do not disable certificate validation</a></p>
 <p>Stay secure, stay safe!</p>
@@ -588,8 +588,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></body>
 </html>

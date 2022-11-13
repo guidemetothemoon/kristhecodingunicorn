@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.104.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
-    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
     crossorigin="anonymous"
   ></script>
 
@@ -394,8 +394,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -593,218 +593,218 @@
 <h3 id="step-by-step-walkthrough">Step-by-step walkthrough</h3>
 <p>First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Or you can run it in a container with Jave pre-installed ;-) Once you've done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.</p>
 <p>First, we'll need to clone a fresh copy of our repo with <code>git clone --mirror</code> command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\Playground\test-cleanup&gt; git clone --mirror https://github.com/guidemetothemoon/demo-projects.git
-</span></span><span class="line"><span class="cl">Cloning into bare repository &#39;demo-projects.git&#39;...
-</span></span><span class="line"><span class="cl">remote: Enumerating objects: 12, done.
-</span></span><span class="line"><span class="cl">remote: Counting objects: 100% (12/12), done.
-</span></span><span class="line"><span class="cl">remote: Compressing objects: 100% (8/8), done.
-</span></span><span class="line"><span class="cl">remote: Total 12 (delta 3), reused 8 (delta 2), pack-reused 0
-</span></span><span class="line"><span class="cl">Receiving objects: 100% (12/12), 4.35 KiB | 1.45 MiB/s, done.
-</span></span><span class="line"><span class="cl">Resolving deltas: 100% (3/3), done.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">PS C:\Playground\test-cleanup&gt; ls
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Directory: C:\Playground\test-cleanup
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Mode                 LastWriteTime         Length Name
-</span></span><span class="line"><span class="cl">----                 -------------         ------ ----
-</span></span><span class="line"><span class="cl">d----           2/20/2022  1:31 PM                demo-projects.git</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\Playground\test-cleanup&gt; git clone --mirror https://github.com/guidemetothemoon/demo-projects.git
+Cloning into bare repository &#39;demo-projects.git&#39;...
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 12 (delta 3), reused 8 (delta 2), pack-reused 0
+Receiving objects: 100% (12/12), 4.35 KiB | 1.45 MiB/s, done.
+Resolving deltas: 100% (3/3), done.
+
+PS C:\Playground\test-cleanup&gt; ls
+
+    Directory: C:\Playground\test-cleanup
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           2/20/2022  1:31 PM                demo-projects.git</code></pre></div>
 <p>This will create a full copy of the Git database of the respective repository. <strong>Before you proceed, you must take a backup of it to ensure that you can restore to the initial state of the repository in case anything goes wrong during clean-up.</strong></p>
 <p>Once you have taken the backup we can start with the clean up. First we'll need to create a local txt-file that will include all the secrets we want to replace. This file will be used by BFG Repo-Cleaner to locate in which files and folders in the repository these secrets were exposed. Since I want to clean up client id and client secret I will create following file and call it &quot;<strong>secrets.txt</strong>&quot;:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"># secrets.txt
-</span></span><span class="line"><span class="cl">5ff4ff61-2caf-4676-a9e6-7b5e7f5e5b24
-</span></span><span class="line"><span class="cl">54614838-b267-4276-a423-f2915160bc70</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"># secrets.txt
+5ff4ff61-2caf-4676-a9e6-7b5e7f5e5b24
+54614838-b267-4276-a423-f2915160bc70</code></pre></div>
 <p>Please note that the values are separated with a new line. File can be saved wherever it's easily accessible - I will save it to the same folder where I cloned my Git repo database to. Now we have everything we need in order to do the clean up. We can do that by executing <code>java -jar bfg.jar --replace-text &quot;C:\Playground\test-cleanup\secrets.txt&quot; demo-projects.git</code> command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\Playground\test-cleanup&gt; java -jar bfg.jar --replace-text &#34;C:\Playground\test-cleanup\secrets.txt&#34; demo-projects.git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Using repo : C:\Playground\test-cleanup\demo-projects.git
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Found 4 objects to protect
-</span></span><span class="line"><span class="cl">Found 2 commit-pointing refs : HEAD, refs/heads/main
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Protected commits
-</span></span><span class="line"><span class="cl">-----------------
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">These are your protected commits, and so their contents will NOT be altered:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> * commit 5066f64e (protected by &#39;HEAD&#39;)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Cleaning
-</span></span><span class="line"><span class="cl">--------
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Found 3 commits
-</span></span><span class="line"><span class="cl">Cleaning commits:       100% (3/3)
-</span></span><span class="line"><span class="cl">Cleaning commits completed in 1,291 ms.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Updating 1 Ref
-</span></span><span class="line"><span class="cl">--------------
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        Ref               Before     After
-</span></span><span class="line"><span class="cl">        -------------------------------------
-</span></span><span class="line"><span class="cl">        refs/heads/main | 5066f64e | 45438e8d
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Updating references:    100% (1/1)
-</span></span><span class="line"><span class="cl">...Ref update completed in 71 ms.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Commit Tree-Dirt History
-</span></span><span class="line"><span class="cl">------------------------
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        Earliest      Latest
-</span></span><span class="line"><span class="cl">        |                  |
-</span></span><span class="line"><span class="cl">           .     D      m
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        D = dirty commits (file tree fixed)
-</span></span><span class="line"><span class="cl">        m = modified commits (commit message or parents changed)
-</span></span><span class="line"><span class="cl">        . = clean commits (no changes to file tree)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                                Before     After
-</span></span><span class="line"><span class="cl">        -------------------------------------------
-</span></span><span class="line"><span class="cl">        First modified commit | 08b69254 | 11b05548
-</span></span><span class="line"><span class="cl">        Last dirty commit     | 08b69254 | 11b05548
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Changed files
-</span></span><span class="line"><span class="cl">-------------
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        Filename              Before &amp; After
-</span></span><span class="line"><span class="cl">        -----------------------------------------
-</span></span><span class="line"><span class="cl">        azure-pipelines.yml | 578e8c2d ? 43f73acf
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">In total, 4 object ids were changed. Full details are logged here:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        C:\Playground\test-cleanup\demo-projects.git.bfg-report\2022-02-20\13-32-27
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">BFG run is complete! When ready, run: git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\Playground\test-cleanup&gt; java -jar bfg.jar --replace-text &#34;C:\Playground\test-cleanup\secrets.txt&#34; demo-projects.git
+
+Using repo : C:\Playground\test-cleanup\demo-projects.git
+
+Found 4 objects to protect
+Found 2 commit-pointing refs : HEAD, refs/heads/main
+
+Protected commits
+-----------------
+
+These are your protected commits, and so their contents will NOT be altered:
+
+ * commit 5066f64e (protected by &#39;HEAD&#39;)
+
+Cleaning
+--------
+
+Found 3 commits
+Cleaning commits:       100% (3/3)
+Cleaning commits completed in 1,291 ms.
+
+Updating 1 Ref
+--------------
+
+        Ref               Before     After
+        -------------------------------------
+        refs/heads/main | 5066f64e | 45438e8d
+
+Updating references:    100% (1/1)
+...Ref update completed in 71 ms.
+
+Commit Tree-Dirt History
+------------------------
+
+        Earliest      Latest
+        |                  |
+           .     D      m
+
+        D = dirty commits (file tree fixed)
+        m = modified commits (commit message or parents changed)
+        . = clean commits (no changes to file tree)
+
+                                Before     After
+        -------------------------------------------
+        First modified commit | 08b69254 | 11b05548
+        Last dirty commit     | 08b69254 | 11b05548
+
+Changed files
+-------------
+
+        Filename              Before &amp; After
+        -----------------------------------------
+        azure-pipelines.yml | 578e8c2d ? 43f73acf
+
+
+In total, 4 object ids were changed. Full details are logged here:
+
+        C:\Playground\test-cleanup\demo-projects.git.bfg-report\2022-02-20\13-32-27
+
+BFG run is complete! When ready, run: git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</code></pre></div>
 <p>What happened now is that BFG Repo-Cleaner updated all the commits, branches and tags and replaced all the secrets defined in secrets.txt with <code>***REMOVED***</code> placeholder. Pay attention to the following message popping up in the command output:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">These are your protected commits, and so their contents will NOT be altered:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> * commit 5066f64e (protected by &#39;HEAD&#39;)</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">These are your protected commits, and so their contents will NOT be altered:
+
+ * commit 5066f64e (protected by &#39;HEAD&#39;)</code></pre></div>
 <p>This message means that the tool has identified the latest commit to master branch which it locks and will NOT overwrite, even if it contains an exposed secret. Therefore, <strong>before running the tool you need to ensure that the latest commit in master branch doesn't contain the exposed secrets</strong> or you will need to re-run the tool once a new, secret-free commit is added to master.</p>
 <p>BFG Repo-Cleaner also generates a report that can make it easier for you to examine the changes that have been done before they're pushed to the remote repository. As you can see in the bottom of the script full details have been logged to a separate folder that was created in the same directory from which you called the tool - <code>reponame.git.bfg-report</code>. The files we're most interested in are:</p>
 <ul>
 <li><strong>changed-files.txt</strong> - in this file you can see which files have been changed. For my test repo this file looks like this:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"># changed-files.txt
-</span></span><span class="line"><span class="cl">578e8c2dcebb3779dad0a81818a50e2413214f82 43f73acf0f846d95ed2d70df150f50a50587d49e azure-pipelines.yml</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"># changed-files.txt
+578e8c2dcebb3779dad0a81818a50e2413214f82 43f73acf0f846d95ed2d70df150f50a50587d49e azure-pipelines.yml</code></pre></div>
 <ul>
 <li><strong>object-id-map.old-new.txt</strong> - in this file you can see all the commit id-s that have been changed and the new commit id-s that have been generated for the changes. For my test repo this file looks like this:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"># object-id-map.old-new.txt
-</span></span><span class="line"><span class="cl">08b69254b55f93d02babae751b9573575dc39327 11b05548da5d1900066d13d048da6ce98e249426
-</span></span><span class="line"><span class="cl">5066f64e23210c4b330faa66275341ea6ef66bbe 45438e8d0d5ee85eb965e8d913cad5268022d4ec
-</span></span><span class="line"><span class="cl">5425a45028c81027ec4a682ba6091a31c36cfc37 8ef38ab0aa8a2139d46f0145b699eb5d51f06302
-</span></span><span class="line"><span class="cl">7f941aed9eea2d41f309ae73df50ff4bcb852c85 c186c1ab4c6e13ac8790fdac7f2ce5212e3afb28</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"># object-id-map.old-new.txt
+08b69254b55f93d02babae751b9573575dc39327 11b05548da5d1900066d13d048da6ce98e249426
+5066f64e23210c4b330faa66275341ea6ef66bbe 45438e8d0d5ee85eb965e8d913cad5268022d4ec
+5425a45028c81027ec4a682ba6091a31c36cfc37 8ef38ab0aa8a2139d46f0145b699eb5d51f06302
+7f941aed9eea2d41f309ae73df50ff4bcb852c85 c186c1ab4c6e13ac8790fdac7f2ce5212e3afb28</code></pre></div>
 <p>Let's check some of the commits and what those have been changed to - let's take the first commit id from the list, navigate to the Git repo folder and check how the initial commit looks like with <code>git show</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\Playground\test-cleanup\demo-projects.git&gt; git show 08b6925
-</span></span><span class="line"><span class="cl">commit 08b69254b55f93d02babae751b9573575dc39327
-</span></span><span class="line"><span class="cl">Author: Kristina D. &lt;g********@gmail.com&gt;
-</span></span><span class="line"><span class="cl">Date:   Sun Feb 20 13:29:43 2022 +0100
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Adding build pipeline definition with secrets
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">diff --git a/secrets-cleanup/azure-pipelines.yml b/secrets-cleanup/azure-pipelines.yml
-</span></span><span class="line"><span class="cl">new file mode 100644
-</span></span><span class="line"><span class="cl">index 0000000..578e8c2
-</span></span><span class="line"><span class="cl">--- /dev/null
-</span></span><span class="line"><span class="cl">+++ b/secrets-cleanup/azure-pipelines.yml
-</span></span><span class="line"><span class="cl">@@ -0,0 +1,28 @@
-</span></span><span class="line"><span class="cl">+name: $(BuildDefinitionName)_$(date:yyyyMMdd)_$(Build.SourceBranchName)$(rev:.r)
-</span></span><span class="line"><span class="cl">+
-</span></span><span class="line"><span class="cl">+trigger:
-</span></span><span class="line"><span class="cl">+  batch: true
-</span></span><span class="line"><span class="cl">+  branches:
-</span></span><span class="line"><span class="cl">+    include:
-</span></span><span class="line"><span class="cl">+    - master
-</span></span><span class="line"><span class="cl">+
-</span></span><span class="line"><span class="cl">+pool:
-</span></span><span class="line"><span class="cl">+  vmImage: &#39;ubuntu-latest&#39;
-</span></span><span class="line"><span class="cl">+
-</span></span><span class="line"><span class="cl">+stages:
-</span></span><span class="line"><span class="cl">+- stage: Release_Production
-</span></span><span class="line"><span class="cl">+  variables:
-</span></span><span class="line"><span class="cl">+  - name: TESTAPPURL
-</span></span><span class="line"><span class="cl">+    value: &#39;https://mytestapp.dev.com&#39;
-</span></span><span class="line"><span class="cl">+  - name: CLIENTID
-</span></span><span class="line"><span class="cl">+    value: &#39;5ff4ff61-2caf-4676-a9e6-7b5e7f5e5b24&#39; # -&gt; Secret&#39;s Present!
-</span></span><span class="line"><span class="cl">+  - name: CLIENTSECRET
-</span></span><span class="line"><span class="cl">+    value: &#39;54614838-b267-4276-a423-f2915160bc70&#39; # -&gt; Secret&#39;s Present!
-</span></span><span class="line"><span class="cl">+  jobs:
-</span></span><span class="line"><span class="cl">+  - deployment: Deploy_TestApp_Production
-</span></span><span class="line"><span class="cl">+    environment: testapp-prod.testapp-prod
-</span></span><span class="line"><span class="cl">+    strategy:
-</span></span><span class="line"><span class="cl">+      runOnce:
-</span></span><span class="line"><span class="cl">+        deploy:
-</span></span><span class="line"><span class="cl">+          steps:
-</span></span><span class="line"><span class="cl">+          - template: build-templates/init-deployment.yml
-</span></span><span class="line"><span class="cl">\ No newline at end of file</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\Playground\test-cleanup\demo-projects.git&gt; git show 08b6925
+commit 08b69254b55f93d02babae751b9573575dc39327
+Author: Kristina D. &lt;g********@gmail.com&gt;
+Date:   Sun Feb 20 13:29:43 2022 +0100
+
+    Adding build pipeline definition with secrets
+
+diff --git a/secrets-cleanup/azure-pipelines.yml b/secrets-cleanup/azure-pipelines.yml
+new file mode 100644
+index 0000000..578e8c2
+--- /dev/null
++++ b/secrets-cleanup/azure-pipelines.yml
+@@ -0,0 +1,28 @@
++name: $(BuildDefinitionName)_$(date:yyyyMMdd)_$(Build.SourceBranchName)$(rev:.r)
++
++trigger:
++  batch: true
++  branches:
++    include:
++    - master
++
++pool:
++  vmImage: &#39;ubuntu-latest&#39;
++
++stages:
++- stage: Release_Production
++  variables:
++  - name: TESTAPPURL
++    value: &#39;https://mytestapp.dev.com&#39;
++  - name: CLIENTID
++    value: &#39;5ff4ff61-2caf-4676-a9e6-7b5e7f5e5b24&#39; # -&gt; Secret&#39;s Present!
++  - name: CLIENTSECRET
++    value: &#39;54614838-b267-4276-a423-f2915160bc70&#39; # -&gt; Secret&#39;s Present!
++  jobs:
++  - deployment: Deploy_TestApp_Production
++    environment: testapp-prod.testapp-prod
++    strategy:
++      runOnce:
++        deploy:
++          steps:
++          - template: build-templates/init-deployment.yml
+\ No newline at end of file</code></pre></div>
 <p>As you can see, the secrets are there, as expected, since this commit represents the state before the changes have been applied by the tool. From the txt-file above we can see that this commit id was mapped to the commit with id <code>11b05548da5d1900066d13d048da6ce98e249426</code> - let's check how the changes in that commit look like:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\Playground\test-cleanup\demo-projects.git&gt; git show 11b0554
-</span></span><span class="line"><span class="cl">commit 11b05548da5d1900066d13d048da6ce98e249426
-</span></span><span class="line"><span class="cl">Author: Kristina D. &lt;g********@gmail.com&gt;
-</span></span><span class="line"><span class="cl">Date:   Sun Feb 20 13:29:43 2022 +0100
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Adding build pipeline definition with secrets
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">diff --git a/secrets-cleanup/azure-pipelines.yml b/secrets-cleanup/azure-pipelines.yml
-</span></span><span class="line"><span class="cl">new file mode 100644
-</span></span><span class="line"><span class="cl">index 0000000..43f73ac
-</span></span><span class="line"><span class="cl">--- /dev/null
-</span></span><span class="line"><span class="cl">+++ b/secrets-cleanup/azure-pipelines.yml
-</span></span><span class="line"><span class="cl">@@ -0,0 +1,28 @@
-</span></span><span class="line"><span class="cl">+name: $(BuildDefinitionName)_$(date:yyyyMMdd)_$(Build.SourceBranchName)$(rev:.r)
-</span></span><span class="line"><span class="cl">+
-</span></span><span class="line"><span class="cl">+trigger:
-</span></span><span class="line"><span class="cl">+  batch: true
-</span></span><span class="line"><span class="cl">+  branches:
-</span></span><span class="line"><span class="cl">+    include:
-</span></span><span class="line"><span class="cl">+    - master
-</span></span><span class="line"><span class="cl">+
-</span></span><span class="line"><span class="cl">+pool:
-</span></span><span class="line"><span class="cl">+  vmImage: &#39;ubuntu-latest&#39;
-</span></span><span class="line"><span class="cl">+
-</span></span><span class="line"><span class="cl">+stages:
-</span></span><span class="line"><span class="cl">+- stage: Release_Production
-</span></span><span class="line"><span class="cl">+  variables:
-</span></span><span class="line"><span class="cl">+  - name: TESTAPPURL
-</span></span><span class="line"><span class="cl">+    value: &#39;https://mytestapp.dev.com&#39;
-</span></span><span class="line"><span class="cl">+  - name: CLIENTID
-</span></span><span class="line"><span class="cl">+    value: &#39;***REMOVED***&#39; # -&gt; Secret&#39;s Gone!
-</span></span><span class="line"><span class="cl">+  - name: CLIENTSECRET
-</span></span><span class="line"><span class="cl">+    value: &#39;***REMOVED***&#39; # -&gt; Secret&#39;s Gone!
-</span></span><span class="line"><span class="cl">+  jobs:
-</span></span><span class="line"><span class="cl">+  - deployment: Deploy_TestApp_Production
-</span></span><span class="line"><span class="cl">+    environment: testapp-prod.testapp-prod
-</span></span><span class="line"><span class="cl">+    strategy:
-</span></span><span class="line"><span class="cl">+      runOnce:
-</span></span><span class="line"><span class="cl">+        deploy:
-</span></span><span class="line"><span class="cl">+          steps:
-</span></span><span class="line"><span class="cl">+          - template: build-templates/init-deployment.yml
-</span></span><span class="line"><span class="cl">\ No newline at end of file</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\Playground\test-cleanup\demo-projects.git&gt; git show 11b0554
+commit 11b05548da5d1900066d13d048da6ce98e249426
+Author: Kristina D. &lt;g********@gmail.com&gt;
+Date:   Sun Feb 20 13:29:43 2022 +0100
+
+    Adding build pipeline definition with secrets
+
+diff --git a/secrets-cleanup/azure-pipelines.yml b/secrets-cleanup/azure-pipelines.yml
+new file mode 100644
+index 0000000..43f73ac
+--- /dev/null
++++ b/secrets-cleanup/azure-pipelines.yml
+@@ -0,0 +1,28 @@
++name: $(BuildDefinitionName)_$(date:yyyyMMdd)_$(Build.SourceBranchName)$(rev:.r)
++
++trigger:
++  batch: true
++  branches:
++    include:
++    - master
++
++pool:
++  vmImage: &#39;ubuntu-latest&#39;
++
++stages:
++- stage: Release_Production
++  variables:
++  - name: TESTAPPURL
++    value: &#39;https://mytestapp.dev.com&#39;
++  - name: CLIENTID
++    value: &#39;***REMOVED***&#39; # -&gt; Secret&#39;s Gone!
++  - name: CLIENTSECRET
++    value: &#39;***REMOVED***&#39; # -&gt; Secret&#39;s Gone!
++  jobs:
++  - deployment: Deploy_TestApp_Production
++    environment: testapp-prod.testapp-prod
++    strategy:
++      runOnce:
++        deploy:
++          steps:
++          - template: build-templates/init-deployment.yml
+\ No newline at end of file</code></pre></div>
 <p>Check that out! Just as I said, client id and client secret got cleaned up - very nice! Once we have done the verification of changes, we can push them to the remote repository by running <code>git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</code> and <code>git push</code> commands:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\Playground\test-cleanup\demo-projects.git&gt; git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive
-</span></span><span class="line"><span class="cl">Enumerating objects: 12, done.
-</span></span><span class="line"><span class="cl">Counting objects: 100% (12/12), done.
-</span></span><span class="line"><span class="cl">Delta compression using up to 4 threads
-</span></span><span class="line"><span class="cl">Compressing objects: 100% (10/10), done.
-</span></span><span class="line"><span class="cl">Writing objects: 100% (12/12), done.
-</span></span><span class="line"><span class="cl">Building bitmaps: 100% (3/3), done.
-</span></span><span class="line"><span class="cl">Total 12 (delta 3), reused 4 (delta 0), pack-reused 0
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">PS C:\Playground\test-cleanup\demo-projects.git&gt; git push
-</span></span><span class="line"><span class="cl">Enumerating objects: 12, done.
-</span></span><span class="line"><span class="cl">Writing objects: 100% (12/12), 4.30 KiB | 2.15 MiB/s, done.
-</span></span><span class="line"><span class="cl">Total 12 (delta 0), reused 0 (delta 0), pack-reused 12
-</span></span><span class="line"><span class="cl">remote: Resolving deltas: 100% (3/3), done.
-</span></span><span class="line"><span class="cl">To https://github.com/guidemetothemoon/demo-projects.git
-</span></span><span class="line"><span class="cl"> + 5066f64...45438e8 main -&gt; main (forced update)</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\Playground\test-cleanup\demo-projects.git&gt; git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (12/12), done.
+Building bitmaps: 100% (3/3), done.
+Total 12 (delta 3), reused 4 (delta 0), pack-reused 0
+
+PS C:\Playground\test-cleanup\demo-projects.git&gt; git push
+Enumerating objects: 12, done.
+Writing objects: 100% (12/12), 4.30 KiB | 2.15 MiB/s, done.
+Total 12 (delta 0), reused 0 (delta 0), pack-reused 12
+remote: Resolving deltas: 100% (3/3), done.
+To https://github.com/guidemetothemoon/demo-projects.git
+ + 5066f64...45438e8 main -&gt; main (forced update)</code></pre></div>
 <p>Now the changes are merged and the history of the respective repository has been overwritten with secrets all cleaned up! Please note that this will not create a new commit since the purpose of the tool is to update the existing commits, therefore the merged changes will not reflect in the timestamps or +1 commit in the repo history UI.</p>
 <p>Now let's check one of the existing commits where the secrets were exposed and see how it looks like after the changes:</p>
 <p><img src="../../images/secrets_cleanup/commit_history_res.png" alt="Screenshot of the commit history result in the UI after execution of BFG Repo-Cleaner"></p>
 <p>The secrets are not there, awesome! If we attempt to check the initial commit that had secrets in plaintext, we can see that it's not available anymore and was deleted for good:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\Playground\test-cleanup\demo-projects.git&gt; git show 08b6925
-</span></span><span class="line"><span class="cl">fatal: ambiguous argument &#39;08b6925&#39;: unknown revision or path not in the working tree.
-</span></span><span class="line"><span class="cl">Use &#39;--&#39; to separate paths from revisions, like this:
-</span></span><span class="line"><span class="cl">&#39;git &lt;command&gt; [&lt;revision&gt;...] -- [&lt;file&gt;...]&#39;</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">PS C:\Playground\test-cleanup\demo-projects.git&gt; git show 08b6925
+fatal: ambiguous argument &#39;08b6925&#39;: unknown revision or path not in the working tree.
+Use &#39;--&#39; to separate paths from revisions, like this:
+&#39;git &lt;command&gt; [&lt;revision&gt;...] -- [&lt;file&gt;...]&#39;</code></pre></div>
 <p>And we're done, at least for now! As I mentioned earlier, you should still re-generate the secrets wherever it's possible and as fast as possible. But this is also a possibility that can help you mitigate exposure to some extent and temporarily.</p>
 <h3 id="final-note-on-permissions-in-azure-devops-repos">Final note on permissions in Azure DevOps repos</h3>
 <p>Normally you should have proper policies and permissions in place in your repository, be it Azure DevOps, GitHub or any other Git repo. Policies will prevent anyone from directly pushing changes to the master branch or performing other destructive actions like deleting a tag or repository. Therefore, if you need to push changes like this to the Azure DevOps repo where proper policies are enabled, you must ensure that you have following permissions in place for your account before you attempt pushing the changes done by the tool:</p>
@@ -858,8 +858,8 @@ If this article was helpful, I'd love to hear about it! You can reach out to me 
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
-    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
     crossorigin="anonymous"
   ></script></body>
 </html>
