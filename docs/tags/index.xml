@@ -6,13 +6,46 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
-      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>gitops</title>
+      <link>https://kristhecodingunicorn.com/tags/gitops/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/gitops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>techtips</title>
+      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
       
         <description></description>
       
@@ -41,17 +74,6 @@
     </item>
     
     <item>
-      <title>kubernetes</title>
-      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
-      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>devops</title>
       <link>https://kristhecodingunicorn.com/tags/devops/</link>
       <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
@@ -68,17 +90,6 @@
       <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/helm/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>techtips</title>
-      <link>https://kristhecodingunicorn.com/tags/techtips/</link>
-      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
       
         <description></description>
       
@@ -112,17 +123,6 @@
       <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>gitops</title>
-      <link>https://kristhecodingunicorn.com/tags/gitops/</link>
-      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/gitops/</guid>
       
         <description></description>
       
