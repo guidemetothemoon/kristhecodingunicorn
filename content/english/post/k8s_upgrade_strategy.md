@@ -63,12 +63,12 @@ There are 3 important pieces that you need to decide upon prior to doing your fi
 Now, let's take a look at concrete example here: in the animation below I've visualized an AKS cluster upgrade flow. We have an AKS cluster with 2 nodes which will be upgraded to a new Kubernetes version with latest node OS image. Node surge value is set to default where only 1 Node at a time will be taken down for upgrade.
 
 There are 2 applications in the game: 
-- DeerCat application with 8 replicas spread across existing 2 nodes. DeerCat application has PDB defined where 6 out of 8 Pods must be available at all times. 
+- DeerCat application with 8 replicas spread across existing 2 nodes. DeerCat application has PDB defined where at least 6 out of 8 Pods must be available. 
 - BlackHatCat application with 2 replicas which will be deployed to the same AKS cluster while the upgrade process is ongoing.
 
 The upgrade will happen as follows:
 
-1. Create buffer node, Node 3, on the chosen new version.
+1. Create buffer node (Node 3) with the chosen, new Kubernetes version.
 2. Choose Node 1 to upgrade. 
 3. Prohibit scheduling of new deployments (cordon) to this Node.
 4. Empty Node 1 (drain) by re-creating all Pods on other available Nodes, including the buffer node. The amount of Pods to be killed and re-created simultaneously is defined by Pod Disruption Budgets.
@@ -87,6 +87,31 @@ As I mentioned earlier, you can perform the upgrade manually, in a controlled ma
 
 ## AKS Auto-upgrade
 
+It is possible to configure automatic upgrade of AKS clusters to GA versions of Kubernetes, based on the chosen auto-upgrade channel.
+
+There are currently 5 auto-upgrade channels available:
+
+![AKS Auto-upgrade channels](../../images/k8s_upgrade_strategy/aks_auto_upgrade_channels.png)
+
+Let's say we have an AKS cluster on version ```1.23.12``` and we have currently these Kubernetes versions available:
+
+![AKS availble Kubernetes versions](../../images/k8s_upgrade_strategy/aks_upgrade_versions.png)
+
+If we take into consideration available Kubernetes versions in the screenshot above, each auto-upgrade channel will work as follows:
+
+> Please note that Kubernetes versioning scheme follows standard semantic versioning rules, i.e. for version ```1.23.12``` -> ```1(Major).23(Minor).12(Patch)```
+
+* **Patch** : will automatically upgrade to the newest patch of the currently used Kubernetes version. In our example there are no new patch versions available for version ```1.23``` but if ```1.23.13``` will be released for example, AKS cluster will be upgraded to version ```1.23.13``` automatically. 
+* **Stable** : will automatically upgrade to the latest patch of ```[LATEST_MINOR_VERSION] - 1```, i.e. the minor version right below newest minor version that is currently available. So in our example above, since preview versions are **NOT** supported by auto-upgrade, our AKS cluster on version ```1.23.12``` will not be upgraded just yet but once version ```1.25.2``` becomes GA, AKS cluster will be automatically upgraded to version ```1.24.6``` which is the version with the newest patch and minor version right below newest GA minor version.
+* **Rapid** : will automatically upgrade to the latest patch of the latest GA minor version that is currently available. So in our example above, since preview versions are **NOT** supported by auto-upgrade, our AKS cluster on version ```1.23.12``` will not be upgraded just yet but once version ```1.25.2``` becomes GA, AKS cluster will be automatically upgraded to version ```1.25.2``` which will then be the newest GA minor version with the newest patch.
+* **Node image**: will automatically upgrade node OS images once new versions become available. This channel can be useful in order to automatically get latest fixes and patches for the Linux and Windows nodes that your applications run on in the AKS cluster. For example, if your Linux nodes are running on version ```AKSUbuntu-1804-2022.11.01``` and version ```AKSUbuntu-1804-2022.11.12``` becomes available, Linux nodes will be automatically upgraded to use this new version.
+* **None/Disabled** : auto-upgrade functionality is disabled and you must upgrade your AKS clusters and node images manually.
+
+Even though Patch auto-upgrade channel is set as default and recommended when you create an AKS cluster from Azure Portal, it is not the same when you provision AKS cluster with IaC or Azure CLI. All provisioning methods except for creation through Azure Portal have auto-upgrade disabled by default and you will need to explicitly enable it if you want to start using it.
+
+You can enable auto-upgrade:
+
+You can learn more about auto-upgrade support for AKS here: [Automatically upgrade an Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster)
 
 ### Auto-upgrade considerations
 
@@ -96,10 +121,12 @@ As I mentioned earlier, you can perform the upgrade manually, in a controlled ma
 
 Below you may find a few resources to learn more about auto-upgrading AKS clusters and about the cluster and node image upgrade process in general:
 
-- []()
-- []()
-- []()
-- []()
+- Official Microsoft documentation for auto-upgrade support in AKS: [Automatically upgrade an Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster)
+- Support policies for AKS article provides details about technical support policies and limitations for Azure Kubernetes Service (AKS), as well as who is responsible for which areas of AKS. [Support policies for Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/support-policies)
+- Kubernetes version support policy for AKS: [Supported Kubernetes versions in Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli)
+- Official Microsoft documentation for AKS cluster upgrade process: [Upgrade an Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster?tabs=azure-cli)
+- Official Microsoft documentation for AKS node image upgrade process:[Azure Kubernetes Service (AKS) node image upgrade](https://learn.microsoft.com/en-us/azure/aks/node-image-upgrade) and applying Linux node updates that require reboot: [Apply security and kernel updates to Linux nodes in Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/node-updates-kured)
+- Official Microsoft documentation for AKS Planned Maintenance support (currently in preview): [Use Planned Maintenance to chedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)](https://learn.microsoft.com/en-us/azure/aks/planned-maintenance)
 
 That\'s it from me this time, thanks for checking in!💖
 
