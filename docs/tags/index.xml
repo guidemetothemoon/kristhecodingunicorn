@@ -6,13 +6,57 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 22 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
-      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://kristhecodingunicorn.com/tags/devops/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>https://kristhecodingunicorn.com/tags/k8s/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
       
         <description></description>
       
@@ -30,55 +74,11 @@
     </item>
     
     <item>
-      <title>kubernetes</title>
-      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
-      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>techtips</title>
       <link>https://kristhecodingunicorn.com/tags/techtips/</link>
       <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>azure</title>
-      <link>https://kristhecodingunicorn.com/tags/azure/</link>
-      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>k8s</title>
-      <link>https://kristhecodingunicorn.com/tags/k8s/</link>
-      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>https://kristhecodingunicorn.com/tags/devops/</link>
-      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
       
         <description></description>
       

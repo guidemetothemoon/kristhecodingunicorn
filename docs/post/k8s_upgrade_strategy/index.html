@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  class="html"
+><head>
+  <title>
+    
+      Kris - The Coding Unicorn
+        |
+        [Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="
+      In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically.
+
+
+    "
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
+      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.b1c4e6a10bdbab01f33fff9d78816ee68cf9a9a731f07668afd546a79924cb80.css"
+    integrity="sha256-scTmoQvbqwHzP/&#43;deIFu5oz5qacx8HZor9VGp5kky4A="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.423dee17c62f55fa733a4ee13e00d523dfce88cc4f4ab4549a24ba36bd9de681.css"
+    integrity="sha256-Qj3uF8YvVfpzOk7hPgDVI9/OiMxPSrRUmiS6Nr2d5oE="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.b7d54133b27e5b4de15245b8e143de3e8ed2d674c706137274cedc9953f31917.css"
+    integrity="sha256-t9VBM7J&#43;W03hUkW44UPePo7S1nTHBhNydM7cmVPzGRc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
+    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically."/>
+
+
+
+  
+  <meta property="og:title" content="[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service" />
+<meta property="og:description" content="In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-15T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service",
+        "headline": "[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we\u0027ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_upgrade_strategy\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-12-15T00:00:00.00Z",
+        "datePublished": "2022-12-15T00:00:00.00Z",
+        "dateModified": "2022-12-15T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_upgrade_strategy\/",
+        "wordCount" : "3489",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--dark"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.jpg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Azure Hero and Microsoft Azure MVP⛅️ | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | <br /> Cat Mom 🐈🐈🐈 and Potterhead</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.linkedin.com/in/krisde"
+            target="_blank"
+            rel="noopener"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://github.com/guidemetothemoon"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://twitter.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+            title="Twitter"
+          >
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://sessionize.com/kristina-devochko"
+            target="_blank"
+            rel="noopener"
+            aria-label="Sessionize"
+            title="Sessionize"
+          >
+            <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.instagram.com/guidemetothemoon"
+            target="_blank"
+            rel="noopener"
+            aria-label="instagram"
+            title="instagram"
+          >
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="/contact/"
+            target="_blank"
+            rel="noopener"
+            aria-label="e-mail"
+            title="e-mail"
+          >
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener"
+            aria-label="rss"
+            title="rss"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.azureheroes.community/user/15391"
+            target="_blank"
+            rel="noopener"
+            aria-label="Azure Heroes"
+            title="Azure Heroes"
+          >
+            <i class="fas fa-mask fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko"
+            target="_blank"
+            rel="noopener"
+            aria-label="Microsoft MVP"
+            title="Microsoft MVP"
+          >
+            <i class="fas fa-cloud fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+
+        
+
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>[Azure Advent Calendar] Exploring Upgrade Strategies in Azure Kubernetes Service</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                15/12/2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">17-minute read</span>
+          </li>
+        </ul>
+
+      <p><img src="../../images/k8s_upgrade_strategy/k8s_upgrade_strategy_banner.png" alt="Article banner for exploring upgrade strategies in AKS"></p>
+<div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-upgrading-aks-clusters-is-important">Why upgrading AKS clusters is important?</a></li>
+    <li><a href="#cluster-and-node-os-image-upgrade-process">Cluster and Node OS image upgrade process</a>
+      <ul>
+        <li><a href="#aks-cluster-upgrade-flow">AKS cluster upgrade flow</a></li>
+      </ul>
+    </li>
+    <li><a href="#aks-auto-upgrade">AKS Auto-upgrade</a>
+      <ul>
+        <li><a href="#enabling-aks-auto-upgrade-in-iac">Enabling AKS auto-upgrade in IaC</a>
+          <ul>
+            <li><a href="#azure-cli">Azure CLI</a></li>
+            <li><a href="#terraform">Terraform</a></li>
+            <li><a href="#bicep">Bicep</a></li>
+          </ul>
+        </li>
+        <li><a href="#auto-upgrade-considerations">Auto-upgrade considerations</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>Have you already seen &ldquo;Automatic upgrade&rdquo; property when creating a new AKS cluster in Azure Portal?😺</p>
+<p><img src="../../images/k8s_upgrade_strategy/aks_automatic_upgrade_property.png" alt="Screenshot of automatic upgrade property in new AKS cluster creation in Azure Portal"></p>
+<p>Auto-upgrade of an AKS cluster is actually <strong>not</strong> a new functionality and has been available since January 2021. It is just recently it has been made configurable from the Azure Portal. You can enable auto-upgrade from the Azure Portal both when you create a new AKS cluster and by enabling it for existing AKS cluster through &ldquo;Cluster configuration&rdquo;, as shown in the screenshots below.</p>
+<p><img src="../../images/k8s_upgrade_strategy/aks_autoupgrade_existing1.png" alt="Screenshot of Cluster configuration section for existing AKS cluster in Azure Portal"></p>
+<p><img src="../../images/k8s_upgrade_strategy/aks_autoupgrade_existing2.png" alt="Screenshot of automatic upgrade property for existing AKS cluster in Azure Portal"></p>
+<p>Before we dive into what auto-upgrade functionality can do for us let&rsquo;s take a look at why we need to bother about upgrading AKS clusters, and why it&rsquo;s important to do it frequently and continuously.🧐</p>
+<h2 id="why-upgrading-aks-clusters-is-important">Why upgrading AKS clusters is important?</h2>
+<p>I&rsquo;ve seen quite a few misunderstandings and misconceptions related to the upgrade process for AKS clusters and Kubernetes clusters in general. Both when it comes to upgrading the cluster to a new Kubernetes version and upgrading a node image in order to get newest OS patches and fixes. I&rsquo;ve seen multiple organizations running their workloads on clusters with Kubernetes version that was 2-4 versions older than the latest GA version.</p>
+<blockquote>
+<p>Node image upgrade can be a confusing term which I would like to clarify. When I talk about node OS image upgrade in this blog post I mean upgrading the existing OS version that a Node runs on to latest patch version that was released by AKS for the same OS. For example, Ubuntu 18.04 node image upgrade from <code>AKSUbuntu-1804-2022.11.01</code> to <code>AKSUbuntu-1804-2022.11.12</code>. Upgrading a node running <code>Ubuntu 18.04</code> to <code>Ubuntu 22.04</code> will be a totally different story: upgrading the operating system version that a node or node pool runs on is tied to the Kubernetes version of the cluster. You will only be able to do that by upgrading the cluster to Kubernetes version that supports respective OS version. For example, if you want to upgrade to <code>Ubuntu 22.04</code> you will need to upgrade AKS clusters to version <code>1.25</code> or newer.</p>
+</blockquote>
+<p><strong>SO, WHY CAN LACKING CLUSTER UPGRADE ROUTINE BECOME AN ISSUE?</strong></p>
+<p><strong>SECURITY</strong></p>
+<p>Kubernetes clusters, just like any other technology, get affected by security vulnerabilities. During the last few years more and more threat actors have started targeting workloads running in Kubernetes clusters. 2022 has been the year with the highest amount of security vulnerabilities affecting Kubernetes according to the CVE count at <a href="https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=kubernetes">CVE - Kubernetes</a>. Nodes that applications are running on in Kubernetes, are basically VMs which must also be continuously patched and updated, just like regular virtual machines that you may be running elsewhere, for example on-premises. When a security vulnerability gets disclosed there may often be a workaround or a quick fix that can be applied to currently running resources, but in order to fully protect your clusters and workloads you would normally need to perform an upgrade in order to get the latest patches and security fixes in place.</p>
+<p><strong>DEPRECATIONS</strong></p>
+<p>Another important reason are new and deprecated features and components. By upgrading to newer Kubernetes versions you get access to new functionality that can help you run your workloads more securely, efficiently and sustainably on Kubernetes, which is always a plus.🌿 At the same time, by not upgrading to newer Kubernetes versions you may end up in a situation where you can&rsquo;t scale out by creating more nodes or more clusters, because the version that you&rsquo;re attempting to use is not supported anymore.</p>
+<p>For example, if you&rsquo;re running node pools on deprecated version and you would need to scale out, you will not be allowed to do that. You will be allowed to create a new node pool but on a newer, supported version, but then you may face incompatibility with Kubernetes control plane version. In that case you will need to upgrade the cluster to a newer Kubernetes version first in order to be able to scale out and create a new node pool. And that&rsquo;s a nasty situation to be in when you really need to scale your application😅 Another risk may be third-party applications that take specific versions out of support while newer versions of the application may not necessarily be compatible with a legacy Kubernetes version. In that case you may not even be able to pull the desupported version of the applicaiton which, even though is a more rare scenario, may still happen (trust me, I&rsquo;ve seen it😑).</p>
+<p><strong>SUPPORT POLICY</strong></p>
+<p>Last reason is related to support policy defined by cloud provider which is applicable if you&rsquo;re using managed Kubernetes service. When it comes to managed Kubernetes service like AKS it&rsquo;s important to understand what you&rsquo;re responsible for in terms of keeping your AKS clusters and nodes upgraded:</p>
+<ol>
+<li>
+<p><strong>AKS cluster and node upgrade to a new Kubernetes version:</strong> you&rsquo;re responsible for upgrading your AKS clusters to newer Kubernetes versions. Kubernetes release frequency is approximately 3 times per year for minor version releases + quite frequent (monthly or even weekly) patch releases for fixing security vulnerabilities or bugs of significant severity. AKS normally has weekly releases with 2-week rollout window in order to make new changes available for all regions in a controlled and safe manner. A typical AKS release may include support for new Kubernetes versions, fixes, feature and component updates, including node OS image updates. In order to stay on a Kubernetes version that is officially supported by Microsoft, you must upgrade your AKS clusters at least once a year. If you&rsquo;re running AKS clusters that have been out of support for more than 3 minor versions and it poses a security risk (for example, to Microsoft&rsquo;s infrastructure which is shared among customers), Microsoft will first nicely ask you to upgrade your clusters. If you ignore the request, Microsoft will have no other choice than to upgrade the clusters on your behalf. YOU. HAVE. BEEN. WARNED. 😈</p>
+</li>
+<li>
+<p><strong>Linux and Windows Node OS image upgrade in order to get latest fixes and patches:</strong> you&rsquo;re responsible for patching and upgrading operating system that your worker nodes (nodes where your applications are deployed) are running on. Node OS image upgrade for master nodes in AKS is handled by Microsoft so we only need to worry about upgrading worker nodes. Upgrade process is different for Linux and Windows nodes: updates for Linux nodes are released weekly or even daily and are applied to existing Linux nodes automatically, except for node reboot. You&rsquo;re responsible to perform reboot to finalize the upgrade of Linux nodes. Updates for Windows nodes are released as a new Windows image on a monthly basis which means that Windows updates are not applied to Windows nodes automatically - you&rsquo;re responsible for upgrading Windows nodes to the newest Windows image which also includes latest patches. If you don&rsquo;t have a routine for upgrading node OS image manually or automatically, <strong>you may end up running your applications on unpatched and potentially vulnerable nodes!</strong> And you don&rsquo;t want that.📛</p>
+</li>
+</ol>
+<p>Overall conclusion is that there are many strong arguments for why you should keep your clusters updated. With a good routine in place upgrade process can be like a walk in the park (almost). You can read more about AKS support and upgrade policies in the links that are provided in &ldquo;Additional resources&rdquo; section below.</p>
+<p>Now let&rsquo;s take a look at how cluster upgrade process looks like and how you can automate it.😼</p>
+<h2 id="cluster-and-node-os-image-upgrade-process">Cluster and Node OS image upgrade process</h2>
+<p>I will not go into all the details of AKS cluster and node OS image upgrade - it&rsquo;s well-documented in official Microsoft documentation, links to which you can find in the end of this blog post.😺</p>
+<p>Instead I would like to illustrate the upgrade process and mention a few highlights that you need to be aware of.</p>
+<p>There are 3 important pieces that you need to decide upon when establishing cluster and node upgrade routine:</p>
+<ul>
+<li>
+<p><strong>Pod Disruption Budgets.</strong> It is important that all the applications running in Kubernetes clusters are configured with Pod Disruption Budgets (PDB). PDB ensures that a specific amount of application replicas are available during voluntary/planned disruptions like planned maintenance. PDB provides you with a capability to perform zero downtime upgrades. I will point out that <strong>PDBs should be configured so that at least 1 Pod can be drained</strong> - if it&rsquo;s configured with unevictable Pods, a Node drain operation hangs and never gets to complete. You can read more about Pod Disruption Budgets here: <a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets">Pod disruption budgets</a></p>
+</li>
+<li>
+<p><strong>Node surge value.</strong> Node surge defines how many worker nodes can be take offline at the same time for upgrade. Default value is 1 Node but it is configurable with a <code>--max-surge</code> setting. Recommendation from Microsoft is to define <code>--max-surge</code> setting no larger than <code>33%</code> for production clusters. You can read more about node surge here: <a href="https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster?tabs=azure-cli#customize-node-surge-upgrade">Customize node surge upgrade</a></p>
+</li>
+<li>
+<p><strong>Maintenance window.</strong> You can enable Planned Maintenance functionality (In Preview at the point of writing this blog post) to secure that upgrades are performed during the time range that works best for you in terms of minimizing planned and unplanned disruption. This may be beneficial, especially when auto-upgrade is enabled. You can read more about it here: <a href="https://learn.microsoft.com/en-us/azure/aks/planned-maintenance">Use Planned Maintenance to schedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)</a></p>
+</li>
+</ul>
+<h3 id="aks-cluster-upgrade-flow">AKS cluster upgrade flow</h3>
+<p>Now, let&rsquo;s take a look at a concrete example: in the animation below I&rsquo;ve visualized an AKS cluster upgrade flow. We have an AKS cluster with 2 nodes which will be upgraded to a new Kubernetes version with latest node OS image. Node surge value is set to default where only 1 Node at a time will be taken down for upgrade.</p>
+<p>There are 2 applications in the game:</p>
+<ul>
+<li>DeerCat application with 8 replicas spread across existing 2 nodes. DeerCat application has PDB defined where at least 6 out of 8 Pods must be available.</li>
+<li>BlackHatCat application with 2 replicas, which will be deployed to the same AKS cluster while the upgrade process is ongoing.</li>
+</ul>
+<p>The upgrade will happen as follows:</p>
+<ol>
+<li>Create buffer node (Node 3) with the chosen, new Kubernetes version and latest node OS image.</li>
+<li>Choose Node 1 to upgrade.</li>
+<li>Prohibit scheduling of new deployments (cordon) to Node 1.</li>
+<li>Empty Node 1 (drain) by re-creating all Pods on other available Nodes, including the buffer node. The amount of application Pods to be killed and re-created simultaneously is defined by Pod Disruption Budgets.</li>
+<li>Upgrade Node 1 to new Kubernetes version and Node OS image. Allow scheduling of new deployments (uncordon) to Node 1 once upgrade completed successfully.</li>
+<li>Node 1 becomes buffer node for Node 2.</li>
+<li>Choose Node 2 to upgrade. Perform step 3-5 for Node 2.</li>
+<li>Node 2 becomes buffer node.</li>
+<li>No subsequent nodes to upgrade. Drain and remove lastly tagged buffer node (Node 2). Repeat step 3-4 for Node 2.</li>
+<li>Delete Node 2. AKS cluster upgrade complete!</li>
+</ol>
+<p>I hope that you liked my festive visualization of the upgrade process.😻</p>
+<p><img src="../../images/k8s_upgrade_strategy/aks_upgrade_flow.gif" alt="AKS Upgrade Flow GIF"></p>
+<p>As I mentioned earlier, you can perform the upgrade manually, in a controlled manner, but you can also configure it to happen automatically whenever a new Kubernetes version or node image becomes available - let&rsquo;s dig into how we can do that in the next section! 👀</p>
+<h2 id="aks-auto-upgrade">AKS Auto-upgrade</h2>
+<p>It is possible to configure automatic upgrade of AKS clusters to GA versions of Kubernetes, based on the chosen auto-upgrade channel.</p>
+<p>There are currently 5 auto-upgrade channels available:</p>
+<p><img src="../../images/k8s_upgrade_strategy/aks_auto_upgrade_channels.png" alt="AKS Auto-upgrade channels"></p>
+<p>Let&rsquo;s say we have an AKS cluster on version <code>1.23.12</code> and we have currently these Kubernetes versions available:</p>
+<p><img src="../../images/k8s_upgrade_strategy/aks_upgrade_versions.png" alt="AKS availble Kubernetes versions"></p>
+<p>If we take into consideration all the available Kubernetes versions in the screenshot above, each auto-upgrade channel will work as follows:</p>
+<blockquote>
+<p>Please note that Kubernetes versioning scheme follows standard semantic versioning rules, i.e. for version <code>1.23.12</code> -&gt; <code>1(Major).23(Minor).12(Patch)</code></p>
+</blockquote>
+<ul>
+<li><strong>Patch</strong> : will automatically upgrade to the newest patch of the currently used Kubernetes version. In our example there are no new patch versions available for version <code>1.23</code> but if version <code>1.23.13</code> is released, AKS cluster will be upgraded to version <code>1.23.13</code> automatically.</li>
+<li><strong>Stable</strong> : will automatically upgrade to the latest patch of <code>[LATEST_MINOR_VERSION] - 1</code>, i.e. the minor version right before newest minor version. So in our example above, since preview versions are <strong>NOT</strong> supported by auto-upgrade, our AKS cluster on version <code>1.23.12</code> will not be upgraded just yet but once version <code>1.25.2</code> becomes GA, AKS cluster will be automatically upgraded to version <code>1.24.6</code> which is the version with the newest patch and minor version right below newest GA minor version.</li>
+<li><strong>Rapid</strong> : will automatically upgrade to the latest patch of the latest GA minor version that is currently available. If current cluster version is 2 minor versions behind the latest, upgrade will happen in 2 stages: first, upgrade to latest patch of <code>[LATEST_MINOR_VERSION] - 1</code>, then upgrade to latest patch of latest minor version. So in our example above, since preview versions are <strong>NOT</strong> supported by auto-upgrade, our AKS cluster on version <code>1.23.12</code> will not be upgraded just yet, but once version <code>1.25.2</code> becomes GA, AKS cluster will first be upgraded to version <code>1.24.6</code> and then upgraded to version <code>1.25.2</code> which will be the newest GA minor version with the newest patch.</li>
+<li><strong>Node image</strong>: will automatically upgrade node OS images once new versions become available. This channel can be useful in order to automatically get latest fixes and patches for the Linux and Windows nodes that your applications run on in the AKS cluster. For example, if your Linux nodes are running on version <code>AKSUbuntu-1804-2022.11.01</code> and version <code>AKSUbuntu-1804-2022.11.12</code> becomes available, Linux nodes will be automatically upgraded to use this new version.</li>
+<li><strong>None/Disabled</strong> : auto-upgrade functionality is disabled and you must upgrade your AKS clusters and node images manually.</li>
+</ul>
+<p>Even though <code>patch</code> auto-upgrade channel is set as default and recommended when you create an AKS cluster from Azure Portal, it is not the same when you provision AKS cluster with IaC or Azure CLI. All provisioning methods, except for creation through Azure Portal, have auto-upgrade <strong>disabled</strong> by default and you will need to explicitly enable it if you want to start using it.</p>
+<h3 id="enabling-aks-auto-upgrade-in-iac">Enabling AKS auto-upgrade in IaC</h3>
+<p>You can enable auto-upgrade for AKS clusters with:</p>
+<h4 id="azure-cli">Azure CLI</h4>
+<p><code>--auto-upgrade-channel &lt;UPGRADE_CHANNEL_NAME&gt;</code> property of <code>az aks create</code> command can be used to enable auto-upgrade.</p>
+<p>For example, <code>az aks create --name chamber-of-secrets --resource-group hogwarts-rg --auto-upgrade-channel patch</code></p>
+<h4 id="terraform">Terraform</h4>
+<p><code>automatic_channel_upgrade = &lt;UPGRADE_CHANNEL_NAME&gt;</code> argument can be used to enable auto-upgrade.</p>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+resource &#34;azurerm_kubernetes_cluster&#34; &#34;aks_cluster&#34; {
+  location                  = &#34;norwayeast&#34;
+  name                      = &#34;chamber-of-secrets&#34;
+  resource_group_name       = &#34;hogwarts-rg&#34;
+  automatic_channel_upgrade = &#34;patch&#34;
+  
+  default_node_pool {
+    name                 = &#34;agentpool&#34;
+    vm_size              = &#34;Standard_B2s&#34;
+  }
+}
+
+</code></pre></div><h4 id="bicep">Bicep</h4>
+<p><code>autoUpgradeProfile.upgradeChannel</code> setting can be used to enable auto-upgrade.</p>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+resource aks_cluster &#39;Microsoft.ContainerService/managedClusters@2022-05-02-preview&#39; = {
+  name: &#39;chamber-of-secrets&#39;
+  location: &#39;norwayeast&#39;
+  properties: {
+    agentPoolProfiles: [
+      {
+        name: &#39;agentpool&#39;
+        count: 1
+        vmSize: &#39;Standard_B2s&#39;
+        osType: &#39;Linux&#39;
+        mode: &#39;System&#39;
+      }
+    ]
+    autoUpgradeProfile: {
+      upgradeChannel: &#39;patch&#39;
+    }
+  }
+}
+
+</code></pre></div><p>You can learn more about auto-upgrade support for AKS here: <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">Automatically upgrade an Azure Kubernetes Service (AKS) cluster</a></p>
+<h3 id="auto-upgrade-considerations">Auto-upgrade considerations</h3>
+<p>Finally, based on my own experience with upgrading AKS clusters, I would like to mention a few things that you should consider when choosing an upgrade strategy.🤔</p>
+<p><strong>Application container size, warmup time and complexity</strong></p>
+<p>There may be different use cases in terms of what applications organizations choose to run and host on Kubernetes. In case you have a heavier application, an application that requires additional warmup time or a more complex, stateful application, you will need to thoroughly test and evaluate if you can enable auto-upgrade and still preserve the same level of availability and confidence in your systems after the upgrade. Having auto-upgrade enabled in development environments for some time is definitely a good idea before you enable it in production.</p>
+<p>When it comes to cluster upgrades another popular strategy is blue-green deployment where you spin up a cluster on a newer Kubernetes version and gradually migrate all workloads from the old cluster to the new cluster. This process can be automated and can be chosen due to high level of criticality and/or complexity of the workloads. It&rsquo;s important that you evaluate all of the possibilities and choose the one that works best for your specific use case.</p>
+<p><strong>Kubernetes API Deprecations</strong></p>
+<p>Quite many Kubernetes releases may include APIs that are deprecated and/or removed as part of the release. If you enable auto-upgrade and don&rsquo;t proactively monitor Kubernetes API removals, you may end up in a situation where deployment of resources that use removed APIs will fail during the upgrade process. There are tools that can help you scan Kubernetes deployment templates and alert you in case a fix is needed. One of the tools that has worked really great for me is Pluto - you can check out one of my earlier blog posts on how to use it: <a href="https://kristhecodingunicorn.com/post/k8s_pluto/">Monitoring Kubernetes API Deprecations With Pluto</a>. If you go ahead with automatic upgrade of AKS clusters I would really recommend to have a proper routine on monitoring and continuously fixing potential Kubernetes API deprecations and removals.</p>
+<p><strong>Upgrade only specific node pools</strong></p>
+<p>As mentioned above you can choose to only upgrade Kubernetes node images in order to receive latest fixes, patches and OS updates. In this case cluster will not be upgraded to newer Kubernetes version. <code>node-image</code> auto-upgrade channel will automatically upgrade all the nodes in an AKS cluste. If you want to only upgrade a specific node pool you can&rsquo;t configure it as part of auto-upgrade channel functionality. An alternative in this case can be to either upgrade node pools manually or to create a workflow that can do it for you, also on a schedule. <code>--node-image-only</code> property of <code>az aks nodepool upgrade</code> command lets you only upgrade node image in a specific node pool. An example of how to do it with GitHub Actions is provided in Microsoft documentation: <a href="https://learn.microsoft.com/en-us/azure/aks/node-upgrade-github-actions">Apply security updates to Azure Kubernetes Service (AKS) nodes automatically using GitHub Actions</a>. The same task can be easily converted to Azure Pipelines if you want to use it in Azure DevOps instead. <code>kured</code> is also a very popular tool for rebooting Linux nodes to complete installation of updates - with label selectors you can limit which nodes shouldn&rsquo;t be rebooted by kured based on what Pods are running on those nodes. You can read more about using kured for Linux nodes in AKS here: <a href="https://learn.microsoft.com/en-us/azure/aks/node-updates-kured">Apply security and kernel updates to Linux nodes in Azure Kubernetes Service (AKS)</a></p>
+<p><strong>Maintenance window</strong></p>
+<p>By default maintenance work on AKS clusters can happen at any time. In order to get more control of this process you can enable weekly maintenance windows which define the time periods that you want this maintenance work to happen at. Maintenance windows can be enabled with help of Planned Maintenance functionality that is currently in preview for AKS: <a href="https://learn.microsoft.com/en-us/azure/aks/planned-maintenance">Use Planned Maintenance to schedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)</a>.</p>
+<blockquote>
+<p>Please note that even with maintenance windows enabled the execution will happen on best effort basis which means that in some cases, like urgent security fixes or critical bugs, Microsoft can break the defined window and perfom updates outside of maintenance windows.</p>
+</blockquote>
+<hr>
+<p>In conclusion I think that auto-upgrade functionality for AKS is a really useful feature that can make the whole upgrade process more agile, as well as make it easier for organizations to keep their clusters up-to-date, especially when it comes to the important security fixes. Nevertheless, before you enable auto-upgrade in production clusters, I would recommend to use this feature for some time in development and testing environments first, in order to verify that your workloads are still at the same level of stability and availability as you want them to be.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Below you may find a few resources to learn more about auto-upgrading AKS clusters and about the cluster and node image upgrade process in general:</p>
+<ul>
+<li>Official Microsoft documentation for auto-upgrade support in AKS: <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">Automatically upgrade an Azure Kubernetes Service (AKS) cluster</a></li>
+<li>Support policies for AKS article provides details about technical support policies and limitations for Azure Kubernetes Service (AKS), as well as who is responsible for which areas of AKS. <a href="https://docs.microsoft.com/en-us/azure/aks/support-policies">Support policies for Azure Kubernetes Service</a></li>
+<li>Kubernetes version support policy for AKS: <a href="https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli">Supported Kubernetes versions in Azure Kubernetes Service (AKS)</a></li>
+<li>Official Microsoft documentation for AKS cluster upgrade process: <a href="https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster?tabs=azure-cli">Upgrade an Azure Kubernetes Service (AKS) cluster</a></li>
+<li>Official Microsoft documentation for AKS node image upgrade process:<a href="https://learn.microsoft.com/en-us/azure/aks/node-image-upgrade">Azure Kubernetes Service (AKS) node image upgrade</a> and applying Linux node updates that require reboot: <a href="https://learn.microsoft.com/en-us/azure/aks/node-updates-kured">Apply security and kernel updates to Linux nodes in Azure Kubernetes Service (AKS)</a></li>
+<li>Official Microsoft documentation for AKS Planned Maintenance support (currently in preview): <a href="https://learn.microsoft.com/en-us/azure/aks/planned-maintenance">Use Planned Maintenance to chedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)</a></li>
+</ul>
+<p>That's it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2022 - Powered by Hugo
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
+    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

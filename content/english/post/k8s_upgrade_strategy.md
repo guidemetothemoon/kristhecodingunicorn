@@ -33,6 +33,8 @@ Before we dive into what auto-upgrade functionality can do for us let's take a l
 
 I've seen quite a few misunderstandings and misconceptions related to the upgrade process for AKS clusters and Kubernetes clusters in general. Both when it comes to upgrading the cluster to a new Kubernetes version and upgrading a node image in order to get newest OS patches and fixes. I've seen multiple organizations running their workloads on clusters with Kubernetes version that was 2-4 versions older than the latest GA version.
 
+> Node image upgrade can be a confusing term which I would like to clarify. When I talk about node OS image upgrade in this blog post I mean upgrading the existing OS version that a Node runs on to latest patch version that was released by AKS for the same OS. For example, Ubuntu 18.04 node image upgrade from ```AKSUbuntu-1804-2022.11.01``` to ```AKSUbuntu-1804-2022.11.12```. Upgrading a node running ```Ubuntu 18.04``` to ```Ubuntu 22.04``` will be a totally different story: upgrading the operating system version that a node or node pool runs on is tied to the Kubernetes version of the cluster. You will only be able to do that by upgrading the cluster to Kubernetes version that supports respective OS version. For example, if you want to upgrade to ```Ubuntu 22.04``` you will need to upgrade AKS clusters to version ```1.25``` or newer.
+
 **SO, WHY CAN LACKING CLUSTER UPGRADE ROUTINE BECOME AN ISSUE?**
 
 **SECURITY** 
