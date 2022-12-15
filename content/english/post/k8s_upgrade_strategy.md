@@ -17,6 +17,8 @@ tags = [
 
 {{< table_of_contents >}}
 
+🎄***This blog post is also a contribution to Azure Advent Calendar where during December, experts from the tech community share their knowledge through contributions of a specific technology in the Azure domain. You're welcome to check out all the contributions here:*** [ Azure Advent Calendar](https://dev.to/icebeam7/azure-advent-calendar-o60)
+
 Have you already seen "Automatic upgrade" property when creating a new AKS cluster in Azure Portal?😺
 
 ![Screenshot of automatic upgrade property in new AKS cluster creation in Azure Portal](../../images/k8s_upgrade_strategy/aks_automatic_upgrade_property.png)
