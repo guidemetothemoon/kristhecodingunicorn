@@ -1,6 +1,6 @@
 +++
 author = "Kristina D."
-title = "[.NET Advent Calendar] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers"
+title = "[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers"
 date = "2022-12-19"
 description = "This blog post explains how you can run containerized .NET applications in a more secure manner with Chiseled Ubuntu Containers"
 draft = false
@@ -25,7 +25,7 @@ In the modern world of cloud native application development more and more organi
 
 Even though the way we're packaging and deploying applications is changing, the importance of continuously ensuring and strengthening security posture of our systems is still extremely crucial. With containers and container orchestrators like Kubernetes, security controls must be implemented at multiple levels and it's important to understand what those levels are once you start containerizing your applications. 🔑
 
-In this blog post I would like to talk about how you can minimize the attack surface of the containerized .NET applications with Ubuntu Chiseled Containers which have recently introduced support for .NET 6 and now .NET 7 applications targeting Linux operating system.
+In this blog post I would like to talk about how you can minimize the attack surface of the containerized .NET applications with Chiseled Ubuntu Containers which have recently introduced support for .NET 6 and now .NET 7 applications targeting Linux operating system.
 
 ## Container Security - pitfalls and must do's
 
@@ -77,7 +77,7 @@ To sum it up, in order to strengthen container security and mitigate common pitf
 - 🛡 In Kubernetes, use SecurityContext to ensure that Pods and application containers running in Pods comply with least privilege principle;
 - 🛡 Implement security scanning tools like Trivy and use policies to detect and alert on this type of misconfiguration, for example with Azure Policy;
 
-Now, let's take a look at what Ubuntu Chiseled Containers are and how they can make it easier for us to mitigate common container security pitfalls mentioned above in containerized .NET applications.😼
+Now, let's take a look at what Chiseled Ubuntu Containers are and how they can make it easier for us to mitigate common container security pitfalls mentioned above in containerized .NET applications.😼
 
 ## Chiseled Ubuntu Containers && .NET
 
@@ -107,12 +107,12 @@ Now, let's see Chiseled Ubuntu Containers in action!😼
 
 ## Example: Porting Cat Encyclopedia app to .NET 7 and Chiseled Ubuntu Containers and deploying on AKS
 
-If you've seen some of my talks you have probably seen my demo application that spreads lots of love for cats - Cat Encyclopedia. 😁 This is a simple ASP.NET 6 web application that initially was using Ubuntu Jammy (22.04) base image. Now, let's port it to ASP.NET 6 Ubuntu Chiseled Container image and finally upgrade it to ASP.NET 7.
+If you've seen some of my talks you have probably seen my demo application that spreads lots of love for cats - Cat Encyclopedia. 😁 This is a simple ASP.NET 6 web application that initially was using Ubuntu Jammy (22.04) base image. Now, let's port it to ASP.NET 6 Chiseled Ubuntu Container image and finally upgrade it to ASP.NET 7.
 
 You can find the source code for Cat Encyclopedia app in this GitHub repo: [cat-encyclopedia](https://github.com/guidemetothemoon/speaker-demos/tree/main/aks-ado-environments)
 
 The process is pretty straightforward and as creators state themselves, shouldn't require any modifications for most of the applications.
-First of all we will need to update the base image in ```Dockerfile``` from ```mcr.microsoft.com/dotnet/aspnet:6.0-jammy``` to ```mcr.microsoft.com/dotnet/nightly/aspnet:6.0-jammy-chiseled```. Please note that for now .NET images built with Ubuntu Chiseled Containers are available for download from nightly repos while this functionality is still in preview. Also, we must ensure that we're binding our container to a non-privileged port, i.e. a port that is higher than ```1024```. By default Chiseled Ubuntu Containers use port ```8080``` so that's the one we will use as well.
+First of all we will need to update the base image in ```Dockerfile``` from ```mcr.microsoft.com/dotnet/aspnet:6.0-jammy``` to ```mcr.microsoft.com/dotnet/nightly/aspnet:6.0-jammy-chiseled```. Please note that for now .NET images built with Chiseled Ubuntu Containers are available for download from nightly repos while this functionality is still in preview. Also, we must ensure that we're binding our container to a non-privileged port, i.e. a port that is higher than ```1024```. By default Chiseled Ubuntu Containers use port ```8080``` so that's the one we will use as well.
 
 ``` bash
 # Dockerfile
@@ -178,13 +178,13 @@ securityContext:
       - all
 ```
 
-We're all set! Now, once we build new container image and Helm chart, we can deploy Cat Encyclopedia to AKS and it still works as expected with Ubuntu Chiseled Containers! 🥳
+We're all set! Now, once we build new container image and Helm chart, we can deploy Cat Encyclopedia to AKS and it still works as expected with Chiseled Ubuntu Containers! 🥳
 
 ![Screenshot of a working ASP.NET Cat Encyclopedia application on Chiseled Ubuntu Containers](../../images/dotnet_chiseled/cat_encyclopedia_chiseled.png)
 
 If we want to upgrade it to ASP.NET 7 we will only need to update application source code to target .NET 7 and update the base image in the Dockerfile to ```mcr.microsoft.com/dotnet/nightly/aspnet:7.0-jammy-chiseled```.
 
-We can compare the size of the image before and after we started using Ubuntu Chiseled Containers with ```docker images``` command - as you can see in the screenshot below the latter is 100MB+ smaller, just as stated in the release announcement😁
+We can compare the size of the image before and after we started using Chiseled Ubuntu Containers with ```docker images``` command - as you can see in the screenshot below the latter is 100MB+ smaller, just as stated in the release announcement😁
 
 ![Screenshot image size comparison for ASP.NET Cat Encyclopedia application before and after Chiseled Ubuntu Containers](../../images/dotnet_chiseled/dotnet_docker_images.png)
 
@@ -204,7 +204,7 @@ Finally, let's give it a test and try to start a shell inside a running CUC cont
 
 ![Screenshot where I attempt to run some shell commands towards runnign ASP.NET 6 Chiseled Ubuntu image](../../images/dotnet_chiseled/dotnet_chiseled_shell.png)
 
-Great job! We've successfully ported an ASP.NET 6 application to Chiseled Ubuntu Containers and successfully deployed it on AKS both on ASP.NET 6 and ASP.NET 7 versions. We tested some of the improvements in terms of image size and security enhancements in Chiseled Ubuntu Containers for .NET, and it looks good under the hood! 💪 I can say that I'm looking forward to seeing Ubuntu Chiseled Containers released in GA and adopted by more .NET applications. 😃
+Great job! We've successfully ported an ASP.NET 6 application to Chiseled Ubuntu Containers and successfully deployed it on AKS both on ASP.NET 6 and ASP.NET 7 versions. We tested some of the improvements in terms of image size and security enhancements in Chiseled Ubuntu Containers for .NET, and it looks good under the hood! 💪 I can say that I'm looking forward to seeing Chiseled Ubuntu Containers released in GA and adopted by more .NET applications. 😃
 
 ## Additional resources
 

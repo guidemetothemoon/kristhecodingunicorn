@@ -6,7 +6,62 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>containers</title>
+      <link>https://kristhecodingunicorn.com/tags/containers/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/containers/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>dotnet</title>
+      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>microservices</title>
+      <link>https://kristhecodingunicorn.com/tags/microservices/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/microservices/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://kristhecodingunicorn.com/tags/ubuntu/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/ubuntu/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
@@ -46,17 +101,6 @@
       <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>kubernetes</title>
-      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
-      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
       
         <description></description>
       
@@ -123,17 +167,6 @@
       <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/devsecops/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>dotnet</title>
-      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
-      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
       
         <description></description>
       
@@ -310,17 +343,6 @@
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/owasp/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>microservices</title>
-      <link>https://kristhecodingunicorn.com/tags/microservices/</link>
-      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/microservices/</guid>
       
         <description></description>
       

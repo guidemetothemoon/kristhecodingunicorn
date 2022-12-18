@@ -1,6 +1,6 @@
 +++
 author = "Kristina D."
-title = "[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service"
+title = "[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service"
 date = "2022-12-15"
 description = "In this blog post we'll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically."
 draft = false

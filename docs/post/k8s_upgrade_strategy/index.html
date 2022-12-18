@@ -9,7 +9,7 @@
     
       Kris - The Coding Unicorn
         |
-        [Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service
+        [🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service
 
 
       
@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.108.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
     crossorigin="anonymous"
   ></script>
 
@@ -116,19 +116,18 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service"/>
+<meta name="twitter:title" content="[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service"/>
 <meta name="twitter:description" content="In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically."/>
 
 
 
   
-  <meta property="og:title" content="[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service" />
+  <meta property="og:title" content="[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service" />
 <meta property="og:description" content="In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-12-15T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-12-15T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
-
 
 
 
@@ -141,8 +140,8 @@
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "articleSection": "post",
-        "name": "[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service",
-        "headline": "[Azure Advent Calendar] Exploring upgrade strategies in Azure Kubernetes Service",
+        "name": "[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service",
+        "headline": "[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service",
         "alternativeHeadline": "",
         "description": "
       In this blog post we\u0027ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically.
@@ -408,8 +407,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -547,7 +546,7 @@
   >
     
     <div class="post__content">
-      <h1>[Azure Advent Calendar] Exploring Upgrade Strategies in Azure Kubernetes Service</h1>
+      <h1>[🎄Azure Advent Calendar🎄] Exploring Upgrade Strategies in Azure Kubernetes Service</h1>
       
         <ul class="post__meta">
           <li class="post__meta-item">
@@ -686,43 +685,41 @@
 <h4 id="terraform">Terraform</h4>
 <p><code>automatic_channel_upgrade = &lt;UPGRADE_CHANNEL_NAME&gt;</code> argument can be used to enable auto-upgrade.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
-resource &#34;azurerm_kubernetes_cluster&#34; &#34;aks_cluster&#34; {
-  location                  = &#34;norwayeast&#34;
-  name                      = &#34;chamber-of-secrets&#34;
-  resource_group_name       = &#34;hogwarts-rg&#34;
-  automatic_channel_upgrade = &#34;patch&#34;
-  
-  default_node_pool {
-    name                 = &#34;agentpool&#34;
-    vm_size              = &#34;Standard_B2s&#34;
-  }
-}
-
-</code></pre></div><h4 id="bicep">Bicep</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource &#34;azurerm_kubernetes_cluster&#34; &#34;aks_cluster&#34; {
+</span></span><span class="line"><span class="cl">  location                  = &#34;norwayeast&#34;
+</span></span><span class="line"><span class="cl">  name                      = &#34;chamber-of-secrets&#34;
+</span></span><span class="line"><span class="cl">  resource_group_name       = &#34;hogwarts-rg&#34;
+</span></span><span class="line"><span class="cl">  automatic_channel_upgrade = &#34;patch&#34;
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  default_node_pool {
+</span></span><span class="line"><span class="cl">    name                 = &#34;agentpool&#34;
+</span></span><span class="line"><span class="cl">    vm_size              = &#34;Standard_B2s&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h4 id="bicep">Bicep</h4>
 <p><code>autoUpgradeProfile.upgradeChannel</code> setting can be used to enable auto-upgrade.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
-resource aks_cluster &#39;Microsoft.ContainerService/managedClusters@2022-05-02-preview&#39; = {
-  name: &#39;chamber-of-secrets&#39;
-  location: &#39;norwayeast&#39;
-  properties: {
-    agentPoolProfiles: [
-      {
-        name: &#39;agentpool&#39;
-        count: 1
-        vmSize: &#39;Standard_B2s&#39;
-        osType: &#39;Linux&#39;
-        mode: &#39;System&#39;
-      }
-    ]
-    autoUpgradeProfile: {
-      upgradeChannel: &#39;patch&#39;
-    }
-  }
-}
-
-</code></pre></div><p>You can learn more about auto-upgrade support for AKS here: <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">Automatically upgrade an Azure Kubernetes Service (AKS) cluster</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource aks_cluster &#39;Microsoft.ContainerService/managedClusters@2022-05-02-preview&#39; = {
+</span></span><span class="line"><span class="cl">  name: &#39;chamber-of-secrets&#39;
+</span></span><span class="line"><span class="cl">  location: &#39;norwayeast&#39;
+</span></span><span class="line"><span class="cl">  properties: {
+</span></span><span class="line"><span class="cl">    agentPoolProfiles: [
+</span></span><span class="line"><span class="cl">      {
+</span></span><span class="line"><span class="cl">        name: &#39;agentpool&#39;
+</span></span><span class="line"><span class="cl">        count: 1
+</span></span><span class="line"><span class="cl">        vmSize: &#39;Standard_B2s&#39;
+</span></span><span class="line"><span class="cl">        osType: &#39;Linux&#39;
+</span></span><span class="line"><span class="cl">        mode: &#39;System&#39;
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">    ]
+</span></span><span class="line"><span class="cl">    autoUpgradeProfile: {
+</span></span><span class="line"><span class="cl">      upgradeChannel: &#39;patch&#39;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>You can learn more about auto-upgrade support for AKS here: <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">Automatically upgrade an Azure Kubernetes Service (AKS) cluster</a></p>
 <h3 id="auto-upgrade-considerations">Auto-upgrade considerations</h3>
 <p>Finally, based on my own experience with upgrading AKS clusters, I would like to mention a few things that you should consider when choosing an upgrade strategy.🤔</p>
 <p><strong>Application container size, warmup time and complexity</strong></p>
@@ -786,8 +783,8 @@ resource aks_cluster &#39;Microsoft.ContainerService/managedClusters@2022-05-02-
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script></body>
 </html>

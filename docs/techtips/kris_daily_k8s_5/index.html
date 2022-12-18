@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.108.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
     crossorigin="anonymous"
   ></script>
 
@@ -128,7 +128,6 @@
 <meta property="og:url" content="https://kristhecodingunicorn.com/techtips/kris_daily_k8s_5/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
 <meta property="article:published_time" content="2022-11-22T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-11-22T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
-
 
 
 
@@ -401,8 +400,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -541,7 +540,7 @@
     
     <div class="post__content">
       <h1>Kris&#39;s Quick Cup of (A)K8S #5 - Housekeeping for Kubernetes Contexts</h1>
-      <p><img src="../../images/tech_tips/techtip_15.png" alt="Article banner for Kris&rsquo;s quick cup of K8s number 5"></p>
+      <p><img src="../../images/tech_tips/techtip_15.png" alt="Article banner for Kris&amp;rsquo;s quick cup of K8s number 5"></p>
 <p>Let&rsquo;s start today&rsquo;s tech tip by identifying what a Kubernetes Context is. Kubernetes Context, which is also known as kubectl context, represents a Kubernetes cluster that kubectl command-line tool is currently targeting. You decide which Kubernetes cluster to set as active by modifying currently active context with <code>kubectl config use-context &lt;cluster_name&gt;</code> command.</p>
 <p>All the configured and available Kubernetes contexts are stored in a kubeconfig file. <strong>Kubeconfig file</strong> contains a collection of properties for every Kubernetes cluster that respective client is connected to - properties such as Kubernetes cluster name, authentication mechanisms, user/service account, etc. This information is used by kubectl command-line tool to connect to the API server of the respective cluster once it&rsquo;s set as the active Kubernetes context.</p>
 <p>Once you set up a connection to a Kubernetes cluster, context information is automatically stored in a kubeconfig file locally.
@@ -551,11 +550,10 @@ But, did you know that <strong>once a Kubernetes cluster is deleted and you&rsqu
 <p>The official way is to use <code>kubectl config unset contexts.&lt;context_name&gt;</code> .</p>
 <p>An important note here is that <strong>this command only removes the context section from the kubeconfig file but the cluster and user section for this context are kept unchanged</strong>. Unless you&rsquo;re handcrafting your kubeconfig files for specific use cases, I would recommend you to clean up cluster and user information as well so that you don&rsquo;t keep orphaned, potentially sensitive information on the client longer than it&rsquo;s actually needed.</p>
 <p>You can clean up cluster and user section with the same unset command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">
-kubectl config <span class="nb">unset</span> clusters.&lt;cluster_name&gt;
-kubectl config <span class="nb">unset</span> users.&lt;user_name&gt;
-
-</code></pre></div><p>It can be quite a lot of manual work to run these commands manually if you have tens of Kubernetes clusters to clean up 😮‍💨 Fortunately we have automation and can script this! Since I&rsquo;m working a lot with AKS clusters I have created a small script that cleans up AKS cluster contexts - it will check all the configured Kubernetes contexts towards all the existing AKS clusters in all Azure subscriptions that I have access to. After confirmation it will then clean up context data, including cluster and user sections (if enabled), for the non-existent AKS clusters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl config <span class="nb">unset</span> clusters.&lt;cluster_name&gt;
+</span></span><span class="line"><span class="cl">kubectl config <span class="nb">unset</span> users.&lt;user_name&gt;
+</span></span></code></pre></div><p>It can be quite a lot of manual work to run these commands manually if you have tens of Kubernetes clusters to clean up 😮‍💨 Fortunately we have automation and can script this! Since I&rsquo;m working a lot with AKS clusters I have created a small script that cleans up AKS cluster contexts - it will check all the configured Kubernetes contexts towards all the existing AKS clusters in all Azure subscriptions that I have access to. After confirmation it will then clean up context data, including cluster and user sections (if enabled), for the non-existent AKS clusters.</p>
 <p>This script is freely available on GitHub so you&rsquo;re welcome to check it out and customize to your needs: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/aks-context-cleanup/Cleanup-AKS-Contexts.ps1">guidemetothemoon - Cleanup-AKS-Contexts.ps1</a></p>
 <p>Another way is to use open source tools like <a href="https://github.com/ahmetb/kubectx">kubectx</a> to help you with this type of housekeeping, but do pay attention to which tool you choose. Some tools may have implemented cleanup logic in such a way that all the clusters that the tool isn&rsquo;t able to connect to will be cleaned up. If you&rsquo;re turning on/off some of the clusters for sustainability and cost optimization reasons for example, this tool will clean them up in case they are in the offline state at the point when the tool is executed. So it&rsquo;s worth having it in the back of your head.</p>
 <p>You can read more about Kubernetes context and Kubernetes configuration file here: <a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">Configure Access to Multiple Clusters</a></p>
@@ -593,8 +591,8 @@ kubectl config <span class="nb">unset</span> users.&lt;user_name&gt;
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script></body>
 </html>

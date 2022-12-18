@@ -19,7 +19,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.92.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.108.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -102,8 +102,8 @@
   
   <script
     type="text/javascript"
-    src="/js/anatole-header.min.46e6a54097480084f8f52c20ca1aa7425b4fad17029a887fd4017b12e311a72d.js"
-    integrity="sha256-RualQJdIAIT49SwgyhqnQltPrRcCmoh/1AF7EuMRpy0="
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
     crossorigin="anonymous"
   ></script>
 
@@ -128,7 +128,6 @@
 <meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_hadolint/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-11-13T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-11-13T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
-
 
 
 
@@ -197,7 +196,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_hadolint\/",
-        "wordCount" : "1713",
+        "wordCount" : "1775",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -401,8 +400,8 @@
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script></div>
 </aside>
@@ -595,29 +594,29 @@
 <h3 id="azure-devops">Azure DevOps</h3>
 <p>As I mentioned above, there is no official extension for Hadolint in Azure DevOps but you can easily create a build task yourself for the same. You can either pull a Hadolint container image or use pre-built binaries. Personally I prefer to limit the amount of external images to be pulled as part of CI/CD pipeline, therefore I will show how you could use the pre-built binaries to run Hadolint. If you would like to use Hadoling Docker image it&rsquo;s also possible to store third-party container images in your private container registry for additional security.</p>
 <p>In the example below I have created two build tasks: one that downloads and executes Hadolint and outputs the results in a SARIF format. The second task publishes the report as a build artifact so that it can be consumed by the SARIF Azure DevOps extension and displayed in the Scans tab of my build execution overview:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># azure-pipeline.yaml</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">Build</span><span class="w">
-</span><span class="w">  </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">Bash@3</span><span class="w">
-</span><span class="w">      </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="l">Lint Dockerfile with Hadolint for best practice compliance</span><span class="w">
-</span><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">targetType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;inline&#39;</span><span class="w">
-</span><span class="w">        </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l">|        </span><span class="w">
-</span><span class="w">          </span><span class="l">echo &#39;Downloading Hadolint to lint Dockerfile...&#39;</span><span class="w">
-</span><span class="w">          </span><span class="l">wget https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64</span><span class="w">
-</span><span class="w">          </span><span class="l">chmod +x hadolint-Linux-x86_64</span><span class="w">
-</span><span class="w">          </span><span class="l">mv hadolint-Linux-x86_64 hadolint</span><span class="w">
-</span><span class="w">                  
-</span><span class="w">          </span><span class="l">echo &#39;Start Dockerfile lint...&#39;</span><span class="w">
-</span><span class="w">          </span><span class="l">./hadolint ./docker/Dockerfile -f sarif | jq &gt; hadolint-scan.sarif</span><span class="w">
-</span><span class="w">    
-</span><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishBuildArtifacts@1</span><span class="w">
-</span><span class="w">      </span><span class="nt">displayName: &#39;Publish Artifact</span><span class="p">:</span><span class="w"> </span><span class="l">Hadolint Dockerfile Scan&#39;</span><span class="w">
-</span><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">pathToPublish</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;hadolint-scan.sarif&#39;</span><span class="w">
-</span><span class="w">        </span><span class="nt">artifactName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;CodeAnalysisLogs&#39;</span><span class="w">
-</span></code></pre></div><p><img src="../../images/k8s_hadolint/k8s_hadolint_ado_sarif_output.png" alt="Screenshot of Hadolint tool output"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># azure-pipeline.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">Build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">Bash@3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="l">Lint Dockerfile with Hadolint for best practice compliance</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">targetType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;inline&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l">|        </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">echo &#39;Downloading Hadolint to lint Dockerfile...&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">wget https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">chmod +x hadolint-Linux-x86_64</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">mv hadolint-Linux-x86_64 hadolint</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">echo &#39;Start Dockerfile lint...&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">./hadolint ./docker/Dockerfile -f sarif | jq &gt; hadolint-scan.sarif</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishBuildArtifacts@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">displayName: &#39;Publish Artifact</span><span class="p">:</span><span class="w"> </span><span class="l">Hadolint Dockerfile Scan&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">pathToPublish</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;hadolint-scan.sarif&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">artifactName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;CodeAnalysisLogs&#39;</span><span class="w">
+</span></span></span></code></pre></div><p><img src="../../images/k8s_hadolint/k8s_hadolint_ado_sarif_output.png" alt="Screenshot of Hadolint tool output"></p>
 <p>Below you can see another example of Hadolint output without SARIF extension, where all the findings are logged as part of the build task output. In this example Hadolint is configured to fail when warnings or more critical findings are detected. Command above can be modified like this (Dockerfile folder path is also updated to correlate with what&rsquo;s shown on the screenshot):</p>
 <p><code>./hadolint ./wiki/Dockerfile --failure-threshold warning</code></p>
 <p><img src="../../images/k8s_hadolint/k8s_hadolint_output.png" alt="Screenshot of Hadolint tool output"></p>
@@ -625,28 +624,28 @@
 <blockquote>
 <p>When you&rsquo;re suppressing an issue, be it the one detected by Hadolint or another tool, it&rsquo;s always a good idea to add a comment explaining the reasoning behind suppression. It&rsquo;s helpful both for others accessing the file and for general accountability.</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># hadolint.yaml: </span><span class="w">
-</span><span class="w"></span><span class="nt">failure-threshold</span><span class="p">:</span><span class="w"> </span><span class="l">error</span><span class="w">
-</span><span class="w"></span><span class="nt">ignored</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="l">DL3009</span><span class="w"> </span><span class="c"># false positive, apt-get lists are deleted on line 13</span><span class="w">
-</span><span class="w">  </span>- <span class="l">DL4006</span><span class="w"> </span><span class="c"># false positive, -o pipefail is set via explicit RUN statements on line 12 and 31</span><span class="w">
-</span><span class="w"></span><span class="nt">trustedRegistries</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;kristhecodingunicorn.acr.io&#34;</span><span class="w"> </span><span class="c"># you can also use the wildcard pattern here, f.ex. &#34;*.acr.io&#34; to whitelist all Azure Container Registry repositories</span><span class="w">
-</span></code></pre></div><p>Hadolint command can once again be modified to incorporate configuration from the file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># hadolint.yaml: </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">failure-threshold</span><span class="p">:</span><span class="w"> </span><span class="l">error</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ignored</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">DL3009</span><span class="w"> </span><span class="c"># false positive, apt-get lists are deleted on line 13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">DL4006</span><span class="w"> </span><span class="c"># false positive, -o pipefail is set via explicit RUN statements on line 12 and 31</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">trustedRegistries</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;kristhecodingunicorn.acr.io&#34;</span><span class="w"> </span><span class="c"># you can also use the wildcard pattern here, f.ex. &#34;*.acr.io&#34; to whitelist all Azure Container Registry repositories</span><span class="w">
+</span></span></span></code></pre></div><p>Hadolint command can once again be modified to incorporate configuration from the file:</p>
 <p><code>./hadolint ./docker/Dockerfile --config ./hadolint.yaml</code></p>
 <h3 id="github-actions">GitHub Actions</h3>
 <p>There&rsquo;s a GitHub Action provided by the Hadolint project maintainers so we can use it directly in our GitHub Workflow like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># myapp-gha.yml</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Lint Dockerfile with Hadolint</span><span class="w">
-</span><span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">hadolint/hadolint-action@v3.0.0</span><span class="w">
-</span><span class="w">  </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">./docker/Dockerfile</span><span class="w">
-</span><span class="w">    </span><span class="nt">failure-threshold</span><span class="p">:</span><span class="w"> </span><span class="l">error</span><span class="w">
-</span></code></pre></div><p>Please note that in case of Hadolint GitHub Action linting results are not being logged to the task output but are logged to an environment variable which is called <code>HADOLINT_RESULTS</code>. You can print it out with a subsequent GitHub Action, for example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># myapp-gha.yml</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Print Hadolint lint results</span><span class="w">
-</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;HADOLINT LINT RESULTS =&gt; ${{ env.HADOLINT_RESULTS }}&#39;</span><span class="w">
-</span></code></pre></div><p>You can also save Hadolint output to a separate file to consume it for display or upload at a later point by providing <code>output-file: &lt;file_path&gt;</code> and <code>format: &lt;output_format&gt;</code> parameters to <code>with</code> section of the GitHub Action. You can also integrate PR comments based on the execution results - you can read more about it on the Hadolint Action page on GitHub marketplace: <a href="https://github.com/marketplace/actions/hadolint-action">Hadolint Action</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># myapp-gha.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Lint Dockerfile with Hadolint</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">hadolint/hadolint-action@v3.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">./docker/Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">failure-threshold</span><span class="p">:</span><span class="w"> </span><span class="l">error</span><span class="w">
+</span></span></span></code></pre></div><p>Please note that in case of Hadolint GitHub Action linting results are not being logged to the task output but are logged to an environment variable which is called <code>HADOLINT_RESULTS</code>. You can print it out with a subsequent GitHub Action, for example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># myapp-gha.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Print Hadolint lint results</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#39;HADOLINT LINT RESULTS =&gt; ${{ env.HADOLINT_RESULTS }}&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>You can also save Hadolint output to a separate file to consume it for display or upload at a later point by providing <code>output-file: &lt;file_path&gt;</code> and <code>format: &lt;output_format&gt;</code> parameters to <code>with</code> section of the GitHub Action. You can also integrate PR comments based on the execution results - you can read more about it on the Hadolint Action page on GitHub marketplace: <a href="https://github.com/marketplace/actions/hadolint-action">Hadolint Action</a></p>
 <h3 id="local-development-vscode-extension">Local development (VSCode Extension)</h3>
 <p>It is a good idea to integrate some tools as part of the local development routines in order to detect potential issues and quality improvements early in the development lifecycle. Fortunately Hadolint can be installed as a VSCode extension. You can search for it directly in the Extensions tab of Visual Studio Code or check out it&rsquo;s page on VSCode marketplace: <a href="https://marketplace.visualstudio.com/items?itemName=exiasr.hadolint">hadolint</a>.</p>
 <blockquote>
@@ -655,22 +654,22 @@
 <p>Once it&rsquo;s installed and you open a Dockerfile in VSCode you will get information about detected issues in the <strong>&ldquo;Problems&rdquo;</strong> tab of your VSCode workspace.
 Let&rsquo;s take a look at a simple example.</p>
 <p>Here I have a simple Dockerfile:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Dockerfile</span><span class="w">
-</span><span class="w"></span><span class="l">FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy</span><span class="w">
-</span><span class="w"></span><span class="l">COPY CatEncyclopedia/src App/</span><span class="w">
-</span><span class="w"></span><span class="l">WORKDIR /App</span><span class="w">
-</span><span class="w"></span><span class="l">ENTRYPOINT [&#34;dotnet&#34;, &#34;CatEncyclopedia.dll&#34;]</span><span class="w">
-</span></code></pre></div><p>Once I open it in VSCode I can see that Hadolint gets into action and lets me know that there&rsquo;s something I need to improve in my file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">COPY CatEncyclopedia/src App/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">WORKDIR /App</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">ENTRYPOINT [&#34;dotnet&#34;, &#34;CatEncyclopedia.dll&#34;]</span><span class="w">
+</span></span></span></code></pre></div><p>Once I open it in VSCode I can see that Hadolint gets into action and lets me know that there&rsquo;s something I need to improve in my file:</p>
 <p><img src="../../images/k8s_hadolint/k8s_hadolint_vscode_output1.png" alt="Screenshot of Hadolint VSCode extension output when an issue is detected"></p>
 <p>You can also see from the screenshot above that detected issues are highlighted directly in the Dockerfile so that you can hover over them to read the same information that you can see in the Problems tab.</p>
 <p>It seems like I have misplaced some Docker instructions. Since I am actually setting a <code>WORKDIR</code>, let&rsquo;s move this instruction so that it happens before the <code>COPY</code> instruction.
 Now our Dockerfile will look like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Dockerfile</span><span class="w">
-</span><span class="w"></span><span class="l">FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy</span><span class="w">
-</span><span class="w"></span><span class="l">WORKDIR /App</span><span class="w">
-</span><span class="w"></span><span class="l">COPY CatEncyclopedia/src App/</span><span class="w">
-</span><span class="w"></span><span class="l">ENTRYPOINT [&#34;dotnet&#34;, &#34;CatEncyclopedia.dll&#34;]</span><span class="w">
-</span></code></pre></div><p>And once we save the changes, we can see that the warning disappears from the Problems tab:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">WORKDIR /App</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">COPY CatEncyclopedia/src App/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">ENTRYPOINT [&#34;dotnet&#34;, &#34;CatEncyclopedia.dll&#34;]</span><span class="w">
+</span></span></span></code></pre></div><p>And once we save the changes, we can see that the warning disappears from the Problems tab:</p>
 <p><img src="../../images/k8s_hadolint/k8s_hadolint_vscode_output2.png" alt="Screenshot of Hadolint tool output"></p>
 <p>Great work everyone, our Dockerfile has become a notch better!😺</p>
 <h2 id="additional-resources">Additional resources</h2>
@@ -718,8 +717,8 @@ Now our Dockerfile will look like this:</p>
   
   <script
     type="text/javascript"
-    src="/js/medium-zoom.min.fae9ac8895995fe91958b3954be11e96025824a04770726a3531e119ddd2d576.js"
-    integrity="sha256-&#43;umsiJWZX&#43;kZWLOVS&#43;EelgJYJKBHcHJqNTHhGd3S1XY="
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
     crossorigin="anonymous"
   ></script></body>
 </html>
