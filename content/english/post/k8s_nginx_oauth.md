@@ -40,7 +40,7 @@ In order to do that we will need to perform following steps:
 
 In addition you will need to have a TLS certificate provisioned both for your application and the OAuth2 Proxy. In my example use case, I\'m using cert-manager which is the most popular certificate management application for Kubernetes. Setting up cert-manager is outside of scope for this blog post but it\'s expected that you have a certificate management application available in order to be able to provision respective TLS certificates. If you want to learn more about cert-manager, you can check this link: [cert-manager](https://cert-manager.io/docs/)
 
-Let\'s get to it!🚀
+Let\'s get to it! 🚀
 
 ### Create OAuth2 Proxy application in Azure AD
 
@@ -163,10 +163,10 @@ But before we do that, we need to make a few preparations first. OAuth2 Proxy re
 
 Since we\'ve made a note of tenant id, client id and client secret what we need to do now is to generate a cookie secret. Cookie storage is the default storage type used by OAuth2 Proxy to store information about a session in a client-side cookie, therefore setting a cookie secret is mandatory. You can also use Redis as an alternative session storage but it\'s outside of scope of this blog post. You can read more about OAuth2 Proxy session storage options here: [Session Storage](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage)
 
-#### **Cookie Secret**
+#### Cookie Secret
 It\'s an important and good practice to always generate a strong secret, using cryptographically secure random number generator and never re-use the same secret across applications! Since cookie secret can be used for sensitive information like storing user session data, in the wrong hands this information can cause a lot of damage and even let attacker get control of the server hosting an application. There are several ways to generate a cookie secret, for example with OpenSSL: ```openssl rand -hex 32```. Once you\'ve generated a secret value, make a note of it, we\'re going to use it in a second.
 
-#### **Create OAuth2 Proxy secrets in AKS cluster**
+#### Create OAuth2 Proxy secrets in AKS cluster
 
 The last thing we need to do before we can deploy OAuth2 Proxy is to save Client ID, Client Secret and Cookie Secret as Kubernetes Secrets. Of course we could\'ve just written them in plaintext in the Deployment YAML but we\'re conscious about security, right?😼 We want to keep secrets secret, therefore we\'ll deploy sensitive values as Kubernetes Secrets.
 
@@ -320,14 +320,174 @@ And it\'s done! Now, when you access the application, you will first be redirect
 
 ![Screenshot of Microsoft login screen once OAuth2 Proxy is enabled](../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png)
 
+### Can I use single OAuth2 Proxy instance for multiple applications using different subdomains?
+
+Yes, you can!😼
+
+There may be use cases where you have multiple applications running in a Kubernetes cluster which are exposed on different subdomains. It may be cumbersome to create and maintain a dedicated instance of OAuth2 Proxy for every application. Fortunately it is possible to use a single instance of OAuth2 Proxy and still provide support for authentication to your applications.
+
+A requirement for this is to use Redis for storing cookies. In this scenario multiple cookies will be used which will exceed the max cookie size set by default OAuth2 Proxy Cookie Storage. You can read more about setting up Redis storage for OAuth2 Proxy here: [Redis Storage](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage/#redis-storage)
+
+You can configure Oauth2 Proxy to use both a single-node Redis instance and a Redis cluster. For example, Redis can easily be deployed in Kubernetes with Helm charts from Bitnami:
+- Single-node Redis: [bitnami/redis](https://bitnami.com/stack/redis/helm)
+- Redis cluster: [bitnami/redis-cluster](https://bitnami.com/stack/redis-cluster/helm)
+
+You can find all the supported arguments for Redis storage in OAuth2 Proxy here: [OAuth2 Proxy - Command Line Options](https://oauth2-proxy.github.io/oauth2-proxy/docs/6.1.x/configuration/overview/#command-line-options) 
+
+The rest of the configuration you will need:
+- Set Azure AD OAuth2 Proxy application to support multi-tenant account types (if required, depends on your use case);
+- In OAuth2 Proxy Ingress Object definition, add multiple hosts representing your applications;
+
+My recommendation is to deploy OAuth2 Proxy in a dedicated namespace, separately from other application deployments, for cleaner structure. Please **DO NOT** use ```default```  or ```kube-system``` namespaces for this purpose since it's not considered to be a good practice.
+
+This approach works both with OIDC and Azure providers, with OAuth2 Proxy ```v7.3.0``` (OIDC only due to the bug with Azure provider mentioned in the section below) and ```v7.4.0``` (both Azure and OIDC).
+
+So, let's take a look at an example. 
+
+I have two apps exposed on different subdomains:
+
+* ```aks-helloworld-one.dev.mydomain.com```
+* ```aks-helloworld-two.business.mydomain.com```
+
+In my Kubernetes cluster, first app is deployed to ```aks-helloworld-one``` namespace, second app is deployed to ```aks-helloworld-two``` namespace. OAuth2 Proxy is deployed to ```oauth2-proxy``` namespace. I also have a Redis cluster running in ```redis``` namespace.
+
+First, we need to add proper OAuth2 Proxy annotations to every application's Ingress Object definition. The approach here is the same as mentioned earlier - if you're using NGINX as an Ingress Controller you will need to add following annotations to respective application's Ingress definition:
+
+``` yaml
+# aks-helloworld-one-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aks-helloworld-one-ingress
+  namespace: aks-helloworld-one
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://aks-helloworld-one.dev.mydomain.com/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://aks-helloworld-one.dev.mydomain.com/oauth2/auth/oauth2/start?rd=https://aks-helloworld-one.dev.mydomain.com/oauth2/callback"
+
+  # REST OF THE CODE IS OMITTED
+```
+
+``` yaml
+# aks-helloworld-two-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aks-helloworld-two-ingress
+  namespace: aks-helloworld-two
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://aks-helloworld-two.business.mydomain.com/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://aks-helloworld-two.business.mydomain.com/oauth2/auth/oauth2/start?rd=https://aks-helloworld-two.business.mydomain.com/oauth2/callback"
+  
+  # REST OF THE CODE IS OMITTED
+```
+
+In the application Deployments themselves no changes should be needed.
+
+Next, in the Oauth2 Proxy Deployment you need to configure Redis for cookie storage, in addition to other relevant configuration, depending on your use case. 
+If we use the example that we used in the section above as reference, configuration section of the OAuth2 Proxy Deployment will look something like this:
+
+``` yaml
+#oauth2-proxy.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    # REST OF THE CODE IS OMITTED
+  labels:
+    application: oauth2-proxy
+  name: oauth2-proxy-deployment
+  namespace: oauth2-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: oauth2-proxy
+  template:
+    metadata:
+      labels:
+        application: oauth2-proxy
+    spec:
+      containers:
+      - args:
+        - --provider=oidc
+        - --azure-tenant=[oauth2-proxy-azure-ad-tenant-id]
+        - --pass-access-token=true
+        - --cookie-name=_proxycookie
+        - --email-domain=*
+        - --upstream=file:///dev/null
+        - --http-address=0.0.0.0:4180
+        - --oidc-issuer-url=https://login.microsoftonline.com/[oauth2-proxy-azure-ad-tenant-id]/v2.0
+        - --session-store-type=redis # <- REDIS SETTING
+        - --redis-use-cluster=true # <- REDIS SETTING
+        - --redis-cluster-connection-urls=redis://[REDIS_URL_OR_IP]:[REDIS_PORT] # <- REDIS SETTING - default Redis port is 6379
+        name: oauth2-proxy
+        image: quay.io/oauth2-proxy/oauth2-proxy:v7.3.0
+
+ # REST OF THE CODE IS OMITTED
+```
+
+Finally, you need to add respective application hosts to OAuth2 Proxy Ingress.
+If we use the same example that we used in the section above as reference, updated OAuth2 Proxy Ingress will look something like this:
+
+``` yaml
+# oauth2-proxy-ingress.yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+     # REST OF THE CODE IS OMITTED
+  labels:
+     # REST OF THE CODE IS OMITTED
+  name: oauth2-proxy-ingress
+  namespace: oauth2-proxy
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: aks-helloworld-one.dev.mydomain.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: oauth2-proxy-svc
+            port:
+              number: 4180
+        path: /oauth2
+        pathType: Prefix
+  - host: aks-helloworld-two.business.mydomain.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: oauth2-proxy-svc
+            port:
+              number: 4180
+        path: /oauth2
+        pathType: Prefix
+  tls:
+  - hosts:
+    - aks-helloworld-one.dev.mydomain.com
+    - aks-helloworld-two.business.mydomain.com
+
+# REST OF THE CODE IS OMITTED
+```
+
+And we're done! 🎉 Now, when accessing both ```https://aks-helloworld-one.dev.mydomain.com``` and ```https://aks-helloworld-two.business.mydomain.com``` authentication through OAuth2 Proxy will be enforced, even though applications are using different subdomains! 😺
 
 ## Known Issues: OAuth2 Proxy
 
 If you will be using OAuth2 Proxy that I have used in this blog post there are a few known issues you should know about and how those issues can be mitigated.
 
-1. **Version 3.7.0 - Issue with Azure provider.** Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use ```--provider=azure``` in the ```template.spec.containers.args``` section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: ```- --provider=oidc```. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: [v7.3.0 breaks azure provider](https://github.com/oauth2-proxy/oauth2-proxy/issues/1666)
+#### Version 7.3.0 - Issue with Azure provider
 
-2. **Version 3.7.0, Azure B2C - ```Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email```.** If you have configured everything correctly and according to what\'s described in this blog post but are still getting this error, a workaround will be to add ```- --user-id-claim=oid``` to the ```args``` section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: [How can I debug oauth2_proxy when connecting to Azure B2C?](https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c). 
+Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use ```--provider=azure``` in the ```template.spec.containers.args``` section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: ```- --provider=oidc```. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: [v7.3.0 breaks azure provider](https://github.com/oauth2-proxy/oauth2-proxy/issues/1666)
+
+> This seems to be fixed in version ```7.4.0```, I've tested it and haven't been able to reproduce this issue in the new version but if you still do experience the same issue with version ```7.4.0```, do check the discussion on the GitHub Issue mentioned above or just switch to OIDC provider.
+
+#### Version 7.3.0, Azure B2C - ```Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email```
+
+If you have configured everything correctly and according to what\'s described in this blog post but are still getting this error, a workaround will be to add ```- --user-id-claim=oid``` to the ```args``` section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: [How can I debug oauth2_proxy when connecting to Azure B2C?](https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c). 
 
 Your updated args section will look something like this:
 

@@ -196,7 +196,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
-        "wordCount" : "2735",
+        "wordCount" : "3550",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -568,7 +568,7 @@
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">13-minute read</span>
+            <span class="post__meta-text">17-minute read</span>
           </li>
         </ul>
 
@@ -583,13 +583,23 @@
         <li><a href="#configure-nginx-ingress-controller">Configure NGINX Ingress Controller</a></li>
         <li><a href="#configure-and-deploy-oauth2-proxy">Configure and deploy OAuth2 Proxy</a>
           <ul>
-            <li><a href="#cookie-secret"><strong>Cookie Secret</strong></a></li>
-            <li><a href="#create-oauth2-proxy-secrets-in-aks-cluster"><strong>Create OAuth2 Proxy secrets in AKS cluster</strong></a></li>
+            <li><a href="#cookie-secret">Cookie Secret</a></li>
+            <li><a href="#create-oauth2-proxy-secrets-in-aks-cluster">Create OAuth2 Proxy secrets in AKS cluster</a></li>
+          </ul>
+        </li>
+        <li><a href="#can-i-use-single-oauth2-proxy-instance-for-multiple-applications-using-different-subdomains">Can I use single OAuth2 Proxy instance for multiple applications using different subdomains?</a></li>
+      </ul>
+    </li>
+    <li><a href="#known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#version-730---issue-with-azure-provider">Version 7.3.0 - Issue with Azure provider</a></li>
+            <li><a href="#version-730-azure-b2c---error-creating-session-during-oauth2-callback-neither-the-id_token-nor-the-profileurl-set-an-email">Version 7.3.0, Azure B2C - <code>Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email</code></a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</a></li>
     <li><a href="#all-in-one-deployment-package">All-in-one deployment package</a></li>
     <li><a href="#additional-resources">Additional resources</a></li>
   </ul>
@@ -606,7 +616,7 @@
 <p>🐾 Update NGINX Ingress configuration for kubecost to enable support for external authentication;</p>
 <p>🐾 Configure and deploy OAuth2 Proxy application which will act as a reverse proxy and provide authentication to kubecost with Azure AD;</p>
 <p>In addition you will need to have a TLS certificate provisioned both for your application and the OAuth2 Proxy. In my example use case, I'm using cert-manager which is the most popular certificate management application for Kubernetes. Setting up cert-manager is outside of scope for this blog post but it's expected that you have a certificate management application available in order to be able to provision respective TLS certificates. If you want to learn more about cert-manager, you can check this link: <a href="https://cert-manager.io/docs/">cert-manager</a></p>
-<p>Let's get to it!🚀</p>
+<p>Let's get to it! 🚀</p>
 <h3 id="create-oauth2-proxy-application-in-azure-ad">Create OAuth2 Proxy application in Azure AD</h3>
 <p>In order to create an OAuth2 Proxy application we need to go to <code>App registrations</code> section in Azure AD and choose <code>New registration</code>. Then provide following properties:</p>
 <p>🐾 <strong>Name</strong> of the Azure AD application. Since I'm setting it up for kubecost, I'll call it <code>kubecost-oauth2-proxy</code>.</p>
@@ -691,9 +701,9 @@
 <p>🐾 Tenant ID, Client ID and Client Secret of an Azure AD application that we've created earlier;</p>
 <p>🐾 Cookie secret for session information storage;</p>
 <p>Since we've made a note of tenant id, client id and client secret what we need to do now is to generate a cookie secret. Cookie storage is the default storage type used by OAuth2 Proxy to store information about a session in a client-side cookie, therefore setting a cookie secret is mandatory. You can also use Redis as an alternative session storage but it's outside of scope of this blog post. You can read more about OAuth2 Proxy session storage options here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage">Session Storage</a></p>
-<h4 id="cookie-secret"><strong>Cookie Secret</strong></h4>
+<h4 id="cookie-secret">Cookie Secret</h4>
 <p>It's an important and good practice to always generate a strong secret, using cryptographically secure random number generator and never re-use the same secret across applications! Since cookie secret can be used for sensitive information like storing user session data, in the wrong hands this information can cause a lot of damage and even let attacker get control of the server hosting an application. There are several ways to generate a cookie secret, for example with OpenSSL: <code>openssl rand -hex 32</code>. Once you've generated a secret value, make a note of it, we're going to use it in a second.</p>
-<h4 id="create-oauth2-proxy-secrets-in-aks-cluster"><strong>Create OAuth2 Proxy secrets in AKS cluster</strong></h4>
+<h4 id="create-oauth2-proxy-secrets-in-aks-cluster">Create OAuth2 Proxy secrets in AKS cluster</h4>
 <p>The last thing we need to do before we can deploy OAuth2 Proxy is to save Client ID, Client Secret and Cookie Secret as Kubernetes Secrets. Of course we could've just written them in plaintext in the Deployment YAML but we're conscious about security, right?😼 We want to keep secrets secret, therefore we'll deploy sensitive values as Kubernetes Secrets.</p>
 <blockquote>
 <p>As an alternative to Kubernetes Secrets in AKS you can save secrets with help of The Azure Key Vault Provider for Secrets Store CSI Driver. Walkthrough of how to do that will be provided in the subsequent blog posts. In current blog post we'll be utilizing Kubernetes Secrets. If you would like to learn more about The Azure Key Vault Provider for Secrets Store CSI Driver, you can check official Microsoft documentation: <a href="https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver">Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster</a></p>
@@ -838,16 +848,146 @@
 </span></span></span></code></pre></div><p>Once you've verified that configuration and the template look correct you can deploy OAuth2 Proxy in AKS cluster where your application is running with following kubectl command: <code>kubectl apply -f ./my-path-to-template/oauth2-proxy.yaml</code></p>
 <p>And it's done! Now, when you access the application, you will first be redirected to the Microsoft authentication.</p>
 <p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png" alt="Screenshot of Microsoft login screen once OAuth2 Proxy is enabled"></p>
+<h3 id="can-i-use-single-oauth2-proxy-instance-for-multiple-applications-using-different-subdomains">Can I use single OAuth2 Proxy instance for multiple applications using different subdomains?</h3>
+<p>Yes, you can!😼</p>
+<p>There may be use cases where you have multiple applications running in a Kubernetes cluster which are exposed on different subdomains. It may be cumbersome to create and maintain a dedicated instance of OAuth2 Proxy for every application. Fortunately it is possible to use a single instance of OAuth2 Proxy and still provide support for authentication to your applications.</p>
+<p>A requirement for this is to use Redis for storing cookies. In this scenario multiple cookies will be used which will exceed the max cookie size set by default OAuth2 Proxy Cookie Storage. You can read more about setting up Redis storage for OAuth2 Proxy here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage/#redis-storage">Redis Storage</a></p>
+<p>You can configure Oauth2 Proxy to use both a single-node Redis instance and a Redis cluster. For example, Redis can easily be deployed in Kubernetes with Helm charts from Bitnami:</p>
+<ul>
+<li>Single-node Redis: <a href="https://bitnami.com/stack/redis/helm">bitnami/redis</a></li>
+<li>Redis cluster: <a href="https://bitnami.com/stack/redis-cluster/helm">bitnami/redis-cluster</a></li>
+</ul>
+<p>You can find all the supported arguments for Redis storage in OAuth2 Proxy here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/6.1.x/configuration/overview/#command-line-options">OAuth2 Proxy - Command Line Options</a></p>
+<p>The rest of the configuration you will need:</p>
+<ul>
+<li>Set Azure AD OAuth2 Proxy application to support multi-tenant account types (if required, depends on your use case);</li>
+<li>In OAuth2 Proxy Ingress Object definition, add multiple hosts representing your applications;</li>
+</ul>
+<p>My recommendation is to deploy OAuth2 Proxy in a dedicated namespace, separately from other application deployments, for cleaner structure. Please <strong>DO NOT</strong> use <code>default</code>  or <code>kube-system</code> namespaces for this purpose since it&rsquo;s not considered to be a good practice.</p>
+<p>This approach works both with OIDC and Azure providers, with OAuth2 Proxy <code>v7.3.0</code> (OIDC only due to the bug with Azure provider mentioned in the section below) and <code>v7.4.0</code> (both Azure and OIDC).</p>
+<p>So, let&rsquo;s take a look at an example.</p>
+<p>I have two apps exposed on different subdomains:</p>
+<ul>
+<li><code>aks-helloworld-one.dev.mydomain.com</code></li>
+<li><code>aks-helloworld-two.business.mydomain.com</code></li>
+</ul>
+<p>In my Kubernetes cluster, first app is deployed to <code>aks-helloworld-one</code> namespace, second app is deployed to <code>aks-helloworld-two</code> namespace. OAuth2 Proxy is deployed to <code>oauth2-proxy</code> namespace. I also have a Redis cluster running in <code>redis</code> namespace.</p>
+<p>First, we need to add proper OAuth2 Proxy annotations to every application&rsquo;s Ingress Object definition. The approach here is the same as mentioned earlier - if you&rsquo;re using NGINX as an Ingress Controller you will need to add following annotations to respective application&rsquo;s Ingress definition:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># aks-helloworld-one-ingress.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-one-ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-one</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://aks-helloworld-one.dev.mydomain.com/oauth2/auth&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://aks-helloworld-one.dev.mydomain.com/oauth2/auth/oauth2/start?rd=https://aks-helloworld-one.dev.mydomain.com/oauth2/callback&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># aks-helloworld-two-ingress.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-two-ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-two</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://aks-helloworld-two.business.mydomain.com/oauth2/auth&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://aks-helloworld-two.business.mydomain.com/oauth2/auth/oauth2/start?rd=https://aks-helloworld-two.business.mydomain.com/oauth2/callback&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span></code></pre></div><p>In the application Deployments themselves no changes should be needed.</p>
+<p>Next, in the Oauth2 Proxy Deployment you need to configure Redis for cookie storage, in addition to other relevant configuration, depending on your use case.
+If we use the example that we used in the section above as reference, configuration section of the OAuth2 Proxy Deployment will look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#oauth2-proxy.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">provider=oidc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">azure-tenant=[oauth2-proxy-azure-ad-tenant-id]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">pass-access-token=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">cookie-name=_proxycookie</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">email-domain=*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">upstream=file:///dev/null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">http-address=0.0.0.0:4180</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">oidc-issuer-url=https://login.microsoftonline.com/[oauth2-proxy-azure-ad-tenant-id]/v2.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">session-store-type=redis</span><span class="w"> </span><span class="c"># &lt;- REDIS SETTING</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">redis-use-cluster=true</span><span class="w"> </span><span class="c"># &lt;- REDIS SETTING</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">redis-cluster-connection-urls=redis://[REDIS_URL_OR_IP]:[REDIS_PORT]</span><span class="w"> </span><span class="c"># &lt;- REDIS SETTING - default Redis port is 6379</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">quay.io/oauth2-proxy/oauth2-proxy:v7.3.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span></code></pre></div><p>Finally, you need to add respective application hosts to OAuth2 Proxy Ingress.
+If we use the same example that we used in the section above as reference, updated OAuth2 Proxy Ingress will look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># oauth2-proxy-ingress.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-one.dev.mydomain.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-svc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">4180</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/oauth2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-two.business.mydomain.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-svc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">4180</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/oauth2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">aks-helloworld-one.dev.mydomain.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">aks-helloworld-two.business.mydomain.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span></code></pre></div><p>And we&rsquo;re done! 🎉 Now, when accessing both <code>https://aks-helloworld-one.dev.mydomain.com</code> and <code>https://aks-helloworld-two.business.mydomain.com</code> authentication through OAuth2 Proxy will be enforced, even though applications are using different subdomains! 😺</p>
 <h2 id="known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</h2>
 <p>If you will be using OAuth2 Proxy that I have used in this blog post there are a few known issues you should know about and how those issues can be mitigated.</p>
-<ol>
-<li>
-<p><strong>Version 3.7.0 - Issue with Azure provider.</strong> Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: <code>- --provider=oidc</code>. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
-</li>
-<li>
-<p><strong>Version 3.7.0, Azure B2C - <code>Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email</code>.</strong> If you have configured everything correctly and according to what's described in this blog post but are still getting this error, a workaround will be to add <code>- --user-id-claim=oid</code> to the <code>args</code> section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: <a href="https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c">How can I debug oauth2_proxy when connecting to Azure B2C?</a>.</p>
-</li>
-</ol>
+<h4 id="version-730---issue-with-azure-provider">Version 7.3.0 - Issue with Azure provider</h4>
+<p>Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: <code>- --provider=oidc</code>. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
+<blockquote>
+<p>This seems to be fixed in version <code>7.4.0</code>, I&rsquo;ve tested it and haven&rsquo;t been able to reproduce this issue in the new version but if you still do experience the same issue with version <code>7.4.0</code>, do check the discussion on the GitHub Issue mentioned above or just switch to OIDC provider.</p>
+</blockquote>
+<h4 id="version-730-azure-b2c---error-creating-session-during-oauth2-callback-neither-the-id_token-nor-the-profileurl-set-an-email">Version 7.3.0, Azure B2C - <code>Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email</code></h4>
+<p>If you have configured everything correctly and according to what's described in this blog post but are still getting this error, a workaround will be to add <code>- --user-id-claim=oid</code> to the <code>args</code> section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: <a href="https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c">How can I debug oauth2_proxy when connecting to Azure B2C?</a>.</p>
 <p>Your updated args section will look something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#oauth2-proxy.yaml</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
