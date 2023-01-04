@@ -128,6 +128,8 @@ Now, the only thing we will need to do to configure support for OAuth 2.0 authen
 
 ```nginx.ingress.kubernetes.io/auth-signin: "https://[application-hostname]/oauth2/start?rd=https://[application-hostname]/oauth2/callback"```
 
+> Please note that if you're using AKS Application Gateway Ingress Controller instead of NGINX Ingress Controller, these annotations are NOT yet supported. Introducing support for it is on the roadmap but ETA is not clear at this point (January 2023). You can follow this GitHub Issue for further updates: [Auth Proxy Support](https://github.com/Azure/application-gateway-kubernetes-ingress/issues/860)
+
 So, in my example the final kubecost application Ingress definition will look like this:
 
 ``` yaml

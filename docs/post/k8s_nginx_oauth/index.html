@@ -196,7 +196,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
-        "wordCount" : "3550",
+        "wordCount" : "3602",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -678,6 +678,9 @@
 <p><code>nginx.ingress.kubernetes.io/auth-url: &quot;https://[application-hostname]/oauth2/auth&quot;</code></p>
 <p>🐾 <strong>auth-signin</strong>: Annotation that represents URL to the location of the error page:</p>
 <p><code>nginx.ingress.kubernetes.io/auth-signin: &quot;https://[application-hostname]/oauth2/start?rd=https://[application-hostname]/oauth2/callback&quot;</code></p>
+<blockquote>
+<p>Please note that if you&rsquo;re using AKS Application Gateway Ingress Controller instead of NGINX Ingress Controller, these annotations are NOT yet supported. Introducing support for it is on the roadmap but ETA is not clear at this point (January 2023). You can follow this GitHub Issue for further updates: <a href="https://github.com/Azure/application-gateway-kubernetes-ingress/issues/860">Auth Proxy Support</a></p>
+</blockquote>
 <p>So, in my example the final kubecost application Ingress definition will look like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">

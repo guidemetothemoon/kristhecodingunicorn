@@ -6,7 +6,18 @@
     <description>Recent content in techtips on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 28 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to modify Azure Arc (or any) Service Principal scope after creation</title>
+      <link>https://kristhecodingunicorn.com/techtips/azure_sp_scope/</link>
+      <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/azure_sp_scope/</guid>
+      
+        <description>In this tech tip we take a look at how you can easily update the scope of an Azure Arc Service Principal or any other Service Principal after it has been created.</description>
+      
+    </item>
+    
     <item>
       <title>How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer</title>
       <link>https://kristhecodingunicorn.com/techtips/ado_sa_error/</link>
