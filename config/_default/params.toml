@@ -43,6 +43,10 @@ listDateFormat = "2/1/2006"
 # enable = true
 # customurl = "https://analytics.example.com"
 
+[umami]
+serverURL = "umami-guidemetothemoon.vercel.app"
+id = "9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+
 ## Math settings
 [math]
 enable = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
