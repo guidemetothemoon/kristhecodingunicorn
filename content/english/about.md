@@ -10,9 +10,11 @@ tags = [
 +++
 
 
-Hey and welcome to my Tech Corner!
+Heisann and welcome to my Tech Corner!
 
-My name is Kris (obvously) and I have created this blog to share tech and non-tech (sometimes) stuff with the rest of the world 😸
+My name is Kris (obviously) and I have created this blog to share tech and non-tech (sometimes) stuff with the rest of the world 😸
+
+***You're welcome to connect with me here as well:*** [link.tree: @guidemetothemoon](https://linktr.ee/guidemetothemoon)
 
 I live in Norway, love coding and putting cat pictures in presentations😼 Currently I am working as a Lead Software Architect and driving several exciting tech projects that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens' life easier.
 
@@ -34,7 +36,7 @@ I also strongly believe that contributing to making this world a better place by
 
 🌱 Volunteer at animal shelter;
 
-Other than that, I\'m a cat mom, a Potterhead, a Witcher fan and a bookworm. I love books, photography, puzzles, board games, cats and unicorns. I am also an active supporter of sustainability, including sustainable software engineering, and animal welfare - I have been a vegetarian for over 8 years and vegan for over 2 years. I\'m an eager nature addict as well - photo below was taken in Lofoten islands, the nature pearl of Norway.
+Other than that, I\'m a cat mom, a Potterhead, a Witcher fan and a bookworm. I love books, photography, puzzles, board games, cats and unicorns. I am also an active supporter of sustainability, including sustainable software engineering, and animal welfare - I have been a vegetarian for over 8 years and vegan for over 2 years. I\'m an eager nature addict as well - photo below was taken in Oslofjord area, one of the most known inlets in the Eastern Norway, which is known for a multitude of idyllic towns and villages that are full of exploration opportunities for the tourists.
 
 Anyway, thanks for stopping by! Check out the blog and tech tips section and stay tuned for the coming updates.☕🦾
 
