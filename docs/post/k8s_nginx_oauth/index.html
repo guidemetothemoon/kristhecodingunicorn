@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
-        "wordCount" : "4146",
+        "wordCount" : "4229",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -829,6 +829,8 @@
 <p>In this example I will be using the official Helm chart, but the approach is the same for both charts. There may be minor differences in supported parameters, but most of them are identical. It&rsquo;s always a good practice to verify your configuration towards official documentation before deployment.</p>
 <p>What is great with OAuth2 Proxy Helm chart is that you don&rsquo;t need to explicitly create Kubernetes Secrets or even a Redis deployment - by providing just a few additional parameters as part of the Helm chart deployment most of the configuration and set up will be done automatically for you, compared to deployment with Kubernetes YAML templates.</p>
 <p>So, if we were to deploy OAuth2 Proxy with the same configuration as we used in the section above where we deployed it with Kubernetes YAML templates, we will first need to create a <code>values.yaml</code> file which will include deployment configuration parameters.</p>
+<p>Here we will also provide <code>proxyVarsAsSecrets: true</code> parameter which will automatically create <code>OAUTH2_PROXY_CLIENT_ID</code> <code>OAUTH2_PROXY_CLIENT_SECRET</code> and <code>OAUTH2_PROXY_COOKIE_SECRET</code> variables as Kubernetes Secrets and refer them in respective environment variables accordingly, which means that <strong>we can fully skip the step we did in the section above, where we manually created Kubernetes Secrets for these values</strong>! In this case all the values will be created as part of a single Secret object of type Opaque, by default using template fullname as name, for example <code>oauth2-proxy</code>.</p>
+<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2-proxy-helm-secrets.png" alt="Screenshot of automatically created Kubernetes Secret with OAuth2 Proxy Helm chart deployment"></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
@@ -846,6 +848,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy-ingress-tls-secret</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="p">[</span><span class="l">application-hostname]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">proxyVarsAsSecrets</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="l">_proxycookie</span><span class="w">

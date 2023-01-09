@@ -332,6 +332,11 @@ What is great with OAuth2 Proxy Helm chart is that you don't need to explicitly 
 
 So, if we were to deploy OAuth2 Proxy with the same configuration as we used in the section above where we deployed it with Kubernetes YAML templates, we will first need to create a ```values.yaml``` file which will include deployment configuration parameters.
 
+Here we will also provide ```proxyVarsAsSecrets: true``` parameter which will automatically create ```OAUTH2_PROXY_CLIENT_ID``` ```OAUTH2_PROXY_CLIENT_SECRET``` and ```OAUTH2_PROXY_COOKIE_SECRET``` variables as Kubernetes Secrets and refer them in respective environment variables accordingly, which means that **we can fully skip the step we did in the section above, where we manually created Kubernetes Secrets for these values**! In this case all the values will be created as part of a single Secret object of type Opaque, by default using template fullname as name, for example ```oauth2-proxy```.
+
+
+![Screenshot of automatically created Kubernetes Secret with OAuth2 Proxy Helm chart deployment](../../images/k8s_oauth2_proxy/k8s_oauth2-proxy-helm-secrets.png)
+
 ``` yaml
 ingress:
   enabled: true
@@ -350,6 +355,8 @@ ingress:
     - secretName: kubecost-oauth2-proxy-ingress-tls-secret
       hosts:
         - [application-hostname]
+
+proxyVarsAsSecrets: true
 
 config:
   cookieName: _proxycookie
