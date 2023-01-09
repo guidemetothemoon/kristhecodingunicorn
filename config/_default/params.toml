@@ -46,6 +46,7 @@ listDateFormat = "2/1/2006"
 [umami]
 serverURL = "umami-guidemetothemoon.vercel.app"
 id = "9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+#trackerScriptName = "18352c56e4b049f69a24fbae0ca62b4f.js"
 
 ## Math settings
 [math]

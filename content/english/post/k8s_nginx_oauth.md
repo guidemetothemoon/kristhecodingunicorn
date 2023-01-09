@@ -322,7 +322,79 @@ And it\'s done! Now, when you access the application, you will first be redirect
 
 ![Screenshot of Microsoft login screen once OAuth2 Proxy is enabled](../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png)
 
-### Can I use single OAuth2 Proxy instance for multiple applications using different subdomains?
+#### Deployment with Helm
+
+There are multiple Helm charts available that can make it significantly easier to deploy OAuth2 Proxy. There's an official Helm chart available: [auth2-proxy/manifests](https://github.com/oauth2-proxy/manifests) and there's also a Bitnami Helm chart available which  provides support for direct deployment to AKS with Bitnami Charts at Microsoft Azure Marketplace: [OAuth2 Proxy packaged by Bitnami](https://bitnami.com/stack/oauth2-proxy/helm).
+
+In this example I will be using the official Helm chart, but the approach is the same for both charts. There may be minor differences in supported parameters, but most of them are identical. It's always a good practice to verify your configuration towards official documentation before deployment.
+
+What is great with OAuth2 Proxy Helm chart is that you don't need to explicitly create Kubernetes Secrets or even a Redis deployment - by providing just a few additional parameters as part of the Helm chart deployment most of the configuration and set up will be done automatically for you, compared to deployment with Kubernetes YAML templates.
+
+So, if we were to deploy OAuth2 Proxy with the same configuration as we used in the section above where we deployed it with Kubernetes YAML templates, we will first need to create a ```values.yaml``` file which will include deployment configuration parameters.
+
+``` yaml
+ingress:
+  enabled: true
+  className: nginx
+  path: /oauth2
+  pathType: Prefix
+  hosts:
+    - [application-hostname]
+
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: [cert-manager-cluster-issuer-name]
+    nginx.ingress.kubernetes.io/proxy-body-size: "2000m"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "32k"
+  tls:
+    - secretName: kubecost-oauth2-proxy-ingress-tls-secret
+      hosts:
+        - [application-hostname]
+
+config:
+  cookieName: _proxycookie
+  clientID: [INJECTED_OAUTH2_PROXY_CLIENT_ID] # can be replaced dynamically as part of CI/CD
+  clientSecret: [INJECTED_OAUTH2_PROXY_CLIENT_SECRET] # can be replaced dynamically as part of CI/CD
+  cookieSecret: [INJECTED_OAUTH2_PROXY_COOKIE_SECRET ] # can be replaced dynamically as part of CI/CD
+resources:
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
+
+extraArgs:
+  provider: oidc
+  azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
+  pass-access-token: true
+  email-domain: "*"
+  upstream: file:///dev/null
+  http-address: 0.0.0.0:4180
+  oidc-issuer-url: https://login.microsoftonline.com/[oauth2-proxy-azure-ad-tenant-id]/v2.0
+  session-store-type: redis # <- Redis setting, can be removed if default cookie storage is used
+  redis-use-cluster: true # <- Redis setting, can be removed if default cookie storage is used
+  redis-cluster-connection-urls: redis://[REDIS_URL_OR_IP]:[REDIS_PORT] # Redis setting, can be removed if default cookie storage is used
+
+podLabels:
+  application: kubecost-oauth2-proxy
+customLabels:
+  application: kubecost-oauth2-proxy
+
+replicaCount: 1
+
+```
+That's it!😺 Now you can deploy OAuth2 Proxy with Helm:
+
+``` bash
+helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
+ helm repo update
+ helm upgrade --install oauth2-proxy -n oauth2-proxy --create-namespace -f values.yaml oauth2-proxy/oauth2-proxy
+```
+
+There are many useful parameters available that you can configure to your benefit like, for example, use existing Kubernetes Secrets for OAuth2 Proxy or choosing between defining OAuth2 Proxy variables as secrets or environment variables, etc. You can check all the available parameters for the official Helm chart here: [oauth2-proxy/oauth2-proxy: Configuration](https://artifacthub.io/packages/helm/oauth2-proxy/oauth2-proxy#configuration) and for the Bitnami chart here: [bitnami/oauth2-proxy: Parameters](https://github.com/bitnami/charts/blob/main/bitnami/oauth2-proxy/README.md#parameters).
+
+### Can a single OAuth2 Proxy instance be used for multiple applications using different subdomains?
 
 Yes, you can!😼
 
@@ -340,7 +412,9 @@ The rest of the configuration you will need:
 - Set Azure AD OAuth2 Proxy application to support multi-tenant account types (if required, depends on your use case);
 - In OAuth2 Proxy Ingress Object definition, add multiple hosts representing your applications;
 
-My recommendation is to deploy OAuth2 Proxy in a dedicated namespace, separately from other application deployments, for cleaner structure. Please **DO NOT** use ```default```  or ```kube-system``` namespaces for this purpose since it's not considered to be a good practice.
+> Please note that in this case, where multiple applications use the same OAuth2 Proxy instance, you have multiple upstreams and **routing with path-based mapping will be the default behaviour of OAuth2 Proxy**. One way you can make it work, as it's described in this blog post, is by configuring OAuth2 Proxy with NGINX ```auth_request``` directive. ```auth_request``` directive can be configured by providing ```auth-url``` and ```auth-signin``` annotations in NGINX Ingress definition, just as described in the section above - these annotations will allow you to provide the redirect URL that can be used after successful sign-in, per applications.
+
+In this scenario you should consider deploying OAuth2 Proxy in a dedicated namespace, separately from other application deployments, for cleaner structure. Please **DO NOT** use ```default```  or ```kube-system``` namespaces for this purpose since it's not considered to be a good practice.
 
 This approach works both with OIDC and Azure providers, with OAuth2 Proxy ```v7.3.0``` (OIDC only due to the bug with Azure provider mentioned in the section below) and ```v7.4.0``` (both Azure and OIDC).
 

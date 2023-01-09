@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
-        "wordCount" : "3602",
+        "wordCount" : "4146",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -541,7 +541,7 @@
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">17-minute read</span>
+            <span class="post__meta-text">20-minute read</span>
           </li>
         </ul>
       <p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_proxy_banner.png" alt="Article banner for enabling OAuth 2.0 in AKS"></p>
@@ -557,9 +557,10 @@
           <ul>
             <li><a href="#cookie-secret">Cookie Secret</a></li>
             <li><a href="#create-oauth2-proxy-secrets-in-aks-cluster">Create OAuth2 Proxy secrets in AKS cluster</a></li>
+            <li><a href="#deployment-with-helm">Deployment with Helm</a></li>
           </ul>
         </li>
-        <li><a href="#can-i-use-single-oauth2-proxy-instance-for-multiple-applications-using-different-subdomains">Can I use single OAuth2 Proxy instance for multiple applications using different subdomains?</a></li>
+        <li><a href="#can-a-single-oauth2-proxy-instance-be-used-for-multiple-applications-using-different-subdomains">Can a single OAuth2 Proxy instance be used for multiple applications using different subdomains?</a></li>
       </ul>
     </li>
     <li><a href="#known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</a>
@@ -823,7 +824,66 @@
 </span></span></span></code></pre></div><p>Once you've verified that configuration and the template look correct you can deploy OAuth2 Proxy in AKS cluster where your application is running with following kubectl command: <code>kubectl apply -f ./my-path-to-template/oauth2-proxy.yaml</code></p>
 <p>And it's done! Now, when you access the application, you will first be redirected to the Microsoft authentication.</p>
 <p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png" alt="Screenshot of Microsoft login screen once OAuth2 Proxy is enabled"></p>
-<h3 id="can-i-use-single-oauth2-proxy-instance-for-multiple-applications-using-different-subdomains">Can I use single OAuth2 Proxy instance for multiple applications using different subdomains?</h3>
+<h4 id="deployment-with-helm">Deployment with Helm</h4>
+<p>There are multiple Helm charts available that can make it significantly easier to deploy OAuth2 Proxy. There&rsquo;s an official Helm chart available: <a href="https://github.com/oauth2-proxy/manifests">auth2-proxy/manifests</a> and there&rsquo;s also a Bitnami Helm chart available which  provides support for direct deployment to AKS with Bitnami Charts at Microsoft Azure Marketplace: <a href="https://bitnami.com/stack/oauth2-proxy/helm">OAuth2 Proxy packaged by Bitnami</a>.</p>
+<p>In this example I will be using the official Helm chart, but the approach is the same for both charts. There may be minor differences in supported parameters, but most of them are identical. It&rsquo;s always a good practice to verify your configuration towards official documentation before deployment.</p>
+<p>What is great with OAuth2 Proxy Helm chart is that you don&rsquo;t need to explicitly create Kubernetes Secrets or even a Redis deployment - by providing just a few additional parameters as part of the Helm chart deployment most of the configuration and set up will be done automatically for you, compared to deployment with Kubernetes YAML templates.</p>
+<p>So, if we were to deploy OAuth2 Proxy with the same configuration as we used in the section above where we deployed it with Kubernetes YAML templates, we will first need to create a <code>values.yaml</code> file which will include deployment configuration parameters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/oauth2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="p">[</span><span class="l">application-hostname]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cert-manager.io/cluster-issuer</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">cert-manager-cluster-issuer-name]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/proxy-body-size</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2000m&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/proxy-buffer-size</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;32k&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy-ingress-tls-secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="p">[</span><span class="l">application-hostname]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="l">_proxycookie</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">clientID</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">INJECTED_OAUTH2_PROXY_CLIENT_ID]</span><span class="w"> </span><span class="c"># can be replaced dynamically as part of CI/CD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">clientSecret</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">INJECTED_OAUTH2_PROXY_CLIENT_SECRET]</span><span class="w"> </span><span class="c"># can be replaced dynamically as part of CI/CD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieSecret</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">INJECTED_OAUTH2_PROXY_COOKIE_SECRET ]</span><span class="w"> </span><span class="c"># can be replaced dynamically as part of CI/CD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">128Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">128Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">extraArgs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">oidc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">azure-tenant</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">oauth2-proxy-azure-ad-tenant-id] </span><span class="w"> </span><span class="c"># Azure AD OAuth2 Proxy application Tenant ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pass-access-token</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">email-domain</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;*&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">upstream</span><span class="p">:</span><span class="w"> </span><span class="l">file:///dev/null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">http-address</span><span class="p">:</span><span class="w"> </span><span class="m">0.0.0.0</span><span class="p">:</span><span class="m">4180</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">oidc-issuer-url</span><span class="p">:</span><span class="w"> </span><span class="l">https://login.microsoftonline.com/[oauth2-proxy-azure-ad-tenant-id]/v2.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">session-store-type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w"> </span><span class="c"># &lt;- Redis setting, can be removed if default cookie storage is used</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis-use-cluster</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># &lt;- Redis setting, can be removed if default cookie storage is used</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis-cluster-connection-urls</span><span class="p">:</span><span class="w"> </span><span class="l">redis://[REDIS_URL_OR_IP]:[REDIS_PORT]</span><span class="w"> </span><span class="c"># Redis setting, can be removed if default cookie storage is used</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">podLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">customLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">replicaCount</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span></code></pre></div><p>That&rsquo;s it!😺 Now you can deploy OAuth2 Proxy with Helm:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
+</span></span><span class="line"><span class="cl"> helm repo update
+</span></span><span class="line"><span class="cl"> helm upgrade --install oauth2-proxy -n oauth2-proxy --create-namespace -f values.yaml oauth2-proxy/oauth2-proxy
+</span></span></code></pre></div><p>There are many useful parameters available that you can configure to your benefit like, for example, use existing Kubernetes Secrets for OAuth2 Proxy or choosing between defining OAuth2 Proxy variables as secrets or environment variables, etc. You can check all the available parameters for the official Helm chart here: <a href="https://artifacthub.io/packages/helm/oauth2-proxy/oauth2-proxy#configuration">oauth2-proxy/oauth2-proxy: Configuration</a> and for the Bitnami chart here: <a href="https://github.com/bitnami/charts/blob/main/bitnami/oauth2-proxy/README.md#parameters">bitnami/oauth2-proxy: Parameters</a>.</p>
+<h3 id="can-a-single-oauth2-proxy-instance-be-used-for-multiple-applications-using-different-subdomains">Can a single OAuth2 Proxy instance be used for multiple applications using different subdomains?</h3>
 <p>Yes, you can!😼</p>
 <p>There may be use cases where you have multiple applications running in a Kubernetes cluster which are exposed on different subdomains. It may be cumbersome to create and maintain a dedicated instance of OAuth2 Proxy for every application. Fortunately it is possible to use a single instance of OAuth2 Proxy and still provide support for authentication to your applications.</p>
 <p>A requirement for this is to use Redis for storing cookies. In this scenario multiple cookies will be used which will exceed the max cookie size set by default OAuth2 Proxy Cookie Storage. You can read more about setting up Redis storage for OAuth2 Proxy here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage/#redis-storage">Redis Storage</a></p>
@@ -838,7 +898,10 @@
 <li>Set Azure AD OAuth2 Proxy application to support multi-tenant account types (if required, depends on your use case);</li>
 <li>In OAuth2 Proxy Ingress Object definition, add multiple hosts representing your applications;</li>
 </ul>
-<p>My recommendation is to deploy OAuth2 Proxy in a dedicated namespace, separately from other application deployments, for cleaner structure. Please <strong>DO NOT</strong> use <code>default</code>  or <code>kube-system</code> namespaces for this purpose since it&rsquo;s not considered to be a good practice.</p>
+<blockquote>
+<p>Please note that in this case, where multiple applications use the same OAuth2 Proxy instance, you have multiple upstreams and <strong>routing with path-based mapping will be the default behaviour of OAuth2 Proxy</strong>. One way you can make it work, as it&rsquo;s described in this blog post, is by configuring OAuth2 Proxy with NGINX <code>auth_request</code> directive. <code>auth_request</code> directive can be configured by providing <code>auth-url</code> and <code>auth-signin</code> annotations in NGINX Ingress definition, just as described in the section above - these annotations will allow you to provide the redirect URL that can be used after successful sign-in, per applications.</p>
+</blockquote>
+<p>In this scenario you should consider deploying OAuth2 Proxy in a dedicated namespace, separately from other application deployments, for cleaner structure. Please <strong>DO NOT</strong> use <code>default</code>  or <code>kube-system</code> namespaces for this purpose since it&rsquo;s not considered to be a good practice.</p>
 <p>This approach works both with OIDC and Azure providers, with OAuth2 Proxy <code>v7.3.0</code> (OIDC only due to the bug with Azure provider mentioned in the section below) and <code>v7.4.0</code> (both Azure and OIDC).</p>
 <p>So, let&rsquo;s take a look at an example.</p>
 <p>I have two apps exposed on different subdomains:</p>
