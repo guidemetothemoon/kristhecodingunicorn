@@ -589,7 +589,7 @@ spec:
 
 ## All-in-one deployment package
 
-You can find all the Kubernetes YAML deployment templates as well as a PowerShell script that includes all the necessary commands to create an Azure AD application and installs OAuth2 Proxy in my GitHub repo: [guidemetothemoon:oauth2-proxy](https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/oauth2-proxy)
+In my GitHub repo you can find a PowerShell script that includes all the necessary commands and templates in order to create an Azure AD application (or use existing app) for OAuth2 Proxy and deploy OAuth2 Proxy to a Kubernetes cluster, either with Kubernetes YAML templates or with official Helm chart: [guidemetothemoon:oauth2-proxy](https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/oauth2-proxy)
 
 ## Additional resources
 
