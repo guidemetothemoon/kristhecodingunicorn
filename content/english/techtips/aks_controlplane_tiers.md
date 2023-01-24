@@ -60,7 +60,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   sku_tier                         = "Paid"
 }
 
-# REST OF THE CODE IS OMMITTED
+# REST OF THE CODE IS OMITTED
 ```
 
 **Bicep**
