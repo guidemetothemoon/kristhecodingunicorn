@@ -3,18 +3,19 @@
   dir="ltr"
   lang="en"
   data-theme="dark"
-  
-    class="html theme--dark"
-  
+  class="html"
 ><head>
   <title>
-    Kris - The Coding Unicorn
+    
+      Kris - The Coding Unicorn
         |
         Kris&#39;s Quick Cup of (A)K8S #5 - Housekeeping for Kubernetes Contexts
+
+
       
 
-    
 
+    
   </title>
 
   
@@ -22,7 +23,11 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="In this tech tip we look at what Kubernetes context is and how we can clean up unused Kubernetes contexts."
+    content="
+      In this tech tip we look at what Kubernetes context is and how we can clean up unused Kubernetes contexts.
+
+
+    "
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -31,11 +36,12 @@
     
     <link
       rel="stylesheet"
-      href="/scss/main.min.5794be192d21535bdd301561e043a96b6adbad2b5c08279deff459e4661c613f.css"
-      integrity="sha256-V5S&#43;GS0hU1vdMBVh4EOpa2rbrStcCCed7/RZ5GYcYT8="
+      href="/scss/main.min.b2e0cb07595e3519ab1193bb421914e06c0e26b0cc561fef23b3c6131d4d2ffa.css"
+      integrity="sha256-suDLB1leNRmrEZO7QhkU4GwOJrDMVh/vI7PGEx1NL/o="
       crossorigin="anonymous"
       type="text/css"
     />
+
   
 
   
@@ -56,36 +62,29 @@
       crossorigin="anonymous"
       media="screen"
     />
+
   
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
-    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    href="/fontawesome/css/fontawesome.min.b1c4e6a10bdbab01f33fff9d78816ee68cf9a9a731f07668afd546a79924cb80.css"
+    integrity="sha256-scTmoQvbqwHzP/&#43;deIFu5oz5qacx8HZor9VGp5kky4A="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
-    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    href="/fontawesome/css/solid.min.423dee17c62f55fa733a4ee13e00d523dfce88cc4f4ab4549a24ba36bd9de681.css"
+    integrity="sha256-Qj3uF8YvVfpzOk7hPgDVI9/OiMxPSrRUmiS6Nr2d5oE="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
-    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
-    crossorigin="anonymous"
-    type="text/css"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
-    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    href="/fontawesome/css/brands.min.b7d54133b27e5b4de15245b8e143de3e8ed2d674c706137274cedc9953f31917.css"
+    integrity="sha256-t9VBM7J&#43;W03hUkW44UPePo7S1nTHBhNydM7cmVPzGRc="
     crossorigin="anonymous"
     type="text/css"
   />
@@ -113,7 +112,7 @@
   <script
   async
   defer
-  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  src="https://umami-guidemetothemoon.vercel.app/umami.js"
   data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
 ></script>
 
@@ -235,16 +234,24 @@
   </script>
 
 
+
 </head>
-<body class="body">
+<body
+    
+      class="body theme--dark"
+
+    
+  >
     <div class="wrapper">
       <aside
         
           class="wrapper__sidebar"
+
         
       ><div
   class="sidebar
     animated fadeInDown
+
   "
 >
   <div class="sidebar__content">
@@ -258,6 +265,7 @@
         <div class="sidebar__introduction-title">
           <a href="/">Kris - The Coding Unicorn</a>
         </div>
+
       
       <div class="sidebar__introduction-description">
         <p>Hey! I'm Kris and I like to code. Welcome to my tech corner!🤗 <br /> Azure Hero and Microsoft Azure MVP⛅️ | Open-Sourceress🧙🏻‍♀️ | Volunteer🦾 | <br /> Cat Mom 🐈🐈🐈</p>
@@ -269,109 +277,118 @@
           <a
             href="https://www.linkedin.com/in/krisde"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="Linkedin"
             title="Linkedin"
           >
             <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://github.com/guidemetothemoon"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="GitHub"
             title="GitHub"
           >
             <i class="fab fa-github fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://twitter.com/kristhecodingu1"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="Twitter"
             title="Twitter"
           >
             <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://sessionize.com/kristina-devochko"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="Sessionize"
             title="Sessionize"
           >
             <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://www.instagram.com/guidemetothemoon"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="instagram"
             title="instagram"
           >
             <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="/contact/"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="e-mail"
             title="e-mail"
           >
             <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="rss"
             title="rss"
           >
             <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://www.azureheroes.community/user/15391"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="Azure Heroes"
             title="Azure Heroes"
           >
             <i class="fas fa-mask fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
         <li class="sidebar__list-item">
           <a
             href="https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko"
             target="_blank"
-            rel="noopener me"
+            rel="noopener"
             aria-label="Microsoft MVP"
             title="Microsoft MVP"
           >
             <i class="fas fa-cloud fa-2x" aria-hidden="true"></i>
           </a>
         </li>
+
       
     </ul>
   </div><footer class="footer footer__sidebar">
@@ -380,6 +397,7 @@
       &copy;
       
         2023 - Powered by Hugo
+
       
     </li>
     
@@ -396,11 +414,13 @@
       <main
         
           class="wrapper__main"
+
         
       >
         <header class="header"><div
   class="
     animated fadeInDown
+
   "
 >
   <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
@@ -410,6 +430,7 @@
   </a>
   <nav class="nav">
     <ul class="nav__list" id="navMenu">
+      
       
       
         
@@ -423,7 +444,9 @@
               >Home</a
             >
           </li>
+
         
+
 
       
         
@@ -437,7 +460,9 @@
               >Blog</a
             >
           </li>
+
         
+
 
       
         
@@ -451,7 +476,9 @@
               >Tech Tips</a
             >
           </li>
+
         
+
 
       
         
@@ -465,7 +492,9 @@
               >Public Talks and Publications</a
             >
           </li>
+
         
+
 
       
         
@@ -479,7 +508,9 @@
               >About</a
             >
           </li>
+
         
+
 
       
         
@@ -493,7 +524,9 @@
               >Contact</a
             >
           </li>
+
         
+
 
       
     </ul>
@@ -507,6 +540,7 @@
   <div
     class="post 
       animated fadeInDown
+
     "
   >
     
@@ -538,11 +572,14 @@ But, did you know that <strong>once a Kubernetes cluster is deleted and you&rsqu
         <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/gitops/">gitops</a></span>
 
 
+
+
       
     </div>
 
     
   </div>
+
 
       </main>
     </div><footer class="footer footer__base">
@@ -551,6 +588,7 @@ But, did you know that <strong>once a Kubernetes cluster is deleted and you&rsqu
       &copy;
       
         2023 - Powered by Hugo
+
       
     </li>
     
