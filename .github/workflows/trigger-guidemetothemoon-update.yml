@@ -1,8 +1,12 @@
 name: Trigger guidemetothemoon content update
-on: deployment_status
+on:
+  workflow_run:
+    workflows: [pages-build-deployment]
+    types:
+      - completed
 jobs:
   trigger-guidemetothemoon-workflow:
-    if: github.event.deployment_status.state == 'success' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/github-script@v6
