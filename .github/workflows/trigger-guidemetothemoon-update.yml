@@ -2,6 +2,7 @@ name: Trigger guidemetothemoon content update
 on: [push]
 jobs:
   trigger-guidemetothemoon-workflow:
+    if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/github-script@v6
