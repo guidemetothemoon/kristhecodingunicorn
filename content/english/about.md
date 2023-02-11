@@ -28,7 +28,7 @@ I also strongly believe that contributing to making this world a better place by
 
 🌱 Supporter and contributor for multiple open-source projects on GitHub;
 
-🌱 Board Member at NNUG Oslo and Co-Organizer of Cloud Native and Kubernetes Oslo meetups;
+🌱 Board Member at Cloud Native Norway, NNUG Oslo and Co-Organizer of Cloud Native and Kubernetes Oslo and DEVREAL Oslo meetups;
 
 🌱 Volunteer at OWASP;
 
