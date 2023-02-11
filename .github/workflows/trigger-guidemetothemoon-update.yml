@@ -1,5 +1,5 @@
 name: Trigger guidemetothemoon content update
-on: [push]
+on: deployment_status
 jobs:
   trigger-guidemetothemoon-workflow:
     if: github.event.deployment_status.state == 'success'
