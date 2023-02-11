@@ -1,0 +1,16 @@
+name: Trigger guidemetothemoon content update
+on: [push]
+jobs:
+  trigger-guidemetothemoon-workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'guidemetothemoon',
+            repo: 'guidemetothemoon',
+            workflow_id: 'recent-activities.yml',
+            ref: 'main'
+          })
