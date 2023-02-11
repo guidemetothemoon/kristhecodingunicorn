@@ -13,7 +13,11 @@ tags = [
 
 📺 3rd May, 2023: [Stockholm Tech Show - Managed Kubernetes Service: Day Zero Survival Pack](https://stockholmtechshow.se/konferens-2023/)
 
+📺 18. April, 2023: [KubeCon + CloudNativeCon Europe 2023: Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes](https://kccnceu2023.sched.com/event/1HyW9)
+
 📺 16th March, 2023: [KCD Ukraine - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-ukraine-presents-kcd-ukraine-2023-fundraiser/)
+
+📺 28. February, 2023: [Wilhelmsen employee event - Security Champions Workshop #3: DevSecOps for AKS]()
 
 📺 23.-24. February, 2023: [KCD Amsterdam - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-netherlands-presents-kubernetes-community-days-amsterdam-2023/)
 
