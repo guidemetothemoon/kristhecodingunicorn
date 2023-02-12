@@ -6,7 +6,18 @@
     <description>Recent content in Tech Tips on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/techtips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to trigger subsequent GitHub workflow in a different repository</title>
+      <link>https://kristhecodingunicorn.com/techtips/gh_crossrepo_wf_trigger/</link>
+      <pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/gh_crossrepo_wf_trigger/</guid>
+      
+        <description>In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition.</description>
+      
+    </item>
+    
     <item>
       <title>AKS control plane tiers - what, when and how?</title>
       <link>https://kristhecodingunicorn.com/techtips/aks_controlplane_tiers/</link>

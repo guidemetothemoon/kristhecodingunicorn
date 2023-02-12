@@ -3,7 +3,7 @@ author = "Kristina D."
 title = "How to trigger subsequent GitHub workflow in a different repository"
 date = "2023-02-12"
 description = "In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition."
-draft = true
+draft = false
 tags = [
     "techtips",
     "github",
@@ -18,7 +18,7 @@ I was recently working on automating some manual actions related to my tech blog
 **Did you know that it is possible to trigger a GitHub workflow that resides in a different repository?** Let me show you how!😼
 There are multiple approaches to how you can implement this but I have found following approach to be most preferrable. Let's say that you have repository A and repository B, and you want to trigger a GitHub workflow in repository B once workflow in repository A succeeds.
 
-1. **Create a GitHub Personal Access Token (PAT) that will be added both to repository A and B.** I recommend to follow the least privilege principle and create a fine-grained personal access token that is scoped only to the repositories A and B. When it comes to configuring PAT permissions you will need to see what's applicable to your use case. For instance, if you're using GitHub Pages or not. Relevant sections to configure permissions for are ```Actions```, ```Deployments``` and ```Pages```. You can read here about how to create a fine-grained GitHub PAT: [Creating a fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token)
+1. **Create a GitHub Personal Access Token (PAT) that will be added both to repository A and B.** I recommend to follow the least privilege principle and create a fine-grained personal access token that is scoped only to the repositories A and B. When it comes to configuring PAT permissions you will need to see what's applicable to your use case. For instance, if you're using GitHub Pages or not. Relevant sections to configure permissions for are ```Actions```, ```Deployments``` and ```Pages```. In my example I have configured ```Read``` access on ```Deployments``` to be able to check deployment status and ```Read/Write``` access on ```Actions``` to be able to check and trigger workflows. You can read here about how to create a fine-grained GitHub PAT: [Creating a fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token)
 
 2. **Add created GitHub PAT as a repository secret for repository A and B, with the name of your choosing.** You can read here how to add a repository secret: [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
 
