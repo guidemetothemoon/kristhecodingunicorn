@@ -15,6 +15,8 @@ tags = [
 
 📺 18. April, 2023: [KubeCon + CloudNativeCon Europe 2023: Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes](https://kccnceu2023.sched.com/event/1HyW9)
 
+📺 17th March, 2023: [DEVREAL Azure Open Source Breakfast - Exploring chaos engineering…the FUN way!](https://www.meetup.com/devreal/events/291534679/)
+
 📺 16th March, 2023: [KCD Ukraine - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-ukraine-presents-kcd-ukraine-2023-fundraiser/)
 
 📺 28. February, 2023: [Wilhelmsen employee event - Security Champions Workshop #3: DevSecOps for AKS]()
