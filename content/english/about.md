@@ -28,7 +28,7 @@ I also strongly believe that contributing to making this world a better place by
 
 🌱 Supporter and contributor for multiple open-source projects on GitHub;
 
-🌱 Board Member at NNUG Oslo and Co-Organizer of Cloud Native and Kubernetes Oslo meetups;
+🌱 Board Member at Cloud Native Norway, NNUG Oslo and Co-Organizer of Cloud Native and Kubernetes Oslo and DEVREAL Oslo meetups;
 
 🌱 Volunteer at OWASP;
 
@@ -36,7 +36,7 @@ I also strongly believe that contributing to making this world a better place by
 
 🌱 Volunteer at animal shelter;
 
-Other than that, I\'m a cat mom, a Potterhead, a Witcher fan and a bookworm. I love books, photography, puzzles, board games, cats and unicorns. I am also an active supporter of sustainability, including sustainable software engineering, and animal welfare - I have been a vegetarian for over 8 years and vegan for over 2 years. I\'m an eager nature addict as well - photo below was taken in Oslofjord area, one of the most known inlets in the Eastern Norway, which is known for a multitude of idyllic towns and villages that are full of exploration opportunities for the tourists.
+Other than that, I\'m a cat mom, a Witcher fan, I love books, photography, puzzles, board games, cats and unicorns. I am also an active supporter of sustainability, including sustainable software engineering, and animal welfare - I have been a vegetarian for over 8 years and vegan for over 3 years. I\'m an eager nature addict as well - photo below was taken in Oslofjord area, one of the most known inlets in the Eastern Norway, which is known for a multitude of idyllic towns and villages that are full of exploration opportunities for the tourists.
 
 Anyway, thanks for stopping by! Check out the blog and tech tips section and stay tuned for the coming updates.☕🦾
 
