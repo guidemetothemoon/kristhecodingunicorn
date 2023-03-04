@@ -18,7 +18,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.110.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.111.1"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_proxy_svc\/",
-        "wordCount" : "2724",
+        "wordCount" : "2881",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -374,6 +374,11 @@
         </li>
       
     </ul>
+    <ul class="sidebar__list">
+      <li class="sidebar__list-item">
+        <a role="button" href="https://www.buymeacoffee.com/kristhecodingu1" target="_blank"><img style="max-width:100%;height:auto" src="/images/bmc_button.png" alt="Buy A Meal For Stray Cat"></a>
+      </li>
+    </ul>
   </div><footer class="footer footer__sidebar">
   <ul class="footer__list">
     <li class="footer__item">
@@ -527,7 +532,7 @@
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">13-minute read</span>
+            <span class="post__meta-text">14-minute read</span>
           </li>
         </ul>
       <p><img src="../../images/k8s_proxy/k8s_proxy_banner.png" alt="Article banner for using Kubernetes Service as proxy"></p>
@@ -535,7 +540,11 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#why-would-proxying-to-external-services-from-kubernetes-cluster-be-relevant">Why would proxying to external services from Kubernetes cluster be relevant?</a></li>
-    <li><a href="#what-is-kubernetes-service-and-what-kinds-of-kubernetes-service-can-be-created">What is Kubernetes Service and what kinds of Kubernetes Service can be created?</a></li>
+    <li><a href="#what-is-a-kubernetes-service-and-what-kinds-of-kubernetes-service-can-be-created">What is a Kubernetes Service and what kinds of Kubernetes Service can be created?</a>
+      <ul>
+        <li><a href="#endpoint-vs-endpointslice">Endpoint vs. EndpointSlice</a></li>
+      </ul>
+    </li>
     <li><a href="#implementation-description-and-preparation">Implementation description and preparation</a></li>
     <li><a href="#proxy-to-external-services-with-service-without-selectors">Proxy to external services with Service without Selectors</a></li>
     <li><a href="#proxy-to-external-services-with-externalname-service">Proxy to external services with ExternalName Service</a></li>
@@ -545,50 +554,72 @@
 </div>
 <p>So, recently I've faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those. I would like to share one of the experiments where I tested several Kubernetes Service types to implement proxying of the requests to external services from Kubernetes cluster.</p>
 <h2 id="why-would-proxying-to-external-services-from-kubernetes-cluster-be-relevant">Why would proxying to external services from Kubernetes cluster be relevant?</h2>
-<p>There may be multiple reasons for why you would look into setting up this kind of proxying to external services from Kubernetes cluster. A few use case examples may be:</p>
+<p>There may be multiple reasons for why you would look into setting up this kind of proxying to external services from Kubernetes cluster.</p>
+<p>A few use case examples may be:</p>
 <ul>
-<li>You have a hybrid deployment where some services are running in Kubernetes cluster and some services haven't been migrated yet and are running, for example, on-premises.</li>
-<li>You have services that will always reside outside of the cluster due to specific requirements like, for instance, object storage or database.</li>
-<li>You have a service that is located in another data center than the Kubernetes cluster.</li>
-<li>You're performing a bigger restructuring/refactoring in your Kubernetes cluster and would like to avoid downtime and have an easy way to redirect traffic during migration.</li>
+<li>You have a hybrid deployment where some services are running in Kubernetes cluster and some services haven&rsquo;t been migrated yet and are running, for example, on-premises.</li>
+<li>You have services that will always reside outside of the cluster due to specific requirements like, for instance, an object storage or a database.</li>
+<li>You have a service that is located in a different datacenter than the Kubernetes cluster.</li>
+<li>You&rsquo;re performing a larger re-structuring/refactoring in your Kubernetes cluster and would like to avoid downtime and have an easy way to redirect traffic during migration.</li>
 </ul>
-<p>Scenario where this was relevant for me was like this: I have a single-tenant application used by hundreds of customers. Some instances of this application are already hosted in Kubernetes (Azure Kubernetes Service (AKS) in this case) but most of the instances are still hosted on hundreds of Azure VMs which are using only dynamic IPs. A new component that has been added to standard application will be sending requests to an external service's API that is hosted by a third-party. This external API accepts requests coming <strong>only</strong> from static IPs, i.e. you will need to have a single static IP that the third-party will need to whitelist in order for you to call their APIs. This would work fine for the instances hosted in Kubernetes since we're already using Ingress Controller there with a static public IP that the requests will be sent from but, as you may guess, this wouldn&rsquo;t work for most of the instances that are still deployed on Azure VMs with dynamic IPs. For those cases there was a need to find other solutions.</p>
+<p>Scenario where this became relevant for me was like this: I have a single-tenant application used by hundreds of customers. Some instances of this application are already hosted in Kubernetes (Azure Kubernetes Service (AKS) in this case), but most of the instances are still hosted on hundreds of Azure VMs which are using only dynamic IPs. A new component that has been added to standard application will be sending requests to an external service&rsquo;s API that is hosted by a third-party. This external API accepts requests coming <strong>only</strong> from static IPs, i.e. you will need to have a single static IP that the third-party will need to whitelist in order for you to call their APIs. This would work fine for the instances hosted in Kubernetes since we&rsquo;re already using Ingress Controller there with a static public IP that the requests will be sent from but, as you may guess, this wouldn&rsquo;t work for most of the instances that are still deployed on Azure VMs with dynamic IPs. For those cases there was a need to find a different solutions</p>
 <blockquote>
-<p>When an AKS cluster is created it'll by default create an external Azure Load Balancer and assign it a public IP which is only valid for the lifespan of the LoadBalancer Service. If you need a static IP you need to explicitly create it and assign to your Kubernetes services. If you're also using a public facing Ingress Controller with static external IP, you will need to ensure that you have properly defined the necessary IP addresses in the Azure Load Balancer. You must also verify that you've defined the correct IP rule order in Azure Load Balancer Frontend IP Configuration section. It's important because the first frontend IP from the list will be used by Azure Load Balancer for the egress traffic from the AKS cluster. Official Microsoft documentation describes this pretty well: <a href="https://docs.microsoft.com/en-us/azure/aks/egress">Egress traffic in AKS</a>.</p>
+<p>When an AKS cluster is created it&rsquo;ll by default create an external Azure Load Balancer and assign it a public IP which is only valid for the lifespan of the LoadBalancer Service. If you need a static IP you need to explicitly create it and assign to your Kubernetes services. If you're also using a public facing Ingress Controller with static external IP, you will need to ensure that you have properly defined the necessary IP addresses in the Azure Load Balancer. You must also verify that you&rsquo;ve defined the correct IP rule order in Azure Load Balancer Frontend IP Configuration section. It&rsquo;s important because the first frontend IP from the list will be used by Azure Load Balancer for the egress traffic from the AKS cluster. Official Microsoft documentation describes this pretty well: <a href="https://docs.microsoft.com/en-us/azure/aks/egress">Egress traffic in AKS</a>.</p>
 </blockquote>
-<p>There are multiple ways to solve the scenario that I've mentioned above:</p>
+<p>Scenario that I&rsquo;ve mentioned above can be resolved in multiple ways:</p>
 <ol>
-<li><strong>Dedicated VM with installed transparent proxy.</strong> You could set up a dedicated VM with a static IP and install a transparent proxy solution that would forward all the requests to the respective external service. Disadvantage of that is that you will need someone to maintain that proxy solution in addition to the dedicated VM which must also be secured and protected from, for instance, DDoS attacks.</li>
-<li><strong>Web traffic load balancer (Azure Application Gateway).</strong> Another possiblity which works pretty well is to set up a web traffic load balancer like Azure Application Gateway that could be created with a static IP as well. I will not go into details on how to do that but I think that this guide describes pretty well how you could use Azure Application Gateway to redirect web traffic: <a href="https://docs.microsoft.com/en-us/azure/application-gateway/tutorial-url-redirect-powershell">Tutorial: Redirect web traffic using Azure PowerShell</a>. The disadvantage of this approach is additional cost - in case of Azure Application Gateway, depending on the size of the gateway the price will vary, and the service is charged per hour. Depending on which location the service is deployed to, the price may vary from 22 to almost 300 dollars a month.</li>
+<li>
+<p><strong>Set up a dedicated VM with installed transparent proxy.</strong> You could set up a dedicated VM with a static IP and install a transparent proxy solution that would forward all the requests to the respective external service. Disadvantage of this approach is that both the transparent proxy and the VM where it&rsquo;s deployed must be continuously maintained, updated, secured and protected from, for instance, DDoS attacks.</p>
+</li>
+<li>
+<p><strong>Use a web traffic load balancer (for example, Azure Application Gateway).</strong> Another possiblity which works pretty well is to set up a web traffic load balancer, like Azure Application Gateway, that could be configured with a static IP. I will not go into details on how to do that, but I think that this guide describes pretty well how you could use Azure Application Gateway to redirect web traffic: <a href="https://docs.microsoft.com/en-us/azure/application-gateway/tutorial-url-redirect-powershell">Tutorial: Redirect web traffic using Azure PowerShell</a>. The disadvantage of this approach is additional cost - in case of Azure Application Gateway, depending on the size of the gateway, the price will vary, and the service is charged per hour. Depending on which location the service is deployed to,- at the point of creating this blog post, the price is defined to vary from 22 to almost 300 dollars a month.</p>
+</li>
 </ol>
 <blockquote>
-<p>It's important to note that if you're setting up Azure Application Gateway, you can't use Redirection rule for the proxy scenario since it will be a pure URL redirection where no intervention with the HTTP request will happen and the request will still be sent from the original client IP. You will need to set up a backend pool pointing to the external service - then, when request hits Azure Application Gateway, it will set up a new session with the backend, assigning the request a new IP which would be equal to the static IP of the gateway, as well as add the source IP of the request as a &quot;X-Forwarded-For&quot; HTTP request header. More information can be found here: <a href="https://docs.microsoft.com/en-us/azure/application-gateway/how-application-gateway-works#modifications-to-the-request">How an application gateway routes a request</a></p>
+<p>It&rsquo;s important to note that if you&rsquo;re setting up Azure Application Gateway, you can&rsquo;t use Redirection rule for the proxy scenario, since it will be a pure URL redirection where no intervention with the HTTP request will happen, and the request will still be sent from the original client IP. You will need to set up a backend pool pointing to the external service - then, when request hits Azure Application Gateway, it will set up a new session with the backend, assigning the request a new IP which would be equal to the static IP of the gateway, as well as add the source IP of the request as a <code>X-Forwarded-For</code> HTTP request header. More information can be found here: <a href="https://docs.microsoft.com/en-us/azure/application-gateway/how-application-gateway-works#modifications-to-the-request">How an application gateway routes a request</a></p>
 </blockquote>
-<p>Since I already had part of the workload running in Kubernetes and the remaining instances were planned to be migrated to Kubernetes in the near future it was clear that the solution I needed to find was temporary. Once all of the instances are migrated to Kubernetes, this problem will be solved automatically. And the cherry on top is that we will need to account only for one static IP address that needs to be whitelisted - the public IP of Azure Load Balancer configured for my AKS cluster! So, why not use the additional capabilities in the existing Kubernetes platform in order to provide this temporary solution for VM-hosted workloads? That's when Kubernetes Service came into picture.</p>
-<h2 id="what-is-kubernetes-service-and-what-kinds-of-kubernetes-service-can-be-created">What is Kubernetes Service and what kinds of Kubernetes Service can be created?</h2>
-<p>Let's briefly clarify what a Kubernetes Service is and what types of Kubernetes Service exist.
-Kubernetes Service is a an abstraction over a logical set of Pods that your application is running on in Kubernetes. As we know, Pods are temporary and can die at any moment and get replaced with a new set of Pods with new IP addresses, therefore Service is a way to expose your application, as well as define the policy for how application Pods must be accessed. More on this in official Kubernetes documentation: <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>.</p>
-<p>There are multiple kinds of Kubernetes Service you can create:</p>
+<p>Since I already had parts of the workload running in Kubernetes and the remaining instances were planned to be migrated to Kubernetes in the near future it was clear that the solution I needed to find was temporary. Once all of the instances are migrated to Kubernetes, this problem will be solved by itself. And the cherry on top is that we will need to account only for one static IP address that would need to be whitelisted - the public IP of the Azure Load Balancer that is configured for the respective AKS cluster! So, why not use the additional capabilities in the existing Kubernetes platform in order to provide this temporary solution for VM-hosted workloads? That&rsquo;s when Kubernetes Service came into picture!😺</p>
+<h2 id="what-is-a-kubernetes-service-and-what-kinds-of-kubernetes-service-can-be-created">What is a Kubernetes Service and what kinds of Kubernetes Service can be created?</h2>
+<p>Let&rsquo;s briefly clarify what a Kubernetes Service is and what types of Kubernetes Service exist.
+Kubernetes Service is an abstraction over a logical set of Pods (simply said, a collection of Pods) that your application is running on in Kubernetes. As you may know, Pods are ephemeral and can die at any moment. When a Pod dies, it gets replaced with a new Pod that gets assigned a new IP address, which means that you can&rsquo;t rely on IP addresses of the Pods in order to route your traffic. Kubernetes Service is a resource that solves precisely this problem: it&rsquo;s placed in front of a group of Pods that your application is deployed to, and defines the policy for how application Pods must be accessed. More on this in official Kubernetes documentation: <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>.</p>
+<p>You can create a Kubernetes Service of following types:</p>
 <ul>
-<li><strong>ClusterIP (default):</strong> internal Service with assigned internal IP - will only be reachable from inside the Kubernetes cluster.</li>
-<li><strong>NodePort:</strong> Service is exposed at static port on each Node's IP and can be reached from outside the cluster by calling [NodeIP]:[NodePort]. Also creates ClusterIP Service automatically.</li>
-<li><strong>LoadBalancer:</strong> normally used by cloud providers, Service is exposed and reachable from the outside via cloud provider's load balancer. For example, in case of AKS it will be Azure Load Balancer. Also creates ClusterIP and NodePort Services automatically.</li>
-<li><strong>ExternalName:</strong> Service is mapped to a respective CNAME record.</li>
+<li>
+<p><strong>ClusterIP (default):</strong> internal Service with assigned cluster-internal IP - will only be reachable from inside the Kubernetes cluster.</p>
+</li>
+<li>
+<p><strong>NodePort:</strong> Service is exposed at a static port on each Node&rsquo;s IP and can be reached from outside the cluster by calling [NodeIP]:[NodePort]. ClusterIP Service is created automatically.</p>
+</li>
+<li>
+<p><strong>LoadBalancer:</strong> this Service type is normally used by the cloud providers. The Service is exposed and reachable from the outside of the cluster via cloud provider&rsquo;s load balancer. For example, in case of Azure Kubernetes Service, Azure Load Balancer will be used. ClusterIP and NodePort Services are created automatically.</p>
+</li>
+<li>
+<p><strong>ExternalName:</strong> this Service type is mapped to a respective CNAME record.</p>
+</li>
 </ul>
-<p>Kubernetes Service can also be created with selectors and without selectors.</p>
+<p>A Kubernetes Service can also be created with selectors and without selectors.</p>
 <ul>
-<li><strong>Service with selectors</strong> is a classic implementation where a set of Pods are abstracted with a Service, and based on the defined selector the Service will now know which Pods it's handling access for. An example of such selector may be application name but you can define whatever selector you want as long as you remember to define the same selector for the Pods as well as for the Service. When a Service with selector is created a respective Endpoint Object is created automatically - it will handle a list of IPs that the Service will redirect traffic to.</li>
-<li><strong>Service without selectors</strong> can be used when you want to expose backend types different from Pods, for instance, an external database, a service in another namespace or an external service in my scenario. When a Service without selector is created, no Endpoint Object is created automatically so you need to create it manually and provide the backend address that the Service must route traffic to. If ExternalName Service is created, no Endpoint Object is needed.</li>
+<li>
+<p><strong>Service with selectors</strong> is a classic implementation where a set of Pods are abstracted with a Service. Based on the defined selector the Service will know which Pods it needs to handle access for. An example of such a selector may be application name, but you can define whatever selector you want, as long as you remember to define the same selector for the Pods AND for the Service. When a Service with selector is created, a respective Endpoint Object is created automatically - it will handle a list of IPs that the Service will redirect traffic to.</p>
+</li>
+<li>
+<p><strong>Service without selectors</strong> can be used when you want to expose backend types that are different from Pods: for example, an external database, a service in another namespace or an external service, as it was required in my scenario. When a Service without selector is created, no Endpoint Object is created automatically so you need to create it manually and provide the backend address that the Service must route the traffic to. If ExternalName Service is created, no Endpoint Object is needed.</p>
+</li>
 </ul>
-<p><strong>Headless Service</strong> is a Service without cluster IP - you can use this Service when you want to use a specific service discovery mechanism that is not the one provided by Kubernetes platform. No load balancing or proxying is done for this Service by Kubernetes and no cluster IP is being allocated for the Service. It can be defined with and without selectors as well and that's what defines how DNS is configured for the headless Service.</p>
-<p>Now that we've covered the basics, let's get back to the scenario I've described above and see how we can implement proxying to external services with help of Kubernetes Service without selectors and ExternalName Service.</p>
+<blockquote>
+<p>Please note that you need to use the <code>kubernetes.io/service-name: &lt;your-service-name&gt;</code> in order for the Service to be mapped to the Endpoint automatically.</p>
+</blockquote>
+<p><strong>Headless Service</strong> is a Service without cluster IP - you can use this Service when you want to use a specific service discovery mechanism that is different from the one provided by Kubernetes. No load balancing or proxying is done for this Service by Kubernetes and no cluster IP is being allocated for the Service. It can be defined with and without selectors, but please note that usage of selectors is what defines how DNS is configured for the headless Service.</p>
+<p>Now that we&rsquo;ve covered the basics, let&rsquo;s get back to the scenario that I&rsquo;ve described above and see how we can implement proxying to external services with help of Kubernetes Service without selectors and ExternalName Service.</p>
+<h3 id="endpoint-vs-endpointslice">Endpoint vs. EndpointSlice</h3>
+<p>TODO</p>
 <h2 id="implementation-description-and-preparation">Implementation description and preparation</h2>
-<p>I will be using AKS as my Kubernetes cluster. As an external service I'll be using a small app I've created that will check the request it receives and return information about the IP that the request is being sent from, as well as the source IPs the request forwarding is happening for (if there are any). For illustration purposes I've deployed the app to IIS on an Azure VM but it's a cross-platform .NET 5 app that can be easily deployed in other ways as well. This application can also be used to test web traffic load balancer like Azure Application Gateway that I've briefly mentioned above.</p>
-<p>If you would like to use it for testing, you can find the code on my GitHub: <a href="https://github.com/guidemetothemoon/IPValidator">IPValidator</a>.</p>
-<p>Since I'm using a Kubernetes cluster provided by a cloud provider (Azure in this case) I will also create an Ingress to provide access from the outside and route traffic to my Service(s) and an Ingress Controller (NGINX) so that Ingress can work as expected.</p>
+<p>I will be using Azure Kubernetes Service cluster for this scenario. As an external service that we&rsquo;ll be proxying traffic to I&rsquo;ll be using a small application that I&rsquo;ve created. This application will check the request it receives and return information about the IP that the request is being sent from, as well as the source IPs the request forwarding is happening to (if there are any). For illustration purposes I&rsquo;ve deployed the app to IIS on an Azure Virtual Machine, but it&rsquo;s a cross-platform .NET 6 app that can be easily deployed in other ways as well. This application can also be used to test web traffic load balancer like Azure Application Gateway, that I&rsquo;ve briefly mentioned above.</p>
+<p>If you would like to use it for testing, you can find the source code on GitHub: <a href="https://github.com/guidemetothemoon/IPValidator">IPValidator</a>.</p>
+<p>Since I&rsquo;m using a Kubernetes cluster provided by a cloud provider (Microsoft Azure in this case) I will also need to create an Ingress resource. It is required in order to provide access to the applications running in the cluster from the outside. Ingress will ensure that the traffic is routed correctly to the respective Service(s) and an Ingress Controller (NGINX).</p>
 <h2 id="proxy-to-external-services-with-service-without-selectors">Proxy to external services with Service without Selectors</h2>
-<p>Now we're ready to create and deploy our Service for proxying. There are two Service types we can achieve it with: a default ClusterIP Service without selectors and ExternalName Service that I will demonstrate in the section below.</p>
-<p>Let's start with creating a default ClusterIP Service without selectors first:</p>
+<p>We&rsquo;re ready to create and deploy our Service for proxying the traffic. We can achieve it by either using a default ClusterIP Service without selectors or an ExternalName Service. I will demonstrate both approaches in the section below.</p>
+<p>Let&rsquo;s start by creating a default ClusterIP Service without selectors:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#service.yaml</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
@@ -599,9 +630,9 @@ Kubernetes Service is a an abstraction over a logical set of Pods that your appl
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span></span></span></code></pre></div>
-<p>As you can see we're not providing any selectors and since we're using default Service type (ClusterIP), we don't need to specify the type either. We only need to specify the Service name and port. I'm using Kubernetes deployment templates but Helm templates can be used here as well if you would like a more generic deployment of these resources.
-Now, if you remember from the previous section, since we're creating a Service without selectors, no Endpoint is being created for us so we need to create an Endpoint manually and provide IP address of the external service we want to proxy requests to. I will use an IP address of IPValidator app running on an Azure VM (IP address is inactive now and was used only for demonstration purposes :) ):</p>
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div><p>As you can see we&rsquo;re not providing any selectors and since we&rsquo;re using a default Service type (ClusterIP), we don&rsquo;t need to specify the type either. We only need to specify the Service name and port. I&rsquo;m using Kubernetes deployment templates but Helm templates can be used here as well if you would like a more generic deployment of these resources.</p>
+<p>Now, if you remember from the previous section, since we&rsquo;re creating a Service without selectors, no Endpoint is being created for us so we need to create an Endpoint manually and provide an IP address of the external service/application that we want to proxy the requests to. I will use an IP address of IPValidator app that is running on an Azure VM (an IP address provided in the examples below is now inactive and was used only for demonstration purposes :) ):</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#endpoint.yaml</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
@@ -612,8 +643,8 @@ Now, if you remember from the previous section, since we're creating a Service w
 </span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">addresses</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="m">10.240.0.129</span><span class="w"> </span><span class="c"># IP address of your external service that you would like to proxy requests to</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span></span></span></code></pre></div>
-<p>Now, let's create an Ingress to enable traffic routing to our Service. I'm using NGINX Ingress therefore it's specified in the annotations but you can definitely use any other Ingress here as well. I'm also not demonstrating TLS configuration here but you can enable that as well.</p>
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div><p>Next, let&rsquo;s create an Ingress to enable traffic routing to our Service. I'm using NGINX Ingress therefore it's specified in the annotations but you can definitely use any other Ingress here as well. I'm also not demonstrating TLS configuration here but you can enable that as well.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#ingress.yaml</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">

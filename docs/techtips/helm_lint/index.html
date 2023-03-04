@@ -18,7 +18,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.110.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.111.1"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -374,6 +374,11 @@
         </li>
       
     </ul>
+    <ul class="sidebar__list">
+      <li class="sidebar__list-item">
+        <a role="button" href="https://www.buymeacoffee.com/kristhecodingu1" target="_blank"><img style="max-width:100%;height:auto" src="/images/bmc_button.png" alt="Buy A Meal For Stray Cat"></a>
+      </li>
+    </ul>
   </div><footer class="footer footer__sidebar">
   <ul class="footer__list">
     <li class="footer__item">
@@ -567,7 +572,7 @@ A few other flags to make a note of:</p>
 </ol>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Lint Helm chart for best practices compatibility</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">    </span><span class="w">    </span><span class="l">helm lint [PATH_TO_HELM_CHART] --with-subcharts --strict</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    helm lint [PATH_TO_HELM_CHART] --with-subcharts --strict</span><span class="w">    
 </span></span></span></code></pre></div><p>If you want to learn more, you can also check this article: <a href="https://helm.sh/docs/helm/helm_lint">Helm Lint</a></p>
 <p>Custom rules are unfortunately not currently supported by <code>helm lint</code>, but if you require this functionality you can check out a third-party tool called <strong>chart-testing</strong>: <a href="https://github.com/helm/chart-testing">chart-testing</a></p>
 <p>Thanks for reading and till next tech tip! 😻</p>
