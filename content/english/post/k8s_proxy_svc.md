@@ -272,6 +272,7 @@ Below you may find some additional material that may be relevant for more in-dep
 * Explanation of Service without selectors: [Services without selectors](https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors)
 * Explanation of Headless Service: [Headless Services](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services)
 * Explanation of different Service types: [Service Types](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
+* Explanation of EndpointSlice and comparison to Endpoint resource: [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
 * Explanation of how to create an Ingress Controller with static public IP in Azure Kubernetes Service (AKS): [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
 
 That's it from me this time, thanks for checking in! 
