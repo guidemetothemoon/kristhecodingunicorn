@@ -158,20 +158,161 @@ spec:
 
 #### Azure CLI
 
+You can enforce the same policy definition with following Azure CLI command:
+
+``` bash
+az policy assignment create --location northeurope --mi-system-assigned \ 
+--policy "95edb821-ddaf-4404-9732-666045e056b4" -p "{ \"effect\": { \"value\": \"Deny\" } }" \ 
+--scope "/subscriptions/[SUBSCRIPTION_ID]" --display-name "Kubernetes cluster should not allow privileged containers" \ 
+--name "Kubernetes cluster should not allow privileged containers" --description "Do not allow privileged containers creation in a Kubernetes cluster."
+```
+
+Azure Policy definition ID can be found on the individual policy definition view, as shown in the screenshot below:
+
+![Screenshot of where to find Azure Policy definition ID in the Azure portal](../../images/k8s_azure_policy/aks_azpolicy_definition_id.png)
+
+You can find more information about ```az policy assignment create``` command here: [az policy assignment create](https://learn.microsoft.com/en-us/cli/azure/policy/assignment?view=azure-cli-latest#az-policy-assignment-create)
+
 #### Terraform (IaC)
 
+Finally, if we were to enforce the same policy definition with Terraform, we could use ```azurerm_subscription_policy_assignment``` resource to enable the policy on the subscription level. If you want to enforce a policy on a different scope, you can use ```azurerm_management_group_policy_assignment```, ```azurerm_resource_group_policy_assignment``` or ```azurerm_resource_policy_assignment``` accordingly.
 
+``` terraform
+resource "azurerm_subscription_policy_assignment" "pa_aks_privileged_containers" {
+  name                      = local.arc_aapls_policy_name
+  location                  = "northeurope"
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/a3461c8c-6c9d-4e42-a644-40ba8a1abf49"
+  subscription_id       = "/subscriptions/[SUBSCRIPTION_ID]"
+  description             = "Kubernetes cluster should not allow privileged containers"
+  display_name         = "Kubernetes cluster should not allow privileged containers"
+  enforce                   = true
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  parameters = <<PARAMETERS
+  {
+    "effect": {
+        "value": "Deny"
+    }
+  }
+  PARAMETERS
+}
+```
+You can read more about Subscription Policy Assignment resource in Azure provider for Terraform here: [azurerm_subscription_policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription_policy_assignment)
 
 ### Create and enforce custom Azure Policy definitions
 
-Built-in Azure Policy definitions can't cover all the areas that you may want to be audited, therefore creating custom Azure Policy definitions can come really handy in such cases.
+Built-in Azure Policy definitions can't always cover all the areas that you may want to be audited, therefore creating custom Azure Policy definitions can come really handy in such cases. Let's take a look at a simple example: I will create a custom policy that will only allow deployment of AKS clusters to North Europe region. 
+
+Below you can see how such a custom policy definition can be defined in Terraform but you can create it with the same data directly from the Azure portal - here's a good tutorial on how to do that: [Implement a new custom policy](https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-and-manage#implement-a-new-custom-policy)
+
+``` terraform
+resource "azurerm_policy_definition" "cpd_audit_vulnerability_assessment" {
+  name              = "cpd-vm-audit_vulnerability-assessment"
+  policy_type     = "Custom"
+  mode              = "All"
+  display_name = "Create AKS clusters only in North Europe"
+  description     = "Only allow deployment of AKS clusters in North Europe region."
+
+  metadata = <<METADATA
+  {
+    "version": "1.0.0",
+    "category": "Kubernetes"
+  }
+  METADATA
+
+
+  policy_rule = <<POLICY_RULE
+  {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "in": [
+            "Microsoft.Kubernetes/connectedClusters",
+            "Microsoft.ContainerService/managedClusters"
+          ]
+        },
+        {
+          "field": "location",
+          "notIn": [
+            "northeurope"
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  }
+  POLICY_RULE
+}
+```
+
+This creates a custom Azure Policy definition which you can find in the list together with existing built-in policy definitions:
+
+![Screenshot of the custom Azure Policy definition included in the list together with built-in Azure Policy definitions](../../images/k8s_azure_policy/aks_azpolicy_custom_definition.png)
+
+In order to enforce it you will need to assign the policy to the scope of your choosing, just as we did with the built-in policy definition in the earlier section. Once the custom policy definition is assigned, we can test it by attempting to create an AKS cluster in West Europe region and verifying that deployment will be denied due to policy violation. You can see the result of this action in the screenshot below:
+
+![Screenshot of the non-compliant Deployment being denied by enforced custom Azure Policy definition for disallowing deployment of AKS clusters in all regions except for North Europe](../../images/k8s_azure_policy/aks_azpolicy_custom_violation.png)
+
+As you can see, in this case you didn't even need to use Rego to be able to define a policy that can be applied to AKS clusters, but in some cases you may still need to do that to achieve specific requirements. My recommendation in this case would be to look into how this is already implemented in the built-in Azure Policy definitions - many of them link to the ContraintTemplate definitions implemented with Rego, and you can use this information as a foundation for your own custom policy. Even the "Kubernetes cluster should not allow privileged containers" built-in Azure Policy definition that we used as an example for the walkthrough in the above section can be used to check how Rego was used to implement a custom Azure Policy definition.
+
+In the subsequent blog posts I will provide more advanced examples of implementing custom Azure Policy definitions with help of Rego so stay tuned!😉
+
+I will also be adding custom Azure Policy definitions in this GitHub repo so you can check it out as well: [guidemetothemoon/div-dev-resources](https://github.com/guidemetothemoon/div-dev-resources/tree/main/help-resources/kubernetes/azure-policy)
 
 ### Azure Policy Remediation
 
+It's worth mentioning that Azure Policy definitions that are enforced with deployIfNotExists or modify effects support remediation. Remediation represents tasks that can be executed on non-compliant resources in order to make them compliant in accordance with the respective policy.
+
+Let's take a look at an example. If I enforce a "Deploy Azure Policy Add-on to Azure Kubernetes Service clusters" built-in Azure Policy definition with a DeployIfNotExists effect, I can then create a remediation task to handle non-compliant resources automatically with Terraform, like shown below:
+
+``` terraform
+resource "azurerm_subscription_policy_remediation" "pr_aks_deploy_azpolicy_addon" {
+  name                                 = "pr-deploy-vm-qualys"
+  subscription_id                  = "/subscriptions/[SUBSCRIPTION_ID]"
+  policy_assignment_id        = "/subscriptions/[SUBSCRIPTION_ID]/providers/microsoft.authorization/policyassignments/[ASSIGNMENT_ID]"
+  resource_discovery_mode = "ReEvaluateCompliance"
+}
+```
+
+If you want to create a remediation task in a different scope, you can use ```azurerm_management_group_policy_remediation```, ```azurerm_resource_group_policy_remediation``` or ```azurerm_resource_policy_remediation``` accordingly.
+
+Once non-compliant resources are identified, a remediation task will be triggered and you will be able to check the execution status in the Remediation -> Remediation tasks section of Azure Policy page.
+
+![Screenshot of the executed remediation task by enforced built-in Azure Policy definition in Azure Portal](../../images/k8s_azure_policy/aks_azpolicy_remediation.png)
+
+Here's a great article that explains what remediation is and how you can execute remediation tasks for enforced Azure Policy definitions: [Remediate non-compliant resources with Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources).
+
 ## Additional resources
 
+Below you may find a few additional resources to learn more about Azure Policy for Kubernetes and related tools:
 
+- [MS Learn: Understand Azure Policy for Kubernetes clusters](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes)
 
+- [MS Learn: Secure your cluster with Azure Policy](https://learn.microsoft.com/en-us/azure/aks/use-azure-policy?toc=%2Fazure%2Fgovernance%2Fpolicy%2Ftoc.json&bc=%2Fazure%2Fgovernance%2Fpolicy%2Fbreadcrumb%2Ftoc.json)
+
+- [MS Learn Tutorial: Create a custom Azure policy definition](https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-custom-policy-definition)
+
+- [MS Learn: Remediate non-compliant resources with Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources?tabs=azure-portal)
+
+- [Microsoft Defender for Containers](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction)
+
+- [Kubernetes: Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards)
+
+- [Open Policy Agent (OPA) documentation](https://www.openpolicyagent.org/docs/latest/)
+
+- [Gatekeeper - Policy Controller for Kubernetes](https://github.com/open-policy-agent/gatekeeper)
+
+- [Rego - Policy Language for OPA](https://www.openpolicyagent.org/docs/latest/policy-language/)
+
+- Check out Policy section in Azure provider for Terraform documentation: [Terraform - Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
+
+As you can see, Azure Policy for Kubernetes is a very powerful mechanism that you can use to continuously govern and keep AKS clusters compliant and securely configured at scale. Being implemented on top of a mature open source policy engine, OPA in combination with Gatekeeper, it also allows for extensibility and even more granular governance and control of cluster configuration with custom Azure Policy definitions. 🦾
 
 That's it from me this time, thanks for checking in!💖
 
