@@ -6,7 +6,18 @@
     <description>Recent content in Blog on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keeping AKS clusters continuously secure with Azure Policy</title>
+      <link>https://kristhecodingunicorn.com/post/aks_azure_policy/</link>
+      <pubDate>Thu, 16 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/aks_azure_policy/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can enhance security and governance of AKS clusters with Azure Policy.</description>
+      
+    </item>
+    
     <item>
       <title>[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers</title>
       <link>https://kristhecodingunicorn.com/post/dotnet_ubuntu_chiseled/</link>

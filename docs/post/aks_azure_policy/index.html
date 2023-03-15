@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Keeping AKS clusters continuously secure with Azure Policy
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.111.3"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="In this blog post we&#39;ll look into how we can enhance security and governance of AKS clusters with Azure Policy."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5794be192d21535bdd301561e043a96b6adbad2b5c08279deff459e4661c613f.css"
+      integrity="sha256-V5S&#43;GS0hU1vdMBVh4EOpa2rbrStcCCed7/RZ5GYcYT8="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/aks_azure_policy/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Keeping AKS clusters continuously secure with Azure Policy"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into how we can enhance security and governance of AKS clusters with Azure Policy."/>
+
+
+
+  
+  <meta property="og:title" content="Keeping AKS clusters continuously secure with Azure Policy" />
+<meta property="og:description" content="In this blog post we&#39;ll look into how we can enhance security and governance of AKS clusters with Azure Policy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/aks_azure_policy/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-16T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Keeping AKS clusters continuously secure with Azure Policy",
+        "headline": "Keeping AKS clusters continuously secure with Azure Policy",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we\u0027ll look into how we can enhance security and governance of AKS clusters with Azure Policy.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/aks_azure_policy\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-03-16T00:00:00.00Z",
+        "datePublished": "2023-03-16T00:00:00.00Z",
+        "dateModified": "2023-03-16T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/aks_azure_policy\/",
+        "wordCount" : "2955",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.jpg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Hey! I'm Kris and I like to code. Welcome to my tech corner! 🤗 <br /> DEI and GreenTech Promoter 🌳 | Microsoft Azure MVP ⛅️ | Open-Sourceress 🧙🏻‍♀️ | Volunteer 🦾 | Cat Mom 🐈🐈🐈</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.linkedin.com/in/krisde"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://github.com/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://twitter.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Twitter"
+            title="Twitter"
+          >
+            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://sessionize.com/kristina-devochko"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Sessionize"
+            title="Sessionize"
+          >
+            <i class="fas fa-bullhorn fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.instagram.com/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="instagram"
+            title="instagram"
+          >
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="/contact/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="e-mail"
+            title="e-mail"
+          >
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="rss"
+            title="rss"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.azureheroes.community/user/15391"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Azure Heroes"
+            title="Azure Heroes"
+          >
+            <i class="fas fa-mask fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Microsoft MVP"
+            title="Microsoft MVP"
+          >
+            <i class="fas fa-cloud fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+    <ul class="sidebar__list">
+      <li class="sidebar__list-item">
+        <a role="button" href="https://www.buymeacoffee.com/kristhecodingu1" target="_blank"><img style="max-width:100%;height:auto" src="/images/bmc_button.png" alt="Buy A Meal For Stray Cat"></a>
+      </li>
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Keeping AKS Clusters Continuously Secure With Azure Policy</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  16/3/2023
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">14-minute read</span>
+          </li>
+        </ul>
+      <p><img src="../../images/k8s_azure_policy/aks_azure_policy_banner.png" alt="Article banner for enhancing security in AKS with Azure Policy"></p>
+<div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#azpolicy--k8s-introduction-and-highlights">AzPolicy 💜 K8s: Introduction and highlights</a></li>
+    <li><a href="#azpolicy--k8s-practical-walkthrough">AzPolicy 💜 K8s: Practical walkthrough</a>
+      <ul>
+        <li><a href="#azure-policy-add-on">Azure Policy add-on</a>
+          <ul>
+            <li><a href="#microsoft-defender-for-containers">Microsoft Defender for Containers</a></li>
+          </ul>
+        </li>
+        <li><a href="#enforce-azure-policy-definitions">Enforce Azure Policy definitions</a>
+          <ul>
+            <li><a href="#azure-portal">Azure Portal</a></li>
+            <li><a href="#azure-cli">Azure CLI</a></li>
+            <li><a href="#terraform-iac">Terraform (IaC)</a></li>
+          </ul>
+        </li>
+        <li><a href="#create-and-enforce-custom-azure-policy-definitions">Create and enforce custom Azure Policy definitions</a></li>
+        <li><a href="#azure-policy-remediation">Azure Policy Remediation</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>🐇<em><strong>This blog post is also a contribution to Azure Spring Clean 2023 where during 5 weekdays of March, 13th-17th, community contributors share learning resources that highlight best practices, lessons learned, and help with some of the more difficult topics of Azure Management. You&rsquo;re welcome to check out all the contributions here:</strong></em> <a href="https://www.azurespringclean.com">Azure Spring Clean 2023</a></p>
+<p>As you may know already, Kubernetes doesn&rsquo;t come with 100% built-in security by default. The same applies for managed Kubernetes service offerings like Azure Kubernetes Service (AKS). Some cloud providers offer more hardened default configuration for a managed Kubernetes service, some offer less hardened and more beginner-friendly default configuration, but the fact stays the fact - cloud services are a shared responsibility. It means that you&rsquo;re responsible to properly harden and secure Kubernetes clusters that you&rsquo;re provisioning in the cloud, also in Azure.</p>
+<p><strong>But is there a way that can help you make this process easier and help you ensure continuous compliance and security?</strong></p>
+<p>There are multiple ways to the goal indeed, and one of the ways is called Azure Policy. Now let&rsquo;s dig into what Azure Policy is and how it can be applied to AKS. 😼</p>
+<h2 id="azpolicy--k8s-introduction-and-highlights">AzPolicy 💜 K8s: Introduction and highlights</h2>
+<p>If you&rsquo;re not familiar with Azure Policy and are working (or planning to work) with Azure, I definitely recommend you to start using it asap. <strong>Azure Policy</strong> is a service that provides you with a collection of rules, aka policy definitions, that you can enforce in order to ensure proper automatic and continuous governance and compliance of your Azure workloads, and even hybrid workloads like Azure Arc resources. You can also create custom policies to govern the areas that are not covered by the collection of built-in policies. We&rsquo;ll shortly see how you can combine both built-in and custom policies to govern AKS clusters.😺</p>
+<p>You&rsquo;re welcome to check out the <a href="https://kristhecodingunicorn.com/post/aks_azure_policy#additional-resources">Additional resources</a> section in the bottom of this blog post for more learning material on areas related to Azure Policy for Kubernetes.</p>
+<p>Azure Policy has a dedicated category called <strong>&ldquo;Kubernetes&rdquo;</strong> which contains all the built-in and custom policy definitions that can be applied to AKS and Azure Arc-enabled Kubernetes clusters. You can use this category as a filter in order to quickly get access to all the policies that can be applied to Kubernetes clusters and workloads.</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_category.png" alt="Screenshot of Azure Policy category for Kubernetes in Azure portal"></p>
+<p><strong>How does AKS governance with Azure Policy work behind the scenes?</strong></p>
+<p>Once enabled, Azure Policy is installed as an add-on in the respective AKS clusters. Azure Policy for Kubernetes is based on extension of <strong>Gatekeeper v3</strong> which is an admission controller webhook for <strong>Open Policy Agent (OPA)</strong>. <strong>OPA</strong> is an open source policy agent that is widely used for governance of not only Kubernetes in general but also a bunch of different services like API gateways, CI/CD pipelines, event streaming platforms like Apache Kafka, etc.</p>
+<p>The way that Azure Policy for Kubernetes was implemented comes with an additional benefit when it comes to extensibility: since the implementation is based on top of an existing open source technology that is widely used in the industry, it allows us to extend governance to those areas which are not covered by the built-in policy definitions by using extensively tested, mature open source tools. We can do that by creating custom Azure Policy definitions and use OPA&rsquo;s policy language called <strong>Rego</strong> to define the <code>Constraints</code> and <code>ConstraintTemplates</code> that we want to be used for custom policy enforcement and evaluation.</p>
+<p>I will not go through all the built-in Azure policy definitions that are included in the Kubernetes category - most of them have a well-defined, helpful description provided. It&rsquo;s important to highlight though that most of the built-in policies represent security controls that are required by security frameworks like <strong>OWASP Top 10 for Docker/Kubernetes</strong>, <strong>CIS Kubernetes/Docker Benchmark</strong>, <strong>Kubernetes Hardening Guidance</strong> and <strong>AKS security baseline</strong>. Therefore, enforcing Azure Policy definitions in your AKS clusters, acting upon and remediating findings from the policy evaluations, will help you ensure and document continuous compliance with the well-established security frameworks and standards, which may be required by your users and customers.</p>
+<p>Another interesting highlight is that Kubernetes category in Azure Policy contains two important policy initiatives that represent a purposefully created collection of policies that are supposed to be enforced together. Policy initiative will be marked as compliant once all the applicable resources are compliant with all policy definitions that are part of the policy initiative. You can see respective policy initiatives in the screenshot below. These initiatives represent <strong>Kubernetes Pod Security Standards (PSS)</strong> - a collection of best practices for implementing baseline (minimally restrictive) and heavily restricted security level for Kubernetes workloads. PSS are established and maintained by the Kubernetes community and you can find a detailed overview of all the policies in the official Kubernetes documentation (link provided below).</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_initiatives.png" alt="Screenshot of Azure Policy initiative for Kubernetes in Azure portal"></p>
+<p>Now, let&rsquo;s take a look at how we can implement Azure Policy for Kubernetes in practice.😼</p>
+<h2 id="azpolicy--k8s-practical-walkthrough">AzPolicy 💜 K8s: Practical walkthrough</h2>
+<p>It&rsquo;s time to get more hands-on! In this walkthrough we&rsquo;ll see what pre-requisites are needed in order to start using Azure Policy for Kubernetes, as well as how to enforce built-in and custom policies in AKS clusters - both through Azure portal, Azure CLI and infrastructure-as-code with Terraform.</p>
+<h3 id="azure-policy-add-on">Azure Policy add-on</h3>
+<p>In order to start using Azure Policy for Kubernetes you need to enable Azure Policy add-on on the AKS clusters that you want to govern. Once enabled, Gatekeeper and Azure Policy related Pods will be deployed in the respective clusters:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_addon_pods.png" alt="Screenshot of the Gatekeeper and Azure Policy Pods that are deployed in every AKS cluster by the Azure Policy add-on"></p>
+<p>Please note that the more workloads that need to be evaluated, the more resources will be consumed by the Azure Policy and Gatekeeper components in the cluster. Therefore you need to ensure that you have enough resources to begin with and can scale accordingly in order to avoid unpredictably failing audit and enforcement operations. Please check general <a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes#recommendations">Recommendations</a> and <a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes#limitations">Limitations</a> for using Azure Policy add-on for Kubernetes for more information.</p>
+<p>You can enable Azure Policy add-on for AKS clusters in multiple ways:</p>
+<p><strong>Azure Portal</strong></p>
+<p>When creating a new AKS cluster you can enable Azure Policy add-on in the Integrations section, as shown in the screenshot below:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_addon_portal.png" alt="Screenshot of enabling Azure Policy add-on from Azure portal upon cluster creation"></p>
+<p>You can enable Azure Policy add-on on existing AKS cluster from the <code>Settings -&gt; Policies</code> section, as shown in the screenshot below:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_addon_portal_existing.png" alt="Screenshot of enabling Azure Policy add-on from Azure portal for an existing AKS cluster"></p>
+<p><strong>Azure CLI</strong></p>
+<p>When creating a new AKS cluster with Azure CLI you can enable Azure Policy add-on with <code>--enable-addons azure-policy</code> parameter. For example:</p>
+<p><code>az aks create --name chamber-of-secrets --resource-group hogwarts-rg --enable-addons azure-policy</code></p>
+<p><strong>Terraform</strong></p>
+<p><code>azure_policy_enabled = true</code> argument can be used to enable Azure Policy add-on with AzureRM provider for Terraform.</p>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_kubernetes_cluster&#34;</span> <span class="s2">&#34;aks_cluster&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location</span>                           = <span class="s2">&#34;northeurope&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                               = <span class="s2">&#34;chamber-of-secrets&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">resource_group_name</span>     = <span class="s2">&#34;hogwarts-rg&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">azure_policy_enabled</span>      = <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nx">default_node_pool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">name</span>                 = <span class="s2">&#34;agentpool&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vm_size</span>              = <span class="s2">&#34;Standard_B2s&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="microsoft-defender-for-containers">Microsoft Defender for Containers</h4>
+<p>In order to enable Azure Policy add-on at scale and automate the deployment process both for new and existing AKS clusters, I would recommend to either use IaC with tools like Terraform, as demonstrated in example above, or use Microsoft Defender for Containers. Or use both in combination which is the best option!😸 By enabling Microsoft Defender for Containers you get additional value beyond just automating deployment of Azure Policy add-on at scale&hellip;you get additional perks like runtime threat protection and alerting, vulnerability assessment of images stored in Azure Container Registry, audit of cluster data plane in accordance with hardening best practices, etc.</p>
+<p>Detailed information about Microsoft Defender for Containers can be found here: <a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction">Microsoft Defender for Containers</a>.</p>
+<p>You can enable Azure Policy add-on with Microsoft Defender for Containers from <code>Defender plans -&gt; Containers -&gt; Settings</code>:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_msdefender.png" alt="Screenshot of enabling Azure Policy add-on through Microsoft Defender for Containers"></p>
+<h3 id="enforce-azure-policy-definitions">Enforce Azure Policy definitions</h3>
+<p>Once Azure Policy add-on has been enabled, it&rsquo;s time to enforce some Azure Policy definitions. This can be done through <strong>policy assignment</strong>, i.e. by assigning a policy to a specific scope: tenant, subscription, resource group or resource. Let&rsquo;s start by assigning a built-in policy definition. I will use <strong>&ldquo;Kubernetes cluster should not allow privileged containers&rdquo;</strong> policy definition as an example. This policy will check if a scheduled deployment uses containers with privileged mode enabled and will deny execution of non-compliant deployments in the respective AKS clusters.</p>
+<h4 id="azure-portal">Azure Portal</h4>
+<p>The approach of assigning an Azure Policy definition for Kubernetes is pretty much the same as for assigning policy to any other resource in Azure, so I will not go through the whole process.</p>
+<p>Nevertheless, I would like to highlight two things that are worth being aware of:</p>
+<ul>
+<li>
+<p><strong>Azure Policy definition scope</strong>: as briefly mentioned above, you can assign a policy either on the individual resource level, resource group level, subscription level or tenant level. In most cases you would want to enable policies either on subscription or tenant level to ensure that the same policies apply to all the new AKS clusters that will be created across subscription or even subscriptions in the same tenant.</p>
+</li>
+<li>
+<p><strong>Azure Policy definition parameters</strong>: in the Parameters section of the policy assignment view I would recommend to always leave <strong>&ldquo;Only show parameters that need input or review&rdquo;</strong> unchecked, because in that case all the available configuration options for the respective policy definition will be visible to you. You can then ensure that the policy&rsquo;s behaviour is configured correctly, as per your use case. Below you can see all the possible configuration options for the policy definition that we&rsquo;re using as an example in this walkthrough:</p>
+</li>
+</ul>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_params.png" alt="Screenshot of default parameters for Azure Policy definition for disallowing usage of container privileged mode"></p>
+<p>Once the policy is enabled you will be able to see it in the list of assigned policies, in addition to the current state of resource compliance in the Compliance blade of the Azure Policy page:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_compliance.png" alt="Screenshot of the Azure Policy compliance blade with enabled Azure Policy definition for disallowing usage of container privileged mode"></p>
+<blockquote>
+<p>Please note that it may take up to <strong>30</strong> minutes for a new or updated policy to take effect and be evaluated across the AKS clusters. If you want to instantly trigger re-evaluation, you can use <code>az policy state trigger-scan</code> command.</p>
+</blockquote>
+<p>If we now attempt to create a deployment with privileged mode enabled&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># deployment.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld-one</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">aks-helloworld:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># &lt;- Non-compliant configuration!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span></code></pre></div><p>&hellip;we will get an error, and as a result, no deployment resources, like Pods for instance, will be provisioned in the respective AKS cluster:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_denied_deploy.png" alt="Screenshot of the non-compliant Deployment being denied by enforced Azure Policy definition for disallowing usage of container privileged mode"></p>
+<h4 id="azure-cli">Azure CLI</h4>
+<p>You can assign the same policy definition with <code>az policy assignment create</code> command in Azure CLI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az policy assignment create --location northeurope --mi-system-assigned <span class="se">\ </span>
+</span></span><span class="line"><span class="cl">--policy <span class="s2">&#34;95edb821-ddaf-4404-9732-666045e056b4&#34;</span> -p <span class="s2">&#34;{ \&#34;effect\&#34;: { \&#34;value\&#34;: \&#34;Deny\&#34; } }&#34;</span> <span class="se">\ </span>
+</span></span><span class="line"><span class="cl">--scope <span class="s2">&#34;/subscriptions/[SUBSCRIPTION_ID]&#34;</span> --display-name <span class="s2">&#34;Kubernetes cluster should not allow privileged containers&#34;</span> <span class="se">\ </span>
+</span></span><span class="line"><span class="cl">--name <span class="s2">&#34;Kubernetes cluster should not allow privileged containers&#34;</span> --description <span class="s2">&#34;Do not allow privileged containers creation in a Kubernetes cluster.&#34;</span>
+</span></span></code></pre></div><p>Azure Policy definition ID, that is provided as a value to <code>--policy</code> parameter in the example above, can be found on the individual policy definition view, as shown in the screenshot below:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_definition_id.png" alt="Screenshot of where to find Azure Policy definition ID in the Azure portal"></p>
+<p>You can find more information about <code>az policy assignment create</code> command here: <a href="https://learn.microsoft.com/en-us/cli/azure/policy/assignment?view=azure-cli-latest#az-policy-assignment-create">az policy assignment create</a></p>
+<h4 id="terraform-iac">Terraform (IaC)</h4>
+<p>Finally, if we were to assign the same built-in policy definition with AzureRM provider for Terraform, we could use <code>azurerm_subscription_policy_assignment</code> resource to assign the policy on the subscription level. If you want to assign a policy on a different scope, you can use <code>azurerm_management_group_policy_assignment</code>, <code>azurerm_resource_group_policy_assignment</code> or <code>azurerm_resource_policy_assignment</code> accordingly.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_subscription_policy_assignment&#34;</span> <span class="s2">&#34;pa_aks_privileged_containers&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                      = <span class="s2">&#34;pa-aks-deny-privileged-containers&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location</span>                  = <span class="s2">&#34;northeurope&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">policy_definition_id</span> = <span class="s2">&#34;/providers/Microsoft.Authorization/policyDefinitions/a3461c8c-6c9d-4e42-a644-40ba8a1abf49&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">subscription_id</span>       = <span class="s2">&#34;/subscriptions/[SUBSCRIPTION_ID]&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">description</span>             = <span class="s2">&#34;Deny Kubernetes cluster deployments that are using privileged containers&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">display_name</span>         = <span class="s2">&#34;Kubernetes cluster should not allow privileged containers&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">enforce</span>                   = <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">identity</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">type</span> = <span class="s2">&#34;SystemAssigned&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="na">parameters</span> = <span class="o">&lt;&lt;PARAMETERS</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">  {
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;effect&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;value&#34;: &#34;Deny&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">  </span><span class="o">PARAMETERS</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You can read more about Subscription Policy Assignment resource in Azure provider for Terraform here: <a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription_policy_assignment">azurerm_subscription_policy_assignment</a></p>
+<p>Policy assignment often requires a managed identity, either a system- or user-assigned, with specific permissions, in order to perform evaluation of resource compliance and execute remediation tasks, if needed. In this example we&rsquo;re using <code>SystemAssigned</code> identity for simplicity reasons, but a better option is to use <code>UserAssigned</code> managed identities when assigning policies. In a subsequent blog post I will demonstrate how you can do that so do come back here again for more content on this topic!🤗</p>
+<h3 id="create-and-enforce-custom-azure-policy-definitions">Create and enforce custom Azure Policy definitions</h3>
+<p>Built-in Azure Policy definitions can&rsquo;t always cover all the areas that you may want to govern, therefore creating custom Azure Policy definitions can come in really handy in such cases. Let&rsquo;s take a look at a simple example: I will create a custom policy that will only allow deployment of AKS clusters to North Europe region.</p>
+<p>Below you can see how such a custom policy definition can be defined in Terraform, but you can also create it directly in the Azure portal or with Azure CLI or even Bicep - here&rsquo;s a good tutorial on how to do that: <a href="https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-and-manage#implement-a-new-custom-policy">Implement a new custom policy</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_policy_definition&#34;</span> <span class="s2">&#34;cpd_aks_deploy_region&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>              = <span class="s2">&#34;cpd-aks-allow-deploy-northeurope&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">policy_type</span>     = <span class="s2">&#34;Custom&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">mode</span>              = <span class="s2">&#34;All&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">display_name</span> = <span class="s2">&#34;Create AKS clusters only in North Europe&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">description</span>     = <span class="s2">&#34;Only allow deployment of AKS clusters in North Europe region.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="na">metadata</span> = <span class="o">&lt;&lt;METADATA</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">  {
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;version&#34;: &#34;1.0.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;category&#34;: &#34;Kubernetes&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">  </span><span class="o">METADATA</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="na">policy_rule</span> = <span class="o">&lt;&lt;POLICY_RULE</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">  {
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;if&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;allOf&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">          &#34;field&#34;: &#34;type&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">          &#34;in&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Microsoft.Kubernetes/connectedClusters&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Microsoft.ContainerService/managedClusters&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          ]
+</span></span></span><span class="line"><span class="cl"><span class="s">        },
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">          &#34;field&#34;: &#34;location&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">          &#34;notIn&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;northeurope&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          ]
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">      ]
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;then&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;effect&#34;: &#34;deny&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">  </span><span class="o">POLICY_RULE</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This creates a custom Azure Policy definition, which you can locate in the Azure policy definition list together with existing built-in policy definitions:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_custom_definition.png" alt="Screenshot of the custom Azure Policy definition included in the list together with built-in Azure Policy definitions"></p>
+<p>In order to enforce this custom policy you will need to assign it to the scope of your choosing, just as we did with the built-in policy definition in the earlier section. Once the custom policy definition is assigned, we can test it by attempting to create an AKS cluster in West Europe region and verifying that deployment will be denied due to the policy violation. You can see the result of this action in the screenshot below:</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_custom_violation.png" alt="Screenshot of the non-compliant Deployment being denied by enforced custom Azure Policy definition for disallowing deployment of AKS clusters in all regions except for North Europe"></p>
+<p>As you can see, in this case, you didn&rsquo;t even need to use Rego to be able to define a custom policy that can be applied to AKS clusters, but in some cases you may still need to do that in order to achieve specific requirements. If you&rsquo;re new to Rego, my recommendation in this case would be, first of all, to check the official documentation with provided examples (see link below). In addition to that I would recommend to look into how similar implementation is done in the built-in Azure Policy definitions - many of them link to the ContraintTemplate definitions that were created with help of Rego, which you can use as a foundation for your own custom policy. Even the &ldquo;Kubernetes cluster should not allow privileged containers&rdquo; built-in Azure Policy definition, that we used as an example for the walkthrough in the above section, used Rego for policy constraint implementation.</p>
+<p>In the subsequent blog posts I will provide more advanced examples of implementing custom Azure Policy definitions with help of Rego, so stay tuned!😉</p>
+<p>I will also be adding custom Azure Policy definitions in this GitHub repo - you&rsquo;re welcome to check it out as well: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/help-resources/kubernetes/azure-policy">guidemetothemoon/div-dev-resources</a></p>
+<h3 id="azure-policy-remediation">Azure Policy Remediation</h3>
+<p>Azure Policy definitions that are assigned with <code>deployIfNotExists</code> or <code>modify</code> effects support remediation. <strong>Remediation</strong> represents a collection of tasks that can be executed on non-compliant resources in order to make them compliant in accordance with the respective policy.</p>
+<p>Let&rsquo;s take a look at an example. If I enforce a <strong>&ldquo;Deploy Azure Policy Add-on to Azure Kubernetes Service clusters&rdquo;</strong> built-in Azure Policy definition with a <code>DeployIfNotExists</code> effect, I can then create a remediation task to automatically fix non-compliant resources,- for example through IaC with Terraform, like shown below:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_subscription_policy_remediation&#34;</span> <span class="s2">&#34;pr_aks_deploy_azpolicy_addon&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                                 = <span class="s2">&#34;pr-deploy-vm-qualys&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">subscription_id</span>                  = <span class="s2">&#34;/subscriptions/[SUBSCRIPTION_ID]&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">policy_assignment_id</span>        = <span class="s2">&#34;/subscriptions/[SUBSCRIPTION_ID]/providers/microsoft.authorization/policyassignments/[ASSIGNMENT_ID]&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">resource_discovery_mode</span> = <span class="s2">&#34;ReEvaluateCompliance&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you want to create a remediation task in a different scope, you can use <code>azurerm_management_group_policy_remediation</code>, <code>azurerm_resource_group_policy_remediation</code> or <code>azurerm_resource_policy_remediation</code> accordingly.</p>
+<p>Once non-compliant resources are identified, a remediation task will be triggered. You will be able to check the task execution status in the <code>Remediation -&gt; Remediation tasks</code> section of the Azure Policy page.</p>
+<p><img src="../../images/k8s_azure_policy/aks_azpolicy_remediation.png" alt="Screenshot of the executed remediation task by enforced built-in Azure Policy definition in Azure Portal"></p>
+<p>Here&rsquo;s a great article that explains what remediation is and how you can execute remediation tasks for enforced Azure Policy definitions: <a href="https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources">Remediate non-compliant resources with Azure Policy</a>.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Below you may find a few additional resources to learn more about Azure Policy for Kubernetes and related tools:</p>
+<ul>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes">MS Learn: Understand Azure Policy for Kubernetes clusters</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/aks/use-azure-policy?toc=%2Fazure%2Fgovernance%2Fpolicy%2Ftoc.json&amp;bc=%2Fazure%2Fgovernance%2Fpolicy%2Fbreadcrumb%2Ftoc.json">MS Learn: Secure your cluster with Azure Policy</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-custom-policy-definition">MS Learn Tutorial: Create a custom Azure policy definition</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources?tabs=azure-portal">MS Learn: Remediate non-compliant resources with Azure Policy</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction">Microsoft Defender for Containers</a></p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards">Kubernetes: Pod Security Standards</a></p>
+</li>
+<li>
+<p><a href="https://www.openpolicyagent.org/docs/latest/">Open Policy Agent (OPA) documentation</a></p>
+</li>
+<li>
+<p><a href="https://github.com/open-policy-agent/gatekeeper">Gatekeeper - Policy Controller for Kubernetes</a></p>
+</li>
+<li>
+<p><a href="https://www.openpolicyagent.org/docs/latest/policy-language/">Rego - Policy Language for OPA</a></p>
+</li>
+<li>
+<p>Check out Policy section in Azure provider for Terraform documentation: <a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs">Terraform - Azure Provider</a></p>
+</li>
+</ul>
+<p>As you can see, Azure Policy for Kubernetes is a very powerful mechanism that you can use in order to continuously govern your AKS clusters and ensure that they are compliant and securely configured at scale. Being implemented on top of a mature open source policy engine (OPA) in combination with Gatekeeper, Azure Policy for Kubernetes also allows for extensibility and even more granular governance and control of cluster configuration with custom Azure Policy definitions. 🦾</p>
+<p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
