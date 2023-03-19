@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/helm_rollback\/",
-        "wordCount" : "723",
+        "wordCount" : "655",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -512,46 +512,42 @@
       <h1>Handling Failed Helm Upgrade Due to Another Operation in Progress</h1>
       <p><img src="../../images/tech_tips/techtip_6.png" alt="Article banner for handling failed Helm upgrade tech tip"></p>
 <div class="toc">
-  <nav id="TableOfContents"></nav>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#controlled-manual-fix">Controlled, manual fix</a></li>
+    <li><a href="#automatic-fix">Automatic fix</a></li>
+  </ul>
+</nav>
 </div>
+<h2 id="introduction">Introduction</h2>
 <p>Sometimes things may go wrong, also during ugprade of the application that is deployed to a Kubernetes cluster with Helm. When something goes wrong, you fix it and re-try a deployment with the new fix included. But then deployment operation fails with following error message:</p>
 <p><code>Error: UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress</code></p>
-<p><strong>So, what does it mean and how can you fix it?</strong></p>
-<p>This happens typically when Helm attempts to roll out a new revision of an application and then something goes wrong in the process, like a bug in an application itself or an issue inside the Kubernetes cluster which causes the new deployment to never get completed. This faulty deployment becomes dangling, therefore preventing all the future deployments to be rolled out. You can easily check the latest deployment status by retrieving the history of application deployments with <code>helm history</code>. It will look something like this:</p>
+<p><strong>So, what does it mean and how can you fix it?</strong> Let&rsquo;s find out!</p>
+<h2 id="controlled-manual-fix">Controlled, manual fix</h2>
+<p>This happens typically when Helm attempts to roll out a new revision of an application and then something goes wrong in the process, like a bug in an application itself or an issue inside the Kubernetes cluster, which causes the new deployment to never get completed. This faulty deployment becomes dangling, therefore preventing all the future deployments to be rolled out. You can easily check the latest deployment status by retrieving the history of application deployments with <code>helm history</code>.</p>
+<p>It will look something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\&gt; helm history test-app -n test-app
-</span></span><span class="line"><span class="cl">REVISION        UPDATED                         STATUS          CHART                                                  APP VERSION                      DESCRIPTION
-</span></span><span class="line"><span class="cl">7               Fri Apr 22 06:44:47 2022        superseded      test-app-0.1.232-move-ps.17                            0.1.232-move-ps.17               Upgrade complete
-</span></span><span class="line"><span class="cl">8               Fri Apr 22 07:26:30 2022        superseded      test-app-0.1.232-move-ps.18                            0.1.232-move-ps.18               Upgrade complete
-</span></span><span class="line"><span class="cl">9               Fri Apr 22 08:49:51 2022        superseded      test-app-0.1.232-PullRequest45039.23                   0.1.232-PullRequest45039.23      Upgrade complete
-</span></span><span class="line"><span class="cl">10              Mon Apr 25 10:46:23 2022        superseded      test-app-0.1.232-add-ma.3                              0.1.232-add-ma.3                 Upgrade complete
-</span></span><span class="line"><span class="cl">11              Mon Apr 25 11:15:52 2022        superseded      test-app-0.1.232-add-ma.5                              0.1.232-add-ma.5                 Upgrade complete
-</span></span><span class="line"><span class="cl">12              Mon Apr 25 12:06:04 2022        superseded      test-app-0.1.232-PullRequest45039.24                   0.1.232-PullRequest45039.24      Upgrade complete
-</span></span><span class="line"><span class="cl">13              Mon Apr 25 13:39:56 2022        superseded      test-app-0.1.232                                       0.1.232                          Upgrade complete
-</span></span><span class="line"><span class="cl">14              Mon Apr 25 14:29:40 2022        superseded      test-app-0.1.233-PullRequest45146.2                    0.1.233-PullRequest45146.2       Upgrade complete
-</span></span><span class="line"><span class="cl">15              Mon Apr 25 14:49:18 2022        deployed        test-app-0.1.233                                       0.1.233                          Upgrade complete
-</span></span><span class="line"><span class="cl">16              Tue Jun 14 12:28:20 2022        pending-upgrade test-app-0.1.244-PullRequest47437.3                    0.1.244-PullRequest47437.3       Preparing upgrade
-</span></span></code></pre></div><p>As you can see in the last entry there, a deployment with revision 16 has had status <code>pending-upgrade</code> since June, 14th which is almost a week long at the time of writing of this blog post. No application can take such a long time to deploy (I hope)!😸 So let's fix it!</p>
+</span></span></code></pre></div><p><img src="../../images/tech_tips/helm_history.png" alt="Screenshot of helm history command before the rollback"></p>
+<p>As you can see in the last entry there, a deployment with revision 16 has had status <code>pending-upgrade</code> since June, 14th which is almost a week long at the time of writing this blog post. No application can take such a long time to deploy (I hope)!😸 So let&rsquo;s fix it!</p>
 <blockquote>
-<p>Please note that even with the dangling deployment like this Helm upgrade operation performs a rolling update which means that the previous version of your applicaiton will still be running until the rollout of the new version is confirmed to be healthy and available. You can easily check that by running <code>kubectl get pods -n [app_namespace]</code> command.</p>
+<p>Please note that even with the dangling deployment like this, Helm upgrade operation performs a rolling update which means that the previous version of your applicaiton will still be running until the rollout of the new version is confirmed to be healthy and available. You can easily check that by running <code>kubectl get pods -n [app_namespace]</code> command.</p>
 </blockquote>
-<p>In order to fix this error all you need to do is to perform a rollback with <code>helm rollback [release_name] [revision_number] -n [app_namespace]</code> so that the latest stable version of the deployment will become the active one and the dangling deployment will be canceled. In the example above deployment with revision 15 is the one that is known to be stable and was successfully rolled out before so we can perform a rollback like this:</p>
+<p>In order to fix this error all you need to do is to perform a rollback with <code>helm rollback [release_name] [revision_number] -n [app_namespace]</code> so that the latest stable version of the deployment will become the active one and the dangling deployment will be cancelled. In the example above deployment with revision 15 is the one that is known to be stable and was successfully rolled out before so we can perform a rollback like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\&gt; helm rollback test-app 15 -n test-app
 </span></span><span class="line"><span class="cl">Rollback was a success! Happy Helming!
 </span></span></code></pre></div><p>If we get history of Helm deployments once again, we can see that the dangling release got rolled back under revision 17 to the latest stable release which now gets next active revision number 18 (you can see that the app version for revision 15 and 18 is the same which is expected):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\&gt; helm history matrikkel-adapter -n matrikkel-adapter
-</span></span><span class="line"><span class="cl">REVISION        UPDATED                         STATUS          CHART                                                   APP VERSION                     DESCRIPTION
-</span></span><span class="line"><span class="cl">9               Fri Apr 22 08:49:51 2022        superseded      test-app-0.1.232-PullRequest45039.23                    0.1.232-PullRequest45039.23     Upgrade complete
-</span></span><span class="line"><span class="cl">10              Mon Apr 25 10:46:23 2022        superseded      test-app-0.1.232-add-ma.3                               0.1.232-add-ma.3                Upgrade complete
-</span></span><span class="line"><span class="cl">11              Mon Apr 25 11:15:52 2022        superseded      test-app-0.1.232-add-ma.5                               0.1.232-add-ma.5                Upgrade complete
-</span></span><span class="line"><span class="cl">12              Mon Apr 25 12:06:04 2022        superseded      test-app-0.1.232-PullRequest45039.24                    0.1.232-PullRequest45039.24     Upgrade complete
-</span></span><span class="line"><span class="cl">13              Mon Apr 25 13:39:56 2022        superseded      test-app-0.1.232                                        0.1.232                         Upgrade complete
-</span></span><span class="line"><span class="cl">14              Mon Apr 25 14:29:40 2022        superseded      test-app-0.1.233-PullRequest45146.2                     0.1.233-PullRequest45146.2      Upgrade complete
-</span></span><span class="line"><span class="cl">15              Mon Apr 25 14:49:18 2022        superseded      test-app-0.1.233                                        0.1.233                         Upgrade complete
-</span></span><span class="line"><span class="cl">16              Tue Jun 14 12:28:20 2022        pending-upgrade test-app-0.1.244-PullRequest47437.3                     0.1.244-PullRequest47437.3      Preparing upgrade
-</span></span><span class="line"><span class="cl">17              Mon Jun 20 10:28:05 2022        superseded      test-app-0.1.233                                        0.1.233                         Rollback to 15
-</span></span><span class="line"><span class="cl">18              Mon Jun 20 08:29:52 2022        deployed        test-app-0.1.244-PullRequest47437.29                    0.1.244-PullRequest47437.29     Upgrade complete
-</span></span></code></pre></div><p>If we now re-try deployment of a new version of the application, the <code>upgrade failed</code> error will not appear anymore and the new deployment should succeed.
-<code>helm rollback</code> is a useful command which you can also use to roll back to the latest stable release in case you discover issues during testing of your application. You can read more about it here: <a href="https://helm.sh/docs/helm/helm_rollback/">Helm Rollback</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\&gt; helm history test-app -n test-app
+</span></span></code></pre></div><p><img src="../../images/tech_tips/helm_rollback_history.png" alt="Screenshot of helm rollback history command"></p>
+<p>If we now re-try deployment of a new version of the application, the <code>upgrade failed</code> error will not appear anymore and the new deployment should succeed.</p>
+<p><code>helm rollback</code> is a useful command which you can also use to roll back to the latest stable release in case you discover issues during testing of your application. You can read more about it here: <a href="https://helm.sh/docs/helm/helm_rollback/">Helm Rollback</a></p>
+<h2 id="automatic-fix">Automatic fix</h2>
+<p>There&rsquo;s also a way you can do the rollback automatically, as part of the <code>helm upgrade</code> command. All you need to do is to provide an additional parameter, <code>--atomic</code> which will automatically perform the rollback in case of the faulty upgrade. By setting <code>--atomic</code> parameter, <code>--wait</code> parameter will be set automatically (value defaults to the value of <code>--timeout</code> parameter which is 5 minutes by default, unless overriden), but it can be overriden if you need to increase/decrease the time to wait for the upgrade operation.</p>
+<p>Below you can see an example of a helm upgrade command with <code>--atomic</code> parameter: the faulty deployment is being terminated automatically once the helm upgrade operation wait time is reached and instead of dangling deployments we can see rollback operations happening when we run <code>helm history</code> command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\&gt; helm upgrade cat-encyclopedia -n cat-encyclopedia --atomic --timeout 1m
+</span></span></code></pre></div><p><img src="../../images/tech_tips/helm_upgrade_atomic.png" alt="Screenshot of helm upgrade command with &amp;ndash;atomic parameter">
+<img src="../../images/tech_tips/helm_upgrade_atomic2.png" alt="Screenshot of helm history command after execution of helm upgrade command with &amp;ndash;atomic parameter"></p>
+<p>You can read more about helm upgrade command here: <a href="https://helm.sh/docs/helm/helm_upgrade">Helm Upgrade</a></p>
 <p>Thanks for reading and till next tech tip 😻</p>
 </div>
     <div class="post__footer">
