@@ -16,19 +16,21 @@ My name is Kris (obviously) and I have created this blog to share tech and non-t
 
 ***You're welcome to connect with me here as well:*** [link.tree: @guidemetothemoon](https://linktr.ee/guidemetothemoon)
 
-I live in Norway, love coding and putting cat pictures in presentations😼 Currently I am working as a Lead Software Architect and driving several exciting tech projects that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens' life easier.
+I'm a techie from Norway who loves preaching about all things Cloud Native, Kubernetes, Green Tech and cats. I am working as a Software Architect and driving tech projects that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens' life easier. I am also a Microsoft Azure MVP and CNCF ambassador.
 
-In 2022 I\'ve become a Microsoft MVP (Most Valuable Professional) in Microsoft Azure category and I\'m totally over the moon about this recognition - for many more years of giving back to the tech community! You can check out my MVP page here: [Most Valuable Professional](https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko)
+I love learning new things and sharing my journey and experiences with others. My goal is to inspire others developers to code with sustainability, security and cloud native principles in mind. I also hope that with my actions and contributions I can inspire and motivate more ladies to join the world of tech!
 
-![Microsoft MVP Badge](../images/mvp_badge1.png)
+I strongly believe that contributing to making this world a better place by volunteering is something all of us should consider doing, therefore being a volunteer is a big part of my life. Both when it comes to contributing back to tech community and non-profit organizations making a crucial positive impact in other areas of our life on this planet. 
 
-As a person I love learning new things and sharing my journey and experiences with others. My biggest passion is tech and my goal is to inspire other developers to code with sustainability and security in mind by spreading my knowledge and experience. My goal is also to be a female coder role model that can inspire and motivate all the beautiful girls and ladies out there to join the world of tech! 💖
-
-I also strongly believe that contributing to making this world a better place by volunteering is something all of us should consider doing, therefore being a volunteer is a big part of my life. I\'m doing my part:
+I\'m doing my part:
 
 🌱 Supporter and contributor for multiple open-source projects on GitHub;
 
 🌱 Board Member at Cloud Native Norway, NNUG Oslo and Co-Organizer of Cloud Native and Kubernetes Oslo and DEVREAL Oslo meetups;
+
+🌱 Co-Host at Kubernetes Unpacked podcast;
+
+🌱 Community Advocate at StreamingClouds;
 
 🌱 Volunteer at OWASP;
 
@@ -36,10 +38,10 @@ I also strongly believe that contributing to making this world a better place by
 
 🌱 Volunteer at animal shelter;
 
-Other than that, I\'m a cat mom, a Witcher fan, I love books, photography, puzzles, board games, cats and unicorns. I am also an active supporter of sustainability, including sustainable software engineering, and animal welfare - I have been a vegetarian for over 8 years and vegan for over 3 years. I\'m an eager nature addict as well - photo below was taken in Oslofjord area, one of the most known inlets in the Eastern Norway, which is known for a multitude of idyllic towns and villages that are full of exploration opportunities for the tourists.
+On a personal note, I love reading books, photography, puzzles, board games, drawing and hiking. I am an active supporter of sustainability in tech and outside of it, and animal welfare. I have been a vegetarian for over 8 years and vegan for over 3 years. I'm an eager nature addict as well - photo below was taken in Oslofjord area, one of the most known inlets in the Eastern Norway, which is known for a multitude of idyllic towns and villages that are full of exploration opportunities for the tourists.
 
-Anyway, thanks for stopping by! Check out the blog and tech tips section and stay tuned for the coming updates.☕🦾
+Anyway, thanks for stopping by! Check out the blog and tech tips section and stay tuned for the coming updates. ☕ 🦾
 
 See you there! 🤗
-
+ 
 ![Photo of myself on a mountain trip](../images/about.jpg)
