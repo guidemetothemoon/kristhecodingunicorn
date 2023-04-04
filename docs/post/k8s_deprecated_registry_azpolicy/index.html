@@ -10,7 +10,7 @@
   <title>
     Kris - The Coding Unicorn
         |
-        Improving Pull Request flow with PR templates and PR Completion Stats in Azure DevOps
+        Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries
       
 
     
@@ -22,7 +22,7 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps."
+    content="In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -95,7 +95,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/pr_templates/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/" />
 
   
   
@@ -123,18 +123,18 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="Improving Pull Request flow with PR templates and PR Completion Stats in Azure DevOps"/>
-<meta name="twitter:description" content="Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps."/>
+<meta name="twitter:title" content="Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."/>
 
 
 
   
-  <meta property="og:title" content="Improving Pull Request flow with PR templates and PR Completion Stats in Azure DevOps" />
-<meta property="og:description" content="Let&#39;s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps." />
+  <meta property="og:title" content="Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries" />
+<meta property="og:description" content="In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/pr_templates/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
-<meta property="article:published_time" content="2022-05-06T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-06T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-04T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
@@ -146,12 +146,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "articleSection": "techtips",
-        "name": "Improving Pull Request flow with PR templates and PR Completion Stats in Azure DevOps",
-        "headline": "Improving Pull Request flow with PR templates and PR Completion Stats in Azure DevOps",
+        "articleSection": "post",
+        "name": "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries",
+        "headline": "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries",
         "alternativeHeadline": "",
         "description": "
-      Let\u0027s take a look at how PR templates and PR Completion Stats extension can help us improve PR flow and quality in Azure DevOps.
+      In this blog post we\u0027ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries.
 
 
     ",
@@ -159,7 +159,7 @@
         "isFamilyFriendly": "true",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/pr_templates\/"
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_deprecated_registry_azpolicy\/"
         },
         "author" : {
             "@type": "Person",
@@ -177,10 +177,10 @@
             "@type": "Person",
             "name": "Kristina D."
         },
-        "copyrightYear" : "2022",
-        "dateCreated": "2022-05-06T00:00:00.00Z",
-        "datePublished": "2022-05-06T00:00:00.00Z",
-        "dateModified": "2022-05-06T00:00:00.00Z",
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-04-04T00:00:00.00Z",
+        "datePublished": "2023-04-04T00:00:00.00Z",
+        "dateModified": "2023-04-04T00:00:00.00Z",
         "publisher":{
             "@type":"Organization",
             "name": "Kristina D.",
@@ -202,19 +202,33 @@
       ]
 
     ,
-        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/pr_templates\/",
-        "wordCount" : "669",
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_deprecated_registry_azpolicy\/",
+        "wordCount" : "795",
         "genre" : [ ],
         "keywords" : [ 
       
-      "techtips"
+      "kubernetes"
 
     
       
         ,
 
       
-      "azure-devops"
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "azure"
 
     
       
@@ -509,39 +523,77 @@
   >
     
     <div class="post__content">
-      <h1>Improving Pull Request Flow With PR Templates and PR Completion Stats in Azure DevOps</h1>
-      <p><img src="../../images/tech_tips/techtip_4.png" alt="Article banner for improving PR flow in Azure DevOps"></p>
+      <h1>Creating Custom Azure Policy for Kubernetes to Disallow Non-Compliant Image Registries</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  4/4/2023
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">4-minute read</span>
+          </li>
+        </ul>
+      <p><img src="../../images/k8s_registry_azpolicy/k8s_deprecated_registry_azpolicy_banner.png" alt="Article banner for creating custom Azure Policy for non-compliant image registries"></p>
 <div class="toc">
-  <nav id="TableOfContents">
-  <ul>
-    <li><a href="#pr-templates">PR templates</a></li>
-    <li><a href="#pr-completion-stats-extension">PR Completion Stats extension</a></li>
-  </ul>
-</nav>
+  <nav id="TableOfContents"></nav>
 </div>
-<p>Code reviews and pull requests are a totally normal practice these days if you're working together with other developers. Even if you're working solo you probably don't want to commit to main branch directly if you have CI/CD in place. That's when adding changes through pull requests and code reviews come into picture.</p>
-<p>For many organizations and development teams this can be a tough process for many reasons where urgency, time limitations, overload with other tasks play a huge role. Nevertheless we still want to ensure that the established policies are being followed in order to ensure that every single line of code we commit is of highest possible quality. And there are ways we can enforce policies of course. One of the ways are automated checks - this is a really important one since we want to avoid human error or a multi-tasking PR reviewer to miss out on a critical bug in the changeset. But it's also about humans, about collaboration and making the code review process easier both for the one committing changes and the one reviewing the changes. And for that there are quite a few tools available!</p>
-<p>Today I would like to share two tools which we're using in the team in Azure DevOps.</p>
-<h2 id="pr-templates">PR templates</h2>
-<p>Pull request templates can be really helpful both for developers and reviewers - this is basically a checklist that gets automatically populated in the pull request description section once the PR is published, even if it's published as a draft. The checklist can include the policies that are crucial to ensure that you've done properly before merging the changes to main branch. In big projects there may be tens or even hundreds of policies and it can quickly get really hard to remember all of them, especially if you're a new developer. Such a checklist will at least help to validate your changes towards the most important code quality requirements that may not be covered by automatic checks. PR templates can also help reviewers to understan what kind of checks the pull request author has done prior to publishing the PR.</p>
-<p>You can start with PR templates quite easily - in the root of your repository in Azure DevOps create a folder called <strong>&quot;.azuredevops&quot;</strong> and create a file with name <code>pull_request_template.md</code> or <code>pull_request_template.txt</code> - I recommend using the Markdown file due to it's more extensive formatting capabilities.</p>
-<p><img src="../../images/tech_tips/pr_template.png" alt="Screenshot of a PR template in Azure DevOps"></p>
-<p>And the rest is history😺 Once it's done the template will automatically be populated in the PR description section as you may see in the screenshot below:</p>
-<p><img src="../../images/tech_tips/pr_template_appended.png" alt="Screenshot of a PR template in Azure DevOps"></p>
-<p>You can also tweak PR templates a bit further like configuring branch specific pull request templates and multiple pull request templates, you can find more about how to do that here: <a href="https://docs.microsoft.com/en-us/azure/devops/repos/git/pull-request-templates?view=azure-devops">Improve pull request descriptions using templates</a></p>
-<h2 id="pr-completion-stats-extension">PR Completion Stats extension</h2>
-<p>Another tool that can be helpful to get an overview of the code review activities and engagement is an Azure DevOps extension called <strong>&quot;Pull Request Completion Report&quot;</strong>. Once it's installed a new section called <strong>&quot;PR Completion Stats&quot;</strong> will pop up in <strong>&quot;Repos&quot;</strong> section for every repository in Azure DevOps and will provide you quite a good overview and statistics of  an average time pull requests are open, PR target branches, most active PR code reviewers, which reviewer groups are involved in code reviews and more.</p>
-<p>Here's an example of how it looks like in one of my repos:</p>
-<p><img src="../../images/tech_tips/pr_completion_stats.png" alt="Screenshot of PR Completion Stats Azure DevOps Extension"></p>
-<p>This statistics can help you see if the code review engagement is decreasing which may cause more confusion for developers. And this can also help you to create some engagement initiatives like rewarding most active and most engaged code reviewers which also motivates all the developers to contribute and feel more included. I think that it's a pretty cool feature to have in place and I'd love to hear if you tried it as well!😺</p>
-<p>You can read more and download the extension from here: <a href="https://marketplace.visualstudio.com/items?itemName=OneLuckiDev.prApprovalReport&amp;targetId=e3cecb71-ee13-46d0-9133-2125fd4f4018&amp;utm_source=vstsproduct&amp;utm_medium=ExtHubManageList">Azure DevOps Pull Request Stats</a></p>
-<p>Thanks for reading and till next tech tip 😻</p>
+<p>There are cases where you may need to explicitly ensure that specific container image registries are blacklisted from being used in your Kubernetes clusters. Let me provide you with a very recent and relevant example.</p>
+<p>From 3rd April 2023, <code>k8s.gcr.io</code> legacy image registry is officially frozen which means that no images, future Kubernetes versions and patch releases for earlier Kubernetes versions will be pushed to this registry. At some point in the near future this legacy image registry will be completely deactivated.</p>
+<p><code>registry.k8s.io</code> image registry is an official replacement for <code>k8s.gcr.io</code>, and you must ensure that you don&rsquo;t have any dependencies on the legacy image registry as soon as possible.</p>
+<p>The journey of transitioning to the new registry started back in 2022, when <code>registry.k8s.io</code> reached GA. There were multiple reasons for this change, but the most important reason is that the new image registry acts as a form of Content Delivery Network (CDN), spreading the load across regions, which will allow more cloud providers and vendors provide better experience to their image consumers by hosting their images &ldquo;closer to home&rdquo;.</p>
+<p><strong>Lower egress bandwidth &amp;&amp; cost -&gt; Higher download speed -&gt; Better user experience</strong>. A win-win change. ✅</p>
+<p>You can read the full announcement here: <a href="https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/">k8s.gcr.io Image Registry Will Be Frozen From the 3rd of April 2023</a></p>
+<p>This is an example of where blacklisting an image registry could come in handy and policies are here to help automate and alert upon that!😺 In order to prevent <code>k8s.gcr.io</code> based images from running in your cluster, you can implement policies, for example with Gatekeeper. Policies for Gatekeeper and Kyverno are available at <a href="https://github.com/aws/aws-eks-best-practices/tree/master/policies/k8s-registry-deprecation">AWS EKS Best Practices</a> repo.</p>
+<p><strong>But how would you implement the same validation for AKS/Azure Arc-enabled Kubernetes clusters with Azure Policy?</strong></p>
+<p>There are multiple options you may consider:</p>
+<ol>
+<li><strong>Assign <code>Kubernetes cluster containers should only use allowed images</code> built-in policy definition</strong> (<code>/providers/Microsoft.Authorization/policyDefinitions/febd0533-8e55-448f-b837-bd0e06f16469</code>) and explicitly whitelist image registries that you allow Kubernetes cluster workloads to use. If you&rsquo;ve already assigned this policy definition you need to ensure that <code>k8s.gcr.io</code> image registry is no longer included.</li>
+</ol>
+<blockquote>
+<p>From what I could see, above built-in policy definition only evaluates Pod containers/initContainers/ephemeralContainers. If you want to evaluate CronJob and Workload containers/initContainers/ephemeralContainers, as it&rsquo;s done in the custom policy below, you will either need to create a custom Azure Policy based on the above built-in policy definition or go ahead with the below alternative #2.</p>
+</blockquote>
+<ol start="2">
+<li><strong>Create custom Azure Policy that can be used for blacklisting non-compliant/deprecated image registries.</strong> <code>k8s.gcr.io</code> image registry can be added to the list. Then, Kubernetes cluster workloads that are attempting to use this image registry (or other blacklisted registries for that matter) will be denied deployment.</li>
+</ol>
+<p>Let&rsquo;s look into the latter alternative in more detail. I&rsquo;ve taken templates for Gatekeeper that are available in AWS EKS Best Practices repo and modified them further in order to create a custom Azure Policy that will either audit or deny deployment of workloads (Pod/CronJob/Workload containers, initContainers and ephemeralContainers) that are dependent on the blacklisted image registries.</p>
+<p>I will not go into the details of what a custom Azure Policy is but you can check out my earlier blog post to learn more: <a href="https://kristhecodingunicorn.com/post/aks_azure_policy/">Keeping AKS Clusters Continuously Secure With Azure Policy</a>. I will soon publish another blog post that will go more in-depth on writing custom Azure Policy definitions for Kubernetes with Rego and Gatekeeper templates so stay tuned for more information on the topic!😼</p>
+<p>Custom Azure Policy source files are available in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/help-resources/kubernetes/azure-policy/k8s_disallowed_image_registries">guidemetothemoon/div-dev-resources</a>. There are two files that are related to the respective custom Azure Policy:</p>
+<ol>
+<li>
+<p><code>k8s_azure_disallowed_registry_ct.yaml</code> represents a ConstraintTemplate that will be used by Gatekeeper to audit and flag non-compliant resources;</p>
+</li>
+<li>
+<p><code>k8s_azure_disallowed_registry_policy.json</code> represents the implementation of the custom Azure Policy definition. It points to <code>k8s_azure_deprecated_registry_ct.yaml</code> in the <code>url</code> parameter of <code>policyRule</code> section. <strong>Please note that ConstraintTemplate file must be publicly available for the Azure Policy to be able to use it.</strong></p>
+</li>
+</ol>
+<p>With minor to none modifications you can paste content of <code>k8s_azure_disallowed_registry_policy.json</code> directly in Azure portal custom Azure policy creation view or in Terraform <code>azurerm_policy_definition</code> resource.</p>
+<p>Once you&rsquo;ve created the custom Azure Policy definition and assigned it to the scope of your choosing, you can test it by assigning the policy with <code>Deny</code> effect and attempting to run a Pod that attempts to use a container image from disallowed image registry. Pod will be denied, as shown in the screenshot below:</p>
+<p><img src="../../images/k8s_registry_azpolicy/k8s_registry_azpolicy_params.png" alt="Screenshot of parameter section of the newly created custom Azure policy definition for non-compliant image registries"></p>
+<p><img src="../../images/k8s_registry_azpolicy/k8s_deprecated_registry_azpolicy_output.png" alt="Screenshot of the output after execution of the newly created custom Azure policy definition for non-compliant image registries"></p>
+<p>For more information about Azure Policy, please see here:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes">Understand Azure Policy for Kubernetes clusters</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure">Azure Policy definition structure</a></li>
+</ul>
+<p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
 </div>
     <div class="post__footer">
       
 
       
-        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/azure-devops/">azure-devops</a><a class="tag" href="/tags/devops/">devops</a></span>
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a></span>
 
 
       

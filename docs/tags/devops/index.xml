@@ -6,7 +6,18 @@
     <description>Recent content in devops on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 04 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</link>
+      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries.</description>
+      
+    </item>
+    
     <item>
       <title>Keeping AKS clusters continuously secure with Azure Policy</title>
       <link>https://kristhecodingunicorn.com/post/aks_azure_policy/</link>

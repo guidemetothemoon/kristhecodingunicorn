@@ -3,7 +3,7 @@ author = "Kristina D."
 title = "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries"
 date = "2023-04-04"
 description = "In this blog post we'll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."
-draft = true
+draft = false
 tags = [
     "kubernetes",
     "aks",
@@ -57,6 +57,7 @@ Once you've created the custom Azure Policy definition and assigned it to the sc
 
 ![Screenshot of parameter section of the newly created custom Azure policy definition for non-compliant image registries](../../images/k8s_registry_azpolicy/k8s_registry_azpolicy_params.png)
 
+![Screenshot of the output after execution of the newly created custom Azure policy definition for non-compliant image registries](../../images/k8s_registry_azpolicy/k8s_deprecated_registry_azpolicy_output.png)
 
 For more information about Azure Policy, please see here: 
 
