@@ -1,6 +1,6 @@
 +++
 title = "About Me"
-description = "Hey, my name's Kris and I like to code and talk tech and cybersecurity."
+description = "Hey, I'm Kris!"
 date = "2021-05-01"
 aliases = ["about-me", "about-kris", "contact"]
 author = "Kristina D."
@@ -13,8 +13,6 @@ tags = [
 Heisann and welcome to my Tech Corner!
 
 My name is Kris (obviously) and I have created this blog to share tech and non-tech (sometimes) stuff with the rest of the world 😸
-
-***You're welcome to connect with me here as well:*** [link.tree: @guidemetothemoon](https://linktr.ee/guidemetothemoon)
 
 I'm a techie from Norway who loves preaching about all things cloud native, Kubernetes, green tech and cats. I am working as a software architect and driving tech projects that support digitalization journey in public and private sector, minimizing bureaucracy and making citizens' life easier. I am also a Microsoft Azure MVP, CNCF ambassador and Kubernetes Unpacked podcast host.
 

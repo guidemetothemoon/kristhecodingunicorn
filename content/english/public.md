@@ -11,8 +11,6 @@ tags = [
 
 📺 24th May, 2023: [NDC Oslo - AKS Survival Pack: what to consider before going all-in with Azure Kubernetes Service](https://ndcoslo.com/agenda/aks-survival-pack-what-to-consider-before-going-all-in-with-azure-kubernetes-service-0ng9/0ivm3jmy32i)
 
-📺 3rd May, 2023: [Stockholm Tech Show - Managed Kubernetes Service: Day Zero Survival Pack](https://stockholmtechshow.se/konferens-2023/)
-
 📺 18. April, 2023: [KubeCon + CloudNativeCon Europe 2023: Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes](https://kccnceu2023.sched.com/event/1HyW9)
 
 📺 20th March, 2023: [Azure User Group Norway - Deploying microservices to AKS with Azure DevOps Environments and multi-staged Azure Pipelines](https://www.meetup.com/azure-user-group-norway/events/291904115)

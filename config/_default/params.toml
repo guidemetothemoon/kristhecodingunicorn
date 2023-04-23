@@ -77,26 +77,6 @@ title = "Sessionize"
 url = "https://sessionize.com/kristina-devochko"
 
 [[socialIcons]]
-icon = "fab fa-instagram"
-title = "instagram"
-url = "https://www.instagram.com/guidemetothemoon"
-
-[[socialIcons]]
-icon = "fas fa-envelope"
-title = "e-mail"
-url = "/contact/"
-
-[[socialIcons]]
 icon = "fas fa-rss"
 title = "rss"
 url = "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
-
-[[socialIcons]]
-icon = "fas fa-mask"
-title = "Azure Heroes"
-url = "https://www.azureheroes.community/user/15391"
-
-[[socialIcons]]
-icon = "fas fa-cloud"
-title = "Microsoft MVP"
-url = "https://mvp.microsoft.com/en-us/PublicProfile/5004929?fullName=Kristina%20Devochko"
