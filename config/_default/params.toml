@@ -2,9 +2,7 @@ title = "Kris - The Coding Unicorn"
 author = "Kris - The Coding Unicorn"
 copyright = "2023 - Powered by Hugo"
 description = "Welcome to my tech corner! 🤗 \nI preach about all things cloud native, green tech and cats 🐈 \nCheck \"Blog\" for new posts and \"About\" for my community involvement 🦄"
-profilePicture = "images/profile.jpg"
-bmcButton = "images/bmc_button.png"
-bmcUrl = "https://www.buymeacoffee.com/kristhecodingu1"
+profilePicture = "images/profile.webp"
 keywords = ""
 favicon = "favicons/"
 displayMode = "dark"
@@ -58,10 +56,15 @@ use = "katex"  # options: "katex", "mathjax". default is "katex".
 # use 'fab' when brand icons, use 'fas' when standard solid icons.
 [[socialIcons]]
 icon = "fas fa-cat"
-title = "Let's Connect!"
+title = "Let's connect!"
 url = "https://linkfree.io/guidemetothemoon"
 
 [[socialIcons]]
+icon = "fas fa-hand-holding-heart"
+title = "Help me buy supplies for homeless animals <3"
+url = "https://www.buymeacoffee.com/kristhecodingu1"
+
+[[socialIcons]]
 icon = "fas fa-rss"
-title = "rss"
+title = "RSS feed"
 url = "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"

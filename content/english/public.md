@@ -5,7 +5,7 @@ date = "2021-10-30"
 aliases = ["public"]
 author = "Kristina D."
 tags = [
-    "public",
+    "public"
 ]
 +++
 
