@@ -1,7 +1,7 @@
 +++
 author = "Kristina D."
 title = "Takeaways from attending KubeCon+CloudNativeCon Europe 2023, wearing many hats"
-date = "2023-05-03"
+date = "2023-05-01"
 description = "In this blog post I will share my reflections and takeaways from attending KubeCon+CloudNativeCon Europe 2023 wearing multiple hats: speaker, CNCF ambassador, KCD organizer and attendee."
 draft = true
 tags = [
@@ -22,40 +22,71 @@ tags = [
 
 For over a week ago, 18th-21st of April, KubeCon+CloudNativeCon Europe was happening in Amsterdam in the Netherlands and it was HUGE! With a fully sold out event, with more than 10 000 participants, it has been the largest conference I've attended in-person so far. I attended the event wearing many hats: a speaker, KCD organizer, CNCF ambassador and an attendee. Having these roles gave me an even broader perspective of the event which I want to share with the community😺
 
-I have also done a re-cap of the event together with Michael Levan in our new Kubernetes Unpacked podcast episode, where we talked about not only the latest and greatest technologies that are coming, but also about the top three takeaways from KubeCon+CloudNativeCon that you should remember when implementing Kubernetes in production. The episode is available here: []()
+I have also done a re-cap of the event together with Michael Levan in our new Kubernetes Unpacked podcast episode, where we talked about not only the latest and greatest technologies that are coming, but also about the top three takeaways from KubeCon+CloudNativeCon EU that you should remember when implementing Kubernetes in production. The episode is available here: []()
 
-## General overview
-
-
+With 10 000+ attendees and 20 parallell tracks KubeCon+CloudNativeCon EU ...
+[TODO]
 
 ## Trends and session highlights
+[TODO]
 
-## Takeaways and tips
+## Takeaways and tips from...
 
-There are some reflections and tips that I gathered from attending KubeCon+CloudNativeCon in multiple roles and I hope that some of these reflections can be insightful for you or even inspire you to attend next time, maybe in a new role apart from attendee😉
+There are some reflections and tips that I gathered from attending KubeCon+CloudNativeCon EU in multiple roles, and I hope that some of these reflections can be insightful for you or even inspire you to attend the conference next time. Maybe even in a new role as a speaker or CNCF Ambassador😉
 
 ### Attendee
 
+As an attendee the conference of such scale can quickly become very overwhelming and quite many tend to get a fear of missing out. For me it was both challenging and crucial to keep a balance of participating in sessions, engaging with the community members and getting quiet, alone time to bring myself back and re-charge.
+
+Here are a few tips that help me get the most out of the conference and at the same time take care of myself:
+> ***- Plan beforehand which sessions you want to prioritize and attend in-person,*** for example for additional engagement with the speaker.     
+>
+> ***- Expect that plans may change in such a dynamic environment:*** sessions may get fully-booked before you get in or you meet an old friend and use some additional time to catch up. Make your peace with it, evaluate what you should prioritize there and then and what can be covered by alternative options (f.ex., session recordings) at a later point.
+>
+> ***- Don't be afraid to ask questions or provide constructive feedback to the speaker.*** Engagement boosts innovation, improvements and new ideas, and is always appreciated! There are no stupid questions and a lot of effort is put into making such events a safe and inclusive space for sharing your opinion on the topic or asking questions. If you're still hesitant, take a look at the code of conduct that all the attendees are obliged to follow - it will help you understand how the rest of the audience is expected to behave in situations like this.
+>
+> ***- Challenge yourself a bit and see if you can come out of the comfort zone and get to know a new community member.*** For example, I chose to go alone for lunch, but I didn't get to sit all by myself for too long😸 Quite promptly other attendees joined me and I got to know new people, engage in interesting conversations around cloud native technologies and network. You can learn a lot from the experience of others and at the same time contribute to making the event more inclusive.
+>
+> ***- Remember to eat, drink water and re-charge.*** It's easy to forget these basic things, but they're crucial if you want to have enough energy and focus throughout the whole event. For me, taking breaks and short walks outside, eating lunch outside to get some fresh helped a ton. Getting good, stable sleep also helped me lots to stay focused so I would definitely urge you to not downprioritize this.
+
+![Photo of keynote room at KubeCon and CloudNativeCon Europe 2023, tightly packed with people](../../images/kubecon_cloudnativecon_eu_2023/keynote.webp)
+
+Finally, please note that all the sessions are being recorded, and recordings are published in a matter of 1-2 weeks after the event so you can always catch up with the rest of the sessions at a later point. For instance, the playlist from KubeCon+CloudNativeCon EU was published after ca. one week and is available here: [KubeCon + CloudNativeCon Europe 2023](https://youtube.com/playlist?list=PLj6h78yzYM2PyrvCoOii4rAopBswfz1p7).
+
 ### Speaker
+
+Speaking at KubeCon+CloudNativeCon EU has become one of the greatest achievement for me as a technical speaker. I always looked up to the speakers presenting at conferences of such scale, and I have always thought that there is almost no chance to get in as a "smaller", less known content creator or tech community member. I was proven wrong. I had an idea, a topic I am extremely passionate about, that I wanted to share with the world and with the tech community. I was eager to talk about it and I took a chance and submitted a proposal...and I got chosen. Next time it can be YOU. 👋
+
+> **If you have learned something that you feel others can benefit from in the community, you should definitely share it. If you have learned something that can become a talk, you should go for it and apply to the events that resonate with you. Independent of how big or popular those events are. It's scary, yes, but you're not missing anything by applying. You may miss on a lot though if you don't apply**😊   
+
+![Photo of Kristina Devochko on stage at KubeCon and CloudNativeCon Europe 2023 presenting her session on sustainability in Kubernetes](../../images/kubecon_cloudnativecon_eu_2023/speaker_photo.webp)
+
+My presentation at KubeCon+CloudNativeCon EU felt extra special because I got a chance to talk about something that I'm very focused on both in my personal and work life - sustainability. I talked about how sustainable software engineering principles can be applied to Kubernetes and it’s workloads, and what concrete actions you can take in order to make your Kubernetes workloads more eco-friendly. The engagement was really good and I enjoyed all the discussions my presentation sparked - as I mentioned in the section above, sustainability in tech is finally getting more attention and engagement from the community and I'm looking forward to contributing to even bigger focus on the importance of this area of software development.
+
+🚀 If you would like to know more about the topic I covered during my presentation, the recording is available on YouTube: [Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes - by Kristina Devochko](https://youtu.be/ppe0ptZEcvw)
 
 ### CNCF Ambassador
 
 CNCF Ambassadors are an extension of CNCF, furthering the mission of "making cloud native ubiquitous" through community leadership and mentorship.
 CNCF Ambassadors are elected twice per year and anyone can apply. If you're contributing back to the cloud native and open source community by creating technical content, organizing events, speaking or mentoring, you should consider applying for the program. Here's a summary of Spring 2023 election which was the first term I got accepted to: [Introducing our Spring 2023 Cloud Native Ambassadors! ](https://www.cncf.io/blog/2023/04/19/introducing-our-spring-2023-cloud-native-ambassadors)
 
-KubeCon+CloudNativeCon Europe was a great opportunity to meet fellow ambassadors from all over the world and engage in interesting discussions around cloud native technologies, content creation and community contribution. It's also a great arena to brainstorm new content and collaborate on creating some of that content together. 
+> **KubeCon+CloudNativeCon EU was a great opportunity to meet fellow ambassadors from all over the world and engage in interesting discussions around cloud native technologies, content creation and community contribution. It's also a great arena to brainstorm new content and collaborate on creating some of that content together to bring even more value to the community.**
+
+![Photo of CNCF Ambassadors logo on a black jacket with cherry blossoms in the background](../../images/kubecon_cloudnativecon_eu_2023/cncf_ambassadors_logo.webp)
 
 Another reflection I really want to share is ***the atmosphere of inclusion***. I'm an introvert and am not always mastering social events and get-to-know parties in a good way, therefore attending events where I don't know that many people can quickly become challenging. As part of the conference I attended an Ambassador breakfast for all the CNCF Ambassadors, where I didn't know that many just yet. As I was about to sit down for myself, a few other ambassadors spotted it and invited me to their table, which was very sweet and nice of them to do. I would like to send these kind fellow ambassadors a shoutout and a warm Thank You for including me in their company - people like you give me even more inspiration to do the same when I see someone who may feel lonely or uncomfortable at community events💖
 
 ### KCD Organizer
 
+![Kubernetes Community Days logo](../../images/kubecon_cloudnativecon_eu_2023/kcd_banner.webp)
+
 Kubernetes Community Days (KCD) are smaller versions of KubeCon+CloudNativeCon that are arranged by tech community members all over the globe, with support from CNCF. The goal of these events is to foster collaboration, networking, knowledge sharing around topics of open source, cloud native and Kubernetes in the local tech communities. 
 
 Any city can arrange a KCD and there's a helpful checklist with extensive information available on GitHub that can come in handy if you consider arranging a KCD event yourself at some point: [cncf/kubernetes-community-days](https://github.com/cncf/kubernetes-community-days).
 
-During KubeCon+CloudNativeCon Europe there were multiple opportunities to engage with fellow KCD organizers, both new and experienced ones. There was a booth available where at any time you could go and have a chat with some of the KCD organizers about anything around event planning, tips and tricks, etc.
+> **During KubeCon+CloudNativeCon EU there were multiple opportunities to engage with fellow KCD organizers, both new and experienced ones. There was a booth available where at any time you could go and have a chat with some of the KCD organizers about anything around event planning, tips and tricks, etc.**
 
-When the recordings from the conference become available I would recommend you to check out following session: ***"Grow Your Own Community! Lessons Learned from Running Kubernetes Community Days Across Europe - Matt Jarvis, Snyk; Annalisa Gennaro, SparkFabrik; Max Korbacher, Liquid Reply; Alessandro Vozza, Solo.io; Paula Kennedy, Syntasso"***. This was a very interesting panel discussion where organizers from some of the biggest Kubernetes Community Days in Europe shared their experiences, challenges, pitfalls, tips and tricks when it comes to organizing such community events at scale.
+🚀 I recommend you to check out following session: [Grow Your Own Community! Lessons Learned from Running Kubernetes Community Days Across Europe - Matt Jarvis, Snyk; Annalisa Gennaro, SparkFabrik; Max Korbacher, Liquid Reply; Alessandro Vozza, Solo.io; Paula Kennedy, Syntasso](https://youtu.be/Ako9eAcMQfY). This was a very interesting panel discussion where organizers from some of the biggest Kubernetes Community Days in Europe shared their experiences, challenges, pitfalls, tips and tricks when it comes to organizing such community events at scale.
 
 Myself, together with a few amazing community members, will be arranging KCD Norway in January 2024 so if you're planning a trip to Oslo or would like to speak at our event, do reach out! All the updates regarding the event will be published at [CNCF - KCD Norway](https://community.cncf.io/kcd-norway), so stay tuned!😼
 
