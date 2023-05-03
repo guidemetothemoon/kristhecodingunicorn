@@ -20,15 +20,73 @@ tags = [
 
 {{< table_of_contents >}}
 
-For over a week ago, 18th-21st of April, KubeCon+CloudNativeCon Europe was happening in Amsterdam in the Netherlands and it was HUGE! With a fully sold out event, with more than 10 000 participants, it has been the largest conference I've attended in-person so far. I attended the event wearing many hats: a speaker, KCD organizer, CNCF ambassador and an attendee. Having these roles gave me an even broader perspective of the event which I want to share with the community😺
+For over a week ago, 18th-21st of April, KubeCon+CloudNativeCon Europe was happening in Amsterdam in the Netherlands and it was HUGE! With a fully sold out event, with more than 10 000 participants and 20 parallell tracks, it has been the largest conference I've attended in-person so far. I attended the event wearing many hats: a speaker, KCD organizer, CNCF ambassador and an attendee. Having these roles gave me an even broader perspective of the event which I want to share with the community😺
 
 I have also done a re-cap of the event together with Michael Levan in our new Kubernetes Unpacked podcast episode, where we talked about not only the latest and greatest technologies that are coming, but also about the top three takeaways from KubeCon+CloudNativeCon EU that you should remember when implementing Kubernetes in production. The episode is available here: []()
 
-With 10 000+ attendees and 20 parallell tracks KubeCon+CloudNativeCon EU ...
-[TODO]
+Overall I need to say that the event has been extremely-well organized - kudos to everyone involved! What specifically caught my attention were all the small things related to accessibility and inclusion: gender pronouns stickers, communication preference stickers and greeting preferences pins, all-gender bathrooms, tasty vegan food options, creative corner where you could draw or build lego, handicap accessibility, professional security and crowd management, and probably much more. It was clear that the event organization was extremelly well thought through in order to make it as inclusive, safe and accessible for everyone as possible.
+
+What about the content?🤔
 
 ## Trends and session highlights
-[TODO]
+
+With 20 parallell tracks it becomes extremely challenging to prioritize and it's humanly impossible to attend all of the sessions in-person. Fortunately there are recordings available on YouTube, and I'm still going through those, but I would like to share with you some the sessions that I enjoyed.
+
+General trends I've pointed out for myself in terms of content and interest from the community:
+
+🪷 ***Multi-Everything: multi-cloud, multi-cluster, multi-tenancy.*** When it comes to enterprise reality, the answer is not always black and white. Many implementation projects become pretty complicated due to requirements like hybrid workloads or multi-cloud infrastructure. How to implement it in a secure, scalable and production-ready way? Quite a few sessions shed light on this topic and demonstrate some of the tools like Cilium, ArgoCD, Crossplane and a few others that can make the implementation journey easier for the organizations.
+
+🪷 ***GitOps.*** This domain was also getting a lot of attention, both from the perspective of tools, but also organizational culture and processes. There were some good sessions that were about running GitOps tools in production, at scale. There was also a very good panel discussion where attendees could bring up their own challenges with implementing GitOps in enterprise setting.
+
+🪷 ***Networking.*** This domain will always be relevant when it comes to Kubernetes, because networking in Kubernetes is advanced and requires times, patience and good helper tools to master. During the conference many sessions were dedicated to service mesh, eBPF, network policies. It was especially interesting to look into more advanced use cases with clusters running in different cloud offerings or in highly restricted environments.
+
+🪷 ***Sustainability.*** My personal favorite. Sustainability in tech is clearly an emerging domain that is gaining more attention from the community. It was great seeing multiple sessions related to sustainability, as well as gaining visibility for TAG Environmental Sustainability. This domain is all about reducing our impact on climate change in tech industry and cloud native space: by reducing energy consumtion, wasted resources, carbon and water footprint. I'm really happy that I could contribute with my presentation to spreading awareness on this topic. It's clear that this domain will get even more attention in the future.
+
+Below I would like to highlight some of the sessions that I really enjoyed, grouped by respective domains:
+
+***GitOps***
+
+- [How GitOps Changed Our Lives & Can Change Yours Too! - Priyanka Ravi, Weaveworks; Christian Hernandez, Red Hat; Filip Jansson, Strålfors; Roberth Strand, Amesto Fortytwo; Leigh Capili, VMware](https://youtu.be/hd7VkCLnTWk)
+
+***Networking***
+
+- [Adopting Network Policies in Highly Secure Environments - Raymond de Jong, Isovalent](https://youtu.be/yikVhGM2ye8)
+
+- [Keeping It Simple: Cilium Networking for Multicloud Kubernetes - Liz Rice, Isovalent](https://youtu.be/fJiuqRY5Oi4)
+
+***Backstage***
+
+- [How We Migrated Over 1000 Services to Backstage Using GitOps and Survived to Talk About It! - Shahar Shmaram & Ran Mansoor, AppsFlyer](https://youtu.be/2fCNqKxAtYo)
+
+- [Paved Paths Leading the Way to Compliance - Kasper Borg Nissen & Brian Nielsen, Lunar](https://youtu.be/6T3Mf6pdg7E)
+
+***Div Kubernetes topics***
+
+- [Keynote: Enabling Real-Time Media in Kubernetes - Giles Heron, Principal Engineer, Cisco](https://youtu.be/1_cxXzhY4Xg)
+
+- [Love, Death and Robots - with Wasm & K8s on Boston Dynamics Spot - Max Körbächer, Liquid Reply](https://youtu.be/UsjZSsWpdRo)
+
+- [Unlocking Argo CD’s Hidden Tools for Chaos Engineering - Featuring VCluster and More - Dan Garfield & Brandon Phillips, Codefresh](https://youtu.be/Z0RB5SFs6fI)
+
+***Community and open source***
+
+- [Keynote: Gardens and Glaciers: Saving Knowledge Through Succession - Emily Fox, Apple](https://youtu.be/oKHD3yAyWss)
+
+- [From Community to Customers - Kelsey Hightower, Google Cloud](https://youtu.be/eb0442K_zmY)
+
+***Sustainability***
+
+- [Keynote: Building a Sustainable, Carbon-Aware Cloud: Scale Workloads and Reduce Emissions - Jorge Palma, Principal PM Lead, Microsoft Azure](https://youtu.be/s7K7QkhWnFU)
+
+- [Minimizing Energy Consumption in Bare Metal K8s Clusters - Marco Schröder & David Meder-Marouelli](https://youtu.be/jsBSNCuSI74)
+
+- [Evolution of on-Node Adaptive Power Tuning - Atanas Atanasov, Intel & Rimma Iontel, Red Hat](https://youtu.be/_SqebJmYteQ)
+
+***TAG Environmental Sustainability***
+
+[The State of Green Software + Cloud Native - Leonard Vincent Simon Pahlke, Liquid Reply & Cara Delia](https://youtu.be/VCIdFHhp4No)
+
+![Photo of TAG Environmental Sustainability logo sticker with KubeCon+CloudNativeCon EU flags in the background](../../images/kubecon_cloudnativecon_eu_2023/tag_env_sus_logo.webp)
 
 ## Takeaways and tips from...
 
