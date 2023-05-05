@@ -46,15 +46,19 @@ Below I would like to highlight some of the sessions that I really enjoyed, grou
 
 ***GitOps***
 
-- [How GitOps Changed Our Lives & Can Change Yours Too! - Priyanka Ravi, Weaveworks; Christian Hernandez, Red Hat; Filip Jansson, Strålfors; Roberth Strand, Amesto Fortytwo; Leigh Capili, VMware](https://youtu.be/hd7VkCLnTWk)
+- Insightful panel discussion where OpenGitOps maintainers discussed why GitOps is a gamechanger for modern software delivery. There were also some good questions from the audience regarding challenges of implementing GitOps in the organizations. [How GitOps Changed Our Lives & Can Change Yours Too! - Priyanka Ravi, Weaveworks; Christian Hernandez, Red Hat; Filip Jansson, Strålfors; Roberth Strand, Amesto Fortytwo; Leigh Capili, VMware](https://youtu.be/hd7VkCLnTWk)
 
 ***Networking***
 
+Isovalent had a visibly strong presence at KubeCon+CloudNativeCon EU, and it was clear that there was a lot of interest and engagement from the participants as well. I find both Raymond and Liz to be very good speakers and it's no surprise for me that this time as well I enjoyed their sessions.
+
 - [Adopting Network Policies in Highly Secure Environments - Raymond de Jong, Isovalent](https://youtu.be/yikVhGM2ye8)
 
-- [Keeping It Simple: Cilium Networking for Multicloud Kubernetes - Liz Rice, Isovalent](https://youtu.be/fJiuqRY5Oi4)
+- This session was very interesting since Liz demoed how Cilium Mesh, which is a newly released component, can be used to connect workloads running on Kubernetes clusters in different cloud providers, or even outside Kubernetes. [Keeping It Simple: Cilium Networking for Multicloud Kubernetes - Liz Rice, Isovalent](https://youtu.be/fJiuqRY5Oi4)
 
 ***Backstage***
+
+I got really inspired from a few sessions related to Backstage. It was very interesting to hear about how organizations adopted Backstage not only for better developer documentation, but also for automatic generation of common templates, asset management and categorization of data for security audits, and much more. If you haven't heard about Backstage before or would like to learn more about use cases where it can be used, do check out the sessions below.
 
 - [How We Migrated Over 1000 Services to Backstage Using GitOps and Survived to Talk About It! - Shahar Shmaram & Ran Mansoor, AppsFlyer](https://youtu.be/2fCNqKxAtYo)
 
@@ -64,17 +68,21 @@ Below I would like to highlight some of the sessions that I really enjoyed, grou
 
 - [Keynote: Enabling Real-Time Media in Kubernetes - Giles Heron, Principal Engineer, Cisco](https://youtu.be/1_cxXzhY4Xg)
 
-- [Love, Death and Robots - with Wasm & K8s on Boston Dynamics Spot - Max Körbächer, Liquid Reply](https://youtu.be/UsjZSsWpdRo)
+- Very fun and entertaining session where we got to take a selfie with an actual Boston Dynamics robot - how often does that happen?😁 Session was a story of how Liquid Reply is building a PoC for running robot-specific software with WASM and Kubernetes on the edge. [Love, Death and Robots - with Wasm & K8s on Boston Dynamics Spot - Max Körbächer, Liquid Reply](https://youtu.be/UsjZSsWpdRo)
 
-- [Unlocking Argo CD’s Hidden Tools for Chaos Engineering - Featuring VCluster and More - Dan Garfield & Brandon Phillips, Codefresh](https://youtu.be/Z0RB5SFs6fI)
+- Quite interesting and easy-to-follow session on how you can use additional capabilities of ArgoCD to test it's control plane at scale, with thousands of deployed applications. [Unlocking Argo CD’s Hidden Tools for Chaos Engineering - Featuring VCluster and More - Dan Garfield & Brandon Phillips, Codefresh](https://youtu.be/Z0RB5SFs6fI)
 
 ***Community and open source***
 
-- [Keynote: Gardens and Glaciers: Saving Knowledge Through Succession - Emily Fox, Apple](https://youtu.be/oKHD3yAyWss)
+The focus of the conference was not only on the technical topics but also on the topic of community, open source development and how keep it blooming, avoid burnout and transfer knowledge to upcoming contributors.
 
-- [From Community to Customers - Kelsey Hightower, Google Cloud](https://youtu.be/eb0442K_zmY)
+- In this keynote I loved the analogy between growing new plants, melting glaciers and knowledge sharing and preservation in the cloud native and open source community. [Keynote: Gardens and Glaciers: Saving Knowledge Through Succession - Emily Fox, Apple](https://youtu.be/oKHD3yAyWss)
+
+- Kelsey is inspiring once again. No slides, just open conversation with the participants about community, customers, monetization and the ways of balancing it in a healthy way. [From Community to Customers - Kelsey Hightower, Google Cloud](https://youtu.be/eb0442K_zmY)
 
 ***Sustainability***
+
+In addition to me presenting on the topic of sustainability in Kubernetes I attended a bunch of sessions that were related to the same domain. Some of them I would like to highlight below. It was cool to see Microsoft announcing carbon-aware scaler for KEDA in AKS during the keynote session. It was also interesting to hear stories and suggestions on ways to reduce energy consumption and use server resources more efficiently.
 
 - [Keynote: Building a Sustainable, Carbon-Aware Cloud: Scale Workloads and Reduce Emissions - Jorge Palma, Principal PM Lead, Microsoft Azure](https://youtu.be/s7K7QkhWnFU)
 
@@ -84,9 +92,15 @@ Below I would like to highlight some of the sessions that I really enjoyed, grou
 
 ***TAG Environmental Sustainability***
 
-[The State of Green Software + Cloud Native - Leonard Vincent Simon Pahlke, Liquid Reply & Cara Delia](https://youtu.be/VCIdFHhp4No)
+Finally I would like to highlight CNCF Technical Advisory Group (TAG) Environmental Sustainability which I've now joined as a member and contributor. The main goal of this working group is to raise awareness of environmental sustainability as a key element of open source development and support projects which foster an understanding of energy drivers. You get a chance to meet and collaborate with like-minded people with passion for sustainability and building greener software. 
+
+> **TAG Environmental Sustainability arranges 2 meetings a month so if you're interested in the above topics as well, join us! More information is provided here:** [TAG Environmental Sustainability](https://tag-env-sustainability.cncf.io)
+
+During KubeCon+CloudNativeCon EU there I joined for the TAG project meeting which was filled with important and sometimes even heated discussions. Unfortunately it wasn't recorded but there was a good session from the TAG's board members on the current state of green software in cloud native space: [The State of Green Software + Cloud Native - Leonard Vincent Simon Pahlke, Liquid Reply & Cara Delia](https://youtu.be/VCIdFHhp4No)
 
 ![Photo of TAG Environmental Sustainability logo sticker with KubeCon+CloudNativeCon EU flags in the background](../../images/kubecon_cloudnativecon_eu_2023/tag_env_sus_logo.webp)
+
+To sum it up, a lot of great content was presented during the conference, and it's tough to highlight just one or two sessions. Nevertheless, if you loved some of the sessions I highlighted, do let me know and let's discuss!🤗
 
 ## Takeaways and tips from...
 
@@ -121,7 +135,7 @@ Speaking at KubeCon+CloudNativeCon EU has become one of the greatest achievement
 
 My presentation at KubeCon+CloudNativeCon EU felt extra special because I got a chance to talk about something that I'm very focused on both in my personal and work life - sustainability. I talked about how sustainable software engineering principles can be applied to Kubernetes and it’s workloads, and what concrete actions you can take in order to make your Kubernetes workloads more eco-friendly. The engagement was really good and I enjoyed all the discussions my presentation sparked - as I mentioned in the section above, sustainability in tech is finally getting more attention and engagement from the community and I'm looking forward to contributing to even bigger focus on the importance of this area of software development.
 
-🚀 If you would like to know more about the topic I covered during my presentation, the recording is available on YouTube: [Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes - by Kristina Devochko](https://youtu.be/ppe0ptZEcvw)
+> 🚀 **If you would like to know more about the topic I covered during my presentation, the recording is available on YouTube:** [Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes - by Kristina Devochko](https://youtu.be/ppe0ptZEcvw)
 
 ### CNCF Ambassador
 
@@ -146,7 +160,19 @@ Any city can arrange a KCD and there's a helpful checklist with extensive inform
 
 🚀 I recommend you to check out following session: [Grow Your Own Community! Lessons Learned from Running Kubernetes Community Days Across Europe - Matt Jarvis, Snyk; Annalisa Gennaro, SparkFabrik; Max Korbacher, Liquid Reply; Alessandro Vozza, Solo.io; Paula Kennedy, Syntasso](https://youtu.be/Ako9eAcMQfY). This was a very interesting panel discussion where organizers from some of the biggest Kubernetes Community Days in Europe shared their experiences, challenges, pitfalls, tips and tricks when it comes to organizing such community events at scale.
 
-Myself, together with a few amazing community members, will be arranging KCD Norway in January 2024 so if you're planning a trip to Oslo or would like to speak at our event, do reach out! All the updates regarding the event will be published at [CNCF - KCD Norway](https://community.cncf.io/kcd-norway), so stay tuned!😼
+> **Myself, together with a few amazing community members, will be arranging KCD Norway in January 2024 so if you're planning a trip to Oslo or would like to speak at our event, do reach out! All the updates regarding the event will be published at** [CNCF - KCD Norway](https://community.cncf.io/kcd-norway), **so stay tuned!** 😼
+
+---
+
+As you can see from the length of this blog post there have been a lot impressions, reflections and learnings from attending KubeCon+CloudNativeCon Europe😸 
+
+**Is it worth attending?**
+
+I would say, absolutely! I see two main reasons for this: firstly, there are so many different activities that are available during the conference of such scale that most of us will be able to choose something that brings value to oneself. Secondly, it's one of the rare opportunities where a large tech community is gathered in one place! Why not use this time to catch up with your community friends or get to know some new ones?😉
+
+All in all, I think that if you have a possibility to join, it's definitely worth to experience it for yourself.
+
+***Community in Bloom - with something to everyone's taste.***
 
 That's it from me this time, thanks for checking in!💖
 
