@@ -6,7 +6,18 @@
     <description>Recent content in k8s on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 04 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023, wearing many hats</title>
+      <link>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</guid>
+      
+        <description>In this blog post I will share my reflections and takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023 wearing multiple hats: speaker, CNCF ambassador, KCD organizer and attendee.</description>
+      
+    </item>
+    
     <item>
       <title>Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries</title>
       <link>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</link>

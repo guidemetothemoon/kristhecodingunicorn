@@ -6,13 +6,112 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 04 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
-      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/aks/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>cloudnative</title>
+      <link>https://kristhecodingunicorn.com/tags/cloudnative/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/cloudnative/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>cloudnativecon</title>
+      <link>https://kristhecodingunicorn.com/tags/cloudnativecon/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/cloudnativecon/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>cncf</title>
+      <link>https://kristhecodingunicorn.com/tags/cncf/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/cncf/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://kristhecodingunicorn.com/tags/devops/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>gitops</title>
+      <link>https://kristhecodingunicorn.com/tags/gitops/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/gitops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>https://kristhecodingunicorn.com/tags/k8s/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>kubecon</title>
+      <link>https://kristhecodingunicorn.com/tags/kubecon/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/kubecon/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>platformengineering</title>
+      <link>https://kristhecodingunicorn.com/tags/platformengineering/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/platformengineering/</guid>
       
         <description></description>
       
@@ -24,39 +123,6 @@
       <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>https://kristhecodingunicorn.com/tags/devops/</link>
-      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>k8s</title>
-      <link>https://kristhecodingunicorn.com/tags/k8s/</link>
-      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/k8s/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>kubernetes</title>
-      <link>https://kristhecodingunicorn.com/tags/kubernetes/</link>
-      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/kubernetes/</guid>
       
         <description></description>
       
@@ -79,17 +145,6 @@
       <pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/techtips/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>gitops</title>
-      <link>https://kristhecodingunicorn.com/tags/gitops/</link>
-      <pubDate>Tue, 24 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/gitops/</guid>
       
         <description></description>
       
