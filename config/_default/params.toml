@@ -11,6 +11,7 @@ enableEmoji = true
 disableThemeSwitcher = true
 pygmentsCodeFences = true
 pygmentsUseClasses = true
+enableCarbonBadge = true
 
 # example ["css/custom.css"]
 customCss = ["css/syntax.css"]
