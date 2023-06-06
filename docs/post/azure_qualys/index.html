@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.112.7"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="In this blog post we&#39;ll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.1147aa5bacb4bce677a0e264073829caedb82fd18ea07a5f1d80521f539d1c45.css"
+      integrity="sha256-EUeqW6y0vOZ3oOJkBzgpyu24L9GOoHpfHYBSH1OdHEU="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/azure_qualys/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources."/>
+
+
+
+  
+  <meta property="og:title" content="Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys" />
+<meta property="og:description" content="In this blog post we&#39;ll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/azure_qualys/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-06T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys",
+        "headline": "Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we\u0027ll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/azure_qualys\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-06-06T00:00:00.00Z",
+        "datePublished": "2023-06-06T00:00:00.00Z",
+        "dateModified": "2023-06-06T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/azure_qualys\/",
+        "wordCount" : "1979",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    
+      
+        ,
+
+      
+      "cybersecurity-corner"
+
+    
+      
+        ,
+
+      
+      "security"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Scanning Azure VMs, Azure Arc-Enabled Servers and ACR Images for Vulnerabilities With Microsoft Defender and Qualys</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  6/6/2023
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">10-minute read</span>
+          </li>
+        </ul>
+      <p><img src="../../images/azure_arc/arc_qualys_banner.webp" alt="Article banner for vulnerability scanning with Qualys"></p>
+<div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-defender-for-clouds-integrated-qualys">What is Defender for Cloud&rsquo;s integrated Qualys?</a></li>
+    <li><a href="#implement-scanning-of-azure-vms-and-azure-arc-enabled-servers">Implement scanning of Azure VMs and Azure Arc-enabled servers</a></li>
+    <li><a href="#what-about-azure-container-registry-acr-and-aks">What about Azure Container Registry (ACR) and AKS?</a></li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>In the modern reality with tens of security vulnerabilities that are being disclosed daily you need to continuously implement a variety of security controls in order to ensure that your systems are strongly protected. Even if you&rsquo;re running on the cloud⛅</p>
+<p>One of the security controls that I would like to talk about in this blog post is vulnerability scanning.
+Vulnerability scanning is an essential practice for maintaining a secure infrastructure, mitigating risks, and protecting sensitive data from potential threats. It allows organizations to stay proactive, comply with regulations, and safeguard their systems against known vulnerabilities and emerging security risks.</p>
+<p>One of the possibilities that you have in Microsoft Azure is utilizing Qualys vulnerability scanner, which is available as an integrated offering as part of Microsoft Defender for Cloud.</p>
+<p>Now let&rsquo;s take a look at what Qualys is, how it can be applied to perform vulnerability scanning of Azure virtual machines, hybrid machines (aka Azure Arc-enabled servers), Azure Container Registry&hellip;and finally how Qualys is involved in securing AKS clusters😺</p>
+<h2 id="what-is-defender-for-clouds-integrated-qualys">What is Defender for Cloud&rsquo;s integrated Qualys?</h2>
+<p>Qualys isn&rsquo;t only the name of the vulnerability scanner but it&rsquo;s also a company that offers a bunch of different services and tools in the area of information security and compliance. You can read more about them here: <a href="https://www.qualys.com">Qualys</a>.</p>
+<p>In terms of Microsoft Azure and Defender for Cloud we will be looking at Qualys vulnerability scanner service. It focuses on identifying security vulnerabilities in IT infrastructure so that consumers can get comprehensive insights into the security weaknesses that are present in their systems. It&rsquo;s  goal is to help consumers proactively identify vulnerabilities, prioritize remediation efforts, and improve overall security resilience.</p>
+<p>Being offered as an integrated vulnerability scanner, as part of Microsoft Defender for Cloud offering, it doesn&rsquo;t require a separate Qualys license or account - it&rsquo;s taken care of by Microsoft and doesn&rsquo;t introduce additional cost, as long as you&rsquo;re using a compliant MS Defender plan. Using integrated offering instead of BYOL is also beneficial in case you discover any problems or challenges with the vulnerability scanner - since it&rsquo;s an integrated offering you can get prompter assistance from Microsoft who can also involve Qualys team directly for faster issue resolution.</p>
+<p><em><strong>If you&rsquo;re using Microsoft Defender for Endpoint&hellip;</strong></em> and want to enable Defender for Cloud&rsquo;s integrated Qualys on your servers, please note that you also have another option worth considering. Once you have Microsoft Defender for Endpoint enabled you can utilize <strong>Microsoft Defender Vulnerability Management</strong>, which is quite similar to the functionality provided by Qualys, but it&rsquo;s agentless, i.e. it doesn&rsquo;t require you to install any additional agents on the servers in order to perform vulnerability scanning. Azure Arc-enabled servers are also supported by Microsoft Defender for Endpoint and Microsoft Defender Vulnerability Management. You can find a few initial similarities and differences in the screenshots below, but do check out additional material in the last section of this blog post for more information on the topic🤗</p>
+<p><strong>Defender for Cloud&rsquo;s integrated Qualys:</strong></p>
+<p><img src="../../images/azure_arc/defender_qualys.webp" alt="Screenshot of Defender for Cloud&rsquo;s integrated Qualys requirements"></p>
+<p><strong>Microsoft Defender Vulnerability Management:</strong></p>
+<p><img src="../../images/azure_arc/defender_mdetvm.webp" alt="Screenshot of Microsoft Defender for Endpoint and Defender Vulnerability Management requirements"></p>
+<p>Now let&rsquo;s take a look at how you can utilize vulnerability scanning with Defender&rsquo;s integrated Qualys scanner for different resources in Azure😼</p>
+<h2 id="implement-scanning-of-azure-vms-and-azure-arc-enabled-servers">Implement scanning of Azure VMs and Azure Arc-enabled servers</h2>
+<p>There are multiple ways you can enable Defender for Cloud&rsquo;s integrated Qualys vulnerability scanner on Azure VMs and Azure Arc-enabled servers.</p>
+<p>One way is to manually choose non-compliant machines and deploy Qualys through remediation step of the <code>Machines should have a vulnerability assessment solution</code> recommendation in Defender for Cloud page in Azure portal.</p>
+<blockquote>
+<p>Please note that Defender for Cloud&rsquo;s integrated Qualys requires Microsoft Defender for Servers Plan 2.</p>
+</blockquote>
+<p><img src="../../images/azure_arc/qualys_install_defender.webp" alt="Screenshot of Defender for Cloud recommendation to install Qualys in Azure portal"></p>
+<p>In this case you will still need to perform manual steps, by checking back and forth for non-compliant servers and explicitly choosing which servers to deploy Qualys to. I prefer more automation and less manual steps, therefore I would like to show you how to do the same but at scale, with help of Azure Policy😼</p>
+<p>There&rsquo;s a built-in Azure policy definition available for us, that&rsquo;s called <code>Configure machines to receive a vulnerability assessment provider</code> - it will deploy Defender for Cloud&rsquo;s integrated Qualys vulnerability scanner to all non-compliant Azure VMs and Azure Arc-enabled servers.</p>
+<blockquote>
+<p>Please note that this policy definition can also be used to deploy Microsoft Defender Vulnerability Management, but you need to ensure that you configure <code>Vulnerability assessment provider type</code> parameter to be <code>mdeTvm</code> during policy assignment.</p>
+</blockquote>
+<p>I will now show how this policy can be enabled, including initial remediation task with help of Terraform. We will create a user-assigned identity with <code>Security Admin</code> role assignment, which has the required permissions to perform policy remediation. We will also create a policy assignment on subscription level to ensure that all resources, existing and future ones, in the respective subscription will be evaluated by the policy. Finally, we will create a subscription policy remediation task to trigger initial deployment of Qualys to detected non-compliant resources.</p>
+<blockquote>
+<p>Please note that continuous auto-remediation of non-compliant resources is not supported in Azure Policy, and this is by design. You can potentially automate that by for example, implementing a Logic App or an Azure Function that could react to the policy&rsquo;s state changes. You can read more about it in this GitHub issue: <a href="https://github.com/MicrosoftDocs/azure-docs/issues/17764">Automatic remediation</a></p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_user_assigned_identity&#34;</span> <span class="s2">&#34;azp_uai&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">resource_group_name</span> = <span class="s2">&#34;rg-azpolicy-dev&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location</span>            = <span class="s2">&#34;northeurope&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                = <span class="s2">&#34;uai-pa-dev&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_role_assignment&#34;</span> <span class="s2">&#34;azp_uai_ra&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">scope</span>              = <span class="s2">&#34;/subscriptions/</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">subscription_id</span><span class="si">}</span><span class="s2">&#34;</span><span class="c1"> # Your Azure subscription ID. Injected as variable here for illustration purposes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">role_definition_id</span> = <span class="s2">&#34;/providers/microsoft.authorization/roleDefinitions/fb1c8493-542b-48eb-b624-b4c8fea62acd&#34;</span><span class="c1"> # Security Admin
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">principal_id</span>       = <span class="nx">azurerm_user_assigned_identity</span><span class="p">.</span><span class="nx">azp_uai</span><span class="p">.</span><span class="nx">principal_id</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_subscription_policy_assignment&#34;</span> <span class="s2">&#34;pa_qualys&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                 = <span class="s2">&#34;pa-qualys&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location</span>             = <span class="s2">&#34;northeurope&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">policy_definition_id</span> = <span class="s2">&#34;/providers/Microsoft.Authorization/policyDefinitions/13ce0167-8ca6-4048-8e6b-f996402e3c1b&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">subscription_id</span>      = <span class="s2">&#34;/subscriptions/</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">subscription_id</span><span class="si">}</span><span class="s2">&#34;</span><span class="c1"> # Your Azure subscription ID. Injected as variable here for illustration purposes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">description</span>          = <span class="s2">&#34;Azure Defender includes vulnerability scanning for your machines at no extra cost. You don&#39;t need a Qualys license or even a Qualys account - everything&#39;s handled seamlessly inside Security Center. When you enable this policy, Azure Defender automatically deploys the Qualys vulnerability assessment provider to all supported machines that don&#39;t already have it installed.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">display_name</span>         = <span class="s2">&#34;Configure machines to receive a vulnerability assessment provider&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">enforce</span>              = <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">identity</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">type</span>         = <span class="s2">&#34;UserAssigned&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">identity_ids</span> = <span class="p">[</span><span class="nx">azurerm_user_assigned_identity</span><span class="p">.</span><span class="nx">azp_uai</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="na">parameters</span> = <span class="o">&lt;&lt;PARAMETERS</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">  {
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;effect&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;value&#34;: &#34;DeployIfNotExists&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  }
+</span></span></span><span class="line"><span class="cl"><span class="s">  </span><span class="o">PARAMETERS</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_subscription_policy_remediation&#34;</span> <span class="s2">&#34;prt_qualys&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                    = <span class="s2">&#34;prt-qualys&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">subscription_id</span>         = <span class="s2">&#34;/subscriptions/</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">subscription_id</span><span class="si">}</span><span class="s2">&#34;</span><span class="c1"> # Your Azure subscription ID. Injected as variable here for illustration purposes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">policy_assignment_id</span>    = <span class="nx">azurerm_subscription_policy_assignment</span><span class="p">.</span><span class="nx">pa_qualys</span><span class="p">.</span><span class="nx">id</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location_filters</span>        = <span class="p">[</span><span class="s2">&#34;northeurope&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">resource_discovery_mode</span> = <span class="s2">&#34;ReEvaluateCompliance&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Once the policy assignment is deployed, initial remediation task will kick in -&gt; detect non-compliant machines and deploy Qualys extension to them. As an example in the screenshot below, you should be able to see Qualys extension being deployed as an extension to an Azure Arc-enabled resource.</p>
+<p><img src="../../images/azure_arc/qualys_policy_remediation.webp" alt="Screenshot of Qualys policy remediation task in Azure portal"></p>
+<p><img src="../../images/azure_arc/qualys_arc_extension.webp" alt="Screenshot of how Qualys extension looks like in Azure Arc-enabled servers extension list in Azure portal"></p>
+<p>Once extension is deployed scanning will begin automatically and will from that point on run periodically, every 12 hours.</p>
+<blockquote>
+<p>Please note that for Azure Arc-enabled servers Qualys extension can sometimes end up hanging in &ldquo;Creating&rdquo; state so you need to check the extension logs as the one in the screenshot below, to confirm if extension was installed successfully. You can also attempt to resolve this by re-installing the extension.</p>
+</blockquote>
+<p><img src="../../images/azure_arc/arc_qualys_extension_log.webp" alt="Screenshot of Azure Arc-enabled server Qualys extension installation log in Azure portal"></p>
+<p>After some time you should be able to see detected vulnerabilities and affected resources in <code>Machines should have vulnerability findings resolved</code> recommendation in Defender for Cloud, from where you can act further upon the respective findings and mitigate them. Findings will be categorized based on severity and will also include information about related CVEs and CVSS scores in addition to recommended remediation instructions.</p>
+<p><img src="../../images/azure_arc/qualys_results_defender.webp" alt="Screenshot of Qualys scanning results in Defender for Cloud in Azure portal"></p>
+<h2 id="what-about-azure-container-registry-acr-and-aks">What about Azure Container Registry (ACR) and AKS?</h2>
+<p>When it comes to ACR and AKS things work a bit differently. I will share some of the most significant highlights here, but I would like to recommend to check out additional Microsoft documentation, that I shared in the section below, for more details on how this works, because those articles explain it really well.</p>
+<p>For vulnerability scanning to be enabled in ACR you need to enable either Defender Cloud Security Posture Management (CSPM) with vulnerability assessment extension or Defender for Containers. Once it&rsquo;s done, Qualys will be used to perform scanning of container images that are imported, pushed, pulled to ACR or even are running in the connected AKS clusters. Results for detected vulnerabilities will be available in Defender for Cloud, in the same way as they are for servers.</p>
+<p>Qualys vulnerability scanner is hosted by Microsoft, therefore customer data is NOT shared with the Qualys company.</p>
+<blockquote>
+<p>Please note that only images that are stored in Azure Container Registry will be evaluated. If you&rsquo;re using images that are stored elsewhere (f.ex., in Docker Hub or Microsoft Container Registry) you will need to import them to ACR to utilize the vulnerability scanning feature.</p>
+</blockquote>
+<p><strong>Now, what about AKS?</strong></p>
+<p>You may think: AKS uses Azure VMs or VMSS to power its Nodes so would vulnerability assessment in this case work in the same way as for regular Azure VMs and Azure Arc-enabled servers, like we discussed above? - Well, not quite🤔</p>
+<p>Approach to vulnerability scanning in AKS is layered, just like it is in many other areas of AKS ecosystem😅</p>
+<ul>
+<li>
+<p><strong>AKS specific container images and packages</strong>, i.e. system-side artifacts that are mainly related to AKS control plane and standard components that are being provided by AKS. This areas is owned, maintained and continuously secured by Microsoft with a wide collection of security tools and practices, some of which are described in more detail in the vulnerability management article linked in the section below.</p>
+</li>
+<li>
+<p><strong>System and Worker Nodes</strong>. Microsoft continusouly rolls out security patches to AKS Nodes but you need to familiarize yourself with AKS upgrade and update processes in order to understand what you need to do in order to ensure that those updates are properly applied. The golden principle here is to establish a routine where you can continuously upgrade AKS cluster and Node image versions in addition to roll out of daily or weekly Node OS updates, depending on which OS your Nodes are running on. I have earlier written a deep dive blog post on the topic of AKS upgrade strategies which you&rsquo;re welcome to check out: <a href="https://kristhecodingunicorn.com/post/k8s_upgrade_strategy">Exploring Upgrade Strategies in Azure Kubernetes Service</a></p>
+</li>
+</ul>
+<p>Where Qualys comes in when it comes to AKS is container images. If you&rsquo;re using AKS in combination with Azure Container Registry, that&rsquo;s where Qualys can be used in order to scan for vulnerabilities in the containers that are running in your AKS clusters. This is done with help of Microsoft Defender agent that is running on the cluster - it collects data about the currently running images  and sends it further to Microsoft Defender that correlates this data with vulnerability scanning output for images that are stored in ACR.</p>
+<p><img src="../../images/azure_arc/defender_agent_aks.webp" alt="Screenshot of Microsoft Defender agent deployed in an AKS cluster"></p>
+<p>Findings will also be available in Defender for Cloud page.</p>
+<blockquote>
+<p>Please note that this functionality only applies to images pulled from ACR. If your AKS clusters don&rsquo;t have workloads using ACR images, these clusters will appear in the &ldquo;Not applicable clusters&rdquo; section of <code>Running container images should have vulnerability findings resolved (powered by Qualys)</code> recommendation in Defender for Cloud, as shown in the screenshot below.</p>
+</blockquote>
+<p><img src="../../images/azure_arc/qualys_aks_na.webp" alt="Screenshot of non-applicable AKS cluster when scanning with Qualys can&rsquo;t be used for non-ACR images"></p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Below you may find a few additional resources to learn more about Microsoft Defender&rsquo;s integrated Qualys vulnerability scanner and vulnerability management in AKS:</p>
+<ul>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/deploy-vulnerability-assessment-vm">Defender for Cloud&rsquo;s integrated Qualys vulnerability scanner for Azure and hybrid machines</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-vulnerability-assessment-azure">Scan your Azure Container Registry images for vulnerabilities</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/deploy-vulnerability-assessment-defender-vulnerability-management">Investigate weaknesses with Microsoft Defender Vulnerability Management</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/aks/concepts-vulnerability-management">Vulnerability management for Azure Kubernetes Service (AKS)</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/support-matrix-defender-for-containers">Defender for Containers support matrices</a></p>
+</li>
+</ul>
+<p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a><a class="tag" href="/tags/cybersecurity-corner/">cybersecurity-corner</a><a class="tag" href="/tags/security/">security</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

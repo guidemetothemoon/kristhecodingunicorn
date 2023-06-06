@@ -3,12 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kristhecodingunicorn.com/</loc>
-    <lastmod>2023-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
-    <lastmod>2023-05-06T00:00:00+00:00</lastmod>
+    <loc>https://kristhecodingunicorn.com/tags/application-insights/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azure-monitor/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/dotnet/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/observability/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/post/azure_qualys/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/security/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/</loc>
+    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/aks/</loc>
     <lastmod>2023-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/cloudnative/</loc>
@@ -18,9 +51,6 @@
     <lastmod>2023-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/cncf/</loc>
-    <lastmod>2023-05-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
     <lastmod>2023-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/gitops/</loc>
@@ -38,14 +68,8 @@
     <loc>https://kristhecodingunicorn.com/tags/platformengineering/</loc>
     <lastmod>2023-05-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/</loc>
-    <lastmod>2023-05-06T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</loc>
     <lastmod>2023-05-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
-    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</loc>
     <lastmod>2023-04-04T00:00:00+00:00</lastmod>
@@ -86,9 +110,6 @@
     <loc>https://kristhecodingunicorn.com/tags/containers/</loc>
     <lastmod>2022-12-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/dotnet/</loc>
-    <lastmod>2022-12-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kristhecodingunicorn.com/tags/microservices/</loc>
     <lastmod>2022-12-19T00:00:00+00:00</lastmod>
   </url><url>
@@ -111,9 +132,6 @@
     <lastmod>2022-10-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/post/ado-auditing-1/</loc>
-    <lastmod>2022-10-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</loc>
     <lastmod>2022-10-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/devsecops/</loc>

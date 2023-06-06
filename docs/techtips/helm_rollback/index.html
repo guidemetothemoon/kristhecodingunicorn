@@ -18,7 +18,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.111.3"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.112.7"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -483,8 +483,8 @@
 <p>There&rsquo;s also a way you can do the rollback automatically, as part of the <code>helm upgrade</code> command. All you need to do is to provide an additional parameter, <code>--atomic</code> which will automatically perform the rollback in case of the faulty upgrade. By setting <code>--atomic</code> parameter, <code>--wait</code> parameter will be set automatically (value defaults to the value of <code>--timeout</code> parameter which is 5 minutes by default, unless overriden), but it can be overriden if you need to increase/decrease the time to wait for the upgrade operation.</p>
 <p>Below you can see an example of a helm upgrade command with <code>--atomic</code> parameter: the faulty deployment is being terminated automatically once the helm upgrade operation wait time is reached and instead of dangling deployments we can see rollback operations happening when we run <code>helm history</code> command.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\&gt; helm upgrade cat-encyclopedia -n cat-encyclopedia --atomic --timeout 1m
-</span></span></code></pre></div><p><img src="../../images/tech_tips/helm_upgrade_atomic.png" alt="Screenshot of helm upgrade command with &amp;ndash;atomic parameter">
-<img src="../../images/tech_tips/helm_upgrade_atomic2.png" alt="Screenshot of helm history command after execution of helm upgrade command with &amp;ndash;atomic parameter"></p>
+</span></span></code></pre></div><p><img src="../../images/tech_tips/helm_upgrade_atomic.png" alt="Screenshot of helm upgrade command with &ndash;atomic parameter">
+<img src="../../images/tech_tips/helm_upgrade_atomic2.png" alt="Screenshot of helm history command after execution of helm upgrade command with &ndash;atomic parameter"></p>
 <p>You can read more about helm upgrade command here: <a href="https://helm.sh/docs/helm/helm_upgrade">Helm Upgrade</a></p>
 <p>Thanks for reading and till next tech tip 😻</p>
 </div>

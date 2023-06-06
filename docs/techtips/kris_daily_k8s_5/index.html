@@ -18,7 +18,7 @@
   </title>
 
   
-  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.111.3"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.112.7"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
@@ -455,7 +455,7 @@
     
     <div class="post__content">
       <h1>Kris&#39;s Quick Cup of (A)K8S #5 - Housekeeping for Kubernetes Contexts</h1>
-      <p><img src="../../images/tech_tips/techtip_15.png" alt="Article banner for Kris&amp;rsquo;s quick cup of K8s number 5"></p>
+      <p><img src="../../images/tech_tips/techtip_15.png" alt="Article banner for Kris&rsquo;s quick cup of K8s number 5"></p>
 <p>Let&rsquo;s start today&rsquo;s tech tip by identifying what a Kubernetes Context is. Kubernetes Context, which is also known as kubectl context, represents a Kubernetes cluster that kubectl command-line tool is currently targeting. You decide which Kubernetes cluster to set as active by modifying currently active context with <code>kubectl config use-context &lt;cluster_name&gt;</code> command.</p>
 <p>All the configured and available Kubernetes contexts are stored in a kubeconfig file. <strong>Kubeconfig file</strong> contains a collection of properties for every Kubernetes cluster that respective client is connected to - properties such as Kubernetes cluster name, authentication mechanisms, user/service account, etc. This information is used by kubectl command-line tool to connect to the API server of the respective cluster once it&rsquo;s set as the active Kubernetes context.</p>
 <p>Once you set up a connection to a Kubernetes cluster, context information is automatically stored in a kubeconfig file locally.

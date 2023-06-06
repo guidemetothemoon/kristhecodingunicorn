@@ -6,7 +6,95 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 06 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>application-insights</title>
+      <link>https://kristhecodingunicorn.com/tags/application-insights/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/application-insights/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>azure-monitor</title>
+      <link>https://kristhecodingunicorn.com/tags/azure-monitor/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azure-monitor/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>cybersecurity-corner</title>
+      <link>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://kristhecodingunicorn.com/tags/devops/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>dotnet</title>
+      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>observability</title>
+      <link>https://kristhecodingunicorn.com/tags/observability/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/observability/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>https://kristhecodingunicorn.com/tags/security/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/security/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>aks</title>
       <link>https://kristhecodingunicorn.com/tags/aks/</link>
@@ -46,17 +134,6 @@
       <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/cncf/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>https://kristhecodingunicorn.com/tags/devops/</link>
-      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
       
         <description></description>
       
@@ -118,17 +195,6 @@
     </item>
     
     <item>
-      <title>azure</title>
-      <link>https://kristhecodingunicorn.com/tags/azure/</link>
-      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>github</title>
       <link>https://kristhecodingunicorn.com/tags/github/</link>
       <pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
@@ -184,17 +250,6 @@
     </item>
     
     <item>
-      <title>dotnet</title>
-      <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
-      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/dotnet/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>microservices</title>
       <link>https://kristhecodingunicorn.com/tags/microservices/</link>
       <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
@@ -222,17 +277,6 @@
       <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/helm/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>cybersecurity-corner</title>
-      <link>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</link>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
       
         <description></description>
       

@@ -6,7 +6,18 @@
     <description>Recent content in dotnet on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resolving Application Insights performance counters collection issue for .NET applications</title>
+      <link>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can an issue with collecting performance counters for Application Insights from ASP.NET Framework and ASP.NET (Core) applications hosted in IIS.</description>
+      
+    </item>
+    
     <item>
       <title>[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers</title>
       <link>https://kristhecodingunicorn.com/post/dotnet_ubuntu_chiseled/</link>
