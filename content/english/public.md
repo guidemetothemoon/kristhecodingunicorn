@@ -9,6 +9,8 @@ tags = [
 ]
 +++
 
+📺 27th June, 2023: [InfoQ Live Panel Discussion - Beyond Default Settings: Evaluating the Security of Kubernetes and Cloud Native Environments](https://live.infoq.com)
+
 📺 21st June, 2023: [Cloud Native and Kubernetes Oslo - Sustainable Kubernetes and how YOU can make an impact](https://www.meetup.com/cloud-native-and-kubernetes-oslo/events/294099940)
 
 📺 24th May, 2023: [NDC Oslo - AKS Survival Pack: what to consider before going all-in with Azure Kubernetes Service](https://ndcoslo.com/agenda/aks-survival-pack-what-to-consider-before-going-all-in-with-azure-kubernetes-service-0ng9/0ivm3jmy32i)
