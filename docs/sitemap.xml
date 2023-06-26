@@ -3,24 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kristhecodingunicorn.com/</loc>
-    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/application-insights/</loc>
-    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/azure/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/azurepolicy/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/post/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/governance/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/post/azpolicy_category_assignments/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/</loc>
+    <lastmod>2023-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kristhecodingunicorn.com/tags/application-insights/</loc>
     <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/azure-monitor/</loc>
     <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kristhecodingunicorn.com/post/</loc>
-    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</loc>
-    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/devops/</loc>
     <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/dotnet/</loc>
@@ -36,9 +48,6 @@
     <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/security/</loc>
-    <lastmod>2023-06-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kristhecodingunicorn.com/tags/</loc>
     <lastmod>2023-06-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kristhecodingunicorn.com/tags/aks/</loc>

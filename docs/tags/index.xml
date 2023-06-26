@@ -6,24 +6,57 @@
     <description>Recent content in Tags on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>application-insights</title>
-      <link>https://kristhecodingunicorn.com/tags/application-insights/</link>
-      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      <title>azure</title>
+      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/application-insights/</guid>
+      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
       
         <description></description>
       
     </item>
     
     <item>
-      <title>azure</title>
-      <link>https://kristhecodingunicorn.com/tags/azure/</link>
+      <title>azurepolicy</title>
+      <link>https://kristhecodingunicorn.com/tags/azurepolicy/</link>
+      <pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/azurepolicy/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://kristhecodingunicorn.com/tags/devops/</link>
+      <pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>governance</title>
+      <link>https://kristhecodingunicorn.com/tags/governance/</link>
+      <pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/tags/governance/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>application-insights</title>
+      <link>https://kristhecodingunicorn.com/tags/application-insights/</link>
       <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://kristhecodingunicorn.com/tags/azure/</guid>
+      <guid>https://kristhecodingunicorn.com/tags/application-insights/</guid>
       
         <description></description>
       
@@ -46,17 +79,6 @@
       <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
       
       <guid>https://kristhecodingunicorn.com/tags/cybersecurity-corner/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>https://kristhecodingunicorn.com/tags/devops/</link>
-      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://kristhecodingunicorn.com/tags/devops/</guid>
       
         <description></description>
       

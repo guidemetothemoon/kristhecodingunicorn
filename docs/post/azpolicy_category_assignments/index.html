@@ -10,7 +10,7 @@
   <title>
     Kris - The Coding Unicorn
         |
-        microservices
+        How to get all Azure Policy assignments of a specific category?
       
 
     
@@ -22,9 +22,7 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="Welcome to my tech corner! 🤗 
-I preach about all things cloud native, green tech and cats 🐈 
-Check &#34;Blog&#34; for new posts and &#34;About&#34; for my community involvement 🦄"
+    content="In this blog post we&#39;ll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -97,10 +95,9 @@ Check &#34;Blog&#34; for new posts and &#34;About&#34; for my community involvem
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://kristhecodingunicorn.com/tags/microservices/" />
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/azpolicy_category_assignments/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/microservices/index.xml" title="Kris - The Coding Unicorn" />
   
   
   
@@ -126,25 +123,117 @@ Check &#34;Blog&#34; for new posts and &#34;About&#34; for my community involvem
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="microservices"/>
-<meta name="twitter:description" content="Welcome to my tech corner! 🤗 
-I preach about all things cloud native, green tech and cats 🐈 
-Check &#34;Blog&#34; for new posts and &#34;About&#34; for my community involvement 🦄"/>
+<meta name="twitter:title" content="How to get all Azure Policy assignments of a specific category?"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category."/>
 
 
 
   
-  <meta property="og:title" content="microservices" />
-<meta property="og:description" content="Welcome to my tech corner! 🤗 
-I preach about all things cloud native, green tech and cats 🐈 
-Check &#34;Blog&#34; for new posts and &#34;About&#34; for my community involvement 🦄" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kristhecodingunicorn.com/tags/microservices/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+  <meta property="og:title" content="How to get all Azure Policy assignments of a specific category?" />
+<meta property="og:description" content="In this blog post we&#39;ll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/azpolicy_category_assignments/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-26T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
 
 
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "How to get all Azure Policy assignments of a specific category?",
+        "headline": "How to get all Azure Policy assignments of a specific category?",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we\u0027ll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/azpolicy_category_assignments\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-06-26T00:00:00.00Z",
+        "datePublished": "2023-06-26T00:00:00.00Z",
+        "dateModified": "2023-06-26T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/azpolicy_category_assignments\/",
+        "wordCount" : "321",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    
+      
+        ,
+
+      
+      "azurepolicy"
+
+    
+      
+        ,
+
+      
+      "governance"
+
+    ]
+    }
+  </script>
+
 
 </head>
 <body class="body">
@@ -359,45 +448,54 @@ Check &#34;Blog&#34; for new posts and &#34;About&#34; for my community involvem
 </div>
 </header>
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
     "
   >
     
-      <div class="archive__heading">2022</div>
+    <div class="post__content">
+      <h1>How to Get All Azure Policy Assignments of a Specific Category?</h1>
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/dotnet_ubuntu_chiseled/" title="[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers">[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers</a>
-            <div class="archive__list-date">
-              
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
                 
-                  19/12/2022
+                  26/6/2023
                 
 
               
-            </div>
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">2-minute read</span>
           </li>
         </ul>
+      <div class="toc">
+  <nav id="TableOfContents"></nav>
+</div>
+<p>I&rsquo;ve been in quite a pickle recently: I needed to find out how many and what Azure Policy definitions from Guest Configuration category are currently assigned to my subscription, so that I could understand if any of those policies are applicable to Azure Arc-enabled servers that are residing in the same subscription. Why?</p>
+<p>Well, because Guest Configuration is a billed functionality, when it comes to Azure Arc. In this case it&rsquo;s good to get an overview if any policies related to the billed functionality are enabled in order to further evaluate if you want to use this functionality or not (and therefore disable it to avoid undesired billing). You may also have different use cases for why you would want to retrieve the same information from Azure Policy🧐</p>
+<p>After some time investigating I discovered that it&rsquo;s quite a challenging to retrieve this kind of information in Azure portal: you can see the category of every single Azure Policy definition in the list of all definitions, but you can&rsquo;t use policy category as a filter on assignments or compliance page. There&rsquo;s no single-line solution in Azure CLI either.</p>
+<p>That&rsquo;s when I got lazy once again and leaned back to my dear friend PowerShell to achieve this😅 Following PowerShell script retrieves all policy definition assignments coming both from regular policy assignments and policy initiative assignments. If any of the assigned policies belong to the requested category, like Guest Configuration in my case, information about those policies will be provided as output upon script execution.</p>
+<p>You can find the PowerShell script in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/azure-policy/Get-Policy-Assignments-In-Category.ps1">Get-Policy-Assignments-In-Category.ps1</a></p>
+<p>Already tested it out? Let me know how it went!🤗</p>
+<p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
       
 
-    
-      <div class="archive__heading">2021</div>
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/post/dotnet_custom_templates/" title="How to create new microservices easily with dotnet custom templates">How to create new microservices easily with dotnet custom templates</a>
-            <div class="archive__list-date">
-              
-                
-                  11/5/2021
-                
+        <span><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a><a class="tag" href="/tags/azurepolicy/">azurepolicy</a><a class="tag" href="/tags/governance/">governance</a></span>
 
-              
-            </div>
-          </li>
-        </ul>
+
       
+    </div>
 
     
   </div>
