@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/azpolicy_category_assignments\/",
-        "wordCount" : "321",
+        "wordCount" : "330",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -481,6 +481,8 @@
 <p>After some time investigating I discovered that it&rsquo;s quite a challenging to retrieve this kind of information in Azure portal: you can see the category of every single Azure Policy definition in the list of all definitions, but you can&rsquo;t use policy category as a filter on assignments or compliance page. There&rsquo;s no single-line solution in Azure CLI either.</p>
 <p>That&rsquo;s when I got lazy once again and leaned back to my dear friend PowerShell to achieve this😅 Following PowerShell script retrieves all policy definition assignments coming both from regular policy assignments and policy initiative assignments. If any of the assigned policies belong to the requested category, like Guest Configuration in my case, information about those policies will be provided as output upon script execution.</p>
 <p>You can find the PowerShell script in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/azure-policy/Get-Policy-Assignments-In-Category.ps1">Get-Policy-Assignments-In-Category.ps1</a></p>
+<p>The output will look something like the screenshot below:</p>
+<p><img src="../../images/azure_policy/azpolicy_category_assignments_output.png" alt="Screenshot of the PowerShell script output"></p>
 <p>Already tested it out? Let me know how it went!🤗</p>
 <p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
 <p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>

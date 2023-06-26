@@ -24,6 +24,10 @@ That's when I got lazy once again and leaned back to my dear friend PowerShell t
 
 You can find the PowerShell script in my GitHub repo: [Get-Policy-Assignments-In-Category.ps1](https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/azure-policy/Get-Policy-Assignments-In-Category.ps1)
 
+The output will look something like the screenshot below:
+
+![Screenshot of the PowerShell script output](../../images/azure_policy/azpolicy_category_assignments_output.png)
+
 Already tested it out? Let me know how it went!🤗
 
 That's it from me this time, thanks for checking in!💖
