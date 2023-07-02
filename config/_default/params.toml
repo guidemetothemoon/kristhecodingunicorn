@@ -12,6 +12,7 @@ disableThemeSwitcher = true
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 enableCarbonBadge = true
+contentratio = 0.8
 
 # example ["css/custom.css"]
 customCss = ["css/syntax.css"]
