@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for part 2 of CD to AKS with Azure DevOps Environments](../../images/k8s_ado_env/aks_adoenv_2_banner.png)
-
 {{< table_of_contents >}}
 
 Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments! In Part 1 we looked into what Azure DevOps Environments are, what benefits they provide and how I would recommend to create ADO environments and resources based on my own experience. If you haven\'t read Part 1, you can check it out here: [Continuous Delivery to AKS With Azure DevOps Environments - Part 1](https://kristhecodingunicorn.com/post/k8s_ado_envs-1/).

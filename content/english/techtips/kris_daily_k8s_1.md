@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for Kris's quick cup of K8s](../../images/tech_tips/techtip_2.png)
-
 {{< table_of_contents >}}
 
 Starting a totally new Tech Tips subsection feels great - especially when it\'s going to be purely dedicated to Kubernetes utilizing Azure Kubernetes Service (AKS) for demo purposes! :-)

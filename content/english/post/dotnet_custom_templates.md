@@ -10,8 +10,6 @@ tags = [
 ]
 +++
 
-![Article banner for dotnet custom templates](../../images/dotnet_custom_templates/dotnet_templates_banner.png)
-
 {{< table_of_contents >}}
 
 Doing development for microservices is quite different from development for a monolithic application - it will require changes in the mindset, either you want it or not...But it\'s not only the mindset that will undergo changes. Let\'s say that you\'re working on creating a new component for your application that will provide functionality for sending e-mail notifications to your users. If you\'re creating this component for a monolithic application, you typically have one place where you\'ll add backend changes and one place for frontend changes. And then those changes are magically included as part of the build and deployment of the application. Nice and straightforward, huh?

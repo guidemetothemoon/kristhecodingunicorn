@@ -1,7 +1,7 @@
 +++
 author = "Kristina D."
 +++
-![](../images/blog_banner.webp)
+
 <!--
 This file is left intentionally empty by default to be backward compatible with initial theme setup.
 

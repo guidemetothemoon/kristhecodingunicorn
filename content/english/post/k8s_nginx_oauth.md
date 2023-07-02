@@ -14,8 +14,6 @@ tags = [
 ]
 +++
 
-![Article banner for enabling OAuth 2.0 in AKS](../../images/k8s_oauth2_proxy/k8s_oauth2_proxy_banner.png)
-
 {{< table_of_contents >}}
 
 ## Introduction and use cases

@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for triggering subsequent GitHub workflow in different repo](../../images/tech_tips/techtip_19.png)
-
 I was recently working on automating some manual actions related to my tech blog and discovered an interesting use case that I thought was worth sharing with the community 😊
 
 **Did you know that it is possible to trigger a GitHub workflow that resides in a different repository?** Let me show you how!😼

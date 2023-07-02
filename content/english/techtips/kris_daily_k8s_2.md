@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for Kris's quick cup of K8s](../../images/tech_tips/techtip_5.png)
-
 {{< table_of_contents >}}
 
 It\'s time for a new edition of Kris\'s Quick cup of Kubernetes where I\'m utilizing Azure Kubernetes Service (AKS) for demo purposes!😺

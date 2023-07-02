@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for creating custom Azure Policy for non-compliant image registries](../../images/k8s_registry_azpolicy/k8s_deprecated_registry_azpolicy_banner.png)
-
 {{< table_of_contents >}}
 
 There are cases where you may need to explicitly ensure that specific container image registries are blacklisted from being used in your Kubernetes clusters. Let me provide you with a very recent and relevant example.

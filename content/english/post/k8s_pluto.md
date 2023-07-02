@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for monitoring Kubernetes API deprecations with Pluto](../../images/k8s_pluto/k8s_pluto_banner.png)
-
 {{< table_of_contents >}}
 
 If you\'ve worked with Kubernetes for a while you should have seen that version lifecycle that Kubernetes has is pretty aggressive. Kubernetes is being actively developed which means that new releases come out pretty frequently - and all of us who are using Kubernetes, be it a managed or a self-hosted distribution, must adapt and adjust. If not, we may risk running our workloads on unsupported version of Kubernetes with lacking security and functionality fixes. In addition, when the time comes to upgrade there\'s a big risk that the change gap will be too large from the Kubernetes version you\'re running and the one you want to upgrade to - this normally ends up in a complicated and unstable upgrade process which I wouldn\'t recommend to anyone, especially in a production environment...😑

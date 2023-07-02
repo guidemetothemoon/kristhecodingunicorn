@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for linting Helm Charts tech tip](../../images/tech_tips/techtip_14.png)
-
 {{< table_of_contents >}}
 
 Linting tools, aka linters, can help you write better and cleaner code early in the software development lifecycle. Linter is a tool that scans existing and new code for potential errors, bad and insecure patterns and violations of the respective programming language best practices. In most cases you can install a linter as an IDE extension so that you can get notified about potential issues during local development, long before the code is checked in to your source code base.

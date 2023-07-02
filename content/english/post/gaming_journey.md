@@ -10,8 +10,6 @@ tags = [
 ]
 +++
 
-![Blog post banner for Journey game](../../images/gaming_corner/journey_banner.png)
-
 ![Screenshot from Journey game](../../images/gaming_corner/journey_1.jpg)
 
 I haven\'t been much of a gamer actually but there have been some games that managed to keep my interest and attention for quite some time. The highlight of my gaming activity was in the beginning of 2000s - when I used to come home from school and complete all of my homework - as a reward I would be allowed to spend some hours playing games on the good old Windows XP. Some of the games I played a lot as a kid were GTA: Vice City, Return to Castle Wolfenstein, Tomb Raider series, The Mummy, KAO the Kangaroo, Dungeon Siege...Oh, and of course it was a must to play Quake over LAN when the informatics teacher was out of the classroom.

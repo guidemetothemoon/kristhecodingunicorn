@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for enhancing security in AKS with Azure Policy](../../images/k8s_azure_policy/aks_azure_policy_banner.png)
-
 {{< table_of_contents >}}
 
 🐇***This blog post is also a contribution to Azure Spring Clean 2023 where during 5 weekdays of March, 13th-17th, community contributors share learning resources that highlight best practices, lessons learned, and help with some of the more difficult topics of Azure Management. You're welcome to check out all the contributions here:*** [Azure Spring Clean 2023](https://www.azurespringclean.com)

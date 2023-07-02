@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for CD to AKS with Azure DevOps Environments](../../images/k8s_ado_env/aks_adoenv_banner.png)
-
 {{< table_of_contents >}}
 
 In the first part of this blog series I would like to talk about Azure DevOps Environments, benefits of using it for deployment of applications to AKS or any other Kubernetes distribution (or even a VM), and provide a few tips and tricks for how ADO environments and resources can be created.

@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for applying Dockerfile best practices with Hadolint](../../images/k8s_hadolint/k8s_hadolint_banner.png)
-
 {{< table_of_contents >}}
 
 In this blog post I would like to take a look at how we can ensure that Dockerfiles we create are of high quality and are following best practices in the industry. Tools like Hadolint make it very easy for us to do that and can automate the verification process.

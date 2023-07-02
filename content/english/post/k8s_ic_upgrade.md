@@ -14,8 +14,6 @@ tags = [
 ]
 +++
 
-![Article banner for Ingress Controller upgrade](../../images/k8s_ic_upgrade/k8s_ic_upgrade_banner.png)
-
 {{< table_of_contents >}}
 ## Introduction to the needs for upgrading Ingress Controller
 

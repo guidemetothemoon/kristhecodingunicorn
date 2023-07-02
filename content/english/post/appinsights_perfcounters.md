@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for fixing Application Insights performance counters collection issue in ASP.NET apps](../../images/azure_monitor/ai_perfcounters_banner.webp)
-
 {{< table_of_contents >}}
 
 If you're using Application Insights SDK in your .NET applications and you want to gather performance counters like disk, memory or CPU usage, you have two main approaches that you can follow:

@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for improving PR flow in Azure DevOps](../../images/tech_tips/techtip_4.png)
-
 {{< table_of_contents >}}
 
 Code reviews and pull requests are a totally normal practice these days if you\'re working together with other developers. Even if you\'re working solo you probably don\'t want to commit to main branch directly if you have CI/CD in place. That\'s when adding changes through pull requests and code reviews come into picture. 

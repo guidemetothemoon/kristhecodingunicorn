@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for Azure DevOps Auditing part 1 with streaming to Azure Monitor logs](../../images/ado_auditing/ado_auditing_banner.png)
-
 {{< table_of_contents >}}
 
 In July 2019, as part of Sprint 154, Microsoft introduced support for auditing in Azure DevOps and this is a feature that you really should look into if you haven't set it up or maybe haven't heard about it yet. Auditing in Azure DevOps allows you to get an aggregated log of important events related to access control, permission and resource management++ across projects in your Azure DevOps organization.

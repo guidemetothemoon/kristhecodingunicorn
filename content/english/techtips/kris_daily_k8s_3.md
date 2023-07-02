@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for Kris's quick cup of K8s](../../images/tech_tips/techtip_12.png)
-
 One day I was going through Azure Policies for Kubernetes and suddenly saw an alert related to the following policy for one of the AKS clusters: ```Kubernetes clusters should not grant CAP_SYS_ADMIN security capabilities```. What this basically means is that you shouldn\'t have any accounts in your cluster that have been assigned a ClusterRole or Role with ```CAP_SYS_ADMIN``` capabilities. ```CAP_SYS_ADMIN``` is a capability that is available in Linux. It provides a very privileged level of permissions that allows an account that has this capability to perform a range of system administration operations which can potentially be harmful and damaging for the whole system. You can read more about this capability here: [capabilities(7) — Linux manual page](https://man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ![Screenshot of Azure Policy for usage of CAP_SYS_ADMIN capability in Kubernetes clusters](../../images/tech_tips/k8s_policy_capsysadmin.png)

@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for handling failed Helm upgrade tech tip](../../images/tech_tips/techtip_6.png)
-
 {{< table_of_contents >}}
 
 ## Introduction

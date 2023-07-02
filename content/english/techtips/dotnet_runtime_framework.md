@@ -10,8 +10,6 @@ tags = [
 ]
 +++
 
-![Article banner for overriding runtime framework in dotnet](../../images/tech_tips/techtip_11.png)
-
 {{< table_of_contents >}}
 
 With release of .NET and .NET Core one significant change you may have noticed is the new version support lifecycle. .NET Framework LTS (long-time support) versions are normally supported for 5+ years by Microsoft but support lifecycle for .NET and .NET Core LTS versions has decreased to 3 years. The main reasons for the shorter support lifecycle are the overall faster technology evolvement, but also more active framework development which requires frequent releases both from the functional and security perspective.

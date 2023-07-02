@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for log in to Azure AD without active subscription with Azure CLI](../../images/tech_tips/techtip_9.png)
-
 {{< table_of_contents >}}
 
 In some cases you may have an Azure AD tenant that doesn\'t have an active subscription connected to it but you would nevertheless want to log in to it from a command line for instance, with Azure CLI. You may want to perform actions like creating an Azure AD Application for example. In this case you need to be cautious about the login command you\'re running so that you don\'t waste a lot of time on debugging an error you could have avoided in the first place (like someone did 😁)!

@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for vulnerability scanning with Qualys](../../images/azure_arc/arc_qualys_banner.webp)
-
 {{< table_of_contents >}}
 
 In the modern reality with tens of security vulnerabilities that are being disclosed daily you need to continuously implement a variety of security controls in order to ensure that your systems are strongly protected. Even if you're running on the cloud⛅

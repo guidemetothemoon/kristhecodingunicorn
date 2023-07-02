@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for certificate validation in dotnet](../../images/tech_tips/techtip_10.png)
-
 {{< table_of_contents >}}
 
 There is one scary property in .NET which, if misused or forgotten, can make your security champions tremble at night...🙀🙀🙀 As scary as it sounds, the risk of forgetting or misusing the property is pretty serious and I\'ve seen it multiple times sneaking into the source code as part of the pull request. And I keep seeing it still. Therefore this tech tip gets to see the world.☀️

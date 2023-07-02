@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for containerizing .NET applications with Chiseled Ubuntu Containers](../../images/dotnet_chiseled/dotnet_chiseled_banner.png)
-
 {{< table_of_contents >}}
 
 🎄***This blog post is also a contribution to .NET Advent Calendar where during December, experts from the tech community share their knowledge about .NET related topics. You're welcome to check out all the contributions here:*** [.NET Advent Calendar 2022](https://dotnet.christmas/)

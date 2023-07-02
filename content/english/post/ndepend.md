@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for improving quality of .NET code with NDepend](../../images/ndepend/ndepend_banner.png)
-
 {{< table_of_contents >}}
 
 ## What is NDepend?

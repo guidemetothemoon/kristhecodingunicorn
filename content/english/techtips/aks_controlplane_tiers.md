@@ -14,8 +14,6 @@ tags = [
 ]
 +++
 
-![Article banner for AKS control plane tiers](../../images/tech_tips/techtip_18.png)
-
 {{< table_of_contents >}}
 
 Recently a new property became available in Azure Portal when creating a new Azure Kubernetes Service instance:

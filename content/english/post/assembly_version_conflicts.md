@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for assembly versioning conflicts](../../images/assembly_conflicts/assembly_conflicts_banner.png)
-
 {{< table_of_contents >}}
 
 If you\'re a .NET developer, I bet that at least once you\'ve experienced errors like **\"System.IO.FileLoadException: Could not load file or assembly \'[ASSEMBLYNAME], Version=x.x.x.x, Culture=neutral, PublicKeyToken=xxxxxx\' or one of its dependencies. The located assembly\'s manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)\"**

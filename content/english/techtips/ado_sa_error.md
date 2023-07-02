@@ -14,8 +14,6 @@ tags = [
 ]
 +++
 
-![Article banner for Azure DevOps Environments Service Account Secret error](../../images/tech_tips/techtip_16.png)
-
 {{< table_of_contents >}}
 
 ## Introduction of the issue

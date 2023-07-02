@@ -455,8 +455,7 @@
     
     <div class="post__content">
       <h1>How to Modify Azure Arc (Or Any) Service Principal Scope After Creation</h1>
-      <p><img src="../../images/tech_tips/techtip_17.png" alt="Article banner for changing Azure Service Principal scope after creation"></p>
-<p>A thought struck me one day when I was working with onboarding machines to Azure Arc. If you want to onboard multiple servers at scale to Azure Arc, you would need a Service Principal with <code>Azure Connected Machine Onboarding</code> role in the respective subscription or resource group where you want to create Azure Arc-enabled servers. An interesting thing here is: what if you would like to re-use the same service principal in order to onboard more Azure Arc resources but to another subscription and/or another resource group?</p>
+      <p>A thought struck me one day when I was working with onboarding machines to Azure Arc. If you want to onboard multiple servers at scale to Azure Arc, you would need a Service Principal with <code>Azure Connected Machine Onboarding</code> role in the respective subscription or resource group where you want to create Azure Arc-enabled servers. An interesting thing here is: what if you would like to re-use the same service principal in order to onboard more Azure Arc resources but to another subscription and/or another resource group?</p>
 <p><strong>Is there a way you can modify the scope of the Azure Arc Service Principal, or any regular Service Principal for that matter, after it&rsquo;s been created?</strong> 🧐</p>
 <p>If you have wondered about the same thing at some point then I have an answer to you and it&rsquo;s&hellip;<strong>AFFIRMATIVE</strong>! 😸</p>
 <p>Service principal is basically an identity that can be used to access Azure resources, which means that the scope, where it has specific permissions, can be altered with help of Azure role-based access control (RBAC).</p>

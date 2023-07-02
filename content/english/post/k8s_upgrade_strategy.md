@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for exploring upgrade strategies in AKS](../../images/k8s_upgrade_strategy/k8s_upgrade_strategy_banner.png)
-
 {{< table_of_contents >}}
 
 🎄***This blog post is also a contribution to Azure Advent Calendar where during December, experts from the tech community share their knowledge through contributions of a specific technology in the Azure domain. You're welcome to check out all the contributions here:*** [ Azure Advent Calendar](https://dev.to/icebeam7/azure-advent-calendar-o60)

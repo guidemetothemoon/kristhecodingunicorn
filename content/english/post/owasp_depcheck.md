@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for OWASP Dependency Check](../../images/owasp_depcheck/owasp_depcheck_banner.png)
-
 {{< table_of_contents >}}
 
 ## Why should you care about security of third-party dependencies

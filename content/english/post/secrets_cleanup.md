@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for cleanup of secrets in repos with BFG Repo-Cleaner](../../images/secrets_cleanup/secrets_cleanup_banner.png)
-
 {{< table_of_contents >}}
 
 ## Why should you care about secrets management?

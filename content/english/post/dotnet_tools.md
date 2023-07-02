@@ -10,8 +10,6 @@ tags = [
 ]
 +++
 
-![Article banner for dotnet custom templates](../../images/dotnet_tools/dotnet_tools_banner.png)
-
 {{< table_of_contents >}}
 
 There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands. In my team we have several administrative tools that are being distributed as console apps in addition to the main application. Multiple stakeholders are using these apps in order to easily perform administrative tasks, make changes to application\'s metadata, interact with the database, integrate customizations into standard application functionality, etc. 

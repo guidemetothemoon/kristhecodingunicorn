@@ -13,8 +13,6 @@ tags = [
 ]
 +++
 
-![Article banner for Kris's quick cup of K8s number 4](../../images/tech_tips/techtip_13.png)
-
 Normally if you were to expose an application running in AKS for external access, you would need multiple bits and pieces to be deployed and configured:
 
 * **Ingress Controller** to ensure proper traffic routing and load balancing in an AKS cluster;

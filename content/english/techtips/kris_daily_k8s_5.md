@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for Kris's quick cup of K8s number 5](../../images/tech_tips/techtip_15.png)
-
 Let's start today's tech tip by identifying what a Kubernetes Context is. Kubernetes Context, which is also known as kubectl context, represents a Kubernetes cluster that kubectl command-line tool is currently targeting. You decide which Kubernetes cluster to set as active by modifying currently active context with ```kubectl config use-context <cluster_name>``` command. 
 
 All the configured and available Kubernetes contexts are stored in a kubeconfig file. **Kubeconfig file** contains a collection of properties for every Kubernetes cluster that respective client is connected to - properties such as Kubernetes cluster name, authentication mechanisms, user/service account, etc. This information is used by kubectl command-line tool to connect to the API server of the respective cluster once it's set as the active Kubernetes context.

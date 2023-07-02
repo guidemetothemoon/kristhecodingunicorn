@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for Accelerated Networking for AKS nodes](../../images/k8s_an/aks_an_banner.png)
-
 {{< table_of_contents >}}
 
 In this blog post I would like to talk about Accelerated Networking, how it can improve internal communication inside an AKS cluster and how you can enable that for Linux and Windows AKS nodes.

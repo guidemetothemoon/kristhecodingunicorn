@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for efficiently re-using Azure DevOps pipelines](../../images/tech_tips/techtip_8.png)
-
 {{< table_of_contents >}}
 
 Following up on the recent blog post series about Continuous Delivery to AKS with Azure DevOps Environments:

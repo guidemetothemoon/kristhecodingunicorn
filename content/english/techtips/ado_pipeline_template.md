@@ -11,8 +11,6 @@ tags = [
 ]
 +++
 
-![Article banner for creating reusable build tasks in Azure DevOps pipelines](../../images/tech_tips/techtip_7.png)
-
 {{< table_of_contents >}}
 
 ## Use case for pipeline templates

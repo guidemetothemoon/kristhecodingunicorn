@@ -12,8 +12,6 @@ tags = [
 ]
 +++
 
-![Article banner for security code scan tool](../../images/dotnet_sast_scs/scs_banner.png)
-
 {{< table_of_contents >}}
 
 ## What is static code analysis and why do I need it?
