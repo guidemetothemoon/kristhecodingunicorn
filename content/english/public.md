@@ -11,7 +11,7 @@ tags = [
 
 📺 12th July, 2023: [Cloud Lunch & Learn - Deploying microservices to AKS with ADO Environments and multi-staged Pipelines](https://www.meetup.com/azuredublin/events/294393334)
 
-📺 27th June, 2023: [InfoQ Live Panel Discussion - Beyond Default Settings: Evaluating the Security of Kubernetes and Cloud Native Environments](https://live.infoq.com)
+📺 27th June, 2023: [InfoQ Live Panel Discussion - Beyond Default Settings: Evaluating the Security of Kubernetes and Cloud Native Environments](https://www.infoq.com/presentations/kubernetes-security-cloud-native)
 
 📺 21st June, 2023: [Cloud Native and Kubernetes Oslo - Sustainable Kubernetes and how YOU can make an impact](https://www.meetup.com/cloud-native-and-kubernetes-oslo/events/294099940)
 
