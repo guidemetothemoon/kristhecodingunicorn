@@ -9,6 +9,8 @@ tags = [
 ]
 +++
 
+📺 26th July, 2023: [Cloud Lunch & Learn - Managed Kubernetes Service: Day Zero Survival Pack](https://www.meetup.com/azuredublin/events/294393389)
+
 📺 12th July, 2023: [Cloud Lunch & Learn - Deploying microservices to AKS with ADO Environments and multi-staged Pipelines](https://www.meetup.com/azuredublin/events/294393334)
 
 📺 27th June, 2023: [InfoQ Live Panel Discussion - Beyond Default Settings: Evaluating the Security of Kubernetes and Cloud Native Environments](https://www.infoq.com/presentations/kubernetes-security-cloud-native)
