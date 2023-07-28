@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_nginx_oauth\/",
-        "wordCount" : "4245",
+        "wordCount" : "4263",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -316,7 +316,16 @@
         </li>
       
     </ul>
-  </div><footer class="footer footer__sidebar">
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
   <ul class="footer__list">
     <li class="footer__item">
       &copy;
@@ -475,7 +484,7 @@
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">20-minute read</span>
+            <span class="post__meta-text">21-minute read</span>
           </li>
         </ul>
       <div class="toc">
@@ -484,7 +493,7 @@
     <li><a href="#introduction-and-use-cases">Introduction and use cases</a></li>
     <li><a href="#setting-up-authentication-with-oauth-20">Setting up authentication with OAuth 2.0</a>
       <ul>
-        <li><a href="#create-oauth2-proxy-application-in-azure-ad">Create OAuth2 Proxy application in Azure AD</a></li>
+        <li><a href="#create-oauth2-proxy-application-in-microsoft-entra-id">Create OAuth2 Proxy application in Microsoft Entra ID</a></li>
         <li><a href="#configure-nginx-ingress-controller">Configure NGINX Ingress Controller</a></li>
         <li><a href="#configure-and-deploy-oauth2-proxy">Configure and deploy OAuth2 Proxy</a>
           <ul>
@@ -513,30 +522,30 @@
 </div>
 <h2 id="introduction-and-use-cases">Introduction and use cases</h2>
 <p>Today I would like to show how you can set up authentication with OAuth 2.0 for applications that are running in Azure Kubernetes Service with help of NGINX Ingress Controller and OAuth2 Proxy.</p>
-<p>There may be multiple reasons for why you would want to implement authentication with OAuth 2.0 this way. For example, you may not want to implement authentication logic in the application itself or, like it was in my case, you want to limit access to a third-party application that you're running in your cluster in case authentication is not natively supported by the application itself (or requires an Enterprise license for the same😃). I was recently working on implementing an open source version of kubecost for cost management in our AKS clusters and the thing is that the open source version of kubecost doesn't natively support authentication. You can enable support for SSO with SAML 2.0 by acquiring an Enterprise version of kubecost which was not applicable in my scenario. Nevertheless, I still wanted to expose kubecost instances so that other teams and business stakeholders can easily access those and check whatever data they need. At the same time I still wanted to limit access and protect the application so I had to look for an alternative solution. And that's where NGINX Ingress Controller and OAuth2 Proxy come into play!😺</p>
-<p>With just a few configuration changes in NGINX Ingress Controller and a lightweight proxy application it's possible to easily configure OAuth 2.0 authentication with Azure AD as an identity provider. So let's take a look at how we can do that!🌟</p>
+<p>There may be multiple reasons for why you would want to implement authentication with OAuth 2.0 this way. For example, you may not want to implement authentication logic in the application itself or, like it was in my case, you want to limit access to a third-party application that you&rsquo;re running in your cluster in case authentication is not natively supported by the application itself (or requires an Enterprise license for the same😃). I was recently working on implementing an open source version of kubecost for cost management in our AKS clusters and the thing is that the open source version of kubecost doesn&rsquo;t natively support authentication. You can enable support for SSO with SAML 2.0 by acquiring an Enterprise version of kubecost which was not applicable in my scenario. Nevertheless, I still wanted to expose kubecost instances so that other teams and business stakeholders can easily access those and check whatever data they need. At the same time I still wanted to limit access and protect the application so I had to look for an alternative solution. And that&rsquo;s where NGINX Ingress Controller and OAuth2 Proxy come into play!😺</p>
+<p>With just a few configuration changes in NGINX Ingress Controller and a lightweight proxy application it&rsquo;s possible to easily configure OAuth 2.0 authentication with Microsoft Entra ID as an identity provider. So let&rsquo;s take a look at how we can do that!🌟</p>
 <h2 id="setting-up-authentication-with-oauth-20">Setting up authentication with OAuth 2.0</h2>
-<p>I will be using kubecost as an example application in this walkthrough. It's now deployed in an AKS cluster and is exposed without any authentication (yet!) on this example URL: <code>https://kubecost-kris.unicorndomain.com</code>. Now, let's protect it by setting up an OAuth2 Proxy.</p>
+<p>I will be using kubecost as an example application in this walkthrough. It&rsquo;s now deployed in an AKS cluster and is exposed without any authentication (yet!) on this example URL: <code>https://kubecost-kris.unicorndomain.com</code>. Now, let&rsquo;s protect it by setting up an OAuth2 Proxy.</p>
 <p>In order to do that we will need to perform following steps:</p>
-<p>🐾 Create an application in Azure AD which will represent OAuth2 Proxy application that we're going to implement later;</p>
+<p>🐾 Create an application in Microsoft Entra ID which will represent OAuth2 Proxy application that we&rsquo;re going to implement later;</p>
 <p>🐾 Update NGINX Ingress configuration for kubecost to enable support for external authentication;</p>
-<p>🐾 Configure and deploy OAuth2 Proxy application which will act as a reverse proxy and provide authentication to kubecost with Azure AD;</p>
-<p>In addition you will need to have a TLS certificate provisioned both for your application and the OAuth2 Proxy. In my example use case, I'm using cert-manager which is the most popular certificate management application for Kubernetes. Setting up cert-manager is outside of scope for this blog post but it's expected that you have a certificate management application available in order to be able to provision respective TLS certificates. If you want to learn more about cert-manager, you can check this link: <a href="https://cert-manager.io/docs/">cert-manager</a></p>
-<p>Let's get to it! 🚀</p>
-<h3 id="create-oauth2-proxy-application-in-azure-ad">Create OAuth2 Proxy application in Azure AD</h3>
-<p>In order to create an OAuth2 Proxy application we need to go to <code>App registrations</code> section in Azure AD and choose <code>New registration</code>. Then provide following properties:</p>
-<p>🐾 <strong>Name</strong> of the Azure AD application. Since I'm setting it up for kubecost, I'll call it <code>kubecost-oauth2-proxy</code>.</p>
-<p>🐾 <strong>Azure AD single-tenant or multi-tenant account types</strong>. In my case there's only one directory being used, therefore I will choose <code>Accounts in this organizational directory only</code>.</p>
-<p>🐾 <strong>Redirect URI</strong> which will represent an application URL that will be receiving an authorization code on behalf of the application. Since we're using an OAuth2 Proxy, a redirect URI in our case is a public URL of your application plus <code>oauth2/callback</code>, i.e. <code>https://kubecost-kris.unicorndomain.com/oauth2/callback</code></p>
-<p>Once all properties are provided, click <code>Register</code> - the application will then be created for you in Azure AD.</p>
-<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_ad_config.png" alt="Screenshot for setting up OAuth2 Proxy application in Azure AD"></p>
-<p>Next, we'll need to create a client secret which will allow OAuth2 Proxy to perform authentication on behalf of our application. In Azure AD, navigate to recently created application. In <code>Certificates &amp; secrets</code> section choose <code>New client secret</code>. Then provide following properties:</p>
-<p>🐾 <strong>Description</strong> that explains what the secret will be used for. In my case it's <code>kubecost-oauth2-proxy-secret</code>.</p>
+<p>🐾 Configure and deploy OAuth2 Proxy application which will act as a reverse proxy and provide authentication to kubecost with Microsoft Entra ID;</p>
+<p>In addition you will need to have a TLS certificate provisioned both for your application and the OAuth2 Proxy. In my example use case, I&rsquo;m using cert-manager which is the most popular certificate management application for Kubernetes. Setting up cert-manager is outside of scope for this blog post but it&rsquo;s expected that you have a certificate management application available in order to be able to provision respective TLS certificates. If you want to learn more about cert-manager, you can check this link: <a href="https://cert-manager.io/docs/">cert-manager</a></p>
+<p>Let&rsquo;s get to it! 🚀</p>
+<h3 id="create-oauth2-proxy-application-in-microsoft-entra-id">Create OAuth2 Proxy application in Microsoft Entra ID</h3>
+<p>In order to create an OAuth2 Proxy application we need to go to <code>App registrations</code> section in Microsoft Entra ID and choose <code>New registration</code>. Then provide following properties:</p>
+<p>🐾 <strong>Name</strong> of the Microsoft Entra ID application. Since I&rsquo;m setting it up for kubecost, I&rsquo;ll call it <code>kubecost-oauth2-proxy</code>.</p>
+<p>🐾 <strong>Microsoft Entra ID single-tenant or multi-tenant account types</strong>. In my case there&rsquo;s only one directory being used, therefore I will choose <code>Accounts in this organizational directory only</code>.</p>
+<p>🐾 <strong>Redirect URI</strong> which will represent an application URL that will be receiving an authorization code on behalf of the application. Since we&rsquo;re using an OAuth2 Proxy, a redirect URI in our case is a public URL of your application plus <code>oauth2/callback</code>, i.e. <code>https://kubecost-kris.unicorndomain.com/oauth2/callback</code></p>
+<p>Once all properties are provided, click <code>Register</code> - the application will then be created for you in Microsoft Entra ID.</p>
+<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_ad_config.png" alt="Screenshot for setting up OAuth2 Proxy application in Microsoft Entra ID"></p>
+<p>Next, we&rsquo;ll need to create a client secret which will allow OAuth2 Proxy to perform authentication on behalf of our application. In Microsoft Entra ID, navigate to recently created application. In <code>Certificates &amp; secrets</code> section choose <code>New client secret</code>. Then provide following properties:</p>
+<p>🐾 <strong>Description</strong> that explains what the secret will be used for. In my case it&rsquo;s <code>kubecost-oauth2-proxy-secret</code>.</p>
 <p>🐾 <strong>Expiration lifecycle of the secret</strong>. For better security, choose at least the recommended lifecycle which at the moment of writing this blog post is 6 months. If you can automate secret renewal, do choose as short lifecycle as possible.</p>
 <p>Once all properties are provided, click <code>Add</code>. Once the client secret is created, <strong>do ensure to copy it and save for a later step since the secret will be shown to you only once, right upon creation</strong>.</p>
-<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_ad_client_secret_config.png" alt="Screenshot for setting up application client secret in Azure AD"></p>
-<p>Finally, go to the <code>Overview</code> section of the recently created application in Azure AD and make a note of <code>Application (client) ID</code> and <code>Directory (tenant) ID</code> which we'll need later.</p>
-<p>Now we're done with setting everything up in Azure AD - let's prepare our application's Ingress next!😺</p>
+<p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_ad_client_secret_config.png" alt="Screenshot for setting up application client secret in Microsoft Entra ID"></p>
+<p>Finally, go to the <code>Overview</code> section of the recently created application in Microsoft Entra ID and make a note of <code>Application (client) ID</code> and <code>Directory (tenant) ID</code> which we&rsquo;ll need later.</p>
+<p>Now we&rsquo;re done with setting everything up in Microsoft Entra ID - let&rsquo;s prepare our application&rsquo;s Ingress next!😺</p>
 <h3 id="configure-nginx-ingress-controller">Configure NGINX Ingress Controller</h3>
 <p>In order to be able to expose our application publicly, we need to create an Ingress. Since my kubecost application is already exposed, I have an Ingress resource already which looks something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
@@ -578,7 +587,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-cost-analyzer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">9090</span><span class="w">
-</span></span></span></code></pre></div><p>Since I've deployed kubecost with Helm and current Ingress belongs to the same release, I've added additional annotations which will let Helm include and manage this Ingress resource as part of the kubecost release. You can read more about adding Kubernetes resources to existing Helm releases here: <a href="https://kristhecodingunicorn.com/post/k8s_object_helm/">How to Include New Kubernetes Resource Into Existing Helm Release</a></p>
+</span></span></span></code></pre></div><p>Since I&rsquo;ve deployed kubecost with Helm and current Ingress belongs to the same release, I&rsquo;ve added additional annotations which will let Helm include and manage this Ingress resource as part of the kubecost release. You can read more about adding Kubernetes resources to existing Helm releases here: <a href="https://kristhecodingunicorn.com/post/k8s_object_helm/">How to Include New Kubernetes Resource Into Existing Helm Release</a></p>
 <p>Now, the only thing we will need to do to configure support for OAuth 2.0 authentication is to add following annotations to the Ingress object:</p>
 <p>🐾 <strong>auth-url</strong>: Annotation that represents URL to the authentication service where requests must be sent.</p>
 <p><code>nginx.ingress.kubernetes.io/auth-url: &quot;https://[application-hostname]/oauth2/auth&quot;</code></p>
@@ -602,22 +611,22 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># OMITTED - SAME AS ABOVE</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># OMITTED - SAME AS ABOVE</span><span class="w">
-</span></span></span></code></pre></div><p>Configuration of NGINX Ingress is done - finally we're ready to deploy OAuth2 Proxy!🤩</p>
+</span></span></span></code></pre></div><p>Configuration of NGINX Ingress is done - finally we&rsquo;re ready to deploy OAuth2 Proxy!🤩</p>
 <h3 id="configure-and-deploy-oauth2-proxy">Configure and deploy OAuth2 Proxy</h3>
-<p>Last thing we'll need to do is to install a proxy application which will authenticate the requests coming into our main application, which in my example case is kubecost. There are many good open source alternatives for such a proxy out there but I can recommend the one called OAuth2 Proxy - it's well maintained and has a big community support. It's also recommended by NGINX. You can find more information in OAuth2 Proxy GitHub and documentation by checking out the links in <a href="https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#additional-resources">Additional resources</a> section below.😉</p>
-<p>OAuth2 Proxy doesn't have a Helm chart so we'll create a Kubernetes YAML template and include it as part of the kubecost Helm release by adding a few annotations to the OAuth2 Proxy Ingress definition.</p>
+<p>Last thing we&rsquo;ll need to do is to install a proxy application which will authenticate the requests coming into our main application, which in my example case is kubecost. There are many good open source alternatives for such a proxy out there but I can recommend the one called OAuth2 Proxy - it&rsquo;s well maintained and has a big community support. It&rsquo;s also recommended by NGINX. You can find more information in OAuth2 Proxy GitHub and documentation by checking out the links in <a href="https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#additional-resources">Additional resources</a> section below.😉</p>
+<p>OAuth2 Proxy doesn&rsquo;t have a Helm chart so we&rsquo;ll create a Kubernetes YAML template and include it as part of the kubecost Helm release by adding a few annotations to the OAuth2 Proxy Ingress definition.</p>
 <p>But before we do that, we need to make a few preparations first. OAuth2 Proxy requires some information from us in order to work properly:</p>
-<p>🐾 Tenant ID, Client ID and Client Secret of an Azure AD application that we've created earlier;</p>
+<p>🐾 Tenant ID, Client ID and Client Secret of an Microsoft Entra ID application that we&rsquo;ve created earlier;</p>
 <p>🐾 Cookie secret for session information storage;</p>
-<p>Since we've made a note of tenant id, client id and client secret what we need to do now is to generate a cookie secret. Cookie storage is the default storage type used by OAuth2 Proxy to store information about a session in a client-side cookie, therefore setting a cookie secret is mandatory. You can also use Redis as an alternative session storage but it's outside of scope of this blog post. You can read more about OAuth2 Proxy session storage options here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage">Session Storage</a></p>
+<p>Since we&rsquo;ve made a note of tenant id, client id and client secret what we need to do now is to generate a cookie secret. Cookie storage is the default storage type used by OAuth2 Proxy to store information about a session in a client-side cookie, therefore setting a cookie secret is mandatory. You can also use Redis as an alternative session storage but it&rsquo;s outside of scope of this blog post. You can read more about OAuth2 Proxy session storage options here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/session_storage">Session Storage</a></p>
 <h4 id="cookie-secret">Cookie Secret</h4>
-<p>It's an important and good practice to always generate a strong secret, using cryptographically secure random number generator and never re-use the same secret across applications! Since cookie secret can be used for sensitive information like storing user session data, in the wrong hands this information can cause a lot of damage and even let attacker get control of the server hosting an application. There are several ways to generate a cookie secret, for example with OpenSSL: <code>openssl rand -hex 32</code>. Once you've generated a secret value, make a note of it, we're going to use it in a second.</p>
+<p>It&rsquo;s an important and good practice to always generate a strong secret, using cryptographically secure random number generator and never re-use the same secret across applications! Since cookie secret can be used for sensitive information like storing user session data, in the wrong hands this information can cause a lot of damage and even let attacker get control of the server hosting an application. There are several ways to generate a cookie secret, for example with OpenSSL: <code>openssl rand -hex 32</code>. Once you&rsquo;ve generated a secret value, make a note of it, we&rsquo;re going to use it in a second.</p>
 <h4 id="create-oauth2-proxy-secrets-in-aks-cluster">Create OAuth2 Proxy secrets in AKS cluster</h4>
-<p>The last thing we need to do before we can deploy OAuth2 Proxy is to save Client ID, Client Secret and Cookie Secret as Kubernetes Secrets. Of course we could've just written them in plaintext in the Deployment YAML but we're conscious about security, right?😼 We want to keep secrets secret, therefore we'll deploy sensitive values as Kubernetes Secrets.</p>
+<p>The last thing we need to do before we can deploy OAuth2 Proxy is to save Client ID, Client Secret and Cookie Secret as Kubernetes Secrets. Of course we could&rsquo;ve just written them in plaintext in the Deployment YAML but we&rsquo;re conscious about security, right?😼 We want to keep secrets secret, therefore we&rsquo;ll deploy sensitive values as Kubernetes Secrets.</p>
 <blockquote>
-<p>As an alternative to Kubernetes Secrets in AKS you can save secrets with help of The Azure Key Vault Provider for Secrets Store CSI Driver. Walkthrough of how to do that will be provided in the subsequent blog posts. In current blog post we'll be utilizing Kubernetes Secrets. If you would like to learn more about The Azure Key Vault Provider for Secrets Store CSI Driver, you can check official Microsoft documentation: <a href="https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver">Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster</a></p>
+<p>As an alternative to Kubernetes Secrets in AKS you can save secrets with help of The Azure Key Vault Provider for Secrets Store CSI Driver. Walkthrough of how to do that will be provided in the subsequent blog posts. In current blog post we&rsquo;ll be utilizing Kubernetes Secrets. If you would like to learn more about The Azure Key Vault Provider for Secrets Store CSI Driver, you can check official Microsoft documentation: <a href="https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver">Use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster</a></p>
 </blockquote>
-<p>In AKS cluster where OAuth2 Proxy will be installed, in the namespace where your application is running (in my case it's <code>kubecost</code>), run following commands with <code>kubectl</code> in order to create secrets for the respective values:</p>
+<p>In AKS cluster where OAuth2 Proxy will be installed, in the namespace where your application is running (in my case it&rsquo;s <code>kubecost</code>), run following commands with <code>kubectl</code> in order to create secrets for the respective values:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl create secret generic client-id --from-literal<span class="o">=</span><span class="nv">oauth2_proxy_client_id</span><span class="o">=[</span>client-id-value<span class="o">]</span> -n <span class="o">[</span>application-namespace<span class="o">]</span>
 </span></span><span class="line"><span class="cl">
@@ -627,17 +636,17 @@
 </span></span><span class="line"><span class="cl">kubectl create secret generic cookie-secret --from-literal<span class="o">=</span><span class="nv">oauth2_proxy_cookie_secret</span><span class="o">=[</span>cookie-secret-value<span class="o">]</span> 
 </span></span><span class="line"><span class="cl">-n <span class="o">[</span>application-namespace<span class="o">]</span>
 </span></span></code></pre></div><p>You can also create Kubernetes Secrets from file by using <code>--from-file</code> instead of <code>--from-literal</code> where you provide the values directly in the command line - you can find more about it here: <a href="https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#create-a-secret">Managing Secrets using kubectl</a></p>
-<p>Finally we're ready to deploy OAuth2 Proxy!🥳 Below you can find an example of a Deployment YAML that will deploy OAuth2 Proxy as part of the existing Helm release for kubecost application.</p>
+<p>Finally we&rsquo;re ready to deploy OAuth2 Proxy!🥳 Below you can find an example of a Deployment YAML that will deploy OAuth2 Proxy as part of the existing Helm release for kubecost application.</p>
 <blockquote>
 <p>Wherever you can see <code>kubecost</code> mentioned in the example template below, you can replace it with the name of your specific application.</p>
 </blockquote>
 <p>A few things to be aware of:</p>
 <ul>
 <li>
-<p>I wouldn't recommend to use the latest container image of any third-party application since it may introduce breaking changes and cause inconsistent application behaviour. Always choose a <strong>stable</strong> release version and have a good upgrade routine in place to ensure that you're keeping third-party applications up-to-date.</p>
+<p>I wouldn&rsquo;t recommend to use the latest container image of any third-party application since it may introduce breaking changes and cause inconsistent application behaviour. Always choose a <strong>stable</strong> release version and have a good upgrade routine in place to ensure that you&rsquo;re keeping third-party applications up-to-date.</p>
 </li>
 <li>
-<p>In the <code>template.spec.containers.env</code> section of the Deployment, we're integrating Kubernetes Secrets for the sensitive values which we created earlier as the environment variables for OAuth2 Proxy. Names of the environment variables should stay as provided in the example since that's what OAuth2 Proxy expects: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#environment-variables">OAuth2 Proxy - Environment variables</a></p>
+<p>In the <code>template.spec.containers.env</code> section of the Deployment, we&rsquo;re integrating Kubernetes Secrets for the sensitive values which we created earlier as the environment variables for OAuth2 Proxy. Names of the environment variables should stay as provided in the example since that&rsquo;s what OAuth2 Proxy expects: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#environment-variables">OAuth2 Proxy - Environment variables</a></p>
 </li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#oauth2-proxy.yaml</span><span class="w">
@@ -646,11 +655,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy-deployment</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
@@ -666,7 +675,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">provider=oidc</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">azure-tenant=[oauth2-proxy-azure-ad-tenant-id]</span><span class="w"> </span><span class="c"># Azure AD OAuth2 Proxy application Tenant ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">azure-tenant=[oauth2-proxy-azure-ad-tenant-id]</span><span class="w"> </span><span class="c"># Microsoft Entra ID OAuth2 Proxy application Tenant ID</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">pass-access-token=true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">cookie-name=_proxycookie</span><span class="w"> </span><span class="c"># this can be any name of your choice which you would like OAuth2 Proxy to use for the session cookie</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">email-domain=*</span><span class="w">
@@ -677,17 +686,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">quay.io/oauth2-proxy/oauth2-proxy:v7.3.0</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">OAUTH2_PROXY_CLIENT_ID</span><span class="w"> </span><span class="c"># keep this name - it\&#39;s required to be defined like this by OAuth2 Proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">OAUTH2_PROXY_CLIENT_ID</span><span class="w"> </span><span class="c"># keep this name - it&#39;s required to be defined like this by OAuth2 Proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">secretKeyRef</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">client-id</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2_proxy_client_id</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">OAUTH2_PROXY_CLIENT_SECRET</span><span class="w"> </span><span class="c"># keep this name - it\&#39;s required to be defined like this by OAuth2 Proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">OAUTH2_PROXY_CLIENT_SECRET</span><span class="w"> </span><span class="c"># keep this name - it&#39;s required to be defined like this by OAuth2 Proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">secretKeyRef</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">client-secret</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2_proxy_client_secret</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">OAUTH2_PROXY_COOKIE_SECRET</span><span class="w"> </span><span class="c"># keep this name - it\&#39;s required to be defined like this by OAuth2 Proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">OAUTH2_PROXY_COOKIE_SECRET</span><span class="w"> </span><span class="c"># keep this name - it&#39;s required to be defined like this by OAuth2 Proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">secretKeyRef</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cookie-secret</span><span class="w">
@@ -707,11 +716,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">application</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy-svc</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
@@ -731,10 +740,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cert-manager.io/cluster-issuer</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">cert-manager-cluster-issuer-name]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/proxy-body-size</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2000m&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/proxy-buffer-size</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;32k&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">meta.helm.sh/release-namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w"> </span><span class="c"># can be removed if your application isn\&#39;t deployed through Helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l">Helm</span><span class="w"> </span><span class="c"># can be removed if your application isn&#39;t deployed through Helm</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy-ingress</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
@@ -754,8 +763,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubecost-oauth2-proxy-svc</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">port</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="m">4180</span><span class="w">
-</span></span></span></code></pre></div><p>Once you've verified that configuration and the template look correct you can deploy OAuth2 Proxy in AKS cluster where your application is running with following kubectl command: <code>kubectl apply -f ./my-path-to-template/oauth2-proxy.yaml</code></p>
-<p>And it's done! Now, when you access the application, you will first be redirected to the Microsoft authentication.</p>
+</span></span></span></code></pre></div><p>Once you&rsquo;ve verified that configuration and the template look correct you can deploy OAuth2 Proxy in AKS cluster where your application is running with following kubectl command: <code>kubectl apply -f ./my-path-to-template/oauth2-proxy.yaml</code></p>
+<p>And it&rsquo;s done! Now, when you access the application, you will first be redirected to the Microsoft authentication.</p>
 <p><img src="../../images/k8s_oauth2_proxy/k8s_oauth2_login_screen.png" alt="Screenshot of Microsoft login screen once OAuth2 Proxy is enabled"></p>
 <h4 id="deployment-with-helm">Deployment with Helm</h4>
 <p>There are multiple Helm charts available that can make it significantly easier to deploy OAuth2 Proxy. There&rsquo;s an official Helm chart available: <a href="https://github.com/oauth2-proxy/manifests">auth2-proxy/manifests</a> and there&rsquo;s also a Bitnami Helm chart available which  provides support for direct deployment to AKS with Bitnami Charts at Microsoft Azure Marketplace: <a href="https://bitnami.com/stack/oauth2-proxy/helm">OAuth2 Proxy packaged by Bitnami</a>.</p>
@@ -799,7 +808,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">extraArgs</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">oidc</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">azure-tenant</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">oauth2-proxy-azure-ad-tenant-id] </span><span class="w"> </span><span class="c"># Azure AD OAuth2 Proxy application Tenant ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">azure-tenant</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">oauth2-proxy-azure-ad-tenant-id] </span><span class="w"> </span><span class="c"># Microsoft Entra ID OAuth2 Proxy application Tenant ID</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pass-access-token</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">email-domain</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;*&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">upstream</span><span class="p">:</span><span class="w"> </span><span class="l">file:///dev/null</span><span class="w">
@@ -829,10 +838,10 @@
 <li>Single-node Redis: <a href="https://bitnami.com/stack/redis/helm">bitnami/redis</a></li>
 <li>Redis cluster: <a href="https://bitnami.com/stack/redis-cluster/helm">bitnami/redis-cluster</a></li>
 </ul>
-<p>You can find all the supported arguments for Redis storage in OAuth2 Proxy here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/6.1.x/configuration/overview/#command-line-options">OAuth2 Proxy - Command Line Options</a></p>
+<p>You can find all the supported arguments for Redis storage in OAuth2 Proxy here: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/6.1.x/configuration/overview/#command-line-options">OAuth2 Proxy - Command Line Options</a>.</p>
 <p>The rest of the configuration you will need:</p>
 <ul>
-<li>Set Azure AD OAuth2 Proxy application to support multi-tenant account types (if required, depends on your use case);</li>
+<li>Set Microsoft Entra ID OAuth2 Proxy application to support multi-tenant account types (if required, depends on your use case);</li>
 <li>In OAuth2 Proxy Ingress Object definition, add multiple hosts representing your applications;</li>
 </ul>
 <blockquote>
@@ -957,12 +966,12 @@ If we use the same example that we used in the section above as reference, updat
 <h2 id="known-issues-oauth2-proxy">Known Issues: OAuth2 Proxy</h2>
 <p>If you will be using OAuth2 Proxy that I have used in this blog post there are a few known issues you should know about and how those issues can be mitigated.</p>
 <h4 id="version-730---issue-with-azure-provider">Version 7.3.0 - Issue with Azure provider</h4>
-<p>Normally, when you want to use OAuth2 Proxy with Azure AD Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: <code>- --provider=oidc</code>. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
+<p>Normally, when you want to use OAuth2 Proxy with Microsoft Entra ID Identity Provider, you would use <code>--provider=azure</code> in the <code>template.spec.containers.args</code> section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: <code>- --provider=oidc</code>. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: <a href="https://github.com/oauth2-proxy/oauth2-proxy/issues/1666">v7.3.0 breaks azure provider</a></p>
 <blockquote>
 <p>This seems to be fixed in version <code>7.4.0</code>, I&rsquo;ve tested it and haven&rsquo;t been able to reproduce this issue in the new version but if you still do experience the same issue with version <code>7.4.0</code>, do check the discussion on the GitHub Issue mentioned above or just switch to OIDC provider.</p>
 </blockquote>
 <h4 id="version-730-azure-b2c---error-creating-session-during-oauth2-callback-neither-the-id_token-nor-the-profileurl-set-an-email">Version 7.3.0, Azure B2C - <code>Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email</code></h4>
-<p>If you have configured everything correctly and according to what's described in this blog post but are still getting this error, a workaround will be to add <code>- --user-id-claim=oid</code> to the <code>args</code> section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: <a href="https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c">How can I debug oauth2_proxy when connecting to Azure B2C?</a>.</p>
+<p>If you have configured everything correctly and according to what&rsquo;s described in this blog post but are still getting this error, a workaround will be to add <code>- --user-id-claim=oid</code> to the <code>args</code> section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: <a href="https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c">How can I debug oauth2_proxy when connecting to Azure B2C?</a>.</p>
 <p>Your updated args section will look something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#oauth2-proxy.yaml</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -974,17 +983,17 @@ If we use the same example that we used in the section above as reference, updat
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">user-id-claim=oid</span><span class="w"> </span><span class="c"># &lt;- This is the new property</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Rest of the configuration is omitted - Other properties are unchanged</span><span class="w">
 </span></span></span></code></pre></div><h2 id="all-in-one-deployment-package">All-in-one deployment package</h2>
-<p>In my GitHub repo you can find a PowerShell script that includes all the necessary commands and templates in order to create an Azure AD application (or use existing app) for OAuth2 Proxy and deploy OAuth2 Proxy to a Kubernetes cluster, either with Kubernetes YAML templates or with official Helm chart: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/oauth2-proxy">guidemetothemoon:oauth2-proxy</a></p>
+<p>In my GitHub repo you can find a PowerShell script that includes all the necessary commands and templates in order to create an Microsoft Entra ID application (or use existing app) for OAuth2 Proxy and deploy OAuth2 Proxy to a Kubernetes cluster, either with Kubernetes YAML templates or with official Helm chart: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/oauth2-proxy">guidemetothemoon:oauth2-proxy</a></p>
 <h2 id="additional-resources">Additional resources</h2>
-<p>A few resources I've found useful on this topic:</p>
+<p>A few resources I&rsquo;ve found useful on this topic:</p>
 <ul>
 <li>Documentation of OAuth2 Proxy open source project: <a href="https://oauth2-proxy.github.io/oauth2-proxy/docs/">OAuth2 Proxy Docs</a></li>
 <li>OAuth2 Proxy GitHub: <a href="https://github.com/oauth2-proxy/oauth2-proxy">OAuth2 Proxy</a></li>
 <li>More on SSO with SAML 2.0 support in kubecost: <a href="https://guide.kubecost.com/hc/en-us/articles/4407595985047-User-Management-SSO-SAML">User Management - SSO/SAML/RBAC</a></li>
 <li>Support for different authentication types in NGINX Ingress Controller including OAuth: <a href="https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/">External OAUTH Authentication</a></li>
 </ul>
-<p>That's it from me this time, thanks for checking in!</p>
-<p>If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
+<p>That&rsquo;s it from me this time, thanks for checking in!</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
 <p>Stay secure, stay safe.</p>
 <p>Till we connect again!😻</p>
 </div>

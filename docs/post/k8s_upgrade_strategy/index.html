@@ -309,7 +309,16 @@
         </li>
       
     </ul>
-  </div><footer class="footer footer__sidebar">
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
   <ul class="footer__list">
     <li class="footer__item">
       &copy;
@@ -496,7 +505,7 @@
   </ul>
 </nav>
 </div>
-<p>🎄<em><strong>This blog post is also a contribution to Azure Advent Calendar where during December, experts from the tech community share their knowledge through contributions of a specific technology in the Azure domain. You&rsquo;re welcome to check out all the contributions here:</strong></em> <a href="https://dev.to/icebeam7/azure-advent-calendar-o60"> Azure Advent Calendar</a></p>
+<p>🎄<em><strong>This blog post is also a contribution to Azure Advent Calendar where during December, experts from the tech community share their knowledge through contributions of a specific technology in the Azure domain. You&rsquo;re welcome to check out all the contributions here:</strong></em> <a href="https://dev.to/icebeam7/azure-advent-calendar-o60">Azure Advent Calendar</a></p>
 <p>Have you already seen &ldquo;Automatic upgrade&rdquo; property when creating a new AKS cluster in Azure Portal?😺</p>
 <p><img src="../../images/k8s_upgrade_strategy/aks_automatic_upgrade_property.png" alt="Screenshot of automatic upgrade property in new AKS cluster creation in Azure Portal"></p>
 <p>Auto-upgrade of an AKS cluster is actually <strong>not</strong> a new functionality and has been available since January 2021. It is just recently it has been made configurable from the Azure Portal. You can enable auto-upgrade from the Azure Portal both when you create a new AKS cluster and by enabling it for existing AKS cluster through &ldquo;Cluster configuration&rdquo;, as shown in the screenshots below.</p>
@@ -532,13 +541,13 @@
 <p>There are 3 important pieces that you need to decide upon when establishing cluster and node upgrade routine:</p>
 <ul>
 <li>
-<p><strong>Pod Disruption Budgets.</strong> It is important that all the applications running in Kubernetes clusters are configured with Pod Disruption Budgets (PDB). PDB ensures that a specific amount of application replicas are available during voluntary/planned disruptions like planned maintenance. PDB provides you with a capability to perform zero downtime upgrades. I will point out that <strong>PDBs should be configured so that at least 1 Pod can be drained</strong> - if it&rsquo;s configured with unevictable Pods, a Node drain operation hangs and never gets to complete. You can read more about Pod Disruption Budgets here: <a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets">Pod disruption budgets</a></p>
+<p><strong>Pod Disruption Budgets.</strong> It is important that all the applications running in Kubernetes clusters are configured with Pod Disruption Budgets (PDB). PDB ensures that a specific amount of application replicas are available during voluntary/planned disruptions like planned maintenance. PDB provides you with a capability to perform zero downtime upgrades. I will point out that <strong>PDBs should be configured so that at least 1 Pod can be drained</strong> - if it&rsquo;s configured with unevictable Pods, a Node drain operation hangs and never gets to complete. You can read more about Pod Disruption Budgets here: <a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets">Pod disruption budgets</a>.</p>
 </li>
 <li>
-<p><strong>Node surge value.</strong> Node surge defines how many worker nodes can be take offline at the same time for upgrade. Default value is 1 Node but it is configurable with a <code>--max-surge</code> setting. Recommendation from Microsoft is to define <code>--max-surge</code> setting no larger than <code>33%</code> for production clusters. You can read more about node surge here: <a href="https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster?tabs=azure-cli#customize-node-surge-upgrade">Customize node surge upgrade</a></p>
+<p><strong>Node surge value.</strong> Node surge defines how many worker nodes can be take offline at the same time for upgrade. Default value is 1 Node but it is configurable with a <code>--max-surge</code> setting. Recommendation from Microsoft is to define <code>--max-surge</code> setting no larger than <code>33%</code> for production clusters. You can read more about node surge here: <a href="https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster?tabs=azure-cli#customize-node-surge-upgrade">Customize node surge upgrade</a>.</p>
 </li>
 <li>
-<p><strong>Maintenance window.</strong> You can enable Planned Maintenance functionality (In Preview at the point of writing this blog post) to secure that upgrades are performed during the time range that works best for you in terms of minimizing planned and unplanned disruption. This may be beneficial, especially when auto-upgrade is enabled. You can read more about it here: <a href="https://learn.microsoft.com/en-us/azure/aks/planned-maintenance">Use Planned Maintenance to schedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)</a></p>
+<p><strong>Maintenance window.</strong> You can enable Planned Maintenance functionality (In Preview at the point of writing this blog post) to secure that upgrades are performed during the time range that works best for you in terms of minimizing planned and unplanned disruption. This may be beneficial, especially when auto-upgrade is enabled. You can read more about it here: <a href="https://learn.microsoft.com/en-us/azure/aks/planned-maintenance">Use Planned Maintenance to schedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)</a>.</p>
 </li>
 </ul>
 <h3 id="aks-cluster-upgrade-flow">AKS cluster upgrade flow</h3>
@@ -590,40 +599,40 @@
 <h4 id="terraform">Terraform</h4>
 <p><code>automatic_channel_upgrade = &lt;UPGRADE_CHANNEL_NAME&gt;</code> argument can be used to enable auto-upgrade.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">resource &#34;azurerm_kubernetes_cluster&#34; &#34;aks_cluster&#34; {
-</span></span><span class="line"><span class="cl">  location                  = &#34;norwayeast&#34;
-</span></span><span class="line"><span class="cl">  name                      = &#34;chamber-of-secrets&#34;
-</span></span><span class="line"><span class="cl">  resource_group_name       = &#34;hogwarts-rg&#34;
-</span></span><span class="line"><span class="cl">  automatic_channel_upgrade = &#34;patch&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">resource</span> <span class="s2">&#34;azurerm_kubernetes_cluster&#34;</span> <span class="s2">&#34;aks_cluster&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">location</span>                  = <span class="s2">&#34;norwayeast&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>                      = <span class="s2">&#34;chamber-of-secrets&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">resource_group_name</span>       = <span class="s2">&#34;hogwarts-rg&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">automatic_channel_upgrade</span> = <span class="s2">&#34;patch&#34;</span>
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  default_node_pool {
-</span></span><span class="line"><span class="cl">    name                 = &#34;agentpool&#34;
-</span></span><span class="line"><span class="cl">    vm_size              = &#34;Standard_B2s&#34;
-</span></span><span class="line"><span class="cl">  }
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">  <span class="nx">default_node_pool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">name</span>                 = <span class="s2">&#34;agentpool&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vm_size</span>              = <span class="s2">&#34;Standard_B2s&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="bicep">Bicep</h4>
 <p><code>autoUpgradeProfile.upgradeChannel</code> setting can be used to enable auto-upgrade.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">resource aks_cluster &#39;Microsoft.ContainerService/managedClusters@2022-05-02-preview&#39; = {
-</span></span><span class="line"><span class="cl">  name: &#39;chamber-of-secrets&#39;
-</span></span><span class="line"><span class="cl">  location: &#39;norwayeast&#39;
-</span></span><span class="line"><span class="cl">  properties: {
-</span></span><span class="line"><span class="cl">    agentPoolProfiles: [
-</span></span><span class="line"><span class="cl">      {
-</span></span><span class="line"><span class="cl">        name: &#39;agentpool&#39;
-</span></span><span class="line"><span class="cl">        count: 1
-</span></span><span class="line"><span class="cl">        vmSize: &#39;Standard_B2s&#39;
-</span></span><span class="line"><span class="cl">        osType: &#39;Linux&#39;
-</span></span><span class="line"><span class="cl">        mode: &#39;System&#39;
-</span></span><span class="line"><span class="cl">      }
-</span></span><span class="line"><span class="cl">    ]
-</span></span><span class="line"><span class="cl">    autoUpgradeProfile: {
-</span></span><span class="line"><span class="cl">      upgradeChannel: &#39;patch&#39;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">  }
-</span></span><span class="line"><span class="cl">}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">resource</span> <span class="err">aks_cluster</span> <span class="err">&#39;Microsoft.ContainerService/managedClusters@</span><span class="mi">2022-05-02</span><span class="err">-preview&#39;</span> <span class="err">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">name:</span> <span class="err">&#39;chamber-of-secrets&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">location:</span> <span class="err">&#39;norwayeast&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">properties:</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">agentPoolProfiles:</span> <span class="err">[</span>
+</span></span><span class="line"><span class="cl">      <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">name:</span> <span class="err">&#39;agentpool&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">count:</span> <span class="err">1</span>
+</span></span><span class="line"><span class="cl">        <span class="err">vmSize:</span> <span class="err">&#39;Standard_B2s&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">osType:</span> <span class="err">&#39;Linux&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">mode:</span> <span class="err">&#39;System&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">]</span>
+</span></span><span class="line"><span class="cl">    <span class="err">autoUpgradeProfile:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="err">upgradeChannel:</span> <span class="err">&#39;patch&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
 </span></span></code></pre></div><p>You can learn more about auto-upgrade support for AKS here: <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">Automatically upgrade an Azure Kubernetes Service (AKS) cluster</a></p>
 <h3 id="auto-upgrade-considerations">Auto-upgrade considerations</h3>
 <p>Finally, based on my own experience with upgrading AKS clusters, I would like to mention a few things that you should consider when choosing an upgrade strategy.🤔</p>

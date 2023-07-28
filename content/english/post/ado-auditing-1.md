@@ -16,7 +16,7 @@ tags = [
 
 In July 2019, as part of Sprint 154, Microsoft introduced support for auditing in Azure DevOps and this is a feature that you really should look into if you haven't set it up or maybe haven't heard about it yet. Auditing in Azure DevOps allows you to get an aggregated log of important events related to access control, permission and resource management++ across projects in your Azure DevOps organization.
 
-Functionality evolved quite a bit since it's initial release and it currently also supports streaming logs to an external service like Azure Monitor logs, which we will take a look at in a bit. At the moment of writing this blog post the feature is still in public preview according to official Microsoft documentation. Hopefully it will soon be released in GA - according to the blog post from November 2021 the plan was to release it in GA early 2022 so let's hope that it will happen by the end of 2022 at least!😁 You can check out the blog post link in Additional resources section below. 
+Functionality evolved quite a bit since it's initial release and it currently also supports streaming logs to an external service like Azure Monitor logs, which we will take a look at in a bit. At the moment of writing this blog post the feature is still in public preview according to official Microsoft documentation. Hopefully it will soon be released in GA - according to the blog post from November 2021 the plan was to release it in GA early 2022 so let's hope that it will happen by the end of 2022 at least!😁 You can check out the blog post link in Additional resources section below.
 
 ## Azure DevOps Auditing - overview and why you would use it
 
@@ -46,7 +46,7 @@ Now, let's take a look at how we can enable Azure DevOps Auditing and export the
 
 By default, Azure DevOps Auditing is disabled for all the organizations so you will need to enable it in order for the logging to start. You can enable it in two ways: through Azure DevOps UI and Azure DevOps REST API.
 
-> If you have installed Azure DevOps Server on-premises, Auditing will unfortunately **not** work for you. This is the only Azure DevOps deployment that is currently unsupported by Auditing functionality. Your organization must also be connected to Azure AD for Auditing to work properly.
+> If you have installed Azure DevOps Server on-premises, Auditing will unfortunately **not** work for you. This is the only Azure DevOps deployment that is currently unsupported by Auditing functionality. Your organization must also be connected to Microsoft Entra ID for Auditing to work properly.
 
 ### Azure DevOps UI
 
@@ -115,7 +115,7 @@ You will need two pieces of information in order to set up streaming to Azure Mo
 1. Workspace ID for Azure Monitor logs instance you're connecting to;
 2. Primary key for Azure Monitor logs instance you're connecting to - it will be the shared key property that Azure DevOps will use to authenticate to the respective Azure Monitor logs instance;
 
-You can retrieve this information either with Azure CLI: 
+You can retrieve this information either with Azure CLI:
 
 ```bash
 az monitor log-analytics workspace show --resource-group [LOG_ANALYTICS_WORKSPACE_RESOURCE_GROUP] \ 
@@ -126,6 +126,7 @@ az monitor log-analytics workspace show --resource-group [LOG_ANALYTICS_WORKSPAC
 az monitor log-analytics workspace get-shared-keys --resource-group [LOG_ANALYTICS_WORKSPACE_RESOURCE_GROUP] \ 
 --workspace-name [LOG_ANALYTICS_WORKSPACE_NAME] | grep "primarySharedKey"
 ```
+
 Or by going to the respective Log Analytics workspace in Azure Portal and locating Settings -> Agents management section where you can find both the workspace ID and primary key in "Log Analytics agent instructions" section.
 
 ![Screenshot of Log Analytics Agents management page in Azure Portal](../../images/ado_auditing/ado_auditing_log_analytics_connect.png)
@@ -167,7 +168,7 @@ AzureDevOpsAuditing
 
 ![Screenshot of querying Azure DevOps audit logs with Log Analytics in Azure Portal](../../images/ado_auditing/ado_auditing_log_analytics_query.png)
 
-Great job!😺 We have now both enabled Azure DevOps Auditing and configured streaming of Azure DevOps audit logs to Azure Monitor logs where we successfully queried the logs with help of Log Analytics. 
+Great job!😺 We have now both enabled Azure DevOps Auditing and configured streaming of Azure DevOps audit logs to Azure Monitor logs where we successfully queried the logs with help of Log Analytics.
 
 ## Additional resources
 
@@ -183,7 +184,7 @@ You can find more information about Azure DevOps Auditing here:
 
 In Part 2 of this blog post series we're going to take a look at how we can export Azure DevOps audit logs to Splunk and in Part 3 we'll take a look at how we can export Azure DevOps audit logs to Azure Event Grid.
 
-That\'s it from me this time, thanks for checking in! 
+That's it from me this time, thanks for checking in!
 
 If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺
 

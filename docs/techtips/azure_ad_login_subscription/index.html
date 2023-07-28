@@ -10,7 +10,7 @@
   <title>
     Kris - The Coding Unicorn
         |
-        Log in to Azure AD without active subscription from Azure CLI
+        Log in to Microsoft Entra ID without active subscription from Azure CLI
       
 
     
@@ -22,7 +22,7 @@
   <meta name="author" content="Kris - The Coding Unicorn" />
   <meta
     name="description"
-    content="In this post we take a look at how you can log in to an Azure AD without active subscription from Azure CLI."
+    content="In this post we take a look at how you can log in to an Microsoft Entra ID without active subscription from Azure CLI."
   />
   
     <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
@@ -123,14 +123,14 @@
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
 
-<meta name="twitter:title" content="Log in to Azure AD without active subscription from Azure CLI"/>
-<meta name="twitter:description" content="In this post we take a look at how you can log in to an Azure AD without active subscription from Azure CLI."/>
+<meta name="twitter:title" content="Log in to Microsoft Entra ID without active subscription from Azure CLI"/>
+<meta name="twitter:description" content="In this post we take a look at how you can log in to an Microsoft Entra ID without active subscription from Azure CLI."/>
 
 
 
   
-  <meta property="og:title" content="Log in to Azure AD without active subscription from Azure CLI" />
-<meta property="og:description" content="In this post we take a look at how you can log in to an Azure AD without active subscription from Azure CLI." />
+  <meta property="og:title" content="Log in to Microsoft Entra ID without active subscription from Azure CLI" />
+<meta property="og:description" content="In this post we take a look at how you can log in to an Microsoft Entra ID without active subscription from Azure CLI." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kristhecodingunicorn.com/techtips/azure_ad_login_subscription/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
 <meta property="article:published_time" content="2022-07-15T00:00:00+00:00" />
@@ -147,11 +147,11 @@
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "articleSection": "techtips",
-        "name": "Log in to Azure AD without active subscription from Azure CLI",
-        "headline": "Log in to Azure AD without active subscription from Azure CLI",
+        "name": "Log in to Microsoft Entra ID without active subscription from Azure CLI",
+        "headline": "Log in to Microsoft Entra ID without active subscription from Azure CLI",
         "alternativeHeadline": "",
         "description": "
-      In this post we take a look at how you can log in to an Azure AD without active subscription from Azure CLI.
+      In this post we take a look at how you can log in to an Microsoft Entra ID without active subscription from Azure CLI.
 
 
     ",
@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/azure_ad_login_subscription\/",
-        "wordCount" : "344",
+        "wordCount" : "349",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -302,7 +302,16 @@
         </li>
       
     </ul>
-  </div><footer class="footer footer__sidebar">
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
   <ul class="footer__list">
     <li class="footer__item">
       &copy;
@@ -445,19 +454,19 @@
   >
     
     <div class="post__content">
-      <h1>Log in to Azure AD Without Active Subscription From Azure CLI</h1>
+      <h1>Log in to Microsoft Entra ID Without Active Subscription From Azure CLI</h1>
       <div class="toc">
   <nav id="TableOfContents"></nav>
 </div>
-<p>In some cases you may have an Azure AD tenant that doesn't have an active subscription connected to it but you would nevertheless want to log in to it from a command line for instance, with Azure CLI. You may want to perform actions like creating an Azure AD Application for example. In this case you need to be cautious about the login command you're running so that you don't waste a lot of time on debugging an error you could have avoided in the first place (like someone did 😁)!</p>
-<p>If you attempt to log in to an Azure AD tenant like this:  <code>az login --tenant [your_azure_ad_tenant_id]</code> and you don't have an active subscription it will look like a login was successful: you will be redirected back from the Azure login window to the command line, but you may see an error message in the output stating: <code>No subscriptions found for testuser@mytest.onmicrosoft.com.</code> (which is kind of expected).</p>
-<p>If you then ignore this error message and attempt to create an Azure AD Application in this tenant, you will get following behaviour:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">PS</span><span class="w"> </span><span class="n">C</span><span class="o">:</span><span class="err">\</span><span class="n">Playground</span><span class="o">&gt;</span><span class="w"> </span><span class="n">az</span><span class="w"> </span><span class="n">ad</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="o">--</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="n">testapplication</span><span class="w"> </span><span class="o">--</span><span class="n">sign</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">audience</span><span class="w"> </span><span class="n">AzureADMyOrg</span><span class="w"> </span><span class="o">--</span><span class="n">web</span><span class="o">-</span><span class="n">redirect</span><span class="o">-</span><span class="n">uris</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="c1">//testapplication.com/callback
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ERROR</span><span class="o">:</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="kd">permission</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">needed</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">register</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">application</span><span class="p">.</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">configure</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">refer</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal&#39;. Original error: Insufficient privileges to complete the operation.
-</span></span></span></code></pre></div><p>The error message doesn't necessarily tell you that you're still not properly logged in, and it may result in a lot of confusion when you know that your user or service principal has more than enough permissions to perform this operation.🙄</p>
+<p>In some cases you may have an Microsoft Entra ID tenant that doesn&rsquo;t have an active subscription connected to it but you would nevertheless want to log in to it from a command line for instance, with Azure CLI. You may want to perform actions like creating a Microsoft Entra ID Application for example. In this case you need to be cautious about the login command you&rsquo;re running so that you don&rsquo;t waste a lot of time on debugging an error you could have avoided in the first place (like someone did 😁)!</p>
+<p>If you attempt to log in to an Microsoft Entra ID tenant like this:  <code>az login --tenant [your_azure_ad_tenant_id]</code> and you don&rsquo;t have an active subscription it will look like a login was successful: you will be redirected back from the Azure login window to the command line, but you may see an error message in the output stating: <code>No subscriptions found for testuser@mytest.onmicrosoft.com.</code> (which is kind of expected).</p>
+<p>If you then ignore this error message and attempt to create an Microsoft Entra ID Application in this tenant, you will get following behaviour:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">PS C:\Playground<span class="p">&gt;</span> az ad app create --display-name testapplication --sign-in-audience AzureADMyOrg --web-redirect-uris https://testapplication.com/callback
+</span></span><span class="line"><span class="cl">ERROR: Directory permission is needed for the current user to register the application. For how to configure, please refer &#39;https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal&#39;. Original error: Insufficient privileges to complete the operation.
+</span></span></code></pre></div><p>The error message doesn&rsquo;t necessarily tell you that you&rsquo;re still not properly logged in, and it may result in a lot of confusion when you know that your user or service principal has more than enough permissions to perform this operation.🙄</p>
 <p>The clue here is to use <code>--allow-no-subscriptions</code> property which will allow you accessing tenants without active subscription from Azure CLI. So your login command will then look like this:</p>
 <p><code>az login --tenant [your_azure_ad_tenant_id] --allow-no-subscriptions</code></p>
-<p>Once the command has been executed you will be able to successfully create an application or perform other actions towards the respective Azure AD tenant with Azure CLI.😺</p>
+<p>Once the command has been executed you will be able to successfully create an application or perform other actions towards the respective Microsoft Entra ID tenant with Azure CLI.😺</p>
 <p>You can read more about <code>az login</code> command here: <a href="https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login">az login</a></p>
 <p>Thanks for reading and till next tech tip! 😻</p>
 </div>
