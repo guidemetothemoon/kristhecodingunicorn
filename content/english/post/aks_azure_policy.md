@@ -33,9 +33,9 @@ Azure Policy has a dedicated category called **"Kubernetes"** which contains all
 
 ![Screenshot of Azure Policy category for Kubernetes in Azure portal](../../images/k8s_azure_policy/aks_azpolicy_category.png)
 
-**How does AKS governance with Azure Policy work behind the scenes?** 
+**How does AKS governance with Azure Policy work behind the scenes?**
 
-Once enabled, Azure Policy is installed as an add-on in the respective AKS clusters. Azure Policy for Kubernetes is based on extension of **Gatekeeper v3** which is an admission controller webhook for **Open Policy Agent (OPA)**. **OPA** is an open source policy agent that is widely used for governance of not only Kubernetes in general but also a bunch of different services like API gateways, CI/CD pipelines, event streaming platforms like Apache Kafka, etc. 
+Once enabled, Azure Policy is installed as an add-on in the respective AKS clusters. Azure Policy for Kubernetes is based on extension of **Gatekeeper v3** which is an admission controller webhook for **Open Policy Agent (OPA)**. **OPA** is an open source policy agent that is widely used for governance of not only Kubernetes in general but also a bunch of different services like API gateways, CI/CD pipelines, event streaming platforms like Apache Kafka, etc.
 
 The way that Azure Policy for Kubernetes was implemented comes with an additional benefit when it comes to extensibility: since the implementation is based on top of an existing open source technology that is widely used in the industry, it allows us to extend governance to those areas which are not covered by the built-in policy definitions by using extensively tested, mature open source tools. We can do that by creating custom Azure Policy definitions and use OPA's policy language called **Rego** to define the ```Constraints``` and ```ConstraintTemplates``` that we want to be used for custom policy enforcement and evaluation.
 
@@ -79,7 +79,7 @@ When creating a new AKS cluster with Azure CLI you can enable Azure Policy add-o
 
 **Terraform**
 
-```azure_policy_enabled = true``` argument can be used to enable Azure Policy add-on with AzureRM provider for Terraform. 
+```azure_policy_enabled = true``` argument can be used to enable Azure Policy add-on with AzureRM provider for Terraform.
 
 For example:
 
@@ -96,9 +96,10 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 }
 ```
+
 #### Microsoft Defender for Containers
 
-In order to enable Azure Policy add-on at scale and automate the deployment process both for new and existing AKS clusters, I would recommend to either use IaC with tools like Terraform, as demonstrated in example above, or use Microsoft Defender for Containers. Or use both in combination which is the best option!😸 By enabling Microsoft Defender for Containers you get additional value beyond just automating deployment of Azure Policy add-on at scale...you get additional perks like runtime threat protection and alerting, vulnerability assessment of images stored in Azure Container Registry, audit of cluster data plane in accordance with hardening best practices, etc. 
+In order to enable Azure Policy add-on at scale and automate the deployment process both for new and existing AKS clusters, I would recommend to either use IaC with tools like Terraform, as demonstrated in example above, or use Microsoft Defender for Containers. Or use both in combination which is the best option!😸 By enabling Microsoft Defender for Containers you get additional value beyond just automating deployment of Azure Policy add-on at scale...you get additional perks like runtime threat protection and alerting, vulnerability assessment of images stored in Azure Container Registry, audit of cluster data plane in accordance with hardening best practices, etc.
 
 Detailed information about Microsoft Defender for Containers can be found here: [Microsoft Defender for Containers](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction).
 
@@ -112,7 +113,7 @@ Once Azure Policy add-on has been enabled, it's time to enforce some Azure Polic
 
 #### Azure Portal
 
-The approach of assigning an Azure Policy definition for Kubernetes is pretty much the same as for assigning policy to any other resource in Azure, so I will not go through the whole process. 
+The approach of assigning an Azure Policy definition for Kubernetes is pretty much the same as for assigning policy to any other resource in Azure, so I will not go through the whole process.
 
 Nevertheless, I would like to highlight two things that are worth being aware of:
 
@@ -204,13 +205,14 @@ resource "azurerm_subscription_policy_assignment" "pa_aks_privileged_containers"
   PARAMETERS
 }
 ```
+
 You can read more about Subscription Policy Assignment resource in Azure provider for Terraform here: [azurerm_subscription_policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription_policy_assignment)
 
 Policy assignment often requires a managed identity, either a system- or user-assigned, with specific permissions, in order to perform evaluation of resource compliance and execute remediation tasks, if needed. In this example we're using ```SystemAssigned``` identity for simplicity reasons, but a better option is to use ```UserAssigned``` managed identities when assigning policies. In a subsequent blog post I will demonstrate how you can do that so do come back here again for more content on this topic!🤗
 
 ### Create and enforce custom Azure Policy definitions
 
-Built-in Azure Policy definitions can't always cover all the areas that you may want to govern, therefore creating custom Azure Policy definitions can come in really handy in such cases. Let's take a look at a simple example: I will create a custom policy that will only allow deployment of AKS clusters to North Europe region. 
+Built-in Azure Policy definitions can't always cover all the areas that you may want to govern, therefore creating custom Azure Policy definitions can come in really handy in such cases. Let's take a look at a simple example: I will create a custom policy that will only allow deployment of AKS clusters to North Europe region.
 
 Below you can see how such a custom policy definition can be defined in Terraform, but you can also create it directly in the Azure portal or with Azure CLI or even Bicep - here's a good tutorial on how to do that: [Implement a new custom policy](https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-and-manage#implement-a-new-custom-policy)
 
