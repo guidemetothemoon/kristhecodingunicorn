@@ -6,7 +6,18 @@
     <description>Recent content in kubernetes on Kris - The Coding Unicorn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 06 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes port forwarding: cleaning up orphaned ports</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_port_forwarding_cleanup/</link>
+      <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_port_forwarding_cleanup/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can clean up port reservations that got stuck after a completed port forwarding command in a Kubernetes cluster.</description>
+      
+    </item>
+    
     <item>
       <title>Takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023, wearing many hats</title>
       <link>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</link>
