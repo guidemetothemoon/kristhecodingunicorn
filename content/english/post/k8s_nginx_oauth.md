@@ -10,7 +10,9 @@ tags = [
     "k8s",
     "nginx",
     "ingress-controller",
-    "auth"
+    "auth",
+    "oauth",
+    "oauth2-proxy"
 ]
 +++
 

@@ -39,7 +39,7 @@ tags = [
 
 📺 16th March, 2023: [KCD Ukraine - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-ukraine-presents-kcd-ukraine-2023-fundraiser/)
 
-📺 28. February, 2023: [Wilhelmsen employee event - Security Champions Workshop #3: DevSecOps for AKS]()
+📺 28. February, 2023: **Wilhelmsen employee event - Security Champions Workshop #3: DevSecOps for AKS**
 
 📺 23. February, 2023: [KCD Amsterdam - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-netherlands-presents-kubernetes-community-days-amsterdam-2023/)
 

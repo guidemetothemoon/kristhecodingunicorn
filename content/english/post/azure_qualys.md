@@ -16,7 +16,7 @@ tags = [
 
 In the modern reality with tens of security vulnerabilities that are being disclosed daily you need to continuously implement a variety of security controls in order to ensure that your systems are strongly protected. Even if you're running on the cloud⛅
 
-One of the security controls that I would like to talk about in this blog post is vulnerability scanning. 
+One of the security controls that I would like to talk about in this blog post is vulnerability scanning.
 Vulnerability scanning is an essential practice for maintaining a secure infrastructure, mitigating risks, and protecting sensitive data from potential threats. It allows organizations to stay proactive, comply with regulations, and safeguard their systems against known vulnerabilities and emerging security risks.
 
 One of the possibilities that you have in Microsoft Azure is utilizing Qualys vulnerability scanner, which is available as an integrated offering as part of Microsoft Defender for Cloud.
@@ -45,7 +45,7 @@ Now let's take a look at how you can utilize vulnerability scanning with Defende
 
 ## Implement scanning of Azure VMs and Azure Arc-enabled servers
 
-There are multiple ways you can enable Defender for Cloud's integrated Qualys vulnerability scanner on Azure VMs and Azure Arc-enabled servers. 
+There are multiple ways you can enable Defender for Cloud's integrated Qualys vulnerability scanner on Azure VMs and Azure Arc-enabled servers.
 
 One way is to manually choose non-compliant machines and deploy Qualys through remediation step of the ```Machines should have a vulnerability assessment solution``` recommendation in Defender for Cloud page in Azure portal.
 
@@ -55,7 +55,7 @@ One way is to manually choose non-compliant machines and deploy Qualys through r
 
 In this case you will still need to perform manual steps, by checking back and forth for non-compliant servers and explicitly choosing which servers to deploy Qualys to. I prefer more automation and less manual steps, therefore I would like to show you how to do the same but at scale, with help of Azure Policy😼
 
-There's a built-in Azure policy definition available for us, that's called ```Configure machines to receive a vulnerability assessment provider``` - it will deploy Defender for Cloud's integrated Qualys vulnerability scanner to all non-compliant Azure VMs and Azure Arc-enabled servers. 
+There's a built-in Azure policy definition available for us, that's called ```Configure machines to receive a vulnerability assessment provider``` - it will deploy Defender for Cloud's integrated Qualys vulnerability scanner to all non-compliant Azure VMs and Azure Arc-enabled servers.
 
 > Please note that this policy definition can also be used to deploy Microsoft Defender Vulnerability Management, but you need to ensure that you configure ```Vulnerability assessment provider type``` parameter to be ```mdeTvm``` during policy assignment.
 
@@ -107,13 +107,14 @@ resource "azurerm_subscription_policy_remediation" "prt_qualys" {
   resource_discovery_mode = "ReEvaluateCompliance"
 }
 ```
+
 Once the policy assignment is deployed, initial remediation task will kick in -> detect non-compliant machines and deploy Qualys extension to them. As an example in the screenshot below, you should be able to see Qualys extension being deployed as an extension to an Azure Arc-enabled resource.
 
 ![Screenshot of Qualys policy remediation task in Azure portal](../../images/azure_arc/qualys_policy_remediation.webp)
 
 ![Screenshot of how Qualys extension looks like in Azure Arc-enabled servers extension list in Azure portal](../../images/azure_arc/qualys_arc_extension.webp)
 
-Once extension is deployed scanning will begin automatically and will from that point on run periodically, every 12 hours. 
+Once extension is deployed scanning will begin automatically and will from that point on run periodically, every 12 hours.
 
 > Please note that for Azure Arc-enabled servers Qualys extension can sometimes end up hanging in "Creating" state so you need to check the extension logs as the one in the screenshot below, to confirm if extension was installed successfully. You can also attempt to resolve this by re-installing the extension.
 
@@ -122,7 +123,6 @@ Once extension is deployed scanning will begin automatically and will from that 
 After some time you should be able to see detected vulnerabilities and affected resources in ```Machines should have vulnerability findings resolved``` recommendation in Defender for Cloud, from where you can act further upon the respective findings and mitigate them. Findings will be categorized based on severity and will also include information about related CVEs and CVSS scores in addition to recommended remediation instructions.
 
 ![Screenshot of Qualys scanning results in Defender for Cloud in Azure portal](../../images/azure_arc/qualys_results_defender.webp)
-
 
 ## What about Azure Container Registry (ACR) and AKS?
 
@@ -144,7 +144,7 @@ Approach to vulnerability scanning in AKS is layered, just like it is in many ot
 
 - **System and Worker Nodes**. Microsoft continusouly rolls out security patches to AKS Nodes but you need to familiarize yourself with AKS upgrade and update processes in order to understand what you need to do in order to ensure that those updates are properly applied. The golden principle here is to establish a routine where you can continuously upgrade AKS cluster and Node image versions in addition to roll out of daily or weekly Node OS updates, depending on which OS your Nodes are running on. I have earlier written a deep dive blog post on the topic of AKS upgrade strategies which you're welcome to check out: [Exploring Upgrade Strategies in Azure Kubernetes Service](https://kristhecodingunicorn.com/post/k8s_upgrade_strategy)
 
-Where Qualys comes in when it comes to AKS is container images. If you're using AKS in combination with Azure Container Registry, that's where Qualys can be used in order to scan for vulnerabilities in the containers that are running in your AKS clusters. This is done with help of Microsoft Defender agent that is running on the cluster - it collects data about the currently running images  and sends it further to Microsoft Defender that correlates this data with vulnerability scanning output for images that are stored in ACR. 
+Where Qualys comes in when it comes to AKS is container images. If you're using AKS in combination with Azure Container Registry, that's where Qualys can be used in order to scan for vulnerabilities in the containers that are running in your AKS clusters. This is done with help of Microsoft Defender agent that is running on the cluster - it collects data about the currently running images  and sends it further to Microsoft Defender that correlates this data with vulnerability scanning output for images that are stored in ACR.
 
 ![Screenshot of Microsoft Defender agent deployed in an AKS cluster](../../images/azure_arc/defender_agent_aks.webp)
 
