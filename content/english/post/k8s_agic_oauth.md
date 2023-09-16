@@ -18,9 +18,25 @@ tags = [
 
 {{< table_of_contents >}}
 
-This blog post is a continuation of an extensive blog post about OAuth2 Proxy, which I published earlier: [Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy](https://kristhecodingunicorn.com/post/k8s_nginx_oauth). In the original blog post NGINX Ingress Controller was deployed in AKS clusters, while this blog post will look into how authentication with OAuth2 Proxy can be implemented when AKS clusters are configured with Application Gateway Ingress Controller (AGIC). Multiple steps for setting up OAuth2 Proxy are similar to the ones described in the original blog post, therefore those will be linked here directly to avoid content duplication. To get most value out of this content I will strongly recommend to check out the original blog post or links to its specific sections that will be provided as part of this blog post.
+## Introduction
 
-TODO
+This blog post is a continuation of an extensive blog post about OAuth2 Proxy, which I published earlier: [Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy](https://kristhecodingunicorn.com/post/k8s_nginx_oauth). In the original blog post NGINX Ingress Controller was used in AKS clusters, while this blog post will look into how authentication with OAuth2 Proxy can be implemented when AKS clusters are configured with Application Gateway Ingress Controller (AGIC). Multiple steps for setting up OAuth2 Proxy are similar to the ones described in the original blog post, therefore those will be linked here directly to avoid content duplication. To get most value out of this content I will strongly recommend to check out the original blog post or links to its specific sections that will be provided as part of this blog post.
+
+Last time we talked about how you can implement OAuth 2.0 authentication for applications that are running in Azure Kubernetes Service with NGINX Ingress Controller. OAuth2 Proxy is a popular open source tool that is widely adopted in the tech community and makes it relatively straightforward to set up OAuth 2.0 authentication.
+
+The process of setting up OAuth2 Proxy in AKS with Application Gateway Ingress Controller (AGIC) is pretty similar to how it's done when NGINX Ingress Controller is used, but there are still some differences that's worth knowing about.
+
+Let's get to it!
+
+## Deploy OAuth2 Proxy in AKS with AGIC
+
+todo: outline steps
+
+### 1 - Create Entra application
+
+### 2 - Deploy Oauth2 Proxy
+
+### 3 - Deploy application behind OAuth2 Proxy
 
 ## Additional resources
 
