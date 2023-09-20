@@ -60,32 +60,32 @@
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
-    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    href="/fontawesome/css/fontawesome.min.7f3c2281c7f965ce3c64888aa452793252a0416909c181097f81d0a0f7d1624e.css"
+    integrity="sha256-fzwigcf5Zc48ZIiKpFJ5MlKgQWkJwYEJf4HQoPfRYk4="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
-    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    href="/fontawesome/css/solid.min.35fc032da8ede6681675d20a2f862fb9e1045c1d512d495fcf862c054daffef2.css"
+    integrity="sha256-NfwDLajt5mgWddIKL4YvueEEXB1RLUlfz4YsBU2v/vI="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
-    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    href="/fontawesome/css/regular.min.3b92357925ea7284f0c6b0378396f39f470f7842ed9702f337e667c4026bf837.css"
+    integrity="sha256-O5I1eSXqcoTwxrA3g5bzn0cPeELtlwLzN&#43;ZnxAJr&#43;Dc="
     crossorigin="anonymous"
     type="text/css"
   />
   
   <link
     rel="stylesheet"
-    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
-    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    href="/fontawesome/css/brands.min.ebb1096e1976e8cc4e2532cfa050b8f30eb13b8eb06be5cee3e38eb426b838ea.css"
+    integrity="sha256-67EJbhl26MxOJTLPoFC48w6xO46wa&#43;XO4&#43;OOtCa4OOo="
     crossorigin="anonymous"
     type="text/css"
   />
@@ -203,7 +203,7 @@
 
     ,
         "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_object_helm\/",
-        "wordCount" : "1713",
+        "wordCount" : "1714",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -477,7 +477,7 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#what-is-helm">What is Helm?</a></li>
-    <li><a href="#how-to-let-existing-helm-release-adopt-a-new-kubernetes-resource-and-why-its-important">How to let existing Helm release &ldquo;adopt&rdquo; a new Kubernetes resource and why it's important?</a></li>
+    <li><a href="#how-to-let-existing-helm-release-adopt-a-new-kubernetes-resource-and-why-its-important">How to let existing Helm release &ldquo;adopt&rdquo; a new Kubernetes resource and why it&rsquo;s important?</a></li>
     <li><a href="#additional-resources">Additional resources</a></li>
   </ul>
 </nav>
@@ -487,37 +487,41 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 <blockquote>
 <p><strong>PodDisruptionBudget (PDB)</strong> is a very neat Kubernetes feature which makes your application highly available, especially in case of planned cluster disruptions. PDB defines the number of application Pods that can be unavailable at the same time in case of voluntary disruptions. An important point to note here is that <strong>the number of Pods that you define as available/unavailable for PDB must be lower than the total count of Pods you have defined to be deployed</strong>. You can read more about PDBs here: <a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets">Disruptions</a></p>
 </blockquote>
-<p>There are multiple ways to solve this: I could've created and published a new version of the Helm chart or I could've re-built and re-uploaded an existing Helm chart but I didn't want to mess with the original version of the Helm chart so I've decided to go for another solution where I've created a script to automatically apply the PDB to all the relevant Kubernetes deployments and let Helm, that the Kubernetes deployments were created with, &quot;adopt&quot; PDB with help of just a few annotations and labels.</p>
-<p>But first things first. Let's freshen up some basics.</p>
+<p>There are multiple ways to solve this: I could&rsquo;ve created and published a new version of the Helm chart or I could&rsquo;ve re-built and re-uploaded an existing Helm chart but I didn&rsquo;t want to mess with the original version of the Helm chart so I&rsquo;ve decided to go for another solution where I&rsquo;ve created a script to automatically apply the PDB to all the relevant Kubernetes deployments and let Helm, that the Kubernetes deployments were created with, &ldquo;adopt&rdquo; PDB with help of just a few annotations and labels.</p>
+<p>But first things first. Let&rsquo;s freshen up some basics.</p>
 <h2 id="what-is-helm">What is Helm?</h2>
-<p>Helm is basically a package manager for Kubernetes - it helps you describe, install and upgrade applications hosted in Kubernetes in an easy and unified way with help of Helm Charts. Helm is a CNCF project and is open-source, maintained by the Helm community on GitHub: <a href="https://github.com/helm/community">Helm community</a>. By using Helm you can deploy a single application in the same way to different environments - development, staging, production, you name it. The only thing you will need to do is to have a separate set of values (<code>values-\[dev/staging/prod\].yaml</code> per environment) where you can define resource allocation depending on what environment the application will be deployed to. The rest of the application definition will be generic and applicable to any deployment environment. Using tools like Helm will minimize probability of human errors and be a great addition to your Kubernetes deployment automation.</p>
+<p>Helm is basically a package manager for Kubernetes - it helps you describe, install and upgrade applications hosted in Kubernetes in an easy and unified way with help of Helm Charts. Helm is a CNCF project and is open-source, maintained by the Helm community on GitHub: <a href="https://github.com/helm/community">Helm community</a>. By using Helm you can deploy a single application in the same way to different environments - development, staging, production, you name it. The only thing you will need to do is to have a separate set of values (<code>values-[dev/staging/prod].yaml</code> per environment) where you can define resource allocation depending on what environment the application will be deployed to. The rest of the application definition will be generic and applicable to any deployment environment. Using tools like Helm will minimize probability of human errors and be a great addition to your Kubernetes deployment automation.</p>
 <p>Want to know more? Take a look at the official Helm documentation: <a href="https://helm.sh/docs/">Helm Docs</a></p>
-<p>Now, let's say that we have deployed a specific version of our test application to production with Helm and realized that we're missing PodDisruptionBudget - we've already fixed this in the source code but how can we patch this to an existing Helm deployment?</p>
+<p>Now, let&rsquo;s say that we have deployed a specific version of our test application to production with Helm and realized that we&rsquo;re missing PodDisruptionBudget - we&rsquo;ve already fixed this in the source code but how can we patch this to an existing Helm deployment?</p>
 <blockquote>
 <p>Approach described below is applicable for Helm 3, not the earlier version.</p>
 </blockquote>
-<h2 id="how-to-let-existing-helm-release-adopt-a-new-kubernetes-resource-and-why-its-important">How to let existing Helm release &ldquo;adopt&rdquo; a new Kubernetes resource and why it's important?</h2>
-<p>First of all, why would you bother making sure that the Kubernetes resource you're patching the existing deployment with is accounted for by Helm? Well, you could of course just patch your Helm deployment as any regular Kubernetes deployment with <code>kubectl patch</code> or <code>kubectl apply</code> and not bother about Helm specifics at all, but this approach has it's unpleasant consequences:</p>
+<h2 id="how-to-let-existing-helm-release-adopt-a-new-kubernetes-resource-and-why-its-important">How to let existing Helm release &ldquo;adopt&rdquo; a new Kubernetes resource and why it&rsquo;s important?</h2>
+<p>First of all, why would you bother making sure that the Kubernetes resource you&rsquo;re patching the existing deployment with is accounted for by Helm? Well, you could of course just patch your Helm deployment as any regular Kubernetes deployment with <code>kubectl patch</code> or <code>kubectl apply</code> and not bother about Helm specifics at all, but this approach has it&rsquo;s unpleasant consequences:</p>
 <ul>
 <li>If you decide at some point to delete this specific Helm deployment, it will not clean up the resources you have created with <code>kubectl patch</code> or <code>kubectl apply</code> which means that you will need to know what resources you have patched manually during lifetime of the deployment and clean those up yourself.</li>
 <li>If you have made changes to the Object definition in the source code and then at some point upgrade the patched deployment where the same Object was patched with <code>kubectl patch</code> or <code>kubectl apply</code>, you may risk getting an error like this:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">  Error: rendered manifests contain a resource that already exists. 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">  Error: rendered manifests contain a resource that already exists.
 </span></span><span class="line"><span class="cl">  Unable to continue with install: PodDisruptionBudget &#34;mytestapp-pdb&#34; in namespace &#34;mytestapp&#34; exists and cannot be imported into the current release: invalid ownership metadata; 
-</span></span><span class="line"><span class="cl">  label validation error: missing key &#34;app.kubernetes.io/managed-by&#34;: must be set to &#34;Helm&#34;; 
-</span></span><span class="line"><span class="cl">  annotation validation error: missing key &#34;meta.helm.sh/release-name&#34;: must be set to &#34;mytestapp-10&#34;; 
-</span></span><span class="line"><span class="cl">  annotation validation error: missing key &#34;meta.helm.sh/release-namespace&#34;: must be set to &#34;mytestapp&#34;</span></span></code></pre></div>
-<p>The error above is pretty much self-explanatory and can be fixed by either deleting the existing resource and re-trying upgrade, or re-patching the existing resource with proper annotations and labels so that it can be registered and managed by Helm - for guidance on how to do that, see more below ;-)</p>
-<p>In Helm 3 it's quite easy to include a new Kubernetes Object into the Helm release - you can do that by adding following annotations to the Object definition:</p>
+</span></span><span class="line"><span class="cl">  label validation error: missing key &#34;app.kubernetes.io/managed-by&#34;: must be set to &#34;Helm&#34;;
+</span></span><span class="line"><span class="cl">  annotation validation error: missing key &#34;meta.helm.sh/release-name&#34;: must be set to &#34;mytestapp-10&#34;;
+</span></span><span class="line"><span class="cl">  annotation validation error: missing key &#34;meta.helm.sh/release-namespace&#34;: must be set to &#34;mytestapp&#34;
+</span></span></code></pre></div><p>The error above is pretty much self-explanatory and can be fixed by either deleting the existing resource and re-trying upgrade, or re-patching the existing resource with proper annotations and labels so that it can be registered and managed by Helm - for guidance on how to do that, see more below 😉</p>
+<p>In Helm 3 it&rsquo;s quite easy to include a new Kubernetes Object into the Helm release - you can do that by adding following annotations to the Object definition:</p>
 <ul>
-<li><code>meta.helm.sh/release-name: [name_of_your_Helm_release]</code> -&gt; name of the Helm release, typically the name you define for the application deployment</li>
-<li><code>meta.helm.sh/release-namespace: [namespace_of_your_Helm_release]</code> -&gt; this one's important in case you're using namespaces in your Kubernetes clusters. If not provided, default namespace will be used</li>
+<li>
+<p><code>meta.helm.sh/release-name: [name_of_your_Helm_release]</code> -&gt; name of the Helm release, typically the name you define for the application deployment</p>
+</li>
+<li>
+<p><code>meta.helm.sh/release-namespace: [namespace_of_your_Helm_release]</code> -&gt; this one&rsquo;s important in case you&rsquo;re using namespaces in your Kubernetes clusters. If not provided, default namespace will be used</p>
+</li>
 </ul>
 <p>You will also need to add following label to the Object definition:</p>
 <ul>
-<li><code>app.kubernetes.io/managed-by: Helm</code> -&gt; this label lets Helm know that you would like to include current Kubernetes Object into Helm release you're patching</li>
+<li><code>app.kubernetes.io/managed-by: Helm</code> -&gt; this label lets Helm know that you would like to include current Kubernetes Object into Helm release you&rsquo;re patching</li>
 </ul>
-<p>I'll continue illustrating the concept with PDB example. So, knowing about the annotations and labels I need to add to the PDB definition, I've created following definition file - here I'm using placeholders because I would like to show you how patching can be automated for multiple deployments:</p>
+<p>I&rsquo;ll continue illustrating the concept with PDB example. So, knowing about the annotations and labels I need to add to the PDB definition, I&rsquo;ve created following definition file - here I&rsquo;m using placeholders because I would like to show you how patching can be automated for multiple deployments:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># pdb.yaml</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">policy/v1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PodDisruptionBudget</span><span class="w">
@@ -533,10 +537,11 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="l">%</span><span class="w"> </span><span class="c"># This value defines that I want half of the Pods to be available at all times in case of disruptions. For odd counts, like 7, this value will result in 4 Pods always being available</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">deployment_labels]</span></span></span></code></pre></div>
-<p>And we're all set! Now our PDB is ready to be patched to the existing application deployment running in production as well as managed by Helm going forward! But what if we have tens, hundreds or even thousands of application deployments that we need to patch this to? Do we need to create this Object manually for every single deployment?? Not to worry, we can automate it!</p>
-<p>I've created following script that will get all the deployments I would like to patch based on the filter I provide and replace the placeholders in the pdb.yaml file we've created above with values related to every individual deployment we're patching. Then it will create a new version of the file (which is also useful in case we want to check the content before creating the new resource) for every deployment and finally apply it in order to create the resource we want - in this case, a PodDisruptionBudget.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Add-PDB.ps1</span>
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">deployment_labels]</span><span class="w">
+</span></span></span></code></pre></div><p>And we&rsquo;re all set! Now our PDB is ready to be patched to the existing application deployment running in production as well as managed by Helm going forward! But what if we have tens, hundreds or even thousands of application deployments that we need to patch this to? Do we need to create this Object manually for every single deployment?? Not to worry, we can automate it!</p>
+<p>I&rsquo;ve created following script that will get all the deployments I would like to patch based on the filter I provide and replace the placeholders in the pdb.yaml file we&rsquo;ve created above with values related to every individual deployment we&rsquo;re patching. Then it will create a new version of the file (which is also useful in case we want to check the content before creating the new resource) for every deployment and finally apply it in order to create the resource we want - in this case, a PodDisruptionBudget.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add-PDB.ps1</span>
 </span></span><span class="line"><span class="cl"><span class="c"># OBS! Ensure that you&#39;re connected to the correct Kubernetes cluster BEFORE executing the script</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># This filter can be adjusted to filter only the deployments you want to apply PodDisruptionBudget to. Current filter is for the deployments of mytestapp only</span>
@@ -567,9 +572,9 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 </span></span><span class="line"><span class="cl">  <span class="c"># 4. Apply updated YAML-file to add PodDisruptionBudget for current deployment</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="s2">&#34;Applying PDB deployment pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml for deployment </span><span class="nv">$deploy_name</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="s2">&#34;</span><span class="nv">$PSScriptRoot</span><span class="s2">/pdb-</span><span class="p">$(</span><span class="nv">$deploy_name</span><span class="p">)</span><span class="s2">.yaml&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
-<p>Now, if I execute this script on my Kubernetes cluster, it'll create PDB for every deployment of <strong>mytestapp</strong> which I've used as a filter in the first line of the script above. And PDB will be included into every Helm release that <strong>mytestapp</strong> deployments have been created with so if I decide to delete one of the deployments with <strong>helm uninstall</strong>, the respective PDB will be removed as well, thanks to the annotations and labels we've provided in the PDB definition file.</p>
-<p>If you would like to see PDB in action, you can simulate a disruption by draining one of the nodes that your application's Pod is running on with following kubectl command:</p>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Now, if I execute this script on my Kubernetes cluster, it&rsquo;ll create PDB for every deployment of <strong>mytestapp</strong> which I&rsquo;ve used as a filter in the first line of the script above. And PDB will be included into every Helm release that <strong>mytestapp</strong> deployments have been created with so if I decide to delete one of the deployments with <strong>helm uninstall</strong>, the respective PDB will be removed as well, thanks to the annotations and labels we&rsquo;ve provided in the PDB definition file.</p>
+<p>If you would like to see PDB in action, you can simulate a disruption by draining one of the nodes that your application&rsquo;s Pod is running on with following kubectl command:</p>
 <p><code>kubectl drain --delete-emptydir-data --force --ignore-daemonsets &lt;your_node_name&gt;</code></p>
 <p>After executing the command above you should be able to see messages in the console output saying that a Pod can&rsquo;t be deleted due to potential violation of PodDisruptionBudget Policy. Once a new Pod is scheduled and ready on another node, this alert will disappear and the Pod on the to-be-drained-node will be evicted. You can read more about node draining procedure here: <a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">Safely drain a Node</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">PS C:\&gt; Set-Alias -Name k -Value kubectl
@@ -579,17 +584,21 @@ A scenario I had to face was that I discovered missing PodDisruptionBudget on on
 </span></span><span class="line"><span class="cl">evicting pod mytestapp/app-2
 </span></span><span class="line"><span class="cl">error when evicting pods/&#34;app-2&#34; -n &#34;mytestapp&#34; (will retry after 5s): Cannot evict pod as it would violate the pod&#39;s disruption budget.
 </span></span><span class="line"><span class="cl">pod/app-2 evicted
-</span></span><span class="line"><span class="cl">node/aks-nodepool1-14745837-vmss000001 evicted</span></span></code></pre></div>
-<h2 id="additional-resources">Additional resources</h2>
+</span></span><span class="line"><span class="cl">node/aks-nodepool1-14745837-vmss000001 evicted
+</span></span></code></pre></div><h2 id="additional-resources">Additional resources</h2>
 <p>Some information I find useful and relevant when working with Kubernetes deployments and Helm:</p>
 <ul>
-<li>Official Helm Docs provide good explanation of main concepts and definitions like Helm Charts and Helm Release here: <a href="https://helm.sh/docs/intro/using_helm/">Using Helm</a></li>
-<li>I've also mentioned some kubectl commands that I didn't go into much details about but if you're not familiar with those, you can read more about the differences between those in this article: <a href="https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#in-place-updates-of-resources">In-place updates of resources</a></li>
+<li>
+<p>Official Helm Docs provide good explanation of main concepts and definitions like Helm Charts and Helm Release here: <a href="https://helm.sh/docs/intro/using_helm/">Using Helm</a></p>
+</li>
+<li>
+<p>I&rsquo;ve also mentioned some kubectl commands that I didn&rsquo;t go into much details about but if you&rsquo;re not familiar with those, you can read more about the differences between those in this article: <a href="https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#in-place-updates-of-resources">In-place updates of resources</a></p>
+</li>
 </ul>
-<p>That's it from me this time, thanks for checking in!
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
+<p>That&rsquo;s it from me this time, thanks for checking in!</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
 <p>Stay secure, stay safe.</p>
-<p>Till we connect again!</p>
+<p>Till we connect again!😻</p>
 </div>
     <div class="post__footer">
       

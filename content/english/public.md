@@ -19,6 +19,8 @@ tags = [
 
 📺 16th September, 2023: [Microsoft Azure Pakistan Community - AKS Survival Pack: what to consider before going all-in with AKS](https://www.meetup.com/Microsoft-Azure-Pakistan-Community/events/294272415)
 
+📝 7th September, 2023: [Microsoft Learn Community Content - "Manage cost and optimize resources in AKS with Kubecost"](https://learn.microsoft.com/en-us/community/content/how-to-utilize-kubecost-for-cost-management-of-aks)
+
 📝 25th August, 2023: [kode24 article - "Lanserer klimanettverk for utviklere"](https://www.kode24.no/artikkel/lanserer-klimanettverk-for-utviklere-mange-er-negative/80111720)
 
 📺 26th July, 2023: [Cloud Lunch & Learn - Managed Kubernetes Service: Day Zero Survival Pack](https://www.meetup.com/azuredublin/events/294393389)

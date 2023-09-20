@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>azure-chaos-studio on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/tags/azure-chaos-studio/</link>
+    <description>Recent content in azure-chaos-studio on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/azure-chaos-studio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resilience testing of Azure services with Azure Chaos Studio</title>
+      <link>https://kristhecodingunicorn.com/post/azure_chaos_studio/</link>
+      <pubDate>Thu, 21 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/azure_chaos_studio/</guid>
+      
+        <description>In this blog post we will explore how you can use Azure Chaos Studio to ensure resilience of non-Kubernetes services in Azure like App Service, Key Vault, Virtual Machine, etc.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

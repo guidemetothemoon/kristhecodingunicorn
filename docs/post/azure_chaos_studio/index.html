@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Resilience testing of Azure services with Azure Chaos Studio
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="In this blog post we will explore how you can use Azure Chaos Studio to ensure resilience of non-Kubernetes services in Azure like App Service, Key Vault, Virtual Machine, etc."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7f3c2281c7f965ce3c64888aa452793252a0416909c181097f81d0a0f7d1624e.css"
+    integrity="sha256-fzwigcf5Zc48ZIiKpFJ5MlKgQWkJwYEJf4HQoPfRYk4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.35fc032da8ede6681675d20a2f862fb9e1045c1d512d495fcf862c054daffef2.css"
+    integrity="sha256-NfwDLajt5mgWddIKL4YvueEEXB1RLUlfz4YsBU2v/vI="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.3b92357925ea7284f0c6b0378396f39f470f7842ed9702f337e667c4026bf837.css"
+    integrity="sha256-O5I1eSXqcoTwxrA3g5bzn0cPeELtlwLzN&#43;ZnxAJr&#43;Dc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.ebb1096e1976e8cc4e2532cfa050b8f30eb13b8eb06be5cee3e38eb426b838ea.css"
+    integrity="sha256-67EJbhl26MxOJTLPoFC48w6xO46wa&#43;XO4&#43;OOtCa4OOo="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/azure_chaos_studio/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Resilience testing of Azure services with Azure Chaos Studio"/>
+<meta name="twitter:description" content="In this blog post we will explore how you can use Azure Chaos Studio to ensure resilience of non-Kubernetes services in Azure like App Service, Key Vault, Virtual Machine, etc."/>
+
+
+
+  
+  <meta property="og:title" content="Resilience testing of Azure services with Azure Chaos Studio" />
+<meta property="og:description" content="In this blog post we will explore how you can use Azure Chaos Studio to ensure resilience of non-Kubernetes services in Azure like App Service, Key Vault, Virtual Machine, etc." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/azure_chaos_studio/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-21T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Resilience testing of Azure services with Azure Chaos Studio",
+        "headline": "Resilience testing of Azure services with Azure Chaos Studio",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we will explore how you can use Azure Chaos Studio to ensure resilience of non-Kubernetes services in Azure like App Service, Key Vault, Virtual Machine, etc.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/azure_chaos_studio\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-09-21T00:00:00.00Z",
+        "datePublished": "2023-09-21T00:00:00.00Z",
+        "dateModified": "2023-09-21T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/azure_chaos_studio\/",
+        "wordCount" : "2151",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    
+      
+        ,
+
+      
+      "chaos-engineering"
+
+    
+      
+        ,
+
+      
+      "azure-chaos-studio"
+
+    
+      
+        ,
+
+      
+      "sre"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Resilience Testing of Azure Services With Azure Chaos Studio</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  21/9/2023
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">11-minute read</span>
+          </li>
+        </ul>
+      <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#azure-chaos-studio">Azure Chaos Studio</a>
+      <ul>
+        <li><a href="#targets-and-use-cases">Targets and use cases</a></li>
+        <li><a href="#creating-and-executing-experiments">Creating and executing experiments</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p><em><strong>This blog post is a contribution to Azure Back to School - an annual community event taking place in September. For the Community by the Community, during the whole month of September, contributors share their knowledge and experience about Azure. You&rsquo;re welcome to check out all the contributions here:</strong></em> <a href="https://azurebacktoschool.github.io/edge%20case/azure-back-to-school-2023-session-schedule">2023 Azure Back to School Session Schedule</a></p>
+<p><img src="../../images/azure_back_to_school_logo.webp" alt="Azure Back to School logo"></p>
+<h2 id="introduction">Introduction</h2>
+<p>Chaos engineering has been known to the tech industry for quite many years now, but it has gained significant popularity and wider adoption during the last few years. There are good reasons for why this acceleration has happened. If we take a look at a modern software development landscape we will see that we&rsquo;re steadily building more complex, distributed systems and applications, with hundreds or even thousands of dependencies and interconnections. Ensuring that all of these bits and pieces play nicely together to provide availability, stability and security of our systems at all times is a challenge that&rsquo;s not for the faint-hearted.</p>
+<p>That&rsquo;s where chaos engineering discipline comes in. It provides us with the tools and methodologies that can be used to perform controlled experiments that simulate real-life disruptive events, like outages or failures, so that we can monitor how our systems respond to and withstand turbulent events. The main goal is to identify ways to improve system resilience and strengthen our confidence in the respective systems.</p>
+<p>If you&rsquo;re not very familiar with chaos engineering yet, do keep an eye out for an introductory blog post that I will publish shortly after the release of this blog post. You can also check out an introductory session about chaos engineering, which will be released at <a href="https://www.womenonstage.net/event-details/global-virtual-conference-2023">Women on Stage global virtual conference 2023</a> in October.</p>
+<h2 id="azure-chaos-studio">Azure Chaos Studio</h2>
+<p>Very often chaos engineering is being mentioned in context of Kubernetes and Kubernetes-exclusive workloads, but this is not the only place where you can integrate chaos engineering. There are multiple chaos engineering tools that support performing experiments that target both regular servers/virtual machines and different PaaS offerings in public cloud.</p>
+<p>Azure Chaos Studio is one of such tools. A subset of experiments in Azure Chaos Studio does indeed target Kubernetes and is built upon Chaos Mesh, which is an open source tool governed by CNCF. This part of Azure Chaos Studio functionality is out of scope for this blog post and will be covered in a subsequent blog post. In this blog post we will focus on the other subset of Azure Chaos Studio experiments, which target some of the Azure PaaS offerings like App Service and Key Vault. Since this is an introductory blog post we will look into what non-Kubernetes services we can currently target with Azure Chaos Studio, what value we can gain out of running such experiments and how we can create and execute the experiments targeting existing resources.</p>
+<h3 id="targets-and-use-cases">Targets and use cases</h3>
+<p>There are quite many resources that you can target with Azure Chaos Studio experiments in addition to Kubernetes. To name a few: Virtual Machines and Virtual Machine Scale Sets, Cosmos DB, Azure Cache for Redis, Key Vault and App Service, including resources of the <code>Microsoft.Web/sites</code> type, like for instance Azure Functions. You can find an overview of all the currently available targets and fault actions that can be executed against those targets here: <a href="https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-fault-library">Fault library</a></p>
+<p>Since Azure Chaos Studio is still in preview I believe that with time we will see even more Azure services and fault actions being added as targets to the above library.</p>
+<p><strong>Now, why would you want to run such Azure Chaos Studio experiments and disrupt Azure services? What value do you gain from that?</strong></p>
+<p>Let&rsquo;s take a look at a few examples. Let&rsquo;s say that you have an application that stores specific secrets, certificates or keys in Azure Key Vault. What happens if a faulty access policy has been configured on the Key Vault or if there&rsquo;s an outage in the region where the Key Vault is deployed? How will your application react to such disruptive events and will it be able to handle it gracefully by for example, providing a meaningful warning message, executing retry logic and potentially failing over to an alternative implementation? Is your current alerting system functioning properly and is it providing meaningful information in relation to the disruptive event that&rsquo;s taking place?</p>
+<p>If you were to simulate it without chaos engineering and Azure Chaos Studio, you would potentially need to do quite some coding, both in the application itself and in the technical platform that the application uses in order to simulate such a failure. It will be both time-consuming and more distant from the real-life simulation. What is beneficial with chaos engineering tools is that they take most of that implementation complexity away from you so that you can focus on the configurational side of things, as well as on building and scheduling the experiment workflows.</p>
+<p>Another example here is App Service. Be it a web app or an Azure Function, with Azure Chaos Studio you can simulate outages in order to analyze how the application handles such disruptive events, how dependent services handle the situation where the respective application becomes offline, etc. By simulating outages of a specific region as a whole or outages targeting application instances deployed in a specific region, you can get a clear picture of the availability needs that your critical production applications may require. You can use chaos engineering experiments to identify possibilities for improvements to your applications like, for example, the need for multi-region deployment implementation where application instances are deployed across multiple regions for higher availability.</p>
+<p>Now that we&rsquo;ve identified the what and the why of running Azure Chaos Studio experiments against Azure services, let&rsquo;s see how we can actually configure and trigger the experiments themselves.</p>
+<h3 id="creating-and-executing-experiments">Creating and executing experiments</h3>
+<p>Before we follow below steps you need to ensure that you&rsquo;ve registered <code>Microsoft.Chaos</code> provider in the subscription where you&rsquo;re planning on running chaos experiments.</p>
+<p>As an example, let&rsquo;s create and execute a <code>Key Vault Deny Access</code> experiment against an existing Key Vault resource.</p>
+<p><strong>1. Enable targets for the experiments and adjust allowed actions.</strong></p>
+<p>First, we need to let Azure Chaos Studio know which resources it&rsquo;s allowed to target with its experiments and what experiments are allowed to be executed against those targets. We can do that in the <strong>Targets</strong> section of Azure Chaos Studio page in the Azure portal. From the list of available resources, choose those that you want to target and choose to enable either service-based or agent-based targets. Agent-based targets require installation of a dedicated agent on the resource itself to be able to simulate specific scenarios like CPU or memory pressure, therefore agent-based experiments can only target Virtual Machines or Virtual Machine Scale Sets.</p>
+<p>In our example we will be targeting an Azure Key Vault, therefore we will only choose this resource in the list and enable service-based targets. Once the target is enabled we can go to <strong>Manage actions</strong> section of the enabled target and only enable the <strong>Key Vault Deny Access</strong> capability, since this is the only experiment we&rsquo;re planning on executing at this point. It&rsquo;s a good practice to enable only what you need and when you need it, which also follows a least privilege principle.</p>
+<p><img src="../../images/azure_chaos_studio/azure_chaos_studio_targets.webp" alt="Screenshot of enabled Azure Key Vault target in Azure Chaos Studio in Azure portal"></p>
+<p><strong>2. Create an experiment.</strong></p>
+<p>Now that the necessary targets have been enabled for access by Azure Chaos Studio we can start building our experiment. Let&rsquo;s go to the <strong>Experiments</strong> section of Azure Chaos Studio page in Azure portal, and choose <strong>Create -&gt; New experiment</strong>. Here we would need to provide some basic information about the resource group, name of the experiment and the location to deploy the experiment resource to.</p>
+<p>In the <strong>Permissions</strong> section you would need to choose if you would like to use a system-assigned or user-assigned identity to perform the experiments with. In addition you need to choose if you would like the necessary permissions that the identity may require to perform the experiment, to be added automatically to the respective resources or if you would like to add those permissions manually at a later point.</p>
+<blockquote>
+<p><strong>Please note that if you choose a user-assigned identity, automatically added permissions will not be cleaned up after the experiment has been deleted.</strong></p>
+</blockquote>
+<p><img src="../../images/azure_chaos_studio/azure_chaos_studio_experiment_permissions.webp" alt="Screenshot of experiment permissions configuration in Azure Chaos Studio in Azure portal"></p>
+<p>Next, we&rsquo;re ready to design our experiment in the <strong>Experiment designer</strong>. Here the possibilities are many: we can chain multiple fault actions together, introduce multiple fault actions running one after the other as part of a single step, before moving to the next step where a different set of fault actions will trigger. We can run group of actions in parallel as part of a single step by spreading them across branches. We can target multiple resources with the same fault action. Apart from adding fault actions we can also add delays between actions to simulate latency or delayed start of the disruption. Finally, apart from choosing fault action targets from the list we can even use a Kusto query (KQL) to choose targets even more granularly.</p>
+<p>As you can see, there are many ways to build quite extensive workflows that can come in handy in cases where you need to test more advanced disruption scenarios that may affect multiple resources in your system. This can be especially useful in testing disaster recovery routines, business continuity plans or during GameDay or tabletop exercises, where multiple system stakeholders are involved.</p>
+<p>We keep our example simple and create a single step with a single branch containing a single **&ldquo;Key Vault Deny Access&rdquo;``` action that targets a previously enabled Azure Key Vault resource. We will let the experiment run for 10 minutes so that we have enough time to observe and test.</p>
+<p><img src="../../images/azure_chaos_studio/azure_chaos_studio_experiment_designer.webp" alt="Screenshot of experiment designer in Azure Chaos Studio in Azure portal"></p>
+<p>Upon creation of the experiment it will verify that the identity has the necessary permissions to run the experiment and will apply the respective permissions if those are lacking. If you have chosen to apply permissions manually you will get a warning requesting you to add necessary permissions to the respective resource prior to running the experiment.</p>
+<p><img src="../../images/azure_chaos_studio/azure_chaos_studio_experiment.webp" alt="Screenshot of created Azure Key Vault Deny Access experiment in Azure Chaos Studio in Azure portal"></p>
+<p><strong>3. Execute a newly created experiment.</strong></p>
+<p>Finally, we&rsquo;re ready to execute the experiment. This is the easiest part 😁</p>
+<p>Choose the newly created experiment and start it. You will see the experiment status being updated continusouly and after some initial preparations you should see it entering the <strong>Running</strong> status.</p>
+<blockquote>
+<p>If the experiment fails with <code>Error Code: AccessDenied</code>, please ensure that the service principal for the respective experiment (service principal name equals to the experiment name) has the <strong>Azure Key Vault Contributor</strong> role on the respective Key Vault resource.</p>
+</blockquote>
+<p><img src="../../images/azure_chaos_studio/azure_chaos_studio_experiment_running.webp" alt="Screenshot of running Azure Key Vault Deny Access experiment in Azure Chaos Studio in Azure portal"></p>
+<p>The simplest way to verify that the experiment is working is to attempt to access keys, secrets or certificates with the user that has valid access in the Key Vault in the Azure portal. The user that initially had proper access will now not be able to view any of the Key Vault objects. You should now see the warning as demonstrated in the screenshot below. From this point on you can trigger the experiment and perform testing of the applications that are dependent on the respective Key Vault resource.</p>
+<p><img src="../../images/azure_chaos_studio/azure_chaos_studio_keyvault_denied_access.webp" alt="Screenshot of denied access to Key Vault objects while the experiment is running in Azure Chaos Studio in Azure portal"></p>
+<p>A few other highlights I would like to mention before we reach the end of this blog post:</p>
+<ul>
+<li>
+<p><strong>Infrastructure as code.</strong> You can define chaos engineering targets and experiments as infrastructure-as-code. If you&rsquo;re using Terraform for this purpose, please note that while Azure Chaos Studio is in preview you will only be able to use the <code>AzAPI</code> provider to create the respective Azure Chaos Studio resources. You can find more information about it here: <a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.chaos/experiments?pivots=deployment-language-terraform">Microsoft.Chaos experiments</a></p>
+</li>
+<li>
+<p><strong>Scheduling.</strong> You can implement scheduling to perform chaos engineering experiments continuously. Following tutorial from Microsoft shows an example where you can set up scheduling with help of Logic Apps: <a href="https://learn.microsoft.com/en-us/azure/chaos-studio/tutorial-schedule">Tutorial: Schedule a recurring experiment with Azure Chaos Studio Preview</a>. Please note that you can also set up a separate pipeline in GitHub or Azure DevOps to do the same. Once you transition past the PoC phase, storing chaos engineering experiments and experiment workflows as code is a recommended approach - both for transparency, efficient maintenance and change management. Keep an eye out for a future blog post on how you can set up chaos experiments and workflows as code 😉</p>
+</li>
+</ul>
+<p>Next time we&rsquo;ll get even more hands-on and create a production-like simulation for some of the Azure services with help of Azure Chaos Studio. Stay tuned for the upcoming hands-on session on this topic!😼</p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Below you may find a few additional resources to learn more about Azure Chaos Studio and chaos engineering:</p>
+<ul>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-overview">What is Azure Chaos Studio Preview?</a></p>
+</li>
+<li>
+<p><a href="https://github.com/guidemetothemoon/Festive-Tech-Calendar-2022/blob/main/learning-resources.md">Chaos Engineering - Learning Resources👾</a></p>
+</li>
+</ul>
+<p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a><a class="tag" href="/tags/chaos-engineering/">chaos-engineering</a><a class="tag" href="/tags/azure-chaos-studio/">azure-chaos-studio</a><a class="tag" href="/tags/sre/">sre</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
