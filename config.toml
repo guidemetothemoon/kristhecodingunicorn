@@ -21,3 +21,9 @@ pygmentsCodefencesGuessSyntax = true
     endLevel = 4
     ordered = false
     startLevel = 2
+[module]
+  # uncomment line below for temporary local development of module
+  # replacements = "github.com/lxndrblz/anatole -> ../../anatole"
+  [[module.imports]]
+    path = "github.com/lxndrblz/anatole"
+    disable = false
