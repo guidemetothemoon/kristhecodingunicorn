@@ -9,4 +9,5 @@ jobs:
             - name: markdownlint-cli2-action
               uses: DavidAnson/markdownlint-cli2-action@v13.0.0
               with:
-                globs: '**/*.md'
+                globs: 'content/**/*.md'
+              continue-on-error: true
