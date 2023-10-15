@@ -5,7 +5,8 @@ jobs:
     lint-markdown:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
             - name: markdownlint-cli2-action
               uses: DavidAnson/markdownlint-cli2-action@v13.0.0
               with:
-                globs: '**/*.md'
+                globs: 'public/**/*.md'
