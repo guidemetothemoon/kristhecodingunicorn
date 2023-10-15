@@ -1,5 +1,5 @@
 baseURL = "https://kristhecodingunicorn.com"
-publishDir = "docs"
+#publishDir = "docs"
 languageCode = "en"
 DefaultContentLanguage = "en"
 title = "Kristina's Tech Corner"
