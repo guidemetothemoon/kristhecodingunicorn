@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries"/>
+<meta name="twitter:description" content="In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."/>
+
+
+
+  
+  <meta property="og:title" content="Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries" />
+<meta property="og:description" content="In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-04T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries",
+        "headline": "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries",
+        "alternativeHeadline": "",
+        "description": "
+      In this blog post we\u0027ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_deprecated_registry_azpolicy\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-04-04T00:00:00.00Z",
+        "datePublished": "2023-04-04T00:00:00.00Z",
+        "dateModified": "2023-04-04T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_deprecated_registry_azpolicy\/",
+        "wordCount" : "795",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Creating Custom Azure Policy for Kubernetes to Disallow Non-Compliant Image Registries</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  4/4/2023
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">4-minute read</span>
+          </li>
+        </ul>
+      <div class="toc">
+  <nav id="TableOfContents"></nav>
+</div>
+<p>There are cases where you may need to explicitly ensure that specific container image registries are blacklisted from being used in your Kubernetes clusters. Let me provide you with a very recent and relevant example.</p>
+<p>From 3rd April 2023, <code>k8s.gcr.io</code> legacy image registry is officially frozen which means that no images, future Kubernetes versions and patch releases for earlier Kubernetes versions will be pushed to this registry. At some point in the near future this legacy image registry will be completely deactivated.</p>
+<p><code>registry.k8s.io</code> image registry is an official replacement for <code>k8s.gcr.io</code>, and you must ensure that you don&rsquo;t have any dependencies on the legacy image registry as soon as possible.</p>
+<p>The journey of transitioning to the new registry started back in 2022, when <code>registry.k8s.io</code> reached GA. There were multiple reasons for this change, but the most important reason is that the new image registry acts as a form of Content Delivery Network (CDN), spreading the load across regions, which will allow more cloud providers and vendors provide better experience to their image consumers by hosting their images &ldquo;closer to home&rdquo;.</p>
+<p><strong>Lower egress bandwidth &amp;&amp; cost -&gt; Higher download speed -&gt; Better user experience</strong>. A win-win change. ✅</p>
+<p>You can read the full announcement here: <a href="https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/">k8s.gcr.io Image Registry Will Be Frozen From the 3rd of April 2023</a></p>
+<p>This is an example of where blacklisting an image registry could come in handy and policies are here to help automate and alert upon that!😺 In order to prevent <code>k8s.gcr.io</code> based images from running in your cluster, you can implement policies, for example with Gatekeeper. Policies for Gatekeeper and Kyverno are available at <a href="https://github.com/aws/aws-eks-best-practices/tree/master/policies/k8s-registry-deprecation">AWS EKS Best Practices</a> repo.</p>
+<p><strong>But how would you implement the same validation for AKS/Azure Arc-enabled Kubernetes clusters with Azure Policy?</strong></p>
+<p>There are multiple options you may consider:</p>
+<ol>
+<li><strong>Assign <code>Kubernetes cluster containers should only use allowed images</code> built-in policy definition</strong> (<code>/providers/Microsoft.Authorization/policyDefinitions/febd0533-8e55-448f-b837-bd0e06f16469</code>) and explicitly whitelist image registries that you allow Kubernetes cluster workloads to use. If you&rsquo;ve already assigned this policy definition you need to ensure that <code>k8s.gcr.io</code> image registry is no longer included.</li>
+</ol>
+<blockquote>
+<p>From what I could see, above built-in policy definition only evaluates Pod containers/initContainers/ephemeralContainers. If you want to evaluate CronJob and Workload containers/initContainers/ephemeralContainers, as it&rsquo;s done in the custom policy below, you will either need to create a custom Azure Policy based on the above built-in policy definition or go ahead with the below alternative #2.</p>
+</blockquote>
+<ol start="2">
+<li><strong>Create custom Azure Policy that can be used for blacklisting non-compliant/deprecated image registries.</strong> <code>k8s.gcr.io</code> image registry can be added to the list. Then, Kubernetes cluster workloads that are attempting to use this image registry (or other blacklisted registries for that matter) will be denied deployment.</li>
+</ol>
+<p>Let&rsquo;s look into the latter alternative in more detail. I&rsquo;ve taken templates for Gatekeeper that are available in AWS EKS Best Practices repo and modified them further in order to create a custom Azure Policy that will either audit or deny deployment of workloads (Pod/CronJob/Workload containers, initContainers and ephemeralContainers) that are dependent on the blacklisted image registries.</p>
+<p>I will not go into the details of what a custom Azure Policy is but you can check out my earlier blog post to learn more: <a href="https://kristhecodingunicorn.com/post/aks_azure_policy/">Keeping AKS Clusters Continuously Secure With Azure Policy</a>. I will soon publish another blog post that will go more in-depth on writing custom Azure Policy definitions for Kubernetes with Rego and Gatekeeper templates so stay tuned for more information on the topic!😼</p>
+<p>Custom Azure Policy source files are available in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/help-resources/kubernetes/azure-policy/k8s_disallowed_image_registries">guidemetothemoon/div-dev-resources</a>. There are two files that are related to the respective custom Azure Policy:</p>
+<ol>
+<li>
+<p><code>k8s_azure_disallowed_registry_ct.yaml</code> represents a ConstraintTemplate that will be used by Gatekeeper to audit and flag non-compliant resources;</p>
+</li>
+<li>
+<p><code>k8s_azure_disallowed_registry_policy.json</code> represents the implementation of the custom Azure Policy definition. It points to <code>k8s_azure_deprecated_registry_ct.yaml</code> in the <code>url</code> parameter of <code>policyRule</code> section. <strong>Please note that ConstraintTemplate file must be publicly available for the Azure Policy to be able to use it.</strong></p>
+</li>
+</ol>
+<p>With minor to none modifications you can paste content of <code>k8s_azure_disallowed_registry_policy.json</code> directly in Azure portal custom Azure policy creation view or in Terraform <code>azurerm_policy_definition</code> resource.</p>
+<p>Once you&rsquo;ve created the custom Azure Policy definition and assigned it to the scope of your choosing, you can test it by assigning the policy with <code>Deny</code> effect and attempting to run a Pod that attempts to use a container image from disallowed image registry. Pod will be denied, as shown in the screenshot below:</p>
+<p><img src="../../images/k8s_registry_azpolicy/k8s_registry_azpolicy_params.png" alt="Screenshot of parameter section of the newly created custom Azure policy definition for non-compliant image registries"></p>
+<p><img src="../../images/k8s_registry_azpolicy/k8s_deprecated_registry_azpolicy_output.png" alt="Screenshot of the output after execution of the newly created custom Azure policy definition for non-compliant image registries"></p>
+<p>For more information about Azure Policy, please see here:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes">Understand Azure Policy for Kubernetes clusters</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure">Azure Policy definition structure</a></li>
+</ul>
+<p>That&rsquo;s it from me this time, thanks for checking in!💖</p>
+<p>If this article was helpful, I&rsquo;d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/azure/">azure</a><a class="tag" href="/tags/devops/">devops</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

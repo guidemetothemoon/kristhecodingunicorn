@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/ado_sa_error/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer"/>
+<meta name="twitter:description" content="In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer."/>
+
+
+
+  
+  <meta property="og:title" content="How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer" />
+<meta property="og:description" content="In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/ado_sa_error/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2022-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-28T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer",
+        "headline": "How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer",
+        "alternativeHeadline": "",
+        "description": "
+      In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/ado_sa_error\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-12-28T00:00:00.00Z",
+        "datePublished": "2022-12-28T00:00:00.00Z",
+        "dateModified": "2022-12-28T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/ado_sa_error\/",
+        "wordCount" : "1770",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "azure-devops"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    
+      
+        ,
+
+      
+      "gitops"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>How to Fix ServiceAccount Error in Azure DevOps Environments for Kubernetes Clusters V.1.24 and Newer</h1>
+      <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-of-the-issue">Introduction of the issue</a></li>
+    <li><a href="#issue-resolution-approaches">Issue resolution approaches</a>
+      <ul>
+        <li><a href="#use-azure-devops-environment-without-kubernetes-resources-and-deploy-with-manually-created-kubernetes-service-connection">Use Azure DevOps Environment without Kubernetes Resources and deploy with manually created Kubernetes Service Connection</a></li>
+        <li><a href="#use-azure-devops-environment-with-kubernetes-resource-of-type-generic-provider-existing-service-account">Use Azure DevOps Environment with Kubernetes Resource of type &ldquo;Generic provider (existing service account)&rdquo;</a></li>
+        <li><a href="#automate-creation-of-kubernetes-resource-of-type-generic-provider-existing-service-account">Automate creation of Kubernetes Resource of type &ldquo;Generic provider (existing service account)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<h2 id="introduction-of-the-issue">Introduction of the issue</h2>
+<blockquote>
+<p><strong>[Update July 2023]</strong> This issue has been resolved and you should be able to create a Kubernetes resource targeting Azure Kubernetes Service in Azure DevOps Environments in the same way as before. Official documentation has been updated with additional details: <a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments-kubernetes?view=azure-devops#use-azure-kubernetes-service">Kubernetes resource</a></p>
+</blockquote>
+<p>With release of Kubernetes version 1.24 a new feature gate has come to life which is called <code>LegacyServiceAccountTokenNoAutoGeneration</code>, and it is enabled by default. What this feature does is that Secret API objects containing service account tokens are no longer auto-generated for every ServiceAccount. You can read more details about this change in release notes: <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.24.md#urgent-upgrade-notes-1">CHANGELOG-1.24</a></p>
+<p>This is a breaking change that is applicable if you attempt to create Azure Kubernetes Service Resources in Azure DevOps Environments that target AKS clusters with version 1.24 or newer. You will see <code>Could not find any secrets associated with the Service Account</code> error message during creation of a new AKS Resource, as shown in the screenshot below:</p>
+<p><img src="../../images/tech_tips/ado_k8s_error.png" alt="Screenshot of Azure DevOps Environments Service Account Secret error"></p>
+<p>What is unfortunate is that you can&rsquo;t get around this issue as long as you&rsquo;re attempting to create an Azure Kubernetes Service Resource. I&rsquo;ve tried multiple approaches by, for example, creating a Secret manually for the ServiceAccount that was generated by Azure DevOps&hellip; but every time you click <code>Validate and create</code>, Azure DevOps will generate a new ServiceAccount for the same Resource, even if you haven&rsquo;t refreshed the page. Another approach that I have tried was to create everything programmatically by calling Azure DevOps REST API, but what I have learned the hard way is that you can&rsquo;t add or update ServiceAccount Secret through REST API either, even if you attempt to update an already existing Resource. This has been quite frustrating to say the least, but I have found a solution that has worked nicely for me and hopefully can help you as well, so that you don&rsquo;t need to struggle by fixing this issue as long as I did. 😺</p>
+<h2 id="issue-resolution-approaches">Issue resolution approaches</h2>
+<p><strong>So, how can you fix this error and still use Azure DevOps Environments with Kubernetes Resources?</strong> 🧐</p>
+<h3 id="use-azure-devops-environment-without-kubernetes-resources-and-deploy-with-manually-created-kubernetes-service-connection">Use Azure DevOps Environment without Kubernetes Resources and deploy with manually created Kubernetes Service Connection</h3>
+<p>In this case you still use Azure DevOps Environment for deployment and change history tracking, but you&rsquo;re not creating any Kubernetes Resources so your ADO Environment is empty. In order to perform actual deployment to the AKS cluster you will need to create a Kubernetes Service Connection in Azure DevOps manually. In order for the service connection to work you can only use type <code>KubeConfig</code> or <code>Service Account</code>. <code>Azure Subscription</code> service connection type will still fail, because the behaviour in this scenario will be the same as in creation of an Azure DevOps Environment AKS Resource where Azure DevOps attempts to generate a ServiceAccount automatically.</p>
+<p>If you don&rsquo;t have a ServiceAccount with <code>cluster-admin</code> permissions in the namespace that you want to deploy to, I&rsquo;ve provided templates in my GitHub repo that you can use in order to create a <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ado-environments/templates/serviceaccount.yml">ServiceAccount</a>, a <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ado-environments/templates/rolebinding.yml">RoleBinding</a> that provides ServiceAccount cluster-admin permissions in the namespace that you want to deploy your application to, and a ServiceAccount <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ado-environments/templates/secret.yml">Secret</a> that will be used in order to communicate to the cluster&rsquo;s API server. Azure DevOps requires this secret for workload deployment. All templates mentioned above can be found here: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/ado-environments/templates">ado-environments/templates</a>. You will need to update placeholders with proper values for your use case.</p>
+<p>I would recommend to create a Kubernetes service connection of type <code>Service Account</code> in order to limit service connection usage to the ServiceAccount with permissions scoped only to your workload&rsquo;s namespace instead of the whole cluster.</p>
+<p>In order to create a Kubernetes service connection of type <code>Service Account</code> you will need to provide a Kubernetes cluster server URL and a ServiceAccount Secret Object in JSON format.</p>
+<p>You can retrieve AKS cluster server URL with <code>(az aks show --name &lt;aks_cluster_name&gt; --resource-group &lt;aks_cluster_resource_group_name&gt; | ConvertFrom-Json).fqdn</code> and prefix it with <code>https://</code>, as shown in the example below.</p>
+<p>You can retrieve ServiceAccount Secret with <code>kubectl get secret &lt;service_account_secret_name&gt; -n &lt;resource_namespace&gt; -o json</code> - please remember to copy the whole Secret Object JSON output, including starting and ending curly brackets, like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">PS /home&gt; kubectl get secret azdev-sa-98f25-token -n cat-encyclopedia -o json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>{<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;apiVersion&#34;: </span><span class="s2">&#34;v1&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;data&#34;: </span>{<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;ca.crt&#34;: </span><span class="s2">&#34;REDACTED&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;namespace&#34;: </span><span class="s2">&#34;REDACTED&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;token&#34;: </span><span class="s2">&#34;REDACTED&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>}<span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;kind&#34;: </span><span class="s2">&#34;Secret&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;metadata&#34;: </span>{<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;annotations&#34;: </span>{<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c"># OMITTED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>}<span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;creationTimestamp&#34;: </span><span class="s2">&#34;2022-12-26T18:37:14Z&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;name&#34;: </span><span class="s2">&#34;azdev-sa-98f25-token&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;namespace&#34;: </span><span class="s2">&#34;cat-encyclopedia&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;resourceVersion&#34;: </span><span class="s2">&#34;704824&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;uid&#34;: </span><span class="s2">&#34;d686b9f6-79c9-43a3-8df5-1b3743b20a09&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>}<span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">&#34;type&#34;: </span><span class="s2">&#34;kubernetes.io/service-account-token&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span></code></pre></div><p>Once the required values are retrieved, in <code>Azure DevOps -&gt; Project Settings -&gt; Service connections</code> you can create a new Kubernetes Service Connection of type <code>Service Account</code> with values that were retrieved in the above step:</p>
+<p><img src="../../images/tech_tips/ado_k8s_sc.png" alt="Screenshot of Azure DevOps Kubernetes Service Connection creation"></p>
+<p>Finally, in your Deployment Job in Azure Pipelines you can still target the Azure DevOps Environment of your choice, but instead of providing a Kubernetes Resource that you normally create in the respective ADO Environment for workload deployment to Kubernetes, you will need to provide a Kubernetes service connection that was created above as part of the deployment task:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">dependsOn</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">Build  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">deployment</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev_AKS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w"> </span><span class="c"># Provide Azure DevOps Environment name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">runOnce</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># REST OF THE CODE IS OMITTED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">HelmDeploy@0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Deploy cat-encyclopedia&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">connectionType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Kubernetes Service Connection&#39;</span><span class="w"> </span><span class="c"># Provide service connection type</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">kubernetesServiceConnection</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;sa-ado-env-test&#39;</span><span class="w"> </span><span class="c"># Provide service connection name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">upgrade </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;cat-encyclopedia&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">releaseName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;cat-encyclopedia&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">chartType</span><span class="p">:</span><span class="w"> </span><span class="l">FilePath</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">chartPath</span><span class="p">:</span><span class="w"> </span><span class="l">$(Pipeline.Workspace)/helm/cat-encyclopedia-1.0.0.tgz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--install --timeout 2m&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Once you&rsquo;ve updated the deployment job, your workloads will be deployed to a Kubernetes cluster as before. The only change in this case is that you will not be able to see any information about your deployment in Azure DevOps Environment. Information like Pod logs, Deployment metadata and state will not be availabled and you will not be able to define additional pre-deployment policies on the ADO Environment Resource level (you will still be able to define policies on the Environment level though).</p>
+<blockquote>
+<p>If you&rsquo;re getting <code>Error: Kubernetes cluster unreachable: Get &quot;https://&lt;kubernetes-cluster-server-url&gt;/version&quot;: x509: certificate signed by unknown authority</code> during deployment, it means that your cluster is using default self-signed certificates which are generated by an untrusted certificate authority. You can bypass this by adding <code>--kube-insecure-skip-tls-verify</code> argument if you&rsquo;re deploying through Helm or <code>--insecure-skip-tls-verify</code> if you&rsquo;re deploying with kubectl build tasks like <code>KubernetesManifest@0</code>. Please note that this is <strong>NOT RECOMMENDED</strong> in production scenarios since your HTTPS connections to Kubernetes cluster server will not be validated. You need to ensure that your production clusters are using trusted certificate authority for generating TLS certificates, for example by using Custom CA.</p>
+</blockquote>
+<p><img src="../../images/tech_tips/ado_env_with_sc.png" alt="Screenshot of Azure DevOps Environment with Kubernetes Service Connection - Deployments view"></p>
+<p><img src="../../images/tech_tips/ado_env_with_sc2.png" alt="Screenshot of Azure DevOps Environment with Kubernetes Service Connection - Changeset history view"></p>
+<p>Due to the limitation mentioned above I would recommend approach #2 for which I have also created a script in order to automate the whole process. 😼</p>
+<h3 id="use-azure-devops-environment-with-kubernetes-resource-of-type-generic-provider-existing-service-account">Use Azure DevOps Environment with Kubernetes Resource of type &ldquo;Generic provider (existing service account)&rdquo;</h3>
+<p>For this approach we don&rsquo;t need to create a Kubernetes service connection manually. We can use both Azure DevOps Environments and Kubernetes Resources as before, with one minor difference - we need to create Kubernetes Resource of type <code>Generic provider (existing service account)</code> instead of <code>Azure Kubernetes Service</code>.</p>
+<p>The initial steps are the same as in approach #1: you need to create a ServiceAccount with respective Secret and RoleBinding, retrieve cluster server URL and ServiceAccount Secret Object JSON. In addition you will need to provide Namespace that you want the Resource to be deployed to, and Kubernetes cluster name. This time you will need to provide this information when creating a Kubernetes Resource in the Azure DevOps Environment of your choice, like it&rsquo;s shown in the screenshot below:</p>
+<p><img src="../../images/tech_tips/ado_env_k8s_generic_resource.png" alt="Screenshot of Azure DevOps Environment with Kubernetes Generic Provider Resource creation"></p>
+<p>If you&rsquo;re getting following error during creation of a Kubernetes Resource:</p>
+<p><img src="../../images/tech_tips/ado_env_generic_k8s_resource_validation_error.png" alt="Screenshot of Azure DevOps Environment with Kubernetes Generic Provider Resource validation error upon creation"></p>
+<p>It means that your cluster is using default self-signed certificates which are generated by an untrusted certificate authority. You can bypass this by checking <code>Accept untrusted certificates</code> option that you can see in the screenshot above. Please note that this is <strong>NOT RECOMMENDED</strong> in production scenarios since your HTTPS connections to Kubernetes cluster server will not be validated. You need to ensure that your production clusters are using trusted certificate authority for generating TLS certificates, for example by using Custom CA. You can also choose to continue anyway but in that case you will not be able to see any information about the Deployment that must be retrieved from the cluster, like Pod Logs or Deployment metadata. You will only be able to see deployment history and set pre-deployment policies on the Resource level.</p>
+<p>Once a Kubernetes Resource of type <code>Generic provider (existing service account)</code> is created, you can use Azure DevOps Environments just as you did before the breaking change. By following this approach you will be able to see the Resource information related to the currently active Deployment in Azure DevOps, for exampl Pod logs, Deployment metadata, etc. - just as if you have created a regular AKS Resource. You will also be able to define additional policies and checks on the Resource level. If you&rsquo;re not sure about how to deploy to Kubernetes with Azure DevOps Environments, you can check out my earlier blog posts that provide more details on this topic:</p>
+<p>🐱 <a href="https://kristhecodingunicorn.com/post/k8s_ado_envs-1/">Continuous Delivery to AKS with Azure DevOps Environments - Part 1</a></p>
+<p>🐱 <a href="https://kristhecodingunicorn.com/post/k8s_ado_envs-2/">Continuous Delivery to AKS with Azure DevOps Environments - Part 2</a></p>
+<h3 id="automate-creation-of-kubernetes-resource-of-type-generic-provider-existing-service-account">Automate creation of Kubernetes Resource of type &ldquo;Generic provider (existing service account)</h3>
+<p>In order to make implementation of approach #2 faster and minimize amount of manual steps, I&rsquo;ve created a PowerShell script that you can run in order to automatically create a Kubernetes Resource of type &ldquo;Generic provider (existing service account) in the Azure DevOps Environment of your choice. This script will automatically create ServiceAccount with RoleBinding and Secret in the respective Kubernetes Namespace.</p>
+<p>You can find the script in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ado-environments/New-ADO-K8s-Resource.ps1">New-ADO-K8s-Resource.ps1</a></p>
+<p>In order to create an ADO Environment Generic Kubernetes Resource you can run the script like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./New-ADO-K8s-Resource.ps1 -AccessToken <span class="s2">&#34;&lt;azure_devops_pat&gt;&#34;</span> -AzureDevOpsUrl <span class="s2">&#34;https://dev.azure.com/&lt;organization_name&gt;/&lt;project_name&gt;&#34;</span> -EnvironmentName <span class="s2">&#34;&lt;azure_devops_environment_name&gt;&#34;</span> -KubernetesClusterName <span class="s2">&#34;&lt;kubernetes_cluster_name&gt;&#34;</span> -KubernetesResourceNamespace <span class="s2">&#34;&lt;application_namespace_in_kubernetes_cluster&gt;&#34;</span> -KubernetesClusterUrl <span class="s2">&#34;https://&lt;kubernetes_cluster_server_url&gt;&#34;</span> 
+</span></span></code></pre></div><p>If you want to create multiple resources in the same Azure DevOps Environment you can create a list of Namespaces that the Resources are targeting and run the script for each of the Namespaces in the list:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$resourceNamespaces</span> <span class="o">=</span> @<span class="o">(</span><span class="s2">&#34;test-ns-1&#34;</span>, <span class="s2">&#34;test-ns-2&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">foreach <span class="o">(</span><span class="nv">$namespace</span> in <span class="nv">$resourceNamespaces</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    ./New-ADO-K8s-Resource.ps1 -AccessToken <span class="s2">&#34;&lt;azure_devops_pat&gt;&#34;</span> -AzureDevOpsUrl <span class="s2">&#34;https://dev.azure.com/&lt;organization_name&gt;/&lt;project_name&gt;&#34;</span> -EnvironmentName <span class="s2">&#34;&lt;azure_devops_environment_name&gt;&#34;</span> -KubernetesClusterName <span class="s2">&#34;&lt;kubernetes_cluster_name&gt;&#34;</span> -KubernetesResourceNamespace <span class="nv">$namespace</span> -KubernetesClusterUrl <span class="s2">&#34;https://&lt;kubernetes_cluster_server_url&gt;&#34;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>That&rsquo;s it for now - Thanks for reading and till next tech tip 😼</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/azure-devops/">azure-devops</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/devops/">devops</a><a class="tag" href="/tags/gitops/">gitops</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

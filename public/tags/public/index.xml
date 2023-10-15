@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>public on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/tags/public/</link>
+    <description>Recent content in public on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/public/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Public talks and Publications</title>
+      <link>https://kristhecodingunicorn.com/public/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/public/</guid>
+      
+        <description>This page contains overview of all external publications and talks I&#39;ve done.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

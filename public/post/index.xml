@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/post/</link>
+    <description>Recent content in Blog on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resilience testing of Azure services with Azure Chaos Studio</title>
+      <link>https://kristhecodingunicorn.com/post/azure_chaos_studio/</link>
+      <pubDate>Thu, 21 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/azure_chaos_studio/</guid>
+      
+        <description>In this blog post we will explore how you can use Azure Chaos Studio to ensure resilience of non-Kubernetes services in Azure like App Service, Key Vault, Virtual Machine, etc.</description>
+      
+    </item>
+    
+    <item>
+      <title>Kubernetes port forwarding: cleaning up orphaned ports</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_port_forwarding_cleanup/</link>
+      <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_port_forwarding_cleanup/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can clean up port reservations that got stuck after a completed port forwarding command in a Kubernetes cluster.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to get all Azure Policy assignments of a specific category?</title>
+      <link>https://kristhecodingunicorn.com/post/azpolicy_category_assignments/</link>
+      <pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/azpolicy_category_assignments/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category.</description>
+      
+    </item>
+    
+    <item>
+      <title>Resolving Application Insights performance counters collection issue for .NET applications</title>
+      <link>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can an issue with collecting performance counters for Application Insights from ASP.NET Framework and ASP.NET (Core) applications hosted in IIS.</description>
+      
+    </item>
+    
+    <item>
+      <title>Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys</title>
+      <link>https://kristhecodingunicorn.com/post/azure_qualys/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/azure_qualys/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources.</description>
+      
+    </item>
+    
+    <item>
+      <title>Takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023, wearing many hats</title>
+      <link>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</guid>
+      
+        <description>In this blog post I will share my reflections and takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023 wearing multiple hats: speaker, CNCF ambassador, KCD organizer and attendee.</description>
+      
+    </item>
+    
+    <item>
+      <title>Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</link>
+      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries.</description>
+      
+    </item>
+    
+    <item>
+      <title>Keeping AKS clusters continuously secure with Azure Policy</title>
+      <link>https://kristhecodingunicorn.com/post/aks_azure_policy/</link>
+      <pubDate>Thu, 16 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/aks_azure_policy/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can enhance security and governance of AKS clusters with Azure Policy.</description>
+      
+    </item>
+    
+    <item>
+      <title>[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_ubuntu_chiseled/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_ubuntu_chiseled/</guid>
+      
+        <description>This blog post explains how you can run containerized .NET applications in a more secure manner with Chiseled Ubuntu Containers</description>
+      
+    </item>
+    
+    <item>
+      <title>[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/</guid>
+      
+        <description>In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically.</description>
+      
+    </item>
+    
+    <item>
+      <title>Applying Dockerfile best practices with Hadolint</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_hadolint/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_hadolint/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can ensure that Dockerfiles we create are following best practices with Hadolint tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs</title>
+      <link>https://kristhecodingunicorn.com/post/ado-auditing-1/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/ado-auditing-1/</guid>
+      
+        <description>First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs.</description>
+      
+    </item>
+    
+    <item>
+      <title>Monitoring Kubernetes API deprecations with Pluto</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_pluto/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_pluto/</guid>
+      
+        <description>In this blog post we&#39;ll look into how you can monitor Kubernetes API deprecations and automate it in CI/CD with Pluto.</description>
+      
+    </item>
+    
+    <item>
+      <title>Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_nginx_oauth/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_nginx_oauth/</guid>
+      
+        <description>This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy.</description>
+      
+    </item>
+    
+    <item>
+      <title>Accelerated Networking for AKS nodes</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_an/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_an/</guid>
+      
+        <description>In this blog post we&#39;ll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux.</description>
+      
+    </item>
+    
+    <item>
+      <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 2</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</link>
+      <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</guid>
+      
+        <description>Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments.</description>
+      
+    </item>
+    
+    <item>
+      <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 1</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</guid>
+      
+        <description>First part of this blog post series describes what Azure DevOps Environments are and provides some tips and tricks for using it deployment of applications to Kubernetes.</description>
+      
+    </item>
+    
+    <item>
+      <title>Improving .NET code quality with NDepend in Visual Studio and Azure DevOps</title>
+      <link>https://kristhecodingunicorn.com/post/ndepend/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/ndepend/</guid>
+      
+        <description>This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>Cleaning up secrets in Azure DevOps and GitHub repositories with BFG Repo-Cleaner</title>
+      <link>https://kristhecodingunicorn.com/post/secrets_cleanup/</link>
+      <pubDate>Tue, 22 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/secrets_cleanup/</guid>
+      
+        <description>This blog post explains how to clean up secrets and sensitive values that have been commited to Azure DevOps and GitHub repositories with help of BFG Repo-Cleaner tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to upgrade NGINX Ingress Controller with zero downtime in production</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
+      
+        <description>This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to include new Kubernetes resource into existing Helm release</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_object_helm/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_object_helm/</guid>
+      
+        <description>This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example.</description>
+      
+    </item>
+    
+    <item>
+      <title>Using Kubernetes Service for proxying to external services</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</guid>
+      
+        <description>This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to perform static code analysis of .NET Code with Security Code Scan</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</guid>
+      
+        <description>This blog post explains how to perform static code analysis of .NET code locally and as part of CI/CD with Security Code Scan tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log</title>
+      <link>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
+      
+        <description>This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to distribute console applications easily with .NET tools</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_tools/</link>
+      <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
+      
+        <description>This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner.</description>
+      
+    </item>
+    
+    <item>
+      <title>Security scanning of third-party dependencies with OWASP Dependency Check</title>
+      <link>https://kristhecodingunicorn.com/post/owasp_depcheck/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/owasp_depcheck/</guid>
+      
+        <description>This blog post explains why it&#39;s important to scan third-party dependencies for known security vulnerabilities and how this can be done with OWASP Dependency Check tool</description>
+      
+    </item>
+    
+    <item>
+      <title>How to create new microservices easily with dotnet custom templates</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</guid>
+      
+        <description>This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice</description>
+      
+    </item>
+    
+    <item>
+      <title>My journey through Journey</title>
+      <link>https://kristhecodingunicorn.com/post/gaming_journey/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/gaming_journey/</guid>
+      
+        <description>Gaming Corner - My journey through Journey</description>
+      
+    </item>
+    
+  </channel>
+</rss>

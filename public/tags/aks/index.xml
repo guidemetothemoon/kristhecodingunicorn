@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aks on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/tags/aks/</link>
+    <description>Recent content in aks on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 11 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/aks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes port forwarding: cleaning up orphaned ports</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_port_forwarding_cleanup/</link>
+      <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_port_forwarding_cleanup/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can clean up port reservations that got stuck after a completed port forwarding command in a Kubernetes cluster.</description>
+      
+    </item>
+    
+    <item>
+      <title>Takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023, wearing many hats</title>
+      <link>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</link>
+      <pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/kubecon_cloudnativecon_eu_2023/</guid>
+      
+        <description>In this blog post I will share my reflections and takeaways from attending KubeCon&#43;CloudNativeCon Europe 2023 wearing multiple hats: speaker, CNCF ambassador, KCD organizer and attendee.</description>
+      
+    </item>
+    
+    <item>
+      <title>Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</link>
+      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_deprecated_registry_azpolicy/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries.</description>
+      
+    </item>
+    
+    <item>
+      <title>Keeping AKS clusters continuously secure with Azure Policy</title>
+      <link>https://kristhecodingunicorn.com/post/aks_azure_policy/</link>
+      <pubDate>Thu, 16 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/aks_azure_policy/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can enhance security and governance of AKS clusters with Azure Policy.</description>
+      
+    </item>
+    
+    <item>
+      <title>AKS control plane tiers - what, when and how?</title>
+      <link>https://kristhecodingunicorn.com/techtips/aks_controlplane_tiers/</link>
+      <pubDate>Tue, 24 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/aks_controlplane_tiers/</guid>
+      
+        <description>In this tech tip we look at AKS control plane tiers, when to use which tier and how to define it in code.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer</title>
+      <link>https://kristhecodingunicorn.com/techtips/ado_sa_error/</link>
+      <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/ado_sa_error/</guid>
+      
+        <description>In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer.</description>
+      
+    </item>
+    
+    <item>
+      <title>[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_upgrade_strategy/</guid>
+      
+        <description>In this blog post we&#39;ll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically.</description>
+      
+    </item>
+    
+    <item>
+      <title>Kris&#39;s Quick Cup of (A)K8S #5 - Housekeeping for Kubernetes Contexts</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_5/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_5/</guid>
+      
+        <description>In this tech tip we look at what Kubernetes context is and how we can clean up unused Kubernetes contexts.</description>
+      
+    </item>
+    
+    <item>
+      <title>Applying Dockerfile best practices with Hadolint</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_hadolint/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_hadolint/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can ensure that Dockerfiles we create are following best practices with Hadolint tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>Kris&#39;s Quick Cup of (A)K8S #4 - HTTP Application Routing add-on in AKS</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_4/</link>
+      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_4/</guid>
+      
+        <description>In this tech tip we look at how we can easily expose applications running in AKS in dev/test with HTTP Application Routing add-on.</description>
+      
+    </item>
+    
+    <item>
+      <title>Kris&#39;s Quick Cup of (A)K8S #3 - (Cluster)Role management</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_3/</guid>
+      
+        <description>In this tech tip we look at how we can locate a ClusterRole and/or Role and identify which accounts it is assigned to.</description>
+      
+    </item>
+    
+    <item>
+      <title>Monitoring Kubernetes API deprecations with Pluto</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_pluto/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_pluto/</guid>
+      
+        <description>In this blog post we&#39;ll look into how you can monitor Kubernetes API deprecations and automate it in CI/CD with Pluto.</description>
+      
+    </item>
+    
+    <item>
+      <title>Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_nginx_oauth/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_nginx_oauth/</guid>
+      
+        <description>This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy.</description>
+      
+    </item>
+    
+    <item>
+      <title>Accelerated Networking for AKS nodes</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_an/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_an/</guid>
+      
+        <description>In this blog post we&#39;ll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux.</description>
+      
+    </item>
+    
+    <item>
+      <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 2</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</link>
+      <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-2/</guid>
+      
+        <description>Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments.</description>
+      
+    </item>
+    
+    <item>
+      <title>Kris&#39;s Quick Cup of (A)K8S #2</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</link>
+      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_2/</guid>
+      
+        <description>A few tricks that can make your life easier when working with Kubernetes and AKS</description>
+      
+    </item>
+    
+    <item>
+      <title>Continuous Delivery to AKS with Azure DevOps Environments - Part 1</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ado_envs-1/</guid>
+      
+        <description>First part of this blog post series describes what Azure DevOps Environments are and provides some tips and tricks for using it deployment of applications to Kubernetes.</description>
+      
+    </item>
+    
+    <item>
+      <title>Kris&#39;s Quick Cup of K8s #1</title>
+      <link>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</link>
+      <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/kris_daily_k8s_1/</guid>
+      
+        <description>4 helpful commands that can make your life easier when working with Kubernetes and AKS</description>
+      
+    </item>
+    
+    <item>
+      <title>How to upgrade NGINX Ingress Controller with zero downtime in production</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
+      
+        <description>This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to include new Kubernetes resource into existing Helm release</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_object_helm/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_object_helm/</guid>
+      
+        <description>This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example.</description>
+      
+    </item>
+    
+    <item>
+      <title>Using Kubernetes Service for proxying to external services</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_proxy_svc/</guid>
+      
+        <description>This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

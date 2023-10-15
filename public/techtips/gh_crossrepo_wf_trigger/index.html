@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        How to trigger subsequent GitHub workflow in a different repository
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/techtips/gh_crossrepo_wf_trigger/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="How to trigger subsequent GitHub workflow in a different repository"/>
+<meta name="twitter:description" content="In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition."/>
+
+
+
+  
+  <meta property="og:title" content="How to trigger subsequent GitHub workflow in a different repository" />
+<meta property="og:description" content="In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/techtips/gh_crossrepo_wf_trigger/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="techtips" />
+<meta property="article:published_time" content="2023-02-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-12T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "techtips",
+        "name": "How to trigger subsequent GitHub workflow in a different repository",
+        "headline": "How to trigger subsequent GitHub workflow in a different repository",
+        "alternativeHeadline": "",
+        "description": "
+      In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/techtips\/gh_crossrepo_wf_trigger\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2023",
+        "dateCreated": "2023-02-12T00:00:00.00Z",
+        "datePublished": "2023-02-12T00:00:00.00Z",
+        "dateModified": "2023-02-12T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/techtips\/gh_crossrepo_wf_trigger\/",
+        "wordCount" : "849",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "techtips"
+
+    
+      
+        ,
+
+      
+      "github"
+
+    
+      
+        ,
+
+      
+      "devops"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>How to Trigger Subsequent GitHub Workflow in a Different Repository</h1>
+      <p>I was recently working on automating some manual actions related to my tech blog and discovered an interesting use case that I thought was worth sharing with the community 😊</p>
+<p><strong>Did you know that it is possible to trigger a GitHub workflow that resides in a different repository?</strong> Let me show you how!😼
+There are multiple approaches to how you can implement this but I have found following approach to be most preferrable. Let&rsquo;s say that you have repository A and repository B, and you want to trigger a GitHub workflow in repository B once workflow in repository A succeeds.</p>
+<ol>
+<li>
+<p><strong>Create a GitHub Personal Access Token (PAT) that will be added both to repository A and B.</strong> I recommend to follow the least privilege principle and create a fine-grained personal access token that is scoped only to the repositories A and B. When it comes to configuring PAT permissions you will need to see what&rsquo;s applicable to your use case. For instance, if you&rsquo;re using GitHub Pages or not. Relevant sections to configure permissions for are <code>Actions</code>, <code>Deployments</code> and <code>Pages</code>. In my example I have configured <code>Read</code> access on <code>Deployments</code> to be able to check deployment status and <code>Read/Write</code> access on <code>Actions</code> to be able to check and trigger workflows. You can read here about how to create a fine-grained GitHub PAT: <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token">Creating a fine-grained personal access token</a></p>
+</li>
+<li>
+<p><strong>Add created GitHub PAT as a repository secret for repository A and B, with the name of your choosing.</strong> You can read here how to add a repository secret: <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">Creating encrypted secrets for a repository</a></p>
+</li>
+<li>
+<p><strong>Add GitHub Action to the repository that will be triggering GitHub workflow in another repository.</strong> In my case I want repository A to trigger workflow in repository B once workflow in repository A succeeds, therefore I need to create a GitHub Action in repository A in order to achieve that. One option is to create a new GitHub workflow with an action that will act as a trigger - this would be a solution when repository A is being built and deployed through GitHub Pages for example, and doesn&rsquo;t have an existing GitHub workflow that can be used. Another option is to add a trigger action as part of the existing workflow - you can add it as an additional job/step with the condition that you want the trigger to be executed for.</p>
+</li>
+</ol>
+<p>In my case repository A only has a GitHub Pages workflow which I don&rsquo;t maintain, therefore I will create a new GitHub workflow by creating <code>trigger-repob-workflow.yml</code> in <code>.github/workflows</code> folder in the root of repo A. Also, I want to trigger repo B workflow <strong>only</strong> when all the jobs of repo A&rsquo;s workflow have succeeded and the whole workflow has completed. In this case I will use a <code>workflow_run</code> event of type <code>completed</code> which will trigger <code>repob-workflow</code> once current (repo A) workflow run is marked as <code>completed</code>. I also want to ensure that triggering not only happens when the workflow completes but also only when it succeeds, therefore I will add an <code>if</code>-condition that will check that <code>github.event.workflow_run.conclusion</code> property is equal to <code>success</code>, otherwise the workflow will run regardless of the conclusion state, which can also be failure.</p>
+<p>You can read more about different event types that can be used to trigger workflows here: <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows">Events that trigger workflows</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="w">   </span><span class="c"># trigger-repob-workflow.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Trigger Repo B GitHub workflow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">workflow_run</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">repob-workflow]</span><span class="w"> </span><span class="c"># Name of GitHub workflow to trigger in target repository</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">types</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">completed</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">trigger-repob-workflow</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">github.event.workflow_run.conclusion == &#39;success&#39;</span><span class="w"> </span><span class="c"># Run only when workflow run has succeeded, i.e. all jobs have succeeded</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/github-script@v6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">github-token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PAT }}</span><span class="w"> </span><span class="c"># Fine-grained GitHub PAT that was saved as repository secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">            await github.rest.actions.createworkflowDispatch({
+</span></span></span><span class="line"><span class="cl"><span class="sd">                owner: &#39;guidemetothemoon&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="sd">                repo: &#39;repoB&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="sd">                workflow_id: &#39;repob-workflow.yml&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="sd">                ref: &#39;main&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sd">            })</span><span class="w">            
+</span></span></span></code></pre></div><p>As you can see from the example above, we&rsquo;re using <code>createworkflowDispatch</code> event in order to perform the actual triggering. You will need to provide following parameters for the event to run properly:</p>
+<ul>
+<li><code>owner</code>: repository owner;</li>
+<li><code>repo</code>: name of the repository where to trigger the workflow;</li>
+<li><code>workflow_id</code>: full name of the GitHub workflow YAML file that must be triggered;</li>
+<li><code>ref</code>: branch name to trigger the workflow from;</li>
+</ul>
+<p>You can read more about this functionality here: <a href="https://github.blog/changelog/2022-09-08-github-actions-use-github_token-with-workflow_dispatch-and-repository_dispatch/">GitHub Actions: Use the GITHUB_TOKEN with workflow_dispatch and repository_dispatch</a></p>
+<p>A few more examples for conditions/execution triggers you could use:</p>
+<ul>
+<li>
+<p>If you want triggering to happen instantly, for example when pushing new changes to the repository, independent of any other workflows that may be running in parallel in the repository, you can remove an <code>if</code>-condition from the example above and update <code>on</code>-clause to be <code>on: [push]</code>.</p>
+</li>
+<li>
+<p>If you want triggering to happen once a deployment in the workflow succeeds, you can update <code>on</code>-clause to be <code>on: deployment_status</code> and update <code>if</code>-condition to be <code>if: github.event.deployment_status.state == 'success'</code>. Please note that in this case, if you have deployments running in parallel, triggering will happen for every succeded deployment,- and for every new trigger, previous run will be cancelled if it&rsquo;s still in progress.</p>
+</li>
+</ul>
+<p>That's it for now - Thanks for reading and till next tech tip 😼</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/techtips/">techtips</a><a class="tag" href="/tags/github/">github</a><a class="tag" href="/tags/devops/">devops</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Continuous Delivery to AKS with Azure DevOps Environments - Part 2
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_ado_envs-2/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Continuous Delivery to AKS with Azure DevOps Environments - Part 2"/>
+<meta name="twitter:description" content="Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments."/>
+
+
+
+  
+  <meta property="og:title" content="Continuous Delivery to AKS with Azure DevOps Environments - Part 2" />
+<meta property="og:description" content="Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_ado_envs-2/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-23T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Continuous Delivery to AKS with Azure DevOps Environments - Part 2",
+        "headline": "Continuous Delivery to AKS with Azure DevOps Environments - Part 2",
+        "alternativeHeadline": "",
+        "description": "
+      Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_ado_envs-2\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-05-23T00:00:00.00Z",
+        "datePublished": "2022-05-23T00:00:00.00Z",
+        "dateModified": "2022-05-23T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_ado_envs-2\/",
+        "wordCount" : "3289",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "azure-devops"
+
+    
+      
+        ,
+
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Continuous Delivery to AKS With Azure DevOps Environments - Part 2</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  23/5/2022
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">16-minute read</span>
+          </li>
+        </ul>
+      <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#deploy-application-to-aks-with-ado-environments">Deploy application to AKS with ADO Environments</a>
+      <ul>
+        <li><a href="#create-azure-devops-environment-and-kubernetes-resource">Create Azure DevOps Environment and Kubernetes resource</a></li>
+        <li><a href="#update-access-control-and-deployment-policies">Update Access Control and Deployment Policies</a></li>
+        <li><a href="#create-build-pipeline-with-deployment-stage">Create build pipeline with deployment stage</a></li>
+        <li><a href="#deploy-and-look-around">Deploy and look around</a></li>
+        <li><a href="#workloads">Workloads</a>
+          <ul>
+            <li><a href="#services">Services</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#automate-migration-of-kubernetes-resources-between-azure-devops-environments">Automate migration of Kubernetes resources between Azure DevOps Environments</a></li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<p>Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments! In Part 1 we looked into what Azure DevOps Environments are, what benefits they provide and how I would recommend to create ADO environments and resources based on my own experience. If you haven't read Part 1, you can check it out here: <a href="https://kristhecodingunicorn.com/post/k8s_ado_envs-1/">Continuous Delivery to AKS With Azure DevOps Environments - Part 1</a>.</p>
+<p>If you would like to know a simple but really useful way to re-use the same Azure DevOps Environment in multiple deployment stages across multiple pipelines, you can check out one of my tech tips here: <a href="https://kristhecodingunicorn.com/techtips/ado_env_as_var/">Re-Using Azure DevOps Environment Efficiently Across Multiple Pipelines</a></p>
+<p>In Part 2 we'll get more hands-on and deploy a test application to AKS with Azure DevOps Environments. In addition we'll take a look at how we can migrate Kubernetes resources between Azure DevOps Environments with a sprinkle of automation. Now, let's dig in!😼</p>
+<h2 id="deploy-application-to-aks-with-ado-environments">Deploy application to AKS with ADO Environments</h2>
+<p>For this scenario I have used a small AKS HelloWorld application that is provided by Microsoft in following tutorial: <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli">Create an ingress controller in Azure Kubernetes Service (AKS)</a>. I have slightly modified it and created a build definition for Azure Pipelines that will deploy the application to AKS with help of Azure DevOps Environments. All the resources can be found in my GitHub repo: <a href="https://github.com/guidemetothemoon/demo-projects/tree/main/ado-environments">guidemetothemoon/demo-projects </a>.</p>
+<p>Let's imagine that you're a developer who has created a new microservice. All of your source code is now in an Azure DevOps repository, including build pipeline defintion (though you haven't created an actual build pipeline yet). Now you need to deploy  your application to AKS. So, how can you do that directly from Azure DevOps?</p>
+<p>Let me walk you through it😼</p>
+<blockquote>
+<p><em><strong>A quick FYI: you may see that throughout this blog post I'm using <code>k</code> as part of commands that interact with a Kubernetes cluster - this is basically an alias for <code>kubectl</code> which is the full name of the Kubernetes command-line tool</strong></em>😺</p>
+</blockquote>
+<h3 id="create-azure-devops-environment-and-kubernetes-resource">Create Azure DevOps Environment and Kubernetes resource</h3>
+<p>First things first: let's create an Azure DevOps Environment which will represent a location we want to deploy the application to, i.e. an AKS cluster. We can do that by going to <strong>&quot;Pipelines -&gt; Environments&quot;</strong> in Azure DevOps:</p>
+<p><img src="../../images/k8s_ado_env/ado_envsection.png" alt="Environments section in Azure DevOps"></p>
+<p>If you already have an Azure DevOps Environment you can just choose it from the list. If not, click <strong>&quot;New Environment&quot;</strong> in the right-hand corner and provide following information:</p>
+<ul>
+<li><strong>Name:</strong> name of the Azure DevOps Environment. I recommend choosing a naming convention that you can follow for all ADO Environments which will make it more readable and self-explanatory. I will use naming convention that I've mentioned in Part 1 of this blog post series -&gt; <code>[kubernetes_distribution]-[cluster_id]-[deployment_stage]</code></li>
+<li><strong>Description:</strong> describe what location this Environment represents. It will help external parties understand what the purpose of the Environment is.</li>
+<li><strong>Resource type:</strong> in this case we'll be creating Kubernetes resources therefore we'll choose <strong>&quot;Kubernetes&quot;</strong> but you can also choose <strong>&quot;Virtual machines&quot;</strong> if resources will be deployed to VMs or <strong>&quot;None&quot;</strong> if you want to add resources at a later point.</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_new_environment.png" alt="New Azure DevOps Environment"></p>
+<p>Now, let's create a Kubernetes resource as part of this ADO Environment which will represent a deployment target for the new microservice. If you already have an ADO Environment, you can navigate to it and click &quot;Add resource&quot; in the right-hand corner. You will then need to choose resource type which in our case will be <strong>&quot;Kubernetes&quot;</strong>. If you created a new Environment like we did above, new resource section will be populated automatically once you click <strong>&quot;Next&quot;</strong>. In <strong>&quot;Add resource&quot;</strong> section you will need to provide following information:</p>
+<ul>
+<li><strong>Provider:</strong> Kubernetes distribution provider which in our case will be <strong>&quot;Azure Kubernetes Service&quot;</strong> but you can also deploy to any other Kubernetes distribution by choosing <strong>&quot;Generic provider (existing service account)&quot;</strong> from the dropdown.</li>
+<li><strong>Azure subscription:</strong> choose Azure subscription of the AKS cluster that application will be targeting.</li>
+<li><strong>Cluster:</strong> choose AKS cluster to deploy application to.</li>
+<li><strong>Namespace:</strong> choose existing namespace or provide new namespace that the application will be deployed to - namespace will then be created automatically in the respective AKS cluster.</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_new_resource.png" alt="New Azure DevOps Kubernetes resource"></p>
+<p>Once you're done, click <strong>&quot;Validate and create&quot;</strong>. What happens then is:</p>
+<ul>
+<li>Azure DevOps will create a new Kubernetes service connection so that it can interact with the respective AKS cluster:</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_aks_svcconn.png" alt="Azure DevOps service connection for new Kubernetes resource"></p>
+<ul>
+<li>If a new namespace was chosen, it will be created in the respective AKS cluster in addition to a new Kubernetes ServiceAccount with <code>cluster-admin</code> ClusterRole that can be used <strong>only</strong> in the chosen namespace which in our case is <strong>&quot;aks-helloworld&quot;</strong> - this is an important detail in terms of security, workload isolation and least privilege access:</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_aks_svcaccount.png" alt="Azure DevOps ServiceAccount for new Kubernetes resource"></p>
+<p>Ok, we've created a deployment location and target in Azure DevOps - as you can see in the screenshot below, it says that resource has never been deployed which makes sense since we haven't triggered any deployment yet!</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_createdresource.png" alt="Newly created Azure DevOps Environment and Kubernetes resource in Azure DevOps"></p>
+<p>Now let's ensure that we have proper access permissions and deployment validations set for the new Azure DevOps Environment before we move ahead with the microservice deployment.</p>
+<h3 id="update-access-control-and-deployment-policies">Update Access Control and Deployment Policies</h3>
+<p>You can configure access and permissions per Azure DevOps Environment. Choose an Environment and then click on 3 dots in the right-hand corner, to the right from <strong>&quot;Add resource&quot;</strong> button - then click <strong>&quot;Security&quot;</strong>. You will be redirected to the page where you can see and configure user and group permissions, see inherited permissions in case there are global policies defined, as well as see which pipelines have access to the chosen Azure DevOps Environment. If you've already created a pipeline that will deploy application to the chosen ADO Environment, you can add permissions for it directly in this view by clicking on the <strong>+</strong> in the right-hand corner where you can then choose your pipeline from the list. But we haven't created a build pipeline yet so we'll leave it empty for now.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_security.png" alt="Security section in Azure DevOps Environment"></p>
+<p>Now that we've verified that permissions look good, let's define some deployment validations. If we go back to the Environment view and click on 3 dots once again we can choose <strong>&quot;Approvals and checks&quot;</strong> this time. In this section you can define additional policies and validations that will be verified before a new version of the application is deployed. Let's add a policy that requires a member of <strong>&quot;Release Administrators&quot;</strong> group to approve the deployment - we can do that by clicking on the <strong>+</strong> in the right-hand corner and choosing <strong>&quot;Approvals&quot;</strong>.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_approvalsnchecks.png" alt="Approvals and checks section in Azure DevOps Environment"></p>
+<p>As you can see, there are quite a few other checks available that can let you have even more granular control over when and under what conditions a new application deployment can happen. In <strong>&quot;Approvals&quot;</strong> section we need to provide following information:</p>
+<ul>
+<li><strong>Approvers:</strong> choose a user or a user group that is supposed to approve deployments to the chosen Azure DevOps Environment - in our case it's <strong>&quot;Release Administrators&quot;</strong>.</li>
+<li><strong>Instructions to approvers:</strong> here you may provide additional information that may be relevant for approvers during review and validation of a new deployment.</li>
+<li><strong>Allow approver to approve their own runs:</strong> if checked and a member of the Approval group triggered a deployment, he/she can then approve the deployment without needing an approval from another group member.</li>
+<li><strong>Timeout:</strong> here you can define how long a deployment can be in Pending state without approval until it reaches timeout.</li>
+</ul>
+<p>Once finished, click <strong>&quot;Create&quot;</strong>.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_approvals.png" alt="Created Approvals policy in Azure DevOps Environment"></p>
+<p>We have now added an additional policy for our deployment and we're finally ready to deploy our application to AKS with Azure DevOps Environments! Let's move on and create a build pipeline that will do the honours and perform the actual deployment😸</p>
+<h3 id="create-build-pipeline-with-deployment-stage">Create build pipeline with deployment stage</h3>
+<p>Last step before we can deploy the application is to create the actual build pipeline that will perform the deployment itself. As I mentioned earlier, all of the source code including build pipeline YAML definition is already stored in a repository in Azure DevOps. So, let's connect it to an actual pipeline. In Azure DevOps, go to <strong>&quot;Pipelines&quot;</strong> and click <strong>&quot;New pipeine&quot;</strong> in the right-hand corner. From there choose the repository type - in our case it is <strong>&quot;Azure Repos Git&quot;</strong>. Finally, choose the repository where the source code and build definition are stored. The build definition will then be populated automatically.</p>
+<blockquote>
+<p><em><strong>Please note: if you have a repository with multiple build definition YAML files, you will need to provide exact path to the YAML file that the build should use by choosing &quot;Existing Azure Pipelines YAML file&quot; in the &quot;Configure your pipeline&quot; section.</strong></em></p>
+</blockquote>
+<p>Our build pipeline is ready to deploy the new microservice to AKS! Before we do that, let's take a look at how to connect your build with a Kubernetes resource in an Azure DevOps Environment.</p>
+<p>Here's the build definition for our new microservice:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">trigger</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">deploy/kubernetes-templates</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">###############</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># DEPLOYMENT #</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">###############  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">deployment</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy_Dev_AKS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ubuntu-latest&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">environment: aks-113366-dev.aks-helloworld # &lt;- Here you define deployment target for the application in following format</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">environment-name].[resource-name]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">runOnce</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">checkout</span><span class="p">:</span><span class="w"> </span><span class="l">self</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">KubernetesManifest@0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install AKS HelloWorld Deployment 1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;deploy&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;aks-helloworld&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">manifests</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/aks-hw-1.yaml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">KubernetesManifest@0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install AKS HelloWorld Deployment 2&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;deploy&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;aks-helloworld&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">manifests</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/aks-hw-2.yaml&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">KubernetesManifest@0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Install AKS HelloWorld Ingress&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;deploy&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;aks-helloworld&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">manifests</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.SourcesDirectory)/deploy/kubernetes-templates/hw-ingress.yaml&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>All you need in order to be able to deploy with ADO Environments from an Azure Pipeline is to define a deployment stage with a deployment job where you provide a property called <code>environment</code> that tells the build pipeline exactly which Azure DevOps Environment and which resource to target. In our case this will be the Environment and Kubernetes resource that we created earlier in this post. And that's it - easy-peasy, right?😺</p>
+<p>You can deploy to multiple environments by extending the multi-staged pipeline presented above with even more stages. In reality you will also need a build stage, a security validation stage and maybe even a deployment stage for Pre-Production and Production environments. That's when you can utilize a multi-staged pipeline to it's full potential.</p>
+<p>It's deployment time! Since we haven't explicitly added a newly created build pipeline in the <strong>&quot;Pipeline permissions&quot;</strong> list which we looked at earlier, once the build is triggered it will ask you to provide it 2 types of permissions:</p>
+<ol>
+<li>Permission to use the Kubernetes service connection that was created by Azure DevOps for the respective Kubernetes resource.</li>
+<li>Permission to access the Azure DevOps Environment where the Kubernetes resource resides.</li>
+</ol>
+<p><img src="../../images/k8s_ado_env/ado_aks_buildpermissions.png" alt="Azure Pipelines permission approval request"></p>
+<p>You can review and approve permissions by clicking on <strong>&quot;View&quot;</strong> in the middle section of the build execution page. Since we've defined a deployment policy for this ADO Environment the build will also request the <strong>&quot;Release Administrators&quot;</strong> group to review and approve the deployment before it's executed.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_buildapproval_review.png" alt="Azure Pipelines deployment approval request"></p>
+<p>Once the build pipeline gets all the needed permissions it will execute successfully and you can see a new tab available called <strong>&quot;Environments&quot;</strong> - here you can view which Azure DevOps Environments and resources the build deployed to. If you have several deployment stages that target different resources and even different Azure DevOps Environments, all of them will pop up in the same tab. By clicking on <strong>&quot;View environment&quot;</strong> you will be taken to the respective ADO Environment page.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_buildpipeline_envtab.png" alt="Azure Pipelines Environments tab"></p>
+<p>We've done it - good job!😻 Our new and shiny microservice was successfully deployed to AKS - let's take a look at how it looks like in the <code>aks-helloworld</code> namespace:</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_deployment.png" alt="Screenshot of deployed resources in AKS"></p>
+<p>Looks good under the hood!🦾 If we want to access the application, we can do that by retrieving the External IP of <code>aks-helloworld</code> Ingress with <code>kubectl get ingress -n aks-helloworld</code> and accessing it in the browser. Or we can even expose the app by creating a new DNS entry that points to the same External IP.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_deployedapp.png" alt="Screenshot of deployed application UI in AKS"></p>
+<p>Before we go and take a well-deserved cup of coffee, let's take a final look at what information we can get about the deployment from an active Kubernetes resource in an Azure DevOps Environment.</p>
+<h3 id="deploy-and-look-around">Deploy and look around</h3>
+<p>Now that the new microservice is up and running in AKS let's see what information about it's deployment is available for us directly from Azure DevOps. In the chosen Environment page we can see two tabs - Resources and Deployments:</p>
+<ul>
+<li>Resources tab includes all the deployment targets that are located in the chosen Environment.</li>
+<li>Deployments tab provides a history of all the deployments, both successful and failed, that have been executed for all the resources in the chosen ADO Environment. From here you can see what resource was deployed, what was the last changeset included in the deployment and a link to the build where the deployment happened.</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_aks_deployments_tab.png" alt="Screenshot of Azure DevOps Environment Deployments section"></p>
+<p>Let's choose <code>aks-helloworld</code> Kubernetes resource from the Resources tab and see what information is available for us about a Kubernetes resource in an ADO Environment.</p>
+<h3 id="workloads">Workloads</h3>
+<p>Workloads section provides overview of resources that are created as part of application's deployment. 4 types of resources can be displayed in this view: Deployment, ReplicaSet, DaemonSet and StatefulSet. You can also filter the list by workload name or resource type by clicking on Filter icon on the right-hand side and choosing resource type from the dropdown (marked green in the screenshot below).</p>
+<p>You can also Validate or even Delete a resource by clicking on 3 dots in the right-hand corner (marked orange in the screenshot below). For instance, if a new deployment suddenly fails you may use Validate functionality to verify if the application's deployment and Azure DevOps connection to it are healthy.</p>
+<p>If you click on the link right below the resource name - in our case it's <code>aks-113366-dev (cluster)</code> (marked yellow in the screenshot below), you'll be navigated to the respective AKS resource in Azure portal.</p>
+<p>Finally, if we take a look at the list of Deployments, among other details, we can see what container image was used in the respective Deployment and how many Pods were created and are currently up and running.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_resource_workloads.png" alt="Screenshot of Azure DevOps Environment Workloads section"></p>
+<p>If we click on the Pods count in one of the Deployment resources (marked pink in the screenshot below), for each Pod in the Deployment we get to see even more useful information:</p>
+<ul>
+<li><strong>Overview:</strong> basic information about Pod's annotations, restart policy, node name, labels, conditions, current state, etc.</li>
+<li><strong>YAML:</strong> Kubernetes YAML template for Pod resource definition.</li>
+<li><strong>Logs:</strong> here you get access to all the Logs, just as if you've executed  <code>kubectl logs [pod_name] -n [namespace] </code> ! You will need to switch between tabs or refresh to get the newest logs though. This can be very useful for initial analysis of the application's performance, especially if you have developers who don't work with Kubernetes on a daily basis and just need to retrieve application logs without too much hassle.😼</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_aks_pod_logs.png" alt="Screenshot of Azure DevOps Pod logs"></p>
+<h4 id="services">Services</h4>
+<p>Services tab provides us overview of all the Services that were created as part of the Deployment. Services of different types will pop up in the same list and you can filter in the same way as in the Workloads section - either by Service name or by choosing a Service type from the dropdown on the right-hand side. Validate/Delete and link to AKS cluster in Azure portal work in the same way as in Workloads section.</p>
+<p>In this view you can find some basic information about the Service like it's Cluster IP, External IP and Port.</p>
+<p><img src="../../images/k8s_ado_env/ado_aks_services.png" alt="Screenshot of Azure DevOps Services section"></p>
+<p>By clicking on the Service you will be taken to a new page where you can find some more useful information:</p>
+<ul>
+<li><strong>Service details:</strong> this section contains details about the Kubernetes Service like it's labels, annotations, session affinity, etc. Here you can also see the link to the latest build from which the Service was provisioned (marked blue in the screenshot below) which you can use to navigate further to the respective build execution log.</li>
+<li><strong>Associated pods:</strong> this section represents all the Pods that the Service fronts and the workloads that Pods are linked to. By clicking on the Workload link (marked red in the screenshot below) you will be redirected to the respective workload detail page.</li>
+</ul>
+<p><img src="../../images/k8s_ado_env/ado_aks_service_details.png" alt="Screenshot of Azure DevOps Services section"></p>
+<p>As you can see, there's a lot of information you can retrieve about an application's deployment directly in Azure DevOps which can come in quite handy for the development teams when they need to check upon the application's state or perform initial analysis of the issues.</p>
+<h2 id="automate-migration-of-kubernetes-resources-between-azure-devops-environments">Automate migration of Kubernetes resources between Azure DevOps Environments</h2>
+<p>In some cases you may need to migrate resources between Azure DevOps Environments and it will typically require a lot of clicks and typing in the UI. I've decided to automate that and created a PowerShell script that can perform the migration automatically for you. This script supports migration of Kubernetes resources that are using Azure Kubernetes Service provider. You can find the script in my GitHub repo: <a href="https://github.com/guidemetothemoon/div-dev-resources/tree/main/scripts/kubernetes/ado-environments">guidemetothemoon/Move-AKS-Environments</a></p>
+<blockquote>
+<p><em><strong>Prior to running the script, please ensure that you have created an Azure DevOps Personal Access Token (PAT) with read/write permissions that will allow the script to create Azure DevOps Environments, Kubernetes resources and Kubernetes service connections.</strong></em></p>
+</blockquote>
+<p>The script covers two cases:</p>
+<ol>
+<li>Migrate Kubernetes resources from Environment1 to Environment2 and target the same AKS cluster. Script can be called with following arguments: <code>Move-AKS-Environments.ps1 -AccessToken &quot;azure-devops-pat&quot; -AzureDevOpsUrl &quot;https://azure-devops-url/org-name/project-name/&quot; -SourceEnvironmentName &quot;Environment1&quot; -TargetEnvironmentName &quot;Environment2&quot; -TargetEnvironmentDescription &quot;New target Azure DevOps Environment&quot;</code></li>
+<li>Migrate Kubernetes resources from Environment1 to Environment2 and target new AKS cluster called &ldquo;NewAKSCluster&rdquo;. In this case you need to ensure that you have downloaded <code>aks-svc-connection-template.json</code> file and it's in the same folder as the script. This file will be used by the script in order to create service connections for the new AKS cluster. Script can be called with following arguments: <code>Move-AKS-Environments.ps1 -AccessToken &quot;azure-devops-pat&quot; -AzureDevOpsUrl &quot;https://azure-devops-url/org-name/project-name/&quot; -SourceEnvironmentName &quot;Environment1&quot; -TargetEnvironmentName &quot;Environment2&quot; -TargetClusterName &quot;NewAKSCluster&quot; -TargetClusterResourceGroup &quot;NewAKSCluster-rg&quot; -SubscriptionId &quot;aks-cluster-azure-subscription-id&quot; -TenantId &quot;azure-ad-tenant-id&quot;</code></li>
+</ol>
+<blockquote>
+<p><strong>Please note:</strong> migration in this case creates and moves metadata and logical representation and grouping of resources (which Azure DevOps Environments and resources are in it's pure sense). The actual deployment happens in Azure Pipelines therefore deployment stages must be updated accordingly once the migration is complete.</p>
+</blockquote>
+<h2 id="additional-resources">Additional resources</h2>
+<p>If you would like to learn more about Azure DevOps Environments you may find these resources useful:</p>
+<p>As I briefly mentioned in this blog post series, ADO Environments support deployments not only to AKS but also to other Kubernetes distributions and even to Virtual Machines. If you're going to deploy to these environments it's a good idea to use some time and think how you're going to protect such connections. For example, with IP range whitelisting, firewall rules and by using an existing ServiceAccount that has only the required permissions and is scoped to a single namespace. You can find more information here:</p>
+<p><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments-kubernetes?view=azure-devops">Environment - Kubernetes resource</a></p>
+<p><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments-virtual-machines?view=azure-devops">Environment - virtual machine resource</a></p>
+<p>More information about what Azure DevOps Environments are can be found here:</p>
+<p><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops">Create and target an environment</a></p>
+<hr>
+<p><strong>Final thought:</strong> Azure DevOps Environments are easy to start with and can work really well when you don't want to introduce a new tool or when you have a relatively small amount of microservices to deploy. When there are hundreds of microservices that must be deployed and upgraded efficiently you might want to use a more advanced tool that has more extensive capabilities than what ADO Environments have to offer but this is a story for another blog post😺</p>
+<p>That's it from me this time, thanks for checking in!</p>
+<p>If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/azure-devops/">azure-devops</a><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/azure/">azure</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

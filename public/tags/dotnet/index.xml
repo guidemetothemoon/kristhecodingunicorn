@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dotnet on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/tags/dotnet/</link>
+    <description>Recent content in dotnet on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resolving Application Insights performance counters collection issue for .NET applications</title>
+      <link>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</link>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/appinsights_perfcounters/</guid>
+      
+        <description>In this blog post we&#39;ll look into how we can an issue with collecting performance counters for Application Insights from ASP.NET Framework and ASP.NET (Core) applications hosted in IIS.</description>
+      
+    </item>
+    
+    <item>
+      <title>[🎄.NET Advent Calendar🎄] Strengthening security posture of containerized .NET applications with Chiseled Ubuntu Containers</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_ubuntu_chiseled/</link>
+      <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_ubuntu_chiseled/</guid>
+      
+        <description>This blog post explains how you can run containerized .NET applications in a more secure manner with Chiseled Ubuntu Containers</description>
+      
+    </item>
+    
+    <item>
+      <title>How to override ASP.NET Core application runtime version</title>
+      <link>https://kristhecodingunicorn.com/techtips/dotnet_runtime_framework/</link>
+      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/dotnet_runtime_framework/</guid>
+      
+        <description>In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with.</description>
+      
+    </item>
+    
+    <item>
+      <title> Detect and avoid this certificate validation trap in .NET!</title>
+      <link>https://kristhecodingunicorn.com/techtips/dotnet_https_validation/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/dotnet_https_validation/</guid>
+      
+        <description>In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code.</description>
+      
+    </item>
+    
+    <item>
+      <title>Automate .NET target framework update with PowerShell</title>
+      <link>https://kristhecodingunicorn.com/techtips/update_dotnet_fw/</link>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/update_dotnet_fw/</guid>
+      
+        <description>Let&#39;s take a look at how we can automate update of .NET target framework across projects with PowerShell.</description>
+      
+    </item>
+    
+    <item>
+      <title>Improving .NET code quality with NDepend in Visual Studio and Azure DevOps</title>
+      <link>https://kristhecodingunicorn.com/post/ndepend/</link>
+      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/ndepend/</guid>
+      
+        <description>This blog post explains how to use NDepend to analyze and improve code quality manually and automatically as part of CI/CD pipelines in Azure DevOps with help of NDepend tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to perform static code analysis of .NET Code with Security Code Scan</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_sast_scs/</guid>
+      
+        <description>This blog post explains how to perform static code analysis of .NET code locally and as part of CI/CD with Security Code Scan tool.</description>
+      
+    </item>
+    
+    <item>
+      <title>Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log</title>
+      <link>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/assembly_version_conflicts/</guid>
+      
+        <description>This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to distribute console applications easily with .NET tools</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_tools/</link>
+      <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_tools/</guid>
+      
+        <description>This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to create new microservices easily with dotnet custom templates</title>
+      <link>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/dotnet_custom_templates/</guid>
+      
+        <description>This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>helm on Kris - The Coding Unicorn</title>
+    <link>https://kristhecodingunicorn.com/tags/helm/</link>
+    <description>Recent content in helm on Kris - The Coding Unicorn</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kristhecodingunicorn.com/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Validating quality of Helm Charts with helm lint</title>
+      <link>https://kristhecodingunicorn.com/techtips/helm_lint/</link>
+      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/helm_lint/</guid>
+      
+        <description>In this tech tip we take a look at how we can use helm lint to validate Helm Charts for errors and best practices prior to deployment to Kubernetes</description>
+      
+    </item>
+    
+    <item>
+      <title>Handling failed Helm upgrade due to another operation in progress</title>
+      <link>https://kristhecodingunicorn.com/techtips/helm_rollback/</link>
+      <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/techtips/helm_rollback/</guid>
+      
+        <description>How to handle failed helm upgrade with helm rollback</description>
+      
+    </item>
+    
+    <item>
+      <title>How to upgrade NGINX Ingress Controller with zero downtime in production</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_ic_upgrade/</guid>
+      
+        <description>This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.</description>
+      
+    </item>
+    
+    <item>
+      <title>How to include new Kubernetes resource into existing Helm release</title>
+      <link>https://kristhecodingunicorn.com/post/k8s_object_helm/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kristhecodingunicorn.com/post/k8s_object_helm/</guid>
+      
+        <description>This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

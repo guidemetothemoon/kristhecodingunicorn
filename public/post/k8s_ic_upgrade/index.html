@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        How to upgrade NGINX Ingress Controller with zero downtime in production
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/k8s_ic_upgrade/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="How to upgrade NGINX Ingress Controller with zero downtime in production"/>
+<meta name="twitter:description" content="This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production."/>
+
+
+
+  
+  <meta property="og:title" content="How to upgrade NGINX Ingress Controller with zero downtime in production" />
+<meta property="og:description" content="This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/k8s_ic_upgrade/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-14T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "How to upgrade NGINX Ingress Controller with zero downtime in production",
+        "headline": "How to upgrade NGINX Ingress Controller with zero downtime in production",
+        "alternativeHeadline": "",
+        "description": "
+      This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/k8s_ic_upgrade\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-01-14T00:00:00.00Z",
+        "datePublished": "2022-01-14T00:00:00.00Z",
+        "dateModified": "2022-01-14T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/k8s_ic_upgrade\/",
+        "wordCount" : "3286",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "kubernetes"
+
+    
+      
+        ,
+
+      
+      "aks"
+
+    
+      
+        ,
+
+      
+      "k8s"
+
+    
+      
+        ,
+
+      
+      "helm"
+
+    
+      
+        ,
+
+      
+      "nginx"
+
+    
+      
+        ,
+
+      
+      "ingress-controller"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>How to Upgrade NGINX Ingress Controller With Zero Downtime in Production</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  14/1/2022
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">16-minute read</span>
+          </li>
+        </ul>
+      <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-the-needs-for-upgrading-ingress-controller">Introduction to the needs for upgrading Ingress Controller</a></li>
+    <li><a href="#walkthrough-of-the-process-for-upgrading-nginx-ingress-controller-with-zero-downtime">Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime</a>
+      <ul>
+        <li><a href="#preparations">Preparations</a></li>
+        <li><a href="#create-temporary-ingress-controller">Create temporary Ingress Controller</a></li>
+        <li><a href="#re-route-traffic-to-temporary-ingress-controller">Re-route traffic to temporary Ingress Controller</a></li>
+        <li><a href="#upgrade-original-ingress-controller-and-re-route-traffic-from-temporary-ic">Upgrade original Ingress Controller and re-route traffic from temporary IC</a></li>
+        <li><a href="#final-test-and-cleanup">Final test and cleanup</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+  </ul>
+</nav>
+</div>
+<h2 id="introduction-to-the-needs-for-upgrading-ingress-controller">Introduction to the needs for upgrading Ingress Controller</h2>
+<p>In some scenarios you may need to perform maintenance work on the Ingress Controller which can potentially result in downtime - in my case the time has come to move away from NGINX Ingress Controller for Kubernetes Helm chart located in <code>stable</code> repo and fully embrace the new Helm chart located in <code>ingress-nginx</code> repository. The reason for that is related to higher maintenance costs for the Helm repositories' maintainers which has become significantly more challenging with release of Helm 3. Therefore EOL timeline has been officially announced by CNCF and Helm back in 2020. You can read the official announcement as well as the reasoning behind deprecation of Helm repositories here: <a href="https://www.cncf.io/blog/2020/10/07/important-reminder-for-all-helm-users-stable-incubator-repos-are-deprecated-and-all-images-are-changing-location/">Important Helm Repo Changes &amp; v2 End of Support in November</a> .</p>
+<p>There may, of course, be other reasons for why you would need to perform maintenance of the Ingress Controller and take it offline: for instance, you may want to spin up a totally different Ingress Controller or a different version of the Ingress Controller that is currently in use. And I love avoiding downtime when performing maintenance work and I guess that many of the readers of this blog post can relate to that ;)</p>
+<p>Well, there is quite a neat and straightforward way to do that! To simplify the whole process for myself I've created a PowerShell script that I've re-used many times (since I had to perform the same work on multiple Kubernetes clusters, both in dev and production). And it saved me quite some time and manual work. You can find the complete version of the script in my GitHub repository: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ingress/Upgrade-Nginx-IC.ps1">guidemetothemoon - Upgrade NGINX Ingress Controller</a></p>
+<blockquote>
+<p><strong>I have also created a fully automated version of the script where you don&rsquo;t need to run any blocks manually - this script expects that Azure DNS and AKS are being used - you can check the script in my GitHub repository:</strong> <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ingress/Upgrade-Nginx-IC-Auto.ps1">guidemetothemoon - Upgrade NGINX Ingress Controller - Automatic</a></p>
+</blockquote>
+<p>If you would like to learn more about debugging in Kubernetes, I've also created a small cheatsheet that I've been actively using and referencing when helping out Kubernetes beginners <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/help-material/kubernetes/k8s-debugging-quicknotes.md">guidemetothemoon - Kubernetes debugging quicknotes</a> :)</p>
+<h2 id="walkthrough-of-the-process-for-upgrading-nginx-ingress-controller-with-zero-downtime">Walkthrough of the process for upgrading NGINX Ingress Controller with zero downtime</h2>
+<p>I will now go through the script in more detail so that you can understand how zero downtime process actually works. In my scenario I will be using NGINX Ingress Controller, Azure Kubernetes Service and Azure DNS but this may be customized based on your infrastructure setup and your needs.
+From now on I will also be using Ingress Controller and IC terms interchangeably but both actually mean the same thing :)</p>
+<h3 id="preparations">Preparations</h3>
+<p>Firstly, we'll need to do some preparations that will make it easier for us to do the work later:</p>
+<ul>
+<li>Set alias for kubectl command so that we don't need to refer the full command every single time</li>
+<li>Log into Azure and set active subscription to the one where your DNS Zones are created</li>
+<li>Set current Kubernetes context to the cluster where you will be performing the upgrade - mine is called TestKubeCluster</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 0 - Set alias for kubectl to not type the whole command every single time ;)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Set-Alias</span> <span class="n">-Name</span> <span class="n">k</span> <span class="n">-Value</span> <span class="n">kubectl</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Log in to Azure and set proper subscription active in order to be able to update DNS records (not applicable if you&#39;re using another DNS provider</span>
+</span></span><span class="line"><span class="cl"><span class="n">az</span> <span class="n">login</span>
+</span></span><span class="line"><span class="cl"><span class="n">az</span> <span class="n">account</span> <span class="nb">set </span><span class="p">-</span><span class="n">-subscription</span> <span class="n">mySubscription</span> <span class="c"># Set active subscription to the one where your DNS zones are defined</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">config</span> <span class="nb">use-context</span> <span class="n">TestKubeCluster</span></span></span></code></pre></div>
+<h3 id="create-temporary-ingress-controller">Create temporary Ingress Controller</h3>
+<p>Next step is to create a temporary Ingress Controller and I recommend to use the same configuration and resource definition as the existing Ingress Controller in production uses. Why? Well, it has been running in production for a while and you know that it works, therefore it's a safe choice to avoid any potential issues with temporary Ingress Controller while you're performing maintenance and upgrading the initial IC.</p>
+<p>Temporary Ingress Controller will naturally reside in a temporary namespace which we will create beforehand. Once we've created a temporary namespace we can add Helm repositories where we can download both the Helm Chart for the original IC, as well as the repo where the Chart for the new IC resides.</p>
+<p>Once that's done, we move to step 2 and deploy temporary Ingress Controller using the same configuration as the active IC uses. Once temporary IC is created we'll need to make a note of the External IP that both the original and temporary Ingress Controller use - we will need that during re-routing of the traffic.</p>
+<p>Finally, once the temporary Ingress Controller is deployed and is up and running, we move on to step 3 and set up monitoring for both the original and the temporary IC - this will become very relevant once we need to re-route the traffic from the original Ingress Controller to the temporary one. We don't want any application becoming unavailable, right? ;) Re-routing traffic will mean updating DNS records and that type of update will take some time. Therefore monitoring traffic for both Ingress Controllers will help us identify when all the traffic is fully drained from the original IC and is actively hitting temporary IC instead.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 1 - Prepare namespace and Helm charts before creating temp Ingress Controller</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">create</span> <span class="n">ns</span> <span class="nb">ingress-temp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add old and new Helm charts to ensure that the repo is up-to-date:</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">repo</span> <span class="n">add</span> <span class="nb">nginx-stable</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">helm</span><span class="p">.</span><span class="py">nginx</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">stable</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">repo</span> <span class="n">add</span> <span class="n">stable</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">charts</span><span class="p">.</span><span class="py">helm</span><span class="p">.</span><span class="n">sh</span><span class="p">/</span><span class="n">stable</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">repo</span> <span class="n">add</span> <span class="nb">ingress-nginx</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">kubernetes</span><span class="p">.</span><span class="py">github</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">ingress-nginx</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">repo</span> <span class="n">update</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 2 - Create temp Ingress Controller based on the same Helm chart as the existing Ingress Controller that will be upgraded</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">upgrade</span> <span class="nb">nginx-ingress</span><span class="n">-temp</span> <span class="n">stable</span><span class="p">/</span><span class="nb">nginx-ingress</span> <span class="p">-</span><span class="n">-install</span> <span class="p">-</span><span class="n">-namespace</span> <span class="nb">ingress-temp</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">config</span><span class="p">.</span><span class="nb">proxy-buffer</span><span class="n">-size</span><span class="p">=</span><span class="s2">&#34;32k&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">config</span><span class="p">.</span><span class="nb">large-client</span><span class="n">-header-buffers</span><span class="p">=</span><span class="s2">&#34;4 32k&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="n">replicaCount</span><span class="p">=</span><span class="mf">2</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">nodeSelector</span><span class="p">.</span><span class="s2">&#34;beta\.kubernetes\.io/os&#34;</span><span class="p">=</span><span class="n">linux</span> <span class="p">-</span><span class="n">-set</span> <span class="n">defaultBackend</span><span class="p">.</span><span class="py">nodeSelector</span><span class="p">.</span><span class="s2">&#34;beta\.kubernetes\.io/os&#34;</span><span class="p">=</span><span class="n">linux</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">metrics</span><span class="p">.</span><span class="py">service</span><span class="p">.</span><span class="py">annotations</span><span class="p">.</span><span class="s2">&#34;prometheus\.io/port&#34;</span><span class="p">=</span><span class="s2">&#34;10254&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">metrics</span><span class="p">.</span><span class="py">service</span><span class="p">.</span><span class="py">annotations</span><span class="p">.</span><span class="s2">&#34;prometheus\.io/scrape&#34;</span><span class="p">=</span><span class="s2">&#34;true&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">metrics</span><span class="p">.</span><span class="n">enabled</span><span class="p">=</span><span class="n">true</span> <span class="p">-</span><span class="n">-version</span><span class="p">=</span><span class="mf">1.41</span><span class="p">.</span><span class="py">2</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$original_ingress_ip</span> <span class="p">=</span> <span class="s2">&#34;10.10.10.10&#34;</span> <span class="c"># replace with the External IP of existing Ingress Controller</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get external IP of the newly created Ingress Controller (service of type LoadBalancer in ingress-temp namespace)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$temp_ingress_ip</span> <span class="p">=</span> <span class="n">k</span> <span class="n">get</span> <span class="n">svc</span> <span class="n">-n</span> <span class="nb">ingress-temp</span> <span class="p">-</span><span class="n">-output</span> <span class="n">jsonpath</span><span class="p">=</span><span class="s1">&#39;{.items[?(@.spec.type contains &#39;</span><span class="n">LoadBalancer</span><span class="s1">&#39;)].status.loadBalancer.ingress[0].ip}&#39;</span> <span class="c"># get External IP of LoadBalancer service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 3 - Monitor traffic in both Ingress Controllers to identify when the traffic is only routed to the temporary IC so that the original IC can be taken offline</span>
+</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">logs</span> <span class="n">-l</span> <span class="n">component</span><span class="p">=</span><span class="n">controller</span> <span class="n">-n</span> <span class="nb">ingress-basic</span> <span class="o">-f</span> <span class="c"># Monitor traffic in original IC</span>
+</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">logs</span> <span class="n">-l</span> <span class="n">component</span><span class="p">=</span><span class="n">controller</span> <span class="n">-n</span> <span class="nb">ingress-temp</span> <span class="o">-f</span> <span class="c"># Monitor traffic in temporary IC</span></span></span></code></pre></div>
+<h3 id="re-route-traffic-to-temporary-ingress-controller">Re-route traffic to temporary Ingress Controller</h3>
+<p>All right, now that we have the temporary Ingress Controller in place, we&rsquo;re ready to re-route all the traffic from original IC to the temporary one.
+Here I would recommend doing some additional tests before updating DNS records in order to ensure that the temporary Ingress Controller is working as expected. For AKS following tutorial and test application from Microsoft came in really handy: <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-basic">Create an ingress controller in Azure Kubernetes Service (AKS)</a>. What I did is that I deployed the demo application as described in the tutorial and created a DNS record for this app which points to the External IP of the temporary Ingress Controller which we made a note of earlier. Now we can navigate to the DNS name we've created (or to External IP of temporary IC) and we should be able to see the same application UI as shown in the tutorial.</p>
+<p>Very nice! Now we've confirmed that the temporary IC works as expected - we're ready for the next step.
+First, we need to get all the DNS records from the DNS zone used by applications running in current Kubernetes cluster that point to the External IP of the original Ingress Controller - that's the ones we will need to update to point to the temporary IC instead. For this we can use quite powerful <code>--query</code> parameter to not retrieve all the DNS records but only those we actually need to update - you can read more about <code>--query</code> syntax here: <a href="https://docs.microsoft.com/en-us/cli/azure/query-azure-cli">How to query Azure CLI command output using a JMESPath query</a>.</p>
+<blockquote>
+<p><strong>Tip:</strong> Some Azure resources support <code>--query-examples</code> parameter which will return you examples on how you can filter the results that a specific command returns - check out Microsoft documentation related to Azure CLI commands related to the Azure resource you're working with and see if those provide query examples!</p>
+</blockquote>
+<p>Once all the relevant DNS records have been retrieved we can start removing External IP of original Ingress Controller and add External IP of temporary IC - for that parallel execution in PowerShell came in very handy for me. Parallel execution (available from PowerShell 7.0, ref. <a href="https://devblogs.microsoft.com/powershell/powershell-foreach-object-parallel-feature/">PowerShell ForEach-Object Parallel Feature</a>) will spin up several threads that will update DNS records in parallel - when you have tens or hundreds of DNS records, this could save quite some time. Important note here which is also mentioned in the script itself - I wouldn&rsquo;t recommend using more than 10-15 threads at a time since it may result in resource exhaustion of your system. Of course, if you have a really fancy quantum computer or something similar, you can try using a higher amount of threads as well ;)</p>
+<p><strong>Please note:</strong> for even further automation, the code that is used to retrieve, filter and update DNS records can be moved out to a separate function to avoid duplication. Since this blog post is aimed for educating purposes, I&rsquo;ve consciously duplicated the same steps at a later step as well instead of creating a separate function. See a fully automated version of the script for this: <a href="https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/ingress/Upgrade-Nginx-IC-Auto.ps1">guidemetothemoon - Upgrade NGINX Ingress Controller - Automatic</a></p>
+<p>Once all DNS records are updated, let's ensure that we haven't missed out on any relevant DNS records. We repeat the same steps we did a few moments ago:</p>
+<ul>
+<li>Retrieve all the DNS records from the DNS zone used by applications running in current Kubernetes cluster</li>
+<li>Filter out only those DNS records pointing to the External IP of the original Ingress Controller</li>
+<li>If no records are returned, we did well and successfully re-routed traffic from the original Ingress Controller to the temporary IC! Of course, if you're using multiple DNS zones, you need to ensure that relevant DNS records in those DNS zones are updated as well.</li>
+</ul>
+<p>Lastly, we wait. Update of DNS records takes time, sometimes up to an hour or two, depending on the amount of DNS records that were updated. We can periodically check if all DNS records were updated with help of <code>Resolve-DnsName</code> function.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 4 - Update DNS records to route traffic to temp Ingress Controller</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Check in the DNS zone how many records are there that are connected to the original IC&#39;s IP</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="n">myresourcegroup</span> <span class="n">-z</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;</span><span class="nv">$original_ingress_ip</span><span class="s2">&#39;)]&#34;</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span><span class="p">.</span><span class="py">count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="n">-Parallel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">Write-Output</span> <span class="s2">&#34;Updating </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2"> IP </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">IP</span><span class="p">)</span><span class="s2"> with updated Ingress Controller External IP </span><span class="nv">$using</span><span class="s2">:temp_ingress_ip&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="nb">add-record</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="n">myresourcegroup</span> <span class="p">-</span><span class="n">-zone-name</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-record-set-name</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="p">-</span><span class="n">-ipv4-address</span>  <span class="nv">$using</span><span class="err">:</span><span class="n">temp_ingress_ip</span>
+</span></span><span class="line"><span class="cl">        <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="nb">remove-record</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="n">myresourcegroup</span> <span class="p">-</span><span class="n">-zone-name</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-record-set-name</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="p">-</span><span class="n">-ipv4-address</span> <span class="nv">$using</span><span class="err">:</span><span class="n">original_ingress_ip</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-ThrottleLimit</span> <span class="mf">3</span> <span class="c"># here you can customize parallel threads count based on how many records you have but I wouldn&#39;t recommend to use more that 15 depending on how resourceful your system is</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Once you&#39;ve updated DNS records you will need to load them again</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Verify that there are no more DNS records that are connected to the original IC&#39;s IP</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="n">myresourcegroup</span> <span class="n">-z</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;</span><span class="nv">$original_ingress_ip</span><span class="s2">&#39;)]&#34;</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span><span class="p">.</span><span class="py">count</span> <span class="c"># Should be 0 by now</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Now wait for all traffic to be drained from original IC and moved to the temp IC</span>
+</span></span><span class="line"><span class="cl"><span class="c"># You can check DNS resolution in the meantime to confirm that all DNS records are updated</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># For few exisitng DNS records - check what those are resolved to</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$dnsrec</span> <span class="k">in</span> <span class="nv">$cluster_dns_recs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">$res</span> <span class="p">=</span> <span class="nb">Resolve-DnsName</span> <span class="n">-Name</span> <span class="nv">$dnsrec</span><span class="p">.</span><span class="py">FQDN</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">Write-Output</span> <span class="nv">$res</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c"># For large amount of DNS records - Faster check if all the DNS records have been properly updated</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$dns_recs</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="n">myresourcegroup</span> <span class="n">-z</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;</span><span class="nv">$temp_ingress_ip</span><span class="s2">&#39;)]&#34;</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$dns_resolv_Res</span> <span class="p">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Name</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FQDN</span><span class="p">).</span><span class="py">IPAddress</span> <span class="o">-ne</span> <span class="nv">$temp_ingress_ip</span><span class="p">}</span></span></span></code></pre></div>
+<h3 id="upgrade-original-ingress-controller-and-re-route-traffic-from-temporary-ic">Upgrade original Ingress Controller and re-route traffic from temporary IC</h3>
+<p>Okay, we've waited and monitored enough! We've now confirmed that all DNS records were updated and all traffic was drained from original Ingress Controller and is now hitting temporary IC. This means that we're ready to upgrade or perform maintenance on the original Ingress Controller. And by upgrade, which we're performing in this scenario, I mean uninstalling the running deployment of original IC and installing a new and shiny NGINX Ingress Controller from the new and shiny <code>ingress-nginx</code> repository.</p>
+<p>With help of <code>helm uninstall</code> and <code>helm upgrade</code> we've now deployed a new version of NGINX Ingress Controller that we want to use in production. Since we've uninstalled the original IC we've also lost the live traffic monitoring that we've set up for it earlier so we need to set up the traffic monitoring for the newly created Ingress Controller as well - we'll be re-routing traffic once again.</p>
+<p>After logging is enabled, we will need to drain traffic from the temporary Ingress Controller and re-route it to the newly created IC. In order to do that we can follow the same steps we did in the previous section:</p>
+<ul>
+<li>(Optional) Create test application pointing to the new Ingress Controller to test that it functions as expected and is ready to accept traffic</li>
+<li>Make a note of External IP of the newly created Ingress Controller</li>
+<li>Update all the relevant DNS records in the respective DNS zones - now, we'll need to remove External IP of the temporary Ingress Controller and add External IP of the newly created IC</li>
+<li>Monitor and wait for the DNS records to be updated and traffic to be drained from temporary IC and re-routed to the newly created IC</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 5 - Once DNS records were updated and all traffic has been re-routed to temp IC, uninstall original Ingress Controller with Helm and install new Ingress Controller with Helm</span>
+</span></span><span class="line"><span class="cl"><span class="c"># In this case new Ingress Controller is configured to use Public IP of Azure Load Balancer and not create a new IP</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">uninstall</span> <span class="nb">nginx-ingress</span> <span class="n">-n</span> <span class="nb">ingress-basic</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">upgrade</span> <span class="nb">nginx-ingress</span> <span class="nb">ingress-nginx</span><span class="p">/</span><span class="nb">ingress-nginx</span> <span class="p">-</span><span class="n">-install</span> <span class="p">-</span><span class="n">-create-namespace</span> <span class="p">-</span><span class="n">-namespace</span> <span class="nb">ingress-basic</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">config</span><span class="p">.</span><span class="nb">proxy-buffer</span><span class="n">-size</span><span class="p">=</span><span class="s2">&#34;32k&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">config</span><span class="p">.</span><span class="nb">large-client</span><span class="n">-header-buffers</span><span class="p">=</span><span class="s2">&#34;4 32k&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="n">replicaCount</span><span class="p">=</span><span class="mf">2</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">nodeSelector</span><span class="p">.</span><span class="s2">&#34;kubernetes\.io/os&#34;</span><span class="p">=</span><span class="n">linux</span> <span class="p">-</span><span class="n">-set</span> <span class="n">defaultBackend</span><span class="p">.</span><span class="py">nodeSelector</span><span class="p">.</span><span class="s2">&#34;kubernetes\.io/os&#34;</span><span class="p">=</span><span class="n">linux</span> <span class="p">-</span><span class="n">-set-string</span> <span class="n">controller</span><span class="p">.</span><span class="py">metrics</span><span class="p">.</span><span class="py">service</span><span class="p">.</span><span class="py">annotations</span><span class="p">.</span><span class="s2">&#34;prometheus\.io/port&#34;</span><span class="p">=</span><span class="s2">&#34;10254&#34;</span> <span class="p">-</span><span class="n">-set-string</span> <span class="n">controller</span><span class="p">.</span><span class="py">metrics</span><span class="p">.</span><span class="py">service</span><span class="p">.</span><span class="py">annotations</span><span class="p">.</span><span class="s2">&#34;prometheus\.io/scrape&#34;</span><span class="p">=</span><span class="s2">&#34;true&#34;</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">metrics</span><span class="p">.</span><span class="n">enabled</span><span class="p">=</span><span class="n">true</span> <span class="p">-</span><span class="n">-set</span> <span class="n">controller</span><span class="p">.</span><span class="py">service</span><span class="p">.</span><span class="n">loadBalancerIP</span><span class="p">=</span><span class="s2">&#34;00.00.00.000&#34;</span> <span class="c">#remove loadBalancerIP if Ingress Controller will not use Azure Load Balancer&#39;s Public IP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 6 - Monitor the newly created Ingress Controller since the initial one was removed in previous step - be aware that the Kubernetes label for in new NGINX Ingress Controller template has changed!</span>
+</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">logs</span> <span class="n">-l</span> <span class="n">app</span><span class="p">.</span><span class="py">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">component</span><span class="p">=</span><span class="n">controller</span> <span class="n">-n</span> <span class="nb">ingress-basic</span> <span class="o">-f</span> <span class="c"># New IC</span>
+</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">logs</span> <span class="n">-l</span> <span class="n">component</span><span class="p">=</span><span class="n">controller</span> <span class="n">-n</span> <span class="nb">ingress-temp</span> <span class="o">-f</span> <span class="c"># Temporary IC, should still be actively monitoring as per actions in step 3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 7 - Redirect traffic back to newly created Ingress Controller and monitor traffic routing together with DNS resolution</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Repeat step 4, just like below:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$new_ingress_ip</span> <span class="p">=</span> <span class="s2">&#34;00.00.00.000&#34;</span> <span class="c"># Public IP of newly created Ingress Controller</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Update DNS records to route traffic to temp Ingress Controller</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Check in the DNS zone how many records are there that are connected to the temp IC&#39;s IP</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="n">myresourcegroup</span> <span class="n">-z</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;</span><span class="nv">$temp_ingress_ip</span><span class="s2">&#39;)]&#34;</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span><span class="p">.</span><span class="py">count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="n">-Parallel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">Write-Output</span> <span class="s2">&#34;Updating </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2"> IP </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">IP</span><span class="p">)</span><span class="s2"> with updated Ingress Controller External IP </span><span class="nv">$using</span><span class="s2">:new_ingress_ip&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="nb">add-record</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="n">myresourcegroup</span> <span class="p">-</span><span class="n">-zone-name</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-record-set-name</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="p">-</span><span class="n">-ipv4-address</span>  <span class="nv">$using</span><span class="err">:</span><span class="n">new_ingress_ip</span>
+</span></span><span class="line"><span class="cl">        <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="nb">remove-record</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="n">myresourcegroup</span> <span class="p">-</span><span class="n">-zone-name</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-record-set-name</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="p">-</span><span class="n">-ipv4-address</span> <span class="nv">$using</span><span class="err">:</span><span class="n">temp_ingress_ip</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-ThrottleLimit</span> <span class="mf">3</span> <span class="c"># here you can customize parallel threads count based on how many records you have but I wouldn&#39;t recommend to use more that 15 depending on how resourceful your system is</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Once you&#39;ve updated DNS records you will need to load them again</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Verify that there are no more DNS records that are connected to the temp IC&#39;s IP</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="n">myresourcegroup</span> <span class="n">-z</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;</span><span class="nv">$temp_ingress_ip</span><span class="s2">&#39;)]&#34;</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster_dns_recs</span><span class="p">.</span><span class="py">count</span> <span class="c"># Should be 0 by now</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Now wait for all traffic to be drained from temp IC and moved to the new IC</span>
+</span></span><span class="line"><span class="cl"><span class="c"># You can check DNS resolution in the meantime to confirm that all DNS records are updated</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># For few exisitng DNS records - check what those are resolved to</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$dnsrec</span> <span class="k">in</span> <span class="nv">$cluster_dns_recs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">$res</span> <span class="p">=</span> <span class="nb">Resolve-DnsName</span> <span class="n">-Name</span> <span class="nv">$dnsrec</span><span class="p">.</span><span class="py">FQDN</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">Write-Output</span> <span class="nv">$res</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># For large amount of DNS records - Faster check if all the DNS records have been properly updated</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$dns_recs</span> <span class="p">=</span> <span class="n">az</span> <span class="n">network</span> <span class="n">dns</span> <span class="nb">record-set</span> <span class="n">a</span> <span class="n">list</span> <span class="n">-g</span> <span class="n">myresourcegroup</span> <span class="n">-z</span> <span class="n">mydnszone</span><span class="p">.</span><span class="py">com</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">&#34;[].{Name:name, FQDN:fqdn, IP:aRecords[].ipv4Address}[?contains(IP[],&#39;</span><span class="nv">$new_ingress_ip</span><span class="s2">&#39;)]&#34;</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$dns_resolv_Res</span> <span class="p">=</span> <span class="nv">$dns_recs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Name</span> <span class="nv">$_</span><span class="p">.</span><span class="n">FQDN</span><span class="p">).</span><span class="py">IPAddress</span> <span class="o">-ne</span> <span class="nv">$new_ingress_ip</span><span class="p">}</span></span></span></code></pre></div>
+<h3 id="final-test-and-cleanup">Final test and cleanup</h3>
+<p>Aaaaaallright! We're almost there and it was worth the wait! Hopefully now you have all applications on the current Kubernetes cluster running nicely and being unaware of this amazing maintenance work we've just performed in production :) But <strong>remember: though it's very tempting to do this directly on a production cluster, one does not simply test in production!</strong> I do encourage you to test this approach out in development first to get your hands dirty and ensure that no deviations in configuration or infrastructure set up cause errors during this type of maintenance.</p>
+<p>Last but not least: we must clean up after ourselves and remove all the temporary resource we've created along the way:</p>
+<ul>
+<li>Remove test application that was used for testing newly created Ingress Controllers and respective DNS records that were created to reach this test application</li>
+<li>Remove temporary Ingress Controller with <code>helm uninstall</code></li>
+<li>Remove temporary namespace where temp IC was residing</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># 8 - Remove temp resources once traffic is drained from temporary IC and newly created IC is fully in use and successfully running in respective Kubernetes cluster</span>
+</span></span><span class="line"><span class="cl"><span class="n">helm</span> <span class="n">uninstall</span> <span class="nb">nginx-ingress</span><span class="n">-temp</span> <span class="n">-n</span> <span class="nb">ingress-temp</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">delete</span> <span class="n">ns</span> <span class="nb">ingress-temp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Final step, after all clusters are upgraded - remove DNS record for any test applications you might have created like the one from this Microsoft tutorial: https://docs.microsoft.com/en-us/azure/aks/ingress-basic</span></span></span></code></pre></div>
+<p><strong>Lastly, take yourself a cup of tasty coffee or tea, sit down in a comfortable chair and enjoy all the traffic hitting the new and shiny Ingress Controller you've created - you deserved it! ;)</strong></p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>A few resources that were really useful for me while doing this work which I hope may help you on your way as well:</p>
+<ul>
+<li>Microsoft tutorial on creation and testing of NGINX Ingress Controller in AKS (which I also used for testing new instances of ICs): <a href="https://docs.microsoft.com/en-us/azure/aks/ingress-basic">Create an ingress controller in Azure Kubernetes Service (AKS)</a></li>
+<li>Recommendations for upgrading ingress-nginx installation: <a href="https://kubernetes.github.io/ingress-nginx/deploy/upgrade/">Upgrading</a></li>
+<li>New GitHub repository for NGINX Ingress Controller and it's Helm Chart: <a href="https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/README.md">ingress-nginx</a></li>
+<li>Finally, I'm continuously filling up my GitHub account with useful material, scripts and (soon) applications that cover different areas of product development and architecture - you're very much welcome to join me there! <a href="https://github.com/guidemetothemoon/div-dev-resources">guidemetothemoon/div-dev-resources</a>  ^_^</li>
+</ul>
+<p>That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/kubernetes/">kubernetes</a><a class="tag" href="/tags/aks/">aks</a><a class="tag" href="/tags/k8s/">k8s</a><a class="tag" href="/tags/helm/">helm</a><a class="tag" href="/tags/nginx/">nginx</a><a class="tag" href="/tags/ingress-controller/">ingress-controller</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme="dark"
+  
+    class="html theme--dark"
+  
+><head>
+  <title>
+    Kris - The Coding Unicorn
+        |
+        Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs
+      
+
+    
+
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.118.2"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Kris - The Coding Unicorn" />
+  <meta
+    name="description"
+    content="First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs."
+  />
+  
+    <meta name="google-site-verification" content="OQXmc6vSYyn6I-aGZoI6GH2M6CdM4NjmwulDqvvNCQA" />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.772eefee9824c26da5d3828c2507ea318c8e7a37b0b1d18cd4f224edc2755fea.css"
+      integrity="sha256-dy7v7pgkwm2l04KMJQfqMYyOejewsdGM1PIk7cJ1X&#43;o="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.dd17d6ee5bba73cc3f814469aae150232f0fc13a2038e79772f4d25565b5a23c.css"
+      integrity="sha256-3RfW7lu6c8w/gURpquFQIy8PwTogOOeXcvTSVWW1ojw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://kristhecodingunicorn.com/post/ado-auditing-1/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+
+  <script
+  async
+  defer
+  src="https://umami-guidemetothemoon.vercel.app/18352c56e4b049f69a24fbae0ca62b4f.js"
+  data-website-id="9dd30a0e-3918-4513-b61d-4dd81e20ed4b"
+></script>
+
+
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs"/>
+<meta name="twitter:description" content="First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs."/>
+
+
+
+  
+  <meta property="og:title" content="Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs" />
+<meta property="og:description" content="First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kristhecodingunicorn.com/post/ado-auditing-1/" /><meta property="og:image" content="https://kristhecodingunicorn.com/images/site-feature-image.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-10T00:00:00+00:00" /><meta property="og:site_name" content="Kris - The Coding Unicorn" />
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs",
+        "headline": "Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs",
+        "alternativeHeadline": "",
+        "description": "
+      First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs.
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kristhecodingunicorn.com\/post\/ado-auditing-1\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Kristina D."
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-10-10T00:00:00.00Z",
+        "datePublished": "2022-10-10T00:00:00.00Z",
+        "dateModified": "2022-10-10T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Kristina D.",
+            "url": "https://kristhecodingunicorn.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/kristhecodingunicorn.com\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "https://kristhecodingunicorn.com/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "https:\/\/kristhecodingunicorn.com\/post\/ado-auditing-1\/",
+        "wordCount" : "2094",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "azure-devops"
+
+    
+      
+        ,
+
+      
+      "devsecops"
+
+    
+      
+        ,
+
+      
+      "cybersecurity-corner"
+
+    
+      
+        ,
+
+      
+      "azure"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/profile.webp"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Kris - The Coding Unicorn</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Welcome to my tech corner! 🤗 <br />I preach about all things cloud native, green tech and cats 🐈 <br />Check "Blog" for new posts and "About" for my community involvement 🦄</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://linkfree.io/guidemetothemoon"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Let&#39;s connect!"
+            title="Let&#39;s connect!"
+          >
+            <i class="fas fa-cat fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.buymeacoffee.com/kristhecodingu1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Help me buy supplies for homeless animals &lt;3"
+            title="Help me buy supplies for homeless animals &lt;3"
+          >
+            <i class="fas fa-hand-holding-heart fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+            target="_blank"
+            rel="noopener me"
+            aria-label="RSS feed"
+            title="RSS feed"
+          >
+            <i class="fas fa-rss fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div id="wcb"  
+        
+        class="carbonbadge wcb-d"
+        
+    >
+    </div>
+    <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+  <footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Blog</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/techtips/"
+              
+              title=""
+              >Tech Tips</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/public/"
+              
+              title=""
+              >Public Talks and Publications</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  10/10/2022
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">10-minute read</span>
+          </li>
+        </ul>
+      <div class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#azure-devops-auditing---overview-and-why-you-would-use-it">Azure DevOps Auditing - overview and why you would use it</a></li>
+    <li><a href="#enable-azure-devops-auditing">Enable Azure DevOps Auditing</a>
+      <ul>
+        <li><a href="#azure-devops-ui">Azure DevOps UI</a></li>
+        <li><a href="#azure-devops-rest-api">Azure DevOps REST API</a></li>
+        <li><a href="#overview-of-enabled-azure-devops-auditing-page">Overview of enabled Azure DevOps Auditing page</a></li>
+      </ul>
+    </li>
+    <li><a href="#configure-azure-devops-log-streaming-to-azure-monitor-logs">Configure Azure DevOps log streaming to Azure Monitor logs</a>
+      <ul>
+        <li><a href="#azure-devops-ui-1">Azure DevOps UI</a></li>
+        <li><a href="#azure-devops-rest-api-1">Azure DevOps REST API</a></li>
+        <li><a href="#accessing-and-querying-azure-devops-audit-logs-with-log-analytics">Accessing and querying Azure DevOps Audit logs with Log Analytics</a></li>
+      </ul>
+    </li>
+    <li><a href="#additional-resources">Additional resources</a></li>
+    <li><a href="#next-steps">Next steps</a></li>
+  </ul>
+</nav>
+</div>
+<p>In July 2019, as part of Sprint 154, Microsoft introduced support for auditing in Azure DevOps and this is a feature that you really should look into if you haven&rsquo;t set it up or maybe haven&rsquo;t heard about it yet. Auditing in Azure DevOps allows you to get an aggregated log of important events related to access control, permission and resource management++ across projects in your Azure DevOps organization.</p>
+<p>Functionality evolved quite a bit since it&rsquo;s initial release and it currently also supports streaming logs to an external service like Azure Monitor logs, which we will take a look at in a bit. At the moment of writing this blog post the feature is still in public preview according to official Microsoft documentation. Hopefully it will soon be released in GA - according to the blog post from November 2021 the plan was to release it in GA early 2022 so let&rsquo;s hope that it will happen by the end of 2022 at least!😁 You can check out the blog post link in Additional resources section below.</p>
+<h2 id="azure-devops-auditing---overview-and-why-you-would-use-it">Azure DevOps Auditing - overview and why you would use it</h2>
+<p>As briefly mentioned above, Azure DevOps Auditing aggregates logs from all the projects that are connected to the Azure DevOps organization where auditing is enabled. Whenever a relevant change is made by a user or a service identity, it gets logged to the Auditing page of the Azure DevOps organization. There are quite many types of activities that are being logged - just to name a few:</p>
+<ul>
+<li>Service connection changes</li>
+<li>Azure Pipelines changes</li>
+<li>Permission changes</li>
+<li>Access control modifications</li>
+<li>Project and Repository changes</li>
+<li>Organizational Policy changes</li>
+<li>etc.</li>
+</ul>
+<p>You can find a detailed overview of all the areas, actions and action categories that are being logged by Azure DevOps Auditing functionality here: <a href="https://learn.microsoft.com/en-us/azure/devops/organizations/audit/auditing-events?view=azure-devops">Auditing events list</a></p>
+<p>By default, Azure DevOps audit logs will be stored for 90 days. If you want to store logs for a longer period than that you will need to set up a backup solution that will continuously export logs and store them at an external location.</p>
+<p><strong>So, why would you want to enable Azure DevOps Auditing functionality?</strong></p>
+<p>Azure DevOps, just like any other service you may be using, must be monitored for any abnormal activity like invalid login attempts, privilege escalations or permission modifications. If at some point your organization decides to acquire a security-related certification like ISO/IEC 27001, you will need to present proof of audit logs and enabled monitoring for <strong>ALL</strong> of the services that you&rsquo;re using internally. In this case, Azure DevOps is one of the most crucial components you may have in your organization since it contains all the source code of the applications you&rsquo;re owning. You wouldn&rsquo;t want any malicious actors to get their hands on it, I hope..</p>
+<p>This is the reason for why Auditing functionality in Azure DevOps was needed and requested by many organizations. Furthermore, you can aggregate Azure DevOps audit log with other audit logs you may be using from before. Or you can just use the Auditing page that is available directly in Azure DevOps UI itself.</p>
+<p>Now, let&rsquo;s take a look at how we can enable Azure DevOps Auditing and export the audit logs to Azure Monitor logs.</p>
+<h2 id="enable-azure-devops-auditing">Enable Azure DevOps Auditing</h2>
+<p>By default, Azure DevOps Auditing is disabled for all the organizations so you will need to enable it in order for the logging to start. You can enable it in two ways: through Azure DevOps UI and Azure DevOps REST API.</p>
+<blockquote>
+<p>If you have installed Azure DevOps Server on-premises, Auditing will unfortunately <strong>not</strong> work for you. This is the only Azure DevOps deployment that is currently unsupported by Auditing functionality. Your organization must also be connected to Microsoft Entra ID for Auditing to work properly.</p>
+</blockquote>
+<h3 id="azure-devops-ui">Azure DevOps UI</h3>
+<p>In order to enable Azure DevOps Auditing from the Azure DevOps UI you need to go to the &ldquo;Organization Settings&rdquo; page for the respective Azure DevOps Organization - URL should be something like this: <code>https://dev.azure.com/[ORGANIZATION_NAME]/_settings/organizationPolicy</code></p>
+<p>Then, in the &ldquo;Settings&rdquo; pane on the left hand side locate &ldquo;Security&rdquo; section and choose &ldquo;Policies&rdquo;. In &ldquo;Security policies&rdquo; section of the Policies page, toggle &ldquo;Log Audit Events&rdquo; to ON, just as it&rsquo;s shown in the screenshot below. Logs will become available from General -&gt; Auditing section in Organization Settings.</p>
+<p><img src="../../images/ado_auditing/ado_auditing_enable.png" alt="Screenshot of enabling Azure DevOps Auditing through UI"></p>
+<h3 id="azure-devops-rest-api">Azure DevOps REST API</h3>
+<p>You can also enable Auditing with Azure DevOps REST API. In order to do that you will need to base64 encode your Azure DevOps Personal Access Token (PAT) and user (which is an empty string in this case) in following format: <code>&quot;&quot;:AZURE-DEVOPS-PAT</code></p>
+<p>Once it&rsquo;s done you can execute a PATCH request to the Azure DevOps Organization Policy API, as in example below:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -X PATCH https://dev.azure.com/<span class="o">[</span>ORGANIZATION_NAME<span class="o">]</span>/_apis/organizationpolicy/policies/Policy.LogAuditEvents <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s1">&#39;Content-Type: application/json-patch+json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s1">&#39;Accept: application/json;api-version=6.0-preview.1&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s1">&#39;Authorization: Basic [BASE64_ENCODED_PAT]&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s1">&#39;[{&#34;op&#34;:&#34;replace&#34;,&#34;path&#34;:&#34;/Value&#34;,&#34;value&#34;:&#34;true&#34;}]&#39;</span> -i
+</span></span></code></pre></div><h3 id="overview-of-enabled-azure-devops-auditing-page">Overview of enabled Azure DevOps Auditing page</h3>
+<p>Once Azure DevOps Auditing has been enabled you can access the Auditing page at following URL: <code>https://dev.azure.com/[ORGANIZATION_NAME]/_settings/audit</code></p>
+<p>In this page you will see two tabs: one for the audit logs themselves and one for configuration of audit log streaming to an external service. In the Logs section you get a list of all the logs for different activities that have been performed in the respective Azure DevOps organization. Following information is provided as part of the log entry:</p>
+<ul>
+<li>User name with IP address or service name that executed the action;</li>
+<li>Action timestamp in your configured time zone;</li>
+<li>Area that the action is related to, i.e. Azure DevOps resource like Pipelines, Permissions, Projects, etc.</li>
+<li>Action category showing what kind of action has been executed (Execute/Modify/Create, etc.);</li>
+<li>Additional details about the action. In some cases you can see an additional information icon in the same column - if you click on it you can get even more information about the respective action. For example, all the timestamps for when the respective resource was accessed or all the permissions that have been added/modified as part of this action.</li>
+</ul>
+<p>Audit logs can be filtered based on the time period of your choice and logs can be downloaded in CSV or JSON format by clicking on &ldquo;Export log&rdquo; drop-down.</p>
+<p>In the screenshot below you can see a snippet of logs that were requested for August 2022:</p>
+<p><img src="../../images/ado_auditing/ado_auditing_logs.png" alt="Screenshot of Azure DevOps Auditing logs page in the UI"></p>
+<p>You can also query and download these logs with help of <a href="https://learn.microsoft.com/en-us/rest/api/azure/devops/audit/?view=azure-devops-rest-6.0">Azure DevOps Audit API</a></p>
+<p>Now, let&rsquo;s take a look at how we can stream these logs to Azure Monitor logs.</p>
+<h2 id="configure-azure-devops-log-streaming-to-azure-monitor-logs">Configure Azure DevOps log streaming to Azure Monitor logs</h2>
+<p>In some cases it can be really nice to aggregate all the audit logs in one place so that you don&rsquo;t need to switch between different services in order to access different logs. In addition, Azure DevOps itself doesn&rsquo;t have any advanced filtering capabilities available in the UI which can make it hard to search and analyze those logs in the Azure DevOps UI itself. That&rsquo;s when Streams come into picture.</p>
+<p>Currently Azure DevOps supports log streaming to three external services:</p>
+<ul>
+<li>Azure Monitor logs</li>
+<li>Splunk</li>
+<li>Azure Event Grid</li>
+</ul>
+<p>This time we&rsquo;ll enable streaming of Azure DevOps audit logs to Azure Monitor logs and see how we can query those logs afterwards with Log Analytics.</p>
+<h3 id="azure-devops-ui-1">Azure DevOps UI</h3>
+<p>In the Auditing page of Azure DevOps organization settings switch to &ldquo;Streams&rdquo; section and click New stream -&gt; Azure Monitor logs. As you can see Azure DevOps audit logs can be streamed to max 2 instances of each of the available external services so you can export logs to max 2 instances of Azure Monitor logs workspaces.</p>
+<blockquote>
+<p>Please be aware that if you don&rsquo;t have a Log Analytics workspace from before you will need to create a new one - you can check here on how to do that: <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/quick-create-workspace?tabs=azure-portal">Azure Monitor Logs - Create a Log Analytics workspace</a></p>
+</blockquote>
+<p>You will need two pieces of information in order to set up streaming to Azure Monitor logs:</p>
+<ol>
+<li>Workspace ID for Azure Monitor logs instance you&rsquo;re connecting to;</li>
+<li>Primary key for Azure Monitor logs instance you&rsquo;re connecting to - it will be the shared key property that Azure DevOps will use to authenticate to the respective Azure Monitor logs instance;</li>
+</ol>
+<p>You can retrieve this information either with Azure CLI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az monitor log-analytics workspace show --resource-group <span class="o">[</span>LOG_ANALYTICS_WORKSPACE_RESOURCE_GROUP<span class="o">]</span> <span class="se">\ </span>
+</span></span><span class="line"><span class="cl">--workspace-name <span class="o">[</span>LOG_ANALYTICS_WORKSPACE_NAME<span class="o">]</span> <span class="p">|</span> grep <span class="s2">&#34;customerId&#34;</span> <span class="se">\ </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>
+</span></span><span class="line"><span class="cl">az monitor log-analytics workspace get-shared-keys --resource-group <span class="o">[</span>LOG_ANALYTICS_WORKSPACE_RESOURCE_GROUP<span class="o">]</span> <span class="se">\ </span>
+</span></span><span class="line"><span class="cl">--workspace-name <span class="o">[</span>LOG_ANALYTICS_WORKSPACE_NAME<span class="o">]</span> <span class="p">|</span> grep <span class="s2">&#34;primarySharedKey&#34;</span>
+</span></span></code></pre></div><p>Or by going to the respective Log Analytics workspace in Azure Portal and locating Settings -&gt; Agents management section where you can find both the workspace ID and primary key in &ldquo;Log Analytics agent instructions&rdquo; section.</p>
+<p><img src="../../images/ado_auditing/ado_auditing_log_analytics_connect.png" alt="Screenshot of Log Analytics Agents management page in Azure Portal"></p>
+<p>Once a new stream has been created you can see it in the list of the Streams in Azure DevOps Auditing UI. For all the streams in the list you can activate/deactivate them by toggling the Enabled column on and off. You can also edit stream properties or delete the stream by clicking on the three dots on the right hand side of the Enabled column.</p>
+<p><img src="../../images/ado_auditing/ado_auditing_streams.png" alt="Screenshot of Azure DevOps Auditing Streams page in the UI"></p>
+<h3 id="azure-devops-rest-api-1">Azure DevOps REST API</h3>
+<p>You can also set up streaming of Azure DevOps audit logs to Azure Monitor logs with help of Azure DevOps Auditing API. So the same operation we did from Azure DevOps UI in the section above can also be done with a POST request, as shown in the example below. Please note that this operation requires a valid Azure DevOps PAT which is base64 encoded in format <code>&quot;&quot;:AZURE-DEVOPS-PAT</code>.</p>
+<p>Important note here as well is that <code>daysToBackfill</code> is a required parameter which lets the API know if only new entries must be streamed or if existing logs for the provided amount of days need to be streamed as well. For example, if I only want new logs to be streamed to Azure Monitor logs I will use value <code>0</code> for this parameter, but if I also want audit logs for the last 30 days to be exported to Azure Monitor logs I will set the value to <code>daysToBackfill=30</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -X POST https://auditservice.dev.azure.com/<span class="o">[</span>ORGANIZATION_NAME<span class="o">]</span>/_apis/audit/streams?daysToBackfill<span class="o">=</span><span class="m">0</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s1">&#39;Accept: application/json;api-version=6.0-preview.1&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s1">&#39;Authorization: Basic [BASE64_ENCODED_PAT]&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s1">&#39;{&#34;consumerInputs&#34;: {&#34;WorkspaceId&#34;:&#34;[LOG_ANALYTICS_WORKSPACE_ID]&#34;,&#34;SharedKey&#34;:&#34;[LOG_ANALYTICS_WORKSPACE_PRIMARY_KEY]&#34;},&#34;consumerType&#34;: &#34;AzureMonitorLogs&#34;}&#39;</span> -i
+</span></span></code></pre></div><p>You can also perform other actions with Audit API like quering, deleting or updating configured streams. More information can be found here: <a href="https://learn.microsoft.com/en-us/rest/api/azure/devops/audit/streams?view=azure-devops-rest-6.0">Azure DevOps Audit API - Streams</a></p>
+<h3 id="accessing-and-querying-azure-devops-audit-logs-with-log-analytics">Accessing and querying Azure DevOps Audit logs with Log Analytics</h3>
+<p>Now that Azure DevOps audit log streaming to Azure Monitor logs has been enabled you will be able to query and define alerts for those logs with Azure Monitor.</p>
+<p>If you go to the Logs section of the Log Analytics workspace that you have enabled streaming for, you will be able to see a new table called &ldquo;AzureDevOpsAuditing&rdquo;. You can now query this table in order to get the desired results from the Azure DevOps audit logs. In the example below I&rsquo;m retrieving top 10 of Azure DevOps audit logs for the last 3 days:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// Display top 10 Audit log events.</span>
+</span></span><span class="line"><span class="cl"><span class="n">AzureDevOpsAuditing</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="n">project</span> <span class="n">TimeGenerated</span><span class="p">,</span> <span class="n">ActivityId</span><span class="p">,</span> <span class="n">ActorDisplayName</span><span class="p">,</span> <span class="n">CategoryDisplayName</span><span class="p">,</span> <span class="n">Details</span><span class="p">,</span> <span class="n">OperationName</span><span class="p">,</span> <span class="n">ProjectName</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">ScopeDisplayName</span><span class="p">,</span> <span class="n">ScopeType</span><span class="p">,</span> <span class="n">SourceSystem</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">UserAgent</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="n">top</span> <span class="m">10</span> <span class="k">by</span> <span class="n">TimeGenerated</span>
+</span></span></code></pre></div><p><img src="../../images/ado_auditing/ado_auditing_log_analytics_query.png" alt="Screenshot of querying Azure DevOps audit logs with Log Analytics in Azure Portal"></p>
+<p>Great job!😺 We have now both enabled Azure DevOps Auditing and configured streaming of Azure DevOps audit logs to Azure Monitor logs where we successfully queried the logs with help of Log Analytics.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>You can find more information about Azure DevOps Auditing here:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/devops/organizations/audit/azure-devops-auditing?view=azure-devops&amp;tabs=preview-page">Azure DevOps Audit</a></li>
+<li>Azure DevOps DevBlog announcement for support for Audit Stream: <a href="https://devblogs.microsoft.com/devops/introducing-azure-devops-audit-stream/">Introducing Azure DevOps Audit Stream</a></li>
+<li><a href="https://learn.microsoft.com/en-us/rest/api/azure/devops/audit/?view=azure-devops-rest-6.0">Azure DevOps Audit API</a></li>
+<li>C# Code samples on GitHub for Azure DevOps Audit API: <a href="https://github.com/microsoft/azure-devops-dotnet-samples/tree/master/ClientLibrary/Samples/Audit">azure-devops-dotnet-samples:audit</a></li>
+<li>Blog post on future roadmap for Azure DevOps Auditing and planned General Availability release: <a href="https://devblogs.microsoft.com/devops/auditing-coming-to-general-availability-ga-early-2022/">Auditing Coming to General Availability (GA) Early 2022!</a></li>
+</ul>
+<h2 id="next-steps">Next steps</h2>
+<p>In Part 2 of this blog post series we&rsquo;re going to take a look at how we can export Azure DevOps audit logs to Splunk and in Part 3 we&rsquo;ll take a look at how we can export Azure DevOps audit logs to Azure Event Grid.</p>
+<p>That&rsquo;s it from me this time, thanks for checking in!</p>
+<p>If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺</p>
+<p>Stay secure, stay safe.</p>
+<p>Till we connect again!😻</p>
+</div>
+    <div class="post__footer">
+      
+
+      
+        <span><a class="tag" href="/tags/azure-devops/">azure-devops</a><a class="tag" href="/tags/devsecops/">devsecops</a><a class="tag" href="/tags/cybersecurity-corner/">cybersecurity-corner</a><a class="tag" href="/tags/azure/">azure</a></span>
+
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        2023 - Powered by Hugo
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
