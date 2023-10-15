@@ -25,5 +25,5 @@ pygmentsCodefencesGuessSyntax = true
   # uncomment line below for temporary local development of module
   # replacements = "github.com/lxndrblz/anatole -> ../../anatole"
   [[module.imports]]
-    path = "github.com/lxndrblz/anatole"
+    path = "github.com/guidemetothemoon/anatole"
     disable = false
