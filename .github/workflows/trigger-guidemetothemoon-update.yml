@@ -3,6 +3,10 @@ on:
   pull_request_target:
     types:
       - closed
+    branches: 
+      - main
+    paths: 
+      - 'content/**'
 jobs:
   trigger-guidemetothemoon-workflow:
     if: github.event.pull_request.merged == true
