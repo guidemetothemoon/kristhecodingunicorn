@@ -1,12 +1,15 @@
 name: Trigger guidemetothemoon content update
 on:
-  workflow_run:
-    workflows: [pages-build-deployment]
+  pull_request_target:
     types:
-      - completed
+      - closed
+    branches: 
+      - main
+    paths: 
+      - 'content/**'
 jobs:
   trigger-guidemetothemoon-workflow:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - uses: actions/github-script@v6
