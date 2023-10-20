@@ -52,4 +52,4 @@ $evictedPods = ((kubectl get pods -n testapp -o json | ConvertFrom-Json).items |
 foreach($pod in $evictedPods) {kubectl delete pods $($pod.metadata.name) -n testapp}
 ```
 
-Thanks for reading and till next tech tip ;)
+Thanks for reading and till next tech tip 😻
