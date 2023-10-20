@@ -12,7 +12,18 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - uses: tj-actions/changed-files@v39
+      id: changed-files
+      with:
+        files: 'content/**/*.md'
+        separator: ","
+    
     - uses: actions/github-script@v6
+      if: steps.changed-files.outputs.any_changed == 'true'
       with:
         github-token: ${{ secrets.PAT }}
         script: |
