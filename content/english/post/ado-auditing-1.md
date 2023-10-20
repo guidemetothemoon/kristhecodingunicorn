@@ -104,7 +104,7 @@ Currently Azure DevOps supports log streaming to three external services:
 
 This time we'll enable streaming of Azure DevOps audit logs to Azure Monitor logs and see how we can query those logs afterwards with Log Analytics.
 
-### Azure DevOps UI
+### UI
 
 In the Auditing page of Azure DevOps organization settings switch to "Streams" section and click New stream -> Azure Monitor logs. As you can see Azure DevOps audit logs can be streamed to max 2 instances of each of the available external services so you can export logs to max 2 instances of Azure Monitor logs workspaces.
 
@@ -135,7 +135,7 @@ Once a new stream has been created you can see it in the list of the Streams in 
 
 ![Screenshot of Azure DevOps Auditing Streams page in the UI](../../images/ado_auditing/ado_auditing_streams.png)
 
-### Azure DevOps REST API
+### REST API
 
 You can also set up streaming of Azure DevOps audit logs to Azure Monitor logs with help of Azure DevOps Auditing API. So the same operation we did from Azure DevOps UI in the section above can also be done with a POST request, as shown in the example below. Please note that this operation requires a valid Azure DevOps PAT which is base64 encoded in format ```"":AZURE-DEVOPS-PAT```.
 

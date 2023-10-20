@@ -12,7 +12,7 @@ tags = [
 +++
 
 Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering!
-Let\'s use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.ex. ```192.0.2.146```. 
+Let\'s use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.ex. ```192.0.2.146```.
 
 So, in order to retrieve all DNS records in respective DNS zone pointing to ```192.0.2.146``` with Azure CLI I could either:
 
@@ -32,7 +32,7 @@ Measure-Command { $dns_recs_to_update = az network dns record-set a list -g test
 | ConvertFrom-Json }
 ```
 
-```
+``` cmd
 # Approach 1
 PS C:\Playground> Measure-Command {$dns_list = az network dns record-set a list -g test-rg -z dev.testzone.com; $dns_recs = $dns_list | ConvertFrom-Json -Depth 4 | Where-Object {$_.arecords.ipv4Address -eq "192.0.2.146"}}
 

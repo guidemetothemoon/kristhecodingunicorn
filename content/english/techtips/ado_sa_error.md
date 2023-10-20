@@ -120,13 +120,13 @@ Due to the limitation mentioned above I would recommend approach #2 for which I 
 
 ### Use Azure DevOps Environment with Kubernetes Resource of type "Generic provider (existing service account)"
 
-For this approach we don't need to create a Kubernetes service connection manually. We can use both Azure DevOps Environments and Kubernetes Resources as before, with one minor difference - we need to create Kubernetes Resource of type ```Generic provider (existing service account)``` instead of ```Azure Kubernetes Service```. 
+For this approach we don't need to create a Kubernetes service connection manually. We can use both Azure DevOps Environments and Kubernetes Resources as before, with one minor difference - we need to create Kubernetes Resource of type ```Generic provider (existing service account)``` instead of ```Azure Kubernetes Service```.
 
 The initial steps are the same as in approach #1: you need to create a ServiceAccount with respective Secret and RoleBinding, retrieve cluster server URL and ServiceAccount Secret Object JSON. In addition you will need to provide Namespace that you want the Resource to be deployed to, and Kubernetes cluster name. This time you will need to provide this information when creating a Kubernetes Resource in the Azure DevOps Environment of your choice, like it's shown in the screenshot below:
 
 ![Screenshot of Azure DevOps Environment with Kubernetes Generic Provider Resource creation](../../images/tech_tips/ado_env_k8s_generic_resource.png)
 
-If you're getting following error during creation of a Kubernetes Resource: 
+If you're getting following error during creation of a Kubernetes Resource:
 
 ![Screenshot of Azure DevOps Environment with Kubernetes Generic Provider Resource validation error upon creation](../../images/tech_tips/ado_env_generic_k8s_resource_validation_error.png)
 

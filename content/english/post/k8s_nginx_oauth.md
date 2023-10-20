@@ -566,13 +566,13 @@ And we're done! 🎉 Now, when accessing both ```https://aks-helloworld-one.dev.
 
 If you will be using OAuth2 Proxy that I have used in this blog post there are a few known issues you should know about and how those issues can be mitigated.
 
-#### Version 7.3.0 - Issue with Azure provider
+### Version 7.3.0 - Issue with Azure provider
 
 Normally, when you want to use OAuth2 Proxy with Microsoft Entra ID Identity Provider, you would use ```--provider=azure``` in the ```template.spec.containers.args``` section of the Deployment resource in the template from the previous section. In release 7.3.0 of OAuth2 Proxy a breaking change was introduced which affected Azure provider and a solution for it is to use a generic OIDC provider instead of Azure provider by setting provider to oidc like this: ```- --provider=oidc```. You can also see me using it in the template above. You can check this GitHub Issue for more details on this: [v7.3.0 breaks azure provider](https://github.com/oauth2-proxy/oauth2-proxy/issues/1666)
 
 > This seems to be fixed in version ```7.4.0```, I've tested it and haven't been able to reproduce this issue in the new version but if you still do experience the same issue with version ```7.4.0```, do check the discussion on the GitHub Issue mentioned above or just switch to OIDC provider.
 
-#### Version 7.3.0, Azure B2C - ```Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email```
+### Version 7.3.0, Azure B2C - ```Error creating session during OAuth2 callback: neither the id_token nor the profileURL set an email```
 
 If you have configured everything correctly and according to what's described in this blog post but are still getting this error, a workaround will be to add ```- --user-id-claim=oid``` to the ```args``` section of the OAuth2 Proxy Deployment resource in the template from the previous section. It will override email claim which is required by the OAuth2 Proxy by default with object id. You can read more about it in this Stackoverflow item: [How can I debug oauth2_proxy when connecting to Azure B2C?](https://stackoverflow.com/questions/61148502/how-can-i-debug-oauth2-proxy-when-connecting-to-azure-b2c).
 

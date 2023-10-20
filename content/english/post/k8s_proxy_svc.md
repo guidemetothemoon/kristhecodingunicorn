@@ -18,7 +18,7 @@ So, recently I've faced a scenario where I got a chance to dig more into differe
 
 ## Why would proxying to external services from Kubernetes cluster be relevant?
 
-There may be multiple reasons for why you would look into setting up this kind of proxying to external services from Kubernetes cluster. 
+There may be multiple reasons for why you would look into setting up this kind of proxying to external services from Kubernetes cluster.
 
 A few use case examples may be:
 
@@ -27,7 +27,7 @@ A few use case examples may be:
 * You have a service that is located in a different datacenter than the Kubernetes cluster.
 * You're performing a larger re-structuring/refactoring in your Kubernetes cluster and would like to avoid downtime, as well as have an easy way to redirect traffic during migration.
 
-Scenario where this became relevant for me was like this: I have a single-tenant application that is used by hundreds of customers. Some instances of this application are already hosted in Kubernetes (Azure Kubernetes Service (AKS) in this case), but most of the instances are still hosted on hundreds of Azure VMs which are using only dynamic IPs. A new component that was added to the core application sends requests to an external service's API that is hosted by a third-party. This external API accepts requests coming **only** from static IPs, i.e. you will need to have a single static IP that the third-party will need to whitelist in order for you to call their APIs. This would work fine for the instances hosted in Kubernetes since we're already using Ingress Controller there with a static public IP that the requests will be sent from but, as you may guess, this wouldn't work for most of the instances that are still deployed on Azure VMs with dynamic IPs. 
+Scenario where this became relevant for me was like this: I have a single-tenant application that is used by hundreds of customers. Some instances of this application are already hosted in Kubernetes (Azure Kubernetes Service (AKS) in this case), but most of the instances are still hosted on hundreds of Azure VMs which are using only dynamic IPs. A new component that was added to the core application sends requests to an external service's API that is hosted by a third-party. This external API accepts requests coming **only** from static IPs, i.e. you will need to have a single static IP that the third-party will need to whitelist in order for you to call their APIs. This would work fine for the instances hosted in Kubernetes since we're already using Ingress Controller there with a static public IP that the requests will be sent from but, as you may guess, this wouldn't work for most of the instances that are still deployed on Azure VMs with dynamic IPs.
 
 For those cases there was a need to find a different solution.
 
@@ -71,16 +71,16 @@ A Kubernetes Service can also be created **with selectors and without selectors*
 
 ### Endpoint vs. EndpointSlice
 
-With a more vast usage of Kubernetes it became clear that the original Endpoint resource has limitations, especially when it comes to load-intensive, large-scale environments, where increased amount of network endpoints was required. That's why EndpointSlice got created as a more flexible, better alternative to an Endpoint resource. 
+With a more vast usage of Kubernetes it became clear that the original Endpoint resource has limitations, especially when it comes to load-intensive, large-scale environments, where increased amount of network endpoints was required. That's why EndpointSlice got created as a more flexible, better alternative to an Endpoint resource.
 
 **EndpointSlice** references to a subset of network endpoints, but compared to original Endpoint, multiple EndpointSlices can exist per Service and a single EndpointSlice contains max 100 endpoints by default (this is a configurable setting). This implementation allows for better scalability and extensibility which is very visible at scale.
 
 As of spring 2023 it's stated that Endpoint resource isn't going to be removed and will continue to remain supported and stable, but it's now considered a legacy feature. More and more services now rely on EndpointSlice and you should create EndpointSlice resources instead of Endpoint resources wherever it's applicable and is supported.
 
 I recommend to check out these links for more information:
-- [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
 
-- [Scaling Kubernetes Networking With EndpointSlices](https://kubernetes.io/blog/2020/09/02/scaling-kubernetes-networking-with-endpointslices/)
+* [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
+* [Scaling Kubernetes Networking With EndpointSlices](https://kubernetes.io/blog/2020/09/02/scaling-kubernetes-networking-with-endpointslices/)
 
 Now that we've covered the basics, let's get back to the scenario that I've described above and see how we can implement proxying to external services with help of Kubernetes Service without selectors and ExternalName Service. 😼
 
@@ -132,7 +132,8 @@ subsets:
   ports:
   - port: 80
 ```
-***Important note on EndpointSlice:*** ideally, in this case you should create an EndpointSlice resource instead of Endpoint, but at the time of updating this blog post (March 2023), there is a bug in NGINX Ingress Controller that prevents us from doing it. Even though support for EndpointSlice in NGINX Ingress Controller was added with release [3.0.0](https://docs.nginx.com/nginx-ingress-controller/releases/#nginx-ingress-controller-300) in January 2023, there's an issue with EndpointSlices causing crash of NGINX Pods when Headless Service or Service without selectors is being used: [EndpointSlices causes crash (panic) with headless service](https://github.com/kubernetes/ingress-nginx/issues/9606). 
+
+***Important note on EndpointSlice:*** ideally, in this case you should create an EndpointSlice resource instead of Endpoint, but at the time of updating this blog post (March 2023), there is a bug in NGINX Ingress Controller that prevents us from doing it. Even though support for EndpointSlice in NGINX Ingress Controller was added with release [3.0.0](https://docs.nginx.com/nginx-ingress-controller/releases/#nginx-ingress-controller-300) in January 2023, there's an issue with EndpointSlices causing crash of NGINX Pods when Headless Service or Service without selectors is being used: [EndpointSlices causes crash (panic) with headless service](https://github.com/kubernetes/ingress-nginx/issues/9606).
 
 Once the issue above is resolved you should then be able to replace Endpoint implementation above with the EndpointSlice implementation below:
 
@@ -153,7 +154,6 @@ endpoints:
   - addresses:
     - "10.240.0.129" # IP address of your external service that you would like to proxy requests to
 ```
-
 
 Next, let's create an Ingress resource in order to enable traffic routing to the newly created Service. If your backend service only accepts HTTPS traffic and you're using NGINX, in addition to updating the destination port accordingly you will need to add ```nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"``` annotation to the Ingress resource definition.
 
@@ -255,10 +255,9 @@ The flow would look something like this:
 
 If we now go to ```https://proxy-service-externalname.dev.com```, we'll be redirected to ```https://ipvalidator-test.dev.com```.
 
-In this case the egress traffic from AKS cluster uses respective Azure Load Balancer public static IP. In this example the IP is the same one as that was used in the previous example (external static IP of NGINX Ingress Controller). What this means is that it's still the same IP that the third-party service can whitelist in order for us to be able to call their APIs. 
+In this case the egress traffic from AKS cluster uses respective Azure Load Balancer public static IP. In this example the IP is the same one as that was used in the previous example (external static IP of NGINX Ingress Controller). What this means is that it's still the same IP that the third-party service can whitelist in order for us to be able to call their APIs.
 
 > **Important note:** **If you want to use ExternalName Service in AKS with NGINX, you will need to set up NGINX Plus Ingress Controller**. It's not officially supported in Basic version of NGINX. You can read more about it here: [Support for ExternalName Services](https://www.nginx.com/blog/announcing-nginx-ingress-controller-for-kubernetes-release-1-5-0/#ExternalName). It may work in some cases though with Basic NGINX Ingress - I was, for instance, able to test proxying with ExternalName Service in Minikube after installing NGINX Ingress Controller add-on. The reason for that is that this functionality is not stable in Basic NGINX Ingress. Even if you manage to make it work once, there are many more issues that may come up afterwards so it's definitely not a way to go for production workloads - you can find more detailed information in the following GitHub issue: [Ingress with a backend service type ExternalName](https://github.com/nginxinc/kubernetes-ingress/issues/837?fbclid=IwAR3T_dhPlsouVMsFTnYlj78WPeh0R280TSFKlcdnjmKqPcM9L5sOhwVmdcU)
-
 > There are some known challenges with ExternalName Service type, also when it comes to common protocols like HTTP and HTTPS. Challenges are related to the Host header discrepancies in the hostname that ExternalName Service references vs. the actual hostname that is used by the clients inside the Kubernetes cluster. You can read more about the challenges here: [Type ExternalName](https://kubernetes.io/docs/concepts/services-networking/service/#externalname). In order to skip preserving the hostname that was initially set in the request you can add following annotation to your Ingress definition: ```ingress.kubernetes.io/preserve-host: "false"``` (valid for Ingress Controller like, f.ex., Traefik) or ```nginx.ingress.kubernetes.io/upstream-vhost: [your_external_host]``` (valid for NGINX Ingress Controller).
 
 ## Additional resources
@@ -273,7 +272,7 @@ Below you may find some additional material that may be relevant for more in-dep
 * Explanation of EndpointSlice and comparison to Endpoint resource: [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
 * Explanation of how to create an Ingress Controller with static public IP in Azure Kubernetes Service (AKS): [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
 
-That's it from me this time, thanks for checking in! 
+That's it from me this time, thanks for checking in!
 If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page.😺
 
 Stay secure, stay safe.

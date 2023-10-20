@@ -45,7 +45,7 @@ Once you start using third-party images it's important that you do your research
 
 #### Rootless Containers
 
-For additional security and isolation you can consider adopting rootless containers, if it's supported for your use case. Rootless containers fully eliminate access to the root user on the host system that a container runs on. In this case, both the container itself and container runtime are running without root privileges. Even if you forget to specify a non-root user to run containers with, or you may need a root user to perform specific operations inside the container, outside of the container you will not have root user privileges, i.e. you will not be able to access the host system as root. In this case, if your container is compromised and an attacker will be able to get access to the host system, he/she will not be able to perform any actions with root privileges on the host. 
+For additional security and isolation you can consider adopting rootless containers, if it's supported for your use case. Rootless containers fully eliminate access to the root user on the host system that a container runs on. In this case, both the container itself and container runtime are running without root privileges. Even if you forget to specify a non-root user to run containers with, or you may need a root user to perform specific operations inside the container, outside of the container you will not have root user privileges, i.e. you will not be able to access the host system as root. In this case, if your container is compromised and an attacker will be able to get access to the host system, he/she will not be able to perform any actions with root privileges on the host.
 
 Container engines like Podman have been offering rootless containers for a while now. It was harder to offer support for this by container engines which required a daemon in order to create and manage containers - for example, Docker is one of the container engines that didn't support it until 2020. With Docker version 20.10.0 support for rootless mode has been officially released in GA. With rootless mode in Docker even Docker daemon doesn't require root privileges. You can read more about rootless mode in Docker here: [Run the Docker daemon as a non-root user (Rootless mode)](https://docs.docker.com/engine/security/rootless)
 
@@ -63,11 +63,12 @@ You can read more about Security Context in Kubernetes here: [Configure a Securi
 
 In most cases, when packaging your applications in a container you will need to use a third-party base image that is built upon an operating system of your choice and has necessary frameworks and tools installed that your application may need in order to run successfully. For example, if you want to run an ASP.NET 6 application on Linux, you would need a base image that includes a Linux distribution of your choice and has ASP.NET 6 installed. In many cases though third-party images may contain lots of unnecessary tools and libraries that your application doesn't need. Having lots of unnecessary components installed results in a broader attack surface for malicious actors to explore. In addition, the more components you have, the more security vulnerabilities you may need to handle.
 
-In order to mitigate this you should use minimal container images that include only those tools and utilities that are absolutely necessary in order for your application to run. If your application requires additional tools and libraries you can granularly define what to include on top of the minimal package as part of the container build phase. Minimal container images definitely have security benefits, but including only what's needed may also significantly reduce the total container image size which results in faster image download and container startup time. 
+In order to mitigate this you should use minimal container images that include only those tools and utilities that are absolutely necessary in order for your application to run. If your application requires additional tools and libraries you can granularly define what to include on top of the minimal package as part of the container build phase. Minimal container images definitely have security benefits, but including only what's needed may also significantly reduce the total container image size which results in faster image download and container startup time.
 
 ### Summary on mitigating common container security pitfalls
 
 To sum it up, in order to strengthen container security and mitigate common pitfalls you should:
+
 - 🛡 Define a default unprivileged user that container will run with;
 - 🛡 Bind to ports higher than 1024 - if a lower port is required, a proxy can be used;
 - 🛡 Be conscious when choosing third-party images: choose unprivileged image or build an unprivileged custom image on top of the original image;
@@ -85,11 +86,11 @@ In August 2022 built-in support for .NET 6 in Ubuntu was officially announced. B
 
 **What are Chiseled Ubuntu Containers?** 🤔
 
-Chiseled Ubuntu Containers are a minimal version of Ubuntu image with enhanced security: 
+Chiseled Ubuntu Containers are a minimal version of Ubuntu image with enhanced security:
 
-* ✅ There is no shell or package manager installed;
-* ✅ Only needed libraries and utilities are installed;
-* ✅ Uses unprivileged, non-root user by default;
+- ✅ There is no shell or package manager installed;
+- ✅ Only needed libraries and utilities are installed;
+- ✅ Uses unprivileged, non-root user by default;
 
 Chiseled Ubuntu Containers (CUC) are available from Ubuntu version 22.04 (Jammy). CUC are built based on the original Ubuntu 22.04 OS, but are heavily stripped to include only what's necessary, and are extra hardened in terms of security following least privilege principle. An advantage of CUC is that it significantly reduces the attack surface and total amount of security vulnerabilities that you may need to handle. Another advantage is the total image size - compared to the original ASP.NET 6 Ubuntu Jammy image, ASP.NET 6 Chiseled Ubuntu Container image is at least 100MB smaller! 😻
 
@@ -190,7 +191,7 @@ Let's run a security scan for both of the images and see how many vulnerabilitie
 
 ![Screenshot for Trivy security scan of the Cat Encyclopedia image built upon regular ASP.NET 6 Ubuntu Jammy base image](../../images/dotnet_chiseled/dotnet_jammy_trivy.png)
 
-Whilst for the updated Cat Encyclopedia image which was built upon ASP.NET 6 Chiseled Ubuntu base image Trivy detected .... 
+Whilst for the updated Cat Encyclopedia image which was built upon ASP.NET 6 Chiseled Ubuntu base image Trivy detected....
 
 **0** security vulnerabilities!🙀
 

@@ -49,9 +49,9 @@ ClusterRoleNamespace:metadata.namespace, ObjectKind:kind, CreatedAt:metadata.cre
 
 Here, we\'re also using regex to filter out entries that may start with or match the name we\'re searching for. In case there are any accounts that have been assigned the ClusterRole or Role we\'ve been checking for, the output of the command will look something like this:
 
-**Output format: [ServiceAccountName] [ClusterRoleName] [ClusterRoleNamespace] [ObjectKind] [CreatedAt]**
+Output format: ```[ServiceAccountName] [ClusterRoleName] [ClusterRoleNamespace] [ObjectKind] [CreatedAt]```
 
-```
+``` txt
   testapp-admin         system:aggregate-to-edit    <none>                  ClusterRoleBinding                  2022-06-09T14:56:16Z
   testapp-admin         system:aggregate-to-edit    testapp                 RoleBinding                         2022-06-09T14:56:16Z
 ```

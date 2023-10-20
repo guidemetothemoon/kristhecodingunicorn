@@ -16,7 +16,7 @@ tags = [
 
 In this blog post I would like to take a look at how we can ensure that Dockerfiles we create are of high quality and are following best practices in the industry. Tools like Hadolint make it very easy for us to do that and can automate the verification process.
 
-If you're working with containerized applications or are planning on containerizing an application you will most likely be working with a Dockerfile. Dockerfile is a variation of a text file (without a file extension though) where you define a set of instructions for assembling, configuring and starting up your application container image. Those instructions are then compiled during the build process (for example, with ```docker build``` command) and are packaged into an artifact, known as a container image, which may then be pushed to a container registry like Docker Hub or Azure Container Registry. 
+If you're working with containerized applications or are planning on containerizing an application you will most likely be working with a Dockerfile. Dockerfile is a variation of a text file (without a file extension though) where you define a set of instructions for assembling, configuring and starting up your application container image. Those instructions are then compiled during the build process (for example, with ```docker build``` command) and are packaged into an artifact, known as a container image, which may then be pushed to a container registry like Docker Hub or Azure Container Registry.
 
 You can read more about it in official Docker documentation: [Dockerfile reference](https://docs.docker.com/engine/reference/builder)
 
@@ -70,7 +70,7 @@ In the example below I have created two build tasks: one that downloads and exec
       inputs:
         pathToPublish: 'hadolint-scan.sarif'
         artifactName: 'CodeAnalysisLogs'
-``` 
+```
 
 ![Screenshot of Hadolint tool output](../../images/k8s_hadolint/k8s_hadolint_ado_sarif_output.png)
 
@@ -125,10 +125,10 @@ You can also save Hadolint output to a separate file to consume it for display o
 
 It is a good idea to integrate some tools as part of the local development routines in order to detect potential issues and quality improvements early in the development lifecycle. Fortunately Hadolint can be installed as a VSCode extension. You can search for it directly in the Extensions tab of Visual Studio Code or check out it's page on VSCode marketplace: [hadolint](https://marketplace.visualstudio.com/items?itemName=exiasr.hadolint).
 
-> If you're getting an error message after installation that says that hadolint executable can't be found it may be that you have saved it to an unusual folder. You can verify and update that by going to ```Extension Settings``` of Hadolint extension in VSCode and updating ```Hadolint: Hadolint Path``` field either in User or Workspace tab, or both. 
+> If you're getting an error message after installation that says that hadolint executable can't be found it may be that you have saved it to an unusual folder. You can verify and update that by going to ```Extension Settings``` of Hadolint extension in VSCode and updating ```Hadolint: Hadolint Path``` field either in User or Workspace tab, or both.
 
 Once it's installed and you open a Dockerfile in VSCode you will get information about detected issues in the **"Problems"** tab of your VSCode workspace.
-Let's take a look at a simple example. 
+Let's take a look at a simple example.
 
 Here I have a simple Dockerfile:
 
@@ -139,13 +139,14 @@ COPY CatEncyclopedia/src App/
 WORKDIR /App
 ENTRYPOINT ["dotnet", "CatEncyclopedia.dll"]
 ```
+
 Once I open it in VSCode I can see that Hadolint gets into action and lets me know that there's something I need to improve in my file:
 
 ![Screenshot of Hadolint VSCode extension output when an issue is detected](../../images/k8s_hadolint/k8s_hadolint_vscode_output1.png)
 
-You can also see from the screenshot above that detected issues are highlighted directly in the Dockerfile so that you can hover over them to read the same information that you can see in the Problems tab. 
+You can also see from the screenshot above that detected issues are highlighted directly in the Dockerfile so that you can hover over them to read the same information that you can see in the Problems tab.
 
-It seems like I have misplaced some Docker instructions. Since I am actually setting a ```WORKDIR```, let's move this instruction so that it happens before the ```COPY``` instruction. 
+It seems like I have misplaced some Docker instructions. Since I am actually setting a ```WORKDIR```, let's move this instruction so that it happens before the ```COPY``` instruction.
 Now our Dockerfile will look like this:
 
 ``` yaml
@@ -170,7 +171,7 @@ Great work everyone, our Dockerfile has become a notch better!😺
 * Docker provides some of the best practices for writing Dockerfiles in their official documentation: [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices)
 * Azure DevOps SARIF extension: [SARIF SAST Scans Tab](https://marketplace.visualstudio.com/items?itemName=sariftools.scans)
 
-That\'s it from me this time, thanks for checking in! 
+That\'s it from me this time, thanks for checking in!
 
 If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺
 

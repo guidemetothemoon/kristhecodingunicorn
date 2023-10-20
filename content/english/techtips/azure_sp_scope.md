@@ -12,7 +12,7 @@ tags = [
 ]
 +++
 
-A thought struck me one day when I was working with onboarding machines to Azure Arc. If you want to onboard multiple servers at scale to Azure Arc, you would need a Service Principal with ```Azure Connected Machine Onboarding``` role in the respective subscription or resource group where you want to create Azure Arc-enabled servers. An interesting thing here is: what if you would like to re-use the same service principal in order to onboard more Azure Arc resources but to another subscription and/or another resource group? 
+A thought struck me one day when I was working with onboarding machines to Azure Arc. If you want to onboard multiple servers at scale to Azure Arc, you would need a Service Principal with ```Azure Connected Machine Onboarding``` role in the respective subscription or resource group where you want to create Azure Arc-enabled servers. An interesting thing here is: what if you would like to re-use the same service principal in order to onboard more Azure Arc resources but to another subscription and/or another resource group?
 
 **Is there a way you can modify the scope of the Azure Arc Service Principal, or any regular Service Principal for that matter, after it's been created?** 🧐
 
@@ -28,7 +28,7 @@ In Azure portal you can navigate to Access Control section of the respective Azu
 
 > Please note that you will need to provide full name of the Service Principal in the members search field in order for Azure to make it available for role assignment choice.
 
-In Azure CLI you can create a role assignment either by providing a ```--resource-group``` argument if you want to assign a role on the resource group level, or a ```--scope``` argument if you want to assign a role on the Azure resource level. ```--scope``` value is a resource ID in Azure so if I were to assign a role on the subscription level I would use ```--scope "/subscriptions/<subscription_id>"```. 
+In Azure CLI you can create a role assignment either by providing a ```--resource-group``` argument if you want to assign a role on the resource group level, or a ```--scope``` argument if you want to assign a role on the Azure resource level. ```--scope``` value is a resource ID in Azure so if I were to assign a role on the subscription level I would use ```--scope "/subscriptions/<subscription_id>"```.
 
 ```az role assignment create --assignee-object-id <service_principal_id> --role <role_name> --resource-group <resource_group_name> --assignee-principal-type ServicePrincipal```
 

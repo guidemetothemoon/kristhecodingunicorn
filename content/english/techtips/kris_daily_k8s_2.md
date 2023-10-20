@@ -22,7 +22,7 @@ In second edition of this tech tip series I would like to share a few tips relat
 
 Sometimes you may need to run a CronJob (scheduled Job) instantly, for example, when you\'re debugging some execution errors. So, can you do that instantly or do you need to wait for the next time slot that the CronJob is scheduled for to execute? Well, you can pretty easily create a regular Job based on CronJob definition and in that way trigger it instantly - here\'s how you can do that with ```kubectl```:
 
-{{< highlight bash >}}
+``` bash
 # 1. Get definition and namespace of the CronJob you want to run from the list of all existing CronJobs
 kubectl get cronjob -A
 
@@ -35,8 +35,7 @@ kubectl get job [job_name] -n [namespace] --watch
 # 4. Check Pod logs for more information by checking the logs of the Pods associated with the newly created Job
 kubectl get pods --selector=job-name=[job_name] --output=wide -n [namespace]
 kubectl log [job_pod_name] -n [namespace]
-
-{{< /highlight >}}
+```
 
 ## #2 - Configure Rolling Update for Deployment
 
@@ -44,7 +43,7 @@ What\'s a Rolling Update? Well, it\'s a very nice way to upgrade an application 
 
 It can be configured by including ```strategy``` section in the Deployment ```spec``` section like it\'s shown below:
 
-{{< highlight yaml >}}
+``` yaml
 
 apiVersion: apps/v1
 kind: Deployment
@@ -71,18 +70,15 @@ spec:
       containers:
 
 # Rest of the code is omitted
-
-{{< /highlight >}}
+```
 
 ## #3 - Check what add-ons are available in AKS with Azure CLI
 
 There are several add-ons that you can install in AKS cluster to get additional functionality but how do you know what add-ons actually exist and what they\'re meant to do? You can easily find it out by running following command with Azure CLI:
 
-{{< highlight bash >}}
-
+``` bash
 az aks addon list-available
-
-{{< /highlight >}}
+```
 
 This command will provide a list of all the add-ons that are available for installation, which add-ons are in Preview mode and what each add-on does.
 

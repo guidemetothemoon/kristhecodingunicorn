@@ -17,8 +17,6 @@ tags = [
 
 ***This blog post is a contribution to Azure Back to School - an annual community event taking place in September. For the Community by the Community, during the whole month of September, contributors share their knowledge and experience about Azure. You're welcome to check out all the contributions here:*** [2023 Azure Back to School Session Schedule](https://azurebacktoschool.github.io/edge%20case/azure-back-to-school-2023-session-schedule)
 
-![Azure Back to School logo](../../images/azure_back_to_school_logo.webp)
-
 ## Introduction
 
 Chaos engineering has been known to the tech industry for quite many years now, but it has gained significant popularity and wider adoption during the last few years. There are good reasons for why this acceleration has happened. If we take a look at a modern software development landscape we will see that we're steadily building more complex, distributed systems and applications, with hundreds or even thousands of dependencies and interconnections. Ensuring that all of these bits and pieces play nicely together to provide availability, stability and security of our systems at all times is a challenge that's not for the faint-hearted.

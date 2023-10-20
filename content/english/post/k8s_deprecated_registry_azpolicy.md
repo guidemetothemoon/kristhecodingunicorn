@@ -21,9 +21,9 @@ From 3rd April 2023, ```k8s.gcr.io``` legacy image registry is officially frozen
 
 ```registry.k8s.io``` image registry is an official replacement for ```k8s.gcr.io```, and you must ensure that you don't have any dependencies on the legacy image registry as soon as possible.
 
-The journey of transitioning to the new registry started back in 2022, when ```registry.k8s.io``` reached GA. There were multiple reasons for this change, but the most important reason is that the new image registry acts as a form of Content Delivery Network (CDN), spreading the load across regions, which will allow more cloud providers and vendors provide better experience to their image consumers by hosting their images "closer to home". 
+The journey of transitioning to the new registry started back in 2022, when ```registry.k8s.io``` reached GA. There were multiple reasons for this change, but the most important reason is that the new image registry acts as a form of Content Delivery Network (CDN), spreading the load across regions, which will allow more cloud providers and vendors provide better experience to their image consumers by hosting their images "closer to home".
 
-**Lower egress bandwidth && cost -> Higher download speed -> Better user experience**. A win-win change. ✅ 
+**Lower egress bandwidth && cost -> Higher download speed -> Better user experience**. A win-win change ✅
 
 You can read the full announcement here: [k8s.gcr.io Image Registry Will Be Frozen From the 3rd of April 2023](https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/)
 
@@ -33,11 +33,9 @@ This is an example of where blacklisting an image registry could come in handy a
 
 There are multiple options you may consider:
 
-1. **Assign ```Kubernetes cluster containers should only use allowed images``` built-in policy definition** (```/providers/Microsoft.Authorization/policyDefinitions/febd0533-8e55-448f-b837-bd0e06f16469```) and explicitly whitelist image registries that you allow Kubernetes cluster workloads to use. If you've already assigned this policy definition you need to ensure that ```k8s.gcr.io``` image registry is no longer included. 
+1. **Assign ```Kubernetes cluster containers should only use allowed images``` built-in policy definition** (```/providers/Microsoft.Authorization/policyDefinitions/febd0533-8e55-448f-b837-bd0e06f16469```) and explicitly whitelist image registries that you allow Kubernetes cluster workloads to use. If you've already assigned this policy definition you need to ensure that ```k8s.gcr.io``` image registry is no longer included. From what I could see, above built-in policy definition only evaluates Pod containers/initContainers/ephemeralContainers. If you want to evaluate CronJob and Workload containers/initContainers/ephemeralContainers, as it's done in the custom policy below, you will either need to create a custom Azure Policy based on the above built-in policy definition or go ahead with the below alternative #2.
 
-> From what I could see, above built-in policy definition only evaluates Pod containers/initContainers/ephemeralContainers. If you want to evaluate CronJob and Workload containers/initContainers/ephemeralContainers, as it's done in the custom policy below, you will either need to create a custom Azure Policy based on the above built-in policy definition or go ahead with the below alternative #2.
-
-2. **Create custom Azure Policy that can be used for blacklisting non-compliant/deprecated image registries.** ```k8s.gcr.io``` image registry can be added to the list. Then, Kubernetes cluster workloads that are attempting to use this image registry (or other blacklisted registries for that matter) will be denied deployment. 
+2. **Create custom Azure Policy that can be used for blacklisting non-compliant/deprecated image registries.** ```k8s.gcr.io``` image registry can be added to the list. Then, Kubernetes cluster workloads that are attempting to use this image registry (or other blacklisted registries for that matter) will be denied deployment.
 
 Let's look into the latter alternative in more detail. I've taken templates for Gatekeeper that are available in AWS EKS Best Practices repo and modified them further in order to create a custom Azure Policy that will either audit or deny deployment of workloads (Pod/CronJob/Workload containers, initContainers and ephemeralContainers) that are dependent on the blacklisted image registries.
 
@@ -57,7 +55,7 @@ Once you've created the custom Azure Policy definition and assigned it to the sc
 
 ![Screenshot of the output after execution of the newly created custom Azure policy definition for non-compliant image registries](../../images/k8s_registry_azpolicy/k8s_deprecated_registry_azpolicy_output.png)
 
-For more information about Azure Policy, please see here: 
+For more information about Azure Policy, please see here:
 
 * [Understand Azure Policy for Kubernetes clusters](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes)
 * [Azure Policy definition structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)

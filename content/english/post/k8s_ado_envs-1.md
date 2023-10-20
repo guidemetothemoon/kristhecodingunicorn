@@ -27,7 +27,7 @@ If you would like to know a simple but really useful way to re-use the same Azur
 
 Azure DevOps Environment basically represents a location where your applications are deployed to - it may be a Kubernetes cluster or even a Virtual Machine. Azure DevOps Environment can easily be incorporated as a deployment target into Azure Pipelines. Each Environment consists of Resources which represent respective applications running in that location. You can group Environments and Resources in different ways and I will share some of the possibile groupings below.
 
-If you\'re actively using Azure DevOps and have all of your source code stored there, it can be easier and more lightweight for you to utilize Azure DevOps Environments as a deployment tool. In one of my projects we started using an external tool for automating deployment of our microservices but we ended up migrating to Azure DevOps Environments which has worked quite well for us for a while now. 
+If you\'re actively using Azure DevOps and have all of your source code stored there, it can be easier and more lightweight for you to utilize Azure DevOps Environments as a deployment tool. In one of my projects we started using an external tool for automating deployment of our microservices but we ended up migrating to Azure DevOps Environments which has worked quite well for us for a while now.
 
 ### Benefits of using ADO Environments (IMHO)
 
@@ -57,14 +57,13 @@ This grouping alternative was the one we started with and quite quickly realized
 
 There are a few disadvantages with this approach. Firstly, the limitation mentioned above: if you\'re using the same namespace across clusters you can\'t create multiple resources with the same namespace as part of a single environment. Secondly, such grouping can become quite messy and less readable: the more resources you create, the harder it becomes to get an overview of which resources are deployed on which cluster and there\'s no possibility to filter the resource list. Due to these factors the next approach worked much better in my case.
 
-
 ### One Environment representing one development/staging/production cluster
 
 In this implementation you create one Azure DevOps Environment that will represent applications that are deployed in a single Kubernetes cluster. If you have two development clusters for instance, you will then create one environment per cluster, something like **\"aks-0000-dev\"** and **\"aks-0001-dev\"**. I prefer using following naming convention when creating ADO Environment: ```[kubernetes_distribution]-[cluster_id]-[deployment_stage]```. Such grouping is visualized in the diagram below:
 
 ![Azure DevOps Environment representing one development/staging/production cluster](../../images/k8s_ado_env/ado-aks-group2.png)
 
-From my experience, this grouping has worked pretty nicely and in my head it seems like quite a logical grouping. I see a single environment as a representation of a deployment location which is a single AKS cluster. And inside a cluster there\'s a collection of resources - all active workloads, i.e. applications that have been deployed to it. You don\'t face the namespace limitation and such grouping provides a good overview of what is deployed in a single location which may be less overwhelming for external parties who don\'t necessarily work with Kubernetes on a regular basis. 
+From my experience, this grouping has worked pretty nicely and in my head it seems like quite a logical grouping. I see a single environment as a representation of a deployment location which is a single AKS cluster. And inside a cluster there\'s a collection of resources - all active workloads, i.e. applications that have been deployed to it. You don\'t face the namespace limitation and such grouping provides a good overview of what is deployed in a single location which may be less overwhelming for external parties who don\'t necessarily work with Kubernetes on a regular basis.
 
 ### One Environment representing one application deployed in development/staging/production cluster
 
@@ -84,7 +83,7 @@ In part 2 of this blog series we\'ll get more hands-on and deploy an application
 
 ---
 
-That\'s it from me this time, thanks for checking in! 
+That\'s it from me this time, thanks for checking in!
 
 If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺
 

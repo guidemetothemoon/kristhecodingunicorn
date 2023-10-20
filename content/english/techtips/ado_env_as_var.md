@@ -56,11 +56,11 @@ stages:
       strategy:
 
       # REST OF THE CODE IS OMITTED
-``` 
+```
 
 > Since we must import variable group at the root of the pipeline, please note that if you\'re importing multiple variable groups with equal variable names like this, they might overwrite each other during build execution so please ensure that there are no variable name conflicts across variable groups when importing this way.
 
-You can do the same with the target resource as well where we could create a ```$(testAppResourceDev)``` variable in the same variable group and replace ```my-testapp``` with ```$(testAppResourceDev)```. 
+You can do the same with the target resource as well where we could create a ```$(testAppResourceDev)``` variable in the same variable group and replace ```my-testapp``` with ```$(testAppResourceDev)```.
 
 If you want to learn more, you can also check this article: [Environment - Kubernetes resource](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments-kubernetes?view=azure-devops)
 

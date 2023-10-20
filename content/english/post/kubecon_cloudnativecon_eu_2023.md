@@ -48,7 +48,7 @@ With 20 parallell tracks it becomes extremely challenging to prioritize, and it'
 
 ***Azure Day with Kubernetes***
 
-During the co-location events pre-day, which was happening the day before the main conference, there was a bunch of different talks you could attend that were related to a single domain: Cilium, WebAssembly, Argo, Observability, etc. One of the events was arranged by Microsoft and was focused on AKS. Many new enhancements and capabilities in AKS were announced that day like long-term support (LTS), service mesh add-on for Istio, OpenCost for AKS for cost visibility, and so much more. 
+During the co-location events pre-day, which was happening the day before the main conference, there was a bunch of different talks you could attend that were related to a single domain: Cilium, WebAssembly, Argo, Observability, etc. One of the events was arranged by Microsoft and was focused on AKS. Many new enhancements and capabilities in AKS were announced that day like long-term support (LTS), service mesh add-on for Istio, OpenCost for AKS for cost visibility, and so much more.
 
 🌳 If you're working with Azure Kubernetes Service (AKS) I would recommend to register for the post-event recordings: [Azure Day with Kubernetes Preday at KubeCon + CloudNativeCon Europe 2023](https://azuredaywithkubernetes2023.com)
 
@@ -100,7 +100,7 @@ In addition to me presenting on the topic of sustainability in Kubernetes I atte
 
 ***TAG Environmental Sustainability***
 
-Finally I would like to highlight CNCF Technical Advisory Group (TAG) Environmental Sustainability which I've now joined as a member and contributor. The main goal of this working group is to raise awareness of environmental sustainability as a key element of open source development and support projects which foster an understanding of energy drivers. By joining this group you get a chance to meet and collaborate with like-minded people with passion for sustainability and building greener software. 
+Finally I would like to highlight CNCF Technical Advisory Group (TAG) Environmental Sustainability which I've now joined as a member and contributor. The main goal of this working group is to raise awareness of environmental sustainability as a key element of open source development and support projects which foster an understanding of energy drivers. By joining this group you get a chance to meet and collaborate with like-minded people with passion for sustainability and building greener software.
 
 > **TAG Environmental Sustainability arranges 2 meetings a month so if you're interested in the above topics as well, join us! More information is provided here:** [TAG Environmental Sustainability](https://tag-env-sustainability.cncf.io)
 
@@ -110,7 +110,7 @@ During KubeCon+CloudNativeCon EU I joined TAG project meeting which was filled w
 
 To sum it up, a lot of great content was presented during the conference, and it's tough to highlight just one or two sessions. Nevertheless, if you loved some of the sessions I highlighted, do let me know and let's discuss!🤗
 
-## Takeaways and tips from...
+## Takeaways and tips
 
 There are some reflections and tips that I gathered from attending KubeCon+CloudNativeCon EU in multiple roles, and I hope that some of these reflections can be insightful for you or even inspire you to attend the conference next time. Maybe even in a new role as a speaker or a CNCF Ambassador😉
 
@@ -119,7 +119,7 @@ There are some reflections and tips that I gathered from attending KubeCon+Cloud
 Attending the conference of such scale can quickly become very overwhelming and quite many tend to get a fear of missing out (FOMO). For me it was challenging but crucial to keep a balance of participating in sessions, engaging with the community members and getting quiet, alone time to bring myself back and re-charge.
 
 Here are a few tips that help me get the most out of the conference and at the same time take care of myself:
-> ***🦋 Plan beforehand which sessions you want to prioritize and attend in-person,*** for example for additional engagement with the speaker.     
+> ***🦋 Plan beforehand which sessions you want to prioritize and attend in-person,*** for example for additional engagement with the speaker.
 >
 > ***🦋 Expect that plans may change in such a dynamic environment:*** sessions may get fully-booked before you get in, or you meet an old friend and use some additional time to catch up. Make your peace with it, evaluate what you should prioritize there and then and what can be covered by alternative options (f.ex., session recordings) at a later point.
 >
@@ -137,7 +137,7 @@ Finally, please note that all the sessions are being recorded, and recordings ar
 
 Speaking at KubeCon+CloudNativeCon EU is one of the greatest achievement for me as a technical speaker. I always looked up to the speakers presenting at conferences of such scale, and I have always thought that there is almost no chance of getting in as a "smaller", less known content creator or tech community member. I was proven wrong. I had an idea, a topic that I am extremely passionate about, that I wanted to share it with the world and with the tech community. I was eager to talk about it and I took a chance and submitted a proposal...and I got chosen. Next time it can be **YOU**! 👋
 
-> **If you have learned something that you feel others can benefit from in the community, you should definitely share it. If you have learned something that can become a talk, you should go for it and apply to the events that resonate with you. Independent of how big or popular those events are. It's scary, yes, but you have nothing to lose by applying. You may miss out on a lot though if you don't apply**😊   
+> **If you have learned something that you feel others can benefit from in the community, you should definitely share it. If you have learned something that can become a talk, you should go for it and apply to the events that resonate with you. Independent of how big or popular those events are. It's scary, yes, but you have nothing to lose by applying. You may miss out on a lot though if you don't apply** 😊
 
 ![Photo of Kristina Devochko on stage at KubeCon and CloudNativeCon Europe 2023 presenting her session on sustainability in Kubernetes](../../images/kubecon_cloudnativecon_eu_2023/speaker_photo.webp)
 
@@ -148,15 +148,15 @@ My presentation at KubeCon+CloudNativeCon EU felt extra special, because I got a
 ### CNCF Ambassador
 
 CNCF Ambassadors are an extension of CNCF, furthering the mission of "making cloud native ubiquitous" through community leadership and mentorship.
-CNCF Ambassadors are elected twice per year and anyone can apply. If you're contributing back to the cloud native and open source community by creating technical content, organizing events, speaking or mentoring, you should consider applying for the program. Here's a summary of Spring 2023 election which was the first term I got accepted to: [Introducing our Spring 2023 Cloud Native Ambassadors! ](https://www.cncf.io/blog/2023/04/19/introducing-our-spring-2023-cloud-native-ambassadors)
+CNCF Ambassadors are elected twice per year and anyone can apply. If you're contributing back to the cloud native and open source community by creating technical content, organizing events, speaking or mentoring, you should consider applying for the program. Here's a summary of Spring 2023 election which was the first term I got accepted to: [Introducing our Spring 2023 Cloud Native Ambassadors!](https://www.cncf.io/blog/2023/04/19/introducing-our-spring-2023-cloud-native-ambassadors)
 
 > **KubeCon+CloudNativeCon EU was a great opportunity to meet fellow ambassadors from all over the world and engage in interesting discussions around cloud native technologies, content creation and community contributions. It's also a great arena to brainstorm upcoming content and collaborate on creating some of that content together to bring even more value to the community.**
 
 ![Photo of CNCF Ambassadors logo on a black jacket with cherry blossoms in the background](../../images/kubecon_cloudnativecon_eu_2023/cncf_ambassadors_logo.webp)
 
-> Another reflection I really want to share when it comes to CNCF Ambassador community is ***the atmosphere of inclusion***. 
+> Another reflection I really want to share when it comes to CNCF Ambassador community is ***the atmosphere of inclusion***.
 
-I'm an introvert and am not always mastering social events and get-to-know parties in a good way, therefore attending events where I don't know that many people can quickly become challenging. As part of the conference I attended an Ambassador breakfast for all the CNCF Ambassadors, where I didn't know that many just yet. As I was about to sit down for myself, a few other ambassadors spotted it and invited me to their table, which was very sweet and nice of them to do. 
+I'm an introvert and am not always mastering social events and get-to-know parties in a good way, therefore attending events where I don't know that many people can quickly become challenging. As part of the conference I attended an Ambassador breakfast for all the CNCF Ambassadors, where I didn't know that many just yet. As I was about to sit down for myself, a few other ambassadors spotted it and invited me to their table, which was very sweet and nice of them to do.
 
 I would like to send these kind fellow ambassadors a shoutout and a warm **Thank You** for including me in their company - people like you give me even more inspiration to do the same, when I see someone who may feel lonely or uncomfortable at community events💖
 
@@ -164,7 +164,7 @@ I would like to send these kind fellow ambassadors a shoutout and a warm **Thank
 
 ![Kubernetes Community Days logo](../../images/kubecon_cloudnativecon_eu_2023/kcd_banner.webp)
 
-Kubernetes Community Days (KCD) are smaller versions of KubeCon+CloudNativeCon conference that are arranged by tech community members all over the globe, with support from CNCF. The goal of these events is to foster collaboration, networking, knowledge sharing around topics of open source, cloud native and Kubernetes in the local tech communities. 
+Kubernetes Community Days (KCD) are smaller versions of KubeCon+CloudNativeCon conference that are arranged by tech community members all over the globe, with support from CNCF. The goal of these events is to foster collaboration, networking, knowledge sharing around topics of open source, cloud native and Kubernetes in the local tech communities.
 
 Any city can arrange a KCD and there's a helpful checklist with extensive information available on GitHub that can come in handy if you consider arranging a KCD event yourself at some point: [cncf/kubernetes-community-days](https://github.com/cncf/kubernetes-community-days).
 
@@ -174,9 +174,9 @@ Any city can arrange a KCD and there's a helpful checklist with extensive inform
 
 > **Myself, together with a few amazing community members, will be arranging KCD Norway in January 2024 so if you're planning a trip to Oslo or would like to speak at our event, do reach out! All the updates regarding the event will be published at** [CNCF - KCD Norway](https://community.cncf.io/kcd-norway), **so stay tuned!** 😼
 
-## Summing it up...
+## Summing it up
 
-As you can see from the length of this blog post there have been a lot impressions, reflections and learnings from attending KubeCon+CloudNativeCon Europe😸 
+As you can see from the length of this blog post there have been a lot impressions, reflections and learnings from attending KubeCon+CloudNativeCon Europe 😸
 
 **Is it worth attending?**
 

@@ -52,7 +52,7 @@ For measuring network latency I\'ve used the tools recommended by Microsoft: ```
 
 ### Linux nodes
 
-***Preparations*** 
+***Preparations***
 
 First, choose 2 Linux nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with SockPerf. Also, make a note of IP for the node that will act as server. Following commands can help you retrieve that information:
 
@@ -165,7 +165,7 @@ Now, let\'s see if the trend is the same for Windows nodes.
 
 ***Preparations***
 
-Just as we did for Linux, first you need to choose 2 Windows nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with latte. Also, make a note of IP for the node that will act as server. 
+Just as we did for Linux, first you need to choose 2 Windows nodes in your AKS cluster where one will act as a server and the other will act as a client - this is needed in order to test network latency during node-to-node communication with latte. Also, make a note of IP for the node that will act as server.
 
 Following commands can help you retrieve that information:
 
@@ -174,12 +174,11 @@ Following commands can help you retrieve that information:
 kubectl get nodes -o wide
 ```
 
-Now we need to log into both of the nodes simultaneously - for Windows nodes it\'s a bit harder than for Linux nodes since you need to set up a jumpserver. This is out of scope for this blog post but the guides below provide more information on how you can set up SSH or RDP connection to Windows nodes in AKS: 
+Now we need to log into both of the nodes simultaneously - for Windows nodes it\'s a bit harder than for Linux nodes since you need to set up a jumpserver. This is out of scope for this blog post but the guides below provide more information on how you can set up SSH or RDP connection to Windows nodes in AKS:
 
 [Create the SSH connection to a Windows node](https://docs.microsoft.com/en-us/azure/aks/node-access#create-the-ssh-connection-to-a-windows-node)
 
 [Connect to Windows Server nodes using remote desktop protocol (RDP) connections](https://docs.microsoft.com/en-us/azure/aks/rdp)
-
 
 Once you\'ve logged into the Windows nodes, you need to install and configure latte on both nodes - I recommend to check a few links in Additional resources section for more information on how to use latte.exe:
 
@@ -254,7 +253,7 @@ Fortunately for all us, from now on (spring/summer 2022) if you create a new AKS
 
 ![Location of Accelerated networking property in AKS node pool in Azure portal](../../images/k8s_an/aks_vmss_an.png)
 
-**Azure CLI**: you need to make a note of your AKS cluster name and resource group where it\'s deployed - once it\'s done, we can run below commands to check if Accelerated Networking is enabled for node pools in the chosen AKS cluster: 
+**Azure CLI**: you need to make a note of your AKS cluster name and resource group where it\'s deployed - once it\'s done, we can run below commands to check if Accelerated Networking is enabled for node pools in the chosen AKS cluster:
 
 ``` powershell
 # 1. Get the name of the resource group where AKS node pools are deployed
@@ -280,7 +279,7 @@ In case you have older node pools which were deployed before Accelerated Network
 
 ![GIF of a cat with his servants](../../images/k8s_an/cat_servants.gif)
 
-In order to do that you will need to create a new node pool and migrate all the workloads from the initial node pool. If you\'re using an IaC tool for provisioning your AKS clusters, you can also handle it in the deployment template but I\'ve seen cases where such a change may cause a full re-creation of a cluster and it will require some downtime and you might not want that. So another approach can be to simply create a new node pool where AN will be enabled by default (as long as it\'s a supported VM SKU which the most of them are😺). 
+In order to do that you will need to create a new node pool and migrate all the workloads from the initial node pool. If you\'re using an IaC tool for provisioning your AKS clusters, you can also handle it in the deployment template but I\'ve seen cases where such a change may cause a full re-creation of a cluster and it will require some downtime and you might not want that. So another approach can be to simply create a new node pool where AN will be enabled by default (as long as it\'s a supported VM SKU which the most of them are😺).
 
 Alternative approach is similar to what a node image upgrade does, just that you will do it for the whole node pool:
 
@@ -322,7 +321,7 @@ az aks nodepool delete --cluster-name [AKS_CLUSTER_NAME] --resource-group [AKS_C
 
 ```
 
-If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion. 
+If you have a lot of nodes and heavier applications, you might not want to drain the whole node pool at once, but take it gradually, scaling down the node pool and draining node for node - that way you can avoid CPU throttling and resource exhaustion.
 
 And we\'re finished! Now the migrated workloads can start benefiting from networking goodies offered by AN feature in AKS.
 
@@ -336,7 +335,7 @@ Some good resources on Accelerated Networking and tools used for network perform
 * [Using sockperf with VMA](https://manualzz.com/doc/o/c8eht/user-manual---mellanox-technologies-using-sockperf-with-vma)
 * [SockPerf - Manpage](https://manpages.debian.org/bullseye/sockperf/sockperf.1.en.html)
 
-That\'s it from me this time, thanks for checking in! 
+That\'s it from me this time, thanks for checking in!
 
 If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺
 

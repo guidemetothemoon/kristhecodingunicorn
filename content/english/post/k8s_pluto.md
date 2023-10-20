@@ -29,10 +29,10 @@ In this blog post I would like to take a look at an open source tool called Plut
 
 Pluto is an open source tool developed by Fairwinds that helps detect deprecated Kubernetes API versions both in:
 
-- static manifests like Kubernetes YAML templates and Helm charts and 
-- live in Kubernetes clusters (Helm charts only). 
+- static manifests like Kubernetes YAML templates and Helm charts and
+- live in Kubernetes clusters (Helm charts only).
 
-You can run Pluto locally as well as integrate as part of your CI/CD pipeline. From what I\'ve seen so far, the tool is quite actively developed and maintained and keeps up well with official Kubernetes releases and API deprecations/removals. 
+You can run Pluto locally as well as integrate as part of your CI/CD pipeline. From what I\'ve seen so far, the tool is quite actively developed and maintained and keeps up well with official Kubernetes releases and API deprecations/removals.
 
 You can find official documentation for Pluto here: [Pluto](https://pluto.docs.fairwinds.com/#purpose)
 
@@ -64,11 +64,12 @@ If you want to limit it to a single namespace you can update the command like th
 
 If any deprecated or removed API versions have been detected in some of your resources, output will look similar to the one below:
 
-```
+``` cmd
 NAME                                 NAMESPACE   KIND                VERSION          REPLACEMENT   DEPRECATED   DEPRECATED IN   REMOVED   REMOVED IN
 kubecost/kubecost-grafana             kubecost    PodSecurityPolicy   policy/v1beta1                 true         v1.21.0         false     v1.25.0
 kubecost/kubecost-cost-analyzer-psp   kubecost    PodSecurityPolicy   policy/v1beta1                 true         v1.21.0         false     v1.25.0
 ```
+
 As you can see, Pluto provides quite a lot of information that may help you update the resources that are using deprecated/removed APIs.
 
 ### CI/CD -> Azure DevOps
@@ -157,6 +158,7 @@ done
       
 echo "Pluto executed scanning successfully!"
 ```
+
 If you\'re using custom Helm values file you can replace line 25 -> ```helmValuesFile=$(find "$helmChartBaseDir" -type f -iname "values.yaml")``` of the script above with the code block below and customize regex expression according to the file names you\'re using in your projects. In my example, it\'s ```values-prod.yaml``` or ```deploy-values.yaml```.
 
 ```bash
@@ -208,6 +210,7 @@ If you want to run Pluto as part of your GitHub workflow, there is a separate Gi
     helm template "[helm_chart_dirpath]" -f "[helm_chart_dirpath]/values.yaml" | pluto detect - -o markdown --ignore-deprecations --ignore-removals
 
 ```
+
 You can find a working example of running Pluto as part of GitHub workflow in my repo: [guidemetothemoon - kubernetes-pluto-gha.yml](https://github.com/guidemetothemoon/div-dev-resources/blob/main/.github/workflows/kubernetes-pluto-gha.yml).
 
 ### Local files
@@ -234,7 +237,6 @@ Below you may find a few resources that may be helpful for you when working with
 - [GitHub CI/CD example with Pluto](https://github.com/guidemetothemoon/div-dev-resources/blob/main/.github/workflows/kubernetes-pluto-gha.yml)
 - [Pluto - GitHub repo](https://github.com/FairwindsOps/pluto)
 - [Kubernetes - Deprecated API Migration Guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide)
-
 
 That\'s it from me this time, thanks for checking in!💖
 
