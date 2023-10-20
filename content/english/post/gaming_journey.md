@@ -25,17 +25,15 @@ So, what is my Journey? This is a bunch of very warm and colourful emotions but 
 
 While I smoothly drift along the dessert and fly up high to the top of half-destroyed temples in search for concealed messages, I can\'t stop thinking of what surrounds me..What made this place disappear? Will it await for me there, on the top of the mountain? Who were those living here before? Only the flying creatures, helping me to keep up the energy, know the stories that are never to be told..
 
-Suddenly I see a silhouette in the distance - I don\'t know who it is and if it a name. I don\'t know where it comes from and what it\'s story is. I can\'t ask and I can\'t get an answer but we can sound...We can use only sound, together making it a music stream, a never-ending song of peace and equality, flowing in harmony along the clouds above the forgotten civilization. And what\'s more valuable is that it wants to share the sacrament of the Journey with me. And from that moment on I\'m not alone anymore. 
+Suddenly I see a silhouette in the distance - I don\'t know who it is and if it a name. I don\'t know where it comes from and what it\'s story is. I can\'t ask and I can\'t get an answer but we can sound...We can use only sound, together making it a music stream, a never-ending song of peace and equality, flowing in harmony along the clouds above the forgotten civilization. And what\'s more valuable is that it wants to share the sacrament of the Journey with me. And from that moment on I\'m not alone anymore.
 
 ![Screenshot from Journey game, two heroes facing each other](../../images/gaming_corner/journey_3.jpg)
 
-
-When we reached the Mountain, the toughest challenge was still to come - a challenge to test my strength, will-power and intention. And the moment I thought my Journey was about to end, I have found my new self and one more Journey was about to begin.     
+When we reached the Mountain, the toughest challenge was still to come - a challenge to test my strength, will-power and intention. And the moment I thought my Journey was about to end, I have found my new self and one more Journey was about to begin.
 
 Gratitude. That was the feeling I had in the end. For the quality time with my inner self. For the colours, music and sounds. For the guiding light and tiny secrets being discovered on the way. For the privilege of acquiring knowledge about the mystery of the faded civilization. For the opportunity to look at myself from the new angle. And gratitude to the unknown fellow traveller who has shared this experience and this Journey with me.
 
-The story of my Journey is long and discoveries have been many (and I don\'t want to include all the spoilers in this post) but your Journey will be different from mine though the main idea will stay the same. This game is about beauty of inner self, beauty of the world you are living in, and beauty of the fellow travellers, mysterious but much alike yourself, taking the chance to experience your Journey and unite it with theirs. And it\'s also about gratitude - for everything you sense and receive unconditionally during the game and maybe even outside of it. 
-
+The story of my Journey is long and discoveries have been many (and I don\'t want to include all the spoilers in this post) but your Journey will be different from mine though the main idea will stay the same. This game is about beauty of inner self, beauty of the world you are living in, and beauty of the fellow travellers, mysterious but much alike yourself, taking the chance to experience your Journey and unite it with theirs. And it\'s also about gratitude - for everything you sense and receive unconditionally during the game and maybe even outside of it.
 
 In conclusion, I would like to pay my respect and gratitude to:
 

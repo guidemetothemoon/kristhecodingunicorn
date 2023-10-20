@@ -16,11 +16,12 @@ tags = [
 ## Use case for pipeline templates
 
 In the world of complex enterprise applications and distributed systems you may have a need to perform many more actions and validations as part of a build pipeline than before:
+
 - build an application,
 - execute multiple types of tests like unit tests and API tests,
 - perform security validations like SCA, SAST, container image scanning and scanning of third-party dependencies,
 - perform application packaging and deployment,
-etc. 
+etc.
 
 That\'s when it\'s worth considering to implement a multi-staged pipeline where you can run several jobs in parallel and control application flow with stages. Each stage may then have it\'s own set of checks and validations. You may even have multiple applications which have similar build tasks as part of the build pipeline - for instance, if you have multiple .NET Web API applications, it\'s very likely that build pipelines for those will be similar to some extent.
 
@@ -125,6 +126,7 @@ steps:
   condition: and(succeeded(),eq('${{ parameters.publish }}', true))
 
 ```
+
 As you can see, in the top of the template we have ```parameters``` section where we define which parameters that can be sent to the template and what the default values for those parameters should be. With ```condition``` property on every build task we can refer to respective parameters and activate the task based on the provided value of the parameter.
 
 Now, in every stage of our main build pipeline we can dynamically adjust how the template should be executed, also by using ```parameters``` property:

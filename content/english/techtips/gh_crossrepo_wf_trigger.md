@@ -26,7 +26,6 @@ In my case repository A only has a GitHub Pages workflow which I don't maintain,
 
 You can read more about different event types that can be used to trigger workflows here: [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows)
 
-
 ```yml
    # trigger-repob-workflow.yml
     name: Trigger Repo B GitHub workflow
@@ -63,8 +62,7 @@ You can read more about this functionality here: [GitHub Actions: Use the GITHUB
 
 A few more examples for conditions/execution triggers you could use:
 
-* If you want triggering to happen instantly, for example when pushing new changes to the repository, independent of any other workflows that may be running in parallel in the repository, you can remove an ```if```-condition from the example above and update ```on```-clause to be ```on: [push]```.
-
-* If you want triggering to happen once a deployment in the workflow succeeds, you can update ```on```-clause to be ```on: deployment_status``` and update ```if```-condition to be ```if: github.event.deployment_status.state == 'success'```. Please note that in this case, if you have deployments running in parallel, triggering will happen for every succeded deployment,- and for every new trigger, previous run will be cancelled if it's still in progress.
+- If you want triggering to happen instantly, for example when pushing new changes to the repository, independent of any other workflows that may be running in parallel in the repository, you can remove an ```if```-condition from the example above and update ```on```-clause to be ```on: [push]```.
+- If you want triggering to happen once a deployment in the workflow succeeds, you can update ```on```-clause to be ```on: deployment_status``` and update ```if```-condition to be ```if: github.event.deployment_status.state == 'success'```. Please note that in this case, if you have deployments running in parallel, triggering will happen for every succeded deployment,- and for every new trigger, previous run will be cancelled if it's still in progress.
 
 That\'s it for now - Thanks for reading and till next tech tip 😼

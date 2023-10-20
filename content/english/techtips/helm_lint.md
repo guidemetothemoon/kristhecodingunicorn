@@ -28,10 +28,11 @@ Another advantage of using ```helm lint``` command is utilizing what you already
 
 I wasn't able to find user-friendly documentation for the rules that ```helm lint``` command validates towards, but if you're nevertheless interested in checking out which rules are being covered by this functionality, you can check out lint folder in source code for Helm project on GitHub - there you can also find test data that's being used to validate that ```helm lint``` command works as expected: [helm/helm - lint rules](https://github.com/helm/helm/tree/main/pkg/lint/rules)
 
-Now, let's see ```helm lint``` in action!😺 First, you need to provide a path to the Helm Chart artifacts to the command - both packaged format (.tgz) and pure source files folder destinations are supported. If you want to lint an external Helm Chart you can pull it from the Helm Chart repo first, as we do in the example below. 
+Now, let's see ```helm lint``` in action!😺 First, you need to provide a path to the Helm Chart artifacts to the command - both packaged format (.tgz) and pure source files folder destinations are supported. If you want to lint an external Helm Chart you can pull it from the Helm Chart repo first, as we do in the example below.
 A few other flags to make a note of:
-* ```--strict``` will make the command fail also in case warnings are discovered;
-* ```--with-subcharts``` will also lint subcharts if a Helm Chart is using those (which will not happen by default);
+
+- ```--strict``` will make the command fail also in case warnings are discovered;
+- ```--with-subcharts``` will also lint subcharts if a Helm Chart is using those (which will not happen by default);
 
 Let's lint an external Helm Chart - in my case, I've chosen **kubecost** Helm Chart. As mentioned above, first I will need to pull the chart from the kubecost Helm repo and only then I can lint it. I will also enable linting of subcharts because a third-party Helm Chart can potentially use those.
 
@@ -41,11 +42,13 @@ helm pull kubecost/cost-analyzer -d .
 helm lint cost-analyzer-1.97.0.tgz --with-subcharts
 helm lint cost-analyzer-1.97.0.tgz --with-subcharts --strict # make the command fail if any warnings/errors are discovered
 ```
+
 As you can see in the screenshot below, a few violations were discovered: one is more of a best practice recommendation to provide icon information in ```Chart.yaml``` file. Second item is a warning related to a deprecated Kubernetes API being used as part of the Helm Chart - in this case it's related to ```PodSecurityPolicy``` resource. With ```--strict``` flag enabled we can also see that the command will actually fail because a warning has been discovered. In the default behaviour this command only fails when errors are discovered.
 
 ![Screenshot of helm lint command for kubecost Helm Chart](../../images/tech_tips/helm_lint_external_chart.png)
 
 Now, let's create a simple Helm Chart with ```helm create```, change indentation in ```deployment.yaml``` file and see what will happen if we now run the ```helm lint``` command:
+
 ```yaml
 # deployment.yaml
 apiVersion: apps/v1
@@ -69,7 +72,8 @@ As you can see in the screenshot below, linting fails with en error related to Y
 
 You can also implement linting of Helm Charts with ```helm lint``` as part of CI/CD pipeline:
 
-1. **In Azure DevOps:**
+- **In Azure DevOps:**
+
 ```yaml
 - task: HelmDeploy@0
   displayName: Lint Helm chart for best practices compatibility
@@ -78,7 +82,8 @@ You can also implement linting of Helm Charts with ```helm lint``` as part of CI
     arguments: '[PATH_TO_HELM_CHART] ---with-subcharts --strict'
 ```
 
-2. **In GitHub Workflow:**
+- **In GitHub Workflow:**
+
 ```yaml
 - name: Lint Helm chart for best practices compatibility
   run: |

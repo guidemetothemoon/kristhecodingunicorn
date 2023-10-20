@@ -19,11 +19,7 @@ The property I\'m talking about is ```ServicePointManager.ServerCertificateValid
 
 The danger of it is though that once you\'re done with testing you may forget to clean it up in the source code, and it silently paves it\'s way out to production... What it results into is that **all TLS certificates will be accepted and all HTTPS traffic will be allowed, even the malicious one!** This can be extremely destructive from the security perspective and can open up for the man-in-the-middle vulnerability for instance.🔥
 
-So, whenever you see a variation of this piece of code:
-
-```
-ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) => true;
-```
+So, whenever you see a variation of this piece of code: ```ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) => true;```
 
 **Stall the change immediately** and take your time to ensure that you or the one who has added this piece of code know what you\'re doing and understand the consequences of enabling this property!⛔️
 

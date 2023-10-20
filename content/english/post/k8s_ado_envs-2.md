@@ -23,7 +23,7 @@ In Part 2 we\'ll get more hands-on and deploy a test application to AKS with Azu
 
 ## Deploy application to AKS with ADO Environments
 
-For this scenario I have used a small AKS HelloWorld application that is provided by Microsoft in following tutorial: [Create an ingress controller in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli). I have slightly modified it and created a build definition for Azure Pipelines that will deploy the application to AKS with help of Azure DevOps Environments. All the resources can be found in my GitHub repo: [guidemetothemoon/demo-projects ](https://github.com/guidemetothemoon/demo-projects/tree/main/ado-environments).
+For this scenario I have used a small AKS HelloWorld application that is provided by Microsoft in following tutorial: [Create an ingress controller in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli). I have slightly modified it and created a build definition for Azure Pipelines that will deploy the application to AKS with help of Azure DevOps Environments. All the resources can be found in my GitHub repo: [guidemetothemoon/demo-projects](https://github.com/guidemetothemoon/demo-projects/tree/main/ado-environments).
 
 Let\'s imagine that you\'re a developer who has created a new microservice. All of your source code is now in an Azure DevOps repository, including build pipeline defintion (though you haven\'t created an actual build pipeline yet). Now you need to deploy  your application to AKS. So, how can you do that directly from Azure DevOps?
 
@@ -64,7 +64,7 @@ Once you\'re done, click **\"Validate and create\"**. What happens then is:
 
 ![Azure DevOps ServiceAccount for new Kubernetes resource](../../images/k8s_ado_env/ado_aks_svcaccount.png)
 
-Ok, we\'ve created a deployment location and target in Azure DevOps - as you can see in the screenshot below, it says that resource has never been deployed which makes sense since we haven\'t triggered any deployment yet! 
+Ok, we\'ve created a deployment location and target in Azure DevOps - as you can see in the screenshot below, it says that resource has never been deployed which makes sense since we haven\'t triggered any deployment yet!
 
 ![Newly created Azure DevOps Environment and Kubernetes resource in Azure DevOps](../../images/k8s_ado_env/ado_aks_createdresource.png)
 
@@ -76,7 +76,7 @@ You can configure access and permissions per Azure DevOps Environment. Choose an
 
 ![Security section in Azure DevOps Environment](../../images/k8s_ado_env/ado_aks_security.png)
 
-Now that we\'ve verified that permissions look good, let\'s define some deployment validations. If we go back to the Environment view and click on 3 dots once again we can choose **\"Approvals and checks\"** this time. In this section you can define additional policies and validations that will be verified before a new version of the application is deployed. Let\'s add a policy that requires a member of **\"Release Administrators\"** group to approve the deployment - we can do that by clicking on the **+** in the right-hand corner and choosing **\"Approvals\"**. 
+Now that we\'ve verified that permissions look good, let\'s define some deployment validations. If we go back to the Environment view and click on 3 dots once again we can choose **\"Approvals and checks\"** this time. In this section you can define additional policies and validations that will be verified before a new version of the application is deployed. Let\'s add a policy that requires a member of **\"Release Administrators\"** group to approve the deployment - we can do that by clicking on the **+** in the right-hand corner and choosing **\"Approvals\"**.
 
 ![Approvals and checks section in Azure DevOps Environment](../../images/k8s_ado_env/ado_aks_approvalsnchecks.png)
 
@@ -87,11 +87,11 @@ As you can see, there are quite a few other checks available that can let you ha
 * **Allow approver to approve their own runs:** if checked and a member of the Approval group triggered a deployment, he/she can then approve the deployment without needing an approval from another group member.
 * **Timeout:** here you can define how long a deployment can be in Pending state without approval until it reaches timeout.
 
-Once finished, click **\"Create\"**. 
+Once finished, click **\"Create\"**.
 
 ![Created Approvals policy in Azure DevOps Environment](../../images/k8s_ado_env/ado_aks_approvals.png)
 
-We have now added an additional policy for our deployment and we\'re finally ready to deploy our application to AKS with Azure DevOps Environments! Let\'s move on and create a build pipeline that will do the honours and perform the actual deployment😸 
+We have now added an additional policy for our deployment and we\'re finally ready to deploy our application to AKS with Azure DevOps Environments! Let\'s move on and create a build pipeline that will do the honours and perform the actual deployment😸
 
 ### Create build pipeline with deployment stage
 
@@ -200,7 +200,7 @@ You can also Validate or even Delete a resource by clicking on 3 dots in the rig
 
 If you click on the link right below the resource name - in our case it\'s ```aks-113366-dev (cluster)``` (marked yellow in the screenshot below), you\'ll be navigated to the respective AKS resource in Azure portal.
 
-Finally, if we take a look at the list of Deployments, among other details, we can see what container image was used in the respective Deployment and how many Pods were created and are currently up and running. 
+Finally, if we take a look at the list of Deployments, among other details, we can see what container image was used in the respective Deployment and how many Pods were created and are currently up and running.
 
 ![Screenshot of Azure DevOps Environment Workloads section](../../images/k8s_ado_env/ado_aks_resource_workloads.png)
 
@@ -208,7 +208,7 @@ If we click on the Pods count in one of the Deployment resources (marked pink in
 
 * **Overview:** basic information about Pod\'s annotations, restart policy, node name, labels, conditions, current state, etc.
 * **YAML:** Kubernetes YAML template for Pod resource definition.
-* **Logs:** here you get access to all the Logs, just as if you\'ve executed  ```kubectl logs [pod_name] -n [namespace] ``` ! You will need to switch between tabs or refresh to get the newest logs though. This can be very useful for initial analysis of the application\'s performance, especially if you have developers who don\'t work with Kubernetes on a daily basis and just need to retrieve application logs without too much hassle.😼
+* **Logs:** here you get access to all the Logs, just as if you\'ve executed  ```kubectl logs [pod_name] -n [namespace]``` ! You will need to switch between tabs or refresh to get the newest logs though. This can be very useful for initial analysis of the application\'s performance, especially if you have developers who don\'t work with Kubernetes on a daily basis and just need to retrieve application logs without too much hassle.😼
 
 ![Screenshot of Azure DevOps Pod logs](../../images/k8s_ado_env/ado_aks_pod_logs.png)
 
@@ -260,7 +260,7 @@ More information about what Azure DevOps Environments are can be found here:
 
 **Final thought:** Azure DevOps Environments are easy to start with and can work really well when you don\'t want to introduce a new tool or when you have a relatively small amount of microservices to deploy. When there are hundreds of microservices that must be deployed and upgraded efficiently you might want to use a more advanced tool that has more extensive capabilities than what ADO Environments have to offer but this is a story for another blog post😺
 
-That\'s it from me this time, thanks for checking in! 
+That\'s it from me this time, thanks for checking in!
 
 If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺
 

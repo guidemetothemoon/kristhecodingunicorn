@@ -16,7 +16,8 @@ tags = [
 {{< table_of_contents >}}
 
 ## What is NDepend?
-When developing software it\'s important to focus on fullfilling customer requirements, providing best possible user experience, performance, security, availability and many other -ilities to ensure success of the software you\'re building, as well as keep your current users loyal and happy about your product. It\'s equally important to keep the code base maintainable and clean, minimize complexity, dependencies and technical debt, ensure that the new code follows the same quality and design standards as the rest of the code base. This is something that\'s extremely difficult to achieve manually, especially when you have a bigger application with tens of developers working on it. Fortunately for us there are many tools in the industry that may help us with this. Recently I got an opportunity to explore and experiment with a tool called NDepend and I would like to share some of the possibilities this tool provides in this blog post. 
+
+When developing software it\'s important to focus on fullfilling customer requirements, providing best possible user experience, performance, security, availability and many other -ilities to ensure success of the software you\'re building, as well as keep your current users loyal and happy about your product. It\'s equally important to keep the code base maintainable and clean, minimize complexity, dependencies and technical debt, ensure that the new code follows the same quality and design standards as the rest of the code base. This is something that\'s extremely difficult to achieve manually, especially when you have a bigger application with tens of developers working on it. Fortunately for us there are many tools in the industry that may help us with this. Recently I got an opportunity to explore and experiment with a tool called NDepend and I would like to share some of the possibilities this tool provides in this blog post.
 
 NDepend has a long history dating back to 2004 and it has gained quite a lot of popularity in the .NET community through the years. I\'ve heard about NDepend many times before and from time to time stumbled upon reviews from other developers, but now the time has come to test it out myself and see what the tool is capable of.
 
@@ -32,9 +33,9 @@ NDepend extension for Azure DevOps is available in Visual Studio Marketplace and
 
 ![Screenshot of NDepend menu section in Azure DevOps](../../images/ndepend/ndepend_ado_menusection.png)
 
-What I really liked about this extension is that all the analysis is performed locally, on the build agent where the analysis is performed. It means that **no data is being transferred outside of the server** which is an advantage in terms of supply chain security and security of your source code. In the same page, where you install the extension, you can find instructions on how to activate the trial license in case you haven\'t acquired a Pro license yet. 
+What I really liked about this extension is that all the analysis is performed locally, on the build agent where the analysis is performed. It means that **no data is being transferred outside of the server** which is an advantage in terms of supply chain security and security of your source code. In the same page, where you install the extension, you can find instructions on how to activate the trial license in case you haven\'t acquired a Pro license yet.
 
-Once the license is applied in Azure DevOps you can start experimenting with NDepend. So let\'s get straight to it! 
+Once the license is applied in Azure DevOps you can start experimenting with NDepend. So let\'s get straight to it!
 
 ### Adding NDepend Build Task
 
@@ -59,7 +60,7 @@ If you want to generate multiple views with different configurations, you can ad
 
 ### NDepend build output and Azure DevOps Dashboard
 
-Once the build has executed we can see in the Artifacts section that quite a few files with analysis results were published by NDepend - these files can be used to investigate the results locally, or they can be used as examples/blueprint for defining your own custom rules, trends, quality gates, etc. 
+Once the build has executed we can see in the Artifacts section that quite a few files with analysis results were published by NDepend - these files can be used to investigate the results locally, or they can be used as examples/blueprint for defining your own custom rules, trends, quality gates, etc.
 
 ![Screenshot of NDepend artifacts](../../images/ndepend/ndepend_artifacts.png)
 
@@ -113,7 +114,7 @@ Now, that we\'ve enabled code coverage analysis as well, let\'s take a look how 
 
 ![Screenshot of NDepend build run 2, with enabled code coverage](../../images/ndepend/ndepend_second_run.png)
 
-As you can see, enabling code coverage had a significant effect! Quality rating went down to level C with technical debt increase of almost 7%, compared to the previous build execution. You can also see multiple changes in Quality Gates, Rules and Issues sections. It means that we have quite some work to do when it comes to improving the code quality of our source code ;) 
+As you can see, enabling code coverage had a significant effect! Quality rating went down to level C with technical debt increase of almost 7%, compared to the previous build execution. You can also see multiple changes in Quality Gates, Rules and Issues sections. It means that we have quite some work to do when it comes to improving the code quality of our source code😼
 
 ### Adding code coverage from external location to NDepend analysis
 
@@ -157,11 +158,12 @@ In some cases you may be running code coverage outside of the main build pipelin
 First, we add publishing of code coverage report files in Opencover format as an additional build artifact, since that\'s the format supported by NDepend. Then, we download the reports from the latest succeeded build for code coverage and enable analysis for the same in NDepend build task. In that way we can connect code coverage data located externally to NDepend analysis - and it doesn\'t increase the main build duration time more than with a few seconds! :)
 
 ### Trends section in NDepend Dashboard in Azure DevOps
+
 There is a lot of information in NDepend dashboard that you can use for further analysis of your source code. I will not go through all of it since it\'s well described in the official documentation but I love visualization, therefore I would like to mention the Trends section of NDepend dashboard. In Trends section you can find a lot of useful diagrams which will demonstrate latest changes compared to the established baseline:
 
 - Total size of the analyzed source code
 - Code coverage and technical debt percentage
-- Total amount of discovered high criticality issues and new/fixed issues compared to baseline 
+- Total amount of discovered high criticality issues and new/fixed issues compared to baseline
 - Total amount of rules, including violated rules
 - Total amount of quality gates, including failed quality gates
 - Total ammount of technical debt
@@ -207,10 +209,10 @@ Firstly, you will need to install NDepend Visual Studio Extension - you can read
 
 ### Running initial NDepend analysis in Visual Studio
 
-Once NDepend extension is installed we need to build our solution so that extension is able to locate the project assemblies for analysis. 
+Once NDepend extension is installed we need to build our solution so that extension is able to locate the project assemblies for analysis.
 Before we do that, we must add one important adjustment. Since we\'re going to suppress specific issues, we must add ```CODE_ANALYSIS``` compilation symbol so that suppression attributes are included into project compilation. I have only one project in my example so I\'ll add following property to the project file:
 
-{{< highlight xml >}}
+``` xml
 
 // MyProj.Web.csproj
 
@@ -219,7 +221,7 @@ Before we do that, we must add one important adjustment. Since we\'re going to s
   // REMAINING CODE IS OMITTED ...
 </PropertyGroup>
 
-{{< /highlight >}}
+```
 
 Now we\'re ready and can build the solution. Once our solution is built, we can analyze it\'s assemblies by following this guide: [Analyzing a Visual Studio solution](https://www.ndepend.com/docs/getting-started-with-ndepend#Part2). Once analysis is complete, we get a pop-up window showing that analysis is now complete and presenting us with further options on what we can do - let\'s choose \"View NDepend Dashboard\". **Please note** that during analysis an .ndproj file was generated for us - this file will come in handy when we are going to modify the default configuration of NDepend analysis.
 
@@ -242,7 +244,7 @@ Once clicked, a collection of quality gates with detailed description will be po
 Next we can see the source code of quality gate definition. It\'s using CQLinq (Code Query LINQ) syntax which is used by NDepend to query .NET code through LINQ queries. You can learn more about CQLinq syntax here: [CQLinq Syntax](https://www.ndepend.com/docs/cqlinq-syntax).
 Now, let\'s update faliure condition and change it from 70% to 50% and save the definition by clicking on \"Save\" icon in the top left of the \"Queries and Rules Edit\" section.
 
-{{< highlight csharp >}}
+``` csharp
 
 // QueryEdit Percentage Coverage
 // <QualityGate Name="Percentage Coverage" Unit="%" />
@@ -250,29 +252,29 @@ failif value < 50% // <- update this value
 warnif value < 80%
 codeBase.PercentageCoverage
 
-{{< /highlight >}}
+```
 
 Now, let\'s take care of the remaining default quality gates that have been violated.
 
 ### Deactivate, Suppress and Resolve quality gate issues
 
-Let\'s go back to \"Quality Gates\" section and click on \"Fail\" count. 
+Let\'s go back to \"Quality Gates\" section and click on \"Fail\" count.
 
 ![Screenshot of NDepend VS Extension Failed quality gates](../../images/ndepend/ndepend_failed_qg.png)
 
-An overview of passed and failed quality gates with additional details will be populated on the right hand side. 
+An overview of passed and failed quality gates with additional details will be populated on the right hand side.
 
 ![Screenshot of NDepend VS Extension quality gate list](../../images/ndepend/ndepend_vs_qg_list.png)
 
 We have 2 failed quality gates - let\'s resolve the first one and deactivate the second one.
 
-* **Debt Rating per Namespace.** Once we chose to display failed quality gates, in the bottom center of Visual Studio a new section appeared showing us the active quality gates with status \"Failed\". We can easily deactivate a quality gate by unchecking \"Active\" checkbox for it. So let\'s do this for the respective quality gate:
+- **Debt Rating per Namespace.** Once we chose to display failed quality gates, in the bottom center of Visual Studio a new section appeared showing us the active quality gates with status \"Failed\". We can easily deactivate a quality gate by unchecking \"Active\" checkbox for it. So let\'s do this for the respective quality gate:
 
 ![Screenshot of NDepend VS Extension deactivation of quality gate](../../images/ndepend/ndepend_vs_deactivate_qg.png)
 
 Once it\'s done, we can click \"Save all\" in Visual Studio - changes will then be added to the respective .ndproj file.
 
-* **Critical Rules Violated.** As we can see, two critical rules have been violated and this is the reason for the quality gate failure. Let\'s double-click on the quality gate and see what rule violations we need to fix and where.
+- **Critical Rules Violated.** As we can see, two critical rules have been violated and this is the reason for the quality gate failure. Let\'s double-click on the quality gate and see what rule violations we need to fix and where.
 
 ![Screenshot of NDepend VS Extension quality gate failed rules](../../images/ndepend/ndepend_vs_violated_rules.png)
 
@@ -282,7 +284,7 @@ Let\'s double-click on the first rule - \"Avoid namespaces mutually dependent\" 
 
 In the pop-up window we can see how the suppression attribute must be defined and where it should be placed. First choose \"Copy SuppressMessage tag to Clipboard\" and then \"Open Source File Declaration\". We\'ll be redirected to the exact place where we need to add the suppression attribute - the only thing we\'ll need to modify is \"Justification\" for why we\'re suppressing the issue. It can look something like this:
 
-{{< highlight csharp >}}
+``` csharp
 
 [SuppressMessage("NDepend", "ND1400:AvoidNamespacesMutuallyDependent", Justification = "Not Applicable validation")]
 private HealthDataSourceBase CreateHealthDataSource(IConfiguration config)
@@ -291,21 +293,21 @@ private HealthDataSourceBase CreateHealthDataSource(IConfiguration config)
 
   // Rest of the method implementation in ommitted...
 }
-{{< /highlight >}}
+```
 
 Now, let\'s resolve the second rule violation - \"Avoid non-readonly static fields\". If we double-click on it, we get an overview and exact location of the fields that must be fixed. In my project there are two fields that were discovered that are defined like this:
 
-{{< highlight csharp >}}
+``` csharp
 static MemoryCache _resultsCache = new MemoryCache("HealthCache");
 static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-{{< /highlight >}}
+```
 
 To fix the issue, I just need to add a readonly declaration like this:
 
-{{< highlight csharp >}}
+``` csharp
 static readonly MemoryCache _resultsCache = new MemoryCache("HealthCache");
 static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-{{< /highlight >}}
+```
 
 Normally a detailed description with information about why this is an issue, how it can be fixed or suppressed is provided if you hover over the rule in the \"Queries and Rules Edit\" tab:
 
@@ -325,13 +327,13 @@ In order to add a new custom rule I need to either choose an existing rule group
 
 ![Screenshot of NDepend new rule creation](../../images/ndepend/ndepend_add_rule.png)
 
-Once we created a new rule, a default rule implementation will be generated in the \"Queries and Rules Edit\" section. It\'s not yet saved and is marked as incomplete by default - let\'s fix that and update the rule. 
+Once we created a new rule, a default rule implementation will be generated in the \"Queries and Rules Edit\" section. It\'s not yet saved and is marked as incomplete by default - let\'s fix that and update the rule.
 
-> What I liked when working with CQLinq is IntelliSense - it is very good. For each option detailed information is provided directly in the IDE so that you don\'t need to refer the documentation every signle time. It makes the development of custom configuration easier and more agile. 
+> What I liked when working with CQLinq is IntelliSense - it is very good. For each option detailed information is provided directly in the IDE so that you don\'t need to refer the documentation every signle time. It makes the development of custom configuration easier and more agile.
 
 Complete rule implementation looks like this:
 
-{{< highlight csharp >}}
+``` csharp
 
 // <Name>Use Uri.EscapeDataString(String) instead of Uri.EscapeUriString()</Name>
 warnif count > 0 
@@ -355,16 +357,18 @@ select new {
 // Use System.Uri.EscapeDataString(String) instead to properly escape URL parameters.
 //</HowToFix>
 
-{{< /highlight >}}
+```
 
 What\'s going on here? First of all, I\'ve added a descriptive name for the new rule as well as detailed description and information on how to fix the issue in the bottom of the rule implementation. What the rule basically does is:
-1. Raise a warning if at least one object satisfying the query conditions was found. 
+
+1. Raise a warning if at least one object satisfying the query conditions was found.
 2. In all methods of the application find all places using ```EscapeUriString``` method of ```System.Uri``` type.
 3. For each discovered occurence, add 30 minutes to total technical debt time and define the severity of the issue as critical.
 
 **Please note** that issue severity and rule severity are different concepts. By default this rule will only throw a warning in case it\'s violated and will therefore not cause any build quality gate failures. If I want the quality gate to fail in case this rule is violated I can go ahead with two approaches:
-* Create a new quality gate that will fail when the rule is violated
-* Connect this rule to an existing quality gate
+
+- Create a new quality gate that will fail when the rule is violated
+- Connect this rule to an existing quality gate
 
 The easiest would be to go with approach #2 and connect my new rule to an existing quality gate. You can see overview of all quality gates by clicking \"Quality Gates\" in \"Queries and Rules Explorer\". I would like to connect my rule to the default quality gate called \"Critical rules violated\".
 
@@ -375,14 +379,15 @@ If we select the quality gate in the list we can see it\'s implementation in CQL
 ![Screenshot of NDepend mark new rule as critical option](../../images/ndepend/ndepend_save_rule.png)
 
 And we\'re ready for test! Let\'s continue further from the point where we left off in the previous section of the blog post: [Enabling NDepend quality gate checks in build pipeline](https://kristhecodingunicorn.com/post/ndepend/#enabling-ndepend-quality-gate-checks-in-build-pipeline). In Azure DevOps we enabled NDepend build quality gate failure for the repo where current project exists and the build failed with 3 quality gate violations. Since then, with help of NDepend Visual Studio Extension we:
-* updated one quality gate where we reduced the code coverage threshold percentage from 70%, which is the default value, to 50%
-* deactivated \"Debt Rating per Namespace\" quality gate because it was not applicable for our use case
-* resolved \"Critical Rules Violated\" quality gate which was triggered by violation of two rules - we deactivated \"Avoid namespaces mutually dependent\" rule and resolved issues identified by \"Avoid non-readonly static fields\" rule
-* added our own \"Kris Custom Quality Rules\" rule group with a new custom rule - \"Use Uri.EscapeDataString(String) instead of Uri.EscapeUriString(String)\", and connected it to default \"Critical rules violated\" quality gate
+
+- updated one quality gate where we reduced the code coverage threshold percentage from 70%, which is the default value, to 50%
+- deactivated \"Debt Rating per Namespace\" quality gate because it was not applicable for our use case
+- resolved \"Critical Rules Violated\" quality gate which was triggered by violation of two rules - we deactivated \"Avoid namespaces mutually dependent\" rule and resolved issues identified by \"Avoid non-readonly static fields\" rule
+- added our own \"Kris Custom Quality Rules\" rule group with a new custom rule - \"Use Uri.EscapeDataString(String) instead of Uri.EscapeUriString(String)\", and connected it to default \"Critical rules violated\" quality gate
 
 So productive and efficient we\'ve been so far! Now let\'s create some code that will violate our custom rule. Below I have a file in my test project where I\'m using ```EscapeUriString``` method in the constructor of ```Logger``` class. This should trigger the rule violation and cause the build to fail.
 
-{{< highlight csharp >}}
+``` csharp
 
 //Logger.cs
 public class Logger
@@ -399,7 +404,7 @@ public class Logger
   }
 }
 
-{{< /highlight >}}
+```
 
 Last thing before we check in our changes and start testing is to update NDepend build task and let NDepend know that we have added custom configuration that it needs to be aware of. Remember that auto-generated ndproj file that is created for us once we start modifying default NDepend configuration? That\'s the one we need to provide the path for in a new property called ```ndproj```:
 
@@ -439,22 +444,21 @@ Finally, let\'s fix this issue and let the build succeed already! If we change r
 
 ![Screenshot of NDepend new custom rule success in dashboard](../../images/ndepend/ndepend_ado_resolved_custom_rule.png)
 
-And that\'s how you can enforce code quality validations as part of pull request builds so that all new code is created in the same way and at the same high quality level! :)
+And that\'s how you can enforce code quality validations as part of pull request builds so that all new code is created in the same way and at the same high quality level!😺
 
 Allright, this has been a long blog post but I really wanted to show the whole flow of implementing NDepend for static code analysis in Azure DevOps and how you can enforce code quality policies, including custom ones, in your organization. Hopefully this will help you out on your way in case you decide to acquire and implement NDepend in your project.
 
 ## Additional resources
 
-As I mentioned earlier in this blog post, official documentation for NDepend is pretty extensive and should help you a lot to start experimenting with the tool straight away. 
+As I mentioned earlier in this blog post, official documentation for NDepend is pretty extensive and should help you a lot to start experimenting with the tool straight away.
 
-* All NDepend documentation is located here: [NDepend Docs](https://www.ndepend.com/docs/getting-started-with-ndepend)
-
-* NDepend Azure DevOps extension documentation is located here: [Azure DevOps Services and Azure DevOps Server (TFS) Extension](https://www.ndepend.com/docs/azure-devops-tfs-vsts-integration-ndepend). Here you can also find extensions for other CI/CD servers like TeamCity or Jenkins.
+- All NDepend documentation is located here: [NDepend Docs](https://www.ndepend.com/docs/getting-started-with-ndepend)
+- NDepend Azure DevOps extension documentation is located here: [Azure DevOps Services and Azure DevOps Server (TFS) Extension](https://www.ndepend.com/docs/azure-devops-tfs-vsts-integration-ndepend). Here you can also find extensions for other CI/CD servers like TeamCity or Jenkins.
 
 At the time of publishing this post a new version of NDepend just got released - [What's new in NDepend v2022.1](https://www.ndepend.com/whatsnew). One of the new features I liked in this release is ILSpy Plugin which lets you decompile and analyze assemblies directly in Visual Studio with NDepend Extension. If you haven\'t heard of or used ILSpy before, check out my post to get to know it: [Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log](https://kristhecodingunicorn.com/post/assembly_version_conflicts/)
 
-That\'s it from me this time, thanks for checking in! 
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
+That\'s it from me this time, thanks for checking in!
+If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page😺
 
 Stay secure, stay safe.
 

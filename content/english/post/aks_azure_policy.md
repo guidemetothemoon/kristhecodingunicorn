@@ -61,7 +61,7 @@ Please note that the more workloads that need to be evaluated, the more resource
 
 You can enable Azure Policy add-on for AKS clusters in multiple ways:
 
-**Azure Portal**
+#### Azure Portal
 
 When creating a new AKS cluster you can enable Azure Policy add-on in the Integrations section, as shown in the screenshot below:
 
@@ -71,13 +71,13 @@ You can enable Azure Policy add-on on existing AKS cluster from the ```Settings 
 
 ![Screenshot of enabling Azure Policy add-on from Azure portal for an existing AKS cluster](../../images/k8s_azure_policy/aks_azpolicy_addon_portal_existing.png)
 
-**Azure CLI**
+#### Azure CLI
 
 When creating a new AKS cluster with Azure CLI you can enable Azure Policy add-on with ```--enable-addons azure-policy``` parameter. For example:
 
 ```az aks create --name chamber-of-secrets --resource-group hogwarts-rg --enable-addons azure-policy```
 
-**Terraform**
+#### Terraform
 
 ```azure_policy_enabled = true``` argument can be used to enable Azure Policy add-on with AzureRM provider for Terraform.
 
@@ -111,7 +111,7 @@ You can enable Azure Policy add-on with Microsoft Defender for Containers from `
 
 Once Azure Policy add-on has been enabled, it's time to enforce some Azure Policy definitions. This can be done through **policy assignment**, i.e. by assigning a policy to a specific scope: tenant, subscription, resource group or resource. Let's start by assigning a built-in policy definition. I will use **"Kubernetes cluster should not allow privileged containers"** policy definition as an example. This policy will check if a scheduled deployment uses containers with privileged mode enabled and will deny execution of non-compliant deployments in the respective AKS clusters.
 
-#### Azure Portal
+#### Enforce Azure Policy definitions in Azure Portal
 
 The approach of assigning an Azure Policy definition for Kubernetes is pretty much the same as for assigning policy to any other resource in Azure, so I will not go through the whole process.
 
@@ -161,7 +161,7 @@ spec:
 
 ![Screenshot of the non-compliant Deployment being denied by enforced Azure Policy definition for disallowing usage of container privileged mode](../../images/k8s_azure_policy/aks_azpolicy_denied_deploy.png)
 
-#### Azure CLI
+#### Enforce Azure Policy definitions via Azure CLI
 
 You can assign the same policy definition with ```az policy assignment create``` command in Azure CLI:
 
@@ -178,7 +178,7 @@ Azure Policy definition ID, that is provided as a value to ```--policy``` parame
 
 You can find more information about ```az policy assignment create``` command here: [az policy assignment create](https://learn.microsoft.com/en-us/cli/azure/policy/assignment?view=azure-cli-latest#az-policy-assignment-create)
 
-#### Terraform (IaC)
+#### Enforce Azure Policy definitions via Terraform (IaC)
 
 Finally, if we were to assign the same built-in policy definition with AzureRM provider for Terraform, we could use ```azurerm_subscription_policy_assignment``` resource to assign the policy on the subscription level. If you want to assign a policy on a different scope, you can use ```azurerm_management_group_policy_assignment```, ```azurerm_resource_group_policy_assignment``` or ```azurerm_resource_policy_assignment``` accordingly.
 
