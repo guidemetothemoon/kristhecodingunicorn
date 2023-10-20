@@ -1,6 +1,8 @@
 name: Run pull request checks
 on:
   pull_request:
+    paths:
+      - 'content/**'
 jobs:
   lint-markdown:
     runs-on: ubuntu-latest
