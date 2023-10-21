@@ -10,6 +10,8 @@ tags = [
     "devsecops",
     "cybersecurity-corner"
 ]
+slug = "dotnet-sca-with-security-code-scan"
+aliases = ["dotnet_sast_scs"]
 +++
 
 {{< table_of_contents >}}
@@ -46,7 +48,7 @@ SCS can be implemented as a:
 
 - **Visual Studio extension**: it\'s a great way to locally test the code you write for security vulnerabilities and get a real-time analytics, as you code. Analysis will happen in the background as IntelliSense and you will get warnings and errors in the \"Error list\" window, just as any other compilation or build warnings/errors. I would recommend every .NET developer to just have it installed - not only does it give a great benefit of alerting you about potentially insecure code before you even commit any changes, but it will also contribute to making you more aware of security in your coding process.
 - **NuGet package**: you can install SCS as a NuGet package for a specific solution or a project. Analysis will then happen both as part of IntelliSense but also as part of the build. Errors and warnings will also come up in the \"Error list\" window. This works fine if you have just one project or solution you want to scan, but if you have multiple solutions or projects then you will need to ensure that you add the NuGet package to all of them.
-- **Standalone runner**: i.e. a .NET tool. If you haven\'t used .NET tools before, you can read more about what those are and how to create a .NET tool in one of my earlier posts: [How to distribute console applications easily with .NET tools](https://kristhecodingunicorn.com/post/dotnet_tools/). This is a recommended installation type for implementation of SAST in CI/CD pipelines. You can also run the .NET tool locally if you want to trigger scanning of your code outside of IDE or solution build step.
+- **Standalone runner**: i.e. a .NET tool. If you haven\'t used .NET tools before, you can read more about what those are and how to create a .NET tool in one of my earlier posts: [How to distribute console applications easily with .NET tools](https://kristhecodingunicorn.com/post/distribute-dotnet-console-apps-with-dotnet-tools). This is a recommended installation type for implementation of SAST in CI/CD pipelines. You can also run the .NET tool locally if you want to trigger scanning of your code outside of IDE or solution build step.
 
 The first two options are pretty straightforward to set up so I would like to talk in more detail about the last option and show how SCS can be implemented as a standalone runner in Azure Pipelines in Azure DevOps.
 
@@ -214,7 +216,7 @@ You can also click on every discovered vulnerability in order to read more about
 
 Well, that\'s what I wanted to share about Security Code Scan tool - in my opinion, the tool is really useful, easy to use and there\'s a potential to tailor it to your own needs by adding your own rules. I haven\'t tried customizing the tool just yet but I have some rules in the backlog that I would like to add to SCS so I might share a guide on how to do that at a later point :)
 
-Finally, it\'s important to mention that SAST tools should **not** be the only security control in place - these tools cover a limited amount of security vulnerabilities and may result in many false positives as well as the scanning process may get quite time-consuming, especially for bigger solutions. Therefore, it\'s important to use SAST tools in combination with other security controls like Dynamic Application Security Testing (DAST), [third-party dependencies scanning](https://kristhecodingunicorn.com/post/owasp_depcheck/), penetration testing and others. [Interactive Application Security Testing (IAST)](https://www.veracode.com/security/interactive-application-security-testing-iast) is pretty new but already promising as a useful addition to SAST and DAST tools.
+Finally, it\'s important to mention that SAST tools should **not** be the only security control in place - these tools cover a limited amount of security vulnerabilities and may result in many false positives as well as the scanning process may get quite time-consuming, especially for bigger solutions. Therefore, it\'s important to use SAST tools in combination with other security controls like Dynamic Application Security Testing (DAST), [third-party dependencies scanning](https://kristhecodingunicorn.com/post/dependency-scanning-with-owasp-dependency-check), penetration testing and others. [Interactive Application Security Testing (IAST)](https://www.veracode.com/security/interactive-application-security-testing-iast) is pretty new but already promising as a useful addition to SAST and DAST tools.
 
 ## Additional resources
 

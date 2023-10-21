@@ -10,6 +10,8 @@ tags = [
     "k8s",
     "azure"
 ]
+slug = "aks-nodes-accelerated-networking"
+aliases = ["k8s_an"]
 +++
 
 {{< table_of_contents >}}

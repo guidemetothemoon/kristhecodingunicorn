@@ -11,6 +11,8 @@ tags = [
     "cloudops",
     "devops"
 ]
+slug = "kubernetes-port-forwarding-cleanup-of-orphaned-ports"
+aliases = ["k8s_port_forwarding_cleanup"]
 +++
 
 {{< table_of_contents >}}

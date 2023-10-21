@@ -8,6 +8,8 @@ tags = [
     "dotnet",
     "tooling"
 ]
+slug = "distribute-dotnet-console-apps-with-dotnet-tools"
+aliases = ["dotnet_tools"]
 +++
 
 {{< table_of_contents >}}

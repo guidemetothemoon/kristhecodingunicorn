@@ -9,6 +9,8 @@ tags = [
     "cybersecurity-corner",
     "owasp",
 ]
+slug = "dependency-scanning-with-owasp-dependency-check"
+aliases = ["owasp_depcheck"]
 +++
 
 {{< table_of_contents >}}

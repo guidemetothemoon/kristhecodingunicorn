@@ -14,13 +14,15 @@ tags = [
     "oauth",
     "oauth2-proxy"
 ]
+slug = "aks-oauth2-proxy-with-agic"
+aliases = ["k8s_agic_oauth"]
 +++
 
 {{< table_of_contents >}}
 
 ## Introduction
 
-This blog post is a continuation of an extensive blog post about OAuth2 Proxy, which I published earlier: [Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy](https://kristhecodingunicorn.com/post/k8s_nginx_oauth). In the original blog post NGINX Ingress Controller was used in AKS clusters, while this blog post will look into how authentication with OAuth2 Proxy can be implemented when AKS clusters are configured with Application Gateway Ingress Controller (AGIC). Multiple steps for setting up OAuth2 Proxy are similar to the ones described in the original blog post, therefore those will be linked here directly to avoid content duplication. To get most value out of this content I will strongly recommend to check out the original blog post or links to its specific sections that will be provided as part of this blog post.
+This blog post is a continuation of an extensive blog post about OAuth2 Proxy, which I published earlier: [Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy](https://kristhecodingunicorn.com/post/aks-oauth2-proxy-with-nginx-ingress-controller). In the original blog post NGINX Ingress Controller was used in AKS clusters, while this blog post will look into how authentication with OAuth2 Proxy can be implemented when AKS clusters are configured with Application Gateway Ingress Controller (AGIC). Multiple steps for setting up OAuth2 Proxy are similar to the ones described in the original blog post, therefore those will be linked here directly to avoid content duplication. To get most value out of this content I will strongly recommend to check out the original blog post or links to its specific sections that will be provided as part of this blog post.
 
 Last time we talked about how you can implement OAuth 2.0 authentication for applications that are running in Azure Kubernetes Service with NGINX Ingress Controller. [OAuth2 Proxy](https://github.com/oauth2-proxy/oauth2-proxy) is a popular open source tool that is widely adopted in the tech community and makes it relatively straightforward to set up OAuth 2.0 authentication.
 
@@ -42,7 +44,7 @@ We'll need to perform following steps in order to integrate authentication with 
 
 ### 1 - Create Microsoft Entra application
 
-This step is performed in the same way as when OAuth2 Proxy is set up towards AKS with NGINX Ingress Controller. An application registration will need to be done in Microsoft Entra with the respective ```<PUBLIC_APPLICATION_URL>/oauth2/callback``` redirect URI. In the example used in this blog post redirect URI will be ```https://chaos-nyan-cat.kristechlab.space/oauth2/callback```. Please follow the instructions outlined in the following link on how to create an application in Microsoft Entra which will act on behalf of OAuth2 Proxy: [Create OAuth2 Proxy application in Microsoft Entra ID](https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#create-oauth2-proxy-application-in-microsoft-entra-id).
+This step is performed in the same way as when OAuth2 Proxy is set up towards AKS with NGINX Ingress Controller. An application registration will need to be done in Microsoft Entra with the respective ```<PUBLIC_APPLICATION_URL>/oauth2/callback``` redirect URI. In the example used in this blog post redirect URI will be ```https://chaos-nyan-cat.kristechlab.space/oauth2/callback```. Please follow the instructions outlined in the following link on how to create an application in Microsoft Entra which will act on behalf of OAuth2 Proxy: [Create OAuth2 Proxy application in Microsoft Entra ID](https://kristhecodingunicorn.com/post/aks-oauth2-proxy-with-nginx-ingress-controller#create-oauth2-proxy-application-in-microsoft-entra-id).
 
 ### 2 - Deploy application with Ingress
 
@@ -137,15 +139,15 @@ Since we haven't deployed any OAuth2 Proxy in front yet we can access the applic
 
 ### 3 - Deploy OAuth2 Proxy in front of the application
 
-Now that we've create a Microsoft Entra application for OAuth2 Proxy and deployed our application we're ready to put OAuth2 Proxy in front of it and get that OAuth 2.0 authentication up and running. In this example I will be deploying OAuth2 Proxy Helm chart with minimal configuration, but you can check the original blog post for more details on how to deploy OAuth2 Proxy with Kubernetes YAML manifests for instance: [Configure and deploy OAuth2 Proxy](https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#configure-and-deploy-oauth2-proxy).
+Now that we've create a Microsoft Entra application for OAuth2 Proxy and deployed our application we're ready to put OAuth2 Proxy in front of it and get that OAuth 2.0 authentication up and running. In this example I will be deploying OAuth2 Proxy Helm chart with minimal configuration, but you can check the original blog post for more details on how to deploy OAuth2 Proxy with Kubernetes YAML manifests for instance: [Configure and deploy OAuth2 Proxy](https://kristhecodingunicorn.com/post/aks-oauth2-proxy-with-nginx-ingress-controller#configure-and-deploy-oauth2-proxy).
 
 Personally I prefer using OAuth2 Proxy Helm chart, because it's so much easier to maintain and configure, as well as it can install multiple additional components like Redis so that I don't need to do it manually myself. All we need to do is to create a Helm values YAML file where we will define the configuration for OAuth2 Proxy deployment based on the need of our application. Below you may see an example of such configuration with the following highlights:
 
 - Install of Redis as a session storage to ensure that in case the session cookie coming from Microsoft Entra is too big which is a quite frequent case, we will have enough space to store it in Redis instead of using default client-side cookie storage.
 - Enable Ingress with the user application public URI so that every time someone attempts to access the application, authentication via OAuth2 Proxy will be requested first.
 - Provide Ingress annotations to ensure that OAuth2 Proxy Ingress is also managed via AGIC and traffic is flowing through HTTPS with a valid TLS certificate.
-- Provide information about the configured Microsoft Entra application for OAuth2 Proxy: client id and client secret. In addition provide a cookie secret for session information storage (see [Cookie Secret](https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#cookie-secret) for more details on generating a cookie secret). Store this configuration as Kubernetes Secrets (you can also take it a step further and integrate Azure Key Vault Provider for Secrets Store CSI Driver).
-- Provide OAuth2 Proxy specific configuration where we define the generic OIDC provider to be used (you can also use azure as a value here but be cautious of following known issue: [OAuth2 Proxy version 7.3.0 - Issue with Azure provider](https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#version-730---issue-with-azure-provider)), which Microsoft Entra tenant id to use for authentication and where to redirect after authentication is performed successfully. We also define that we want to skip OAuth2 Proxy specific UI and redirect to the respective provider's authentication UI directly.
+- Provide information about the configured Microsoft Entra application for OAuth2 Proxy: client id and client secret. In addition provide a cookie secret for session information storage (see [Cookie Secret](https://kristhecodingunicorn.com/post/aks-oauth2-proxy-with-nginx-ingress-controller#cookie-secret) for more details on generating a cookie secret). Store this configuration as Kubernetes Secrets (you can also take it a step further and integrate Azure Key Vault Provider for Secrets Store CSI Driver).
+- Provide OAuth2 Proxy specific configuration where we define the generic OIDC provider to be used (you can also use azure as a value here but be cautious of following known issue: [OAuth2 Proxy version 7.3.0 - Issue with Azure provider](https://kristhecodingunicorn.com/post/aks-oauth2-proxy-with-nginx-ingress-controller#version-730---issue-with-azure-provider)), which Microsoft Entra tenant id to use for authentication and where to redirect after authentication is performed successfully. We also define that we want to skip OAuth2 Proxy specific UI and redirect to the respective provider's authentication UI directly.
 
 Let's take a closer look at the ```upstreams``` parameter: TODO
 
@@ -202,7 +204,7 @@ To sum it up, the flow of setting up OAuth2 Proxy for applications running in AK
 
 Below you may find a few additional resources to learn more about Application Gateway Ingress Controller on AKS and OAuth2 Proxy:
 
-- [Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy](https://kristhecodingunicorn.com/post/k8s_nginx_oauth)
+- [Setting Up OAuth 2.0 Authentication for Applications in AKS With NGINX and OAuth2 Proxy](https://kristhecodingunicorn.com/post/aks-oauth2-proxy-with-nginx-ingress-controller)
 
 - [What is Application Gateway Ingress Controller?](https://learn.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview)
 

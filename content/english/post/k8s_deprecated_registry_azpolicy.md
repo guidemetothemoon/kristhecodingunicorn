@@ -11,6 +11,8 @@ tags = [
     "azure",
     "devops"
 ]
+slug = "custom-azure-policy-for-k8s-image-registries-compliance"
+aliases = ["k8s_deprecated_registry_azpolicy"]
 +++
 
 {{< table_of_contents >}}
@@ -39,7 +41,7 @@ There are multiple options you may consider:
 
 Let's look into the latter alternative in more detail. I've taken templates for Gatekeeper that are available in AWS EKS Best Practices repo and modified them further in order to create a custom Azure Policy that will either audit or deny deployment of workloads (Pod/CronJob/Workload containers, initContainers and ephemeralContainers) that are dependent on the blacklisted image registries.
 
-I will not go into the details of what a custom Azure Policy is but you can check out my earlier blog post to learn more: [Keeping AKS Clusters Continuously Secure With Azure Policy](https://kristhecodingunicorn.com/post/aks_azure_policy/). I will soon publish another blog post that will go more in-depth on writing custom Azure Policy definitions for Kubernetes with Rego and Gatekeeper templates so stay tuned for more information on the topic!😼
+I will not go into the details of what a custom Azure Policy is but you can check out my earlier blog post to learn more: [Keeping AKS Clusters Continuously Secure With Azure Policy](https://kristhecodingunicorn.com/post/aks-azure-policy). I will soon publish another blog post that will go more in-depth on writing custom Azure Policy definitions for Kubernetes with Rego and Gatekeeper templates so stay tuned for more information on the topic!😼
 
 Custom Azure Policy source files are available in my GitHub repo: [guidemetothemoon/div-dev-resources](https://github.com/guidemetothemoon/div-dev-resources/tree/main/help-resources/kubernetes/azure-policy/k8s_disallowed_image_registries). There are two files that are related to the respective custom Azure Policy:
 

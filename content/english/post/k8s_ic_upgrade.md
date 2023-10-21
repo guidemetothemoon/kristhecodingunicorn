@@ -12,6 +12,8 @@ tags = [
     "nginx",
     "ingress-controller"
 ]
+slug = "nginx-ingress-controller-upgrade-with-zero-downtime"
+aliases = ["k8s_ic_upgrade"]
 +++
 
 {{< table_of_contents >}}

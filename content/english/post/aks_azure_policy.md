@@ -11,6 +11,8 @@ tags = [
     "azure",
     "devops"
 ]
+slug = "aks-azure-policy"
+aliases = ["aks_azure_policy"]
 +++
 
 {{< table_of_contents >}}
@@ -27,7 +29,7 @@ There are multiple ways to the goal indeed, and one of the ways is called Azure 
 
 If you're not familiar with Azure Policy and are working (or planning to work) with Azure, I definitely recommend you to start using it asap. **Azure Policy** is a service that provides you with a collection of rules, aka policy definitions, that you can enforce in order to ensure proper automatic and continuous governance and compliance of your Azure workloads, and even hybrid workloads like Azure Arc resources. You can also create custom policies to govern the areas that are not covered by the collection of built-in policies. We'll shortly see how you can combine both built-in and custom policies to govern AKS clusters.😺
 
-You're welcome to check out the [Additional resources](https://kristhecodingunicorn.com/post/aks_azure_policy#additional-resources) section in the bottom of this blog post for more learning material on areas related to Azure Policy for Kubernetes.
+You're welcome to check out the [Additional resources](#additional-resources) section in the bottom of this blog post for more learning material on areas related to Azure Policy for Kubernetes.
 
 Azure Policy has a dedicated category called **"Kubernetes"** which contains all the built-in and custom policy definitions that can be applied to AKS and Azure Arc-enabled Kubernetes clusters. You can use this category as a filter in order to quickly get access to all the policies that can be applied to Kubernetes clusters and workloads.
 

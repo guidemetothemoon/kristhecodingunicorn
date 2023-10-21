@@ -134,9 +134,9 @@ It means that your cluster is using default self-signed certificates which are g
 
 Once a Kubernetes Resource of type ```Generic provider (existing service account)``` is created, you can use Azure DevOps Environments just as you did before the breaking change. By following this approach you will be able to see the Resource information related to the currently active Deployment in Azure DevOps, for exampl Pod logs, Deployment metadata, etc. - just as if you have created a regular AKS Resource. You will also be able to define additional policies and checks on the Resource level. If you're not sure about how to deploy to Kubernetes with Azure DevOps Environments, you can check out my earlier blog posts that provide more details on this topic:
 
-🐱 [Continuous Delivery to AKS with Azure DevOps Environments - Part 1](https://kristhecodingunicorn.com/post/k8s_ado_envs-1/)
+🐱 [Continuous Delivery to AKS with Azure DevOps Environments - Part 1](https://kristhecodingunicorn.com/post/cd-to-aks-with-azure-devops-environments-part-one)
 
-🐱 [Continuous Delivery to AKS with Azure DevOps Environments - Part 2](https://kristhecodingunicorn.com/post/k8s_ado_envs-2/)
+🐱 [Continuous Delivery to AKS with Azure DevOps Environments - Part 2](https://kristhecodingunicorn.com/post/cd-to-aks-with-azure-devops-environments-part-two)
 
 ### Automate creation of Kubernetes Resource of type "Generic provider (existing service account)
 

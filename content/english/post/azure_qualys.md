@@ -10,6 +10,8 @@ tags = [
     "cybersecurity-corner",
     "security"
 ]
+slug = "scan-azurevm-azurearc-acr-with-defender-and-qualys"
+aliases = ["azure_qualys"]
 +++
 
 {{< table_of_contents >}}
@@ -142,7 +144,7 @@ Approach to vulnerability scanning in AKS is layered, just like it is in many ot
 
 - **AKS specific container images and packages**, i.e. system-side artifacts that are mainly related to AKS control plane and standard components that are being provided by AKS. This areas is owned, maintained and continuously secured by Microsoft with a wide collection of security tools and practices, some of which are described in more detail in the vulnerability management article linked in the section below.
 
-- **System and Worker Nodes**. Microsoft continusouly rolls out security patches to AKS Nodes but you need to familiarize yourself with AKS upgrade and update processes in order to understand what you need to do in order to ensure that those updates are properly applied. The golden principle here is to establish a routine where you can continuously upgrade AKS cluster and Node image versions in addition to roll out of daily or weekly Node OS updates, depending on which OS your Nodes are running on. I have earlier written a deep dive blog post on the topic of AKS upgrade strategies which you're welcome to check out: [Exploring Upgrade Strategies in Azure Kubernetes Service](https://kristhecodingunicorn.com/post/k8s_upgrade_strategy)
+- **System and Worker Nodes**. Microsoft continusouly rolls out security patches to AKS Nodes but you need to familiarize yourself with AKS upgrade and update processes in order to understand what you need to do in order to ensure that those updates are properly applied. The golden principle here is to establish a routine where you can continuously upgrade AKS cluster and Node image versions in addition to roll out of daily or weekly Node OS updates, depending on which OS your Nodes are running on. I have earlier written a deep dive blog post on the topic of AKS upgrade strategies which you're welcome to check out: [Exploring Upgrade Strategies in Azure Kubernetes Service](https://kristhecodingunicorn.com/post/aks-upgrade-strategies)
 
 Where Qualys comes in when it comes to AKS is container images. If you're using AKS in combination with Azure Container Registry, that's where Qualys can be used in order to scan for vulnerabilities in the containers that are running in your AKS clusters. This is done with help of Microsoft Defender agent that is running on the cluster - it collects data about the currently running images  and sends it further to Microsoft Defender that correlates this data with vulnerability scanning output for images that are stored in ACR.
 
