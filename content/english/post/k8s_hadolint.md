@@ -10,6 +10,8 @@ tags = [
     "k8s",
     "azure"
 ]
+slug = "dockerfile-linting-with-hadolint"
+aliases = ["k8s_hadolint"]
 +++
 
 {{< table_of_contents >}}

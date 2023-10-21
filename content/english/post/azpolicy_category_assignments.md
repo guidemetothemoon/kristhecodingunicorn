@@ -10,6 +10,8 @@ tags = [
     "azurepolicy",
     "governance"
 ]
+slug = "get-azure-policy-assignment-of-category"
+aliases = ["azpolicy_category_assignments"]
 +++
 
 {{< table_of_contents >}}

@@ -8,6 +8,8 @@ tags = [
     "gamingcorner",
     "journey",
 ]
+slug = "journey-game-review"
+aliases = ["gaming_journey"]
 +++
 
 ![Screenshot from Journey game](../../images/gaming_corner/journey_1.jpg)

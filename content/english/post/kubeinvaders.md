@@ -10,4 +10,6 @@ tags = [
     "chaosengineering",
     "resiliency"
 ]
+slug = "testing-kubernets-resiliency-with-kubeinvaders"
+aliases = ["kubeinvaders"]
 +++

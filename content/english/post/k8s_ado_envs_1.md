@@ -11,15 +11,17 @@ tags = [
     "k8s",
     "azure"
 ]
+slug = "cd-to-aks-with-azure-devops-environments-part-one"
+aliases = ["k8s_ado_envs-1"]
 +++
 
 {{< table_of_contents >}}
 
 In the first part of this blog series I would like to talk about Azure DevOps Environments, benefits of using it for deployment of applications to AKS or any other Kubernetes distribution (or even a VM), and provide a few tips and tricks for how ADO environments and resources can be created.
 
-In Part 2 of this blog post series we\'ll deploy a test application to AKS with Azure DevOps Environments and take a look at how we can migrate Kubernetes resources between Azure DevOps Environments with a sprinkle of automation. Check out Part 2 here: [Continuous Delivery to AKS With Azure DevOps Environments - Part 2](https://kristhecodingunicorn.com/post/k8s_ado_envs-2/)
+In Part 2 of this blog post series we\'ll deploy a test application to AKS with Azure DevOps Environments and take a look at how we can migrate Kubernetes resources between Azure DevOps Environments with a sprinkle of automation. Check out Part 2 here: [Continuous Delivery to AKS With Azure DevOps Environments - Part 2](https://kristhecodingunicorn.com/post/cd-to-aks-with-azure-devops-environments-part-two)
 
-If you would like to know a simple but really useful way to re-use the same Azure DevOps Environment in multiple deployment stages across multiple pipelines, you can check out one of my tech tips here: [Re-Using Azure DevOps Environment Efficiently Across Multiple Pipelines](https://kristhecodingunicorn.com/techtips/ado_env_as_var/)
+If you would like to know a simple but really useful way to re-use the same Azure DevOps Environment in multiple deployment stages across multiple pipelines, you can check out one of my tech tips here: [Re-Using Azure DevOps Environment Efficiently Across Multiple Pipelines](https://kristhecodingunicorn.com/post/reuse-azure-devops-environment)
 
 ## What is an Azure DevOps Environment?
 

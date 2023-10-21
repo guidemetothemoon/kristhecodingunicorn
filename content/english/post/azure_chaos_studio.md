@@ -11,6 +11,8 @@ tags = [
     "azure-chaos-studio",
     "sre"
 ]
+slug = "azure-services-resilience-testing-with-azure-chaos-studio"
+aliases = ["azure_chaos_studio"]
 +++
 
 {{< table_of_contents >}}

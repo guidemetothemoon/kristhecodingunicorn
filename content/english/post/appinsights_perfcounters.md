@@ -11,6 +11,8 @@ tags = [
     "observability",
     "azure-monitor"
 ]
+slug = "application-insights-perfcounters-collection-issue-dotnet"
+aliases = ["appinsights_perfcounters"]
 +++
 
 {{< table_of_contents >}}

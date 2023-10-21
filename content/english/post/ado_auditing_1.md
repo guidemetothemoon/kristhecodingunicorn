@@ -10,6 +10,8 @@ tags = [
     "cybersecurity-corner",
     "azure"
 ]
+slug = "azure-devops-audit-azure-monitor-logs"
+aliases = ["ado-auditing-1"]
 +++
 
 {{< table_of_contents >}}

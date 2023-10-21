@@ -11,6 +11,8 @@ tags = [
     "ubuntu",
     "kubernetes"
 ]
+slug = "dotnet-chiseled-ubuntu-containers"
+aliases = ["dotnet_ubuntu_chiseled"]
 +++
 
 {{< table_of_contents >}}

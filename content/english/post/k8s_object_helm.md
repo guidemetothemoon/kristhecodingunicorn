@@ -10,6 +10,8 @@ tags = [
     "k8s",
     "helm"
 ]
+slug = "include-k8s-resource-in-existing-helm-release"
+aliases = ["k8s_object_helm"]
 +++
 
 {{< table_of_contents >}}

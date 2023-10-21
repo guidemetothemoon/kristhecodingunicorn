@@ -10,6 +10,8 @@ tags = [
     "ilspy",
     "fusionlog"
 ]
+slug = "assembly-version-conflict-debugging-dotnet"
+aliases = ["assembly_version_conflicts"]
 +++
 
 {{< table_of_contents >}}

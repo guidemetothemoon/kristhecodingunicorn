@@ -11,6 +11,8 @@ tags = [
     "azure-devops",
     "visual-studio"
 ]
+slug = "dotnet-code-quality-with-ndepend"
+aliases = ["ndepend"]
 +++
 
 {{< table_of_contents >}}
@@ -378,7 +380,7 @@ If we select the quality gate in the list we can see it\'s implementation in CQL
 
 ![Screenshot of NDepend mark new rule as critical option](../../images/ndepend/ndepend_save_rule.png)
 
-And we\'re ready for test! Let\'s continue further from the point where we left off in the previous section of the blog post: [Enabling NDepend quality gate checks in build pipeline](https://kristhecodingunicorn.com/post/ndepend/#enabling-ndepend-quality-gate-checks-in-build-pipeline). In Azure DevOps we enabled NDepend build quality gate failure for the repo where current project exists and the build failed with 3 quality gate violations. Since then, with help of NDepend Visual Studio Extension we:
+And we\'re ready for test! Let\'s continue further from the point where we left off in the previous section of the blog post: [Enabling NDepend quality gate checks in build pipeline](#enabling-ndepend-quality-gate-checks-in-build-pipeline). In Azure DevOps we enabled NDepend build quality gate failure for the repo where current project exists and the build failed with 3 quality gate violations. Since then, with help of NDepend Visual Studio Extension we:
 
 - updated one quality gate where we reduced the code coverage threshold percentage from 70%, which is the default value, to 50%
 - deactivated \"Debt Rating per Namespace\" quality gate because it was not applicable for our use case
@@ -455,7 +457,7 @@ As I mentioned earlier in this blog post, official documentation for NDepend is 
 - All NDepend documentation is located here: [NDepend Docs](https://www.ndepend.com/docs/getting-started-with-ndepend)
 - NDepend Azure DevOps extension documentation is located here: [Azure DevOps Services and Azure DevOps Server (TFS) Extension](https://www.ndepend.com/docs/azure-devops-tfs-vsts-integration-ndepend). Here you can also find extensions for other CI/CD servers like TeamCity or Jenkins.
 
-At the time of publishing this post a new version of NDepend just got released - [What's new in NDepend v2022.1](https://www.ndepend.com/whatsnew). One of the new features I liked in this release is ILSpy Plugin which lets you decompile and analyze assemblies directly in Visual Studio with NDepend Extension. If you haven\'t heard of or used ILSpy before, check out my post to get to know it: [Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log](https://kristhecodingunicorn.com/post/assembly_version_conflicts/)
+At the time of publishing this post a new version of NDepend just got released - [What's new in NDepend v2022.1](https://www.ndepend.com/whatsnew). One of the new features I liked in this release is ILSpy Plugin which lets you decompile and analyze assemblies directly in Visual Studio with NDepend Extension. If you haven\'t heard of or used ILSpy before, check out my post to get to know it: [Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log](https://kristhecodingunicorn.com/post/assembly-version-conflict-debugging-dotnet)
 
 That\'s it from me this time, thanks for checking in!
 If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page😺

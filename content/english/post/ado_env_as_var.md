@@ -9,15 +9,17 @@ tags = [
     "azure-devops",
     "devops"
 ]
+slug = "reuse-azure-devops-environment"
+aliases = ["/techtips/ado_env_as_var"]
 +++
 
 {{< table_of_contents >}}
 
 Following up on the recent blog post series about Continuous Delivery to AKS with Azure DevOps Environments:
 
-🐱 [Part 1](https://kristhecodingunicorn.com/post/k8s_ado_envs-1/)
+🐱 [Part 1](https://kristhecodingunicorn.com/post/cd-to-aks-with-azure-devops-environments-part-one)
 
-🐱 [Part 2](https://kristhecodingunicorn.com/post/k8s_ado_envs-2/)
+🐱 [Part 2](https://kristhecodingunicorn.com/post/cd-to-aks-with-azure-devops-environments-part-two)
 
 I would like to share a simple but really useful way to re-use the same Azure DevOps Environment in multiple deployment stages across multiple pipelines. Normally if you want to deploy multiple applications to the same AKS cluster, you would specify a target Azure DevOps Environment by writing it\'s name in ```environment``` property of deployment stage of every application:
 

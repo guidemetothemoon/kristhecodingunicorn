@@ -8,6 +8,8 @@ tags = [
     "dotnet",
     "microservices",
 ]
+slug = "create-microservices-with-dotnet-custom-templates"
+aliases = ["dotnet_custom_templates"]
 +++
 
 {{< table_of_contents >}}

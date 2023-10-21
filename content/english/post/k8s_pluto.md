@@ -11,6 +11,8 @@ tags = [
     "azure",
     "devops"
 ]
+slug = "monitor-k8s-api-deprecations-with-pluto"
+aliases = ["k8s_pluto"]
 +++
 
 {{< table_of_contents >}}

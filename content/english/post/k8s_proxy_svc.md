@@ -10,6 +10,8 @@ tags = [
     "k8s",
     "proxy"
 ]
+slug = "kubernetes-service-to-proxy-to-external-services"
+aliases = ["k8s_proxy_svc"]
 +++
 
 {{< table_of_contents >}}

@@ -9,6 +9,8 @@ tags = [
     "cybersecurity-corner",
     "azure"
 ]
+slug = "secrets-cleanup-with-bfg-repo-cleaner"
+aliases = ["secrets_cleanup"]
 +++
 
 {{< table_of_contents >}}
@@ -25,7 +27,7 @@ If you don\'t trust me, just search for variations of \"password\" or \"apikey\"
 
 Fortunately, there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in \"Additional resources\" section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.
 
-## I\'ve committed a secret - now what? o.O
+## I\'ve committed a secret - now what?
 
 Now let\'s fix it! Your first thought might be \"*Well, I can just create a new pull request and remove the secret! Once the PR is merged, the secret is gone from the source code, right? RIGHT?!*\". Well, not exactly. Though the secret will be gone from the latest version of your source code in master branch, it will still be available in commit history of your repo. If any developers cloned the repo before the secret was removed, they may still have it locally as well, even after you remove it from the source code.
 

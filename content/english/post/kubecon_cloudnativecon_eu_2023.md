@@ -16,6 +16,8 @@ tags = [
     "kubecon",
     "cloudnativecon"
 ]
+slug = "kubecon-cloudnativecon-eu-2023-takeaways"
+aliases = ["kubecon_cloudnativecon_eu_2023"]
 +++
 
 ![Article banner for KubeCon and CloudNativeCon Europe 2023 takeaways](../../images/kubecon_cloudnativecon_eu_2023/blog_post_banner.webp)

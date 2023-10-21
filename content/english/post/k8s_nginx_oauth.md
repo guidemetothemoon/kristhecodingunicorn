@@ -14,6 +14,8 @@ tags = [
     "oauth",
     "oauth2-proxy"
 ]
+slug = "aks-oauth2-proxy-with-nginx-ingress-controller"
+aliases = ["k8s_nginx_oauth"]
 +++
 
 {{< table_of_contents >}}
@@ -116,7 +118,7 @@ spec:
               number: 9090
 ```
 
-Since I've deployed kubecost with Helm and current Ingress belongs to the same release, I've added additional annotations which will let Helm include and manage this Ingress resource as part of the kubecost release. You can read more about adding Kubernetes resources to existing Helm releases here: [How to Include New Kubernetes Resource Into Existing Helm Release](https://kristhecodingunicorn.com/post/k8s_object_helm/)
+Since I've deployed kubecost with Helm and current Ingress belongs to the same release, I've added additional annotations which will let Helm include and manage this Ingress resource as part of the kubecost release. You can read more about adding Kubernetes resources to existing Helm releases here: [How to Include New Kubernetes Resource Into Existing Helm Release](https://kristhecodingunicorn.com/post/include-k8s-resource-in-existing-helm-release)
 
 Now, the only thing we will need to do to configure support for OAuth 2.0 authentication is to add following annotations to the Ingress object:
 
@@ -153,7 +155,7 @@ Configuration of NGINX Ingress is done - finally we're ready to deploy OAuth2 Pr
 
 ### Configure and deploy OAuth2 Proxy
 
-Last thing we'll need to do is to install a proxy application which will authenticate the requests coming into our main application, which in my example case is kubecost. There are many good open source alternatives for such a proxy out there but I can recommend the one called OAuth2 Proxy - it's well maintained and has a big community support. It's also recommended by NGINX. You can find more information in OAuth2 Proxy GitHub and documentation by checking out the links in [Additional resources](https://kristhecodingunicorn.com/post/k8s_nginx_oauth/#additional-resources) section below.😉
+Last thing we'll need to do is to install a proxy application which will authenticate the requests coming into our main application, which in my example case is kubecost. There are many good open source alternatives for such a proxy out there but I can recommend the one called OAuth2 Proxy - it's well maintained and has a big community support. It's also recommended by NGINX. You can find more information in OAuth2 Proxy GitHub and documentation by checking out the links in [Additional resources](#additional-resources) section below.😉
 
 OAuth2 Proxy doesn't have a Helm chart so we'll create a Kubernetes YAML template and include it as part of the kubecost Helm release by adding a few annotations to the OAuth2 Proxy Ingress definition.
 
