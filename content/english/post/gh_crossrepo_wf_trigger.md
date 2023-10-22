@@ -9,6 +9,8 @@ tags = [
     "github",
     "devops"
 ]
+slug = "trigger-github-workflow-in-different-repo"
+aliases = ["/techtips/gh_crossrepo_wf_trigger"]
 +++
 
 I was recently working on automating some manual actions related to my tech blog and discovered an interesting use case that I thought was worth sharing with the community 😊

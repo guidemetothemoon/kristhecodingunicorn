@@ -10,6 +10,8 @@ tags = [
     "kubernetes",
     "gitops"
 ]
+slug = "kris-quick-cup-of-k8s-five"
+aliases = ["/techtips/kris_daily_k8s_5"]
 +++
 
 Let's start today's tech tip by identifying what a Kubernetes Context is. Kubernetes Context, which is also known as kubectl context, represents a Kubernetes cluster that kubectl command-line tool is currently targeting. You decide which Kubernetes cluster to set as active by modifying currently active context with ```kubectl config use-context <cluster_name>``` command.

@@ -9,6 +9,8 @@ tags = [
     "dotnet",
     "cybersecurity-corner"
 ]
+slug = "dotnet-certificate-validation"
+aliases = ["/techtips/dotnet_https_validation"]
 +++
 
 {{< table_of_contents >}}

@@ -9,6 +9,8 @@ tags = [
     "azure",
     "azure-cli"
 ]
+slug = "azure-cli-query-parameter"
+aliases = ["/techtips/azure_query"]
 +++
 
 Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering!

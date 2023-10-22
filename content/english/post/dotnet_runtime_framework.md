@@ -8,6 +8,8 @@ tags = [
     "techtips",
     "dotnet"
 ]
+slug = "dotnet-override-app-runtime-version"
+aliases = ["/techtips/dotnet_runtime_framework"]
 +++
 
 {{< table_of_contents >}}

@@ -9,6 +9,8 @@ tags = [
     "helm",
     "devops"
 ]
+slug = "helm-upgrade-failure-another-operation-in-progress"
+aliases = ["/techtips/helm_rollback"]
 +++
 
 {{< table_of_contents >}}

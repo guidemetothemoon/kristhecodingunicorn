@@ -9,6 +9,8 @@ tags = [
     "dotnet",
     "powershell"
 ]
+slug = "automate-dotnet-framework-version-update-powershell"
+aliases = ["/techtips/update_dotnet_fw"]
 +++
 
 With all the active development in the .NET world many of us have faced a situation where we need to update .NET target framework more frequently in order to be able to keep up, but at the same time to be able to utilize all the goodies .NET has to offer.
