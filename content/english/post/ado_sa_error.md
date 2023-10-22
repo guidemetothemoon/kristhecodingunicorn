@@ -12,6 +12,8 @@ tags = [
     "devops",
     "gitops"
 ]
+slug = "azure-devops-environments-service-account-error"
+aliases = ["/techtips/ado_sa_error"]
 +++
 
 {{< table_of_contents >}}

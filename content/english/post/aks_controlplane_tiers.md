@@ -12,6 +12,8 @@ tags = [
     "devops",
     "gitops"
 ]
+slug = "aks-control-plane-tiers"
+aliases = ["/techtips/aks_controlplane_tiers"]
 +++
 
 {{< table_of_contents >}}

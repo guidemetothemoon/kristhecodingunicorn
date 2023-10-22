@@ -9,6 +9,8 @@ tags = [
     "azure-devops",
     "devops"
 ]
+slug = "azure-devops-pipeline-templates-for-reusable tasks"
+aliases = ["/techtips/ado_pipeline_template"]
 +++
 
 {{< table_of_contents >}}

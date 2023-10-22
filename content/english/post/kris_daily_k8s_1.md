@@ -11,6 +11,8 @@ tags = [
     "kubernetes",
     "gitops"
 ]
+slug = "kris-quick-cup-of-k8s-one"
+aliases = ["/techtips/kris_daily_k8s_1"]
 +++
 
 {{< table_of_contents >}}

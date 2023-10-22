@@ -10,6 +10,8 @@ tags = [
     "azure-arc",
     "devops"
 ]
+slug = "modify-azure-arc-service-principal-scope"
+aliases = ["/techtips/azure_sp_scope"]
 +++
 
 A thought struck me one day when I was working with onboarding machines to Azure Arc. If you want to onboard multiple servers at scale to Azure Arc, you would need a Service Principal with ```Azure Connected Machine Onboarding``` role in the respective subscription or resource group where you want to create Azure Arc-enabled servers. An interesting thing here is: what if you would like to re-use the same service principal in order to onboard more Azure Arc resources but to another subscription and/or another resource group?

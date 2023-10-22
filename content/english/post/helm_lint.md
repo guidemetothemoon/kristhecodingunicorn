@@ -10,6 +10,8 @@ tags = [
     "devops",
     "kubernetes"
 ]
+slug = "helm-chart-validation-with-helm-lint"
+aliases = ["/techtips/helm_lint"]
 +++
 
 {{< table_of_contents >}}

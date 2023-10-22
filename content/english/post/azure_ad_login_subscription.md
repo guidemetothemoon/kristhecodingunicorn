@@ -10,6 +10,8 @@ tags = [
     "azure-cli",
     "azure-ad"
 ]
+slug = "entra-login-without-active-subscription-azure-cli"
+aliases = ["/techtips/azure_ad_login_subscription"]
 +++
 
 {{< table_of_contents >}}

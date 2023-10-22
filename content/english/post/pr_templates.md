@@ -9,6 +9,8 @@ tags = [
     "azure-devops",
     "devops"
 ]
+slug = "pull-request-templates-and-completion-stats-azure-devops"
+aliases = ["/techtips/pr_templates"]
 +++
 
 {{< table_of_contents >}}

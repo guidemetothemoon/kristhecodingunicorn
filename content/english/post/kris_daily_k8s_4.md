@@ -11,6 +11,8 @@ tags = [
     "kubernetes",
     "gitops"
 ]
+slug = "kris-quick-cup-of-k8s-four"
+aliases = ["/techtips/kris_daily_k8s_4"]
 +++
 
 Normally if you were to expose an application running in AKS for external access, you would need multiple bits and pieces to be deployed and configured:
