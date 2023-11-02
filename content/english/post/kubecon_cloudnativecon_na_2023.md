@@ -21,7 +21,7 @@ slug = "kubecon-cloudnativecon-na-2023-expectations"
 
 {{< table_of_contents >}}
 
-KubeCon+CloudNativeCon North America 2023 is under a week away and I thought I would use this opportunity to share some of the personal reflections for the upcoming event, as well as highlight some of the sessions that I personally am looking forward to watching.
+[KubeCon + CloudNativeCon North America 2023](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america) is under a week away and I thought I would use this opportunity to share some of the personal reflections for the upcoming event, as well as highlight some of the sessions that I personally am looking forward to watching.
 
 Myself and Michael have also chatted about the event at **Kubernetes Unpacked podcast** - do check out this episode as well: [KubeCon NA 2023 Prep](https://packetpushers.net/podcast/kubernetes-unpacked-TODO).
 
