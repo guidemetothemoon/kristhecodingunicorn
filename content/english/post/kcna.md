@@ -1,7 +1,7 @@
 +++
 author = "Kristina D."
 title = "Passing Kubernetes and Cloud Native Associate (KCNA) certification exam"
-date = "2023-11-02"
+date = "2023-11-05"
 description = "In this blog post I will share my experience from passing KCNA certification exam. I will also share resources and tips and tricks from prepraring for and taking the exam."
 draft = true
 tags = [
