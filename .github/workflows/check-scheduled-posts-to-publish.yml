@@ -1,0 +1,24 @@
+name: Publish scheduled blog posts
+on:
+  schedule:
+    - cron: '30 23 * * *'
+jobs:
+  publish-scheduled-blog-posts:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Check if content directory was modified
+      id: check_content
+      run: |
+        if git diff --name-only --since='1 day ago' | grep '^content/'
+        then
+          echo "::set-output name=modified::true"
+        else
+          echo "::set-output name=modified::false"
+        fi
+
+    - name: Trigger website deploy
+      run: |
+        ./scripts/manage-scheduled-blogs.sh
