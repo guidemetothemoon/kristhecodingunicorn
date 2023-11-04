@@ -1,0 +1,29 @@
+  [[main]]
+  name = "Головна"
+  identifier = "home"
+  weight = 100
+  url = "/ua/"
+
+  [[main]]
+  name = "Блог"
+  weight = 200
+  identifier = "posts"
+  url = "/ua/post/"
+
+  [[main]]
+  name = "Публічні презентації та публікації"
+  weight = 300
+  identifier = "public"
+  url = "/ua/public/"
+
+  [[main]]
+  name = "Про Кріс"
+  weight = 400
+  identifier = "about"
+  url = "/ua/about/"
+
+  [[main]]
+  name = "Контакти"
+  weight = 500
+  identifier = "contact"
+  url = "/ua/contact/"

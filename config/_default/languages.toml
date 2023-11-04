@@ -3,3 +3,9 @@ title = "Kris - The Coding Unicorn"
 weight = 1
 LanguageName = "EN"
 contentDir = "content/english"
+
+[ua]
+title = "Kris - The Coding Unicorn"
+weight = 2
+LanguageName = "UA"
+contentDir = "content/ukrainian"
