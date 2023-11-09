@@ -4,7 +4,7 @@
         {
             "label": "git-branch-cleanup",
             "type": "shell",
-            "command": "git checkout $(basename $(git symbolic-ref --short refs/remotes/origin/HEAD)) | git fetch --prune origin && git branch -vv | sed 's/\*/ /1' | awk '/: gone]/{print $1}' | xargs git branch -D $1",
+            "command": "git checkout $(basename $(git symbolic-ref --short refs/remotes/origin/HEAD)) | git fetch origin --prune && git branch -vv | sed 's/\\*/ /1' | awk '/: gone]/{print $1}' | xargs git branch -D $1",
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always"
