@@ -1,6 +1,6 @@
 +++
 title = "Public talks and Publications"
-description = "This page contains overview of all external publications and talks I've done."
+description = "This page provides overview of all the presentations and external publications that I've done in the tech community."
 date = "2021-10-30"
 aliases = ["public"]
 author = "Kristina D."
