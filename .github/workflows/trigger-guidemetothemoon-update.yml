@@ -7,6 +7,11 @@ on:
       - master
     paths: 
       - 'content/**'
+  push:
+    branches:
+      - master
+    paths: 
+      - 'content/**'
 jobs:
   trigger-guidemetothemoon-workflow:
     if: github.event.pull_request.merged == true
