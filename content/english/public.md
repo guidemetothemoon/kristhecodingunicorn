@@ -9,9 +9,11 @@ tags = [
 ]
 +++
 
-📺 25th October, 2023: [MVP-Dagen Oslo - Exploring GitOps on Azure](https://mvp-dagen-2023.sessionize.com/session/513076)
+📺 30th November, 2023: [Come Cloud With Us Panel - Microsoft Ignite 2023 After Party](https://www.meetup.com/comecloudwithus/events/296203008)
 
-📺 11th October, 2023: [Women on Stage Global Virtual Conference 2023 - Exploring chaos engineering...the FUN way!](https://www.womenonstage.net/global-virtual-conference-2023)
+📺 29th November, 2023: [Women on Stage Global Virtual Conference 2023 - Exploring chaos engineering...the FUN way!](https://www.womenonstage.net/global-virtual-conference-2023)
+
+📺 25th October, 2023: [MVP-Dagen Oslo - Exploring GitOps on Azure](https://mvp-dagen-2023.sessionize.com/session/513076)
 
 📺 9th October, 2023: [GSF Oslo October meetup - Getting started with green software and cloud native sustainability](https://www.meetup.com/gsf-oslo/events/295698438)
 
