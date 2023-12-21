@@ -9,6 +9,8 @@ tags = [
 ]
 +++
 
+📺 21st December, 2023: [Women in Cloud Native - Journey in Tech & all about Sustainability in Tech w/ Kristina](https://www.youtube.com/watch?v=EoL2X4QB33M)
+
 📺 30th November, 2023: [Come Cloud With Us Panel - Microsoft Ignite 2023 After Party](https://www.meetup.com/comecloudwithus/events/296203008)
 
 📺 29th November, 2023: [Women on Stage Global Virtual Conference 2023 - Exploring chaos engineering...the FUN way!](https://www.womenonstage.net/global-virtual-conference-2023)
