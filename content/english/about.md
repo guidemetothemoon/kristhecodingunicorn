@@ -20,7 +20,7 @@ If you would like to have a chat about cloud native, Kubernetes, green tech, Azu
 
 I strongly believe that contributing to making this world a better place by volunteering is something all of us should consider doing, therefore being a volunteer is a big part of my life. Both when it comes to contributing back to tech community and non-profit organizations making a crucial positive impact in other areas of our life on this planet.
 
-> 💖 Heartful thanks to all of you who are donating and supporting the work I do in the community - **YOU** help me help others and together we're making great deeds for the good of this planet. Currently **$320** went to support animal shelters and you may find the receipts here: [Donation Receipts](https://drive.google.com/drive/folders/1HxM52SrOuEskDQcGyWjB5A27k2el2Moj?usp=sharing)
+> 💖 Heartful thanks to all of you who are donating and supporting the work I do in the community - **YOU** help me help others and together we're making great deeds for the good of this planet. Currently **$480** went to support animal shelters and you may find the receipts here: [Donation Receipts](https://drive.google.com/drive/folders/1HxM52SrOuEskDQcGyWjB5A27k2el2Moj?usp=sharing)
 >
 > 🙌 If you would like to say thanks or support what I'm doing in the community, help me help animals in need by donating through the [Buy Me a Coffee](https://www.buymeacoffee.com/kristhecodingu1) page - 100% of contributions go to support animal shelters.
 
