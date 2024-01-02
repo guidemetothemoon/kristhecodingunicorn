@@ -14,7 +14,7 @@ Heisann and welcome to my Tech Corner!
 
 I'm Kris and I have created this blog to share tech and less-tech stuff with the rest of the world 😸
 
-I'm a techie from Norway and I'm currently working as a principal cloud engineer. I love learning new things and sharing my journey and experiences with others, which is the reason why I'm doing a bunch of diverse community work and have become what I call a "tech community octopus" 😸
+I'm a techie from Norway and I'm currently working as a platform engineer. I love learning new things and sharing my journey and experiences with others, which is the reason why I'm doing a bunch of diverse community work and have become what I call a "tech community octopus" 😸
 
 If you would like to have a chat about cloud native, Kubernetes, green tech, Azure, AppSec/DevSecOps or cats, don't be shy and drop me a message!
 
