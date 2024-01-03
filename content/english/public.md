@@ -9,6 +9,8 @@ tags = [
 ]
 +++
 
+📝 2nd January, 2024: [Microsoft Azure Community Blog - Contributor Stories: Kristina Devochko](https://techcommunity.microsoft.com/t5/azure-developer-community-blog/contributor-stories-kristina-devochko/ba-p/4017860?wt.mc_id=contributorstories_techcommunity_blog_cxa)
+
 📺 21st December, 2023: [Women in Cloud Native - Journey in Tech & all about Sustainability in Tech w/ Kristina](https://www.youtube.com/watch?v=EoL2X4QB33M)
 
 📺 30th November, 2023: [Come Cloud With Us Panel - Microsoft Ignite 2023 After Party](https://www.meetup.com/comecloudwithus/events/296203008)
