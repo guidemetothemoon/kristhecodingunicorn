@@ -188,7 +188,7 @@ In Part 2 of this blog post series we're going to take a look at how we can expo
 
 That's it from me this time, thanks for checking in!
 
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page 😺
+If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
 
 Stay secure, stay safe.
 
