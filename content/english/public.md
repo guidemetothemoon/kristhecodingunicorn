@@ -11,6 +11,8 @@ tags = [
 
 📺 21. March, 2024: [KubeCon + CloudNativeCon Europe 2024: Cloud Native Sustainability Efforts in the Community - TAG Environmental Sustainability](https://sched.co/1Yhgd)
 
+📺 20. March, 2024: [KubeCon + CloudNativeCon Europe 2024: CloudNativeHacks - Panel Discussion Facilitated by The Sustainability Working Group](https://sched.co/1Yvvp)
+
 📺 19. March, 2024: [KubeCon + CloudNativeCon Europe 2024: ⚡Lightning Talk: Debunking Myths About Environmental Sustainability in the Cloud, Building a Greener CNCF Landscape](https://sched.co/1YeLF)
 
 🎙️ 25th January, 2024: [Green Software Foundation Environment Variables podcast - The Week in Green Software: CNCF TAG Environmental Sustainability](https://podcast.greensoftware.foundation/e/q802j038-the-week-in-green-software-cncf-tag-environmental-sustainability)
