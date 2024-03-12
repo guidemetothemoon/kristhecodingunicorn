@@ -3,7 +3,7 @@ author = "Kristina D."
 title = "How to check if any resources are linked to a Log Analytics workspace"
 date = "2024-03-02"
 description = "In this blog post we will explore how you can check if any resources, like Application Insights instances, are linked to a Log Analytics workspace."
-draft = false
+draft = true
 tags = [
     "azure",
     "devops",

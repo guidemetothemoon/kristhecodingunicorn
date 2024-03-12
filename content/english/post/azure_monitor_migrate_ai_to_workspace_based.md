@@ -1,7 +1,7 @@
 +++
 author = "Kristina D."
 title = "How to automate migration of classic Application Insights instances to workspace-based"
-date = "2024-03-01"
+date = "2024-03-12"
 description = "In this blog post we will explore how you can easily automate migration of classic Application Insights instances to workspace-based instances at scale"
 draft = false
 tags = [
@@ -27,7 +27,7 @@ Final note before we take a look at automating the migration process is that onc
 
 In order to migrate multiple Application Insights instances from classic to workspace-based type you can use a small PowerShell script below. Here I'm defining a common Log Analytics workspace for all of the migrated Application Insights instances to target, but there's nothing stopping you from using multiple workspaces by modifying this script as you see fit😊
 
-``` powershell
+``` shell
 
 $logAnalyticsWorkspaceResourceId = "/subscriptions/SUBSCRIPTION_ID/resourceGroups/RESOURCE_GROUP_NAME/providers/Microsoft.OperationalInsights/workspaces/LOG_ANALYTICS_WORKSPACE_NAME"
 
@@ -44,7 +44,38 @@ Write-Output "Migration completed!"
 
 **What if I provisioned Application Insights instances through Infrastructure-as-Code?**
 
-https://learn.microsoft.com/en-us/azure/azure-monitor/app/convert-classic-resource#how-do-i-ensure-a-successful-migration-of-my-app-insights-resource-using-terraform
+It's even easier to perform the migration if your Application Insights resources are provisioned using IaC tools like Terraform or Bicep.
+
+Important note when it comes to Terraform is to ensure that you're using version 3.89 or higher of the AzureRM provider for Terraform prior to updating the templates, otherwise the old data may be deleted. Please refer this section of the documentation for more information: [How do I ensure a successful migration of my App Insights resource using Terraform?](https://learn.microsoft.com/en-us/azure/azure-monitor/app/convert-classic-resource#how-do-i-ensure-a-successful-migration-of-my-app-insights-resource-using-terraform)
+
+Let's take Bicep as an example. In order to migrate your Application Insights instance from classic to workspace-based you would need to update ```IngestionMode``` to ```LogAnalytics``` and provide a Log Analytics workspace resource ID as a value to ```WorkspaceResourceId``` property. Below is a very simple example of how it looks like in Bicep code.
+
+``` yaml
+param location string = resourceGroup().location
+
+resource log 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: 'log-appi-test'
+  location: location
+  properties: {
+    retentionInDays: 30
+    sku: {
+      name: 'PerGB2018'
+    }
+  }
+}
+
+resource appi 'Microsoft.Insights/components@2020-02-02' = {
+  name: 'appi-classic-migration-test'
+  location: location
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    IngestionMode: 'LogAnalytics' // 'ApplicationInsights' -> 'LogAnalytics' for workspace-based migration
+    RetentionInDays: 30
+    WorkspaceResourceId: log.id // Add the Log Analytics workspace resource id here
+  }
+}
+```
 
 That's it from me this time, thanks for checking in!💖
 
