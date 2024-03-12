@@ -15,8 +15,6 @@ slug = "check-log-analytics-linked-resources"
 
 {{< table_of_contents >}}
 
-
-
 That's it from me this time, thanks for checking in!💖
 
 If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
