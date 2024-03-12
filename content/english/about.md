@@ -2,7 +2,7 @@
 title = "About Me"
 description = "Hey, I'm Kris!"
 date = "2021-05-01"
-aliases = ["about-me", "about-kris", "contact"]
+aliases = ["about-me", "about-kris"]
 author = "Kristina D."
 tags = [
     "aboutkris"

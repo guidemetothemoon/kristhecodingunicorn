@@ -327,7 +327,7 @@ As you can see, Azure Policy for Kubernetes is a very powerful mechanism that yo
 
 That's it from me this time, thanks for checking in!💖
 
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, Twitter, GitHub or by using the contact form on this page.😺
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
 
 Stay secure, stay safe.
 

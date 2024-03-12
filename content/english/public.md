@@ -9,6 +9,14 @@ tags = [
 ]
 +++
 
+📺 21. March, 2024: [KubeCon + CloudNativeCon Europe 2024: Cloud Native Sustainability Efforts in the Community - TAG Environmental Sustainability](https://sched.co/1Yhgd)
+
+📺 20. March, 2024: [KubeCon + CloudNativeCon Europe 2024: CloudNativeHacks - Panel Discussion Facilitated by The Sustainability Working Group](https://sched.co/1Yvvp)
+
+📺 19. March, 2024: [KubeCon + CloudNativeCon Europe 2024: Lightning Talk: Debunking Myths About Environmental Sustainability in the Cloud, Building a Greener CNCF Landscape](https://sched.co/1YeLF)
+
+🎙️ 25th January, 2024: [Green Software Foundation Environment Variables podcast - The Week in Green Software: CNCF TAG Environmental Sustainability](https://podcast.greensoftware.foundation/e/q802j038-the-week-in-green-software-cncf-tag-environmental-sustainability)
+
 📝 2nd January, 2024: [Microsoft Azure Community Blog - Contributor Stories: Kristina Devochko](https://techcommunity.microsoft.com/t5/azure-developer-community-blog/contributor-stories-kristina-devochko/ba-p/4017860?wt.mc_id=contributorstories_techcommunity_blog_cxa)
 
 📺 21st December, 2023: [Women in Cloud Native - Journey in Tech & all about Sustainability in Tech w/ Kristina](https://www.youtube.com/watch?v=EoL2X4QB33M)
