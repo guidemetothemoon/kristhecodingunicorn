@@ -9,6 +9,8 @@ tags = [
 ]
 +++
 
+📺 27. March, 2024: [Cloud Native Austria and Saar - KubeCon Recap: Debunking Myths About Environmental Sustainability in the Cloud, Building a Greener CNCF Landscape](https://www.meetup.com/cloud-native-austria/events/299793428)
+
 📺 21. March, 2024: [KubeCon + CloudNativeCon Europe 2024: Cloud Native Sustainability Efforts in the Community - TAG Environmental Sustainability](https://sched.co/1Yhgd)
 
 📺 20. March, 2024: [KubeCon + CloudNativeCon Europe 2024: CloudNativeHacks - Panel Discussion Facilitated by The Sustainability Working Group](https://sched.co/1Yvvp)
