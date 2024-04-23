@@ -9,6 +9,8 @@ tags = [
 ]
 +++
 
+🎙️ 19th April, 2024: [nCast: The Cloud Optimization Podcast from nOps #12: Optimizing for Sustainability](https://open.spotify.com/episode/03m6TxbFfGJFGJudJY9KKH?si=w1UceH7sRfelICu7yQ7aFA)
+
 📺 3rd. April, 2024: [Microsoft Learn Live - From Day Zero To Production with Azure Container Apps](https://www.youtube.com/live/yAtMgufv7Aw?si=vtQ6ziOYhasNKuyr)
 
 📺 27th March, 2024: [Cloud Native Austria and Saar - KubeCon Recap: Debunking Myths About Environmental Sustainability in the Cloud, Building a Greener CNCF Landscape](https://www.meetup.com/cloud-native-austria/events/299793428)
