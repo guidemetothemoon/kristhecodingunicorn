@@ -59,7 +59,7 @@ use = "katex"  # options: "katex", "mathjax". default is "katex".
 [[socialIcons]]
 icon = "fas fa-cat"
 title = "Let's connect!"
-url = "https://www.biodrop.io/guidemetothemoon"
+url = "https://linktr.ee/guidemetothemoon"
 
 [[socialIcons]]
 icon = "fas fa-hand-holding-heart"
