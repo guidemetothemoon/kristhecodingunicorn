@@ -9,9 +9,11 @@ tags = [
 ]
 +++
 
+📺 11th June, 2024: [NDC Oslo Community Tuesday - Exploring best practices for sustainability of Kubernetes clusters and Kubernetes-hosted workloads](https://www.meetup.com/gsf-oslo/events/300942997)
+
 🎙️ 19th April, 2024: [nCast: The Cloud Optimization Podcast from nOps #12: Optimizing for Sustainability](https://open.spotify.com/episode/03m6TxbFfGJFGJudJY9KKH?si=w1UceH7sRfelICu7yQ7aFA)
 
-📺 3rd. April, 2024: [Microsoft Learn Live - From Day Zero To Production with Azure Container Apps](https://www.youtube.com/live/yAtMgufv7Aw?si=vtQ6ziOYhasNKuyr)
+📺 3rd April, 2024: [Microsoft Learn Live - From Day Zero To Production with Azure Container Apps](https://www.youtube.com/live/yAtMgufv7Aw?si=vtQ6ziOYhasNKuyr)
 
 📺 27th March, 2024: [Cloud Native Austria and Saar - KubeCon Recap: Debunking Myths About Environmental Sustainability in the Cloud, Building a Greener CNCF Landscape](https://youtu.be/PLjX3gpnmjo?si=yUScFmZcOVw_Egq5)
 
@@ -53,7 +55,7 @@ tags = [
 
 📺 24th May, 2023: [NDC Oslo - AKS Survival Pack: what to consider before going all-in with Azure Kubernetes Service](https://ndcoslo.com/agenda/aks-survival-pack-what-to-consider-before-going-all-in-with-azure-kubernetes-service-0ng9/0ivm3jmy32i)
 
-📺 18. April, 2023: [KubeCon + CloudNativeCon Europe 2023: Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes](https://kccnceu2023.sched.com/event/1HyW9)
+📺 18th April, 2023: [KubeCon + CloudNativeCon Europe 2023: Be the Change Our Planet Seeks: How YOU Can Contribute to Running Environment-Friendly Workloads on Kubernetes](https://kccnceu2023.sched.com/event/1HyW9)
 
 📺 20th March, 2023: [Azure User Group Norway - Deploying microservices to AKS with Azure DevOps Environments and multi-staged Azure Pipelines](https://www.meetup.com/azure-user-group-norway/events/291904115)
 
@@ -61,9 +63,9 @@ tags = [
 
 📺 16th March, 2023: [KCD Ukraine - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-ukraine-presents-kcd-ukraine-2023-fundraiser/)
 
-📺 28. February, 2023: **Wilhelmsen employee event - Security Champions Workshop #3: DevSecOps for AKS**
+📺 28th February, 2023: **Wilhelmsen employee event - Security Champions Workshop #3: DevSecOps for AKS**
 
-📺 23. February, 2023: [KCD Amsterdam - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-netherlands-presents-kubernetes-community-days-amsterdam-2023/)
+📺 23rd February, 2023: [KCD Amsterdam - Managed Kubernetes Service: Day Zero Survival Pack](https://community.cncf.io/events/details/cncf-kcd-netherlands-presents-kubernetes-community-days-amsterdam-2023/)
 
 📺 17th February, 2023: [Come Cloud With Us - Kubernetes Panel Discussion](https://www.meetup.com/comecloudwithus/events/290494259/)
 
