@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Continuous Delivery to AKS with Azure DevOps Environments - Part 2"
-date = "2022-05-23"
-description = "Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Continuous Delivery to AKS with Azure DevOps Environments - Part 2"
+date: "2022-05-23"
+description: "Second part of this blog post series focuses on hands-on deployment to AKS with Azure DevOps Environments as well as automating migration of resources between environments."
+draft: false
+tags: [
     "azure-devops",
     "kubernetes",
     "aks",
     "k8s",
     "azure"
 ]
-slug = "cd-to-aks-with-azure-devops-environments-part-two"
-aliases = ["k8s_ado_envs-2"]
-+++
-
-{{< table_of_contents >}}
+slug: "cd-to-aks-with-azure-devops-environments-part-two"
+aliases: ["k8s_ado_envs-2"]
+---
 
 Welcome to Part 2 of blog post series on Continuous Delivery to Azure Kubernetes Service with Azure DevOps Environments! In Part 1 we looked into what Azure DevOps Environments are, what benefits they provide and how I would recommend to create ADO environments and resources based on my own experience. If you haven\'t read Part 1, you can check it out here: [Continuous Delivery to AKS With Azure DevOps Environments - Part 1](https://kristhecodingunicorn.com/post/cd-to-aks-with-azure-devops-environments-part-one).
 
@@ -262,10 +260,8 @@ More information about what Azure DevOps Environments are can be found here:
 
 **Final thought:** Azure DevOps Environments are easy to start with and can work really well when you don\'t want to introduce a new tool or when you have a relatively small amount of microservices to deploy. When there are hundreds of microservices that must be deployed and upgraded efficiently you might want to use a more advanced tool that has more extensive capabilities than what ADO Environments have to offer but this is a story for another blog post😺
 
-That\'s it from me this time, thanks for checking in!
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

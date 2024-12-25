@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer"
-date = "2022-12-28"
-description = "In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to fix ServiceAccount error in Azure DevOps Environments for Kubernetes clusters v.1.24 and newer"
+date: "2022-12-28"
+description: "In this tech tip we look at how you can fix Azure DevOps Environments error related to missing Service Account Secret that occurs when targeting Kubernetes clusters on version 1.24 or newer."
+draft: false
+tags: [
     "techtips",
     "azure-devops",
     "aks",
@@ -12,11 +12,9 @@ tags = [
     "devops",
     "gitops"
 ]
-slug = "azure-devops-environments-service-account-error"
-aliases = ["/techtips/ado_sa_error"]
-+++
-
-{{< table_of_contents >}}
+slug: "azure-devops-environments-service-account-error"
+aliases: ["/techtips/ado_sa_error"]
+---
 
 ## Introduction of the issue
 
@@ -165,4 +163,8 @@ foreach ($namespace in $resourceNamespaces)
 
 ```
 
-That's it for now - Thanks for reading and till next tech tip 😼
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

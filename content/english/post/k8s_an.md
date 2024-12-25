@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Accelerated Networking for AKS nodes"
-date = "2022-06-10"
-description = "In this blog post we'll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Accelerated Networking for AKS nodes"
+date: "2022-06-10"
+description: "In this blog post we'll look into what accelerated networking is and how you can enable/disable and test it in AKS nodes, both Windows and Linux."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "azure"
 ]
-slug = "aks-nodes-accelerated-networking"
-aliases = ["k8s_an"]
-+++
-
-{{< table_of_contents >}}
+slug: "aks-nodes-accelerated-networking"
+aliases: ["k8s_an"]
+---
 
 In this blog post I would like to talk about Accelerated Networking, how it can improve internal communication inside an AKS cluster and how you can enable that for Linux and Windows AKS nodes.
 
@@ -337,10 +335,8 @@ Some good resources on Accelerated Networking and tools used for network perform
 * [Using sockperf with VMA](https://manualzz.com/doc/o/c8eht/user-manual---mellanox-technologies-using-sockperf-with-vma)
 * [SockPerf - Manpage](https://manpages.debian.org/bullseye/sockperf/sockperf.1.en.html)
 
-That\'s it from me this time, thanks for checking in!
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

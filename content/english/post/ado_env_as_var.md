@@ -1,19 +1,17 @@
-+++
-author = "Kristina D."
-title = "Re-using Azure DevOps Environment efficiently across multiple pipelines"
-date = "2022-07-14"
-description = "In this post we take a look at how we can avoid duplication and re-use Azure DevOps Environment across multiple pipelines with variable groups."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Re-using Azure DevOps Environment efficiently across multiple pipelines"
+date: "2022-07-14"
+description: "In this post we take a look at how we can avoid duplication and re-use Azure DevOps Environment across multiple pipelines with variable groups."
+draft: false
+tags: [
     "techtips",
     "azure-devops",
     "devops"
 ]
-slug = "reuse-azure-devops-environment"
-aliases = ["/techtips/ado_env_as_var"]
-+++
-
-{{< table_of_contents >}}
+slug: "reuse-azure-devops-environment"
+aliases: ["/techtips/ado_env_as_var"]
+---
 
 Following up on the recent blog post series about Continuous Delivery to AKS with Azure DevOps Environments:
 
@@ -66,4 +64,8 @@ You can do the same with the target resource as well where we could create a ```
 
 If you want to learn more, you can also check this article: [Environment - Kubernetes resource](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/environments-kubernetes?view=azure-devops)
 
-Thanks for reading and till next tech tip! 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

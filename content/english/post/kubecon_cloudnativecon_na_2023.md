@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "A bird's-eye view of upcoming KubeCon+CloudNativeCon North America 2023"
-date = "2023-11-03"
-description = "In this blog post I will share my perspective for the upcoming KubeCon+CloudNativeCon North America 2023: trends, what to expect and share personal tips about getting the most out of the event."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "A bird's-eye view of upcoming KubeCon+CloudNativeCon North America 2023"
+date: "2023-11-03"
+description: "In this blog post I will share my perspective for the upcoming KubeCon+CloudNativeCon North America 2023: trends, what to expect and share personal tips about getting the most out of the event."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
@@ -16,10 +16,8 @@ tags = [
     "kubecon",
     "cloudnativecon"
 ]
-slug = "kubecon-cloudnativecon-na-2023-expectations"
-+++
-
-{{< table_of_contents >}}
+slug: "kubecon-cloudnativecon-na-2023-expectations"
+---
 
 [KubeCon + CloudNativeCon North America 2023](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america) is under a week away and I thought I would use this opportunity to share some of the personal reflections for the upcoming event, as well as highlight some of the sessions that I personally am looking forward to watching.
 
@@ -65,10 +63,8 @@ To round up on the topic I've been asked a few times about how you can get most 
 
 **Summing it up:** KubeCon+CloudNativeCon North America 2023 will definitely be a great event filled with great content and great people from the community. If you're going there in-person I hope that you'll enjoy it to the fullest!
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

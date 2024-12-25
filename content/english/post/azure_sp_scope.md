@@ -1,18 +1,18 @@
-+++
-author = "Kristina D."
-title = "How to modify Azure Arc (or any) Service Principal scope after creation"
-date = "2023-01-04"
-description = "In this tech tip we take a look at how you can easily update the scope of an Azure Arc Service Principal or any other Service Principal after it has been created."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to modify Azure Arc (or any) Service Principal scope after creation"
+date: "2023-01-04"
+description: "In this tech tip we take a look at how you can easily update the scope of an Azure Arc Service Principal or any other Service Principal after it has been created."
+draft: false
+tags: [
     "techtips",
     "azure",
     "azure-arc",
     "devops"
 ]
-slug = "modify-azure-arc-service-principal-scope"
-aliases = ["/techtips/azure_sp_scope"]
-+++
+slug: "modify-azure-arc-service-principal-scope"
+aliases: ["/techtips/azure_sp_scope"]
+---
 
 A thought struck me one day when I was working with onboarding machines to Azure Arc. If you want to onboard multiple servers at scale to Azure Arc, you would need a Service Principal with ```Azure Connected Machine Onboarding``` role in the respective subscription or resource group where you want to create Azure Arc-enabled servers. An interesting thing here is: what if you would like to re-use the same service principal in order to onboard more Azure Arc resources but to another subscription and/or another resource group?
 
@@ -57,4 +57,8 @@ Once we run this command, in the Azure portal, in service Principals section of 
 
 You can read more about Azure Service Principals here: [Service principal object](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object)
 
-That\'s it for now - Thanks for reading and till next tech tip 😼
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

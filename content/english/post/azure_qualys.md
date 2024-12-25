@@ -1,20 +1,20 @@
-+++
-author = "Kristina D."
-title = "Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys"
-date = "2023-06-06"
-description = "In this blog post we'll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Scanning Azure VMs, Azure Arc-enabled servers and ACR images for vulnerabilities with Microsoft Defender and Qualys"
+date: "2023-06-06"
+description: "In this blog post we'll look into how we can use integrated Qualys scanner in MS Defender for vulnerability assessment of Azure Arc-enabled servers and other applicable resources."
+draft: false
+tags: [
     "azure",
     "devops",
     "cybersecurity-corner",
     "security"
 ]
-slug = "scan-azurevm-azurearc-acr-with-defender-and-qualys"
-aliases = ["azure_qualys"]
-+++
+slug: "scan-azurevm-azurearc-acr-with-defender-and-qualys"
+aliases: ["azure_qualys"]
+---
 
-{{< table_of_contents >}}
+> ⚠️ **Please note that Azure vulnerability scanning with the integrated Qualys scanner has now been deprecated (as of 1st of May 2024).**
 
 In the modern reality with tens of security vulnerabilities that are being disclosed daily you need to continuously implement a variety of security controls in order to ensure that your systems are strongly protected. Even if you're running on the cloud⛅
 
@@ -170,10 +170,8 @@ Below you may find a few additional resources to learn more about Microsoft Defe
 
 - [Defender for Containers support matrices](https://learn.microsoft.com/en-us/azure/defender-for-cloud/support-matrix-defender-for-containers)
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

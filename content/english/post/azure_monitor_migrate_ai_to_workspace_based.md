@@ -1,19 +1,17 @@
-+++
-author = "Kristina D."
-title = "How to automate migration of classic Application Insights instances to workspace-based"
-date = "2024-03-12"
-description = "In this blog post we will explore how you can easily automate migration of classic Application Insights instances to workspace-based instances at scale"
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to automate migration of classic Application Insights instances to workspace-based"
+date: "2024-03-12"
+description: "In this blog post we will explore how you can easily automate migration of classic Application Insights instances to workspace-based instances at scale"
+draft: false
+tags: [
     "azure",
     "devops",
     "azure-monitor",
     "application-insights"
 ]
-slug = "migrate-application-insights-to-workspace-based"
-+++
-
-{{< table_of_contents >}}
+slug: "migrate-application-insights-to-workspace-based"
+---
 
 Following the retirement of classic Application Insights in February 2024 I think that it's a great opportunity to share a quick tip on how you can easily automate migration of all of your classic instances to workspace-based Application Insights.
 
@@ -77,10 +75,8 @@ resource appi 'Microsoft.Insights/components@2020-02-02' = {
 }
 ```
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

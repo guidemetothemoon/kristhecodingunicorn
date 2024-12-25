@@ -1,13 +1,13 @@
-+++
-title = "Public talks and Publications"
-description = "This page provides overview of all the presentations and external publications that I've done in the community."
-date = "2021-10-30"
-aliases = ["public"]
-author = "Kristina D."
-tags = [
+---
+title: "Public talks and Publications"
+description: "This page provides overview of all the presentations and external publications that I've done in the community."
+date: "2021-10-30"
+aliases: ["public"]
+author: "Kristina D."
+tags: [
     "public"
 ]
-+++
+---
 
 🎙️ 19th April, 2024: [nCast: The Cloud Optimization Podcast from nOps #12: Optimizing for Sustainability](https://open.spotify.com/episode/03m6TxbFfGJFGJudJY9KKH?si=w1UceH7sRfelICu7yQ7aFA)
 

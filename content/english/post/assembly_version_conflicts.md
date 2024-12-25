@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log"
-date = "2021-07-06"
-description = "This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Could not load file or assembly...Oh my! How I went through five stages of grief and mastered assembly version conflict debugging with .NET CLI, ILSpy and Fusion Log"
+date: "2021-07-06"
+description: "This blog post explains how to debug and resolve assembly versioning conflicts with .NET CLI, ILSpy and FusionLog."
+draft: false
+tags: [
     "dotnet",
     "assembly",
     "ilspy",
     "fusionlog"
 ]
-slug = "assembly-version-conflict-debugging-dotnet"
-aliases = ["assembly_version_conflicts"]
-+++
-
-{{< table_of_contents >}}
+slug: "assembly-version-conflict-debugging-dotnet"
+aliases: ["assembly_version_conflicts"]
+---
 
 If you\'re a .NET developer, I bet that at least once you\'ve experienced errors like **\"System.IO.FileLoadException: Could not load file or assembly \'[ASSEMBLYNAME], Version=x.x.x.x, Culture=neutral, PublicKeyToken=xxxxxx\' or one of its dependencies. The located assembly\'s manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)\"**
 
@@ -206,9 +204,8 @@ Congratulations on mastering the art of assembly version conflict resolutions! H
 
 ![Dll master meme](../../images/assembly_conflicts/dll_master.jpg)
 
-That\'s it from me this time, thanks for checking in!
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!
+Till we connect again!😼

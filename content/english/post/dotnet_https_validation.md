@@ -1,19 +1,17 @@
-+++
-author = "Kristina D."
-title = " Detect and avoid this certificate validation trap in .NET!"
-date = "2022-07-18"
-description = "In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: " Detect and avoid this certificate validation trap in .NET!"
+date: "2022-07-18"
+description: "In this post we take a look at how to use ServerCertificateValidationCallback cautiously in .NET without creating security vulnerability in the code."
+draft: false
+tags: [
     "techtips",
     "dotnet",
     "cybersecurity-corner"
 ]
-slug = "dotnet-certificate-validation"
-aliases = ["/techtips/dotnet_https_validation"]
-+++
-
-{{< table_of_contents >}}
+slug: "dotnet-certificate-validation"
+aliases: ["/techtips/dotnet_https_validation"]
+---
 
 There is one scary property in .NET which, if misused or forgotten, can make your security champions tremble at night...🙀🙀🙀 As scary as it sounds, the risk of forgetting or misusing the property is pretty serious and I\'ve seen it multiple times sneaking into the source code as part of the pull request. And I keep seeing it still. Therefore this tech tip gets to see the world.☀️
 
@@ -44,4 +42,8 @@ And here you can check one of the Microsoft quality rules which also is about ca
 
 Stay secure, stay safe!
 
-Thanks for reading and till next tech tip! 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

@@ -1,18 +1,16 @@
-+++
-author = "Kristina D."
-title = "How to create new microservices easily with dotnet custom templates"
-date = "2021-05-11"
-description = "This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice"
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to create new microservices easily with dotnet custom templates"
+date: "2021-05-11"
+description: "This blog post explains how dotnet custom templates can be used in order to easily start development of a new microservice"
+draft: false
+tags: [
     "dotnet",
     "microservices",
 ]
-slug = "create-microservices-with-dotnet-custom-templates"
-aliases = ["dotnet_custom_templates"]
-+++
-
-{{< table_of_contents >}}
+slug: "create-microservices-with-dotnet-custom-templates"
+aliases: ["dotnet_custom_templates"]
+---
 
 Doing development for microservices is quite different from development for a monolithic application - it will require changes in the mindset, either you want it or not...But it\'s not only the mindset that will undergo changes. Let\'s say that you\'re working on creating a new component for your application that will provide functionality for sending e-mail notifications to your users. If you\'re creating this component for a monolithic application, you typically have one place where you\'ll add backend changes and one place for frontend changes. And then those changes are magically included as part of the build and deployment of the application. Nice and straightforward, huh?
 
@@ -240,8 +238,8 @@ There are several resources available if you would like to get deeper understand
 
 7. Informative InfoQ article, written by developer advocate at JetBrains Matt Ellis, about how .NET Core Template Engine can be used to create custom templates and projects: <https://www.infoq.com/articles/dotnet-core-template-engine>
 
-Well, that\'s it from me on this topic, thanks for checking in! Hopefully it was useful for you and go ahead and create some dotnet templates of your own - that\'s how you really learn ;)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
-If this article was helpful, please let me know about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
-
-Till we connect again!
+Stay secure, stay safe.
+Till we connect again!😼

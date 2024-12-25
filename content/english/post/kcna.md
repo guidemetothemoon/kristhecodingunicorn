@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Passing Kubernetes and Cloud Native Associate (KCNA) certification exam"
-date = "2023-11-05"
-description = "In this blog post I will share my experience from passing KCNA certification exam. I will also share resources and tips and tricks from prepraring for and taking the exam."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Passing Kubernetes and Cloud Native Associate (KCNA) certification exam"
+date: "2023-11-05"
+description: "In this blog post I will share my experience from passing KCNA certification exam. I will also share resources and tips and tricks from prepraring for and taking the exam."
+draft: false
+tags: [
     "kubernetes",
     "kcna",
     "k8s",
     "cloudnative",
     "cncf"
 ]
-slug = "passing-kcna-certification-exam"
-+++
-
-{{< table_of_contents >}}
+slug: "passing-kcna-certification-exam"
+---
 
 For some time ago I successfully passed a Kubernetes and Cloud Native Associate (KCNA) certification exam from CNCF and The Linux Foundation, and in this blog post I would like to share a few resources I've used for preparation, as well as a few personal experiences from the certification exam and format, that I hope can be useful for others who are getting ready for the exam 😺
 
@@ -50,16 +48,14 @@ I've used following resources for preparation, and I think that these are very g
 
 - ⭐️ ["The KCNA Book" by Nigel Poulton](https://leanpub.com/thekcnabook) is really good and goes more detailed through the topics that are covered in the LFS250 course. There are also control questions and final exam sample that will help you ensure that you've understood the basic concepts. I would also recommend Nigel's [The Kubernetes Book](https://leanpub.com/thekubernetesbook) which also has great walkthrough of Kubernetes fundamentals and provides detailed and easy-to-grasp explanations of Kubernetes architecture and its main components.
 
-- ⭐️ My fellow CNCF ambassador, James Spurin, has launched an open [Kubernetes and Cloud Native Associate - Study Group](https://github.com/spurin/KCNA-Study-Group) in GitHub Discussions that is specifically meant to be a discussion and knowledge sharing forum among those who are pursuing the KCNA certification. I think that it can be a great place to learn from others, as well as ask questions in case you're struggling with understanding a specific topic.
+- ⭐️ A fellow CNCF ambassador, James Spurin, has launched an open [Kubernetes and Cloud Native Associate - Study Group](https://github.com/spurin/KCNA-Study-Group) in GitHub Discussions that is specifically meant to be a discussion and knowledge sharing forum among those who are pursuing the KCNA certification. I think that it can be a great place to learn from others, as well as ask questions in case you're struggling with understanding a specific topic.
 
 - ⭐️ Finally, there's a lot of useful information about the exam format, requirements and rule in [The Linux Foundation Certification Exam Candidate Handsbook](https://docs.linuxfoundation.org/tc-docs/certification/lf-handbook2) so I would definitely recommend to go through it in advance to get a good overall picture of how the exam will look like, at least a few days before the scheduled exam date.
 
 Good luck with the exam and if you have any questions regarding it, don't hesitate to reach out and I'll be happy to help!
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Kubernetes port forwarding: cleaning up orphaned ports"
-date = "2023-08-11"
-description = "In this blog post we'll look into how we can clean up port reservations that got stuck after a completed port forwarding command in a Kubernetes cluster."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Kubernetes port forwarding: cleaning up orphaned ports"
+date: "2023-08-11"
+description: "In this blog post we'll look into how we can clean up port reservations that got stuck after a completed port forwarding command in a Kubernetes cluster."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "cloudops",
     "devops"
 ]
-slug = "kubernetes-port-forwarding-cleanup-of-orphaned-ports"
-aliases = ["k8s_port_forwarding_cleanup"]
-+++
-
-{{< table_of_contents >}}
+slug: "kubernetes-port-forwarding-cleanup-of-orphaned-ports"
+aliases: ["k8s_port_forwarding_cleanup"]
+---
 
 ## Introduction
 
@@ -89,10 +87,8 @@ If I now attempt to perform port forwarding and target one of the reserved ports
 
 In Linux you can check if any ports are reserved by running [sysctl](https://man7.org/linux/man-pages/man8/sysctl.8.html) command: ```sysctl net.ipv4.ip_local_reserved_ports```
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

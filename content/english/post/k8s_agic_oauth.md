@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "Setting up OAuth 2.0 authentication for applications in AKS with AGIC and OAuth2 Proxy"
-date = "2023-09-17"
-description = "This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of Application Gateway Ingress Controller (AGIC) and OAuth2 Proxy."
-draft = true
-tags = [
+---
+author: "Kristina Devochko"
+title: "Setting up OAuth 2.0 authentication for applications in AKS with AGIC and OAuth2 Proxy"
+date: "2023-09-17"
+description: "This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of Application Gateway Ingress Controller (AGIC) and OAuth2 Proxy."
+draft: true
+tags: [
     "kubernetes",
     "aks",
     "k8s",
@@ -14,11 +14,9 @@ tags = [
     "oauth",
     "oauth2-proxy"
 ]
-slug = "aks-oauth2-proxy-with-agic"
-aliases = ["k8s_agic_oauth"]
-+++
-
-{{< table_of_contents >}}
+slug: "aks-oauth2-proxy-with-agic"
+aliases: ["k8s_agic_oauth"]
+---
 
 ## Introduction
 
@@ -220,10 +218,8 @@ Below you may find a few additional resources to learn more about Application Ga
 
 - [Host your domain on Azure DNS](https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns)
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

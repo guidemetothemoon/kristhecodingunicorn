@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "How to perform static code analysis of .NET Code with Security Code Scan"
-date = "2021-08-05"
-description = "This blog post explains how to perform static code analysis of .NET code locally and as part of CI/CD with Security Code Scan tool."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to perform static code analysis of .NET Code with Security Code Scan"
+date: "2021-08-05"
+description: "This blog post explains how to perform static code analysis of .NET code locally and as part of CI/CD with Security Code Scan tool."
+draft: false
+tags: [
     "dotnet",
     "sast",
     "devsecops",
     "cybersecurity-corner"
 ]
-slug = "dotnet-sca-with-security-code-scan"
-aliases = ["dotnet_sast_scs"]
-+++
-
-{{< table_of_contents >}}
+slug: "dotnet-sca-with-security-code-scan"
+aliases: ["dotnet_sast_scs"]
+---
 
 ## What is static code analysis and why do I need it?
 
@@ -227,9 +225,8 @@ If you would like to know more about Security Code Scan tool, other available SA
 - Great walkthrough from Snyk of what SAST tools are and what differs those from other security testing tools: [Static Application Security Testing (SAST)](https://snyk.io/learn/sast-static-application-security-testing/)
 - Walkthrough of Security Development Lifecycle practices by Microsoft: [What are the Microsoft SDL practices?](https://www.microsoft.com/en-us/securityengineering/sdl/practices)
 
-That\'s it from me this time, thanks for checking in!
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!
+Till we connect again!😼

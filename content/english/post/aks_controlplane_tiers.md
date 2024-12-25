@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "AKS control plane tiers - what, when and how?"
-date = "2023-01-24"
-description = "In this tech tip we look at AKS control plane tiers, when to use which tier and how to define it in code."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "AKS control plane tiers - what, when and how?"
+date: "2023-01-24"
+description: "In this tech tip we look at AKS control plane tiers, when to use which tier and how to define it in code."
+draft: false
+tags: [
     "techtips",
     "azure",
     "aks",
@@ -12,11 +12,9 @@ tags = [
     "devops",
     "gitops"
 ]
-slug = "aks-control-plane-tiers"
-aliases = ["/techtips/aks_controlplane_tiers"]
-+++
-
-{{< table_of_contents >}}
+slug: "aks-control-plane-tiers"
+aliases: ["/techtips/aks_controlplane_tiers"]
+---
 
 Recently a new property became available in Azure Portal when creating a new Azure Kubernetes Service instance:
 
@@ -85,4 +83,8 @@ resource aks 'Microsoft.ContainerService/managedClusters@2022-05-02-preview' = {
 
 You can read more about AKS Uptime SLA here: [Azure Kubernetes Service (AKS) Uptime SLA](https://learn.microsoft.com/en-us/azure/aks/uptime-sla)
 
-That\'s it for now - Thanks for reading and till next tech tip 😼
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

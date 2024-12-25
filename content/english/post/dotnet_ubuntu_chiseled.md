@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Strengthening security posture of containerized .NET applications with .NET Chiseled Containers (updated Dec.2023)"
-date = "2022-12-19"
-description = "This blog post explains how you can run containerized .NET applications in a more secure manner with .NET Chiseled Containers"
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Strengthening security posture of containerized .NET applications with .NET Chiseled Containers (updated Dec.2023)"
+date: "2022-12-19"
+description: "This blog post explains how you can run containerized .NET applications in a more secure manner with .NET Chiseled Containers"
+draft: false
+tags: [
     "dotnet",
     "microservices",
     "containers",
     "ubuntu",
     "kubernetes"
 ]
-slug = "dotnet-chiseled-ubuntu-containers"
-aliases = ["dotnet_ubuntu_chiseled"]
-+++
-
-{{< table_of_contents >}}
+slug: "dotnet-chiseled-ubuntu-containers"
+aliases: ["dotnet_ubuntu_chiseled"]
+---
 
 🎄***This blog post is also a contribution to .NET Advent Calendar where during December, experts from the tech community share their knowledge about .NET related topics. You're welcome to check out all the contributions here:*** [.NET Advent Calendar 2022](https://dotnet.christmas)
 
@@ -221,10 +219,8 @@ Below you may find a few resources to learn more about .NET Chiseled Containers 
 - Extensive documentation about rootless containers, how it works and how it's supported by different components: [Rootless Containers](https://rootlesscontaine.rs/getting-started/)
 - Official documentation from Kubernetes on how to run Kubernetes Node components such as kubelet, CRI, OCI, and CNI without root privileges, by using a user namespace: [Running Kubernetes Node Components as a Non-root User](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-in-userns/)
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

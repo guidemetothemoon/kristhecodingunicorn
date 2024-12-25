@@ -1,19 +1,21 @@
-+++
-author = "Kristina D."
-title = "Kris's Quick Cup of (A)K8S #4 - HTTP Application Routing add-on in AKS"
-date = "2022-09-26"
-description = "In this tech tip we look at how we can easily expose applications running in AKS in dev/test with HTTP Application Routing add-on."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Kris's Quick Cup of (A)K8S #4 - HTTP Application Routing add-on in AKS"
+date: "2022-09-26"
+description: "In this tech tip we look at how we can easily expose applications running in AKS in dev/test with HTTP Application Routing add-on."
+draft: false
+tags: [
     "techtips",
     "azure",
     "aks",
     "kubernetes",
     "gitops"
 ]
-slug = "kris-quick-cup-of-k8s-four"
-aliases = ["/techtips/kris_daily_k8s_4"]
-+++
+slug: "kris-quick-cup-of-k8s-four"
+aliases: ["/techtips/kris_daily_k8s_4"]
+---
+
+> ⚠️ **Please note that the HTTP Application routing add-on for AKS is now deprecated and will be retired on 3rd of March, 2025.**
 
 Normally if you were to expose an application running in AKS for external access, you would need multiple bits and pieces to be deployed and configured:
 
@@ -76,4 +78,8 @@ Once you delete an AKS cluster, all the resources provisioned by HTTP Applicatio
 
 HTTP Application Routing can save you quite some time during development and testing, try it out for yourself and let me know what you think! Check out documentation from Microsoft about this add-on as well: [HTTP application routing](https://learn.microsoft.com/en-us/azure/aks/http-application-routing)
 
-That\'s it for now - Thanks for reading and till next tech tip 😼
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

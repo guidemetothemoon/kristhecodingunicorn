@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Log in to Microsoft Entra ID without active subscription from Azure CLI"
-date = "2022-07-15"
-description = "In this post we take a look at how you can log in to an Microsoft Entra ID without active subscription from Azure CLI."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Log in to Microsoft Entra ID without active subscription from Azure CLI"
+date: "2022-07-15"
+description: "In this post we take a look at how you can log in to an Microsoft Entra ID without active subscription from Azure CLI."
+draft: false
+tags: [
     "techtips",
     "azure",
     "azure-cli",
     "azure-ad"
 ]
-slug = "entra-login-without-active-subscription-azure-cli"
-aliases = ["/techtips/azure_ad_login_subscription"]
-+++
-
-{{< table_of_contents >}}
+slug: "entra-login-without-active-subscription-azure-cli"
+aliases: ["/techtips/azure_ad_login_subscription"]
+---
 
 In some cases you may have an Microsoft Entra ID tenant that doesn't have an active subscription connected to it but you would nevertheless want to log in to it from a command line for instance, with Azure CLI. You may want to perform actions like creating a Microsoft Entra ID Application for example. In this case you need to be cautious about the login command you're running so that you don't waste a lot of time on debugging an error you could have avoided in the first place (like someone did 😁)!
 
@@ -37,4 +35,8 @@ Once the command has been executed you will be able to successfully create an ap
 
 You can read more about ```az login``` command here: [az login](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login)
 
-Thanks for reading and till next tech tip! 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼
