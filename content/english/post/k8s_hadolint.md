@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Applying Dockerfile best practices with Hadolint"
-date = "2022-11-13"
-description = "In this blog post we'll look into how we can ensure that Dockerfiles we create are following best practices with Hadolint tool."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Applying Dockerfile best practices with Hadolint"
+date: "2022-11-13"
+description: "In this blog post we'll look into how we can ensure that Dockerfiles we create are following best practices with Hadolint tool."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "azure"
 ]
-slug = "dockerfile-linting-with-hadolint"
-aliases = ["k8s_hadolint"]
-+++
-
-{{< table_of_contents >}}
+slug: "dockerfile-linting-with-hadolint"
+aliases: ["k8s_hadolint"]
+---
 
 In this blog post I would like to take a look at how we can ensure that Dockerfiles we create are of high quality and are following best practices in the industry. Tools like Hadolint make it very easy for us to do that and can automate the verification process.
 
@@ -173,10 +171,8 @@ Great work everyone, our Dockerfile has become a notch better!😺
 * Docker provides some of the best practices for writing Dockerfiles in their official documentation: [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices)
 * Azure DevOps SARIF extension: [SARIF SAST Scans Tab](https://marketplace.visualstudio.com/items?itemName=sariftools.scans)
 
-That\'s it from me this time, thanks for checking in!
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

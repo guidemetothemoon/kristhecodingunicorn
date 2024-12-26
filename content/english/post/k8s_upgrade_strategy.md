@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service"
-date = "2022-12-15"
-description = "In this blog post we'll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "[🎄Azure Advent Calendar🎄] Exploring upgrade strategies in Azure Kubernetes Service"
+date: "2022-12-15"
+description: "In this blog post we'll look into importance of continuous upgrade of AKS clusters and nodes, and what are possible strategies to do it manually and automatically."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "azure",
     "devops"
 ]
-slug = "aks-upgrade-strategies"
-aliases = ["k8s_upgrade_strategy"]
-+++
-
-{{< table_of_contents >}}
+slug: "aks-upgrade-strategies"
+aliases: ["k8s_upgrade_strategy"]
+---
 
 🎄***This blog post is also a contribution to Azure Advent Calendar where during December, experts from the tech community share their knowledge through contributions of a specific technology in the Azure domain. You're welcome to check out all the contributions here:*** [Azure Advent Calendar](https://dev.to/icebeam7/azure-advent-calendar-o60)
 
@@ -215,10 +213,8 @@ Below you may find a few resources to learn more about auto-upgrading AKS cluste
 - Official Microsoft documentation for AKS node image upgrade process:[Azure Kubernetes Service (AKS) node image upgrade](https://learn.microsoft.com/en-us/azure/aks/node-image-upgrade) and applying Linux node updates that require reboot: [Apply security and kernel updates to Linux nodes in Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/node-updates-kured)
 - Official Microsoft documentation for AKS Planned Maintenance support (currently in preview): [Use Planned Maintenance to chedule maintenance windows for your Azure Kubernetes Service (AKS) cluster (preview)](https://learn.microsoft.com/en-us/azure/aks/planned-maintenance)
 
-That\'s it from me this time, thanks for checking in!💖
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

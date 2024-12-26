@@ -1,17 +1,17 @@
-+++
-author = "Kristina D."
-title = "Power of --query in Azure CLI"
-date = "2022-02-13"
-description = "Let's take a look at how helpful query parameter can be in Azure CLI."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Power of --query in Azure CLI"
+date: "2022-02-13"
+description: "Let's take a look at how helpful query parameter can be in Azure CLI."
+draft: false
+tags: [
     "techtips",
     "azure",
     "azure-cli"
 ]
-slug = "azure-cli-query-parameter"
-aliases = ["/techtips/azure_query"]
-+++
+slug: "azure-cli-query-parameter"
+aliases: ["/techtips/azure_query"]
+---
 
 Have you ever heard of or used query parameter when running Azure CLI commands? If not, I do recommend you checking it out because this is a pretty powerful parameter that can help you with much faster and efficient data retrieval and filtering!
 Let\'s use DNS records retrieval as an example: I need to update DNS records pointing to a specific IP, f.ex. ```192.0.2.146```.
@@ -79,4 +79,8 @@ As you can see, approach #2 is faster and the difference might not seem so signi
 
 Check also this tutorial in Microsoft docs on how to write JMESPath-based queries as part of your Azure CLI command: [How to query Azure CLI command output using a JMESPath query](https://docs.microsoft.com/en-us/cli/azure/query-azure-cli).
 
-Thanks for reading and till next tech tip ;)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

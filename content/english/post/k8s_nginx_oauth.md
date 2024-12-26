@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy"
-date = "2022-07-14"
-description = "This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Setting up OAuth 2.0 authentication for applications in AKS with NGINX and OAuth2 Proxy"
+date: "2022-07-14"
+description: "This blog post explains how to enable OAuth 2.0 authentication for an application running in AKS with help of NGINX Ingress Controller and OAuth2 Proxy."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
@@ -14,11 +14,9 @@ tags = [
     "oauth",
     "oauth2-proxy"
 ]
-slug = "aks-oauth2-proxy-with-nginx-ingress-controller"
-aliases = ["k8s_nginx_oauth"]
-+++
-
-{{< table_of_contents >}}
+slug: "aks-oauth2-proxy-with-nginx-ingress-controller"
+aliases: ["k8s_nginx_oauth"]
+---
 
 ## Introduction and use cases
 
@@ -607,9 +605,7 @@ A few resources I've found useful on this topic:
 - Support for different authentication types in NGINX Ingress Controller including OAuth: [External OAUTH Authentication](https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/)
 
 That's it from me this time, thanks for checking in!
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

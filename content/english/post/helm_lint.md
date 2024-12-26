@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Validating quality of Helm Charts with helm lint"
-date = "2022-10-15"
-description = "In this tech tip we take a look at how we can use helm lint to validate Helm Charts for errors and best practices prior to deployment to Kubernetes"
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Validating quality of Helm Charts with helm lint"
+date: "2022-10-15"
+description: "In this tech tip we take a look at how we can use helm lint to validate Helm Charts for errors and best practices prior to deployment to Kubernetes"
+draft: false
+tags: [
     "techtips",
     "helm",
     "devops",
     "kubernetes"
 ]
-slug = "helm-chart-validation-with-helm-lint"
-aliases = ["/techtips/helm_lint"]
-+++
-
-{{< table_of_contents >}}
+slug: "helm-chart-validation-with-helm-lint"
+aliases: ["/techtips/helm_lint"]
+---
 
 Linting tools, aka linters, can help you write better and cleaner code early in the software development lifecycle. Linter is a tool that scans existing and new code for potential errors, bad and insecure patterns and violations of the respective programming language best practices. In most cases you can install a linter as an IDE extension so that you can get notified about potential issues during local development, long before the code is checked in to your source code base.
 
@@ -96,4 +94,8 @@ If you want to learn more, you can also check this article: [Helm Lint](https://
 
 Custom rules are unfortunately not currently supported by ```helm lint```, but if you require this functionality you can check out a third-party tool called **chart-testing**: [chart-testing](https://github.com/helm/chart-testing)
 
-Thanks for reading and till next tech tip! 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

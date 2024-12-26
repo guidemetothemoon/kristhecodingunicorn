@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Using Kubernetes Service for proxying to external services"
-date = "2021-10-21"
-description = "This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Using Kubernetes Service for proxying to external services"
+date: "2021-10-21"
+description: "This blog post explains what Kubernetes Service is, what types of Kubernetes Service exist and how Kubernetes Service can be used for proxying to external services."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "proxy"
 ]
-slug = "kubernetes-service-to-proxy-to-external-services"
-aliases = ["k8s_proxy_svc"]
-+++
-
-{{< table_of_contents >}}
+slug: "kubernetes-service-to-proxy-to-external-services"
+aliases: ["k8s_proxy_svc"]
+---
 
 So, recently I've faced a scenario where I got a chance to dig more into different Kubernetes Service types and experiment with those. I would like to share about one of the experiments where I tested several Kubernetes Service types in order to implement proxying of the requests to external services from Kubernetes cluster.
 
@@ -275,8 +273,7 @@ Below you may find some additional material that may be relevant for more in-dep
 * Explanation of how to create an Ingress Controller with static public IP in Azure Kubernetes Service (AKS): [Create an ingress controller with a static public IP address in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip)
 
 That's it from me this time, thanks for checking in!
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page.😺
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

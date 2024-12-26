@@ -1,5 +1,6 @@
 ---
-date: 2021-05-02
-type: section
+title: "Archive"
 layout: "archives"
+url: "/archives/"
+summary: archives
 ---

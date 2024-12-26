@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries"
-date = "2023-04-04"
-description = "In this blog post we'll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Creating custom Azure Policy for Kubernetes to disallow non-compliant image registries"
+date: "2023-04-04"
+description: "In this blog post we'll look into how we can create custom Azure Policy to disallow workloads referencing non-compliant image registries."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "azure",
     "devops"
 ]
-slug = "custom-azure-policy-for-k8s-image-registries-compliance"
-aliases = ["k8s_deprecated_registry_azpolicy"]
-+++
-
-{{< table_of_contents >}}
+slug: "custom-azure-policy-for-k8s-image-registries-compliance"
+aliases: ["k8s_deprecated_registry_azpolicy"]
+---
 
 There are cases where you may need to explicitly ensure that specific container image registries are blacklisted from being used in your Kubernetes clusters. Let me provide you with a very recent and relevant example.
 
@@ -62,10 +60,8 @@ For more information about Azure Policy, please see here:
 * [Understand Azure Policy for Kubernetes clusters](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes)
 * [Azure Policy definition structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

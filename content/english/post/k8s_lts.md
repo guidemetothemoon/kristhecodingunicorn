@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Christmas the Whole Year Round...and Year++ with Kubernetes LTS"
-date = "2023-12-29"
-description = "In this blog post we'll discuss in which use cases Kubernetes LTS makes sense, what this means for the core Kubernetes projects, and how the Kubernetes LTS works in context of AKS."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Christmas the Whole Year Round...and Year++ with Kubernetes LTS"
+date: "2023-12-29"
+description: "In this blog post we'll discuss in which use cases Kubernetes LTS makes sense, what this means for the core Kubernetes projects, and how the Kubernetes LTS works in context of AKS."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "cloudops",
     "devops"
 ]
-slug = "kubernetes-lts"
-+++
-
-{{< table_of_contents >}}
+slug: "kubernetes-lts"
+---
 
 🎄***This blog post is also a contribution to Festive Tech Calendar 2023, where during the month of December, experts from the tech community share their knowledge about a multitude of tech topics. As part of this initiative you can also support a*** [fundraising](https://www.justgiving.com/page/festive-tech-calendar-2023) ***for the Raspberry Pi Foundation. You're welcome to check out all the contributions here:*** [Festive Tech Calendar 2023](https://festivetechcalendar.com)
 
@@ -117,10 +115,8 @@ To learn more about Kubernetes long-term support for AKS, check out following do
 
 Finally, to learn more about the CNCF Kubernetes LTS working group, check out their subfolder in Kubernetes GitHub repository: [LTS Working Group](https://github.com/kubernetes/community/blob/master/wg-lts/README.md). In this working group community is working on creating an understanding an alignment around what long-term support means for Kubernetes and how it can be offered in a stable and secure manner.
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

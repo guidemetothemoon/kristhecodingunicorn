@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "How to get all Azure Policy assignments of a specific category?"
-date = "2023-06-26"
-description = "In this blog post we'll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to get all Azure Policy assignments of a specific category?"
+date: "2023-06-26"
+description: "In this blog post we'll look into how we can retrieve all Azure Policy assignments that represent policy definitions under specific category."
+draft: false
+tags: [
     "azure",
     "devops",
     "azurepolicy",
     "governance"
 ]
-slug = "get-azure-policy-assignment-of-category"
-aliases = ["azpolicy_category_assignments"]
-+++
-
-{{< table_of_contents >}}
+slug: "get-azure-policy-assignment-of-category"
+aliases: ["azpolicy_category_assignments"]
+---
 
 I've been in quite a pickle recently: I needed to find out how many and what Azure Policy definitions from Guest Configuration category are currently assigned to my subscription, so that I could understand if any of those policies are applicable to Azure Arc-enabled servers that are residing in the same subscription. Why?
 
@@ -32,10 +30,8 @@ The output will look something like the screenshot below:
 
 Already tested it out? Let me know how it went!🤗
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

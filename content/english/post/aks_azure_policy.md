@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Keeping AKS clusters continuously secure with Azure Policy"
-date = "2023-03-16"
-description = "In this blog post we'll look into how we can enhance security and governance of AKS clusters with Azure Policy."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Keeping AKS clusters continuously secure with Azure Policy"
+date: "2023-03-16"
+description: "In this blog post we'll look into how we can enhance security and governance of AKS clusters with Azure Policy."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "azure",
     "devops"
 ]
-slug = "aks-azure-policy"
-aliases = ["aks_azure_policy"]
-+++
-
-{{< table_of_contents >}}
+slug: "aks-azure-policy"
+aliases: ["aks_azure_policy"]
+---
 
 🐇***This blog post is also a contribution to Azure Spring Clean 2023 where during 5 weekdays of March, 13th-17th, community contributors share learning resources that highlight best practices, lessons learned, and help with some of the more difficult topics of Azure Management. You're welcome to check out all the contributions here:*** [Azure Spring Clean 2023](https://www.azurespringclean.com)
 
@@ -325,10 +323,8 @@ Below you may find a few additional resources to learn more about Azure Policy f
 
 As you can see, Azure Policy for Kubernetes is a very powerful mechanism that you can use in order to continuously govern your AKS clusters and ensure that they are compliant and securely configured at scale. Being implemented on top of a mature open source policy engine (OPA) in combination with Gatekeeper, Azure Policy for Kubernetes also allows for extensibility and even more granular governance and control of cluster configuration with custom Azure Policy definitions. 🦾
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

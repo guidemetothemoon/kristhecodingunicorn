@@ -1,17 +1,17 @@
-+++
-author = "Kristina D."
-title = "How to trigger subsequent GitHub workflow in a different repository"
-date = "2023-02-12"
-description = "In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to trigger subsequent GitHub workflow in a different repository"
+date: "2023-02-12"
+description: "In this tech tip we take a look at how you can trigger a GitHub workflow residing in a different repository, based on a specific condition."
+draft: false
+tags: [
     "techtips",
     "github",
     "devops"
 ]
-slug = "trigger-github-workflow-in-different-repo"
-aliases = ["/techtips/gh_crossrepo_wf_trigger"]
-+++
+slug: "trigger-github-workflow-in-different-repo"
+aliases: ["/techtips/gh_crossrepo_wf_trigger"]
+---
 
 I was recently working on automating some manual actions related to my tech blog and discovered an interesting use case that I thought was worth sharing with the community 😊
 
@@ -67,4 +67,8 @@ A few more examples for conditions/execution triggers you could use:
 - If you want triggering to happen instantly, for example when pushing new changes to the repository, independent of any other workflows that may be running in parallel in the repository, you can remove an ```if```-condition from the example above and update ```on```-clause to be ```on: [push]```.
 - If you want triggering to happen once a deployment in the workflow succeeds, you can update ```on```-clause to be ```on: deployment_status``` and update ```if```-condition to be ```if: github.event.deployment_status.state == 'success'```. Please note that in this case, if you have deployments running in parallel, triggering will happen for every succeded deployment,- and for every new trigger, previous run will be cancelled if it's still in progress.
 
-That\'s it for now - Thanks for reading and till next tech tip 😼
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Continuous Delivery to AKS with Azure DevOps Environments - Part 1"
-date = "2022-04-30"
-description = "First part of this blog post series describes what Azure DevOps Environments are and provides some tips and tricks for using it deployment of applications to Kubernetes."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Continuous Delivery to AKS with Azure DevOps Environments - Part 1"
+date: "2022-04-30"
+description: "First part of this blog post series describes what Azure DevOps Environments are and provides some tips and tricks for using it deployment of applications to Kubernetes."
+draft: false
+tags: [
     "azure-devops",
     "kubernetes",
     "aks",
     "k8s",
     "azure"
 ]
-slug = "cd-to-aks-with-azure-devops-environments-part-one"
-aliases = ["k8s_ado_envs-1"]
-+++
-
-{{< table_of_contents >}}
+slug: "cd-to-aks-with-azure-devops-environments-part-one"
+aliases: ["k8s_ado_envs-1"]
+---
 
 In the first part of this blog series I would like to talk about Azure DevOps Environments, benefits of using it for deployment of applications to AKS or any other Kubernetes distribution (or even a VM), and provide a few tips and tricks for how ADO environments and resources can be created.
 
@@ -85,10 +83,8 @@ In part 2 of this blog series we\'ll get more hands-on and deploy an application
 
 ---
 
-That\'s it from me this time, thanks for checking in!
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

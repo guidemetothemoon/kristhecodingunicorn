@@ -1,13 +1,19 @@
-+++
-title = "Public talks and Publications"
-description = "This page provides overview of all the presentations and external publications that I've done in the community."
-date = "2021-10-30"
-aliases = ["public"]
-author = "Kristina D."
-tags = [
+---
+title: "Public talks and Publications"
+description: "This page provides overview of all the presentations and external publications that I've done in the community."
+date: "2021-10-30"
+aliases: ["public"]
+author: "Kristina D."
+tags: [
     "public"
 ]
-+++
+---
+
+📝 2nd December, 2024: [24 Days of Kubernetes - Kubernetes Sustainability Thought Leader Interviews](https://aknostic.com/articles/24-days-kubernetes-kristina-devochko-interview)
+
+🎙️ 11th June, 2024: [Green Software Oslo at NDC Community Tuesday - Exploring best practices for sustainability of Kubernetes clusters and Kubernetes-hosted workloads](https://www.meetup.com/gsf-oslo/events/300942997)
+
+🎙️ 9th June, 2024: [CNCF Ambassador interview to celebrate Kubertenes 10-year anniversary](https://www.linkedin.com/posts/bart-farrell_kubertenes-ugcPost-7205578472281251842-2lyM/?utm_source=share&utm_medium=member_desktop)
 
 🎙️ 19th April, 2024: [nCast: The Cloud Optimization Podcast from nOps #12: Optimizing for Sustainability](https://open.spotify.com/episode/03m6TxbFfGJFGJudJY9KKH?si=w1UceH7sRfelICu7yQ7aFA)
 

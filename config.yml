@@ -1,0 +1,116 @@
+baseURL: "https://kristhecodingunicorn.com/"
+title: "Tech & Code with Kris"
+copyright: "© 2024 - Kristina Devochko"
+pagination: 
+  pagerSize: 5
+theme: [hugo-PaperMod]
+
+module:
+  imports:
+  - path: github.com/adityatelange/hugo-PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: false
+enableEmoji: true
+pygmentsUseClasses: true
+mainsections: ["post"]
+#searchHidden: true
+
+minify:
+  disableXML: true
+  # minifyOutput: true
+
+languages:
+  en:
+    languageName: "EN"
+    contentDir: "content/english"
+    weight: 1
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+        - name: Search
+          url: search/
+          weight: 10
+        - name: Public Talks and Publications
+          url: public/
+          weight: 10
+        - name: About
+          url: about/
+          weight: 15
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+
+  defaultTheme: auto
+  ShowShareButtons: true
+  ShowReadingTime: true
+  # disableSpecial1stPost: true
+  displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
+  TocOpen: true
+  comments: false
+
+  profileMode:
+    enabled: false
+
+  homeInfoParams:
+    Title: "👋 Hello there!"
+    Content: >
+      Welcome to this cozy tech corner of the Internet! 🌍
+      
+      * My name is Kris and here I share content about all things cloud native, green tech and sometimes cats 🐈
+
+      * You can find more tech posts in **Archives**.
+      If you would like to learn more about other community involvement I do, check out the **About** section. 🦄
+
+      * I'm happy to connect with fellow community members - you can reach me at ***guidemetothemoon*** on different platforms 🚀
+
+  socialIcons:
+    - name: other
+      title: Let's connect!
+      url: "https://linktr.ee/guidemetothemoon"
+    - name: buymeacoffee
+      title: Help me buy supplies for homeless animals <3
+      url: "https://www.buymeacoffee.com/guidemetothemoon"
+    - name: github
+      title: Follow me on GitHub :)
+      url: "https://github.com/guidemetothemoon"
+    - name: rss
+      title: RSS feed
+      url: "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fkristhecodingunicorn.com%2Findex.xml"
+
+  assets:
+    disableHLJS: true
+
+  fuseOpts:
+    isCaseSensitive: false
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    # anchorLineNos: true
+    # codeFences: true
+    # guessSyntax: true
+    # lineNos: true
+    # style: monokai

@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Resolving Application Insights performance counters collection issue for .NET applications"
-date = "2023-06-06"
-description = "In this blog post we'll look into how we can an issue with collecting performance counters for Application Insights from ASP.NET Framework and ASP.NET (Core) applications hosted in IIS."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Resolving Application Insights performance counters collection issue for .NET applications"
+date: "2023-06-06"
+description: "In this blog post we'll look into how we can an issue with collecting performance counters for Application Insights from ASP.NET Framework and ASP.NET (Core) applications hosted in IIS."
+draft: false
+tags: [
     "azure",
     "application-insights",
     "dotnet",
     "observability",
     "azure-monitor"
 ]
-slug = "application-insights-perfcounters-collection-issue-dotnet"
-aliases = ["appinsights_perfcounters"]
-+++
-
-{{< table_of_contents >}}
+slug: "application-insights-perfcounters-collection-issue-dotnet"
+aliases: ["appinsights_perfcounters"]
+---
 
 If you're using Application Insights SDK in your .NET applications and you want to gather performance counters like disk, memory or CPU usage, you have two main approaches that you can follow:
 
@@ -51,10 +49,8 @@ Once it's done, you should be able to see performance counters for your applicat
 
 ![Screenshot of KQL query to retrieve performance counters in Log Analytics in Azure portal](../../images/azure_monitor/ai_dotnet_perfcounters.webp)
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "How to include new Kubernetes resource into existing Helm release"
-date = "2021-10-21"
-description = "This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to include new Kubernetes resource into existing Helm release"
+date: "2021-10-21"
+description: "This blog post explains how to patch an existing Helm release by including new Kubernetes resource as an example."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "helm"
 ]
-slug = "include-k8s-resource-in-existing-helm-release"
-aliases = ["k8s_object_helm"]
-+++
-
-{{< table_of_contents >}}
+slug: "include-k8s-resource-in-existing-helm-release"
+aliases: ["k8s_object_helm"]
+---
 
 Helm is extremely useful and efficient when it comes to distributing, installing and upgrading applications hosted in Kubernetes. But sometimes you may have a need to patch an existing release and there is a quick way to do that which I would like to share with you today.
 A scenario I had to face was that I discovered missing PodDisruptionBudget on one of the production deployments and after this has been fixed in the source code I had therefore a need to add it to the existing Helm release to ensure configuration consistency.
@@ -151,9 +149,7 @@ Some information I find useful and relevant when working with Kubernetes deploym
 * I've also mentioned some kubectl commands that I didn't go into much details about but if you're not familiar with those, you can read more about the differences between those in this article: [In-place updates of resources](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#in-place-updates-of-resources)
 
 That's it from me this time, thanks for checking in!
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

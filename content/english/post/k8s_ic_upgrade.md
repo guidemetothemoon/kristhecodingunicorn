@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "How to upgrade NGINX Ingress Controller with zero downtime in production"
-date = "2022-01-14"
-description = "This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to upgrade NGINX Ingress Controller with zero downtime in production"
+date: "2022-01-14"
+description: "This blog post explains how to perform maintenance and upgrade of NGINX Ingress Controller with zero downtime in production."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
@@ -12,11 +12,9 @@ tags = [
     "nginx",
     "ingress-controller"
 ]
-slug = "nginx-ingress-controller-upgrade-with-zero-downtime"
-aliases = ["k8s_ic_upgrade"]
-+++
-
-{{< table_of_contents >}}
+slug: "nginx-ingress-controller-upgrade-with-zero-downtime"
+aliases: ["k8s_ic_upgrade"]
+---
 
 ## Introduction to the needs for upgrading Ingress Controller
 
@@ -228,9 +226,8 @@ A few resources that were really useful for me while doing this work which I hop
 - New GitHub repository for NGINX Ingress Controller and it\'s Helm Chart: [ingress-nginx](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/README.md)
 - Finally, I\'m continuously filling up my GitHub account with useful material, scripts and (soon) applications that cover different areas of product development and architecture - you\'re very much welcome to join me there! [guidemetothemoon/div-dev-resources](https://github.com/guidemetothemoon/div-dev-resources)  ^_^
 
-That\'s it from me this time, thanks for checking in!
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!
+Till we connect again!😼

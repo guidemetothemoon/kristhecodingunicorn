@@ -1,19 +1,17 @@
-+++
-author = "Kristina D."
-title = "Creating reusable build tasks in Azure DevOps pipelines with templates"
-date = "2022-06-24"
-description = "In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Creating reusable build tasks in Azure DevOps pipelines with templates"
+date: "2022-06-24"
+description: "In this post we take a look at how to implement reusable build tasks in Azure DevOps pipelines with templates."
+draft: false
+tags: [
     "techtips",
     "azure-devops",
     "devops"
 ]
-slug = "azure-devops-pipeline-templates-for-reusable tasks"
-aliases = ["/techtips/ado_pipeline_template"]
-+++
-
-{{< table_of_contents >}}
+slug: "azure-devops-pipeline-templates-for-reusable tasks"
+aliases: ["/techtips/ado_pipeline_template"]
+---
 
 ## Use case for pipeline templates
 
@@ -180,4 +178,8 @@ Build templates can really help you make your pipeline code more reusable and ke
 
 You can learn more about templates here: [Template types & usage](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops)
 
-Thanks for reading and till next tech tip! 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

@@ -1,20 +1,18 @@
-+++
-author = "Kristina D."
-title = "Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs"
-date = "2022-10-10"
-description = "First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Azure DevOps Auditing - Part 1 - Overview and Streaming to Azure Monitor Logs"
+date: "2022-10-10"
+description: "First part of this blog post series gives an overview of Azure DevOps Auditing and how you can set up audit log streaming to Azure Monitor logs."
+draft: false
+tags: [
     "azure-devops",
     "devsecops",
     "cybersecurity-corner",
     "azure"
 ]
-slug = "azure-devops-audit-azure-monitor-logs"
-aliases = ["ado-auditing-1"]
-+++
-
-{{< table_of_contents >}}
+slug: "azure-devops-audit-azure-monitor-logs"
+aliases: ["ado-auditing-1"]
+---
 
 In July 2019, as part of Sprint 154, Microsoft introduced support for auditing in Azure DevOps and this is a feature that you really should look into if you haven't set it up or maybe haven't heard about it yet. Auditing in Azure DevOps allows you to get an aggregated log of important events related to access control, permission and resource management++ across projects in your Azure DevOps organization.
 
@@ -187,9 +185,7 @@ You can find more information about Azure DevOps Auditing here:
 In Part 2 of this blog post series we're going to take a look at how we can export Azure DevOps audit logs to Splunk and in Part 3 we'll take a look at how we can export Azure DevOps audit logs to Azure Event Grid.
 
 That's it from me this time, thanks for checking in!
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page 😺
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

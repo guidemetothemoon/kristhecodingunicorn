@@ -1,43 +1,41 @@
-+++
-author = "Kristina D."
-title = "Cleaning up secrets in Azure DevOps and GitHub repositories with BFG Repo-Cleaner"
-date = "2022-02-22"
-description = "This blog post explains how to clean up secrets and sensitive values that have been commited to Azure DevOps and GitHub repositories with help of BFG Repo-Cleaner tool."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Cleaning up secrets in Azure DevOps and GitHub repositories with BFG Repo-Cleaner"
+date: "2022-02-22"
+description: "This blog post explains how to clean up secrets and sensitive values that have been commited to Azure DevOps and GitHub repositories with help of BFG Repo-Cleaner tool."
+draft: false
+tags: [
     "devsecops",
     "cybersecurity-corner",
     "azure"
 ]
-slug = "secrets-cleanup-with-bfg-repo-cleaner"
-aliases = ["secrets_cleanup"]
-+++
-
-{{< table_of_contents >}}
+slug: "secrets-cleanup-with-bfg-repo-cleaner"
+aliases: ["secrets_cleanup"]
+---
 
 ## Why should you care about secrets management?
 
-There are very few applications out there that don\'t require a secret, an API key or a password of some kind. Secrets and sensitive values are a natural part of a software developer\'s life and are tightly incorporated into software development process. With the vast and diverse amount of cybersecurity threats in the modern world proper secrets management hasn\'t been as crucial and important as it is now.
+There are very few applications out there that don't require a secret, an API key or a password of some kind. Secrets and sensitive values are a natural part of a software developer's life and are tightly incorporated into software development process. With the vast and diverse amount of cybersecurity threats in the modern world proper secrets management hasn't been as crucial and important as it is now.
 
-Why? Well, if we don\'t care about where and how we store sensitive data related to our application, and just let it be publicly available in plaintext then we basically tell all the malicious actors out there: \"*Hey, please get all the user data out of our application and please use it to damage our users and interconnected applications! Thank you!*\". Not that far-fetched in my humble opinion. If attackers get hold of crucial secrets, their evil job becomes so much easier from that point on: privilege escalation, execution of malicious programs and scripts, stealing user data to sell it on dark web, injection of malicious code to damage as many systems and users as possible, etc. Improper or lacking secrets management can open an ocean of malicious possibilities to those who are up to no good. Therefore, proper secrets management policies must be in place in every organization and proper routines to follow these policies must be enforced as part of the software development lifecycle.
+Why? Well, if we don't care about where and how we store sensitive data related to our application, and just let it be publicly available in plaintext then we basically tell all the malicious actors out there: "*Hey, please get all the user data out of our application and please use it to damage our users and interconnected applications! Thank you!*". Not that far-fetched in my humble opinion. If attackers get hold of crucial secrets, their evil job becomes so much easier from that point on: privilege escalation, execution of malicious programs and scripts, stealing user data to sell it on dark web, injection of malicious code to damage as many systems and users as possible, etc. Improper or lacking secrets management can open an ocean of malicious possibilities to those who are up to no good. Therefore, proper secrets management policies must be in place in every organization and proper routines to follow these policies must be enforced as part of the software development lifecycle.
 
-Sometimes mistakes happen. A developer might forget to remove a client secret before committing the changes. At the same time PR reviewer might have been multi-tasking and has overseen that a secret was part of the pull request and approved it. Or it was a faster and easier way to deploy a new microservice by hard-coding the API key that will be used in production - it\'s so much more time-consuming to create it as a secret and store it somewhere else, in a secure storage...we\'ll fix it once the service is 100% production-ready! And then we forget....And that\'s how easy it is to expose bits of your application that should\'ve never been exposed.
+Sometimes mistakes happen. A developer might forget to remove a client secret before committing the changes. At the same time PR reviewer might have been multi-tasking and has overseen that a secret was part of the pull request and approved it. Or it was a faster and easier way to deploy a new microservice by hard-coding the API key that will be used in production - it's so much more time-consuming to create it as a secret and store it somewhere else, in a secure storage...we'll fix it once the service is 100% production-ready! And then we forget....And that's how easy it is to expose bits of your application that should've never been exposed.
 
-If you don\'t trust me, just search for variations of \"password\" or \"apikey\" in GitHub or Google it - you\'ll catch my drift, this type of mistakes happen pretty often, unfortunately.
+If you don\'t trust me, just search for variations of "password" or "apikey" in GitHub or Google it - you'll catch my drift, this type of mistakes happen pretty often, unfortunately.
 
-Fortunately, there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in \"Additional resources\" section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.
+Fortunately, there are ways to improve and there are tons of valuable resources out there on how to implement good secrets management policies - I will link some of those in "Additional resources" section. But for now I would like to focus on how we can fix the aftermath and clean-up a secret that was accidentally committed to the source code. Here, BFG Repo-Cleaner tool comes really handy in.
 
-## I\'ve committed a secret - now what?
+## I've committed a secret - now what?
 
-Now let\'s fix it! Your first thought might be \"*Well, I can just create a new pull request and remove the secret! Once the PR is merged, the secret is gone from the source code, right? RIGHT?!*\". Well, not exactly. Though the secret will be gone from the latest version of your source code in master branch, it will still be available in commit history of your repo. If any developers cloned the repo before the secret was removed, they may still have it locally as well, even after you remove it from the source code.
+Now let's fix it! Your first thought might be "*Well, I can just create a new pull request and remove the secret! Once the PR is merged, the secret is gone from the source code, right? RIGHT?!*". Well, not exactly. Though the secret will be gone from the latest version of your source code in master branch, it will still be available in commit history of your repo. If any developers cloned the repo before the secret was removed, they may still have it locally as well, even after you remove it from the source code.
 
 Therefore, if such a mistake has happened and a secret has been committed to the source code **you must always consider following approach first:**
 
-> **Once a secret has become publicly available, you must ALWAYS treat it as compromised! If it\'s possible you must always generate a new secret and deactivate the exposed secret as soon as possible!** In some cases it can be more challenging to update the secret immediately - for instance, when you need to go through a time-consuming process involving third-parties in order to update the secret, or when you have a lot of dependencies that it will take time to upgrade. In those cases you can mitigate the issue to some extent by removing the secret from the source code and by changing the repo history with tools like BFG Repo-Cleaner. Nevertheless, such clean-up must always be evaluated on a case-by-case basis and as a temporary solution, until the new secret has been rolled out.
+> **Once a secret has become publicly available, you must ALWAYS treat it as compromised! If it's possible you must always generate a new secret and deactivate the exposed secret as soon as possible!** In some cases it can be more challenging to update the secret immediately - for instance, when you need to go through a time-consuming process involving third-parties in order to update the secret, or when you have a lot of dependencies that it will take time to upgrade. In those cases you can mitigate the issue to some extent by removing the secret from the source code and by changing the repo history with tools like BFG Repo-Cleaner. Nevertheless, such clean-up must always be evaluated on a case-by-case basis and as a temporary solution, until the new secret has been rolled out.
 
 If the first approach is not applicable for now, you can use tools like BFG Repo-Cleaner to perform a clean up of the exposed secrets in your Git repo history. This tool can also be used for other purposes like to reduce the size or the repo or remove large, troublesome files that are no longer in use.
 
-Let\'s take a look at how this tool can be used in practice.
+Let's take a look at how this tool can be used in practice.
 
 ## Cleaning up secrets in Azure DevOps and GitHub repos (or any other Git repo) with BFG Repo-Cleaner
 
@@ -46,18 +44,18 @@ BFG Repo-Cleaner was created by Roberto Tyley and it\'s open-sourced on GitHub: 
 In order to demonstrate how this tool can be used, I\'ve created a minimal version of Azure Pipelines build definition and uploaded it to my GitHub repo: [secrets-cleanup](https://github.com/guidemetothemoon/demo-projects/tree/main/secrets-cleanup). Initially this build definition included some secrets like client id and client secret that were in use by my service - this can be easily detected in the commit history by looking at the commit messages:
 ![Screenshot of commit history stating that secrets were committed](../../images/secrets_cleanup/bfg_commit_history.png)
 
-After I\'ve executed BFG Repo-Cleaner, these secrets were cleaned up and marked as ```***REMOVED***``` in repo history:
+After I've executed BFG Repo-Cleaner, these secrets were cleaned up and marked as ```***REMOVED***``` in repo history:
 ![Screenshot of obfuscated secrets in repo history after execution of BFG Repo-Cleaner](../../images/secrets_cleanup/bfg_cleanup_res.png)
 
-You can do the same operations with ```git filter-branch``` but it\'s more complicated and more error-prone. BFG Repo-Cleaner significantly decreases the complexity of clean-up operations and is known for being much more performant than  ```git filter-branch``` command. For instance, I\'ve tested this on a repo with more than 15 000 files and it took around 4-5 seconds to execute, which I think is a very good result.
+You can do the same operations with ```git filter-branch``` but it's more complicated and more error-prone. BFG Repo-Cleaner significantly decreases the complexity of clean-up operations and is known for being much more performant than  ```git filter-branch``` command. For instance, I've tested this on a repo with more than 15 000 files and it took around 4-5 seconds to execute, which I think is a very good result.
 
 So, how can this be done?
 
 ### Step-by-step walkthrough
 
-First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Or you can run it in a container with Jave pre-installed ;-) Once you\'ve done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.
+First of all, you need to ensure that you have Java Runtime Environment (JRE) installed since BFG Repo-Cleaner is a Java application. Or you can run it in a container with Jave pre-installed 😉 Once you've done that and downloaded BFG Repo-Cleaner we can start our clean up! I recommend saving the tool to the same folder where your Git repository will be cloned to so that you can easily call the tool through the command line without needing to provide the long file path to the tool.
 
-First, we\'ll need to clone a fresh copy of our repo with ```git clone --mirror``` command:
+First, we'll need to clone a fresh copy of our repo with ```git clone --mirror``` command:
 
 ``` cmd
 
@@ -82,7 +80,7 @@ d----           2/20/2022  1:31 PM                demo-projects.git
 
 This will create a full copy of the Git database of the respective repository. **Before you proceed, you must take a backup of it to ensure that you can restore to the initial state of the repository in case anything goes wrong during clean-up.**
 
-Once you have taken the backup we can start with the clean up. First we\'ll need to create a local txt-file that will include all the secrets we want to replace. This file will be used by BFG Repo-Cleaner to locate in which files and folders in the repository these secrets were exposed. Since I want to clean up client id and client secret I will create following file and call it \"**secrets.txt**\":
+Once you have taken the backup we can start with the clean up. First we'll need to create a local txt-file that will include all the secrets we want to replace. This file will be used by BFG Repo-Cleaner to locate in which files and folders in the repository these secrets were exposed. Since I want to clean up client id and client secret I will create following file and call it "**secrets.txt**":
 
 ``` cmd
 # secrets.txt
@@ -90,7 +88,7 @@ Once you have taken the backup we can start with the clean up. First we\'ll need
 54614838-b267-4276-a423-f2915160bc70
 ```
 
-Please note that the values are separated with a new line. File can be saved wherever it\'s easily accessible - I will save it to the same folder where I cloned my Git repo database to. Now we have everything we need in order to do the clean up. We can do that by executing ```java -jar bfg.jar --replace-text "C:\Playground\test-cleanup\secrets.txt" demo-projects.git``` command:
+Please note that the values are separated with a new line. File can be saved wherever it's easily accessible - I will save it to the same folder where I cloned my Git repo database to. Now we have everything we need in order to do the clean up. We can do that by executing ```java -jar bfg.jar --replace-text "C:\Playground\test-cleanup\secrets.txt" demo-projects.git``` command:
 
 ``` cmd
 PS C:\Playground\test-cleanup> java -jar bfg.jar --replace-text "C:\Playground\test-cleanup\secrets.txt" demo-projects.git
@@ -163,9 +161,9 @@ These are your protected commits, and so their contents will NOT be altered:
  * commit 5066f64e (protected by 'HEAD')
 ```
 
-This message means that the tool has identified the latest commit to master branch which it locks and will NOT overwrite, even if it contains an exposed secret. Therefore, **before running the tool you need to ensure that the latest commit in master branch doesn\'t contain the exposed secrets** or you will need to re-run the tool once a new, secret-free commit is added to master.
+This message means that the tool has identified the latest commit to master branch which it locks and will NOT overwrite, even if it contains an exposed secret. Therefore, **before running the tool you need to ensure that the latest commit in master branch doesn't contain the exposed secrets** or you will need to re-run the tool once a new, secret-free commit is added to master.
 
-BFG Repo-Cleaner also generates a report that can make it easier for you to examine the changes that have been done before they\'re pushed to the remote repository. As you can see in the bottom of the script full details have been logged to a separate folder that was created in the same directory from which you called the tool - ```reponame.git.bfg-report```. The files we\'re most interested in are:
+BFG Repo-Cleaner also generates a report that can make it easier for you to examine the changes that have been done before they're pushed to the remote repository. As you can see in the bottom of the script full details have been logged to a separate folder that was created in the same directory from which you called the tool - ```reponame.git.bfg-report```. The files we're most interested in are:
 
 * **changed-files.txt** - in this file you can see which files have been changed. For my test repo this file looks like this:
 
@@ -184,7 +182,7 @@ BFG Repo-Cleaner also generates a report that can make it easier for you to exam
 7f941aed9eea2d41f309ae73df50ff4bcb852c85 c186c1ab4c6e13ac8790fdac7f2ce5212e3afb28
 ```
 
-Let\'s check some of the commits and what those have been changed to - let\'s take the first commit id from the list, navigate to the Git repo folder and check how the initial commit looks like with ```git show```:
+Let's check some of the commits and what those have been changed to - let's take the first commit id from the list, navigate to the Git repo folder and check how the initial commit looks like with ```git show```:
 
 ``` cmd
 PS C:\Playground\test-cleanup\demo-projects.git> git show 08b6925
@@ -198,7 +196,7 @@ diff --git a/secrets-cleanup/azure-pipelines.yml b/secrets-cleanup/azure-pipelin
 new file mode 100644
 index 0000000..578e8c2
 --- /dev/null
-+++ b/secrets-cleanup/azure-pipelines.yml
+--- b/secrets-cleanup/azure-pipelines.yml
 @@ -0,0 +1,28 @@
 +name: $(BuildDefinitionName)_$(date:yyyyMMdd)_$(Build.SourceBranchName)$(rev:.r)
 +
@@ -231,7 +229,7 @@ index 0000000..578e8c2
 \ No newline at end of file
 ```
 
-As you can see, the secrets are there, as expected, since this commit represents the state before the changes have been applied by the tool. From the txt-file above we can see that this commit id was mapped to the commit with id ```11b05548da5d1900066d13d048da6ce98e249426``` - let\'s check how the changes in that commit look like:
+As you can see, the secrets are there, as expected, since this commit represents the state before the changes have been applied by the tool. From the txt-file above we can see that this commit id was mapped to the commit with id ```11b05548da5d1900066d13d048da6ce98e249426``` - let's check how the changes in that commit look like:
 
 ``` cmd
 PS C:\Playground\test-cleanup\demo-projects.git> git show 11b0554
@@ -245,7 +243,7 @@ diff --git a/secrets-cleanup/azure-pipelines.yml b/secrets-cleanup/azure-pipelin
 new file mode 100644
 index 0000000..43f73ac
 --- /dev/null
-+++ b/secrets-cleanup/azure-pipelines.yml
+--- b/secrets-cleanup/azure-pipelines.yml
 @@ -0,0 +1,28 @@
 +name: $(BuildDefinitionName)_$(date:yyyyMMdd)_$(Build.SourceBranchName)$(rev:.r)
 +
@@ -301,11 +299,11 @@ To https://github.com/guidemetothemoon/demo-projects.git
 
 Now the changes are merged and the history of the respective repository has been overwritten with secrets all cleaned up! Please note that this will not create a new commit since the purpose of the tool is to update the existing commits, therefore the merged changes will not reflect in the timestamps or +1 commit in the repo history UI.
 
-Now let\'s check one of the existing commits where the secrets were exposed and see how it looks like after the changes:
+Now let's check one of the existing commits where the secrets were exposed and see how it looks like after the changes:
 
 ![Screenshot of the commit history result in the UI after execution of BFG Repo-Cleaner](../../images/secrets_cleanup/commit_history_res.png)
 
-The secrets are not there, awesome! If we attempt to check the initial commit that had secrets in plaintext, we can see that it\'s not available anymore and was deleted for good:
+The secrets are not there, awesome! If we attempt to check the initial commit that had secrets in plaintext, we can see that it's not available anymore and was deleted for good:
 
 ``` cmd
 PS C:\Playground\test-cleanup\demo-projects.git> git show 08b6925
@@ -314,23 +312,23 @@ Use '--' to separate paths from revisions, like this:
 'git <command> [<revision>...] -- [<file>...]'
 ```
 
-And we\'re done, at least for now! As I mentioned earlier, you should still re-generate the secrets wherever it\'s possible and as fast as possible. But this is also a possibility that can help you mitigate exposure to some extent and temporarily.
+And we're done, at least for now! As I mentioned earlier, you should still re-generate the secrets wherever it's possible and as fast as possible. But this is also a possibility that can help you mitigate exposure to some extent and temporarily.
 
 ### Final note on permissions in Azure DevOps repos
 
 Normally you should have proper policies and permissions in place in your repository, be it Azure DevOps, GitHub or any other Git repo. Policies will prevent anyone from directly pushing changes to the master branch or performing other destructive actions like deleting a tag or repository. Therefore, if you need to push changes like this to the Azure DevOps repo where proper policies are enabled, you must ensure that you have following permissions in place for your account before you attempt pushing the changes done by the tool:
 
-For every branch to be updated (master, dev, hotfix, etc.), you must have \"Allow\" permissions set for the  policies: \"Bypass policies when pushing\", \"Force push (rewrite history, delete branches and tags)\":
+For every branch to be updated (master, dev, hotfix, etc.), you must have "Allow" permissions set for the  policies: "Bypass policies when pushing", "Force push (rewrite history, delete branches and tags)":
 
 ![Screenshot of the branch level policies in Azure DevOps](../../images/secrets_cleanup/ad_branch_policy.png)
 
-If the repository has tags, you must have \"Allow\" permissions set for your account for the following policies on the Repository level: \"Bypass policies when pushing\", \"Force push (rewrite history, delete branches and tags)\":
+If the repository has tags, you must have "Allow" permissions set for your account for the following policies on the Repository level: "Bypass policies when pushing", "Force push (rewrite history, delete branches and tags)":
 
 ![Screenshot of the repository level policies in Azure DevOps](../../images/secrets_cleanup/ad_repo_policy.png)
 
 ## Additional resources
 
-I\'ve just covered one use case where BFG Repo-Cleaner can be used but there are many more use cases where you can use this tool as well. You can read more about the usage areas here: [BFG Repo Cleaner - Usage](https://rtyley.github.io/bfg-repo-cleaner/)
+I've just covered one use case where BFG Repo-Cleaner can be used but there are many more use cases where you can use this tool as well. You can read more about the usage areas here: [BFG Repo Cleaner - Usage](https://rtyley.github.io/bfg-repo-cleaner/)
 
 Some good resources about secrets management and why this is important:
 
@@ -339,9 +337,8 @@ Some good resources about secrets management and why this is important:
 * [BeyondTrust - Secrets Management](https://www.beyondtrust.com/resources/glossary/secrets-management)
 * [Cyberark - Secrets Management](https://www.cyberark.com/what-is/secrets-management/)
 
-That\'s it from me this time, thanks for checking in!
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!
+Till we connect again!😼

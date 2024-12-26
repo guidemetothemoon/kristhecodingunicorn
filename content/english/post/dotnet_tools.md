@@ -1,18 +1,16 @@
-+++
-author = "Kristina D."
-title = "How to distribute console applications easily with .NET tools"
-date = "2021-06-06"
-description = "This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to distribute console applications easily with .NET tools"
+date: "2021-06-06"
+description: "This blog post explains how packaging console apps as .NET tools will make it possible to distribute them in a faster and easier manner."
+draft: false
+tags: [
     "dotnet",
     "tooling"
 ]
-slug = "distribute-dotnet-console-apps-with-dotnet-tools"
-aliases = ["dotnet_tools"]
-+++
-
-{{< table_of_contents >}}
+slug: "distribute-dotnet-console-apps-with-dotnet-tools"
+aliases: ["dotnet_tools"]
+---
 
 There are probably no developers out there (or at least very few) who have never created a console application - use cases where such apps are a first choice are hundreds, if not thousands. In my team we have several administrative tools that are being distributed as console apps in addition to the main application. Multiple stakeholders are using these apps in order to easily perform administrative tasks, make changes to application\'s metadata, interact with the database, integrate customizations into standard application functionality, etc.
 
@@ -134,9 +132,8 @@ You can read more about .NET Tools in Microsoft\'s official documentation:
 - [Create tools for the .NET CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools-how-to-create)
 - [dotnet tool commands](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install)
 
-That\'s it from me this time, thanks for checking in!
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, GitHub or by using the contact form on this page :)
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!
+Till we connect again!😼

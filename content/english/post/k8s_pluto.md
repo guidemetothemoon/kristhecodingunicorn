@@ -1,21 +1,19 @@
-+++
-author = "Kristina D."
-title = "Monitoring Kubernetes API deprecations with Pluto"
-date = "2022-08-14"
-description = "In this blog post we'll look into how you can monitor Kubernetes API deprecations and automate it in CI/CD with Pluto."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Monitoring Kubernetes API deprecations with Pluto"
+date: "2022-08-14"
+description: "In this blog post we'll look into how you can monitor Kubernetes API deprecations and automate it in CI/CD with Pluto."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
     "azure",
     "devops"
 ]
-slug = "monitor-k8s-api-deprecations-with-pluto"
-aliases = ["k8s_pluto"]
-+++
-
-{{< table_of_contents >}}
+slug: "monitor-k8s-api-deprecations-with-pluto"
+aliases: ["k8s_pluto"]
+---
 
 If you\'ve worked with Kubernetes for a while you should have seen that version lifecycle that Kubernetes has is pretty aggressive. Kubernetes is being actively developed which means that new releases come out pretty frequently - and all of us who are using Kubernetes, be it a managed or a self-hosted distribution, must adapt and adjust. If not, we may risk running our workloads on unsupported version of Kubernetes with lacking security and functionality fixes. In addition, when the time comes to upgrade there\'s a big risk that the change gap will be too large from the Kubernetes version you\'re running and the one you want to upgrade to - this normally ends up in a complicated and unstable upgrade process which I wouldn\'t recommend to anyone, especially in a production environment...😑
 
@@ -240,10 +238,8 @@ Below you may find a few resources that may be helpful for you when working with
 - [Pluto - GitHub repo](https://github.com/FairwindsOps/pluto)
 - [Kubernetes - Deprecated API Migration Guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide)
 
-That\'s it from me this time, thanks for checking in!💖
-
-If this article was helpful, I\'d love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

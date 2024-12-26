@@ -1,19 +1,17 @@
-+++
-author = "Kristina D."
-title = "Handling failed Helm upgrade due to another operation in progress"
-date = "2022-06-20"
-description = "How to handle failed helm upgrade with helm rollback"
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Handling failed Helm upgrade due to another operation in progress"
+date: "2022-06-20"
+description: "How to handle failed helm upgrade with helm rollback"
+draft: false
+tags: [
     "techtips",
     "helm",
     "devops"
 ]
-slug = "helm-upgrade-failure-another-operation-in-progress"
-aliases = ["/techtips/helm_rollback"]
-+++
-
-{{< table_of_contents >}}
+slug: "helm-upgrade-failure-another-operation-in-progress"
+aliases: ["/techtips/helm_rollback"]
+---
 
 ## Introduction
 
@@ -71,4 +69,8 @@ PS C:\> helm upgrade cat-encyclopedia -n cat-encyclopedia --atomic --timeout 1m
 
 You can read more about helm upgrade command here: [Helm Upgrade](https://helm.sh/docs/helm/helm_upgrade)  
 
-Thanks for reading and till next tech tip 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼

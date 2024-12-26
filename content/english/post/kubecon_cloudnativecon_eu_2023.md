@@ -1,10 +1,10 @@
-+++
-author = "Kristina D."
-title = "Takeaways from attending KubeCon+CloudNativeCon Europe 2023, wearing many hats"
-date = "2023-05-06"
-description = "In this blog post I will share my reflections and takeaways from attending KubeCon+CloudNativeCon Europe 2023 wearing multiple hats: speaker, CNCF ambassador, KCD organizer and attendee."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "Takeaways from attending KubeCon+CloudNativeCon Europe 2023, wearing many hats"
+date: "2023-05-06"
+description: "In this blog post I will share my reflections and takeaways from attending KubeCon+CloudNativeCon Europe 2023 wearing multiple hats: speaker, CNCF ambassador, KCD organizer and attendee."
+draft: false
+tags: [
     "kubernetes",
     "aks",
     "k8s",
@@ -16,13 +16,11 @@ tags = [
     "kubecon",
     "cloudnativecon"
 ]
-slug = "kubecon-cloudnativecon-eu-2023-takeaways"
-aliases = ["kubecon_cloudnativecon_eu_2023"]
-+++
+slug: "kubecon-cloudnativecon-eu-2023-takeaways"
+aliases: ["kubecon_cloudnativecon_eu_2023"]
+---
 
 ![Article banner for KubeCon and CloudNativeCon Europe 2023 takeaways](../../images/kubecon_cloudnativecon_eu_2023/blog_post_banner.webp)
-
-{{< table_of_contents >}}
 
 Last month, 18th-21st of April, KubeCon+CloudNativeCon Europe was happening in Amsterdam in the Netherlands, and it was **HUGE**! With a fully sold out event, with more than 10000 in-person participants, 5000+ online participants and 20 parallell tracks, it has been the largest conference I've attended in-person so far. I attended the event wearing many hats: a speaker, KCD organizer, CNCF ambassador and an attendee. Having these roles gave me an even broader perspective of the event which I want to share with the community😺
 
@@ -188,10 +186,8 @@ All in all, I think that if you have a possibility to join, it's definitely wort
 
 > ***Community in Bloom - with something for everyone's taste.***
 
-That's it from me this time, thanks for checking in!💖
-
-If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, X, GitHub or by using the contact form on this page.😺
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
 
 Stay secure, stay safe.
-
-Till we connect again!😻
+Till we connect again!😼

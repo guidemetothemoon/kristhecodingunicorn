@@ -1,18 +1,16 @@
-+++
-author = "Kristina D."
-title = "How to override ASP.NET Core application runtime version"
-date = "2022-07-23"
-description = "In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with."
-draft = false
-tags = [
+---
+author: "Kristina Devochko"
+title: "How to override ASP.NET Core application runtime version"
+date: "2022-07-23"
+description: "In this post we take a look at how we can make an ASP.NET Core application use a different runtime version than the one it was compiled with."
+draft: false
+tags: [
     "techtips",
     "dotnet"
 ]
-slug = "dotnet-override-app-runtime-version"
-aliases = ["/techtips/dotnet_runtime_framework"]
-+++
-
-{{< table_of_contents >}}
+slug: "dotnet-override-app-runtime-version"
+aliases: ["/techtips/dotnet_runtime_framework"]
+---
 
 With release of .NET and .NET Core one significant change you may have noticed is the new version support lifecycle. .NET Framework LTS (long-time support) versions are normally supported for 5+ years by Microsoft but support lifecycle for .NET and .NET Core LTS versions has decreased to 3 years. The main reasons for the shorter support lifecycle are the overall faster technology evolvement, but also more active framework development which requires frequent releases both from the functional and security perspective.
 
@@ -57,4 +55,8 @@ function Edit-RuntimeConfig($jsonFilePath)
 
 You can also read more about .NET Runtime configuration settings here: [.NET Runtime configuration settings](https://docs.microsoft.com/en-us/dotnet/core/runtime-config/) and about .NET and .NET Core support lifecycle here: [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core).
 
-Thanks for reading and till next tech tip! 😻
+That's it from me this time, thanks for checking in!
+If this article was helpful, I'd love to hear about it! You can reach out to me on LinkedIn, GitHub or BlueSky 😊
+
+Stay secure, stay safe.
+Till we connect again!😼
