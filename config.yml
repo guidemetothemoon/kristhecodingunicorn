@@ -1,6 +1,6 @@
 baseURL: "https://kristhecodingunicorn.com/"
-title: "Kristina's Tech Corner"
-copyright: "© 2024 - Powered by [Hugo PaperMod theme](https://github.com/adityatelange/hugo-PaperMod)"
+title: "Tech & Code with Kris"
+copyright: "© 2024 - Kristina Devochko"
 pagination: 
   pagerSize: 5
 theme: [hugo-PaperMod]
@@ -72,13 +72,16 @@ params:
     enabled: false
 
   homeInfoParams:
-    Title: "Kris - The Coding Unicorn"
+    Title: "👋 Hello there!"
     Content: >
-      Welcome to my tech corner! 🤗
+      Welcome to this cozy tech corner of the Internet! 🌍
       
-      * I preach about all things cloud native, green tech and cats 🐈
+      * My name is Kris and here I share content about all things cloud native, green tech and sometimes cats 🐈
 
-      * Check out "Archives" for all posts and "About" to learn more about other community involvement 🦄
+      * You can find more tech posts in **Archives**.
+      If you would like to learn more about other community involvement I do, check out the **About** section. 🦄
+
+      * I'm happy to connect with fellow community members - you can reach me at ***guidemetothemoon*** on different platforms 🚀
 
   socialIcons:
     - name: other
