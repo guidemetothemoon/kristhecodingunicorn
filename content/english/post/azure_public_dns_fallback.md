@@ -3,7 +3,7 @@ author: "Kristina Devochko"
 title: "Azure Private DNS zone fallback to internet - what, why and how"
 date: "2025-01-15"
 description: "In this blog post we will explore recently released functionality for Azure Private DNS zones that allows fallback to internet on domain name resolution."
-draft: true
+draft: false
 tags: [
     "azure",
     "devops",
@@ -46,22 +46,22 @@ Private endpoint implementation for different scenarios can be a dedicated blog 
 
 The main point here is that once all the above steps are done and the Azure Key Vault is only accessible through a private endpoint and its private IP address, **all of the requests that are attempting to reach the key vault will only be resolvable by the respective private DNS zone**.
 
-But, what if you have a multi-region setup where both regions are using private DNS zones and are not interconnected, and a virtual machine from one region needs access to a specific Key Vault that is behind private endpoint in another region?
+But, what if you have a multi-region setup where both regions are using private DNS zones and are not interconnected, and a virtual machine from one region needs access to a specific Key Vault that is behind private endpoint in another region? 🤔
 
 Originally that wouldn't be easy to achieve out of the box and would require you to make larger infrastructure changes and potentially increase complexity by introducing cross-regional virtual network peering for instance.
-But what if you don't want (or can't, for example due to overlapping IP ranges) implement full-blown interconnected multi-regional setup for private endpoints with virtual network peerings? Maybe instead you would like to just whitelist the IP of that virtual machine or the NAT Gateway for traffic coming from that region on the Key Vault's firewall level?
+But what if you don't want (or can't, for example due to overlapping IP ranges) implement full-blown interconnected multi-regional setup for private endpoints with virtual network peerings? Maybe instead you would like to just whitelist the IP of that virtual machine or the NAT Gateway IP for traffic coming from that region on the Key Vault's firewall level?
 
-That's where the fallback to internet functionality comes into picture. By enabling this configuration setting, you can support scenarios where access via private endpoint isn't possible, but the resource behind private endpoint can still be reached over the internet by the whitelisted IP addresses, while all the other traffic still flows through the private endpoint.
+That's where the fallback to internet functionality comes into picture! 🎉 By enabling this configuration setting, you can support scenarios where access via private endpoint isn't possible, but the resource behind private endpoint can still be reached over the internet by the whitelisted IP addresses, while all the other traffic still flows through the private endpoint.
 
 Scenario that was mentioned above is similar to the one I faced. In my use case there was a multi-regional setup (including private endpoints) where every region operated in isolation, but there was a specific, common resource in one of the regions that needed access to some of the resources behind the private endpoints in a different region.
 An option there would've been to introduce cross-regional virtual network peering, but it wasn't applicable in that use case due to security restrictions and the undesirable additional complexity that this change could introduce.
 Utilizing the fallback to internet functionality actually made it pretty straightforward to resolve this challenge and simply whitelist the IP that needed access to the resource behind the private endpoint, while still enforcing resolution of all the other traffic to the endpoint's private IP address.
 
-To illustrate the new DNS resolution flow, let's build on the earlier example.
+To illustrate the new DNS resolution flow, let's build upon the earlier example.
 
 Let's say that we have a virtual machine in Norway East region that is in the virtual network that is linked to the private DNS zone for key vault in Norway East region. This VM also needs access to our key vault in North Europe that is now behind a private endpoint that is linked to the private DNS zone for key vaults in North Europe region.
 
-Without the fallback to internet setting disabled, DNS resolution will come back empty, as shown below since DNS resolution will start in the private DNS zone in Norway East, but that one doesn't have any mapping for the key vault's private endpoint since it's in North Europe.
+With the fallback to internet setting disabled, DNS resolution will come back empty, as shown below, since DNS resolution will start in the private DNS zone in Norway East, but that private DNS zone doesn't have any mapping for the key vault's private endpoint since it resides in North Europe.
 
 ![DNS resolution failure when accessing key vault behind private endpoint with disabled fallback to Internet](../../images/azure_dns/azure-private-endpoint-fallback-to-internet-disabled.webp)
 
@@ -115,35 +115,35 @@ resource vnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06
 Configuration for fallback to internet is unfortunately not yet available in the AzureRM provider for Terraform, but you should be able to configure it with AzAPI provider like this:
 
 ``` terraform
-// TODO: boilerplate code, review and update
+// main-virtual-network-link.tf
 resource "azapi_resource" "vnet_link" {
   type      = "Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01"
-  parent_id = azurerm_private_dns_zone.example.id
-  name      = "${azurerm_private_dns_zone.example.name}-vnetlink"
+  parent_id = "<private_dns_zone_resource_id>"
+  name      = "<virtual_network_link_name>"
   location  = "global"
 
-  tags = {
-    Environment = "Production"
-  }
-
-  body = jsonencode({
+  body = {
     properties = {
-      registrationEnabled = false
+      registrationEnabled = true
       resolutionPolicy    = "NxDomainRedirect" // <-- enable fallback to Internet
       virtualNetwork = {
-        id = azurerm_virtual_network.example.id
+        id = "<virtual_network_resource_id>"
       }
     }
-  })
+  }
 }
 ```
 
 ### Azure CLI
 
-``` shell
-az network private-dns link vnet create --name <virtual_network_link_name> --resource-group <private_dns_zonre_resource_group_name> --virtual-network <virtual_network_name> --zone-name <private_dns_zone_name> --registration-enabled False --resolution-policy NxDomainRedirect
+``` azurecli
+az network private-dns link vnet create --name <virtual_network_link_name> \
+--resource-group <private_dns_zonre_resource_group_name> --virtual-network <virtual_network_name> \
+--zone-name <private_dns_zone_name> --registration-enabled False --resolution-policy NxDomainRedirect
 
-az network private-dns link vnet update --name <virtual_network_link_name> --resource-group <private_dns_zonre_resource_group_name> --zone-name <private_dns_zone_name> --resolution-policy NxDomainRedirect
+az network private-dns link vnet update --name <virtual_network_link_name> \
+--resource-group <private_dns_zonre_resource_group_name> --zone-name <private_dns_zone_name> \
+--resolution-policy NxDomainRedirect
 ```
 
 You can also go the classic way and configure it via Azure portal (also on existing private DNS zones) - check out the first linked article in the session below for more information on how to do that!
