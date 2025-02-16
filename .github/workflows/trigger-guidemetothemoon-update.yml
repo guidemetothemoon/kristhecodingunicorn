@@ -17,6 +17,10 @@ jobs:
     if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+    - name: Sleep for 1 minute to allow the content to be updated in production
+      run: sleep 1m
+      shell: bash
+
     - uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.PAT }}
