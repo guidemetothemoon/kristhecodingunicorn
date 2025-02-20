@@ -36,7 +36,7 @@ For example, if I were to explicitly customize and install a tool like Trivy for
 ``` yaml
 - pwsh: |
     Write-Host "##vso[task.prependpath]$(System.DefaultWorkingDirectory)/trivy"
-  name: 'UpdatePath'
+  name: 'PrependPath' # This value can be whatever you like
   displayName: 'Add Trivy binary path to PATH'
 ```
 
