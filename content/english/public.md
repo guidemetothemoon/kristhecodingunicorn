@@ -9,6 +9,10 @@ tags: [
 ]
 ---
 
+📺 7th March, 2025: [BLDRcon Spring 2025](https://www.youtube.com/live/NuLQK-jOF4k?feature=shared)
+
+📺 26th December, 2024: [Cloud-Native & Platform Engineering EOY Wrap-up](https://www.youtube.com/live/bXRt6Rg54A0?feature=shared)
+
 📝 2nd December, 2024: [24 Days of Kubernetes - Kubernetes Sustainability Thought Leader Interviews](https://aknostic.com/articles/24-days-kubernetes-kristina-devochko-interview)
 
 🎙️ 11th June, 2024: [Green Software Oslo at NDC Community Tuesday - Exploring best practices for sustainability of Kubernetes clusters and Kubernetes-hosted workloads](https://www.meetup.com/gsf-oslo/events/300942997)
@@ -17,7 +21,7 @@ tags: [
 
 🎙️ 19th April, 2024: [nCast: The Cloud Optimization Podcast from nOps #12: Optimizing for Sustainability](https://open.spotify.com/episode/03m6TxbFfGJFGJudJY9KKH?si=w1UceH7sRfelICu7yQ7aFA)
 
-📺 3rd. April, 2024: [Microsoft Learn Live - From Day Zero To Production with Azure Container Apps](https://www.youtube.com/live/yAtMgufv7Aw?si=vtQ6ziOYhasNKuyr)
+📺 3rd April, 2024: [Microsoft Learn Live - From Day Zero To Production with Azure Container Apps](https://www.youtube.com/live/yAtMgufv7Aw?si=vtQ6ziOYhasNKuyr)
 
 📺 27th March, 2024: [Cloud Native Austria and Saar - KubeCon Recap: Debunking Myths About Environmental Sustainability in the Cloud, Building a Greener CNCF Landscape](https://youtu.be/PLjX3gpnmjo?si=yUScFmZcOVw_Egq5)
 
