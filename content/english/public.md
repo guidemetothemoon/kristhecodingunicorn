@@ -9,6 +9,8 @@ tags: [
 ]
 ---
 
+📝 9th April, 2025: [Forskerforum - Datalagring: Kor mykje data er nok?](https://www.forskerforum.no/kor-mykje-data-er-nok)
+
 📺 7th March, 2025: [BLDRcon Spring 2025](https://www.youtube.com/live/NuLQK-jOF4k?feature=shared)
 
 📺 26th December, 2024: [Cloud-Native & Platform Engineering EOY Wrap-up](https://www.youtube.com/live/bXRt6Rg54A0?feature=shared)
