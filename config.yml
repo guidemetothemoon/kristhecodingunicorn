@@ -1,6 +1,6 @@
 baseURL: "https://kristhecodingunicorn.com/"
 title: "Tech & Code with Kris"
-copyright: "© 2024 - Kristina Devochko"
+copyright: "© 2025 - Kristina Devochko"
 pagination: 
   pagerSize: 5
 theme: [hugo-PaperMod]
@@ -55,6 +55,7 @@ params:
 
   defaultTheme: auto
   ShowShareButtons: true
+  ShareButtons: ["linkedin", "x", "facebook", "whatsapp", "telegram"] 
   ShowReadingTime: true
   # disableSpecial1stPost: true
   displayFullLangName: true
@@ -72,16 +73,13 @@ params:
     enabled: false
 
   homeInfoParams:
-    Title: "👋 Hello there!"
+    Title: "👋 What a pleasure to have you here!"
     Content: >
-      Welcome to this cozy tech corner of the Internet! 🌍
+      Welcome to this small but cozy tech corner of the Internet! 🌍
       
-      * My name is Kris and here I share content about all things cloud native, green tech and sometimes cats 🐈
+      * I'm Kris and that where I chat about all the techy things I do 🐈
 
-      * You can find more tech posts in **Archive** (or by searching for keywords).
-      If you would like to learn more about other community involvement I do, check out the **About** section. 🦄
-
-      * I'm happy to connect with fellow community members - you can reach me at ***guidemetothemoon*** on different platforms 🚀
+      * Always happy to connect with other community members - check out the links below to get in touch 🚀
 
   socialIcons:
     - name: other
