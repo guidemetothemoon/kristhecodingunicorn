@@ -5,7 +5,7 @@ date: "2021-05-01"
 aliases: ["about-me", "about-kris"]
 author: "Kristina Devochko"
 tags: [
-    "aboutkris"
+    "about"
 ]
 ---
 
