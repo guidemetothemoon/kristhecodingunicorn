@@ -11,4 +11,16 @@ jobs:
       with:
         fetch-depth: 0
     
-    # To-Do - alternative approach to perform markdownlint
+    - uses: tj-actions/changed-files@v46
+      id: changed-files
+      with:
+        files: 'content/**/*.md'
+        separator: ","
+
+    - uses: DavidAnson/markdownlint-cli2-action@v20
+      if: steps.changed-files.outputs.any_changed == 'true'
+      with:
+        globs: ${{ steps.changed-files.outputs.all_changed_files }}
+        separator: ","
+        config: 'custom.markdownlint.jsonc'
+      continue-on-error: false
