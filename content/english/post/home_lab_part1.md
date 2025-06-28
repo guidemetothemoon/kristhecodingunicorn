@@ -27,7 +27,7 @@ The plan is to use Proxmox on all of these servers. **Proxmox** is a quite popul
 
 I also did a BIOS upgrade and validation of BIOS settings on all servers to ensure that virtualization options, like **VT-x/VT-d** in case of Intel, are enabled. An interesting thing that happened was that on one of the servers Proxmox wasn't able to identify an SSD due to the SATA controller mode in the BIOS that was set to RAID instead of **AHCI**. Devil's in the details🎃
 
-Servers I snatched from work also had BitLocker-encrypted drives which hasn't been cleaned up so I wiped those with help of both `diskpart` and **HP's Secure Erase** tool in BIOS.
+HP servers also had BitLocker-encrypted drives so I wiped those with help of both `diskpart` and **HP's Secure Erase** tool in BIOS.
 
 ## Installation of Proxmox
 
