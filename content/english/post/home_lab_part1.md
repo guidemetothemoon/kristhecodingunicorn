@@ -19,7 +19,7 @@ When it comes to hardware I'm first and foremost interested in buying what's bee
 
 In Norway we have a website where folks sell stuff they don't need so I was lucky to snatch **Dell OptiPlex 3050** - **4 cores** and currently with **12GB RAM**, but I'll be upgrading it to **16GB RAM** once I get an 8GB RAM piece delivered.
 
-Company where I worked at the time of writing this post has also been getting rid of some unused electronics so I was also lucky enough to snatch 2 pieces of **HP ProDesk 400** with **4 cores** and **16GB RAM**. All in all, off to a good start!😼
+I was also lucky enough to snatch 2 pieces of **HP ProDesk 400** with **4 cores** and **16GB RAM** from a place that was getting rid of some unused electronics. All in all, off to a good start!😼
 
 ## Preparation
 
