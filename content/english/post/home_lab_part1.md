@@ -1,8 +1,8 @@
 ---
 author: "Kristina Devochko"
-title: "Home Lab Part 1 - Joining the self-hosting club"
+title: "HomeLab Part 1 - Joining the self-hosting club"
 date: "2025-06-28"
-description: "This is the first blog post in my home lab journey series where I will share the first steps of what hardware I've chosen and what has been set up so far."
+description: "This is the first blog post in my homelab journey series where I will share the first steps of what hardware I've chosen and what has been set up so far."
 draft: false
 tags: [
     "homelab",
@@ -13,7 +13,7 @@ tags: [
 slug: "home-lab-part-one"
 ---
 
-I have officially embarked on a home lab journey and will be sharing here what I learn and do as I progress🥳 It's been a long time coming! Having a home lab will be super useful for me in order to do larger, more advanced experiments with bare metal Kubernetes. I have also been interested for some time in self-hosting some of the tools and services that I'm using. So it's a win-win!
+I have officially embarked on a homelab journey and will be sharing here what I learn and do as I progress🥳 It's been a long time coming! Having a homelab will be super useful for me in order to do larger, more advanced experiments with bare metal Kubernetes. I have also been interested for some time in self-hosting some of the tools and services that I'm using. So it's a win-win!
 
 When it comes to hardware I'm first and foremost interested in buying what's been used instead of buying new. Both from the perspective of recycling but also from the cost perspective, especially in the beginning of the journey. I can always upgrade later as my set up and needs evolve.
 
