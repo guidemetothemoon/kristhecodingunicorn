@@ -79,7 +79,7 @@ jobs:
         run: bash ${GITHUB_WORKSPACE}/util-scripts/validate-input.sh "${{ secrets.MY_SECRETY_SECRET }}" "meowfoobar"
 ```
 
-You can find a full example with step-by-step instructions on how to test it yourself in my GitHub repo: [guidemetothemoon/cloudy-labs](https://github.com/guidemetothemoon/cloudy-labs/tree/main/github-workflows/deploy-env-secrets-in-reusable-workflow).
+You can find a full example with step-by-step instructions on how to test it yourself in my GitHub repo: [guidemetothemoon/cloudy-labs](https://github.com/guidemetothemoon/cloudy-labs/tree/main/github-workflows/secrets-and-vars-in-reusable-workflow).
 
 That's it from me this time, thanks for checking in!
 
