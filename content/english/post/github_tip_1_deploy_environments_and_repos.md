@@ -3,7 +3,7 @@ author: "Kristina Devochko"
 title: "GitHub Bits and Bobs #1 - Reference Repository and Deployment Environment Secrets and Variables in Reusable Workflows"
 date: "2025-07-06"
 description: "In this tech tip we take a look at how we can reference GitHub Deployment Environment and regular Repository Secrets and variables in a reusable workflow."
-draft: false
+draft: true
 tags: [
     "techtips",
     "github",
