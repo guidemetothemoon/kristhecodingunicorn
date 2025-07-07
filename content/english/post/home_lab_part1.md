@@ -2,7 +2,6 @@
 author: "Kristina Devochko"
 title: "HomeLab Part 1 - Joining the self-hosting club"
 date: "2025-06-28"
-description: "This is the first blog post in my homelab journey series where I will share the first steps of what hardware I've chosen and what has been set up so far."
 draft: false
 tags: [
     "homelab",
