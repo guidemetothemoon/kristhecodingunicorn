@@ -211,7 +211,7 @@ If you want to run Pluto as part of your GitHub workflow, there is a separate Gi
 
 ```
 
-You can find a working example of running Pluto as part of GitHub workflow in my repo: [guidemetothemoon - kubernetes-pluto-gha.yml](https://github.com/guidemetothemoon/div-dev-resources/blob/main/.github/workflows/kubernetes-pluto-gha.yml).
+You can find a working example of running Pluto as part of GitHub workflow in my repo: [guidemetothemoon/tech-utils](https://github.com/guidemetothemoon/tech-utils/blob/main/scripts/kubernetes/pluto/kubernetes-pluto-gha.yml).
 
 ### Local files
 
@@ -234,7 +234,7 @@ There are a few other tools available that serve the same purpose as Pluto which
 Below you may find a few resources that may be helpful for you when working with Pluto and Kubernetes API deprecations in general:
 
 - [Scripts and templates used in this blog post](https://github.com/guidemetothemoon/div-dev-resources/blob/main/scripts/kubernetes/pluto)
-- [GitHub CI/CD example with Pluto](https://github.com/guidemetothemoon/div-dev-resources/blob/main/.github/workflows/kubernetes-pluto-gha.yml)
+- [GitHub CI/CD example with Pluto](https://github.com/guidemetothemoon/tech-utils/blob/main/scripts/kubernetes/pluto/kubernetes-pluto-gha.yml)
 - [Pluto - GitHub repo](https://github.com/FairwindsOps/pluto)
 - [Kubernetes - Deprecated API Migration Guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide)
 
